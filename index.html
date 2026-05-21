@@ -28,7 +28,7 @@ overflow-x:hidden;
 min-height:100vh;
 }
 
-/* skeleton texture */
+/* skeleton texture - INAYOS DITO: Idinagdag ang pointer-events at z-index para hindi harang sa mouse */
 body::before{
 content:"☠";
 position:fixed;
@@ -37,8 +37,9 @@ opacity:.04;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-pointer-events:none;
+pointer-events:none; /* Para lumusot ang click */
 color:white;
+z-index: 1;
 }
 
 /* TOP & SECTIONS */
@@ -46,6 +47,8 @@ color:white;
 .header{
 padding-top:70px;
 text-align:center;
+position: relative;
+z-index: 2;
 }
 
 .logo{
@@ -67,6 +70,8 @@ width:90%;
 height:1px;
 background:rgba(255,255,255,.08);
 margin:50px auto;
+position: relative;
+z-index: 2;
 }
 
 /* section alignment and typography */
@@ -74,6 +79,8 @@ margin:50px auto;
 .section-container {
 text-align: center;
 width: 100%;
+position: relative;
+z-index: 2;
 }
 
 .subtitle{
@@ -158,6 +165,8 @@ font-size:20px;
   border-top: 1px solid rgba(255, 255, 255, .08);
   border-bottom: 1px solid rgba(255, 255, 255, .08);
   background: rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
 }
 
 .scroll {
@@ -205,6 +214,8 @@ text-align:center;
 padding:50px;
 opacity:.5;
 font-size:13px;
+position: relative;
+z-index: 2;
 }
 
 .home{
@@ -215,6 +226,7 @@ display:flex;
 gap:20px;
 font-size:13px;
 letter-spacing:4px;
+z-index: 3;
 }
 
 .views{
@@ -451,7 +463,8 @@ background:black;
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:99999;
+z-index:999999; /* Tiniyak na ito ang pinaka-ibabaw sa lahat */
+cursor: pointer;
 }
 .enter-text{
 padding:20px 40px;
@@ -459,6 +472,7 @@ letter-spacing:8px;
 background:rgba(255,255,255,.05);
 border-radius:20px;
 cursor:pointer;
+pointer-events: auto;
 }
 </style>
 

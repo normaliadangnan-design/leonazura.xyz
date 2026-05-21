@@ -1,88 +1,381 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>AZURA COMMUNITY#PUBLICENEMY</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AZURA</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
-background-image:url('78A9AAF7-4AB1-4260-B243-6AB35C297A8D.png');
+font-family:Poppins;
+background:
+linear-gradient(rgba(0,0,0,.86),rgba(0,0,0,.92)),
+url("att.MNKCYkhOQ9iAQURy1mtb8dbTrtzcFCbCN_gWu1wZyVU.png.webp");
 background-size:cover;
 background-position:center;
-background-repeat:no-repeat;
-height:100vh;
-margin:0;
-font-family:Arial;
+background-attachment:fixed;
 color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* skeleton texture */
+body::before{
+content:"☠";
+position:fixed;
+font-size:520px;
+opacity:.04;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+pointer-events:none;
+color:white;
+}
+
+/* TOP */
+
+.header{
+padding-top:70px;
 text-align:center;
 }
 
-.overlay{
-background:rgba(0,0,0,0.6);
-height:100vh;
-padding-top:80px;
+.logo{
+width:140px;
+filter:
+drop-shadow(0 0 15px rgba(255,255,255,.5))
+brightness(1.1);
+animation:float 4s infinite ease-in-out;
 }
 
-h1{
-font-size:60px;
+@keyframes float{
+50%{
+transform:translateY(-10px);
+}
+}
+
+.line{
+width:90%;
+height:1px;
+background:rgba(255,255,255,.08);
+margin:50px auto;
+}
+
+/* section title */
+
+.subtitle{
+font-size:12px;
+letter-spacing:8px;
+opacity:.6;
+margin-bottom:10px;
+text-transform:uppercase;
+}
+
+.title{
+font-size:52px;
+font-family:Cinzel;
+font-weight:700;
 letter-spacing:5px;
+text-shadow:
+0 0 12px rgba(255,255,255,.35);
 }
 
-.box{
-background:rgba(255,255,255,0.1);
-width:80%;
-margin:auto;
-padding:20px;
-border-radius:20px;
-backdrop-filter:blur(5px);
+/* profile circles */
+
+.row{
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+margin-top:35px;
+margin-bottom:50px;
 }
 
-h2{
-color:cyan;
+.avatar{
+width:95px;
+height:95px;
+border-radius:50%;
+border:2px solid rgba(255,255,255,.35);
+overflow:hidden;
+position:relative;
+transition:.3s;
+box-shadow:
+0 0 20px rgba(255,255,255,.15);
 }
 
-a{
-color:white;
-text-decoration:none;
+.avatar:hover{
+transform:translateY(-8px);
+box-shadow:
+0 0 35px rgba(255,255,255,.35);
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.crown{
+position:absolute;
+top:-18px;
+left:50%;
+transform:translateX(-50%);
 font-size:20px;
 }
 
-</style>
+/* member scrolling */
 
+.member-wrap{
+overflow:hidden;
+width:100%;
+padding:25px 0;
+margin-top:50px;
+border-top:1px solid rgba(255,255,255,.08);
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.scroll{
+display:flex;
+gap:18px;
+width:max-content;
+animation:scroll 25s linear infinite;
+}
+
+.member{
+background:rgba(255,255,255,.06);
+padding:14px 28px;
+border-radius:50px;
+backdrop-filter:blur(8px);
+white-space:nowrap;
+border:1px solid rgba(255,255,255,.1);
+}
+
+@keyframes scroll{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+/* footer */
+
+footer{
+text-align:center;
+padding:50px;
+opacity:.5;
+font-size:13px;
+}
+
+.home{
+position:absolute;
+top:30px;
+right:60px;
+display:flex;
+gap:20px;
+font-size:13px;
+letter-spacing:4px;
+}
+
+.views{
+padding:10px 22px;
+border:1px solid rgba(255,255,255,.15);
+border-radius:30px;
+}
+.discord-box{
+
+position:fixed;
+
+bottom:30px;
+right:30px;
+
+z-index:999;
+
+}
+
+.discord-box a{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:14px 22px;
+
+text-decoration:none;
+
+color:white;
+
+background:rgba(255,255,255,.08);
+
+border:1px solid rgba(255,255,255,.15);
+
+border-radius:50px;
+
+backdrop-filter:blur(10px);
+
+}
+
+.discord-box img{
+
+width:28px;
+
+}
+</style>
 </head>
 
 <body>
 
-<div class="overlay">
+<div class="home">
+HOME
+<div class="views">Views : 0 </div>
+</div>
 
-<h1>LEONAZURA</h1>
+<div class="header">
 
-<div class="box">
+<img src="E0E5FD65-3941-4143-A8B0-69517B2DC3B9.webp" class="logo">
 
-<p>AZURA COMMUNITY#PUBLICENEMY.</p>
+<div class="line"></div>
 
-<h2>Collaborations</h2>
+<div class="subtitle">$</div>
 
-<p>
-• AzuraTeam<br>
-• Azura Community
-</p>
+<div class="row">
 
-<h2>Music</h2>
+<div class="avatar">
+<div class="crown">☠</div>
+<img src="members/user1.jpg">
+</div>
 
-<audio controls autoplay loop>
-<source src="https://files.catbox.moe/6q8j5v.mp3" type="audio/mpeg">
+<div class="avatar">
+<div class="crown">☠</div>
+<img src="members/user2.jpg">
+</div>
+
+<div class="avatar">
+<img src="members/user3.jpg">
+</div>
+
+</div>
+
+<div class="line"></div>
+
+<div class="subtitle">ABOVE ALL</div>
+<div class="title">ABOVE ALL</div>
+
+<div class="row">
+
+<div class="avatar">
+<img src="members/user4.jpg">
+</div>
+
+<div class="avatar">
+<div class="crown">☠</div>
+<img src="members/user5.jpg">
+</div>
+
+<div class="avatar">
+<img src="members/user6.jpg">
+</div>
+
+<div class="avatar">
+<div class="crown">☠</div>
+<img src="members/user7.jpg">
+</div>
+
+</div>
+
+<div class="line"></div>
+
+<div class="subtitle">STAFF</div>
+<div class="title" style="font-size:40px">
+STAFF
+</div>
+
+<div class="row">
+
+<div class="avatar">
+<img src="members/user8.jpg">
+</div>
+
+<div class="avatar">
+<img src="members/user9.jpg">
+</div>
+
+<div class="avatar">
+<img src="members/user10.jpg">
+</div>
+
+<div class="avatar">
+<img src="members/user11.jpg">
+</div>
+
+</div>
+
+</div>
+
+<!-- SCROLL MEMBER LIST -->
+
+<div class="member-wrap">
+
+<div class="scroll">
+
+<div class="member">☠ Gelo Suarez</div>
+<div class="member">☠ Jay Mercado</div>
+<div class="member">☠ Andrie Gaspari</div>
+<div class="member">☠ Nix Kupal</div>
+<div class="member">☠ Dought Tanga</div>
+<div class="member">☠ Cza Renz</div>
+<div class="member">☠ Aki Ro</div>
+<div class="member">☠ KinaAzura</div>
+
+<div class="member">☠ Gelo Suarez</div>
+<div class="member">☠ Jay Mercado</div>
+<div class="member">☠ Nix Kupal</div>
+<div class="member">☠ KinaAzura</div>
+<div class="member">☠ Dought Tanga</div>
+<div class="member">☠ Cza Renz</div>
+<div class="member">☠ Aki Ro</div>
+<div class="member">☠ Andrie Gaspari</div>
+
+</div>
+
+</div>
+
+<footer>
+AZURA • ABOVE ALL • $
+</footer>
+<!-- MUSIC AUTO PLAY -->
+
+<audio id="bgMusic" autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<br><br>
 
-<a href="https://discord.com">
-Join Discord
+<!-- DISCORD BUTTON -->
+
+<div class="discord-box">
+
+<a href="https://discord.gg/YOURINVITE"
+target="_blank">
+
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
+
+<span>AZURA DISCORD</span>
+
 </a>
 
 </div>
 
-</div>
 
 </body>
-</html>
+</html> 

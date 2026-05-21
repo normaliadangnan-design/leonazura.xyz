@@ -41,7 +41,7 @@ pointer-events:none;
 color:white;
 }
 
-/* TOP */
+/* TOP & SECTIONS */
 
 .header{
 padding-top:70px;
@@ -69,7 +69,12 @@ background:rgba(255,255,255,.08);
 margin:50px auto;
 }
 
-/* section title */
+/* section alignment and typography */
+
+.section-container {
+text-align: center; /* Nilagay sa gitna ang lahat ng text sa loob nito */
+width: 100%;
+}
 
 .subtitle{
 font-size:12px;
@@ -77,6 +82,17 @@ letter-spacing:8px;
 opacity:.6;
 margin-bottom:10px;
 text-transform:uppercase;
+display: block;
+text-align: center;
+}
+
+/* Pinalaki ang font size at spacing ng $ para mas maangas */
+.founder-title {
+font-size:24px; 
+font-weight:700;
+letter-spacing:10px;
+margin-bottom: 10px;
+text-align: center;
 }
 
 .title{
@@ -84,8 +100,9 @@ font-size:52px;
 font-family:Cinzel;
 font-weight:700;
 letter-spacing:5px;
-text-shadow:
-0 0 12px rgba(255,255,255,.35);
+text-shadow: 0 0 12px rgba(255,255,255,.35);
+text-align: center;
+margin-bottom: 15px;
 }
 
 /* profile circles */
@@ -97,6 +114,7 @@ gap:25px;
 flex-wrap:wrap;
 margin-top:35px;
 margin-bottom:50px;
+width: 100%;
 }
 
 .avatar{
@@ -163,7 +181,6 @@ font-size:20px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
-/* Maliit na bilog para sa scrolling members */
 .member-pic {
   width: 35px;         
   height: 35px;
@@ -207,92 +224,55 @@ border:1px solid rgba(255,255,255,.15);
 border-radius:30px;
 }
 .discord-box{
-
 position:fixed;
-
 bottom:30px;
 right:30px;
-
 z-index:999;
-
 }
 
 .discord-box a{
-
 display:flex;
-
 align-items:center;
-
 gap:12px;
-
 padding:14px 22px;
-
 text-decoration:none;
-
 color:white;
-
 background:rgba(255,255,255,.08);
-
 border:1px solid rgba(255,255,255,.15);
-
 border-radius:50px;
-
 backdrop-filter:blur(10px);
-
 }
 .avatar-box{
 position:relative;
 }
 
 .info-card{
-
 position:absolute;
-
 top:110px;
-
 left:50%;
-
 transform:translateX(-50%);
-
 width:240px;
-
 padding:15px;
-
 background:black;
-
 border-radius:20px;
-
 display:none;
-
 z-index:999;
-
 border:1px solid rgba(255,255,255,.1);
-
 }
 
 .avatar-box:hover .info-card{
-
 display:block;
-
 }
 
 .card-pic{
-
 width:100%;
-
 height:120px;
-
 object-fit:cover;
-
 border-radius:15px;
-
 margin-bottom:12px;
-
 }
 .discord-box img{
-
 width:28px;
-
 }
 </style>
 </head>
@@ -305,28 +285,25 @@ HOME
 </div>
 
 <div class="header">
-
 <img src="E0E5FD65-3941-4143-A8B0-69517B2DC3B9.webp" class="logo">
+</div>
 
 <div class="line"></div>
 
-<div class="subtitle">$</div>
+<div class="section-container">
+<div class="founder-title">$</div>
 
 <div class="row">
-
 <div class="avatar-box">
-
 <div class="avatar">
 <img src="members/founder/user1.jpg">
 </div>
-
 <div class="info-card">
 <img src="members/founder/leon-banner.jpg" class="card-pic">
 <h3>Leon</h3>
 <p>@LeonAzura</p>
 <span>Founder • AZURA</span>
 </div>
-
 </div>
 
 <div class="avatar">
@@ -337,70 +314,57 @@ HOME
 <div class="avatar">
 <img src="members/founder/user3.jpg">
 </div>
-
 </div>
 </div>
 
 <div class="line"></div>
 
+<div class="section-container">
 <div class="subtitle">ABOVE ALL</div>
 <div class="title">ABOVE ALL</div>
 
 <div class="row">
-
 <div class="avatar">
 <img src="members/above all/user4.jpg">
 </div>
-
 <div class="avatar">
 <div class="crown">☠</div>
 <img src="members/above all/user5.jpg">
 </div>
-
 <div class="avatar">
 <img src="members/above all/user6.jpg">
 </div>
-
 <div class="avatar">
 <div class="crown">☠</div>
 <img src="members/above all/user7.jpg">
 </div>
-
+</div>
 </div>
 
 <div class="line"></div>
 
+<div class="section-container">
 <div class="subtitle">STAFF</div>
-<div class="title" style="font-size:40px">
-STAFF
-</div>
+<div class="title" style="font-size:40px">STAFF</div>
 
 <div class="row">
-
 <div class="avatar">
 <img src="members/STAFF/user8.jpg">
 </div>
-
 <div class="avatar">
 <img src="members/STAFF/user9.jpg">
 </div>
-
 <div class="avatar">
 <img src="members/STAFF/user10.jpg">
 </div>
-
 <div class="avatar">
 <img src="members/STAFF/user11.jpg">
 </div>
-
 </div>
-
 </div>
 
 <div class="member-wrap">
-
   <div class="scroll">
-
     <div class="member">
       <img src="members/REGULAR/gelo.jpg" class="member-pic">
       <span>☠ Gelo Suarez</span>
@@ -466,98 +430,57 @@ STAFF
       <img src="members/REGULAR/kina.jpg" class="member-pic">
       <span>☠ KinaAzura</span>
     </div>
-
   </div>
-
 </div>
 
 <footer>
 AZURA • ABOVE ALL • $
 </footer>
+
 <div id="enterScreen">
-
-<div class="enter-text">
-
-☠ ENTER AZURA ☠
-
-
+<div class="enter-text">☠ ENTER AZURA ☠</div>
 </div>
 
 <style>
-
 #enterScreen{
 position:fixed;
 top:0;
 left:0;
-
 width:100%;
 height:100%;
-
 background:black;
-
 display:flex;
-
 justify-content:center;
 align-items:center;
-
 z-index:99999;
 }
-
 .enter-text{
-
 padding:20px 40px;
-
 letter-spacing:8px;
-
 background:rgba(255,255,255,.05);
-
 border-radius:20px;
-
 cursor:pointer;
-
 }
-
 </style>
 
 <audio id="bgMusic" loop>
-
 <source src="5%20Mil.mp3" type="audio/mpeg">
-
 </audio>
 
 <script>
-
-const music =
-document.getElementById("bgMusic");
-
+const music = document.getElementById("bgMusic");
 music.volume=0.5;
-
-document
-.getElementById("enterScreen")
-.onclick=()=>{
-
+document.getElementById("enterScreen").onclick=()=>{
 music.play().catch(()=>{});
-
-document
-.getElementById("enterScreen")
-.style.display="none";
-
+document.getElementById("enterScreen").style.style.display="none";
 };
-
 </script>
 
-
 <div class="discord-box">
-
-<a href="https://discord.gg/TvfnaBMFzc"
-target="_blank">
-
+<a href="https://discord.gg/TvfnaBMFzc" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-
 <span>AZURA DISCORD</span>
-
 </a>
-
 </div>
 
 </body>

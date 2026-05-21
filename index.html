@@ -354,28 +354,72 @@ STAFF
 <footer>
 AZURA • ABOVE ALL • $
 </footer>
-<!-- MUSIC -->
+<div id="enterScreen">
 
-<audio id="bgMusic" preload="auto">
+<div class="enter-text">CLICK</div>
+
+</div>
+
+<style>
+
+#enterScreen{
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:black;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+z-index:99999;
+}
+
+.enter-text{
+
+padding:20px 40px;
+
+letter-spacing:8px;
+
+background:rgba(255,255,255,.05);
+
+border-radius:20px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<audio id="bgMusic" loop>
+
 <source src="5%20Mil.mp3" type="audio/mpeg">
+
 </audio>
 
 <script>
 
-const music = document.getElementById("bgMusic");
+const music =
+document.getElementById("bgMusic");
 
-music.volume = 0.5;
-music.loop = true;
+music.volume=0.5;
 
-function playMusic(){
+document
+.getElementById("enterScreen")
+.onclick=()=>{
 
 music.play().catch(()=>{});
 
-document.removeEventListener("click",playMusic);
+document
+.getElementById("enterScreen")
+.style.display="none";
 
-}
-
-document.addEventListener("click",playMusic);
+};
 
 </script>
 

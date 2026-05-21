@@ -354,20 +354,28 @@ STAFF
 <footer>
 AZURA • ABOVE ALL • $
 </footer>
-<!-- MUSIC AUTO PLAY -->
+<!-- MUSIC -->
 
-<audio id="bgMusic" autoplay loop controls style="display:none;">
+<audio id="bgMusic" loop>
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-window.addEventListener("click",()=>{
 
 const music=document.getElementById("bgMusic");
+
+document.addEventListener("click",()=>{
 
 music.play().catch(()=>{});
 
 },{once:true});
+
+window.onload=()=>{
+
+music.volume=0.5;
+
+};
+
 </script>
 
 
@@ -386,6 +394,5 @@ target="_blank">
 
 </div>
 
-
 </body>
-</html> 
+</html>

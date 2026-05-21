@@ -131,31 +131,46 @@ transform:translateX(-50%);
 font-size:20px;
 }
 
-/* member scrolling */
+/* member scrolling updated */
 
-.member-wrap{
-overflow:hidden;
-width:100%;
-padding:25px 0;
-margin-top:50px;
-border-top:1px solid rgba(255,255,255,.08);
-border-bottom:1px solid rgba(255,255,255,.08);
+.member-wrap {
+  overflow: hidden;
+  width: 100%;
+  padding: 15px 0;
+  margin-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  background: rgba(0, 0, 0, 0.3);
 }
 
-.scroll{
-display:flex;
-gap:18px;
-width:max-content;
-animation:scroll 25s linear infinite;
+.scroll {
+  display: flex;
+  gap: 30px; 
+  width: max-content;
+  animation: scroll 30s linear infinite; 
 }
 
-.member{
-background:rgba(255,255,255,.06);
-padding:14px 28px;
-border-radius:50px;
-backdrop-filter:blur(8px);
-white-space:nowrap;
-border:1px solid rgba(255,255,255,.1);
+.member {
+  display: flex;
+  align-items: center;
+  gap: 12px; 
+  background: rgba(255, 255, 255, .06);
+  padding: 8px 20px 8px 10px; 
+  border-radius: 50px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, .1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Maliit na bilog para sa scrolling members */
+.member-pic {
+  width: 35px;         
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  object-fit: cover;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
 @keyframes scroll{
@@ -302,51 +317,28 @@ HOME
 <div class="avatar-box">
 
 <div class="avatar">
-
-<img src="members/user1.jpg">
-
+<img src="members/founder/user1.jpg">
 </div>
 
 <div class="info-card">
-
-<img src="members/leon-banner.jpg"
-class="card-pic">
-
+<img src="members/founder/leon-banner.jpg" class="card-pic">
 <h3>Leon</h3>
-
 <p>@LeonAzura</p>
-
 <span>Founder • AZURA</span>
-
 </div>
 
 </div>
 
-<div class="avatar">
-
-<div class="crown">☠</div>
-
-<img src="members/user2.jpg">
-
-</div>
-
-<div class="avatar">
-
-<img src="members/user3.jpg">
-
-</div>
-
-</div>
-</div>
 <div class="avatar">
 <div class="crown">☠</div>
-<img src="members/user2.jpg">
+<img src="members/founder/user2.jpg">
 </div>
 
 <div class="avatar">
-<img src="members/user3.jpg">
+<img src="members/founder/user3.jpg">
 </div>
 
+</div>
 </div>
 
 <div class="line"></div>
@@ -357,21 +349,21 @@ class="card-pic">
 <div class="row">
 
 <div class="avatar">
-<img src="members/user4.jpg">
+<img src="members/above-all/user4.jpg">
 </div>
 
 <div class="avatar">
 <div class="crown">☠</div>
-<img src="members/user5.jpg">
+<img src="members/above-all/user5.jpg">
 </div>
 
 <div class="avatar">
-<img src="members/user6.jpg">
+<img src="members/above-all/user6.jpg">
 </div>
 
 <div class="avatar">
 <div class="crown">☠</div>
-<img src="members/user7.jpg">
+<img src="members/above-all/user7.jpg">
 </div>
 
 </div>
@@ -386,50 +378,96 @@ STAFF
 <div class="row">
 
 <div class="avatar">
-<img src="members/user8.jpg">
+<img src="members/staff/user8.jpg">
 </div>
 
 <div class="avatar">
-<img src="members/user9.jpg">
+<img src="members/staff/user9.jpg">
 </div>
 
 <div class="avatar">
-<img src="members/user10.jpg">
+<img src="members/staff/user10.jpg">
 </div>
 
 <div class="avatar">
-<img src="members/user11.jpg">
+<img src="members/staff/user11.jpg">
 </div>
 
 </div>
 
 </div>
-
-<!-- SCROLL MEMBER LIST -->
 
 <div class="member-wrap">
 
-<div class="scroll">
+  <div class="scroll">
 
-<div class="member">☠ Gelo Suarez</div>
-<div class="member">☠ Jay Mercado</div>
-<div class="member">☠ Andrie Gaspari</div>
-<div class="member">☠ Nix Kupal</div>
-<div class="member">☠ Dought Tanga</div>
-<div class="member">☠ Cza Renz</div>
-<div class="member">☠ Aki Ro</div>
-<div class="member">☠ KinaAzura</div>
+    <div class="member">
+      <img src="members/regular/gelo.jpg" class="member-pic">
+      <span>☠ Gelo Suarez</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/jay.jpg" class="member-pic">
+      <span>☠ Jay Mercado</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/andrie.jpg" class="member-pic">
+      <span>☠ Andrie Gaspari</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/nix.jpg" class="member-pic">
+      <span>☠ Nix Kupal</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/dought.jpg" class="member-pic">
+      <span>☠ Dought Tanga</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/cza.jpg" class="member-pic">
+      <span>☠ Cza Renz</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/aki.jpg" class="member-pic">
+      <span>☠ Aki Ro</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/kina.jpg" class="member-pic">
+      <span>☠ KinaAzura</span>
+    </div>
 
-<div class="member">☠ Gelo Suarez</div>
-<div class="member">☠ Jay Mercado</div>
-<div class="member">☠ Nix Kupal</div>
-<div class="member">☠ KinaAzura</div>
-<div class="member">☠ Dought Tanga</div>
-<div class="member">☠ Cza Renz</div>
-<div class="member">☠ Aki Ro</div>
-<div class="member">☠ Andrie Gaspari</div>
+    <div class="member">
+      <img src="members/regular/gelo.jpg" class="member-pic">
+      <span>☠ Gelo Suarez</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/jay.jpg" class="member-pic">
+      <span>☠ Jay Mercado</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/andrie.jpg" class="member-pic">
+      <span>☠ Andrie Gaspari</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/nix.jpg" class="member-pic">
+      <span>☠ Nix Kupal</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/dought.jpg" class="member-pic">
+      <span>☠ Dought Tanga</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/cza.jpg" class="member-pic">
+      <span>☠ Cza Renz</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/aki.jpg" class="member-pic">
+      <span>☠ Aki Ro</span>
+    </div>
+    <div class="member">
+      <img src="members/regular/kina.jpg" class="member-pic">
+      <span>☠ KinaAzura</span>
+    </div>
 
-</div>
+  </div>
 
 </div>
 
@@ -508,8 +546,6 @@ document
 
 </script>
 
-
-<!-- DISCORD BUTTON -->
 
 <div class="discord-box">
 

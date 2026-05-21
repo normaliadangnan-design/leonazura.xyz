@@ -356,25 +356,26 @@ AZURA • ABOVE ALL • $
 </footer>
 <!-- MUSIC -->
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" preload="auto">
 <source src="5%20Mil.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-const music=document.getElementById("bgMusic");
+const music = document.getElementById("bgMusic");
 
-document.addEventListener("click",()=>{
+music.volume = 0.5;
+music.loop = true;
+
+function playMusic(){
 
 music.play().catch(()=>{});
 
-},{once:true});
+document.removeEventListener("click",playMusic);
 
-window.onload=()=>{
+}
 
-music.volume=0.5;
-
-};
+document.addEventListener("click",playMusic);
 
 </script>
 

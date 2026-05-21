@@ -356,16 +356,26 @@ AZURA • ABOVE ALL • $
 </footer>
 <!-- MUSIC AUTO PLAY -->
 
-<audio id="bgMusic" autoplay loop>
+<audio id="bgMusic" autoplay loop controls style="display:none;">
 <source src="music.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+window.addEventListener("click",()=>{
+
+const music=document.getElementById("bgMusic");
+
+music.play().catch(()=>{});
+
+},{once:true});
+</script>
 
 
 <!-- DISCORD BUTTON -->
 
 <div class="discord-box">
 
-<a href="https://discord.gg/YOURINVITE"
+<a href="https://discord.gg/kkkNWRbsbm"
 target="_blank">
 
 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">

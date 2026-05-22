@@ -294,11 +294,13 @@ width:28px;
 
 <div class="home">
 HOME
-<div class="views">Views : 0 </div>
+<div class="views">
+Views : <span id="viewCount">0</span>
+</div>
 </div>
 
 <div class="header">
-<img src="azura-logo.png"" class="logo">
+<img src="azura-logo.png" class="logo">
 </div>
 
 <div class="line"></div>
@@ -326,8 +328,8 @@ HOME
 </div>
 <div class="info-card">
 <img src="members/founder/user2-banner.jpg" class="card-pic">
-<h3>JaehanKidz</h3>
-<p>@delacruz2482</p>
+<h3>Undefeated One</h3>
+<p>@jaehan097</p>
 <span>$ • AZURA</span>
 </div>
 </div>
@@ -500,11 +502,22 @@ pointer-events: auto;
 
 <script>
 const music = document.getElementById("bgMusic");
-music.volume=0.5;
-document.getElementById("enterScreen").onclick=()=>{
+music.volume = 0.5;
+
+document.getElementById("enterScreen").onclick = () => {
 music.play().catch(()=>{});
-document.getElementById("enterScreen").style.display="none";
+document.getElementById("enterScreen").style.display = "none";
 };
+
+/* VIEWS */
+
+fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
+.then(res => res.json())
+.then(data => {
+document.getElementById("viewCount").innerText = data.record.views;
+})
+.catch(err => console.log(err));
+
 </script>
 
 <div class="discord-box">

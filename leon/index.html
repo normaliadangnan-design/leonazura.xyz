@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Leon</title>
-
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -20,213 +16,142 @@ font-family:Poppins;
 }
 
 body{
-
 height:100vh;
-
 display:flex;
 justify-content:center;
 align-items:center;
-
 background:
 linear-gradient(rgba(0,0,0,.55),
 rgba(0,0,0,.78)),
 url("../members/founder/leon.gif");
-
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
-
 color:white;
-
 overflow:hidden;
-
 }
 
 body::before{
-
 content:"";
-
 position:absolute;
 inset:0;
-
 background:
 radial-gradient(
 rgba(255,255,255,.07) 1px,
 transparent 1px);
-
 background-size:8px 8px;
-
 }
 
 .card{
-
 position:relative;
 z-index:2;
-
 text-align:center;
-
 padding:40px;
-
 width:320px;
-
 backdrop-filter:blur(14px);
-
 background:
 rgba(0,0,0,.28);
-
 border-radius:25px;
-
 border:
 1px solid rgba(255,255,255,.08);
-
 box-shadow:
 0 0 35px rgba(0,0,0,.45);
-
 }
 
 .logo{
-
 font-size:42px;
-
 margin-bottom:10px;
-
 }
 
 .title{
-
 font-size:20px;
-
 letter-spacing:4px;
-
 margin-bottom:25px;
-
 }
 
 .avatar{
-
 width:110px;
 height:110px;
-
 margin:auto;
-
 border-radius:50%;
-
 overflow:hidden;
-
 border:
 3px solid rgba(255,255,255,.18);
-
 margin-bottom:15px;
-
 }
 
 .avatar img{
-
 width:100%;
 height:100%;
-
 object-fit:cover;
-
 }
 
 .username{
-
 font-size:22px;
-
 font-weight:600;
-
 margin-bottom:5px;
-
 }
 
 .bio{
-
 opacity:.75;
-
 font-size:13px;
-
 margin-bottom:25px;
-
 }
 
 .socials{
-
 display:flex;
-
 justify-content:center;
-
 gap:12px;
-
 margin-bottom:20px;
-
 }
 
 .social{
-
 width:48px;
 height:48px;
-
 border-radius:50%;
-
 display:flex;
-
 justify-content:center;
 align-items:center;
-
 background:
 rgba(255,255,255,.08);
-
 text-decoration:none;
-
 font-size:18px;
-
 color:white;
-
 transition:.3s;
-
 }
 
 .social:hover{
-
 transform:translateY(-4px);
-
 background:
 rgba(255,255,255,.18);
+}
 
+/* Dagdag na style para sa logo */
+.social svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
 }
 
 .music{
-
 display:block;
-
 padding:14px;
-
 border-radius:15px;
-
 background:
 rgba(0,0,0,.45);
-
 font-size:13px;
-
 color:white;
-
 text-decoration:none;
-
 transition:.3s;
-
 }
 
 .music:hover{
-
 transform:scale(1.05);
-
 background:
 rgba(255,255,255,.12);
-
 }
 
 </style>
-
 </head>
 
 <body>
@@ -240,9 +165,7 @@ Leon
 </div>
 
 <div class="avatar">
-
 <img src="../members/founder/user1.jpg" alt="Leon Avatar">
-
 </div>
 
 <div class="username">
@@ -255,51 +178,33 @@ youngest • AZURA
 
 <div class="socials">
 
-<a class="social"
-href="https://discord.gg/CwsGFu6D"
-target="_blank">
-
-DC
-
+<a class="social" href="https://discord.gg/CwsGFu6D" target="_blank">
+  <!-- Ito ang pinalitan: Opisyal na Logo ng Discord -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/>
+  </svg>
 </a>
 
 </div>
 
-<a class="music"
-href="https://open.spotify.com/track/6G30DMFfBSW1NIw6OXF4UZ?si=1a8d5614252248d9"
-target="_blank">
-
+<a class="music" href="https://open.spotify.com/track/6G30DMFfBSW1NIw6OXF4UZ?si=1a8d5614252248d9" target="_blank">
 🎵 Nateman — 123
-
 </a>
 
 </div>
 
 <audio id="bgMusic" autoplay loop>
+<source src="../Nateman - 123 (Official Music Video).mp3" type="audio/mpeg">
 
-<source
-src="../Nateman - 123 (Official Music Video).mp3"
-type="audio/mpeg">
-
-</audio>
 
 <script>
-
-const music =
-document.getElementById("bgMusic");
-
+const music = document.getElementById("bgMusic");
 music.volume = .5;
-
 music.play().catch(()=>{
-
 document.body.onclick = ()=>{
-
 music.play();
-
 };
-
-});
-
+});  
 </script>
 
 </body>

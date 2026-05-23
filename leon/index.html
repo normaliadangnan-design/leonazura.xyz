@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
+<title>Leon</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(rgba(0,0,0,.65),
+rgba(0,0,0,.8)),
+url("../members/founder/leon-banner.jpg");
+
+background-size:cover;
+background-position:center;
+
+color:white;
+
+overflow:hidden;
+}
+
+body::before{
+content:"";
+position:absolute;
+inset:0;
+
+background:
+radial-gradient(
+rgba(255,255,255,.08) 1px,
+transparent 1px);
+
+background-size:8px 8px;
+}
+
+.card{
+
+position:relative;
+z-index:2;
+
+text-align:center;
+
+padding:40px;
+
+width:320px;
+
+backdrop-filter:blur(12px);
+
+background:
+rgba(0,0,0,.35);
+
+border-radius:25px;
+
+border:
+1px solid rgba(255,255,255,.1);
+
+}
+
+.logo{
+
+font-size:45px;
+
+margin-bottom:10px;
+
+}
+
+.title{
+
+font-size:20px;
+
+letter-spacing:4px;
+
+margin-bottom:25px;
+
+}
+
+.avatar{
+
+width:110px;
+height:110px;
+
+margin:auto;
+
+border-radius:50%;
+
+overflow:hidden;
+
+border:3px solid rgba(255,255,255,.2);
+
+margin-bottom:15px;
+
+}
+
+.avatar img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+}
+
+.username{
+
+font-size:20px;
+
+font-weight:600;
+
+margin-bottom:5px;
+
+}
+
+.bio{
+
+opacity:.7;
+
+font-size:13px;
+
+margin-bottom:25px;
+
+}
+
+.socials{
+
+display:flex;
+
+justify-content:center;
+
+gap:12px;
+
+margin-bottom:20px;
+
+}
+
+.social{
+
+width:45px;
+height:45px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:
+rgba(255,255,255,.08);
+
+text-decoration:none;
+
+font-size:18px;
+
+color:white;
+
+}
+
+.music{
+
+padding:12px;
+
+border-radius:15px;
+
+background:
+rgba(0,0,0,.4);
+
+font-size:13px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="logo">☠</div>
+
+<div class="title">
+Leon
+</div>
+
+<div class="avatar">
+
+<img src="../members/founder/user1.jpg">
+
+</div>
+
+<div class="username">
+@wtf.leon
+</div>
+
+<div class="bio">
+youngest • AZURA
+</div>
+
+<div class="socials">
+
+<a class="social"
+href="https://instagram.com"
+target="_blank">
+
+IG
+
+</a>
+
+<a class="social"
+href="https://discord.com"
+target="_blank">
+
+DC
+
+</a>
+
+<a class="social"
+href="https://spotify.com"
+target="_blank">
+
+SP
+
+</a>
+
+</div>
+
+<div class="music">
+
+Now Playing
+
+<br><br>
+
+Nateman — 123
+
+</div>
+</div>
+
+<audio id="bgMusic" autoplay loop>
+
+<source src="../Nateman - 123 (Official Music Video).mp3"
+type="audio/mpeg">
+
+</audio>
+
+<script>
+
+const music=
+document.getElementById("bgMusic");
+
+music.volume=.5;
+
+music.play().catch(()=>{
+
+document.body.onclick=()=>{
+
+music.play();
+
+};
+
+});
+
+</script>
+
+</body>
+
+</html>

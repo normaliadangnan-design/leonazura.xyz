@@ -6,8 +6,7 @@
 <title>AZURA</title>
 
 <style>
-/* Ginamit ang Inter at Kanit para sa eksaktong kapal at linis ng font ng Public Enemy */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Kanit:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
 
 * {
     margin: 0;
@@ -55,8 +54,8 @@ body {
 /* CENTER STRUCTURAL TREE */
 .center-container {
     width: 100%;
-    max-width: 800px;
-    margin: 60px auto;
+    max-width: 650px;
+    margin: 50px auto 20px auto; /* Siksik na margin para walang malaking gap */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,14 +77,14 @@ body {
 .symbol-break {
     font-size: 24px;
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
-/* PUBLIC ENEMY TEXT STRUCTURE */
+/* SECTION TEXT HEADERS */
 .title-group-block {
-    margin-top: 40px;
-    margin-bottom: 15px;
+    margin-top: 35px;
+    margin-bottom: 12px;
     text-align: center;
 }
 
@@ -108,20 +107,20 @@ body {
     color: #ffffff;
 }
 
-/* BULLETPROOF HORIZONTAL OVERLAP ROW */
+/* HORIZONTAL OVERLAP ROW */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important; /* Nilock para hinding-hindi mag-vertical/break pababa */
+    flex-wrap: nowrap !important;
     justify-content: center;
     align-items: center;
     width: auto;
-    padding: 10px 0;
+    padding: 5px 0;
 }
 
 .avatar-wrapper-node {
     position: relative;
-    margin-left: -18px; /* Tamang lapit para sa overlapping chain epekto */
+    margin-left: -18px; 
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
     cursor: pointer;
@@ -131,7 +130,6 @@ body {
     margin-left: 0;
 }
 
-/* Pop up at layer sorting kapag tinapatan ng mouse */
 .avatar-wrapper-node:hover {
     transform: scale(1.18);
     z-index: 9999 !important;
@@ -157,21 +155,10 @@ body {
     object-fit: cover;
 }
 
-/* CUSTOM AMBIENT DECORATIONS (GIF/PNG OVERLAYS LIKE CAT EARS/WINGS) */
-.cosmetic-overlay {
-    position: absolute;
-    width: 110px;
-    height: auto;
-    top: -15px;
-    left: -17px;
-    pointer-events: none;
-    z-index: 5;
-}
-
-/* METADATA HOVER TOOLTIPS */
+/* HOVER TOOLTIPS */
 .avatar-tooltip {
     position: absolute;
-    bottom: -38px;
+    bottom: -35px;
     left: 50%;
     transform: translateX(-50%) translateY(5px);
     background: #050505;
@@ -197,36 +184,44 @@ body {
     transform: translateX(-50%) translateY(0);
 }
 
-/* BOTTOM MARQUEE SYSTEM */
+/* PUBLIC ENEMY ACCURATE SCROLLING TICKER 
+   Inalis ang 'margin-top: auto' para dumikit sa taas!
+*/
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
-    padding: 12px 0;
-    margin-top: auto;
-    margin-bottom: 25px;
-    background: rgba(0, 0, 0, 0.6);
-    border-top: 1px solid rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    max-width: 600px; /* Nilimitahan ang lapad para kapantay lang ng mga bilog mo */
+    padding: 10px 0;
+    margin-top: 45px; /* Eksaktong distansya mula sa ADMINS row */
+    margin-bottom: 50px;
+    background: transparent;
 }
 
 .marquee-inner-wrap {
     display: flex;
-    gap: 40px;
+    gap: 12px; /* Pinagdikit at pinaglapit ang mga lumiligid na members */
     width: max-content;
-    animation: smoothScroll 26s linear infinite;
+    animation: smoothScroll 22s linear infinite;
 }
 
+/* Ginitna at ginawang oblong/capsule badge kagaya ng PE */
 .marquee-profile-block {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    background: #0c0c0c; /* Maitim na pill background */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 5px 14px;
+    border-radius: 30px; /* Ginawang pill shape */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .marquee-profile-block img {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -236,7 +231,7 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-/* FLOATING INTERACTION COMPONENTS */
+/* DISCORD FLOATING BUTTON */
 .discord-float-action {
     position: fixed;
     bottom: 25px;
@@ -258,7 +253,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* GATEWAY ENTRY CONTROLLER */
+/* ENTRY GATEWAY */
 #gateway-overlay {
     position: fixed;
     inset: 0;
@@ -334,7 +329,7 @@ body {
         
         <div class="avatar-wrapper-node" style="z-index: 17;">
             <div class="circle-avatar-container" style="border-color: #5865F2;">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" style="padding: 12px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" style="padding: 12px; width:100%; height:100%;">
             </div>
             <div class="avatar-tooltip"><span class="tooltip-username">Discord Channel</span></div>
         </div>
@@ -347,10 +342,6 @@ body {
             <div class="circle-avatar-container"><img src="members/above all/user12.jpg"></div>
             <div class="avatar-tooltip"><span class="tooltip-username">Member 5</span></div>
         </div>
-        <div class="avatar-wrapper-node" style="z-index: 14;">
-            <div class="circle-avatar-container"><img src="members/above all/user13.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Member 6</span></div>
-        </div>
     </div>
 
     <div class="title-group-block">
@@ -361,37 +352,37 @@ body {
     <div class="horizontal-avatar-row">
         <div class="avatar-wrapper-node" style="z-index: 10;">
             <div class="circle-avatar-container"><img src="members/STAFF/user8.jpg"></div>
-            <div class="avatar-tooltip"><span class="popup-text">Staff 1</span></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Staff 1</span></div>
         </div>
         <div class="avatar-wrapper-node" style="z-index: 9;">
             <div class="circle-avatar-container"><img src="members/STAFF/user9.jpg"></div>
-            <div class="avatar-tooltip"><span class="popup-text">Staff 2</span></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Staff 2</span></div>
         </div>
         <div class="avatar-wrapper-node" style="z-index: 8;">
             <div class="circle-avatar-container"><img src="members/STAFF/user10.jpg"></div>
-            <div class="avatar-tooltip"><span class="popup-text">Staff 3</span></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Staff 3</span></div>
         </div>
         <div class="avatar-wrapper-node" style="z-index: 7;">
             <div class="circle-avatar-container"><img src="members/STAFF/user11.jpg"></div>
-            <div class="avatar-tooltip"><span class="popup-text">Staff 4</span></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Staff 4</span></div>
         </div>
     </div>
 
-</div>
+    <div class="marquee-ticker">
+      <div class="marquee-inner-wrap">
+        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>saxt</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Cosl</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Seventh threat</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Aaron</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>raiden</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>saxt</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Cosl</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Seventh threat</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Aaron</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>raiden</span></div>
+      </div>
+    </div>
 
-<div class="marquee-ticker">
-  <div class="marquee-inner-wrap">
-    <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>saxt</span></div>
-    <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Cosl</span></div>
-    <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Seventh threat</span></div>
-    <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Aaron</span></div>
-    <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>raiden</span></div>
-    <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>saxt</span></div>
-    <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Cosl</span></div>
-    <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Seventh threat</span></div>
-    <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Aaron</span></div>
-    <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>raiden</span></div>
-  </div>
 </div>
 
 <div id="gateway-overlay">

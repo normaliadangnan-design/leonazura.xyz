@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>AZURA</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap');
 
 *{
 margin:0;
@@ -16,224 +15,290 @@ box-sizing:border-box;
 }
 
 body{
-font-family:Poppins;
-background:
-linear-gradient(rgba(0,0,0,.86),rgba(0,0,0,.92)),
-url("att.MNKCYkhOQ9iAQURy1mtb8dbTrtzcFCbCN_gWu1wZyVU.png.webp");
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-color:white;
+font-family: 'Space Grotesk', sans-serif;
+/* Ginamit ang inayos na pangalan ng background na walang space */
+background: 
+    linear-gradient(rgba(5, 5, 5, 0.85), rgba(10, 10, 10, 0.90)),
+    url("bg.webp");
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+color:#e5e5e5;
 overflow-x:hidden;
 min-height:100vh;
+letter-spacing: 0.5px;
 }
 
-/* skeleton texture */
-body::before{
-content:"☠";
-position:fixed;
-font-size:520px;
-opacity:.04;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-pointer-events:none;
-color:white;
+body::after {
+content: "";
+position: fixed;
+inset: 0;
+background-image: linear-gradient(rgba(255,255,255,0.006) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.006) 1px, transparent 1px);
+background-size: 60px 60px;
+pointer-events: none;
 z-index: 1;
 }
 
-/* TOP & SECTIONS */
-
 .header{
-padding-top:70px;
+padding-top:100px;
 text-align:center;
 position: relative;
 z-index: 2;
 }
 
-.logo{
-width:140px;
-filter:
-drop-shadow(0 0 15px rgba(255,255,255,.5))
-brightness(1.1);
-animation:float 4s infinite ease-in-out;
-}
-
-@keyframes float{
-50%{
-transform:translateY(-10px);
-}
+/* Eleganteng Text Branding habang inaayos mo pa ang logo transparent file */
+.text-logo {
+font-family: 'Cinzel', serif;
+font-size: 38px;
+font-weight: 900;
+letter-spacing: 12px;
+color: #ffffff;
+text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
 }
 
 .line{
-width:90%;
+width:85%;
 height:1px;
-background:rgba(255,255,255,.08);
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
 margin:50px auto;
 position: relative;
 z-index: 2;
 }
 
-/* section alignment and typography */
-
 .section-container {
 text-align: center;
-width: 100%;
+width: 90%;
+max-width: 1200px;
+margin: 0 auto;
 position: relative;
 z-index: 2;
 }
 
 .subtitle{
-font-size:12px;
-letter-spacing:8px;
-opacity:.6;
-margin-bottom:10px;
+font-size:11px;
+letter-spacing:10px;
+color: rgba(255, 255, 255, 0.35);
+margin-bottom:12px;
 text-transform:uppercase;
 display: block;
-text-align: center;
-}
-
-.founder-title {
-font-size:24px; 
-font-weight:700;
-letter-spacing:10px;
-margin-bottom: 10px;
-text-align: center;
+font-weight: 500;
 }
 
 .title{
-font-size:52px;
-font-family:Cinzel;
-font-weight:700;
-letter-spacing:5px;
-text-shadow: 0 0 12px rgba(255,255,255,.35);
+font-size:42px;
+font-family: 'Cinzel', serif;
+font-weight:900;
+letter-spacing:8px;
+text-shadow: 0 0 20px rgba(255,255,255,0.1);
+margin-bottom: 40px;
+text-transform: uppercase;
+}
+
+/* GRID SYSTEM: Ito ang pumipilit sa mga bilog na maging magkakatabi */
+.profile-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+gap: 25px;
+padding: 10px;
+margin-bottom: 50px;
+}
+
+.avatar-card {
+position: relative;
+background: rgba(10, 10, 10, 0.65);
+border: 1px solid rgba(255, 255, 255, 0.04);
+border-radius: 14px;
+padding: 30px 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
 text-align: center;
-margin-bottom: 15px;
+backdrop-filter: blur(10px);
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+cursor: pointer;
+overflow: hidden;
+text-decoration: none;
+color: inherit;
 }
 
-/* profile circles */
+.avatar-card:hover {
+transform: translateY(-6px);
+border-color: rgba(255, 255, 255, 0.15);
+background: rgba(15, 15, 15, 0.8);
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+}
 
-.row{
-display:flex;
-justify-content:center;
-gap:25px;
-flex-wrap:wrap;
-margin-top:35px;
-margin-bottom:50px;
+.avatar-holder {
+width: 95px;
+height: 95px;
+border-radius: 50%;
+border: 2px solid rgba(255, 255, 255, 0.1);
+padding: 4px;
+position: relative;
+margin-bottom: 18px;
+transition: all 0.4s;
+}
+
+.avatar-card:hover .avatar-holder {
+border-color: rgba(255, 255, 255, 0.4);
+transform: scale(1.05);
+}
+
+.avatar-holder img {
 width: 100%;
+height: 100%;
+border-radius: 50%;
+object-fit: cover;
+background: #111;
 }
 
-.avatar{
-width:95px;
-height:95px;
-border-radius:50%;
-border:2px solid rgba(255,255,255,.35);
-overflow:hidden;
-position:relative;
-transition:.3s;
-box-shadow:
-0 0 20px rgba(255,255,255,.15);
+.card-crown {
+position: absolute;
+top: -14px;
+left: 50%;
+transform: translateX(-50%);
+font-size: 20px;
+filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+z-index: 5;
 }
 
-.avatar:hover{
-transform:translateY(-8px);
-box-shadow:
-0 0 35px rgba(255,255,255,.35);
+.member-name {
+font-size: 18px;
+font-weight: 700;
+letter-spacing: 0.5px;
+margin-bottom: 4px;
+color: #ffffff;
 }
 
-.avatar img{
-width:100%;
-height:100%;
-object-fit:cover;
+.member-tag {
+font-size: 12px;
+color: rgba(255, 255, 255, 0.4);
+margin-bottom: 15px;
+font-weight: 300;
 }
 
-.crown{
-position:absolute;
-top:-18px;
-left:50%;
-transform:translateX(-50%);
-font-size:20px;
-z-index: 10;
+.member-status {
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(255, 255, 255, 0.06);
+padding: 5px 14px;
+border-radius: 30px;
+color: rgba(255, 255, 255, 0.8);
+transition: all 0.3s;
 }
 
-/* member scrolling updated */
+.avatar-card:hover .member-status {
+background: #ffffff;
+color: #000000;
+font-weight: 700;
+}
+
+.staff-grid {
+display: flex;
+justify-content: center;
+gap: 25px;
+flex-wrap: wrap;
+margin-bottom: 50px;
+}
+
+.staff-avatar {
+width: 95px;
+height: 95px;
+border-radius: 50%;
+border: 2px solid rgba(255, 255, 255, 0.15);
+overflow: hidden;
+transition: .3s;
+box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.staff-avatar:hover {
+transform: translateY(-6px);
+border-color: rgba(255, 255, 255, 0.4);
+}
+
+.staff-avatar img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
 
 .member-wrap {
-  overflow: hidden;
-  width: 100%;
-  padding: 15px 0;
-  margin-top: 50px;
-  border-top: 1px solid rgba(255, 255, 255, .08);
-  border-bottom: 1px solid rgba(255, 255, 255, .08);
-  background: rgba(0, 0, 0, 0.3);
-  position: relative;
-  z-index: 2;
+overflow: hidden;
+width: 100%;
+padding: 18px 0;
+margin-top: 50px;
+border-top: 1px solid rgba(255, 255, 255, .04);
+border-bottom: 1px solid rgba(255, 255, 255, .04);
+background: rgba(5, 5, 5, 0.5);
+position: relative;
+z-index: 2;
 }
 
 .scroll {
-  display: flex;
-  gap: 30px; 
-  width: max-content;
-  animation: scroll 30s linear infinite; 
+display: flex;
+gap: 30px; 
+width: max-content;
+animation: scroll 28s linear infinite; 
 }
 
 .member {
-  display: flex;
-  align-items: center;
-  gap: 12px; 
-  background: rgba(255,255,255,.06);
-  padding: 8px 20px 8px 10px; 
-  border-radius: 50px;
-  backdrop-filter: blur(8px);
-  white-space: nowrap;
-  border: 1px solid rgba(255, 255, 255, .1);
-  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+display: flex;
+align-items: center;
+gap: 12px; 
+background: rgba(255,255,255,.02);
+padding: 6px 20px 6px 10px; 
+border-radius: 50px;
+backdrop-filter: blur(8px);
+white-space: nowrap;
+border: 1px solid rgba(255, 255, 255, .04);
+font-size: 13px;
 }
 
 .member-pic {
-  width: 35px;          
-  height: 35px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  object-fit: cover;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+width: 34px;          
+height: 34px;
+border-radius: 50%;
+border: 1px solid rgba(255, 255, 255, 0.15);
+object-fit: cover;
 }
 
 @keyframes scroll{
-0%{
-transform:translateX(0);
+0%{ transform:translateX(0); }
+100%{ transform:translateX(-50%); }
 }
-100%{
-transform:translateX(-50%);
-}
-}
-
-/* footer */
 
 footer{
 text-align:center;
-padding:50px;
-opacity:.5;
-font-size:13px;
+padding:50px 20px;
+opacity:.3;
+font-size:12px;
+letter-spacing: 2px;
 position: relative;
 z-index: 2;
 }
 
 .home{
 position:absolute;
-top:30px;
+top:35px;
 right:60px;
 display:flex;
+align-items: center;
 gap:20px;
-font-size:13px;letter-spacing:4px;
+font-size:12px;
+letter-spacing:4px;
 z-index: 3;
 }
 
 .views{
-padding:10px 22px;
-border:1px solid rgba(255,255,255,.15);
+padding:8px 18px;
+border:1px solid rgba(255,255,255,.06);
 border-radius:30px;
+background: rgba(0,0,0,0.3);
 }
+
 .discord-box{
 position:fixed;
 bottom:30px;
@@ -242,65 +307,86 @@ z-index:999;
 }
 
 .discord-box a{
-display:flex;align-items:center;gap:12px;padding:14px 22px;text-decoration:none;color:white;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50px;backdrop-filter:blur(10px);
-}
-.avatar-box{
-position:relative;
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px 22px;
+text-decoration:none;
+color:white;
+background:rgba(10, 10, 10, 0.85);
+border:1px solid rgba(255, 255, 255, 0.08);
+border-radius:50px;
+backdrop-filter:blur(10px);
+font-size: 12px;
+font-weight: 700;
+letter-spacing: 1px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+transition: all 0.3s;
 }
 
-.info-card{
-position:absolute;
-top:110px;
-left:50%;
-transform:translateX(-50%);
-width:260px;
-min-height:190px;
-padding:18px;
-background:rgba(8,8,8,.95);
-border-radius:18px;
-display:none;
-z-index:99999;
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(15px);
-box-shadow:
-0 0 40px rgba(0,0,0,.6);
+.discord-box a:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.25); }
+.discord-box img{ width:22px; }
+
+#enterScreen{
+position:fixed;
+inset:0;
+background:#030303;
+display:flex;
+justify-content:center;
+align-items:center;
 overflow:hidden;
+z-index:999999;
+cursor:pointer;
+transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
 }
 
-.info-card::after{
-content:"";
+.bg-logo{
 position:absolute;
-left:0;
-bottom:48px;
-width:100%;
-height:1px;
-background:
-rgba(255,255,255,.08);
+font-size:18vw;
+font-family:'Cinzel', serif;
+font-weight:900;
+letter-spacing:30px;
+opacity:.015;
+filter:blur(4px);
+animation:pulseLogoBg 4s infinite ease-in-out;
+pointer-events:none;
+user-select:none;
 }
 
-.avatar-box:hover .info-card{
-display:block;
-animation:cardFade .25s;
+.blur-light{
+position:absolute;
+width:250px;
+height:120px;
+background:white;
+opacity:.03;
+filter:blur(50px);
+animation:glowCenter 4s infinite ease-in-out;
 }
 
-@keyframes cardFade{
-from{
-opacity:0;
-transform:
-translateX(-50%)
-translateY(12px);
-}
-to{
-opacity:1;
-transform:
-translateX(-50%)
-translateY(0);
-}
+.enter-btn{
+position:relative;
+padding:18px 50px;
+font-size:12px;
+letter-spacing:10px;
+background:rgba(255,255,255,.01);
+border: 1px solid rgba(255,255,255,0.06);
+border-radius:40px;
+backdrop-filter:blur(12px);
+transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
+z-index:5;
+color: #fff;
 }
 
-.discord-box img{
-width:28px;
+.enter-btn:hover{
+transform:scale(1.04);
+border-color: rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.03);
+box-shadow:0 0 35px rgba(255,255,255,0.05);
 }
+
+.fadeout{ opacity:0; visibility:hidden; }
+@keyframes glowCenter{ 50%{ opacity:.08; transform:scale(1.1); } }
+@keyframes pulseLogoBg{ 50%{ opacity:.03; } }
 </style>
 </head>
 
@@ -309,232 +395,137 @@ width:28px;
 <div class="home">
 HOME
 <div class="views">
-Views : <span id="viewCount">1568</span>
+VIEWS : <span id="viewCount">1568</span>
 </div>
 </div>
 
 <div class="header">
-<img src="azura-logo.png" class="logo">
-</div>
-
-<div class="line"></div>
-
-<div class="row">
-<div class="avatar-box">
-<a href="/leon/" target="_blank">
-<div class="avatar">
-<img src="members/founder/user1.jpg">
-</div>
-</a>
-<div class="info-card">
-<img src="members/founder/user1.jpg" style="width:50px;height:50px;border-radius:50%;margin-bottom:10px;">
-<h3>Leon</h3>
-<div style="background:black;padding:5px;border-radius:5px;margin-top:8px;font-size:12px;">Playing ROBLOX</div>
-<p style="margin-top:8px;">@wtf.leon</p>
-</div>
-</div>
-
-<div class="avatar-box">
-<div class="avatar">
-<div class="crown">☠</div>
-<img src="members/founder/user2.jpg">
-</div>
-<div class="info-card">
-<img src="members/founder/user2.jpg" style="width:50px;height:50px;border-radius:50%;margin-bottom:10px;">
-<h3>Undefeated One</h3>
-<div style="background:black;padding:5px;border-radius:5px;margin-top:8px;font-size:12px;">Playing VALORANT</div>
-<p style="margin-top:8px;">@jaehan097</p>
-</div>
-</div>
-
-<div class="avatar-box">
-<div class="avatar">
-<img src="members/founder/user3.jpg">
-</div>
-<div class="info-card">
-<img src="members/founder/user3.jpg" style="width:50px;height:50px;border-radius:50%;margin-bottom:10px;">
-<h3>Dough Tanga</h3>
-<div style="background:black;padding:5px;border-radius:5px;margin-top:8px;font-size:12px;">Playing GTA V</div>
-<p style="margin-top:8px;">@Dough420</p>
-</div>
-</div>
+    <div class="text-logo">AZURAGOD$</div>
 </div>
 
 <div class="line"></div>
 
 <div class="section-container">
-<div class="subtitle">ABOVE ALL</div>
-<div class="title">ABOVE ALL</div>
+    <div class="subtitle">MANAGEMENT</div>
+    <div class="title">FOUNDERS</div>
+    
+    <div class="profile-grid">
+        <a href="/leon/" target="_blank" class="avatar-card">
+            <div class="avatar-holder"><img src="members/founder/user1.jpg"></div>
+            <div class="member-name">Leon</div>
+            <div class="member-tag">@wtf.leon</div>
+            <div class="member-status">Playing ROBLOX</div>
+        </a>
 
-<div class="row">
-
-    <div class="avatar-box">
-        <div class="avatar">
-            <img src="members/above all/user4.jpg">
+        <div class="avatar-card">
+            <div class="avatar-holder">
+                <div class="card-crown">☠</div>
+                <img src="members/founder/user2.jpg">
+            </div>
+            <div class="member-name">Undefeated One</div>
+            <div class="member-tag">@jaehan097</div>
+            <div class="member-status">Playing VALORANT</div>
         </div>
-        <div class="info-card">
-            <img src="members/above all/user4.jpg" style="width:58px;height:58px;border-radius:50%;object-fit:cover;">
-            <h3 style="margin-top:10px;font-size:18px;">Kina</h3>
-            <p style="opacity:.6;font-size:13px;margin-top:4px;">@kinaazura</p>
-            <div style="margin-top:45px;font-size:12px;opacity:.45;">Discord User</div>
+
+        <div class="avatar-card">
+            <div class="avatar-holder"><img src="members/founder/user3.jpg"></div>
+            <div class="member-name">Dough Tanga</div>
+            <div class="member-tag">@Dough420</div>
+            <div class="member-status">Playing GTA V</div>
         </div>
     </div>
-
-    <div class="avatar-box">
-        <div class="avatar">
-            <div class="crown">☠</div>
-            <img src="members/above all/user5.jpg">
-        </div>
-        <div class="info-card">
-            <img src="members/above all/user5.jpg" style="width:58px;height:58px;border-radius:50%;object-fit:cover;">
-            <h3 style="margin-top:10px;font-size:18px;">YG</h3>
-            <p style="opacity:.6;font-size:13px;margin-top:4px;">@YG TOK AZURA</p>
-            <div style="margin-top:8px;display:inline-block;padding:5px 8px;background:black;border-radius:6px;font-size:12px;">Playing Valorant</div>
-            <div style="margin-top:45px;font-size:12px;opacity:.45;">Discord User</div>
-        </div>
-    </div>
-
-    <div class="avatar-box">
-        <div class="avatar">
-            <img src="members/above all/user6.jpg">
-        </div>
-        <div class="info-card">
-            <img src="members/above all/user6.jpg" style="width:58px;height:58px;border-radius:50%;object-fit:cover;">
-            <h3 style="margin-top:10px;font-size:18px;">Aki</h3>
-            <p style="opacity:.6;font-size:13px;">@aki</p>
-            <div style="margin-top:8px;display:inline-block;padding:5px 8px;background:black;border-radius:6px;font-size:12px;">Playing Roblox</div>
-        </div>
-    </div>
-
-    <div class="avatar-box">
-        <div class="avatar">
-            <div class="crown">☠</div>
-            <img src="members/above all/user7.jpg">
-        </div>
-        <div class="info-card">
-            <img src="members/above all/user7.jpg" style="width:58px;height:58px;border-radius:50%;object-fit:cover;">
-            <h3 style="margin-top:10px;font-size:18px;">Jay</h3>
-            <p style="opacity:.6;font-size:13px;">@jay</p>
-            <div style="margin-top:8px;display:inline-block;padding:5px 8px;background:black;border-radius:6px;font-size:12px;">Playing GTA V</div>
-        </div>
-    </div>
-
-    <div class="avatar-box">
-        <div class="avatar">
-            <img src="members/above all/user12.jpg">
-        </div>
-        <div class="info-card">
-            <img src="members/above all/user12.jpg" style="width:58px;height:58px;border-radius:50%;object-fit:cover;">
-            <h3 style="margin-top:10px;font-size:18px;">New Member 1</h3>
-            <p style="opacity:.6;font-size:13px;">@username1</p>
-            <div style="margin-top:8px;display:inline-block;padding:5px 8px;background:black;border-radius:6px;font-size:12px;">Playing Game</div>
-        </div>
-    </div>
-
-    <div class="avatar-box">
-        <div class="avatar">
-            <img src="members/above all/user13.jpg">
-        </div>
-        <div class="info-card">
-            <img src="members/above all/user13.jpg" style="width:58px;height:58px;border-radius:50%;object-fit:cover;">
-            <h3 style="margin-top:10px;font-size:18px;">New Member 2</h3>
-            <p style="opacity:.6;font-size:13px;">@username2</p>
-            <div style="margin-top:8px;display:inline-block;padding:5px 8px;background:black;border-radius:6px;font-size:12px;">Playing Game</div>
-        </div>
-    </div>
-
-</div>
 </div>
 
 <div class="line"></div>
 
 <div class="section-container">
-<div class="subtitle">STAFF</div>
-<div class="title" style="font-size:40px">STAFF</div>
+    <div class="subtitle">ELITE TEAM</div>
+    <div class="title">ABOVE ALL</div>
 
-<div class="row">
-<div class="avatar">
-<img src="members/STAFF/user8.jpg">
+    <div class="profile-grid">
+        <div class="avatar-card">
+            <div class="avatar-holder"><img src="members/above all/user4.jpg"></div>
+            <div class="member-name">Kina</div>
+            <div class="member-tag">@kinaazura</div>
+            <div class="member-status">Discord User</div>
+        </div>
+
+        <div class="avatar-card">
+            <div class="avatar-holder">
+                <div class="card-crown">☠</div>
+                <img src="members/above all/user5.jpg">
+            </div>
+            <div class="member-name">YG</div>
+            <div class="member-tag">@YG TOK AZURA</div>
+            <div class="member-status">Playing Valorant</div>
+        </div>
+
+        <div class="avatar-card">
+            <div class="avatar-holder"><img src="members/above all/user6.jpg"></div>
+            <div class="member-name">Aki</div>
+            <div class="member-tag">@aki</div>
+            <div class="member-status">Playing Roblox</div>
+        </div>
+
+        <div class="avatar-card">
+            <div class="avatar-holder">
+                <div class="card-crown">☠</div>
+                <img src="members/above all/user7.jpg">
+            </div>
+            <div class="member-name">Jay</div>
+            <div class="member-tag">@jay</div>
+            <div class="member-status">Playing GTA V</div>
+        </div>
+
+        <div class="avatar-card">
+            <div class="avatar-holder"><img src="members/above all/user12.jpg"></div>
+            <div class="member-name">New Member 1</div>
+            <div class="member-tag">@username1</div>
+            <div class="member-status">Playing Game</div>
+        </div>
+
+        <div class="avatar-card">
+            <div class="avatar-holder"><img src="members/above all/user13.jpg"></div>
+            <div class="member-name">New Member 2</div>
+            <div class="member-tag">@username2</div>
+            <div class="member-status">Offline</div>
+        </div>
+    </div>
 </div>
-<div class="avatar">
-<img src="members/STAFF/user9.jpg">
-</div>
-<div class="avatar">
-<img src="members/STAFF/user10.jpg">
-</div>
-<div class="avatar">
-<img src="members/STAFF/user11.jpg">
-</div>
-</div>
+
+<div class="line"></div>
+
+<div class="section-container">
+    <div class="subtitle">MODERATION</div>
+    <div class="title" style="font-size:36px;">STAFF</div>
+
+    <div class="staff-grid">
+        <div class="staff-avatar"><img src="members/STAFF/user8.jpg"></div>
+        <div class="staff-avatar"><img src="members/STAFF/user9.jpg"></div>
+        <div class="staff-avatar"><img src="members/STAFF/user10.jpg"></div>
+        <div class="staff-avatar"><img src="members/STAFF/user11.jpg"></div>
+    </div>
 </div>
 
 <div class="member-wrap">
   <div class="scroll">
-    <div class="member">
-      <img src="members/REGULAR/gelo.jpg" class="member-pic">
-      <span>☠ Gelo Suarez</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/jay.jpg" class="member-pic">
-      <span>☠ Jay Mercado</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/andrie.jpg" class="member-pic">
-      <span>☠ Andrie Gaspari</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/nix.jpg" class="member-pic">
-      <span>☠ Nix Kupal</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/dought.jpg" class="member-pic">
-      <span>☠ Dought Tanga</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/cza.jpg" class="member-pic">
-      <span>☠ Zaki Berdugo</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/aki.jpg" class="member-pic">
-      <span>☠ Aki Ro</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/kina.jpg" class="member-pic">
-      <span>☠ KinaAzura</span>
-    </div>
-
-    <div class="member">
-      <img src="members/REGULAR/gelo.jpg" class="member-pic">
-      <span>☠ Gelo Suarez</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/jay.jpg" class="member-pic">
-      <span>☠ Jay Mercado</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/andrie.jpg" class="member-pic">
-      <span>☠ Andrie Gaspari</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/nix.jpg" class="member-pic">
-      <span>☠ Nix Kupal</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/dought.jpg" class="member-pic">
-      <span>☠ Dought Tanga</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/cza.jpg" class="member-pic">
-      <span>☠ Cza Renz</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/aki.jpg" class="member-pic">
-      <span>☠ Aki Ro</span>
-    </div>
-    <div class="member">
-      <img src="members/REGULAR/kina.jpg" class="member-pic">
-      <span>☠ KinaAzura</span>
-    </div>
+    <div class="member"><img src="members/REGULAR/gelo.jpg" class="member-pic"> <span>☠ Gelo Suarez</span></div>
+    <div class="member"><img src="members/REGULAR/jay.jpg" class="member-pic"> <span>☠ Jay Mercado</span></div>
+    <div class="member"><img src="members/REGULAR/andrie.jpg" class="member-pic"> <span>☠ Andrie Gaspari</span></div>
+    <div class="member"><img src="members/REGULAR/nix.jpg" class="member-pic"> <span>☠ Nix Kupal</span></div>
+    <div class="member"><img src="members/REGULAR/dought.jpg" class="member-pic"> <span>☠ Dought Tanga</span></div>
+    <div class="member"><img src="members/REGULAR/cza.jpg" class="member-pic"> <span>☠ Zaki Berdugo</span></div>
+    <div class="member"><img src="members/REGULAR/aki.jpg" class="member-pic"> <span>☠ Aki Ro</span></div>
+    <div class="member"><img src="members/REGULAR/kina.jpg" class="member-pic"> <span>☠ KinaAzura</span></div>
+    
+    <div class="member"><img src="members/REGULAR/gelo.jpg" class="member-pic"> <span>☠ Gelo Suarez</span></div>
+    <div class="member"><img src="members/REGULAR/jay.jpg" class="member-pic"> <span>☠ Jay Mercado</span></div>
+    <div class="member"><img src="members/REGULAR/andrie.jpg" class="member-pic"> <span>☠ Andrie Gaspari</span></div>
+    <div class="member"><img src="members/REGULAR/nix.jpg" class="member-pic"> <span>☠ Nix Kupal</span></div>
+    <div class="member"><img src="members/REGULAR/dought.jpg" class="member-pic"> <span>☠ Dought Tanga</span></div>
+    <div class="member"><img src="members/REGULAR/cza.jpg" class="member-pic"> <span>☠ Cza Renz</span></div>
+    <div class="member"><img src="members/REGULAR/aki.jpg" class="member-pic"> <span>☠ Aki Ro</span></div>
+    <div class="member"><img src="members/REGULAR/kina.jpg" class="member-pic"> <span>☠ KinaAzura</span></div>
   </div>
 </div>
 
@@ -545,81 +536,8 @@ AZURA • ABOVE ALL • $
 <div id="enterScreen">
 <div class="bg-logo">AZURA</div>
 <div class="blur-light"></div>
-<div class="enter-btn">CLICK</div>
+<div class="enter-btn">ENTER SYSTEM</div>
 </div>
-
-<style>
-#enterScreen{
-position:fixed;
-inset:0;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-z-index:999999;
-cursor:pointer;
-transition:1s;
-}
-
-.bg-logo{
-position:absolute;
-font-size:22vw;
-font-family:Cinzel;
-font-weight:700;
-letter-spacing:25px;
-opacity:.03;
-filter:blur(8px);
-animation:pulseLogoBg 5s infinite;
-pointer-events:none;
-user-select:none;
-}
-
-.blur-light{
-position:absolute;
-width:200px;
-height:100px;
-background:white;
-opacity:.08;
-filter:blur(45px);
-animation:glowCenter 3s infinite;
-}
-
-.enter-btn{
-position:relative;
-padding:18px 45px;
-font-size:14px;
-letter-spacing:10px;
-background:rgba(255,255,255,.05);
-border-radius:40px;
-backdrop-filter:blur(10px);
-transition:.4s;
-z-index:5;
-}
-
-.enter-btn:hover{
-transform:scale(1.08);
-box-shadow:0 0 35px rgba(255,255,255,.15);
-}
-
-.fadeout{
-opacity:0;
-visibility:hidden;
-}
-
-@keyframes glowCenter{
-50%{
-opacity:.18;
-transform:scale(1.25);
-}
-}
-
-@keyframes pulseLogoBg{
-50%{
-opacity:.06;
-}
-}
-</style>
 
 <audio id="bgMusic" loop>
 <source src="Nateman%20-%20123%20%28Official%20Music%20Video%29.mp3" type="audio/mpeg">
@@ -627,18 +545,17 @@ opacity:.06;
 
 <script>
 const music = document.getElementById("bgMusic");
-music.volume=.5;
+music.volume = 0.5;
 
-document.getElementById("enterScreen").onclick=()=>{
-music.play().catch(()=>{});
-document.getElementById("enterScreen").classList.add("fadeout");
+document.getElementById("enterScreen").onclick = () => {
+    music.play().catch(() => {});
+    document.getElementById("enterScreen").classList.add("fadeout");
 };
 
-/* VIEWS COUNTER */
 fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 .then(res => res.json())
 .then(data => {
-document.getElementById("viewCount").innerText = data.record.views;
+    document.getElementById("viewCount").innerText = data.record.views;
 })
 .catch(err => console.log(err));
 </script>
@@ -646,7 +563,7 @@ document.getElementById("viewCount").innerText = data.record.views;
 <div class="discord-box">
 <a href="https://discord.gg/TvfnaBMFzc" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-<span>JOIN HERE</span>
+<span>LAUNCH DISCORD</span>
 </a>
 </div>
 

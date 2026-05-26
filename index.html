@@ -6,9 +6,9 @@
 <title>AZURA</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Space+Grotesk:wght@300;400;700&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -17,7 +17,7 @@
 body {
     font-family: 'Space Grotesk', sans-serif;
     background: 
-        linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.93)),
+        linear-gradient(rgba(0, 0, 0, 0.93), rgba(0, 0, 0, 0.95)),
         url("bg.webp");
     background-size: cover;
     background-position: center;
@@ -28,228 +28,244 @@ body {
     text-align: center;
 }
 
-/* LOGO HEADER */
-.header {
+/* TOP WIDGETS */
+.top-nav {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    z-index: 100;
+    opacity: 0.5;
+}
+
+.view-counter {
+    padding: 3px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* HEADER BRANDING */
+.header-container {
     padding-top: 50px;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 10;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.logo {
-    width: 100%;
-    max-width: 340px;
+.logo-brand {
+    max-width: 310px;
     height: auto;
-    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+    display: block;
 }
 
-/* SECTIONS STRUCTURE */
-.section-wrapper {
-    margin: 45px auto;
+/* MAIN TREE CLUSTER WRAPPER */
+.main-cluster {
     width: 100%;
-    max-width: 800px;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
     z-index: 10;
 }
 
-/* PUBLIC ENEMY TEXT TYPOGRAPHY */
-.clan-symbol {
-    font-size: 32px;
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 20px;
-    display: block;
+/* SECTION HEADERS (PUBLIC ENEMY ACCURATE STYLING) */
+.title-block {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.section-subtitle {
+.tiny-sub {
     font-size: 8px;
-    letter-spacing: 5px;
-    color: rgba(255, 255, 255, 0.3);
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.25);
     text-transform: uppercase;
-    margin-bottom: 3px;
-    display: block;
+    line-height: 1;
+    margin-bottom: 2px;
 }
 
-.section-title {
+.main-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: #ffffff;
-    margin-bottom: 25px;
+    line-height: 1.2;
 }
 
-/* OVERLAPPING AVATAR CHAIN SYSTEM */
-.avatar-container {
+.dollar-symbol {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    letter-spacing: 0;
+}
+
+/* THE OVERLAPPING AVATAR CHAIN */
+.row-chain {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    width: 100%;
+    padding: 5px 0;
 }
 
-.profile-node {
+.avatar-node {
     position: relative;
-    text-decoration: none;
-    color: inherit;
-    /* Gumagawa ng patong-patong na epekto sa tabi */
-    margin-left: -16px; 
-    transition: transform 0.25s ease, z-index 0.25s ease;
-    z-index: 1;
+    /* Dikit-dikit at nagpapatong ang mga gilid */
+    margin-left: -22px; 
+    transition: transform 0.2s ease, z-index 0.2s ease;
+    z-index: 10;
 }
 
-/* Unang item walang kabig sa kaliwa para laging sentro */
-.profile-node:first-child {
+.avatar-node:first-child {
     margin-left: 0;
 }
 
-/* Kapag nag-hover, umaangat sa ibabaw ng mga katabi */
-.profile-node:hover {
-    transform: scale(1.15) translateY(-5px);
+/* Umaangat kapag tinapatan ng mouse */
+.avatar-node:hover {
+    transform: scale(1.18);
     z-index: 999 !important;
 }
 
-.circle-wrapper {
-    width: 78px;
-    height: 78px;
+/* BASE AVATAR CIRCLE Frame Look */
+.circle-frame {
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
-    border: 1.5px solid rgba(255, 255, 255, 0.2);
-    padding: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     background: #000000;
+    padding: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-    transition: all 0.25s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+    overflow: visible; /* Para sa mga dekorasyon sa labas ng bilog */
 }
 
-/* Red Glow para sa specific segments or general hover */
-.profile-node:hover .circle-wrapper {
-    border-color: #ff3333;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-}
-
-.circle-wrapper img {
+.circle-frame img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
 }
 
-/* HOVER TOOLTIPS */
-.node-tooltip {
+/* CUSTOM COSMETIC ADDONS (KATULAD NG WINGS/EARS SA PUBLIC ENEMY) */
+.wings-decoration {
     position: absolute;
-    bottom: -45px;
+    width: 110px;
+    height: auto;
+    top: -12px;
+    left: -17px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.85;
+}
+
+/* HOVER DETAILED TOOLTIPS */
+.node-info-popup {
+    position: absolute;
+    bottom: -40px;
     left: 50%;
     transform: translateX(-50%) translateY(5px);
-    background: rgba(5, 5, 5, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 5px 12px;
-    border-radius: 4px;
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 4px 10px;
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
     pointer-events: none;
+    z-index: 1000;
 }
 
-.node-name {
-    font-size: 11px;
+.info-name {
+    font-size: 10px;
     font-weight: 700;
-    display: block;
-    color: #ffffff;
+    letter-spacing: 0.5px;
 }
 
-.profile-node:hover .node-tooltip {
+.avatar-node:hover .node-info-popup {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
 }
 
-/* BOTTOM MARQUEE RUNNER */
-.marquee-wrapper {
+/* MARQUEE RUNNER PACK */
+.marquee-container {
     overflow: hidden;
     width: 100%;
-    padding: 14px 0;
-    margin-top: 60px;
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    padding: 12px 0;
+    margin-top: 50px;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.015);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.015);
 }
 
-.marquee-content {
+.marquee-track {
     display: flex;
-    gap: 35px;
+    gap: 40px;
     width: max-content;
-    animation: runMarquee 28s linear infinite;
+    animation: marqueeShift 26s linear infinite;
 }
 
-.marquee-item {
+.marquee-block {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-size: 11px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.6);
 }
 
-.marquee-pic {
-    width: 24px;
-    height: 24px;
+.marquee-avatar {
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-@keyframes runMarquee {
+@keyframes marqueeShift {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
 
-/* GENERAL WIDGETS */
-.top-nav {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 10px;
-    letter-spacing: 2px;
-    z-index: 20;
-    opacity: 0.6;
-}
-
-.view-counter {
-    padding: 4px 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-}
-
-.discord-anchor {
+/* FLOATING JOIN DISCORD ACTION BUTTON */
+.discord-button-floating {
     position: fixed;
     bottom: 25px;
     right: 25px;
     z-index: 9999;
 }
 
-.discord-anchor a {
+.discord-button-floating a {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 18px;
+    padding: 8px 16px;
     text-decoration: none;
-    color: #fff;
+    color: #ffffff;
     background: #000000;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    border-radius: 2px;
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
-.discord-anchor img { width: 16px; }
-
-/* RE-ENTRY DOOR */
+/* OVERLAY GATEWAY SCREEN */
 #gatekeeper {
     position: fixed;
     inset: 0;
@@ -259,17 +275,16 @@ body {
     align-items: center;
     z-index: 999999;
     cursor: pointer;
-    transition: opacity 0.8s ease, visibility 0.8s;
+    transition: opacity 0.6s ease, visibility 0.6s;
 }
 
 .gate-button {
-    padding: 14px 35px;
+    padding: 12px 30px;
     font-size: 10px;
-    letter-spacing: 6px;
+    letter-spacing: 5px;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
 }
 
 .exit-gate {
@@ -285,97 +300,100 @@ body {
     <div class="view-counter">VIEWS : <span id="views">0</span></div>
 </div>
 
-<div class="header">
-    <img src="att.yYqjZASWT0CYo0mYBzb2CFulOHxOD4TFMJU8V1zqNrE (1).webp" class="logo">
+<div class="header-container">
+    <img src="att.yYqjZASWT0CYo0mYBzb2CFulOHxOD4TFMJU8V1zqNrE (1).webp" class="logo-brand">
 </div>
 
-<div class="section-wrapper">
-    <div class="clan-symbol">$</div>
+<div class="main-cluster">
+
+    <div class="dollar-symbol">$</div>
     
-    <div class="avatar-container">
-        <a href="/leon/" target="_blank" class="profile-node" style="z-index: 3;">
-            <div class="circle-wrapper"><img src="members/founder/user1.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Leon</span></div>
+    <div class="row-chain">
+        <a href="/leon/" target="_blank" class="avatar-node" style="z-index: 30;">
+            <svg class="wings-decoration" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>
+            <div class="circle-frame"><img src="members/founder/user1.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Leon</span></div>
         </a>
-        <div class="profile-node" style="z-index: 2;">
-            <div class="circle-wrapper"><img src="members/founder/user2.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Undefeated One</span></div>
+        <div class="avatar-node" style="z-index: 29;">
+            <div class="circle-frame"><img src="members/founder/user2.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Undefeated One</span></div>
         </div>
-        <div class="profile-node" style="z-index: 1;">
-            <div class="circle-wrapper"><img src="members/founder/user3.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Dough Tanga</span></div>
+        <div class="avatar-node" style="z-index: 28;">
+            <div class="circle-frame"><img src="members/founder/user3.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Dough Tanga</span></div>
         </div>
     </div>
-</div>
 
-<div class="section-wrapper">
-    <div class="section-subtitle">ABOVE ALL</div>
-    <div class="section-title">ABOVE ALL</div>
+    <div class="title-block">
+        <span class="tiny-sub">ABOVE ALL</span>
+        <h2 class="main-title">ABOVE ALL</h2>
+    </div>
     
-    <div class="avatar-container">
-        <div class="profile-node" style="z-index: 6;">
-            <div class="circle-wrapper"><img src="members/above all/user4.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Kina</span></div>
+    <div class="row-chain">
+        <div class="avatar-node" style="z-index: 20;">
+            <div class="circle-frame"><img src="members/above all/user4.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Kina</span></div>
         </div>
-        <div class="profile-node" style="z-index: 5;">
-            <div class="circle-wrapper"><img src="members/above all/user5.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">YG</span></div>
+        <div class="avatar-node" style="z-index: 19;">
+            <div class="circle-frame"><img src="members/above all/user5.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">YG</span></div>
         </div>
-        <div class="profile-node" style="z-index: 4;">
-            <div class="circle-wrapper"><img src="members/above all/user6.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Aki</span></div>
+        <div class="avatar-node" style="z-index: 18;">
+            <div class="circle-frame"><img src="members/above all/user6.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Aki</span></div>
         </div>
-        <div class="profile-node" style="z-index: 3;">
-            <div class="circle-wrapper"><img src="members/above all/user7.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Jay</span></div>
+        <div class="avatar-node" style="z-index: 17;">
+            <div class="circle-frame"><img src="members/above all/user7.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Jay</span></div>
         </div>
-        <div class="profile-node" style="z-index: 2;">
-            <div class="circle-wrapper"><img src="members/above all/user12.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Member 5</span></div>
+        <div class="avatar-node" style="z-index: 16;">
+            <div class="circle-frame"><img src="members/above all/user12.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Member 5</span></div>
         </div>
-        <div class="profile-node" style="z-index: 1;">
-            <div class="circle-wrapper"><img src="members/above all/user13.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Member 6</span></div>
+        <div class="avatar-node" style="z-index: 15;">
+            <div class="circle-frame"><img src="members/above all/user13.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Member 6</span></div>
         </div>
     </div>
-</div>
 
-<div class="section-wrapper">
-    <div class="section-subtitle">ACHIEVE</div>
-    <div class="section-title">ADMINS</div>
+    <div class="title-block">
+        <span class="tiny-sub">ACHIEVE</span>
+        <h2 class="main-title">ADMINS</h2>
+    </div>
     
-    <div class="avatar-container">
-        <div class="profile-node" style="z-index: 4;">
-            <div class="circle-wrapper"><img src="members/STAFF/user8.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Staff 1</span></div>
+    <div class="row-chain">
+        <div class="avatar-node" style="z-index: 10;">
+            <div class="circle-frame"><img src="members/STAFF/user8.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Staff 1</span></div>
         </div>
-        <div class="profile-node" style="z-index: 3;">
-            <div class="circle-wrapper"><img src="members/STAFF/user9.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Staff 2</span></div>
+        <div class="avatar-node" style="z-index: 9;">
+            <div class="circle-frame"><img src="members/STAFF/user9.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Staff 2</span></div>
         </div>
-        <div class="profile-node" style="z-index: 2;">
-            <div class="circle-wrapper"><img src="members/STAFF/user10.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Staff 3</span></div>
+        <div class="avatar-node" style="z-index: 8;">
+            <div class="circle-frame"><img src="members/STAFF/user10.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Staff 3</span></div>
         </div>
-        <div class="profile-node" style="z-index: 1;">
-            <div class="circle-wrapper"><img src="members/STAFF/user11.jpg"></div>
-            <div class="node-tooltip"><span class="node-name">Staff 4</span></div>
+        <div class="avatar-node" style="z-index: 7;">
+            <div class="circle-frame"><img src="members/STAFF/user11.jpg"></div>
+            <div class="node-info-popup"><span class="info-name">Staff 4</span></div>
         </div>
     </div>
+
 </div>
 
-<div class="marquee-wrapper">
-  <div class="marquee-content">
-    <div class="marquee-item"><img src="members/REGULAR/gelo.jpg" class="marquee-pic"> <span>saxt</span></div>
-    <div class="marquee-item"><img src="members/REGULAR/jay.jpg" class="marquee-pic"> <span>Cosl</span></div>
-    <div class="marquee-item"><img src="members/REGULAR/andrie.jpg" class="marquee-pic"> <span>Seventh threat</span></div>
-    <div class="marquee-item"><img src="members/REGULAR/nix.jpg" class="marquee-pic"> <span>Aaron</span></div>
-    <div class="marquee-item"><img src="members/REGULAR/dought.jpg" class="marquee-pic"> <span>raiden</span></div>
-    <div class="marquee-item"><img src="members/REGULAR/gelo.jpg" class="marquee-pic"> <span>saxt</span></div>
-    <div class="marquee-item"><img src="members/REGULAR/jay.jpg" class="marquee-pic"> <span>Cosl</span></div>
-    <div class="marquee-item"><img src="members/REGULAR/andrie.jpg" class="marquee-pic"> <span>Seventh threat</span></div>
-    <div class="marquee-item"><img src="members/REGULAR/nix.jpg" class="marquee-pic"> <span>Aaron</span></div>
-    <div class="marquee-item"><img src="members/REGULAR/dought.jpg" class="marquee-pic"> <span>raiden</span></div>
+<div class="marquee-container">
+  <div class="marquee-track">
+    <div class="marquee-block"><img src="members/REGULAR/gelo.jpg" class="marquee-avatar"> <span>saxt</span></div>
+    <div class="marquee-block"><img src="members/REGULAR/jay.jpg" class="marquee-avatar"> <span>Cosl</span></div>
+    <div class="marquee-block"><img src="members/REGULAR/andrie.jpg" class="marquee-avatar"> <span>Seventh threat</span></div>
+    <div class="marquee-block"><img src="members/REGULAR/nix.jpg" class="marquee-avatar"> <span>Aaron</span></div>
+    <div class="marquee-block"><img src="members/REGULAR/dought.jpg" class="marquee-avatar"> <span>raiden</span></div>
+    <div class="marquee-block"><img src="members/REGULAR/gelo.jpg" class="marquee-avatar"> <span>saxt</span></div>
+    <div class="marquee-block"><img src="members/REGULAR/jay.jpg" class="marquee-avatar"> <span>Cosl</span></div>
+    <div class="marquee-block"><img src="members/REGULAR/andrie.jpg" class="marquee-avatar"> <span>Seventh threat</span></div>
+    <div class="marquee-block"><img src="members/REGULAR/nix.jpg" class="marquee-avatar"> <span>Aaron</span></div>
+    <div class="marquee-block"><img src="members/REGULAR/dought.jpg" class="marquee-avatar"> <span>raiden</span></div>
   </div>
 </div>
 
@@ -402,10 +420,10 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 .catch(e => console.log(e));
 </script>
 
-<div class="discord-anchor">
+<div class="discord-button-floating">
     <a href="https://discord.gg/TvfnaBMFzc" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-        <span>LAUNCH DISCORD</span>
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" style="width:14px;">
+        <span>DISCORD</span>
     </a>
 </div>
 

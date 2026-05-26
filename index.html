@@ -55,7 +55,7 @@ body {
 .center-container {
     width: 100%;
     max-width: 650px;
-    margin: 50px auto 20px auto; /* Siksik na margin para walang malaking gap */
+    margin: 50px auto 20px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -184,27 +184,25 @@ body {
     transform: translateX(-50%) translateY(0);
 }
 
-/* PUBLIC ENEMY ACCURATE SCROLLING TICKER 
-   Inalis ang 'margin-top: auto' para dumikit sa taas!
-*/
+/* SCROLLING TICKER (MALAPIT SA ADMINS ROW) */
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
-    max-width: 600px; /* Nilimitahan ang lapad para kapantay lang ng mga bilog mo */
+    max-width: 600px;
     padding: 10px 0;
-    margin-top: 45px; /* Eksaktong distansya mula sa ADMINS row */
+    margin-top: 45px; 
     margin-bottom: 50px;
     background: transparent;
 }
 
 .marquee-inner-wrap {
     display: flex;
-    gap: 12px; /* Pinagdikit at pinaglapit ang mga lumiligid na members */
+    gap: 12px;
     width: max-content;
-    animation: smoothScroll 22s linear infinite;
+    animation: smoothScroll 25s linear infinite;
 }
 
-/* Ginitna at ginawang oblong/capsule badge kagaya ng PE */
+/* MALINIS NA CAPSULE PILL STYLE SA MARQUEE */
 .marquee-profile-block {
     display: flex;
     align-items: center;
@@ -212,10 +210,10 @@ body {
     font-size: 11px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.8);
-    background: #0c0c0c; /* Maitim na pill background */
+    background: #0c0c0c; 
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 5px 14px;
-    border-radius: 30px; /* Ginawang pill shape */
+    border-radius: 30px; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
@@ -326,19 +324,11 @@ body {
             <div class="circle-avatar-container"><img src="members/above all/user6.jpg"></div>
             <div class="avatar-tooltip"><span class="tooltip-username">Aki</span></div>
         </div>
-        
         <div class="avatar-wrapper-node" style="z-index: 17;">
-            <div class="circle-avatar-container" style="border-color: #5865F2;">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" style="padding: 12px; width:100%; height:100%;">
-            </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Discord Channel</span></div>
-        </div>
-
-        <div class="avatar-wrapper-node" style="z-index: 16;">
             <div class="circle-avatar-container"><img src="members/above all/user7.jpg"></div>
             <div class="avatar-tooltip"><span class="tooltip-username">Jay</span></div>
         </div>
-        <div class="avatar-wrapper-node" style="z-index: 15;">
+        <div class="avatar-wrapper-node" style="z-index: 16;">
             <div class="circle-avatar-container"><img src="members/above all/user12.jpg"></div>
             <div class="avatar-tooltip"><span class="tooltip-username">Member 5</span></div>
         </div>
@@ -370,16 +360,25 @@ body {
 
     <div class="marquee-ticker">
       <div class="marquee-inner-wrap">
-        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>saxt</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Cosl</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Seventh threat</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Aaron</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>raiden</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>saxt</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Cosl</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Seventh threat</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Aaron</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>raiden</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
+        
+        <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
       </div>
     </div>
 

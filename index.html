@@ -63,15 +63,12 @@ body {
     z-index: 10;
 }
 
-/* MAIN CLAN TITLE */
-.main-clan-tag {
-    font-family: 'Kanit', sans-serif;
-    font-size: 36px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    color: #ffffff;
+/* MAIN CLAN LOGO - Pinalitan mula sa text papuntang image */
+.main-clan-logo {
+    max-width: 180px;
+    width: 100%;
+    height: auto;
     margin-bottom: 5px;
-    text-transform: uppercase;
 }
 
 .symbol-break {
@@ -180,8 +177,7 @@ body {
 
 .avatar-wrapper-node:hover .avatar-tooltip {
     opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    visibility: visible; transform: translateX(-50%) translateY(0);
 }
 
 /* SCROLLING TICKER */
@@ -293,7 +289,8 @@ body {
 
 <div class="center-container">
 
-    <h1 class="main-clan-tag">AZURA</h1>
+    <!-- ✅ PINALITAN: Logo na ang gamit imbes na text -->
+    <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
     <div class="symbol-break">$</div>
     
     <div class="horizontal-avatar-row">
@@ -395,7 +392,7 @@ body {
 
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3">
-</audio>
+
 
 <script>
 const audio = document.getElementById("soundtrack");

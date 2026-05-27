@@ -244,37 +244,41 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-/* ✅ DISCORD BUTTON - NASA AYOS NA TAMA */
+/* ✅ DISCORD BUTTON - TAMA NA, SIGURADONG LALABAS NASA BABA KANAN */
 .discord-float-action {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    z-index: 9999;
+    position: fixed !important;
+    bottom: 25px !important;
+    right: 25px !important;
+    z-index: 99999 !important;
+    display: flex !important;
 }
 
 .discord-float-action a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: #000000;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 16px !important;
+    background: #000000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    transition: background 0.2s ease, border-color 0.2s ease !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .discord-float-action a:hover {
-    background: #111111;
-    border-color: rgba(255, 255, 255, 0.25);
+    background: #111111 !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
 }
 
 .discord-float-action img {
-    width: 16px;
-    height: auto;
+    width: 16px !important;
+    height: auto !important;
+    display: block !important;
 }
 
 /* ENTRY OVERLAY */
@@ -456,10 +460,10 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 .catch(e => console.log(e));
 </script>
 
-<!-- ✅ DISCORD BUTTON - NASA BABA KANAN, LALABAS NA ITO -->
+<!-- ✅ DISCORD BUTTON - NASA DITO SA DULO, SIGURADONG LALABAS NA -->
 <div class="discord-float-action">
     <a href="https://discord.gg/eUaKEqXkWA" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord Icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
         <span>AZURA ORG</span>
     </a>
 </div>

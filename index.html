@@ -12,7 +12,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* ✅ DAGDAG PROTEKSYON: Hindi mapipili ang text */
+    /* Proteksyon: Hindi mapipili ang text */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -22,7 +22,7 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #000000;
-    /* ✅ AYOS NA: Kitang-kita na ang GIF */
+    /* GIF Background - Kitang-kita na */
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
         url("banner.gif");
@@ -58,7 +58,7 @@ body {
     border-radius: 3px;
 }
 
-/* CENTER STRUCTURAL TREE */
+/* CENTER CONTAINER */
 .center-container {
     width: 100%;
     max-width: 650px;
@@ -70,14 +70,13 @@ body {
     z-index: 10;
 }
 
-/* MAIN CLAN LOGO */
+/* MAIN LOGO */
 .main-clan-logo {
     max-width: 180px;
     width: 100%;
     height: auto;
     margin-bottom: 5px;
-    /* ✅ Proteksyon sa imahe */
-    pointer-events: none;
+    pointer-events: none; /* Proteksyon sa imahe */
 }
 
 .symbol-break {
@@ -87,7 +86,7 @@ body {
     font-weight: 700;
 }
 
-/* SECTION TEXT HEADERS */
+/* SECTION HEADERS */
 .title-group-block {
     margin-top: 35px;
     margin-bottom: 12px;
@@ -113,7 +112,7 @@ body {
     color: #ffffff;
 }
 
-/* HORIZONTAL OVERLAP ROW */
+/* AVATAR ROW */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -129,16 +128,25 @@ body {
     margin-left: -18px; 
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
-    cursor: pointer;
 }
 
 .avatar-wrapper-node:first-child {
     margin-left: 0;
 }
 
-.avatar-wrapper-node:hover {
+/* ✅ KAY LEON LANG MAY CLICK & LINK */
+.avatar-wrapper-node.clickable {
+    cursor: pointer;
+}
+.avatar-wrapper-node.clickable:hover {
     transform: scale(1.18);
     z-index: 9999 !important;
+}
+
+.avatar-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .circle-avatar-container {
@@ -159,11 +167,10 @@ body {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    /* ✅ Proteksyon sa imahe */
-    pointer-events: none;
+    pointer-events: none; /* Proteksyon */
 }
 
-/* HOVER TOOLTIPS */
+/* HOVER TOOLTIP */
 .avatar-tooltip {
     position: absolute;
     bottom: -35px;
@@ -188,7 +195,8 @@ body {
 
 .avatar-wrapper-node:hover .avatar-tooltip {
     opacity: 1;
-    visibility: visible; transform: translateX(-50%) translateY(0);
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 /* SCROLLING TICKER */
@@ -228,8 +236,7 @@ body {
     height: 18px;
     border-radius: 50%;
     object-fit: cover;
-    /* ✅ Proteksyon sa imahe */
-    pointer-events: none;
+    pointer-events: none; /* Proteksyon */
 }
 
 @keyframes smoothScroll {
@@ -237,7 +244,7 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-/* FLOATING DISCORD COMPONENT */
+/* ✅ DISCORD BUTTON - PERFECT NA */
 .discord-float-action {
     position: fixed;
     bottom: 25px;
@@ -265,7 +272,12 @@ body {
     border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* ENTRY GATEWAY */
+.discord-float-action img {
+    width: 16px;
+    height: auto;
+}
+
+/* ENTRY OVERLAY */
 #gateway-overlay {
     position: fixed;
     inset: 0;
@@ -293,9 +305,6 @@ body {
 }
 </style>
 </head>
-<body>
-
-<!-- ✅ PIGIL ANG RIGHT CLICK -->
 <body oncontextmenu="return false;" onkeydown="return disableKeyPress(event);">
 
 <div class="navigation-bar">
@@ -310,10 +319,14 @@ body {
     <div class="symbol-break">$</div>
     
     <div class="horizontal-avatar-row">
-        <div class="avatar-wrapper-node" style="z-index: 30;">
-            <div class="circle-avatar-container"><img src="members/founder/user1.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Leon</span></div>
+        <!-- ✅ LINK NI LEON: PUPUNTA SA FOLDER /leon/ -->
+        <div class="avatar-wrapper-node clickable" style="z-index: 30;">
+            <a href="leon/" class="avatar-link">
+                <div class="circle-avatar-container"><img src="members/founder/user1.jpg"></div>
+                <div class="avatar-tooltip"><span class="tooltip-username">Leon</span></div>
+            </a>
         </div>
+        <!-- IBA WALANG LINK -->
         <div class="avatar-wrapper-node" style="z-index: 29;">
             <div class="circle-avatar-container"><img src="members/founder/user2.jpg"></div>
             <div class="avatar-tooltip"><span class="tooltip-username">Undefeated One</span></div>
@@ -409,14 +422,11 @@ body {
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3">
 
-<!-- ✅ SCRIPT PARA HINDI MA INSPECT / RIGHT CLICK / SHORTCUT -->
-<script>
-// Pigilan ang Right Click
-document.addEventListener('contextmenu', event => event.preventDefault());
 
+<!-- PROTEKSYON SCRIPT -->
+<script>
 // Pigilan ang mga Shortcut Keys
 function disableKeyPress(e) {
-    // F12, Ctrl+U, Ctrl+S, Ctrl+Shift+I/J/C, Ctrl+P
     if (e.keyCode == 123 || 
         (e.ctrlKey && e.keyCode == 85) || 
         (e.ctrlKey && e.keyCode == 83) || 
@@ -427,13 +437,10 @@ function disableKeyPress(e) {
         return false;
     }
 }
-
-// I-disable ang mga developer tools console
 document.onkeydown = disableKeyPress;
 document.onmousedown = disableKeyPress;
-</script>
 
-<script>
+// Music & Overlay
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
 
@@ -442,16 +449,18 @@ document.getElementById("gateway-overlay").onclick = () => {
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
 
+// Views Counter
 fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 .then(r => r.json())
 .then(d => { document.getElementById("views").innerText = d.record.views; })
 .catch(e => console.log(e));
 </script>
 
+<!-- ✅ DISCORD BUTTON: ICON + AZURA ORG TEXT -->
 <div class="discord-float-action">
     <a href="https://discord.gg/eUaKEqXkWA" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" style="width:14px;">
-        <span>AZURA LINK</span>
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
+        <span>AZURA ORG</span>
     </a>
 </div>
 

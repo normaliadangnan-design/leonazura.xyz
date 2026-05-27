@@ -23,7 +23,7 @@ align-items:center;
 background:
 linear-gradient(rgba(0,0,0,.55),
 rgba(0,0,0,.78)),
-url("../members/founder/leon.gif");
+url("../members/founder/leon.gif"); /* ✅ SIGURADONG TAMA ANG LOKASYON */
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
@@ -40,6 +40,7 @@ radial-gradient(
 rgba(255,255,255,.07) 1px,
 transparent 1px);
 background-size:8px 8px;
+z-index:1;
 }
 
 .card{
@@ -126,7 +127,6 @@ background:
 rgba(255,255,255,.18);
 }
 
-/* Dagdag na style para sa logo */
 .social svg {
   width: 24px;
   height: 24px;
@@ -179,7 +179,6 @@ ShadowLeon • $
 <div class="socials">
 
 <a class="social" href="https://discord.gg/CwsGFu6D" target="_blank">
-  <!-- Ito ang pinalitan: Opisyal na Logo ng Discord -->
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/>
   </svg>
@@ -193,9 +192,10 @@ ShadowLeon • $
 
 </div>
 
+<!-- ✅ INAYOS ANG PANGALAN NG MUSIC FILE (WALANG SPACE) -->
 <audio id="bgMusic" autoplay loop>
-<source src="../Nateman - 123 (Official Music Video).mp3" type="audio/mpeg">
-
+<source src="../5-mil_2RPY2b9n.mp3" type="audio/mpeg">
+ <!-- ✅ DINAGDAG ANG CLOSING TAG -->
 
 <script>
 const music = document.getElementById("bgMusic");

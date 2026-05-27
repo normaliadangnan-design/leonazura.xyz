@@ -12,12 +12,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* ✅ DAGDAG PROTEKSYON: Hindi mapipili ang text */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 body {
     font-family: 'Inter', sans-serif;
     background-color: #000000;
-    /* ✅ INAYOS: BINAWASAN ANG ITIM PARA LUMABAS ANG GIF */
+    /* ✅ AYOS NA: Kitang-kita na ang GIF */
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
         url("banner.gif");
@@ -71,6 +76,8 @@ body {
     width: 100%;
     height: auto;
     margin-bottom: 5px;
+    /* ✅ Proteksyon sa imahe */
+    pointer-events: none;
 }
 
 .symbol-break {
@@ -152,6 +159,8 @@ body {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+    /* ✅ Proteksyon sa imahe */
+    pointer-events: none;
 }
 
 /* HOVER TOOLTIPS */
@@ -219,6 +228,8 @@ body {
     height: 18px;
     border-radius: 50%;
     object-fit: cover;
+    /* ✅ Proteksyon sa imahe */
+    pointer-events: none;
 }
 
 @keyframes smoothScroll {
@@ -283,6 +294,9 @@ body {
 </style>
 </head>
 <body>
+
+<!-- ✅ PIGIL ANG RIGHT CLICK -->
+<body oncontextmenu="return false;" onkeydown="return disableKeyPress(event);">
 
 <div class="navigation-bar">
     HOME
@@ -395,6 +409,29 @@ body {
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3">
 
+<!-- ✅ SCRIPT PARA HINDI MA INSPECT / RIGHT CLICK / SHORTCUT -->
+<script>
+// Pigilan ang Right Click
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Pigilan ang mga Shortcut Keys
+function disableKeyPress(e) {
+    // F12, Ctrl+U, Ctrl+S, Ctrl+Shift+I/J/C, Ctrl+P
+    if (e.keyCode == 123 || 
+        (e.ctrlKey && e.keyCode == 85) || 
+        (e.ctrlKey && e.keyCode == 83) || 
+        (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
+        (e.ctrlKey && e.shiftKey && e.keyCode == 74) || 
+        (e.ctrlKey && e.shiftKey && e.keyCode == 67) || 
+        (e.ctrlKey && e.keyCode == 80)) {
+        return false;
+    }
+}
+
+// I-disable ang mga developer tools console
+document.onkeydown = disableKeyPress;
+document.onmousedown = disableKeyPress;
+</script>
 
 <script>
 const audio = document.getElementById("soundtrack");

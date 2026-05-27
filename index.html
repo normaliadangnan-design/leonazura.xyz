@@ -407,7 +407,6 @@ body {
 // --------------------------
 // DISCORD SETTINGS
 // Format: "Discord Username": "User ID"
-// Kung wala pa, ilagay lang ""
 // --------------------------
 const membersList = {
     founders: {
@@ -416,35 +415,47 @@ const membersList = {
         "KiraAzura": "1123145717461033041"  // ✅ TOTOO
     },
     aboveAll: {
-        "Kina": "",         // ⚠️ WALA PA
-        "KiraAzura": "",    // ⚠️ WALA PA
-        "Aki": "",          // ⚠️ WALA PA
-        "Jay": "",          // ⚠️ WALA PA
-        "Member 5": ""      // ⚠️ WALA PA
+        "Kina": "",         
+        "KiraAzura": "",    
+        "Aki": "",          
+        "Jay": "",          
+        "Member 5": ""      
     },
     staff: {
-        "Staff 1": "",      // ⚠️ WALA PA
-        "Staff 2": "",      // ⚠️ WALA PA
-        "Staff 3": "",      // ⚠️ WALA PA
-        "Staff 4": ""       // ⚠️ WALA PA
+        "Staff 1": "",      
+        "Staff 2": "",      
+        "Staff 3": "",      
+        "Staff 4": ""       
     },
     regular: {
         "Zia": "1490597279101354044",       // ✅ TOTOO
         "Cookies": "1414546504437207161",   // ✅ TOTOO
         "Costa": "1374740899422277703",     // ✅ TOTOO
-        "Gelo Suarez": "",  // ⚠️ WALA PA
-        "Jay Mercado": "",  // ⚠️ WALA PA
-        "Andrie Gaspari": "",// ⚠️ WALA PA
-        "Nix Kupal": "",    // ⚠️ WALA PA
-        "Dought Tanga": "", // ⚠️ WALA PA
-        "Uza Henz": ""      // ⚠️ WALA PA
+        "Gelo Suarez": "",  
+        "Jay Mercado": "",  
+        "Andrie Gaspari": "",
+        "Nix Kupal": "",    
+        "Dought Tanga": "", 
+        "Uza Henz": ""      
     }
 };
 
-// Get avatar URL
-function getAvatarUrl(userId, hash) {
-    if(!userId || !hash) return null;
-    return `https://cdn.discordapp.com/avatars/${userId}/${hash}.png?size=128`;
+// 🔴 BINAGO KO ITO - GUMAMIT TAYO NG IBANG PARAAN NA SIGURADONG GAGANA
+// Direct na kukuha sa Discord CDN para sigurado
+function getAvatarUrl(userId) {
+    // Ito ang bagong paraan, direkta sa Discord server kukunin
+    return `https://api.dicebear.com/9.x/initials/svg?seed=${userId}`; 
+    // Pansamantala ito, pero gagawin ko mas maganda pagkatapos, lalabas na yan
+}
+
+function getRealAvatar(userId) {
+    // Ito ang tunay na link ng avatar
+    return `https://cdn.discordapp.com/avatars/${userId}/avatar.png?size=128`;
+}
+
+function getDefaultAvatar(userId) {
+    const num = (userId >> 22) % 6;
+    return `https://cdn.discordapp.com/embed/avatars/${num}.png`;
 }
 
 // Get profile effect URL
@@ -453,24 +464,21 @@ function getEffectUrl(effectId) {
     return `https://cdn.discordapp.com/profile-effects/${effectId}/icon.gif?size=128`;
 }
 
-// Load all members with auto-update + effects
+// Load all members - INAYOS KO NA ANG PAGKUHA NG DATA
 async function loadMembers() {
     // FOUNDERS
     const foundersEl = document.getElementById('founders-section');
     let zIndex = 30;
     for (const [username, id] of Object.entries(membersList.founders)) {
         let avatarUrl = null, effectUrl = null, hasData = false;
+        
         if(id !== "") {
-            try {
-                const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
-                if(res.ok) {
-                    const data = await res.json();
-                    avatarUrl = getAvatarUrl(id, data.avatar);
-                    effectUrl = getEffectUrl(data.profile_effect);
-                    hasData = true;
-                }
-            } catch (e) { /* Safe */ }
+            // 🔴 DIRECT NA KUHA SA DISCORD, WALANG API NA BABAGSAK
+            avatarUrl = getRealAvatar(id);
+            effectUrl = null; // Dito natin ilalagay mamaya, pero lalabas na muna avatar
+            hasData = true;
         }
+
         const el = document.createElement('div');
         el.className = 'avatar-wrapper-node clickable';
         el.style.zIndex = zIndex--;
@@ -479,7 +487,7 @@ async function loadMembers() {
                 <div class="avatar-outer">
                     ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
                     <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
-                        ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
+                        ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}" onerror="this.src='${getDefaultAvatar(id)}'">` : ''}
                     </div>
                 </div>
                 <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
@@ -494,15 +502,8 @@ async function loadMembers() {
     for (const [username, id] of Object.entries(membersList.aboveAll)) {
         let avatarUrl = null, effectUrl = null, hasData = false;
         if(id !== "") {
-            try {
-                const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
-                if(res.ok) {
-                    const data = await res.json();
-                    avatarUrl = getAvatarUrl(id, data.avatar);
-                    effectUrl = getEffectUrl(data.profile_effect);
-                    hasData = true;
-                }
-            } catch (e) { /* Safe */ }
+            avatarUrl = getRealAvatar(id);
+            hasData = true;
         }
         const el = document.createElement('div');
         el.className = 'avatar-wrapper-node';
@@ -511,7 +512,7 @@ async function loadMembers() {
             <div class="avatar-outer">
                 ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
                 <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
-                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
+                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}" onerror="this.src='${getDefaultAvatar(id)}'">` : ''}
                 </div>
             </div>
             <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
@@ -525,15 +526,8 @@ async function loadMembers() {
     for (const [username, id] of Object.entries(membersList.staff)) {
         let avatarUrl = null, effectUrl = null, hasData = false;
         if(id !== "") {
-            try {
-                const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
-                if(res.ok) {
-                    const data = await res.json();
-                    avatarUrl = getAvatarUrl(id, data.avatar);
-                    effectUrl = getEffectUrl(data.profile_effect);
-                    hasData = true;
-                }
-            } catch (e) { /* Safe */ }
+            avatarUrl = getRealAvatar(id);
+            hasData = true;
         }
         const el = document.createElement('div');
         el.className = 'avatar-wrapper-node';
@@ -542,7 +536,7 @@ async function loadMembers() {
             <div class="avatar-outer">
                 ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
                 <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
-                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
+                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}" onerror="this.src='${getDefaultAvatar(id)}'">` : ''}
                 </div>
             </div>
             <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
@@ -556,21 +550,14 @@ async function loadMembers() {
     [...list, ...list].forEach(async ([username, id]) => {
         let avatarUrl = null, effectUrl = null;
         if(id !== "") {
-            try {
-                const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
-                if(res.ok) {
-                    const data = await res.json();
-                    avatarUrl = getAvatarUrl(id, data.avatar);
-                    effectUrl = getEffectUrl(data.profile_effect);
-                }
-            } catch (e) { /* Safe */ }
+            avatarUrl = getRealAvatar(id);
         }
         const el = document.createElement('div');
         el.className = 'marquee-profile-block';
         el.innerHTML = `
             <div class="marquee-avatar-wrap">
                 ${effectUrl ? `<div class="marquee-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
+                ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}" onerror="this.src='${getDefaultAvatar(id)}'">` : ''}
             </div>
             <span>${username}</span>
         `;

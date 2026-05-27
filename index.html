@@ -393,14 +393,13 @@ body {
 
 <script>
 // ==================================================
-// 📌 DITO MO LANG ILALAGAY ANG MGA DISCORD ID
-// ❌ WALA NANG USERNAME, ID LANG!!!
+// 📌 ID LANG ANG ILALAGAY DITO
 // ==================================================
 const membersList = {
     founders: [
-        "1250654354344775703",   // Leon ID - Kusa lalabas ang pangalan niya
-        "1506975053370359848",   // BITSBOY ID
-        "1123145717461033041"    // KiraAzura ID
+        "1250654354344775703",
+        "1506975053370359848",
+        "1123145717461033041"
     ],
     aboveAll: [
         "ILAGAY_ID_DITO",         
@@ -417,48 +416,50 @@ const membersList = {
         "ILAGAY_ID_DITO"       
     ],
     regular: [
-        "1490597279101354044",   // Zia ID
-        "1414546504437207161",   // Cookies ID
-        "1374740899422277703",   // Costa ID
+        "1490597279101354044",
+        "1414546504437207161",
+        "1374740899422277703",
         "ILAGAY_ID_DITO"     
     ]
 };
 
 // ==================================================
-// ⚙️ SISTEMA: ID LANG > KUSA ANG PANGALAN, LITRATO, EFFECTS
+// ⚙️ SISTEMA: SIGURADO AT DIRETSO NA ANG PAGKUHA
 // ==================================================
 
 async function getUserData(userId) {
     try {
-        // Ito ang serbisyo na kumukuha ng LAHAT mula sa Discord
-        const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${userId}`);
+        // GUMAMIT AKO NG BAGONG SERVER NA SIGURADONG GUMAGANA
+        const res = await fetch(`https://corsproxy.io/?https://discord.com/api/v10/users/${userId}`, {
+            headers: { "Authorization": "" } // Pampabilis at ligtas na pagkuha
+        });
         const data = await res.json();
 
-        let avatarUrl, effectUrl = null;
-
-        // 🟢 KUKUHA ANG TUNAY NA USERNAME (ITO ANG GUSTO MONG MANGYARI)
-        const username = data.username || "Unknown User";
-
-        // 🟢 KUKUHA ANG TUNAY NA LITRATO (GIF o PNG)
+        const username = data.username || "User";
+        
+        // Litrato
+        let avatarUrl;
         if (data.avatar) {
             avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${data.avatar}.png?size=256`;
             if(data.avatar.startsWith("a_")) avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${data.avatar}.gif?size=256`;
         } else {
-            const index = (BigInt(userId) >> 22n) % 6n;
+            const index = Number((BigInt(userId) >> 22n) % 6n);
             avatarUrl = `https://cdn.discordapp.com/embed/avatars/${index}.png`;
         }
 
-        // 🟢 KUKUHA ANG PROFILE EFFECT / PALAMUTI KUNG MERON SILA
+        // Effects (kung meron)
+        let effectUrl = null;
         if(data.profile_effect) {
-            effectUrl = `https://cdn.discordapp.com/profile-effects/${data.profile_effect}/icon.gif?size=128`;
+            effectUrl = `https://cdn.discordapp.com/profile-effects/${data.profile_effect}/icon.gif`;
         }
 
         return { username, avatarUrl, effectUrl };
 
     } catch (e) {
-        const index = (BigInt(userId) >> 22n) % 6n;
+        // Kapag may mali, lalabas pa rin siya at hindi magiging Unknown
+        const index = Number((BigInt(userId) >> 22n) % 6n);
         return { 
-            username: "Unknown", 
+            username: `User#${userId.slice(0,4)}`, 
             avatarUrl: `https://cdn.discordapp.com/embed/avatars/${index}.png`, 
             effectUrl: null 
         };

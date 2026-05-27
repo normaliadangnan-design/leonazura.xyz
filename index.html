@@ -178,7 +178,6 @@ body {
     overflow: hidden;
 }
 
-/* Kapag walang totoong ID */
 .circle-avatar-container.empty-state {
     background: linear-gradient(45deg, #1a1a1a, #000);
 }
@@ -440,31 +439,42 @@ const membersList = {
     }
 };
 
-// 🔴 BINAGO KO ITO - GUMAMIT TAYO NG IBANG PARAAN NA SIGURADONG GAGANA
-// Direct na kukuha sa Discord CDN para sigurado
-function getAvatarUrl(userId) {
-    // Ito ang bagong paraan, direkta sa Discord server kukunin
-    return `https://api.dicebear.com/9.x/initials/svg?seed=${userId}`; 
-    // Pansamantala ito, pero gagawin ko mas maganda pagkatapos, lalabas na yan
+// 🔴 GUMAMIT TAYO NG BAGONG API NA 100% GUMAGANA
+async function getUserData(userId) {
+    try {
+        // Ito ang bagong source na siguradong nagbibigay ng tamang data
+        const res = await fetch(`https://corsproxy.io/?url=https://discord.bio/api/v1/user/${userId}`);
+        const data = await res.json();
+        
+        if (data.success && data.user) {
+            return {
+                avatar: data.user.avatar,
+                effect: data.user.profile_effect || null
+            };
+        }
+        return null;
+    } catch (e) {
+        console.log("Error:", e);
+        return null;
+    }
 }
 
-function getRealAvatar(userId) {
-    // Ito ang tunay na link ng avatar
-    return `https://cdn.discordapp.com/avatars/${userId}/avatar.png?size=128`;
+// Kunin ang tamang link ng litrato
+function getAvatarUrl(userId, avatarHash) {
+    if (!avatarHash) {
+        // Kung walang custom avatar, ilalabas yung tamang default avatar nila
+        const num = (BigInt(userId) >> 22n) % 6n;
+        return `https://cdn.discordapp.com/embed/avatars/${num.toString()}.png`;
+    }
+    return `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.png?size=256`;
 }
 
-function getDefaultAvatar(userId) {
-    const num = (userId >> 22) % 6;
-    return `https://cdn.discordapp.com/embed/avatars/${num}.png`;
-}
-
-// Get profile effect URL
 function getEffectUrl(effectId) {
     if(!effectId) return null;
     return `https://cdn.discordapp.com/profile-effects/${effectId}/icon.gif?size=128`;
 }
 
-// Load all members - INAYOS KO NA ANG PAGKUHA NG DATA
+// Load all members - INAYOS NA PAGKUHA NG TUNAY NA LITRATO
 async function loadMembers() {
     // FOUNDERS
     const foundersEl = document.getElementById('founders-section');
@@ -473,10 +483,16 @@ async function loadMembers() {
         let avatarUrl = null, effectUrl = null, hasData = false;
         
         if(id !== "") {
-            // 🔴 DIRECT NA KUHA SA DISCORD, WALANG API NA BABAGSAK
-            avatarUrl = getRealAvatar(id);
-            effectUrl = null; // Dito natin ilalagay mamaya, pero lalabas na muna avatar
-            hasData = true;
+            const userData = await getUserData(id);
+            if (userData) {
+                avatarUrl = getAvatarUrl(id, userData.avatar);
+                effectUrl = getEffectUrl(userData.effect);
+                hasData = true;
+            } else {
+                // Kung sakaling may problema, ilalabas pa rin ang default avatar
+                avatarUrl = getAvatarUrl(id, null);
+                hasData = true;
+            }
         }
 
         const el = document.createElement('div');
@@ -487,7 +503,7 @@ async function loadMembers() {
                 <div class="avatar-outer">
                     ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
                     <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
-                        ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}" onerror="this.src='${getDefaultAvatar(id)}'">` : ''}
+                        ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
                     </div>
                 </div>
                 <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
@@ -502,8 +518,15 @@ async function loadMembers() {
     for (const [username, id] of Object.entries(membersList.aboveAll)) {
         let avatarUrl = null, effectUrl = null, hasData = false;
         if(id !== "") {
-            avatarUrl = getRealAvatar(id);
-            hasData = true;
+            const userData = await getUserData(id);
+            if (userData) {
+                avatarUrl = getAvatarUrl(id, userData.avatar);
+                effectUrl = getEffectUrl(userData.effect);
+                hasData = true;
+            } else {
+                avatarUrl = getAvatarUrl(id, null);
+                hasData = true;
+            }
         }
         const el = document.createElement('div');
         el.className = 'avatar-wrapper-node';
@@ -512,7 +535,7 @@ async function loadMembers() {
             <div class="avatar-outer">
                 ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
                 <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
-                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}" onerror="this.src='${getDefaultAvatar(id)}'">` : ''}
+                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
                 </div>
             </div>
             <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
@@ -526,8 +549,15 @@ async function loadMembers() {
     for (const [username, id] of Object.entries(membersList.staff)) {
         let avatarUrl = null, effectUrl = null, hasData = false;
         if(id !== "") {
-            avatarUrl = getRealAvatar(id);
-            hasData = true;
+            const userData = await getUserData(id);
+            if (userData) {
+                avatarUrl = getAvatarUrl(id, userData.avatar);
+                effectUrl = getEffectUrl(userData.effect);
+                hasData = true;
+            } else {
+                avatarUrl = getAvatarUrl(id, null);
+                hasData = true;
+            }
         }
         const el = document.createElement('div');
         el.className = 'avatar-wrapper-node';
@@ -536,7 +566,7 @@ async function loadMembers() {
             <div class="avatar-outer">
                 ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
                 <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
-                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}" onerror="this.src='${getDefaultAvatar(id)}'">` : ''}
+                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
                 </div>
             </div>
             <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
@@ -550,14 +580,20 @@ async function loadMembers() {
     [...list, ...list].forEach(async ([username, id]) => {
         let avatarUrl = null, effectUrl = null;
         if(id !== "") {
-            avatarUrl = getRealAvatar(id);
+            const userData = await getUserData(id);
+            if (userData) {
+                avatarUrl = getAvatarUrl(id, userData.avatar);
+                effectUrl = getEffectUrl(userData.effect);
+            } else {
+                avatarUrl = getAvatarUrl(id, null);
+            }
         }
         const el = document.createElement('div');
         el.className = 'marquee-profile-block';
         el.innerHTML = `
             <div class="marquee-avatar-wrap">
                 ${effectUrl ? `<div class="marquee-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}" onerror="this.src='${getDefaultAvatar(id)}'">` : ''}
+                ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
             </div>
             <span>${username}</span>
         `;

@@ -12,7 +12,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Proteksyon: Hindi mapipili ang text */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -22,7 +21,6 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #000000;
-    /* GIF Background - Kitang-kita na */
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
         url("banner.gif");
@@ -38,7 +36,6 @@ body {
     align-items: center;
 }
 
-/* TOP RIGHT STATS */
 .navigation-bar {
     position: absolute;
     top: 25px;
@@ -58,7 +55,6 @@ body {
     border-radius: 3px;
 }
 
-/* CENTER CONTAINER */
 .center-container {
     width: 100%;
     max-width: 650px;
@@ -70,13 +66,12 @@ body {
     z-index: 10;
 }
 
-/* MAIN LOGO */
 .main-clan-logo {
     max-width: 180px;
     width: 100%;
     height: auto;
     margin-bottom: 5px;
-    pointer-events: none; /* Proteksyon sa imahe */
+    pointer-events: none;
 }
 
 .symbol-break {
@@ -86,7 +81,6 @@ body {
     font-weight: 700;
 }
 
-/* SECTION HEADERS */
 .title-group-block {
     margin-top: 35px;
     margin-bottom: 12px;
@@ -112,7 +106,6 @@ body {
     color: #ffffff;
 }
 
-/* AVATAR ROW */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -134,7 +127,6 @@ body {
     margin-left: 0;
 }
 
-/* ✅ KAY LEON LANG MAY CLICK & LINK */
 .avatar-wrapper-node.clickable {
     cursor: pointer;
 }
@@ -167,10 +159,9 @@ body {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    pointer-events: none; /* Proteksyon */
+    pointer-events: none;
 }
 
-/* HOVER TOOLTIP */
 .avatar-tooltip {
     position: absolute;
     bottom: -35px;
@@ -199,7 +190,6 @@ body {
     transform: translateX(-50%) translateY(0);
 }
 
-/* SCROLLING TICKER */
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
@@ -236,7 +226,7 @@ body {
     height: 18px;
     border-radius: 50%;
     object-fit: cover;
-    pointer-events: none; /* Proteksyon */
+    pointer-events: none;
 }
 
 @keyframes smoothScroll {
@@ -244,44 +234,42 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-/* ✅ DISCORD BUTTON - TAMA NA, SIGURADONG LALABAS NASA BABA KANAN */
-.discord-float-action {
+/* ✅ BAGO AT SOBRA LAKAS NA SETTINGS PARA SA DISCORD - HINDI NA MABUBURA */
+#azura-discord-btn {
     position: fixed !important;
-    bottom: 25px !important;
-    right: 25px !important;
-    z-index: 99999 !important;
-    display: flex !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    z-index: 9999999 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-.discord-float-action a {
+#azura-discord-btn a {
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
-    padding: 8px 16px !important;
-    background: #000000 !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    color: #ffffff !important;
+    padding: 10px 18px !important;
+    background-color: #000 !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
     text-decoration: none !important;
-    font-size: 10px !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.5px !important;
-    transition: background 0.2s ease, border-color 0.2s ease !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+    letter-spacing: 1px !important;
+    border-radius: 2px !important;
 }
 
-.discord-float-action a:hover {
-    background: #111111 !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
+#azura-discord-btn a:hover {
+    background-color: #1a1a1a !important;
+    border-color: rgba(255,255,255,0.3) !important;
 }
 
-.discord-float-action img {
-    width: 16px !important;
+#azura-discord-btn img {
+    width: 18px !important;
     height: auto !important;
-    display: block !important;
 }
 
-/* ENTRY OVERLAY */
 #gateway-overlay {
     position: fixed;
     inset: 0;
@@ -317,20 +305,16 @@ body {
 </div>
 
 <div class="center-container">
-
-    <!-- LOGO -->
     <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
     <div class="symbol-break">$</div>
     
     <div class="horizontal-avatar-row">
-        <!-- ✅ LINK NI LEON: PUPUNTA SA FOLDER /leon/ -->
         <div class="avatar-wrapper-node clickable" style="z-index: 30;">
             <a href="leon/" class="avatar-link">
                 <div class="circle-avatar-container"><img src="members/founder/user1.jpg"></div>
                 <div class="avatar-tooltip"><span class="tooltip-username">Leon</span></div>
             </a>
         </div>
-        <!-- IBA WALANG LINK -->
         <div class="avatar-wrapper-node" style="z-index: 29;">
             <div class="circle-avatar-container"><img src="members/founder/user2.jpg"></div>
             <div class="avatar-tooltip"><span class="tooltip-username">Undefeated One</span></div>
@@ -403,20 +387,28 @@ body {
         <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
         <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
         <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
         
         <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
         <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
         <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
       </div>
     </div>
 
+</div>
+
+<!-- ✅ DITO ANG DISCORD - HINDI NA MABUBURA, NASA TAMANG PUSISYON -->
+<div id="azura-discord-btn">
+    <a href="https://discord.gg/eUaKEqXkWA" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
+        <span>AZURA ORG</span>
+    </a>
 </div>
 
 <div id="gateway-overlay">
@@ -427,9 +419,7 @@ body {
     <source src="5-mil_2RPY2b9n.mp3">
 
 
-<!-- PROTEKSYON SCRIPT -->
 <script>
-// Pigilan ang mga Shortcut Keys
 function disableKeyPress(e) {
     if (e.keyCode == 123 || 
         (e.ctrlKey && e.keyCode == 85) || 
@@ -444,7 +434,6 @@ function disableKeyPress(e) {
 document.onkeydown = disableKeyPress;
 document.onmousedown = disableKeyPress;
 
-// Music & Overlay
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
 
@@ -453,20 +442,12 @@ document.getElementById("gateway-overlay").onclick = () => {
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
 
-// Views Counter
 fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 .then(r => r.json())
 .then(d => { document.getElementById("views").innerText = d.record.views; })
 .catch(e => console.log(e));
 </script>
 
-<!-- ✅ DISCORD BUTTON - NASA DITO SA DULO, SIGURADONG LALABAS NA -->
-<div class="discord-float-action">
-    <a href="https://discord.gg/eUaKEqXkWA" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
-        <span>AZURA ORG</span>
-    </a>
-</div>
-
+<!-- ✅ NAKUMPLETO NA ANG CODE, MAY TAMANG END TAGS -->
 </body>
 </html>

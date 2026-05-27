@@ -121,6 +121,12 @@ body {
     margin-left: -18px; 
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
+    /* ✅ DITO NILAGAY ANG PANGALAN SA LOOB */
+    text-align: center;
+    font-size: 9px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 3px #000;
 }
 
 .avatar-wrapper-node:first-child {
@@ -144,6 +150,7 @@ body {
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
     overflow: hidden;
+    margin-bottom: 3px; /* para may pagitan sa pangalan */
 }
 
 .circle-avatar-container img {
@@ -152,6 +159,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     pointer-events: none;
+    background: #222; /* kulay kapag walang litrato */
 }
 
 .avatar-tooltip {
@@ -304,23 +312,23 @@ body {
         <!-- ✅ LEON - ILAGAY ANG DISCORD ID DITO -->
         <div class="avatar-wrapper-node" style="z-index: 30;">
             <div class="circle-avatar-container">
-                <img src="https://api.lanyard.rest/v1/users/1250654354344775703.png" alt="Leon">
+                <img src="https://cdn.discordapp.com/avatars/ILAGAY_ID_MO_DITO/AVATAR_HASH_DITO.png?size=128" alt="Leon">
             </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Leon</span></div>
+            <span>Leon</span>
         </div>
-        <!-- ✅ UNDEFEATED ONE - ILAGAY ANG DISCORD ID DITO -->
+        <!-- ✅ UNDEFEATED ONE / SENSEIJI - ILAGAY ANG DISCORD ID DITO -->
         <div class="avatar-wrapper-node" style="z-index: 29;">
             <div class="circle-avatar-container">
-                <img src="https://api.lanyard.rest/v1/users/1506975053370359848.png" alt="Undefeated One">
+                <img src="https://cdn.discordapp.com/avatars/ILAGAY_ID_MO_DITO/AVATAR_HASH_DITO.png?size=128" alt="Undefeated">
             </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Undefeated One</span></div>
+            <span>Undefeated<br>One</span>
         </div>
-        <!-- ✅ DOUGH TANGA - ILAGAY ANG DISCORD ID DITO -->
+        <!-- ✅ DON / DOUGH TANGA - ILAGAY ANG DISCORD ID DITO -->
         <div class="avatar-wrapper-node" style="z-index: 28;">
             <div class="circle-avatar-container">
-                <img src="https://api.lanyard.rest/v1/users/1085580321623375938.png" alt="Don Kaiji">
+                <img src="https://cdn.discordapp.com/avatars/ILAGAY_ID_MO_DITO/AVATAR_HASH_DITO.png?size=128" alt="Don">
             </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Don Kaiji</span></div>
+            <span>Don<br>Aijji</span>
         </div>
     </div>
 
@@ -333,34 +341,34 @@ body {
         <!-- ✅ KINA - ILAGAY ANG DISCORD ID DITO -->
         <div class="avatar-wrapper-node" style="z-index: 20;">
             <div class="circle-avatar-container">
-                <img src="https://api.lanyard.rest/v1/users/USER_ID_KINA_DITO.png" alt="Kina">
+                <img src="https://cdn.discordapp.com/avatars/ILAGAY_ID_MO_DITO/AVATAR_HASH_DITO.png?size=128" alt="Kina">
             </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Kina</span></div>
+            <span>Kina</span>
         </div>
         <!-- ✅ KIRAAZURA - ILAGAY ANG DISCORD ID DITO -->
         <div class="avatar-wrapper-node" style="z-index: 19;">
             <div class="circle-avatar-container">
-                <img src="https://api.lanyard.rest/v1/users/USER_ID_KIRA_DITO.png" alt="KiraAzura">
+                <img src="https://cdn.discordapp.com/avatars/ILAGAY_ID_MO_DITO/AVATAR_HASH_DITO.png?size=128" alt="KinaAzura">
             </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">KiraAzura</span></div>
+            <span>KinaAzura</span>
         </div>
         <!-- ✅ AKI - ILAGAY ANG DISCORD ID DITO -->
         <div class="avatar-wrapper-node" style="z-index: 18;">
             <div class="circle-avatar-container">
-                <img src="https://api.lanyard.rest/v1/users/USER_ID_AKI_DITO.png" alt="Aki">
+                <img src="https://cdn.discordapp.com/avatars/ILAGAY_ID_MO_DITO/AVATAR_HASH_DITO.png?size=128" alt="Aki">
             </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Aki</span></div>
+            <span>Aki</span>
         </div>
         <!-- ✅ JAY - ILAGAY ANG DISCORD ID DITO -->
         <div class="avatar-wrapper-node" style="z-index: 17;">
             <div class="circle-avatar-container">
-                <img src="https://api.lanyard.rest/v1/users/USER_ID_JAY_DITO.png" alt="Jay">
+                <img src="https://cdn.discordapp.com/avatars/ILAGAY_ID_MO_DITO/AVATAR_HASH_DITO.png?size=128" alt="Jay">
             </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Jay</span></div>
+            <span>Jay</span>
         </div>
         <div class="avatar-wrapper-node" style="z-index: 16;">
             <div class="circle-avatar-container"><img alt="Member 5"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Member 5</span></div>
+            <span>Member</span>
         </div>
     </div>
 
@@ -372,19 +380,19 @@ body {
     <div class="horizontal-avatar-row">
         <div class="avatar-wrapper-node" style="z-index: 10;">
             <div class="circle-avatar-container"><img alt="Staff 1"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 1</span></div>
+            <span>Staff 1</span>
         </div>
         <div class="avatar-wrapper-node" style="z-index: 9;">
             <div class="circle-avatar-container"><img alt="Staff 2"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 2</span></div>
+            <span>Staff 2</span>
         </div>
         <div class="avatar-wrapper-node" style="z-index: 8;">
             <div class="circle-avatar-container"><img alt="Staff 3"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 3</span></div>
+            <span>Staff 3</span>
         </div>
         <div class="avatar-wrapper-node" style="z-index: 7;">
             <div class="circle-avatar-container"><img alt="Staff 4"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 4</span></div>
+            <span>Staff 4</span>
         </div>
     </div>
 
@@ -396,19 +404,19 @@ body {
         <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
         <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
         <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
         
-        <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
       </div>
     </div>
 </div>

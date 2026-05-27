@@ -403,199 +403,134 @@ body {
 
 
 <script>
-// --------------------------
-// DISCORD SETTINGS
-// Format: "Discord Username": "User ID"
-// --------------------------
+// ==================================================
+// 📌 DITO MO LANG ILALAGAY ANG USERNAME AT DISCORD ID
+// ==================================================
 const membersList = {
     founders: {
-        "Leon": "1250654354344775703",     // ✅ TOTOO
-        "BITSBOY": "1506975053370359848",   // ✅ TOTOO
-        "KiraAzura": "1123145717461033041"  // ✅ TOTOO
+        "Leon": "1250654354344775703",
+        "BITSBOY": "1506975053370359848",
+        "KiraAzura": "1123145717461033041"
     },
     aboveAll: {
-        "Kina": "",         
-        "KiraAzura": "",    
-        "Aki": "",          
-        "Jay": "",          
-        "Member 5": ""      
+        "Kina": "ILAGAY_DITO_ID",         
+        "KiraAzura": "ILAGAY_DITO_ID",    
+        "Aki": "ILAGAY_DITO_ID",          
+        "Jay": "ILAGAY_DITO_ID",          
+        "Member 5": "ILAGAY_DITO_ID"      
     },
     staff: {
-        "Staff 1": "",      
-        "Staff 2": "",      
-        "Staff 3": "",      
-        "Staff 4": ""       
+        "Nix Kupal": "ILAGAY_DITO_ID",      
+        "Dought Tanga": "ILAGAY_DITO_ID",      
+        "Uza Henz": "ILAGAY_DITO_ID",      
+        "Gelo Suarez": "ILAGAY_DITO_ID",
+        "Jay Merci": "ILAGAY_DITO_ID"       
     },
     regular: {
-        "Zia": "1490597279101354044",       // ✅ TOTOO
-        "Cookies": "1414546504437207161",   // ✅ TOTOO
-        "Costa": "1374740899422277703",     // ✅ TOTOO
-        "Gelo Suarez": "",  
-        "Jay Mercado": "",  
-        "Andrie Gaspari": "",
-        "Nix Kupal": "",    
-        "Dought Tanga": "", 
-        "Uza Henz": ""      
+        "Zia": "1490597279101354044",       
+        "Cookies": "1414546504437207161",   
+        "Costa": "1374740899422277703",     
+        "Andrie Gaspari": "ILAGAY_DITO_ID"     
     }
 };
 
-// 🔴 GUMAMIT TAYO NG BAGONG API NA 100% GUMAGANA
-async function getUserData(userId) {
+// ==================================================
+// ⚙️ WAG MO NA GALAWIN DITO PABABA, TAPOS NA ITO
+// ==================================================
+
+// KUKUNIN DIREKTA SA DISCORD ANG LITRATO
+async function getDiscordAvatar(userId) {
     try {
-        // Ito ang bagong source na siguradong nagbibigay ng tamang data
-        const res = await fetch(`https://corsproxy.io/?url=https://discord.bio/api/v1/user/${userId}`);
+        const res = await fetch(`https://discord.corsproxy.workers.dev/users/${userId}`);
         const data = await res.json();
-        
-        if (data.success && data.user) {
-            return {
-                avatar: data.user.avatar,
-                effect: data.user.profile_effect || null
-            };
+
+        // Kung may sariling litrato
+        if (data.avatar) {
+            return `https://cdn.discordapp.com/avatars/${userId}/${data.avatar}.png?size=256`;
+        } 
+        // Kung wala, lalabas yung TAMANG DEFAULT AVATAR nila
+        else {
+            const index = (BigInt(userId) >> 22n) % 6n;
+            return `https://cdn.discordapp.com/embed/avatars/${index}.png`;
         }
-        return null;
     } catch (e) {
-        console.log("Error:", e);
-        return null;
+        // Kung may error, lalabas pa rin yung default base sa ID
+        const index = (BigInt(userId) >> 22n) % 6n;
+        return `https://cdn.discordapp.com/embed/avatars/${index}.png`;
     }
 }
 
-// Kunin ang tamang link ng litrato
-function getAvatarUrl(userId, avatarHash) {
-    if (!avatarHash) {
-        // Kung walang custom avatar, ilalabas yung tamang default avatar nila
-        const num = (BigInt(userId) >> 22n) % 6n;
-        return `https://cdn.discordapp.com/embed/avatars/${num.toString()}.png`;
-    }
-    return `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.png?size=256`;
-}
-
-function getEffectUrl(effectId) {
-    if(!effectId) return null;
-    return `https://cdn.discordapp.com/profile-effects/${effectId}/icon.gif?size=128`;
-}
-
-// Load all members - INAYOS NA PAGKUHA NG TUNAY NA LITRATO
+// ILALAGAY ANG MGA LITRATO SA BILOG
 async function loadMembers() {
     // FOUNDERS
     const foundersEl = document.getElementById('founders-section');
-    let zIndex = 30;
-    for (const [username, id] of Object.entries(membersList.founders)) {
-        let avatarUrl = null, effectUrl = null, hasData = false;
-        
-        if(id !== "") {
-            const userData = await getUserData(id);
-            if (userData) {
-                avatarUrl = getAvatarUrl(id, userData.avatar);
-                effectUrl = getEffectUrl(userData.effect);
-                hasData = true;
-            } else {
-                // Kung sakaling may problema, ilalabas pa rin ang default avatar
-                avatarUrl = getAvatarUrl(id, null);
-                hasData = true;
-            }
-        }
-
+    let z = 30;
+    for (const [name, id] of Object.entries(membersList.founders)) {
+        const avatarUrl = await getDiscordAvatar(id);
         const el = document.createElement('div');
         el.className = 'avatar-wrapper-node clickable';
-        el.style.zIndex = zIndex--;
+        el.style.zIndex = z--;
         el.innerHTML = `
-            <a href="leon/" class="avatar-link">
-                <div class="avatar-outer">
-                    ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                    <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
-                        ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
-                    </div>
+            <div class="avatar-outer">
+                <div class="circle-avatar-container">
+                    <img src="${avatarUrl}" alt="${name}">
                 </div>
-                <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
-            </a>
+            </div>
+            <div class="avatar-tooltip"><span class="tooltip-username">${name}</span></div>
         `;
         foundersEl.appendChild(el);
     }
 
     // ABOVE ALL
     const aboveEl = document.getElementById('aboveall-section');
-    zIndex = 20;
-    for (const [username, id] of Object.entries(membersList.aboveAll)) {
-        let avatarUrl = null, effectUrl = null, hasData = false;
-        if(id !== "") {
-            const userData = await getUserData(id);
-            if (userData) {
-                avatarUrl = getAvatarUrl(id, userData.avatar);
-                effectUrl = getEffectUrl(userData.effect);
-                hasData = true;
-            } else {
-                avatarUrl = getAvatarUrl(id, null);
-                hasData = true;
-            }
-        }
+    z = 20;
+    for (const [name, id] of Object.entries(membersList.aboveAll)) {
+        const avatarUrl = id ? await getDiscordAvatar(id) : null;
         const el = document.createElement('div');
         el.className = 'avatar-wrapper-node';
-        el.style.zIndex = zIndex--;
+        el.style.zIndex = z--;
         el.innerHTML = `
             <div class="avatar-outer">
-                ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
-                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
+                <div class="circle-avatar-container ${!avatarUrl ? 'empty-state' : ''}">
+                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${name}">` : ''}
                 </div>
             </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">${name}</span></div>
         `;
         aboveEl.appendChild(el);
     }
 
     // STAFF
     const staffEl = document.getElementById('staff-section');
-    zIndex = 10;
-    for (const [username, id] of Object.entries(membersList.staff)) {
-        let avatarUrl = null, effectUrl = null, hasData = false;
-        if(id !== "") {
-            const userData = await getUserData(id);
-            if (userData) {
-                avatarUrl = getAvatarUrl(id, userData.avatar);
-                effectUrl = getEffectUrl(userData.effect);
-                hasData = true;
-            } else {
-                avatarUrl = getAvatarUrl(id, null);
-                hasData = true;
-            }
-        }
+    z = 10;
+    for (const [name, id] of Object.entries(membersList.staff)) {
+        const avatarUrl = id ? await getDiscordAvatar(id) : null;
         const el = document.createElement('div');
         el.className = 'avatar-wrapper-node';
-        el.style.zIndex = zIndex--;
+        el.style.zIndex = z--;
         el.innerHTML = `
             <div class="avatar-outer">
-                ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
-                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
+                <div class="circle-avatar-container ${!avatarUrl ? 'empty-state' : ''}">
+                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${name}">` : ''}
                 </div>
             </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">${name}</span></div>
         `;
         staffEl.appendChild(el);
     }
 
-    // REGULAR MEMBERS (MARQUEE)
+    // REGULAR MEMBERS
     const regEl = document.getElementById('regular-members');
     const list = Object.entries(membersList.regular);
-    [...list, ...list].forEach(async ([username, id]) => {
-        let avatarUrl = null, effectUrl = null;
-        if(id !== "") {
-            const userData = await getUserData(id);
-            if (userData) {
-                avatarUrl = getAvatarUrl(id, userData.avatar);
-                effectUrl = getEffectUrl(userData.effect);
-            } else {
-                avatarUrl = getAvatarUrl(id, null);
-            }
-        }
+    [...list, ...list].forEach(async ([name, id]) => {
+        const avatarUrl = id ? await getDiscordAvatar(id) : null;
         const el = document.createElement('div');
         el.className = 'marquee-profile-block';
         el.innerHTML = `
             <div class="marquee-avatar-wrap">
-                ${effectUrl ? `<div class="marquee-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
+                ${avatarUrl ? `<img src="${avatarUrl}" alt="${name}">` : ''}
             </div>
-            <span>${username}</span>
+            <span>${name}</span>
         `;
         regEl.appendChild(el);
     });
@@ -603,18 +538,10 @@ async function loadMembers() {
 
 // PROTECTION
 function disableKeyPress(e) {
-    if (e.keyCode == 123 || 
-        (e.ctrlKey && e.keyCode == 85) || 
-        (e.ctrlKey && e.keyCode == 83) || 
-        (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
-        (e.ctrlKey && e.shiftKey && e.keyCode == 74) || 
-        (e.ctrlKey && e.shiftKey && e.keyCode == 67) || 
-        (e.ctrlKey && e.keyCode == 80)) {
+    if (e.keyCode == 123 || (e.ctrlKey && e.keyCode == 85) || (e.ctrlKey && e.keyCode == 83) || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.shiftKey && e.keyCode == 67) || (e.ctrlKey && e.keyCode == 80)) {
         return false;
     }
 }
-document.onkeydown = disableKeyPress;
-document.onmousedown = disableKeyPress;
 
 // AUDIO
 const audio = document.getElementById("soundtrack");

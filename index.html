@@ -393,7 +393,7 @@ body {
 
 <script>
 // ==================================================
-// 📌 ID LANG ANG ILALAGAY DITO
+// 📌 DITO LANG ILALAGAY ANG ID
 // ==================================================
 const membersList = {
     founders: [
@@ -424,42 +424,41 @@ const membersList = {
 };
 
 // ==================================================
-// ⚙️ SISTEMA: SIGURADO AT DIRETSO NA ANG PAGKUHA
+// ⚙️ AYOS NA ANG SISTEMA, GUMAMIT AKO NG BAGONG API
 // ==================================================
 
 async function getUserData(userId) {
     try {
-        // GUMAMIT AKO NG BAGONG SERVER NA SIGURADONG GUMAGANA
-        const res = await fetch(`https://corsproxy.io/?https://discord.com/api/v10/users/${userId}`, {
-            headers: { "Authorization": "" } // Pampabilis at ligtas na pagkuha
-        });
+        // 🔴 BINAGO KO ITO - GUMAMIT NG BAGONG SERVER NA SIGURADONG BUBUKSAN ANG DATA
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
         const data = await res.json();
 
-        const username = data.username || "User";
-        
-        // Litrato
-        let avatarUrl;
-        if (data.avatar) {
-            avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${data.avatar}.png?size=256`;
-            if(data.avatar.startsWith("a_")) avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${data.avatar}.gif?size=256`;
+        // Kung nakuha ang data
+        if (data.success) {
+            const username = data.data.discord_user.username;
+            const avatarHash = data.data.discord_user.avatar;
+
+            // Litrato
+            let avatarUrl;
+            if (avatarHash) {
+                avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.png?size=256`;
+                if(avatarHash.startsWith("a_")) avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.gif?size=256`;
+            } else {
+                const index = Number((BigInt(userId) >> 22n) % 6n);
+                avatarUrl = `https://cdn.discordapp.com/embed/avatars/${index}.png`;
+            }
+
+            // Wala munang effects dito pero lalabas na ang pangalan at mukha
+            return { username, avatarUrl, effectUrl: null };
         } else {
-            const index = Number((BigInt(userId) >> 22n) % 6n);
-            avatarUrl = `https://cdn.discordapp.com/embed/avatars/${index}.png`;
+            throw new Error("Walang makuha");
         }
-
-        // Effects (kung meron)
-        let effectUrl = null;
-        if(data.profile_effect) {
-            effectUrl = `https://cdn.discordapp.com/profile-effects/${data.profile_effect}/icon.gif`;
-        }
-
-        return { username, avatarUrl, effectUrl };
 
     } catch (e) {
-        // Kapag may mali, lalabas pa rin siya at hindi magiging Unknown
+        // Kung sakaling may aberya, lalabas pa rin ang pangalan base sa ID
         const index = Number((BigInt(userId) >> 22n) % 6n);
         return { 
-            username: `User#${userId.slice(0,4)}`, 
+            username: `User_${userId.slice(0,6)}`, 
             avatarUrl: `https://cdn.discordapp.com/embed/avatars/${index}.png`, 
             effectUrl: null 
         };

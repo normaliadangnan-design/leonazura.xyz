@@ -141,7 +141,6 @@ body {
     display: block;
 }
 
-/* ✅ Avatar container with effect support */
 .avatar-outer {
     position: relative;
     width: 76px;
@@ -169,13 +168,26 @@ body {
     height: 100%;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    background: #000000;
+    background: #0a0a0a;
     padding: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
     z-index: 3;
+    overflow: hidden;
+}
+
+/* Kapag walang totoong ID */
+.circle-avatar-container.empty-state {
+    background: linear-gradient(45deg, #1a1a1a, #000);
+}
+.circle-avatar-container.empty-state::after {
+    content: '';
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
 }
 
 .circle-avatar-container img {
@@ -254,11 +266,13 @@ body {
     position: relative;
 }
 
-/* ✅ Marquee avatar effect */
 .marquee-avatar-wrap {
     position: relative;
     width: 18px;
     height: 18px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    overflow: hidden;
 }
 .marquee-effect {
     position: absolute;
@@ -393,156 +407,178 @@ body {
 // --------------------------
 // DISCORD SETTINGS
 // Format: "Discord Username": "User ID"
+// Kung wala pa, ilagay lang ""
 // --------------------------
 const membersList = {
     founders: {
-        "Leon": "1250654354344775703",
-        "BITSBOY": "1506975053370359848",
-        "KiraAzura": "1123145717461033041"
+        "Leon": "1250654354344775703",     // ✅ TOTOO
+        "BITSBOY": "1506975053370359848",   // ✅ TOTOO
+        "KiraAzura": "1123145717461033041"  // ✅ TOTOO
     },
     aboveAll: {
-        "Kina": "678901234567890123",
-        "KiraAzura": "789012345678901234",
-        "Aki": "890123456789012345",
-        "Jay": "901234567890123456",
-        "Member 5": "123456789012345678"
+        "Kina": "",         // ⚠️ WALA PA
+        "KiraAzura": "",    // ⚠️ WALA PA
+        "Aki": "",          // ⚠️ WALA PA
+        "Jay": "",          // ⚠️ WALA PA
+        "Member 5": ""      // ⚠️ WALA PA
     },
     staff: {
-        "Staff 1": "234567890123456789",
-        "Staff 2": "345678901234567890",
-        "Staff 3": "456789012345678901",
-        "Staff 4": "567890123456789012"
+        "Staff 1": "",      // ⚠️ WALA PA
+        "Staff 2": "",      // ⚠️ WALA PA
+        "Staff 3": "",      // ⚠️ WALA PA
+        "Staff 4": ""       // ⚠️ WALA PA
     },
     regular: {
-        "Zia": "1490597279101354044",
-        "Cookies": "1414546504437207161",
-        "Costa": "1374740899422277703",
-        "Gelo Suarez": "901234567890123456",
-        "Jay Mercado": "123456789012345678",
-        "Andrie Gaspari": "234567890123456789",
-        "Nix Kupal": "345678901234567890",
-        "Dought Tanga": "456789012345678901",
-        "Uza Henz": "567890123456789012"
+        "Zia": "1490597279101354044",       // ✅ TOTOO
+        "Cookies": "1414546504437207161",   // ✅ TOTOO
+        "Costa": "1374740899422277703",     // ✅ TOTOO
+        "Gelo Suarez": "",  // ⚠️ WALA PA
+        "Jay Mercado": "",  // ⚠️ WALA PA
+        "Andrie Gaspari": "",// ⚠️ WALA PA
+        "Nix Kupal": "",    // ⚠️ WALA PA
+        "Dought Tanga": "", // ⚠️ WALA PA
+        "Uza Henz": ""      // ⚠️ WALA PA
     }
 };
 
 // Get avatar URL
 function getAvatarUrl(userId, hash) {
-    return hash 
-        ? `https://cdn.discordapp.com/avatars/${userId}/${hash}.png?size=128` 
-        : `https://cdn.discordapp.com/embed/avatars/${(userId >> 22) % 5}.png`;
+    if(!userId || !hash) return null;
+    return `https://cdn.discordapp.com/avatars/${userId}/${hash}.png?size=128`;
 }
 
-// Get profile effect URL ✅
+// Get profile effect URL
 function getEffectUrl(effectId) {
-    return effectId 
-        ? `https://cdn.discordapp.com/profile-effects/${effectId}/icon.gif?size=128` 
-        : null;
+    if(!effectId) return null;
+    return `https://cdn.discordapp.com/profile-effects/${effectId}/icon.gif?size=128`;
 }
 
-// Load all members with auto-update + effects ✅
+// Load all members with auto-update + effects
 async function loadMembers() {
-    // Founders
+    // FOUNDERS
     const foundersEl = document.getElementById('founders-section');
     let zIndex = 30;
     for (const [username, id] of Object.entries(membersList.founders)) {
-        try {
-            const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
-            const data = await res.json();
-            const effect = getEffectUrl(data.profile_effect);
-
-            const el = document.createElement('div');
-            el.className = 'avatar-wrapper-node clickable';
-            el.style.zIndex = zIndex--;
-            el.innerHTML = `
-                <a href="leon/" class="avatar-link">
-                    <div class="avatar-outer">
-                        ${effect ? `<div class="profile-effect" style="background-image: url('${effect}')"></div>` : ''}
-                        <div class="circle-avatar-container">
-                            <img src="${getAvatarUrl(id, data.avatar)}" alt="${username}">
-                        </div>
+        let avatarUrl = null, effectUrl = null, hasData = false;
+        if(id !== "") {
+            try {
+                const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
+                if(res.ok) {
+                    const data = await res.json();
+                    avatarUrl = getAvatarUrl(id, data.avatar);
+                    effectUrl = getEffectUrl(data.profile_effect);
+                    hasData = true;
+                }
+            } catch (e) { /* Safe */ }
+        }
+        const el = document.createElement('div');
+        el.className = 'avatar-wrapper-node clickable';
+        el.style.zIndex = zIndex--;
+        el.innerHTML = `
+            <a href="leon/" class="avatar-link">
+                <div class="avatar-outer">
+                    ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
+                    <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
+                        ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
                     </div>
-                    <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
-                </a>
-            `;
-            foundersEl.appendChild(el);
-        } catch (e) { console.error(e); }
+                </div>
+                <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
+            </a>
+        `;
+        foundersEl.appendChild(el);
     }
 
-    // Above All
+    // ABOVE ALL
     const aboveEl = document.getElementById('aboveall-section');
     zIndex = 20;
     for (const [username, id] of Object.entries(membersList.aboveAll)) {
-        try {
-            const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
-            const data = await res.json();
-            const effect = getEffectUrl(data.profile_effect);
-
-            const el = document.createElement('div');
-            el.className = 'avatar-wrapper-node';
-            el.style.zIndex = zIndex--;
-            el.innerHTML = `
-                <div class="avatar-outer">
-                    ${effect ? `<div class="profile-effect" style="background-image: url('${effect}')"></div>` : ''}
-                    <div class="circle-avatar-container">
-                        <img src="${getAvatarUrl(id, data.avatar)}" alt="${username}">
-                    </div>
+        let avatarUrl = null, effectUrl = null, hasData = false;
+        if(id !== "") {
+            try {
+                const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
+                if(res.ok) {
+                    const data = await res.json();
+                    avatarUrl = getAvatarUrl(id, data.avatar);
+                    effectUrl = getEffectUrl(data.profile_effect);
+                    hasData = true;
+                }
+            } catch (e) { /* Safe */ }
+        }
+        const el = document.createElement('div');
+        el.className = 'avatar-wrapper-node';
+        el.style.zIndex = zIndex--;
+        el.innerHTML = `
+            <div class="avatar-outer">
+                ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
+                <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
+                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
                 </div>
-                <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
-            `;
-            aboveEl.appendChild(el);
-        } catch (e) { console.error(e); }
+            </div>
+            <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
+        `;
+        aboveEl.appendChild(el);
     }
 
-    // Staff
+    // STAFF
     const staffEl = document.getElementById('staff-section');
     zIndex = 10;
     for (const [username, id] of Object.entries(membersList.staff)) {
-        try {
-            const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
-            const data = await res.json();
-            const effect = getEffectUrl(data.profile_effect);
-
-            const el = document.createElement('div');
-            el.className = 'avatar-wrapper-node';
-            el.style.zIndex = zIndex--;
-            el.innerHTML = `
-                <div class="avatar-outer">
-                    ${effect ? `<div class="profile-effect" style="background-image: url('${effect}')"></div>` : ''}
-                    <div class="circle-avatar-container">
-                        <img src="${getAvatarUrl(id, data.avatar)}" alt="${username}">
-                    </div>
+        let avatarUrl = null, effectUrl = null, hasData = false;
+        if(id !== "") {
+            try {
+                const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
+                if(res.ok) {
+                    const data = await res.json();
+                    avatarUrl = getAvatarUrl(id, data.avatar);
+                    effectUrl = getEffectUrl(data.profile_effect);
+                    hasData = true;
+                }
+            } catch (e) { /* Safe */ }
+        }
+        const el = document.createElement('div');
+        el.className = 'avatar-wrapper-node';
+        el.style.zIndex = zIndex--;
+        el.innerHTML = `
+            <div class="avatar-outer">
+                ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
+                <div class="circle-avatar-container ${!hasData ? 'empty-state' : ''}">
+                    ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
                 </div>
-                <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
-            `;
-            staffEl.appendChild(el);
-        } catch (e) { console.error(e); }
+            </div>
+            <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
+        `;
+        staffEl.appendChild(el);
     }
 
-    // Regular Members (Marquee) ✅ with effects
+    // REGULAR MEMBERS (MARQUEE)
     const regEl = document.getElementById('regular-members');
     const list = Object.entries(membersList.regular);
     [...list, ...list].forEach(async ([username, id]) => {
-        try {
-            const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
-            const data = await res.json();
-            const effect = getEffectUrl(data.profile_effect);
-
-            const el = document.createElement('div');
-            el.className = 'marquee-profile-block';
-            el.innerHTML = `
-                <div class="marquee-avatar-wrap">
-                    ${effect ? `<div class="marquee-effect" style="background-image: url('${effect}')"></div>` : ''}
-                    <img src="${getAvatarUrl(id, data.avatar)}" alt="${username}">
-                </div>
-                <span>${username}</span>
-            `;
-            regEl.appendChild(el);
-        } catch (e) { console.error(e); }
+        let avatarUrl = null, effectUrl = null;
+        if(id !== "") {
+            try {
+                const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
+                if(res.ok) {
+                    const data = await res.json();
+                    avatarUrl = getAvatarUrl(id, data.avatar);
+                    effectUrl = getEffectUrl(data.profile_effect);
+                }
+            } catch (e) { /* Safe */ }
+        }
+        const el = document.createElement('div');
+        el.className = 'marquee-profile-block';
+        el.innerHTML = `
+            <div class="marquee-avatar-wrap">
+                ${effectUrl ? `<div class="marquee-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
+                ${avatarUrl ? `<img src="${avatarUrl}" alt="${username}">` : ''}
+            </div>
+            <span>${username}</span>
+        `;
+        regEl.appendChild(el);
     });
 }
 
-// Original functions
+// PROTECTION
 function disableKeyPress(e) {
     if (e.keyCode == 123 || 
         (e.ctrlKey && e.keyCode == 85) || 
@@ -557,20 +593,23 @@ function disableKeyPress(e) {
 document.onkeydown = disableKeyPress;
 document.onmousedown = disableKeyPress;
 
+// AUDIO
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
 
+// GATEWAY
 document.getElementById("gateway-overlay").onclick = () => {
     audio.play().catch(() => {});
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
 
+// VIEWS
 fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 .then(r => r.json())
 .then(d => { document.getElementById("views").innerText = d.record.views; })
 .catch(e => console.log(e));
 
-// Load everything
+// SIMULA
 loadMembers();
 </script>
 

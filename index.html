@@ -141,9 +141,32 @@ body {
     display: block;
 }
 
-.circle-avatar-container {
+/* ✅ Avatar container with effect support */
+.avatar-outer {
+    position: relative;
     width: 76px;
     height: 76px;
+    border-radius: 50%;
+}
+
+.profile-effect {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    border-radius: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.circle-avatar-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: #000000;
@@ -152,6 +175,7 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+    z-index: 3;
 }
 
 .circle-avatar-container img {
@@ -227,6 +251,27 @@ body {
     border-radius: 50%;
     object-fit: cover;
     pointer-events: none;
+    position: relative;
+}
+
+/* ✅ Marquee avatar effect */
+.marquee-avatar-wrap {
+    position: relative;
+    width: 18px;
+    height: 18px;
+}
+.marquee-effect {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 2;
+    pointer-events: none;
 }
 
 @keyframes smoothScroll {
@@ -234,7 +279,6 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-/* ✅ BAGO AT SOBRA LAKAS NA SETTINGS PARA SA DISCORD - HINDI NA MABUBURA */
 #azura-discord-btn {
     position: fixed !important;
     bottom: 30px !important;
@@ -308,102 +352,28 @@ body {
     <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
     <div class="symbol-break">$</div>
     
-    <div class="horizontal-avatar-row">
-        <div class="avatar-wrapper-node clickable" style="z-index: 30;">
-            <a href="leon/" class="avatar-link">
-                <div class="circle-avatar-container"><img src="members/founder/user1.jpg"></div>
-                <div class="avatar-tooltip"><span class="tooltip-username">Leon</span></div>
-            </a>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 29;">
-            <div class="circle-avatar-container"><img src="members/founder/user2.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Undefeated One</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 28;">
-            <div class="circle-avatar-container"><img src="members/founder/user3.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Dough Tanga</span></div>
-        </div>
-    </div>
+    <div class="horizontal-avatar-row" id="founders-section"></div>
 
     <div class="title-group-block">
         <span class="tiny-top-text">ABOVE ALL</span>
         <h2 class="bold-main-header">ABOVE ALL</h2>
     </div>
     
-    <div class="horizontal-avatar-row">
-        <div class="avatar-wrapper-node" style="z-index: 20;">
-            <div class="circle-avatar-container"><img src="members/above all/user4.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Kina</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 19;">
-            <div class="circle-avatar-container"><img src="members/above all/user5.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">KiraAzura</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 18;">
-            <div class="circle-avatar-container"><img src="members/above all/user6.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Aki</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 17;">
-            <div class="circle-avatar-container"><img src="members/above all/user7.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Jay</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 16;">
-            <div class="circle-avatar-container"><img src="members/above all/user12.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Member 5</span></div>
-        </div>
-    </div>
+    <div class="horizontal-avatar-row" id="aboveall-section"></div>
 
     <div class="title-group-block">
         <span class="tiny-top-text">STAFF</span>
         <h2 class="bold-main-header">STAFF</h2>
     </div>
     
-    <div class="horizontal-avatar-row">
-        <div class="avatar-wrapper-node" style="z-index: 10;">
-            <div class="circle-avatar-container"><img src="members/STAFF/user8.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 1</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 9;">
-            <div class="circle-avatar-container"><img src="members/STAFF/user9.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 2</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 8;">
-            <div class="circle-avatar-container"><img src="members/STAFF/user10.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 3</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 7;">
-            <div class="circle-avatar-container"><img src="members/STAFF/user11.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 4</span></div>
-        </div>
-    </div>
+    <div class="horizontal-avatar-row" id="staff-section"></div>
 
     <div class="marquee-ticker">
-      <div class="marquee-inner-wrap">
-        <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
-        
-        <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
-      </div>
+      <div class="marquee-inner-wrap" id="regular-members"></div>
     </div>
 
 </div>
 
-<!-- ✅ DITO ANG DISCORD - HINDI NA MABUBURA, NASA TAMANG PUSISYON -->
 <div id="azura-discord-btn">
     <a href="https://discord.gg/eUaKEqXkWA" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
@@ -420,6 +390,159 @@ body {
 
 
 <script>
+// --------------------------
+// DISCORD SETTINGS
+// Format: "Discord Username": "User ID"
+// --------------------------
+const membersList = {
+    founders: {
+        "Leon": "1250654354344775703",
+        "Undefeated One": "432109876543210987",
+        "Dough Tanga": "567890123456789012"
+    },
+    aboveAll: {
+        "Kina": "678901234567890123",
+        "KiraAzura": "789012345678901234",
+        "Aki": "890123456789012345",
+        "Jay": "901234567890123456",
+        "Member 5": "123456789012345678"
+    },
+    staff: {
+        "Staff 1": "234567890123456789",
+        "Staff 2": "345678901234567890",
+        "Staff 3": "456789012345678901",
+        "Staff 4": "567890123456789012"
+    },
+    regular: {
+        "Zia": "1490597279101354044",
+        "Cookies": "1414546504437207161",
+        "KinaAzura": "890123456789012345",
+        "Gelo Suarez": "901234567890123456",
+        "Jay Mercado": "123456789012345678",
+        "Andrie Gaspari": "234567890123456789",
+        "Nix Kupal": "345678901234567890",
+        "Dought Tanga": "456789012345678901",
+        "Uza Henz": "567890123456789012"
+    }
+};
+
+// Get avatar URL
+function getAvatarUrl(userId, hash) {
+    return hash 
+        ? `https://cdn.discordapp.com/avatars/${userId}/${hash}.png?size=128` 
+        : `https://cdn.discordapp.com/embed/avatars/${(userId >> 22) % 5}.png`;
+}
+
+// Get profile effect URL ✅
+function getEffectUrl(effectId) {
+    return effectId 
+        ? `https://cdn.discordapp.com/profile-effects/${effectId}/icon.gif?size=128` 
+        : null;
+}
+
+// Load all members with auto-update + effects ✅
+async function loadMembers() {
+    // Founders
+    const foundersEl = document.getElementById('founders-section');
+    let zIndex = 30;
+    for (const [username, id] of Object.entries(membersList.founders)) {
+        try {
+            const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
+            const data = await res.json();
+            const effect = getEffectUrl(data.profile_effect);
+
+            const el = document.createElement('div');
+            el.className = 'avatar-wrapper-node clickable';
+            el.style.zIndex = zIndex--;
+            el.innerHTML = `
+                <a href="leon/" class="avatar-link">
+                    <div class="avatar-outer">
+                        ${effect ? `<div class="profile-effect" style="background-image: url('${effect}')"></div>` : ''}
+                        <div class="circle-avatar-container">
+                            <img src="${getAvatarUrl(id, data.avatar)}" alt="${username}">
+                        </div>
+                    </div>
+                    <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
+                </a>
+            `;
+            foundersEl.appendChild(el);
+        } catch (e) { console.error(e); }
+    }
+
+    // Above All
+    const aboveEl = document.getElementById('aboveall-section');
+    zIndex = 20;
+    for (const [username, id] of Object.entries(membersList.aboveAll)) {
+        try {
+            const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
+            const data = await res.json();
+            const effect = getEffectUrl(data.profile_effect);
+
+            const el = document.createElement('div');
+            el.className = 'avatar-wrapper-node';
+            el.style.zIndex = zIndex--;
+            el.innerHTML = `
+                <div class="avatar-outer">
+                    ${effect ? `<div class="profile-effect" style="background-image: url('${effect}')"></div>` : ''}
+                    <div class="circle-avatar-container">
+                        <img src="${getAvatarUrl(id, data.avatar)}" alt="${username}">
+                    </div>
+                </div>
+                <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
+            `;
+            aboveEl.appendChild(el);
+        } catch (e) { console.error(e); }
+    }
+
+    // Staff
+    const staffEl = document.getElementById('staff-section');
+    zIndex = 10;
+    for (const [username, id] of Object.entries(membersList.staff)) {
+        try {
+            const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
+            const data = await res.json();
+            const effect = getEffectUrl(data.profile_effect);
+
+            const el = document.createElement('div');
+            el.className = 'avatar-wrapper-node';
+            el.style.zIndex = zIndex--;
+            el.innerHTML = `
+                <div class="avatar-outer">
+                    ${effect ? `<div class="profile-effect" style="background-image: url('${effect}')"></div>` : ''}
+                    <div class="circle-avatar-container">
+                        <img src="${getAvatarUrl(id, data.avatar)}" alt="${username}">
+                    </div>
+                </div>
+                <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
+            `;
+            staffEl.appendChild(el);
+        } catch (e) { console.error(e); }
+    }
+
+    // Regular Members (Marquee) ✅ with effects
+    const regEl = document.getElementById('regular-members');
+    const list = Object.entries(membersList.regular);
+    [...list, ...list].forEach(async ([username, id]) => {
+        try {
+            const res = await fetch(`https://discordlookup.mesavirep.xyz/v1/user/${id}`);
+            const data = await res.json();
+            const effect = getEffectUrl(data.profile_effect);
+
+            const el = document.createElement('div');
+            el.className = 'marquee-profile-block';
+            el.innerHTML = `
+                <div class="marquee-avatar-wrap">
+                    ${effect ? `<div class="marquee-effect" style="background-image: url('${effect}')"></div>` : ''}
+                    <img src="${getAvatarUrl(id, data.avatar)}" alt="${username}">
+                </div>
+                <span>${username}</span>
+            `;
+            regEl.appendChild(el);
+        } catch (e) { console.error(e); }
+    });
+}
+
+// Original functions
 function disableKeyPress(e) {
     if (e.keyCode == 123 || 
         (e.ctrlKey && e.keyCode == 85) || 
@@ -446,8 +569,10 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 .then(r => r.json())
 .then(d => { document.getElementById("views").innerText = d.record.views; })
 .catch(e => console.log(e));
+
+// Load everything
+loadMembers();
 </script>
 
-<!-- ✅ NAKUMPLETO NA ANG CODE, MAY TAMANG END TAGS -->
 </body>
 </html>

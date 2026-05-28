@@ -34,25 +34,34 @@ async function checkAndUpdateMembers() {
         await guild.members.fetch();
         const currentData = [];
 
-        guild.members.cache.forEach(member => {
-            if (member.user.bot) return;
+        // 👇 GINAMIT KO ANG "FOR...OF" DAHIL GAGAMIT TAYO NG "await" SA LOOB
+        for (const member of guild.members.cache.values()) {
+            if (member.user.bot) continue;
 
-            // ✅ DETECT NG AVATAR DECORATION / EFFECT
+            // ✅ AYOS NA PARAAN PARA MA-DETECT ANG AVATAR DECORATION / EFFECT
             let decorationURL = null;
-            if (member.user.avatarDecoration) {
-                const assetName = member.user.avatarDecoration.asset;
-                decorationURL = `https://cdn.discordapp.com/avatar-decorations/${member.user.id}/${assetName}.png?size=256`;
+            try {
+                // 👇 MAHALAGA: Kinukuha natin ulit ang buong detalye ng user para lumabas ang decoration data
+                const fullUser = await client.users.fetch(member.user.id, { force: true });
+
+                // 👇 DITO ANG TAMA: "avatarDecorationData" ang gamitin, HINDI "avatarDecoration"
+                if (fullUser.avatarDecorationData) {
+                    const assetName = fullUser.avatarDecorationData.asset;
+                    decorationURL = `https://cdn.discordapp.com/avatar-decorations/${member.user.id}/${assetName}.png?size=256`;
+                }
+            } catch ( (err) {
+                // Kung may error sa pagkuha, hayaan lang, null na lang ang value
             }
 
             // ✅ ISINAMA ANG USER ID, AT LAHAT NG DETALYE
             currentData.push({
-                id: member.user.id,                // 👈 USER ID - SIGURADONG NASA LISTA ITO
+                id: member.user.id,                // 👈 USER ID
                 username: member.user.username,
                 displayName: member.displayName,
                 avatarURL: member.user.avatarURL({ size: 256, extension: 'png' }) || `https://cdn.discordapp.com/embed/avatars/${Number((BigInt(member.user.id) >> 22n) % 6n)}.png`,
-                effectURL: decorationURL            // 👈 AVATAR DECORATION - null kung wala
+                effectURL: decorationURL            // 👈 NGAYON MAY LAMAN NA 'TO KAPAG MAY DECORATION
             });
-        });
+        }
 
         // ✅ IKUMPARA ANG LUMANG DATA SA BAGO
         const newDataString = JSON.stringify(currentData, null, 2);
@@ -65,7 +74,7 @@ async function checkAndUpdateMembers() {
             fs.writeFileSync('members.json', newDataString);
             
             // I-save ito bilang "previousData" para sa susunod na check
-            previousData = newDataString; // ✅ INAAYOS: Ito yung mali kanina, naayos na ngayon
+            previousData = newDataString;
 
             // 📩 I-SEND SA IYO ANG BAGONG FILE
             try {

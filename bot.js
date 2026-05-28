@@ -65,7 +65,7 @@ async function checkAndUpdateMembers() {
             fs.writeFileSync('members.json', newDataString);
             
             // I-save ito bilang "previousData" para sa susunod na check
-            previousData =新DataString;
+            previousData = newDataString; // ✅ INAAYOS: Ito yung mali kanina, naayos na ngayon
 
             // 📩 I-SEND SA IYO ANG BAGONG FILE
             try {

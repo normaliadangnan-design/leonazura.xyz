@@ -10,13 +10,17 @@ const client = new Client({
 });
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
-const GUILD_ID = "1506830822207127552";
-const YOUR_ID = "1250654354344775703";
+const GUILD_ID = "1506830822207127552"; 
+const YOUR_ID = "1250654354344775703"; 
 
 client.on('ready', async () => {
     console.log(`✅ NAKA CONNECT NA: ${client.user.tag}`);
     const guild = client.guilds.cache.get(GUILD_ID);
-    if (!guild) return console.log("❌ HINDI MAHANAP ANG SERVER");
+    if (!guild) {
+        console.log("❌ HINDI MAHANAP ANG SERVER");
+        // 🛑 PATAYIN AGAD PAG MAY ERROR
+        process.exit(1); 
+    }
 
     await guild.members.fetch();
     const membersData = [];
@@ -37,16 +41,26 @@ client.on('ready', async () => {
     try {
         const user = await client.users.fetch(YOUR_ID);
         const file = new AttachmentBuilder('members.json');
+        
+        // ✅ SIGURADUHING ISANG BESES LANG ITO
         await user.send({ 
             content: "📂 **Ito na ang members.json! I-upload mo ito sa GitHub**", 
             files: [file] 
         });
         console.log("✅ NA-SEND NA SA DM MO ANG FILE!");
+
     } catch (err) {
         console.log("❌ ERROR: Hindi maipadala. Check mo ang YOUR_ID.");
     }
 
-    setTimeout(() => { process.exit(0); }, 3000);
+    // ==================================================
+    // ✅ ITO ANG SOLUSYON: MATIBAY NA PAGPATAY SA DULO
+    // ==================================================
+    console.log("🔌 PUMAPATAY NA SA BOT... TAPOS NA ANG GAWAIN.");
+    setTimeout(() => { 
+        client.destroy();  // Patayin ang koneksyon sa Discord
+        process.exit(0);   // Lumabas at patayin ang proseso mismo
+    }, 3000); // Maghihintay lang ng 3 segundo bago mamatay
 });
 
 client.login(BOT_TOKEN);

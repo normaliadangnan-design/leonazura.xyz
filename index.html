@@ -176,9 +176,6 @@ body {
     visibility: hidden;
     transition: all 0.15s ease;
     pointer-events: none;
-}
-
-.tooltip-username {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -234,7 +231,6 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-/* ✅ BAGO AT SOBRA LAKAS NA SETTINGS PARA SA DISCORD - HINDI NA MABUBURA */
 #azura-discord-btn {
     position: fixed !important;
     bottom: 30px !important;
@@ -308,102 +304,34 @@ body {
     <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
     <div class="symbol-break">$</div>
     
-    <div class="horizontal-avatar-row">
-        <div class="avatar-wrapper-node clickable" style="z-index: 30;">
-            <a href="leon/" class="avatar-link">
-                <div class="circle-avatar-container"><img src="members/founder/user1.jpg"></div>
-                <div class="avatar-tooltip"><span class="tooltip-username">Leon</span></div>
-            </a>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 29;">
-            <div class="circle-avatar-container"><img src="members/founder/user2.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Undefeated One</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 28;">
-            <div class="circle-avatar-container"><img src="members/founder/user3.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Dough Tanga</span></div>
-        </div>
+    <!-- ✅ FOUNDER -->
+    <div class="title-group-block">
+        <span class="tiny-top-text">FOUNDER</span>
+        <h2 class="bold-main-header">FOUNDER</h2>
     </div>
+    <div id="founder-container" class="horizontal-avatar-row"></div>
 
+    <!-- ✅ ABOVE ALL -->
     <div class="title-group-block">
         <span class="tiny-top-text">ABOVE ALL</span>
         <h2 class="bold-main-header">ABOVE ALL</h2>
     </div>
-    
-    <div class="horizontal-avatar-row">
-        <div class="avatar-wrapper-node" style="z-index: 20;">
-            <div class="circle-avatar-container"><img src="members/above all/user4.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Kina</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 19;">
-            <div class="circle-avatar-container"><img src="members/above all/user5.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">KiraAzura</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 18;">
-            <div class="circle-avatar-container"><img src="members/above all/user6.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Aki</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 17;">
-            <div class="circle-avatar-container"><img src="members/above all/user7.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Jay</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 16;">
-            <div class="circle-avatar-container"><img src="members/above all/user12.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Member 5</span></div>
-        </div>
-    </div>
+    <div id="aboveall-container" class="horizontal-avatar-row"></div>
 
+    <!-- ✅ STAFF -->
     <div class="title-group-block">
         <span class="tiny-top-text">STAFF</span>
         <h2 class="bold-main-header">STAFF</h2>
     </div>
-    
-    <div class="horizontal-avatar-row">
-        <div class="avatar-wrapper-node" style="z-index: 10;">
-            <div class="circle-avatar-container"><img src="members/STAFF/user8.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 1</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 9;">
-            <div class="circle-avatar-container"><img src="members/STAFF/user9.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 2</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 8;">
-            <div class="circle-avatar-container"><img src="members/STAFF/user10.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 3</span></div>
-        </div>
-        <div class="avatar-wrapper-node" style="z-index: 7;">
-            <div class="circle-avatar-container"><img src="members/STAFF/user11.jpg"></div>
-            <div class="avatar-tooltip"><span class="tooltip-username">Staff 4</span></div>
-        </div>
-    </div>
+    <div id="staff-container" class="horizontal-avatar-row"></div>
 
+    <!-- ✅ SCROLLING MEMBERS (LAHAT, HINDI KAILANGAN NG ID, KUSA NA 'TO) -->
     <div class="marquee-ticker">
-      <div class="marquee-inner-wrap">
-        <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
-        
-        <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
-        <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
-        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
-      </div>
+      <div id="marquee-container" class="marquee-inner-wrap"></div>
     </div>
 
 </div>
 
-<!-- ✅ DITO ANG DISCORD - HINDI NA MABUBURA, NASA TAMANG PUSISYON -->
 <div id="azura-discord-btn">
     <a href="https://discord.gg/eUaKEqXkWA" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
@@ -446,8 +374,73 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 .then(r => r.json())
 .then(d => { document.getElementById("views").innerText = d.record.views; })
 .catch(e => console.log(e));
+
+// ==================================================
+// ✅ DITO MO ILALAGAY ANG MGA ID NILA (SA TAAS LANG)
+// ==================================================
+fetch('members.json')
+    .then(res => res.json())
+    .then(members => {
+        // 🟢 FOUNDER: ID MO LANG
+        const founderIDs = ["1250654354344775703"]; 
+
+        // 🔵 ABOVE ALL: ILAGAY DITO ANG ID NILA (HIWALAY NG KUWIT)
+        const aboveAllIDs = [
+            "111111111111111111", // USER 1
+            "222222222222222222", // USER 2
+            "333333333333333333", // USER 3
+            "444444444444444444", // USER 4
+            "555555555555555555"  // USER 5
+        ]; 
+
+        // 🟡 STAFF: ILAGAY DITO ANG ID NILA
+        const staffIDs = [
+            "666666666666666666", // STAFF 1
+            "777777777777777777", // STAFF 2
+            "888888888888888888", // STAFF 3
+            "999999999999999999"  // STAFF 4
+        ]; 
+
+        // IPASOK SA TAMANG PWESTO
+        showGroup(members, founderIDs, 'founder-container');
+        showGroup(members, aboveAllIDs, 'aboveall-container');
+        showGroup(members, staffIDs, 'staff-container');
+
+        // ✅ SCROLLING: KUSA NANG KUKUHA LAHAT NG NASA members.json
+        showMarquee(members); 
+    })
+    .catch(err => console.error("Error:", err));
+
+// ✅ FUNCTION PARA SA MGA NASA TAAS
+function showGroup(allMembers, listIDs, container) {
+    const box = document.getElementById(container);
+    const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
+
+    filtered.forEach((mem, i) => {
+        const div = document.createElement('div');
+        div.className = 'avatar-wrapper-node';
+        div.style.zIndex = 50 - i;
+        div.innerHTML = `
+            <div class="circle-avatar-container"><img src="${mem.avatarURL}"></div>
+            <div class="avatar-tooltip">${mem.displayName || mem.username}</div>
+        `;
+        box.appendChild(div);
+    });
+}
+
+// ✅ FUNCTION PARA SA GUMUGULONG (LAHAT NG MIYEMBRO)
+function showMarquee(members) {
+    const box = document.getElementById("marquee-container");
+    const ulit = [...members, ...members]; // DOBLE PARA HINDI MAPUTOL ANG IKOT
+    
+    ulit.forEach(mem => {
+        const block = document.createElement('div');
+        block.className = 'marquee-profile-block';
+        block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;
+        box.appendChild(block);
+    });
+}
 </script>
 
-<!-- ✅ NAKUMPLETO NA ANG CODE, MAY TAMANG END TAGS -->
 </body>
 </html>

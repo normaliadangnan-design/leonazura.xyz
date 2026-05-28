@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale, maximum-scale=1.0">
 <title>AZURA</title>
 
 <style>
@@ -39,7 +39,7 @@ body {
 .navigation-bar {
     position: absolute;
     top: 25px;
-    right: 35px;
+right: 35px;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -51,7 +51,7 @@ body {
 
 .views-box {
     padding: 3px 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255,  255, 255, 0.1);
     border-radius: 3px;
 }
 
@@ -76,7 +76,7 @@ body {
 
 .symbol-break {
     font-size: 28px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255,  255, 255, 0.8);
     margin-bottom: 20px;
     font-weight: 700;
 }
@@ -91,7 +91,7 @@ body {
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 5px;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255,  255, 255, 0.3);
     text-transform: uppercase;
     display: block;
     margin-bottom: 3px;
@@ -99,11 +99,10 @@ body {
 
 .bold-main-header {
     font-family: 'Inter', sans-serif;
-    font-size: 30px;
-    font-weight: 900;
+    font-size: 30px; font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255,  255, 255, 0.8);
 }
 
 .horizontal-avatar-row {
@@ -141,13 +140,13 @@ body {
     display: block;
 }
 
-/* ✅ CONTAINER - HANGGANG DITO LANG ANG SAKOP */
+/* ✅ CONTAINER */
 .circle-avatar-container {
     position: relative;
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255,  255, 255, 0.15);
     background: #000000;
     padding: 2px;
     display: flex;
@@ -168,16 +167,17 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION "ANGRY" - SAKTO LANG, HINDI LALAGPAS SA KADIKIT */
+/* ✅ AVATAR DECORATION - AUTO ADJUST, HINDI LALAGPAS */
 img.avatar-decoration {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 110px;  /* ✅ SAKTO LANG ANG LAKI - HINDI MATATAKPAN ANG KATABI */
+    width: 110px; 
     height: 110px;
     pointer-events: none;
-    z-index: 3; /* ✅ NASA TAAS PERO NASA SARILI MONG BILOG LANG */
+    z-index: 3; 
+    border-radius: 0 !important;
 }
 
 /* ==================================================
@@ -189,7 +189,7 @@ img.avatar-decoration {
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     background: #000000;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255,  255, 255, 0.1);
     border-radius: 12px;
     padding: 12px 15px;
     width: 180px;
@@ -255,8 +255,9 @@ img.avatar-decoration {
 
 .marquee-inner-wrap {
     display: flex;
+    justify-content: flex-start;
     gap: 12px;
-    width: max-content;
+    width：max-content;
     animation: smoothScroll 35s linear infinite; 
 }
 
@@ -266,12 +267,12 @@ img.avatar-decoration {
     gap: 8px;
     font-size: 12px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255,  255, 255, 0.8);
     background: #0c0c0c; 
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255,255,255,0.08);
     padding: 6px 16px;
     border-radius: 30px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
 .marquee-profile-block img {
@@ -299,7 +300,7 @@ img.avatar-decoration {
 
 #azura-discord-btn a {
     display: flex !important;
-    align-items: center !important;
+    align-items: center !important;;
     gap: 8px !important;
     padding: 10px 18px !important;
     background-color: #000 !important;
@@ -391,8 +392,10 @@ img.avatar-decoration {
     <div class="gateway-btn">CLICK</div>
 </div>
 
+<!-- ✅ MUSIC PLAYER - NANDITO PA RIN, HINDI NAWALA -->
 <audio id="soundtrack" loop>
-    <source src="5-mil_2RPY2b9n.mp3">
+    <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
+
 
 
 <script>
@@ -426,23 +429,23 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 fetch('members.json')
     .then(res => res.json())
     .then(members => {
-        // ✅ TAMA NA BILANG: 3 | 6 | 8 | 10
+        // ✅ ID LIST MO 
         const founderIDs = [
-            "1250654354344775703",   // <-- IKAW DITO
+            "1250654354344775703",   
             "1506975053370359848",
             "1123145717461033041"
         ]; 
 
         const aboveAllIDs = [
-            "ID_1", "ID_2", "ID_3", "ID_4", "ID_5", "ID_6"
+            "1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"
         ]; 
 
         const staffIDs = [
-            "ID_1", "ID_2", "ID_3", "ID_4", "ID_5", "ID_6", "ID_7", "ID_8"
+            "1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"
         ]; 
 
         const scrollingIDs = [
-            "1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588", "1374740899422277703", "1081806153341743144", "995205070679453789", "ID_9", "ID_10"
+            "1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588", "1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"
         ]; 
 
         showGroup(members, founderIDs.slice(0, 3), 'founder-container');
@@ -452,7 +455,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ FUNCTION: IKAW LANG MAY DECORATION, SAKTO ANG LAKI, HINDI MATATAKPAN
+// ✅ FUNCTION: KUSANG KUKUHA NG DECORATION KUNG MERON
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -462,22 +465,22 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ IKAW LANG MAY "ANGRY" - LINK AT LAKI AY TAMA NA, HINDI LALAGPAS
+        // ✅ AUTO DETECT DECORATION
         let decorationHTML = '';
-        if(mem.id === "1250654354344775703"){ 
-            decorationHTML = `<img src="https://cdn.discordapp.com/decorations/1136607238467973220.png?size=128" class="avatar-decoration" alt="">`;
+        if(mem.effectURL) { 
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="">`;
         }
 
         div.innerHTML = `
             <div class="circle-avatar-container">
                 <img src="${mem.avatarURL}" class="avatar-img" alt="">
-                ${decorationHTML}
+                ${decorationHTML} 
             </div>
             
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
                     <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
-                    <span class="tooltip-emojis">😍💖</span>
+                    <span class="tooltip-emojis">👑</span>
                 </div>
                 <div class="tooltip-username">
                     <span>◇</span> @${mem.username || 'username'}
@@ -488,7 +491,7 @@ function showGroup(allMembers, listIDs, container) {
             </div>
         `;
         box.appendChild(div);
-    });
+    })
 }
 
 function showMarquee(allMembers, listIDs) {
@@ -501,9 +504,8 @@ function showMarquee(allMembers, listIDs) {
         block.className = 'marquee-profile-block';
         block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;
         box.appendChild(block);
-    });
+    })
 }
 </script>
-
 </body>
 </html>

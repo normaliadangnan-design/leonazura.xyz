@@ -1,12 +1,13 @@
 {
   "name": "azura-bot",
   "version": "1.0.0",
-  "description": "Azura Org Website Bot",
+  "description": "Auto detect avatar decoration",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
-    "discord.js": "^14.14.1"
+    "discord.js": "^14.11.0",
+    "fs": "^0.0.1-security"
   }
 }

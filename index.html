@@ -101,11 +101,11 @@ body {
 /* ✅ PINALAKI + KULAY GAYA SA $ */
 .bold-main-header {
     font-family: 'Inter', sans-serif;
-    font-size: 30px; /* Dati 26px -> naging 30px */
+    font-size: 30px;
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8); /* KAPAREHO NG $ */
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .horizontal-avatar-row {
@@ -200,11 +200,12 @@ body {
     background: transparent;
 }
 
+/* ✅ INAYOS ANG ANIMATION: MAS BILIS AT WALANG HINTO */
 .marquee-inner-wrap {
     display: flex;
     gap: 12px;
     width: max-content;
-    animation: smoothScroll 25s linear infinite;
+    animation: smoothScroll 12s linear infinite; /* 12 seconds lang, mabilis at tuloy */
 }
 
 .marquee-profile-block {
@@ -230,6 +231,7 @@ body {
     pointer-events: none;
 }
 
+/* ✅ TAMANG GALAWAN PARA WALANG GAP O HINTO */
 @keyframes smoothScroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -383,22 +385,22 @@ fetch('members.json')
     .then(members => {
 
         // ==================================================
-        // 📍 DITO KA MAGLALAGAY NG MGA ID
+        // 📍 DITO KA MAGLALAGAY NG MGA ID - GANITO NA ANG NILAGAY MO
         // ==================================================
 
-        // 🔴 NASA ILALIM NG $ : MAX 3 ID LANG - NAILAGAY MO NA TAMA
+        // 🔴 NASA ILALIM NG $ : MAX 3 ID LANG
         const founderIDs = [
-            "1250654354344775703",
+            "1123145717461033041",
             "1506975053370359848",
-            "1123145717461033041"
+            "1250654354344775703"
         ]; 
 
         // 🔵 NASA ILALIM NG ABOVE ALL : HANGGANG KAYA NG PWEDE
         const aboveAllIDs = [
-             // "ID-UNA",
+            // "ID-UNA",
             // "ID-PANGALAWA",
-           // "ID-PANGATLO",
-         ];
+            // "ID-PANGATLO",
+        ]; 
 
         // 🟢 NASA ILALIM NG STAFF : MAX 8 ID LANG
         const staffIDs = [
@@ -412,13 +414,13 @@ fetch('members.json')
             // "ID-PANG-WALO"
         ]; 
 
-        // 🟡 NASA SCROLLING MEMBER : MAX 8 ID LANG (ITO ANG BAGO!)
+        // 🟡 NASA SCROLLING MEMBER : MAX 8 ID LANG - NAILAGAY MO NA
         const scrollingIDs = [
             "1414546504437207161",
-            // "1498999674969784426",
-            // "1499093156321431622",
-            // "1506434429613113405",
-            // "1374740899422277703A",
+            "1498999674969784426",
+            "1499093156321431622",
+            "1506434429613113405",
+            "1374740899422277703",
             // "ID-PANG-ANIM",
             // "ID-PANG-PITO",
             // "ID-PANG-WALO"
@@ -451,12 +453,11 @@ function showGroup(allMembers, listIDs, container) {
     });
 }
 
-// 🎡 SCROLLING: KUKUHA LANG YUNG MGA ID NA ILALAGAY MO SA TAAS
+// 🎡 SCROLLING: INAYOS KO NA PARA TULOY-TULOY ANG IKOT
 function showMarquee(allMembers, listIDs) {
     const box = document.getElementById("marquee-container");
-    // Hahanapin lang niya yung mga ID na nilagay mo, hindi lahat
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
-    const ulit = [...selectedMembers, ...selectedMembers]; // Doble para tuloy-tuloy ang ikot
+    const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers]; // TINLOP KO PARA WALANG HINTO
     
     ulit.forEach(mem => {
         const block = document.createElement('div');

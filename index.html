@@ -307,7 +307,7 @@ body {
 <div class="center-container">
     <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
     
-    <!-- ✅ NASA ILALIM NG $ - MAX 3 ID -->
+    <!-- ✅ NASA ILALIM NG $ - MAX 3 ID - NAILAGAY MO NA TAMA -->
     <div class="symbol-break">$</div>
     <div id="founder-container" class="horizontal-avatar-row"></div>
 
@@ -328,7 +328,7 @@ body {
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
 
-    <!-- ✅ SCROLLING: LAHAT NASA MEMBERS.JSON -->
+    <!-- ✅ SCROLLING MEMBERS - MAY SARILI NANG LAGYANAN NG ID - MAX 8 ID -->
     <div class="marquee-ticker">
       <div id="marquee-container" class="marquee-inner-wrap"></div>
     </div>
@@ -386,19 +386,19 @@ fetch('members.json')
         // 📍 DITO KA MAGLALAGAY NG MGA ID
         // ==================================================
 
-        // 🔴 NASA ILALIM NG $ : MAX 3 ID LANG
+        // 🔴 NASA ILALIM NG $ : MAX 3 ID LANG - NAILAGAY MO NA TAMA
         const founderIDs = [
-            // "ID-UNA",
-            // "ID-PANGALAWA",
-            // "ID-PANGATLO"
-            // (WAG LAGYAN NG 4, HINDI SASAKTO ANG AYOS)
+            "1250654354344775703",
+            "1506975053370359848",
+            "1123145717461033041"
         ]; 
 
         // 🔵 NASA ILALIM NG ABOVE ALL : HANGGANG KAYA NG PWEDE
         const aboveAllIDs = [
-            // "ID-UNA",
+             // "ID-UNA",
             // "ID-PANGALAWA",
-        ]; 
+           // "ID-PANGATLO",
+         ];
 
         // 🟢 NASA ILALIM NG STAFF : MAX 8 ID LANG
         const staffIDs = [
@@ -410,18 +410,28 @@ fetch('members.json')
             // "ID-PANG-ANIM",
             // "ID-PANG-PITO",
             // "ID-PANG-WALO"
-            // (WAG LAGYAN NG 9, HINDI SASAKTO ANG AYOS)
+        ]; 
+
+        // 🟡 NASA SCROLLING MEMBER : MAX 8 ID LANG (ITO ANG BAGO!)
+        const scrollingIDs = [
+            "1414546504437207161",
+            // "1498999674969784426",
+            // "1499093156321431622",
+            // "1506434429613113405",
+            // "1374740899422277703A",
+            // "ID-PANG-ANIM",
+            // "ID-PANG-PITO",
+            // "ID-PANG-WALO"
         ]; 
 
         // ==================================================
         // WAG MO NA BAGUHAN SA ILALIM NITO ✅
         // ==================================================
 
-        // Nililimitahan natin kung ilan lang ang kukunin
-        showGroup(members, founderIDs.slice(0, 3), 'founder-container'); // 3 lang
+        showGroup(members, founderIDs.slice(0, 3), 'founder-container');   // 3 lang
         showGroup(members, aboveAllIDs, 'aboveall-container');
-        showGroup(members, staffIDs.slice(0, 8), 'staff-container'); // 8 lang
-        showMarquee(members); 
+        showGroup(members, staffIDs.slice(0, 8), 'staff-container');       // 8 lang
+        showMarquee(members, scrollingIDs.slice(0, 8));                    // 8 lang (IKAW ANG MAGLALAGAY)
     })
     .catch(err => console.error("Error:", err));
 
@@ -441,9 +451,12 @@ function showGroup(allMembers, listIDs, container) {
     });
 }
 
-function showMarquee(members) {
+// 🎡 SCROLLING: KUKUHA LANG YUNG MGA ID NA ILALAGAY MO SA TAAS
+function showMarquee(allMembers, listIDs) {
     const box = document.getElementById("marquee-container");
-    const ulit = [...members, ...members]; 
+    // Hahanapin lang niya yung mga ID na nilagay mo, hindi lahat
+    const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
+    const ulit = [...selectedMembers, ...selectedMembers]; // Doble para tuloy-tuloy ang ikot
     
     ulit.forEach(mem => {
         const block = document.createElement('div');

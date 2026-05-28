@@ -13,8 +13,7 @@ const BOT_TOKEN = process.env.BOT_TOKEN;
 const GUILD_ID = "1506830822207127552"; 
 const YOUR_ID = "1250654354344775703"; 
 
-// ⏱️ ORAS NG PAG I-CHECK: 30 segundo = 30000 ms (Pwede mong baguhin)
-// Mas mabilis = mas mabilis maka-detect, mas mabagal = mas tipid sa resources
+// ⏱️ ORAS NG PAG-I-CHECK: 30 segundo = 30000 ms (Pwede mong baguhin)
 const CHECK_INTERVAL = 30000; 
 
 // Ito ang magtatago ng huling na-save na data para ikumpara kung may nagbago
@@ -45,12 +44,13 @@ async function checkAndUpdateMembers() {
                 decorationURL = `https://cdn.discordapp.com/avatar-decorations/${member.user.id}/${assetName}.png?size=256`;
             }
 
+            // ✅ ISINAMA ANG USER ID, AT LAHAT NG DETALYE
             currentData.push({
-                id: member.user.id,
+                id: member.user.id,                // 👈 USER ID - SIGURADONG NASA LISTA ITO
                 username: member.user.username,
                 displayName: member.displayName,
                 avatarURL: member.user.avatarURL({ size: 256, extension: 'png' }) || `https://cdn.discordapp.com/embed/avatars/${Number((BigInt(member.user.id) >> 22n) % 6n)}.png`,
-                effectURL: decorationURL // Kung wala, automatic null ang laman
+                effectURL: decorationURL            // 👈 AVATAR DECORATION - null kung wala
             });
         });
 
@@ -65,7 +65,7 @@ async function checkAndUpdateMembers() {
             fs.writeFileSync('members.json', newDataString);
             
             // I-save ito bilang "previousData" para sa susunod na check
-            previousData = newDataString;
+            previousData =新DataString;
 
             // 📩 I-SEND SA IYO ANG BAGONG FILE
             try {
@@ -73,7 +73,7 @@ async function checkAndUpdateMembers() {
                 const file = new AttachmentBuilder('members.json');
                 
                 await user.send({ 
-                    content: "🔔 **MAY UPDATE!** May nagbago sa profile o avatar decoration. Ito ang bagong `members.json`:", 
+                    content: "🔔 **MAY UPDATE!** May nagbago sa profile o avatar decoration. Nandito ang bagong listahan (kasama ang User ID):", 
                     files: [file] 
                 });
                 console.log("✅ NA-SEND SA DM ANG BAGONG UPDATE!");

@@ -141,41 +141,17 @@ body {
     display: block;
 }
 
-.avatar-outer {
-    position: relative;
+.circle-avatar-container {
     width: 76px;
     height: 76px;
     border-radius: 50%;
-}
-
-.profile-effect {
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    width: calc(100% + 8px);
-    height: calc(100% + 8px);
-    border-radius: 50%;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.circle-avatar-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    background: #0a0a0a;
+    background: #000000;
     padding: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    z-index: 3;
-    overflow: hidden;
 }
 
 .circle-avatar-container img {
@@ -251,29 +227,6 @@ body {
     border-radius: 50%;
     object-fit: cover;
     pointer-events: none;
-    position: relative;
-}
-
-.marquee-avatar-wrap {
-    position: relative;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #1a1a1a;
-    overflow: hidden;
-}
-.marquee-effect {
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    border-radius: 50%;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 2;
-    pointer-events: none;
 }
 
 @keyframes smoothScroll {
@@ -281,6 +234,7 @@ body {
     100% { transform: translateX(-50%); }
 }
 
+/* ✅ BAGO AT SOBRA LAKAS NA SETTINGS PARA SA DISCORD - HINDI NA MABUBURA */
 #azura-discord-btn {
     position: fixed !important;
     bottom: 30px !important;
@@ -354,28 +308,102 @@ body {
     <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
     <div class="symbol-break">$</div>
     
-    <div class="horizontal-avatar-row" id="founders-section"></div>
+    <div class="horizontal-avatar-row">
+        <div class="avatar-wrapper-node clickable" style="z-index: 30;">
+            <a href="leon/" class="avatar-link">
+                <div class="circle-avatar-container"><img src="members/founder/user1.jpg"></div>
+                <div class="avatar-tooltip"><span class="tooltip-username">Leon</span></div>
+            </a>
+        </div>
+        <div class="avatar-wrapper-node" style="z-index: 29;">
+            <div class="circle-avatar-container"><img src="members/founder/user2.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Undefeated One</span></div>
+        </div>
+        <div class="avatar-wrapper-node" style="z-index: 28;">
+            <div class="circle-avatar-container"><img src="members/founder/user3.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Dough Tanga</span></div>
+        </div>
+    </div>
 
     <div class="title-group-block">
         <span class="tiny-top-text">ABOVE ALL</span>
         <h2 class="bold-main-header">ABOVE ALL</h2>
     </div>
     
-    <div class="horizontal-avatar-row" id="aboveall-section"></div>
+    <div class="horizontal-avatar-row">
+        <div class="avatar-wrapper-node" style="z-index: 20;">
+            <div class="circle-avatar-container"><img src="members/above all/user4.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Kina</span></div>
+        </div>
+        <div class="avatar-wrapper-node" style="z-index: 19;">
+            <div class="circle-avatar-container"><img src="members/above all/user5.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">KiraAzura</span></div>
+        </div>
+        <div class="avatar-wrapper-node" style="z-index: 18;">
+            <div class="circle-avatar-container"><img src="members/above all/user6.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Aki</span></div>
+        </div>
+        <div class="avatar-wrapper-node" style="z-index: 17;">
+            <div class="circle-avatar-container"><img src="members/above all/user7.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Jay</span></div>
+        </div>
+        <div class="avatar-wrapper-node" style="z-index: 16;">
+            <div class="circle-avatar-container"><img src="members/above all/user12.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Member 5</span></div>
+        </div>
+    </div>
 
     <div class="title-group-block">
         <span class="tiny-top-text">STAFF</span>
         <h2 class="bold-main-header">STAFF</h2>
     </div>
     
-    <div class="horizontal-avatar-row" id="staff-section"></div>
+    <div class="horizontal-avatar-row">
+        <div class="avatar-wrapper-node" style="z-index: 10;">
+            <div class="circle-avatar-container"><img src="members/STAFF/user8.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Staff 1</span></div>
+        </div>
+        <div class="avatar-wrapper-node" style="z-index: 9;">
+            <div class="circle-avatar-container"><img src="members/STAFF/user9.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Staff 2</span></div>
+        </div>
+        <div class="avatar-wrapper-node" style="z-index: 8;">
+            <div class="circle-avatar-container"><img src="members/STAFF/user10.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Staff 3</span></div>
+        </div>
+        <div class="avatar-wrapper-node" style="z-index: 7;">
+            <div class="circle-avatar-container"><img src="members/STAFF/user11.jpg"></div>
+            <div class="avatar-tooltip"><span class="tooltip-username">Staff 4</span></div>
+        </div>
+    </div>
 
     <div class="marquee-ticker">
-      <div class="marquee-inner-wrap" id="regular-members"></div>
+      <div class="marquee-inner-wrap">
+        <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
+        
+        <div class="marquee-profile-block"><img src="members/REGULAR/zaki.jpg"> <span>Zaki Berdugo</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/aki.jpg"> <span>Aki Ro</span></div>
+        <div class="marquee-profile-block"><img src="members/REGULAR/kina.jpg"> <span>KinaAzura</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/gelo.jpg"> <span>Gelo Suarez</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/jay.jpg"> <span>Jay Mercado</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/andrie.jpg"> <span>Andrie Gaspari</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/nix.jpg"> <span>Nix Kupal</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/dought.jpg"> <span>Dought Tanga</span></div>
+        <div class.marquee-profile-block"><img src="members/REGULAR/uza.jpg"> <span>Uza Henz</span></div>
+      </div>
     </div>
 
 </div>
 
+<!-- ✅ DITO ANG DISCORD - HINDI NA MABUBURA, NASA TAMANG PUSISYON -->
 <div id="azura-discord-btn">
     <a href="https://discord.gg/eUaKEqXkWA" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
@@ -392,187 +420,34 @@ body {
 
 
 <script>
-// ==================================================
-// 📌 DITO LANG ILALAGAY ANG ID
-// ==================================================
-const membersList = {
-    founders: [
-        "1250654354344775703",
-        "1506975053370359848",
-        "1123145717461033041"
-    ],
-    aboveAll: [
-        "ILAGAY_ID_DITO",         
-        "ILAGAY_ID_DITO",    
-        "ILAGAY_ID_DITO",          
-        "ILAGAY_ID_DITO",          
-        "ILAGAY_ID_DITO"      
-    ],
-    staff: [
-        "ILAGAY_ID_DITO",      
-        "ILAGAY_ID_DITO",      
-        "ILAGAY_ID_DITO",      
-        "ILAGAY_ID_DITO",
-        "ILAGAY_ID_DITO"       
-    ],
-    regular: [
-        "1490597279101354044",
-        "1414546504437207161",
-        "1374740899422277703",
-        "ILAGAY_ID_DITO"     
-    ]
-};
-
-// ==================================================
-// ⚙️ AYOS NA ANG SISTEMA, GUMAMIT AKO NG BAGONG API
-// ==================================================
-
-async function getUserData(userId) {
-    try {
-        // 🔴 BINAGO KO ITO - GUMAMIT NG BAGONG SERVER NA SIGURADONG BUBUKSAN ANG DATA
-        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-        const data = await res.json();
-
-        // Kung nakuha ang data
-        if (data.success) {
-            const username = data.data.discord_user.username;
-            const avatarHash = data.data.discord_user.avatar;
-
-            // Litrato
-            let avatarUrl;
-            if (avatarHash) {
-                avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.png?size=256`;
-                if(avatarHash.startsWith("a_")) avatarUrl = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.gif?size=256`;
-            } else {
-                const index = Number((BigInt(userId) >> 22n) % 6n);
-                avatarUrl = `https://cdn.discordapp.com/embed/avatars/${index}.png`;
-            }
-
-            // Wala munang effects dito pero lalabas na ang pangalan at mukha
-            return { username, avatarUrl, effectUrl: null };
-        } else {
-            throw new Error("Walang makuha");
-        }
-
-    } catch (e) {
-        // Kung sakaling may aberya, lalabas pa rin ang pangalan base sa ID
-        const index = Number((BigInt(userId) >> 22n) % 6n);
-        return { 
-            username: `User_${userId.slice(0,6)}`, 
-            avatarUrl: `https://cdn.discordapp.com/embed/avatars/${index}.png`, 
-            effectUrl: null 
-        };
-    }
-}
-
-// ILALAGAY SA BILOG
-async function loadMembers() {
-    // FOUNDERS
-    const foundersEl = document.getElementById('founders-section');
-    let z = 30;
-    for (const id of membersList.founders) {
-        const {username, avatarUrl, effectUrl} = await getUserData(id);
-        const el = document.createElement('div');
-        el.className = 'avatar-wrapper-node clickable';
-        el.style.zIndex = z--;
-        el.innerHTML = `
-            <div class="avatar-outer">
-                ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                <div class="circle-avatar-container">
-                    <img src="${avatarUrl}" alt="${username}">
-                </div>
-            </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
-        `;
-        foundersEl.appendChild(el);
-    }
-
-    // ABOVE ALL
-    const aboveEl = document.getElementById('aboveall-section');
-    z = 20;
-    for (const id of membersList.aboveAll) {
-        if(id === "ILAGAY_ID_DITO") continue;
-        const {username, avatarUrl, effectUrl} = await getUserData(id);
-        const el = document.createElement('div');
-        el.className = 'avatar-wrapper-node';
-        el.style.zIndex = z--;
-        el.innerHTML = `
-            <div class="avatar-outer">
-                ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                <div class="circle-avatar-container">
-                    <img src="${avatarUrl}" alt="${username}">
-                </div>
-            </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
-        `;
-        aboveEl.appendChild(el);
-    }
-
-    // STAFF
-    const staffEl = document.getElementById('staff-section');
-    z = 10;
-    for (const id of membersList.staff) {
-        if(id === "ILAGAY_ID_DITO") continue;
-        const {username, avatarUrl, effectUrl} = await getUserData(id);
-        const el = document.createElement('div');
-        el.className = 'avatar-wrapper-node';
-        el.style.zIndex = z--;
-        el.innerHTML = `
-            <div class="avatar-outer">
-                ${effectUrl ? `<div class="profile-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                <div class="circle-avatar-container">
-                    <img src="${avatarUrl}" alt="${username}">
-                </div>
-            </div>
-            <div class="avatar-tooltip"><span class="tooltip-username">${username}</span></div>
-        `;
-        staffEl.appendChild(el);
-    }
-
-    // REGULAR MEMBERS
-    const regEl = document.getElementById('regular-members');
-    const list = membersList.regular.filter(id => id !== "ILAGAY_ID_DITO");
-    [...list, ...list].forEach(async (id) => {
-        const {username, avatarUrl, effectUrl} = await getUserData(id);
-        const el = document.createElement('div');
-        el.className = 'marquee-profile-block';
-        el.innerHTML = `
-            <div class="marquee-avatar-wrap">
-                ${effectUrl ? `<div class="marquee-effect" style="background-image: url('${effectUrl}')"></div>` : ''}
-                <img src="${avatarUrl}" alt="${username}">
-            </div>
-            <span>${username}</span>
-        `;
-        regEl.appendChild(el);
-    });
-}
-
-// PROTECTION
 function disableKeyPress(e) {
-    if (e.keyCode == 123 || (e.ctrlKey && e.keyCode == 85) || (e.ctrlKey && e.keyCode == 83) || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.shiftKey && e.keyCode == 67) || (e.ctrlKey && e.keyCode == 80)) {
+    if (e.keyCode == 123 || 
+        (e.ctrlKey && e.keyCode == 85) || 
+        (e.ctrlKey && e.keyCode == 83) || 
+        (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
+        (e.ctrlKey && e.shiftKey && e.keyCode == 74) || 
+        (e.ctrlKey && e.shiftKey && e.keyCode == 67) || 
+        (e.ctrlKey && e.keyCode == 80)) {
         return false;
     }
 }
+document.onkeydown = disableKeyPress;
+document.onmousedown = disableKeyPress;
 
-// AUDIO
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
 
-// GATEWAY
 document.getElementById("gateway-overlay").onclick = () => {
     audio.play().catch(() => {});
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
 
-// VIEWS
 fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 .then(r => r.json())
 .then(d => { document.getElementById("views").innerText = d.record.views; })
 .catch(e => console.log(e));
-
-// SIMULA
-loadMembers();
 </script>
 
+<!-- ✅ NAKUMPLETO NA ANG CODE, MAY TAMANG END TAGS -->
 </body>
 </html>

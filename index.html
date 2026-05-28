@@ -200,12 +200,12 @@ body {
     background: transparent;
 }
 
-/* ✅ INAYOS ANG ANIMATION: MAS BILIS AT WALANG HINTO */
+/* ✅ DINAHAN-DAHAN: 35 SECONDS SOBRANG BAGAL NA */
 .marquee-inner-wrap {
     display: flex;
     gap: 12px;
     width: max-content;
-    animation: smoothScroll 12s linear infinite; /* 12 seconds lang, mabilis at tuloy */
+    animation: smoothScroll 35s linear infinite; 
 }
 
 .marquee-profile-block {
@@ -222,16 +222,16 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* ✅ LAKI NG BILOG SA SCROLLING */
+/* ✅ PINALAKI: 24px -> 32px MAS MALAKI NANG KONTI */
 .marquee-profile-block img {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     object-fit: cover;
     pointer-events: none;
 }
 
-/* ✅ TAMANG GALAWAN PARA WALANG GAP O HINTO */
+/* ✅ TAMANG GALAWAN */
 @keyframes smoothScroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -453,11 +453,11 @@ function showGroup(allMembers, listIDs, container) {
     });
 }
 
-// 🎡 SCROLLING: INAYOS KO NA PARA TULOY-TULOY ANG IKOT
+// 🎡 SCROLLING: DINAHAN-DAHAN AT PINALAKI NA
 function showMarquee(allMembers, listIDs) {
     const box = document.getElementById("marquee-container");
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
-    const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers]; // TINLOP KO PARA WALANG HINTO
+    const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers]; // Tuloy-tuloy lang
     
     ulit.forEach(mem => {
         const block = document.createElement('div');

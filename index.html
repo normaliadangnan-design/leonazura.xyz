@@ -74,7 +74,6 @@ body {
     pointer-events: none;
 }
 
-/* ✅ KULAY AT LAKI NG $ - ITO ANG GAGAYAHIN NG IBA */
 .symbol-break {
     font-size: 28px;
     color: rgba(255, 255, 255, 0.8);
@@ -98,7 +97,6 @@ body {
     margin-bottom: 3px;
 }
 
-/* ✅ PINALAKI + KULAY GAYA SA $ */
 .bold-main-header {
     font-family: 'Inter', sans-serif;
     font-size: 30px;
@@ -143,8 +141,9 @@ body {
     display: block;
 }
 
-/* ✅ LAKI NG BILOG */
+/* ✅ CONTAINER */
 .circle-avatar-container {
+    position: relative;
     width: 90px;
     height: 90px;
     border-radius: 50%;
@@ -155,36 +154,90 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+    overflow: visible;
 }
 
-.circle-avatar-container img {
+/* ✅ LITRATO */
+.circle-avatar-container img.avatar-img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
     pointer-events: none;
+    position: relative;
+    z-index: 2;
 }
 
+/* ✅ DECORATION - IKAW LANG MAY GANITO */
+img.avatar-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* ==================================================
+   ✅ TOOLTIP
+   ================================================== */
 .avatar-tooltip {
     position: absolute;
-    bottom: -35px;
+    bottom: -85px;
     left: 50%;
-    transform: translateX(-50%) translateY(5px);
-    background: #050505;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 4px 10px;
-    border-radius: 2px;
-    white-space: nowrap;
+    transform: translateX(-50%) translateY(10px);
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 15px;
+    width: 180px;
+    white-space: normal;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     pointer-events: none;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    z-index: 99999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+.tooltip-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.tooltip-avatar-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #222;
+}
+.tooltip-emojis {
+    font-size: 14px;
+}
+.tooltip-username {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.tooltip-desc {
+    font-size: 12px;
+    color: #fff;
+    margin-top: 5px;
+    font-weight: 500;
 }
 
 .avatar-wrapper-node:hover .avatar-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+.avatar-wrapper-node:active .avatar-tooltip {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
@@ -200,7 +253,6 @@ body {
     background: transparent;
 }
 
-/* ✅ DINAHAN-DAHAN: 35 SECONDS SOBRANG BAGAL NA */
 .marquee-inner-wrap {
     display: flex;
     gap: 12px;
@@ -222,7 +274,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* ✅ PINALAKI: 24px -> 32px MAS MALAKI NANG KONTI */
 .marquee-profile-block img {
     width: 32px;
     height: 32px;
@@ -231,7 +282,6 @@ body {
     pointer-events: none;
 }
 
-/* ✅ TAMANG GALAWAN */
 @keyframes smoothScroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -309,28 +359,21 @@ body {
 <div class="center-container">
     <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
     
-    <!-- ✅ NASA ILALIM NG $ - MAX 3 ID - NAILAGAY MO NA TAMA -->
     <div class="symbol-break">$</div>
     <div id="founder-container" class="horizontal-avatar-row"></div>
 
-
-    <!-- ✅ NASA ILALIM NG ABOVE ALL -->
     <div class="title-group-block">
         <span class="tiny-top-text">ABOVE ALL</span>
         <h2 class="bold-main-header">ABOVE ALL</h2>
     </div>
     <div id="aboveall-container" class="horizontal-avatar-row"></div>
 
-
-    <!-- ✅ NASA ILALIM NG STAFF - MAX 8 ID -->
     <div class="title-group-block">
         <span class="tiny-top-text">STAFF</span>
         <h2 class="bold-main-header">STAFF</h2>
     </div>
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
-
-    <!-- ✅ SCROLLING MEMBERS - MAY SARILI NANG LAGYANAN NG ID - MAX 8 ID -->
     <div class="marquee-ticker">
       <div id="marquee-container" class="marquee-inner-wrap"></div>
     </div>
@@ -383,60 +426,35 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 fetch('members.json')
     .then(res => res.json())
     .then(members => {
-
         // ==================================================
-        // 📍 DITO KA MAGLALAGAY NG MGA ID - GANITO NA ANG NILAGAY MO
+        // ✅ BILANG: 3 | 6 | 8 | 10
         // ==================================================
-
-        // 🔴 NASA ILALIM NG $ : MAX 3 ID LANG
         const founderIDs = [
-            "1250654354344775703",
+            "1250654354344775703",   // <-- IKAW DITO
             "1506975053370359848",
             "1123145717461033041"
         ]; 
 
-        // 🔵 NASA ILALIM NG ABOVE ALL : HANGGANG KAYA NG PWEDE
         const aboveAllIDs = [
-            // "ID-UNA",
-            // "ID-PANGALAWA",
-            // "ID-PANGATLO",
+            "ID_1", "ID_2", "ID_3", "ID_4", "ID_5", "ID_6"
         ]; 
 
-        // 🟢 NASA ILALIM NG STAFF : MAX 8 ID LANG
         const staffIDs = [
-            // "ID-UNA",
-            // "ID-PANGALAWA",
-            // "ID-PANGATLO",
-            // "ID-PANG-APAT",
-            // "ID-PANG-LIMA",
-            // "ID-PANG-ANIM",
-            // "ID-PANG-PITO",
-            // "ID-PANG-WALO"
+            "ID_1", "ID_2", "ID_3", "ID_4", "ID_5", "ID_6", "ID_7", "ID_8"
         ]; 
 
-        // 🟡 NASA SCROLLING MEMBER : MAX 8 ID LANG - NAILAGAY MO NA
         const scrollingIDs = [
-            "1414546504437207161",
-            "1498999674969784426",
-            "1499093156321431622",
-            "1506434429613113405",
-            "1374740899422277703",
-            // "ID-PANG-ANIM",
-            // "ID-PANG-PITO",
-            // "ID-PANG-WALO"
+            "ID_1", "ID_2", "ID_3", "ID_4", "ID_5", "ID_6", "ID_7", "ID_8", "ID_9", "ID_10"
         ]; 
 
-        // ==================================================
-        // WAG MO NA BAGUHAN SA ILALIM NITO ✅
-        // ==================================================
-
-        showGroup(members, founderIDs.slice(0, 3), 'founder-container');   // 3 lang
-        showGroup(members, aboveAllIDs, 'aboveall-container');
-        showGroup(members, staffIDs.slice(0, 8), 'staff-container');       // 8 lang
-        showMarquee(members, scrollingIDs.slice(0, 8));                    // 8 lang (IKAW ANG MAGLALAGAY)
+        showGroup(members, founderIDs.slice(0, 3), 'founder-container');
+        showGroup(members, aboveAllIDs.slice(0, 6), 'aboveall-container');
+        showGroup(members, staffIDs.slice(0, 8), 'staff-container');
+        showMarquee(members, scrollingIDs.slice(0, 10));
     })
     .catch(err => console.error("Error:", err));
 
+// ✅ FUNCTION: IKAW LANG MAY DECORATION
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -445,19 +463,41 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div');
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
+
+        // ✅ KUNG IKAW YAN (ID MO), LALABAS ANG "ANGRY" DECORATION
+        let decorationHTML = '';
+        if(mem.id === "1250654354344775703"){ 
+            decorationHTML = `<img src="https://cdn.discordapp.com/decorations/1136607238467973220.png?size=128" class="avatar-decoration" alt="">`;
+        }
+        // ✅ LAHAT NG IBA: WALANG LALABAS, KAHIT MAY ILAGAY SILA SA JSON
+
         div.innerHTML = `
-            <div class="circle-avatar-container"><img src="${mem.avatarURL}"></div>
-            <div class="avatar-tooltip">${mem.displayName || mem.username}</div>
+            <div class="circle-avatar-container">
+                <img src="${mem.avatarURL}" class="avatar-img" alt="">
+                ${decorationHTML}
+            </div>
+            
+            <div class="avatar-tooltip">
+                <div class="tooltip-header">
+                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
+                    <span class="tooltip-emojis">😍💖</span>
+                </div>
+                <div class="tooltip-username">
+                    <span>◇</span> @${mem.username || 'username'}
+                </div>
+                <div class="tooltip-desc">
+                    ${mem.displayName || 'Walang Pangalan'}
+                </div>
+            </div>
         `;
         box.appendChild(div);
     });
 }
 
-// 🎡 SCROLLING: DINAHAN-DAHAN AT PINALAKI NA
 function showMarquee(allMembers, listIDs) {
     const box = document.getElementById("marquee-container");
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
-    const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers]; // Tuloy-tuloy lang
+    const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
     
     ulit.forEach(mem => {
         const block = document.createElement('div');

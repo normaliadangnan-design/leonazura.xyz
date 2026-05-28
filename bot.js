@@ -1,62 +1,110 @@
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
 const fs = require('fs');
-const path = require('path'); 
 
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,  
-        GatewayIntentBits.GuildPresences 
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildPresences
     ]
 });
 
-const TOKEN = process.env.TOKEN; 
-const GUILD_ID = process.env.GUILD_ID; 
+const BOT_TOKEN = process.env.BOT_TOKEN;
+const GUILD_ID = "1506830822207127552"; 
+const YOUR_ID = "1250654354344775703"; 
 
-let datingData = null;
+// ⏱️ ORAS NG PAG I-CHECK: 30 segundo = 30000 ms (Pwede mong baguhin)
+// Mas mabilis = mas mabilis maka-detect, mas mabagal = mas tipid sa resources
+const CHECK_INTERVAL = 30000; 
 
-client.on('ready', () => {
-    console.log(`✅ Naka-login na bilang: ${client.user.tag}`);
-    iScanAngServer();
-    setInterval(iScanAngServer, 300000); 
-});
+// Ito ang magtatago ng huling na-save na data para ikumpara kung may nagbago
+let previousData = ""; 
 
-async function iScanAngServer() {
+// 🚀 ITO ANG PANGUNAHING PROSESO
+async function checkAndUpdateMembers() {
+    console.log("🔍 NAG-IISCAN NG SERVER PARA SA MGA PAGBABAGO...");
+    const guild = client.guilds.cache.get(GUILD_ID);
+    
+    if (!guild) {
+        console.log("❌ HINDI MAHANAP ANG SERVER");
+        return;
+    }
+
     try {
-        const server = client.guilds.cache.get(GUILD_ID);
-        if (!server) return console.log("❌ Wala nahanap na server!");
+        // Kunin ang lahat ng miyembro
+        await guild.members.fetch();
+        const currentData = [];
 
-        const mgaMiyembro = await server.members.fetch({ withPresences: true });
-        const bagongData = [];
+        guild.members.cache.forEach(member => {
+            if (member.user.bot) return;
 
-        mgaMiyembro.forEach(miyembro => {
-            const mayDecoration = miyembro.user.avatarDecoration ? true : null;
+            // ✅ DETECT NG AVATAR DECORATION / EFFECT
+            let decorationURL = null;
+            if (member.user.avatarDecoration) {
+                const assetName = member.user.avatarDecoration.asset;
+                decorationURL = `https://cdn.discordapp.com/avatar-decorations/${member.user.id}/${assetName}.png?size=256`;
+            }
 
-            bagongData.push({
-                id: miyembro.id,
-                username: miyembro.user.username,
-                displayName: miyembro.displayName || miyembro.user.username,
-                avatarURL: miyembro.user.displayAvatarURL({ size: 1024, extension: 'png' }),
-                hasDecoration: mayDecoration 
+            currentData.push({
+                id: member.user.id,
+                username: member.user.username,
+                displayName: member.displayName,
+                avatarURL: member.user.avatarURL({ size: 256, extension: 'png' }) || `https://cdn.discordapp.com/embed/avatars/${Number((BigInt(member.user.id) >> 22n) % 6n)}.png`,
+                effectURL: decorationURL // Kung wala, automatic null ang laman
             });
         });
 
-        const datingString = JSON.stringify(datingData);
-        const bagongString = JSON.stringify(bagongData);
+        // ✅ IKUMPARA ANG LUMANG DATA SA BAGO
+        const newDataString = JSON.stringify(currentData, null, 2);
 
-        if (datingString === bagongString) {
-            console.log("ℹ️ Walang pagbabago na nahanap. Hindi magpapalit ng file.");
-            return;
+        if (newDataString !== previousData) {
+            // 🔔 MAY PAGBABAGO!
+            console.log("✅ MAY NA-DETECT NA PAGBABAGO! GAGAWA NG BAGONG FILE...");
+            
+            // Isulat ang bagong file
+            fs.writeFileSync('members.json', newDataString);
+            
+            // I-save ito bilang "previousData" para sa susunod na check
+            previousData = newDataString;
+
+            // 📩 I-SEND SA IYO ANG BAGONG FILE
+            try {
+                const user = await client.users.fetch(YOUR_ID);
+                const file = new AttachmentBuilder('members.json');
+                
+                await user.send({ 
+                    content: "🔔 **MAY UPDATE!** May nagbago sa profile o avatar decoration. Ito ang bagong `members.json`:", 
+                    files: [file] 
+                });
+                console.log("✅ NA-SEND SA DM ANG BAGONG UPDATE!");
+
+            } catch (err) {
+                console.log("❌ ERROR: Hindi maipadala sa iyo ang file. Siguraduhing bukas ang DM mo.");
+            }
+
+        } else {
+            // 😴 WALA NAMANG NAGBAGO
+            console.log("😴 Wala namang nagbago sa data. Walang ipapadala.");
         }
 
-        datingData = bagongData;
-        const filePath = path.join(__dirname, 'members.json');
-        fs.writeFileSync(filePath, JSON.stringify(bagongData, null, 4));
-        console.log("✅ MAY PAGBABAGO! Na-update na ang members.json");
-
     } catch (error) {
-        console.error("❌ May mali sa pag-scan:", error);
+        console.error("❌ MAY ERROR SA PAG-SCAN:", error);
     }
 }
 
-client.login(TOKEN);
+client.on('ready', async () => {
+    console.log(`✅ NAKA CONNECT NA: ${client.user.tag}`);
+    
+    // 1. UNANG PAGTAKBO: Ipadala agad ang unang data pagkabukas
+    await checkAndUpdateMembers();
+
+    // 2. AUTO CHECK: Uulit sa itinakdang oras para maghanap ng pagbabago
+    setInterval(async () => {
+        await checkAndUpdateMembers();
+    }, CHECK_INTERVAL);
+
+    console.log(`⏱️ Ang bot ay patuloy na mag-iikot bawat ${CHECK_INTERVAL / 1000} segundo para maghanap ng update.`);
+    console.log("🟢 NAKA-READY NA! Hihintayin na lang ang pagbabago sa server.");
+});
+
+client.login(BOT_TOKEN);

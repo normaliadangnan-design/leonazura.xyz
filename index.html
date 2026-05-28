@@ -74,6 +74,7 @@ body {
     pointer-events: none;
 }
 
+/* ✅ KULAY AT LAKI NG $ - ITO ANG GAGAYAHIN NG IBA */
 .symbol-break {
     font-size: 28px;
     color: rgba(255, 255, 255, 0.8);
@@ -97,13 +98,14 @@ body {
     margin-bottom: 3px;
 }
 
+/* ✅ PINALAKI + KULAY GAYA SA $ */
 .bold-main-header {
     font-family: 'Inter', sans-serif;
-    font-size: 26px;
+    font-size: 30px; /* Dati 26px -> naging 30px */
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.8); /* KAPAREHO NG $ */
 }
 
 .horizontal-avatar-row {
@@ -118,7 +120,7 @@ body {
 
 .avatar-wrapper-node {
     position: relative;
-    margin-left: -22px; /* ✅ Tamang dikit ng mga bilog */
+    margin-left: -22px;
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
 }
@@ -141,7 +143,7 @@ body {
     display: block;
 }
 
-/* ✅ PINALAKI ANG BILOG (90px na) */
+/* ✅ LAKI NG BILOG */
 .circle-avatar-container {
     width: 90px;
     height: 90px;
@@ -219,7 +221,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* ✅ PINALAKI RIN ANG BILOG SA SCROLLING (24px na) */
+/* ✅ LAKI NG BILOG SA SCROLLING */
 .marquee-profile-block img {
     width: 24px;
     height: 24px;
@@ -305,12 +307,12 @@ body {
 <div class="center-container">
     <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
     
-    <!-- ✅ $ SIGN NASA TAAS -->
+    <!-- ✅ NASA ILALIM NG $ - MAX 3 ID -->
     <div class="symbol-break">$</div>
     <div id="founder-container" class="horizontal-avatar-row"></div>
 
 
-    <!-- ✅ ABOVE ALL SECTION -->
+    <!-- ✅ NASA ILALIM NG ABOVE ALL -->
     <div class="title-group-block">
         <span class="tiny-top-text">ABOVE ALL</span>
         <h2 class="bold-main-header">ABOVE ALL</h2>
@@ -318,7 +320,7 @@ body {
     <div id="aboveall-container" class="horizontal-avatar-row"></div>
 
 
-    <!-- ✅ BALIK SA "STAFF" GAYA NG UNA -->
+    <!-- ✅ NASA ILALIM NG STAFF - MAX 8 ID -->
     <div class="title-group-block">
         <span class="tiny-top-text">STAFF</span>
         <h2 class="bold-main-header">STAFF</h2>
@@ -326,7 +328,7 @@ body {
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
 
-    <!-- ✅ SCROLLING MEMBERS (Mas malaki na nang kaunti) -->
+    <!-- ✅ SCROLLING: LAHAT NASA MEMBERS.JSON -->
     <div class="marquee-ticker">
       <div id="marquee-container" class="marquee-inner-wrap"></div>
     </div>
@@ -379,27 +381,46 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 fetch('members.json')
     .then(res => res.json())
     .then(members => {
-        // 🟢 NASA ILALIM NG $
+
+        // ==================================================
+        // 📍 DITO KA MAGLALAGAY NG MGA ID
+        // ==================================================
+
+        // 🔴 NASA ILALIM NG $ : MAX 3 ID LANG
         const founderIDs = [
-            "1250654354344775703", // ID MO
+            // "ID-UNA",
+            // "ID-PANGALAWA",
+            // "ID-PANGATLO"
+            // (WAG LAGYAN NG 4, HINDI SASAKTO ANG AYOS)
         ]; 
 
-        // 🔵 NASA ILALIM NG ABOVE ALL
+        // 🔵 NASA ILALIM NG ABOVE ALL : HANGGANG KAYA NG PWEDE
         const aboveAllIDs = [
-            "995205070679453789", // IRom
-            // ILAGAY DITO IBANG ID
+            // "ID-UNA",
+            // "ID-PANGALAWA",
         ]; 
 
-        // 🟡 NASA ILALIM NG STAFF
+        // 🟢 NASA ILALIM NG STAFF : MAX 8 ID LANG
         const staffIDs = [
-            // ILAGAY DITO ID NG STAFF
+            // "ID-UNA",
+            // "ID-PANGALAWA",
+            // "ID-PANGATLO",
+            // "ID-PANG-APAT",
+            // "ID-PANG-LIMA",
+            // "ID-PANG-ANIM",
+            // "ID-PANG-PITO",
+            // "ID-PANG-WALO"
+            // (WAG LAGYAN NG 9, HINDI SASAKTO ANG AYOS)
         ]; 
 
-        showGroup(members, founderIDs, 'founder-container');
-        showGroup(members, aboveAllIDs, 'aboveall-container');
-        showGroup(members, staffIDs, 'staff-container');
+        // ==================================================
+        // WAG MO NA BAGUHAN SA ILALIM NITO ✅
+        // ==================================================
 
-        // ✅ SCROLLING: LAHAT SILA
+        // Nililimitahan natin kung ilan lang ang kukunin
+        showGroup(members, founderIDs.slice(0, 3), 'founder-container'); // 3 lang
+        showGroup(members, aboveAllIDs, 'aboveall-container');
+        showGroup(members, staffIDs.slice(0, 8), 'staff-container'); // 8 lang
         showMarquee(members); 
     })
     .catch(err => console.error("Error:", err));

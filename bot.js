@@ -1,66 +1,69 @@
-const { Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const fs = require('fs');
+const path = require('path'); // ✅ PARA SA TAMANG SAVE SA RAILWAY
 
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildPresences
+        GatewayIntentBits.GuildMembers,  
+        GatewayIntentBits.GuildPresences 
     ]
 });
 
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const GUILD_ID = "1506830822207127552"; 
-const YOUR_ID = "1250654354344775703"; 
+// ✅ GANITO PA RIN PARA KINUKUHA SA VARIABLES (WAG NA BAGUHIN)
+const TOKEN = process.env.TOKEN; 
+const GUILD_ID = process.env.GUILD_ID; 
 
-client.on('ready', async () => {
-    console.log(`✅ NAKA CONNECT NA: ${client.user.tag}`);
-    const guild = client.guilds.cache.get(GUILD_ID);
-    if (!guild) {
-        console.log("❌ HINDI MAHANAP ANG SERVER");
-        // 🛑 PATAYIN AGAD PAG MAY ERROR
-        process.exit(1); 
-    }
+// ✅ ITATAGO NATIN DITO ANG HULING DATA PARA ICOMPARE
+let datingData = null;
 
-    await guild.members.fetch();
-    const membersData = [];
-
-    guild.members.cache.forEach(member => {
-        if(member.user.bot) return;
-        membersData.push({
-            id: member.user.id,
-            username: member.user.username,
-            displayName: member.displayName,
-            avatarURL: member.user.avatarURL({ size: 256, extension: 'png' }) || `https://cdn.discordapp.com/embed/avatars/${Number((BigInt(member.user.id) >> 22n) % 6n)}.png`,
-            effectURL: null
-        });
-    });
-
-    fs.writeFileSync('members.json', JSON.stringify(membersData, null, 2));
-
-    try {
-        const user = await client.users.fetch(YOUR_ID);
-        const file = new AttachmentBuilder('members.json');
-        
-        // ✅ SIGURADUHING ISANG BESES LANG ITO
-        await user.send({ 
-            content: "📂 **Ito na ang members.json! I-upload mo ito sa GitHub**", 
-            files: [file] 
-        });
-        console.log("✅ NA-SEND NA SA DM MO ANG FILE!");
-
-    } catch (err) {
-        console.log("❌ ERROR: Hindi maipadala. Check mo ang YOUR_ID.");
-    }
-
-    // ==================================================
-    // ✅ ITO ANG SOLUSYON: MATIBAY NA PAGPATAY SA DULO
-    // ==================================================
-    console.log("🔌 PUMAPATAY NA SA BOT... TAPOS NA ANG GAWAIN.");
-    setTimeout(() => { 
-        client.destroy();  // Patayin ang koneksyon sa Discord
-        process.exit(0);   // Lumabas at patayin ang proseso mismo
-    }, 3000); // Maghihintay lang ng 3 segundo bago mamatay
+client.on('ready', () => {
+    console.log(`✅ Naka-login na bilang: ${client.user.tag}`);
+    iScanAngServer();
+    setInterval(iScanAngServer, 300000); // ✅ 5 minuto pa rin ang pag-check
 });
 
-client.login(BOT_TOKEN);
+async function iScanAngServer() {
+    try {
+        const server = client.guilds.cache.get(GUILD_ID);
+        if (!server) return console.log("❌ Wala nahanap na server!");
+
+        const mgaMiyembro = await server.members.fetch({ withPresences: true });
+        const bagongData = [];
+
+        mgaMiyembro.forEach(miyembro => {
+            const mayDecoration = miyembro.user.avatarDecoration ? true : null;
+
+            bagongData.push({
+                id: miyembro.id,
+                username: miyembro.user.username,
+                displayName: miyembro.displayName || miyembro.user.username,
+                avatarURL: miyembro.user.displayAvatarURL({ size: 1024, extension: 'png' }),
+                hasDecoration: mayDecoration 
+            });
+        });
+
+        // ==================================================
+        // ✅ ANG PINAKA-IMPORTANTE: ICOMPARE KUNG MAY PAGBABAGO
+        // ==================================================
+        const datingString = JSON.stringify(datingData);
+        const bagongString = JSON.stringify(bagongData);
+
+        if (datingString === bagongString) {
+            // 🔴 WALA NAGBAGO -> WAG MAG-SAVE, WAG GUMALAW
+            console.log("ℹ️ Walang pagbabago na nahanap. Hindi magpapalit ng file.");
+            return;
+        }
+
+        // 🟢 MAY PAGBABAGO -> SAKA LANG MAG-SAVE AT MAG-UPDATE
+        datingData = bagongData; // I-save ang bagong datos para sa susunod na check
+        const filePath = path.join(__dirname, 'members.json');
+        fs.writeFileSync(filePath, JSON.stringify(bagongData, null, 4));
+        console.log("✅ MAY PAGBABAGO! Na-update na ang members.json");
+
+    } catch (error) {
+        console.error("❌ May mali sa pag-scan:", error);
+    }
+}
+
+client.login(TOKEN);

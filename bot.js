@@ -49,7 +49,8 @@ async function checkAndUpdateMembers() {
                     const assetName = fullUser.avatarDecorationData.asset;
                     decorationURL = `https://cdn.discordapp.com/avatar-decorations/${member.user.id}/${assetName}.png?size=256`;
                 }
-            } catch ( (err) {
+            } catch (err) { 
+                // ✅ AYOS NA ITO: Tinanggal ko yung mali kanina, ito ang tama
                 // Kung may error sa pagkuha, hayaan lang, null na lang ang value
             }
 

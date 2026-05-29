@@ -156,7 +156,7 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION / PROFILE EFFECTS - GINAYA SA KANILA */
+/* ✅ AVATAR DECORATION - SAKTO SA LUGAR */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -400,7 +400,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ PAREHAS NA PAREHAS NG SISTEMA NILA
+// ✅ WALANG IBA, DIRETSO LANG
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -410,10 +410,10 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ BASTA MAY "PROFILE EFFECTS" / DECORATION URL, ILALAGAY
+        // ✅ KUNG MERON, ILALAGAY. WALA NANG IBA PANG GAGAWIN
         let decorationHTML = '';
-        if(mem.decoration_url) { 
-            decorationHTML = `<img src="${mem.decoration_url}" class="avatar-decoration" alt="" referrerpolicy="no-referrer">`;
+        if(mem.decoration) { 
+            decorationHTML = `<img src="${mem.decoration}" class="avatar-decoration" alt="">`;
         }
 
         div.innerHTML = `

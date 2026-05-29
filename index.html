@@ -245,23 +245,35 @@ img.avatar-decoration {
     transform: translateX(-50%) translateY(0);
 }
 
+/* ==================================================
+   ✅ SCROLLING AREA - DALAWANG LINYA
+   ================================================== */
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
     max-width: 700px;
     padding: 10px 0;
     margin-top: 45px; 
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     background: transparent;
 }
 
-.marquee-inner-wrap {
+/* ✅ IKOT 1: PAKALIWA */
+.marquee-inner-wrap-top {
     display: flex;
     justify-content: flex-start;
     gap: 12px;
     width: max-content;
-    /* ✅ BINILISAN + GAWANG PABALIK AT PABALIK */
-    animation: scrollLoop 20s linear infinite alternate; 
+    animation: scrollLeft 20s linear infinite; 
+}
+
+/* ✅ IKOT 2: PAKANAN (KABALIGTARAN) */
+.marquee-inner-wrap-bottom {
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    width: max-content;
+    animation: scrollRight 20s linear infinite; 
 }
 
 .marquee-profile-block {
@@ -286,10 +298,16 @@ img.avatar-decoration {
     pointer-events: none;
 }
 
-/* ✅ BAGONG ANIMATION: PAKANAN -> PABALIK -> ULI */
-@keyframes scrollLoop {
+/* ✅ ANIMATION 1: PAKALIWA */
+@keyframes scrollLeft {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+}
+
+/* ✅ ANIMATION 2: PAKANAN (BALIK SA SIMULA) */
+@keyframes scrollRight {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
 }
 
 #azura-discord-btn {
@@ -379,8 +397,13 @@ img.avatar-decoration {
     </div>
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
+    <!-- ✅ DALAWANG LINYA NG SCROLL -->
     <div class="marquee-ticker">
-      <div id="marquee-container" class="marquee-inner-wrap"></div>
+      <div id="marquee-top" class="marquee-inner-wrap-top"></div>
+    </div>
+    
+    <div class="marquee-ticker">
+      <div id="marquee-bottom" class="marquee-inner-wrap-bottom"></div>
     </div>
 
 </div>
@@ -453,7 +476,10 @@ fetch('members.json')
         showGroup(members, founderIDs.slice(0, 3), 'founder-container');
         showGroup(members, aboveAllIDs.slice(0, 6), 'aboveall-container');
         showGroup(members, staffIDs.slice(0, 8), 'staff-container');
-        showMarquee(members, scrollingIDs.slice(0, 10));
+        
+        // ✅ IPAPAKITA SA DALAWANG LINYA
+        showMarqueeTop(members, scrollingIDs.slice(0, 10));
+        showMarqueeBottom(members, scrollingIDs.slice(0, 10));
     })
     .catch(err => console.error("Error:", err));
 
@@ -496,8 +522,23 @@ function showGroup(allMembers, listIDs, container) {
     })
 }
 
-function showMarquee(allMembers, listIDs) {
-    const box = document.getElementById("marquee-container");
+// ✅ IKOT SA TAAS: PAKALIWA
+function showMarqueeTop(allMembers, listIDs) {
+    const box = document.getElementById("marquee-top");
+    const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
+    const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
+    
+    ulit.forEach(mem => {
+        const block = document.createElement('div');
+        block.className = 'marquee-profile-block';
+        block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;
+        box.appendChild(block);
+    })
+}
+
+// ✅ IKOT SA BABA: PAKANAN (KABALIGTARAN)
+function showMarqueeBottom(allMembers, listIDs) {
+    const box = document.getElementById("marquee-bottom");
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
     const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
     

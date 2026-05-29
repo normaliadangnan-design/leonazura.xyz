@@ -38,29 +38,12 @@ async function checkAndUpdateMembers() {
         for (const member of guild.members.cache.values()) {
             if (member.user.bot) continue;
 
-            // ✅ AYOS NA PARAAN PARA MA-DETECT ANG AVATAR DECORATION / EFFECT
-            let decorationURL = null;
-            try {
-                // 👇 MAHALAGA: Kinukuha natin ulit ang buong detalye ng user para lumabas ang decoration data
-                const fullUser = await client.users.fetch(member.user.id, { force: true });
-
-                // 👇 DITO ANG TAMA: "avatarDecorationData" ang gamitin, HINDI "avatarDecoration"
-                if (fullUser.avatarDecorationData) {
-                    const assetName = fullUser.avatarDecorationData.asset;
-                    decorationURL = `https://cdn.discordapp.com/avatar-decorations/${member.user.id}/${assetName}.png?size=256`;
-                }
-            } catch (err) { 
-                // ✅ AYOS NA ITO: Tinanggal ko yung mali kanina, ito ang tama
-                // Kung may error sa pagkuha, hayaan lang, null na lang ang value
-            }
-
-            // ✅ ISINAMA ANG USER ID, AT LAHAT NG DETALYE
+            // ✅ WALA NANG EFFECT URL! USER ID, PANGALAN AT LITRATO LANG ANG KUKUNIN
             currentData.push({
-                id: member.user.id,                // 👈 USER ID
+                id: member.user.id,                // 👈 USER ID (ITO NA LANG ANG BASEHAN)
                 username: member.user.username,
                 displayName: member.displayName,
-                avatarURL: member.user.avatarURL({ size: 256, extension: 'png' }) || `https://cdn.discordapp.com/embed/avatars/${Number((BigInt(member.user.id) >> 22n) % 6n)}.png`,
-                effectURL: decorationURL            // 👈 NGAYON MAY LAMAN NA 'TO KAPAG MAY DECORATION
+                avatarURL: member.user.avatarURL({ size: 256, extension: 'png' }) || `https://cdn.discordapp.com/embed/avatars/${Number((BigInt(member.user.id) >> 22n) % 6n)}.png`
             });
         }
 
@@ -83,7 +66,7 @@ async function checkAndUpdateMembers() {
                 const file = new AttachmentBuilder('members.json');
                 
                 await user.send({ 
-                    content: "🔔 **MAY UPDATE!** May nagbago sa profile o avatar decoration. Nandito ang bagong listahan (kasama ang User ID):", 
+                    content: "🔔 **MAY UPDATE!** Bagong listahan ng miyembro.", 
                     files: [file] 
                 });
                 console.log("✅ NA-SEND SA DM ANG BAGONG UPDATE!");

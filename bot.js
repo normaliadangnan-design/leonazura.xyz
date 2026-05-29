@@ -10,8 +10,8 @@ const client = new Client({
     ]
 });
 
-// ✅ GINAMIT KO ANG VERSION 9 DITO, KASI DITO SIGURADONG LUMALABAS ANG DATA
-const rest = new REST({ version: '9' }).setToken(process.env.BOT_TOKEN);
+// ✅ GINAMIT NATIN ANG TAMANG VERSION 10
+const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const GUILD_ID = "1506830822207127552"; 
@@ -21,7 +21,7 @@ const CHECK_INTERVAL = 30000;
 let previousData = ""; 
 
 async function checkAndUpdateMembers() {
-    console.log("🔍 NAG-IISCAN... (FINAL ATTACK MODE)");
+    console.log("🔍 NAG-IISCAN... (FINAL & PERFECT VERSION)");
     const guild = client.guilds.cache.get(GUILD_ID);
     
     if (!guild) { console.log("❌ SERVER NOT FOUND"); return; }
@@ -33,37 +33,30 @@ async function checkAndUpdateMembers() {
         for (const member of guild.members.cache.values()) {
             if (member.user.bot) continue;
 
-            let decorationID = null;
-            let decorationHASH = null;
+            // ✅ DITO NA GAGAWIN ANG BUONG LINK! WALANG KULANG
+            let decorationFullURL = null;
 
             try {
-                // ✅ IBANG PARAAN NG PAGKUHA - GANITO GINAGAWA NG IBA
-                const userData = await rest.get(`/users/${member.user.id}`);
+                // ✅ KUKUHA NG DATA KAY DISCORD
+                const userData = await rest.get(Routes.user(member.user.id));
 
-                // ✅ DITO KINUKUHA ANG DETALYE, SIGURADO AKO MAY LAMAN NA ITO
+                // ✅ KUNG MAY DECORATION, GAGAWIN AGAD ANG BUONG TAMANG LINK
                 if (userData.avatar_decoration_data) {
-                    decorationID = userData.avatar_decoration_data.asset;
-                    
-                    // ✅ HINATI NATIN PARA SIGURADO
-                    if(decorationID.includes("a_")){
-                        decorationHASH = decorationID.replace("a_", "");
-                    } else {
-                        decorationHASH = decorationID;
-                    }
+                    const asset = userData.avatar_decoration_data.asset;
+                    // ✅ ITO ANG TAMANG LINK, KUMPLETO NA, HANDA NA IPASA SA WEBSITE
+                    decorationFullURL = `https://cdn.discordapp.com/avatar-decorations/${member.user.id}/${asset}.png?size=256`;
                 }
             } catch (err) { 
-                console.log("⚠️ Error sa user: " + member.user.username);
+                console.log(`⚠️ Walang nakuha kay: ${member.user.username}`);
             }
 
-            // ✅ ILALAGAY NATIN LAHAT NG POSIBILIDAD SA JSON
+            // ✅ ILALAGAY NATIN ANG BUONG LINK SA JSON
             currentData.push({
                 id: member.user.id,                
                 username: member.user.username,
                 displayName: member.displayName,
-                avatar: member.user.avatar,
                 avatarURL: member.user.avatarURL({ size: 256, extension: 'png' }) || `https://cdn.discordapp.com/embed/avatars/${Number((BigInt(member.user.id) >> 22n) % 6n)}.png`,
-                decorationID: decorationID,
-                decorationHASH: decorationHASH
+                decorationURL: decorationFullURL // ✅ BUO NA ITO, DIRETSONG LALAGAY
             });
         }
 
@@ -77,7 +70,7 @@ async function checkAndUpdateMembers() {
             try {
                 const user = await client.users.fetch(YOUR_ID);
                 const file = new AttachmentBuilder('members.json');
-                await user.send({ content: "🔔 **SYSTEM UPDATE!**\n*Sigurado may decoration na to!*", files: [file] });
+                await user.send({ content: "🔔 **SYSTEM UPDATE!**\n*Kumpleto na ang links!*", files: [file] });
             } catch (err) {}
         } else {
             console.log("😴 Walang pagbabago...");

@@ -10,20 +10,20 @@ const client = new Client({
     ]
 });
 
-// Siguraduhing may laman ang process.env.BOT_TOKEN sa hosting mo (gaya ng Replit, Render, o .env file)
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const rest = new REST({ version: '10' }).setToken(BOT_TOKEN);
 
 const GUILD_ID = "1506830822207127552"; 
 const YOUR_ID = "1250654354344775703"; 
-const CHECK_INTERVAL = 6000;
+
+// 🚨 TINAMAAN DITO: Ginawang 60000 (1 minuto) para hindi ma-rate-limit ng Discord API
+const CHECK_INTERVAL = 60000; 
 
 let previousData = ""; 
 
 async function checkAndUpdateMembers() {
     console.log("🔍 NAG-IISCAN... (FINAL FIX)");
     
-    // Siguraduhing naka-fetch o nasa cache ang guild
     let guild = client.guilds.cache.get(GUILD_ID);
     if (!guild) {
         try {
@@ -50,22 +50,19 @@ async function checkAndUpdateMembers() {
                 // ✅ KUNG MAY AVATAR DECORATION / PROFILE EFFECTS
                 if (userData.avatar_decoration_data) {
                     const asset = userData.avatar_decoration_data.asset;
-                    
-                    // ✨ TINAMAAN NA FORMAT: Walang User ID sa gitna, direkta sa asset hash.
-                    // Gumagana ito sa parehong static (.png) at animated (.gif) na dekorasyon.
                     decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.png?size=256`;
                 }
             } catch (err) { 
-                // Inalis ang ingay sa console kung normal user lang na walang palamuti
+                // Lalaktawan lang nang tahimik kapag walang Nitro decoration ang user
             }
 
-            // ✅ ILALAGAY SA JSON (Ginawang 'effectURL' para tugma sa html script mo)
+            // ✅ ILALAGAY SA JSON
             currentData.push({
                 id: member.user.id,                
                 username: member.user.username,
                 displayName: member.displayName,
                 avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png' }),
-                effectURL: decoration_url // Tugma na sa `mem.effectURL` ng index.html mo
+                effectURL: decoration_url
             });
         }
 

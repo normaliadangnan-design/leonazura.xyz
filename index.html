@@ -168,18 +168,18 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - PERPEKTO NA! */
+/* ✅ AVATAR DECORATION - GAYA SA PUBLICENEMY */
 img.avatar-decoration {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 160px;  /* ✅ SAKTO SA DISCORD DECORATION SIZE */
-    height: 160px; /* ✅ SAKTO SA DISCORD DECORATION SIZE */
+    width: 160px;  
+    height: 160px; 
     pointer-events: none;
     z-index: 3; 
     border-radius: 0 !important;
-    object-fit: contain; /* ✅ HINDI MAPIPITPIT, BUO ANG LALABAS */
+    object-fit: contain; 
 }
 
 /* ==================================================
@@ -235,11 +235,6 @@ img.avatar-decoration {
 }
 
 .avatar-wrapper-node:hover .avatar-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
-.avatar-wrapper-node:active .avatar-tooltip {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
@@ -477,13 +472,12 @@ fetch('members.json')
         showGroup(members, aboveAllIDs.slice(0, 6), 'aboveall-container');
         showGroup(members, staffIDs.slice(0, 8), 'staff-container');
         
-        // ✅ IPAPAKITA SA DALAWANG LINYA
         showMarqueeTop(members, scrollingIDs.slice(0, 10));
         showMarqueeBottom(members, scrollingIDs.slice(0, 10));
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ DETECTION FUNCTION - SIGURADONG BABASA ANG EFFECTURL
+// ✅ BASAHIN NA DIRETSO ANG effectURL GALING SA BOT
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -493,9 +487,9 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ AYOS NA ANG PAGDEDETEK NG DECORATION
+        // ✅ KUNG MAY effectURL galing kay Discord, ilalagay. Kung wala, wala.
         let decorationHTML = '';
-        if(mem.effectURL && mem.effectURL.trim() !== "") { 
+        if(mem.effectURL) { 
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="Decoration">`;
         }
 
@@ -522,7 +516,6 @@ function showGroup(allMembers, listIDs, container) {
     })
 }
 
-// ✅ IKOT SA TAAS: PAKALIWA
 function showMarqueeTop(allMembers, listIDs) {
     const box = document.getElementById("marquee-top");
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -536,7 +529,6 @@ function showMarqueeTop(allMembers, listIDs) {
     })
 }
 
-// ✅ IKOT SA BABA: PAKANAN (KABALIGTARAN)
 function showMarqueeBottom(allMembers, listIDs) {
     const box = document.getElementById("marquee-bottom");
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));

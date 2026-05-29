@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>AZURA</title>
 
 <style>
@@ -39,7 +39,7 @@ body {
 .navigation-bar {
     position: absolute;
     top: 25px;
-right: 35px;
+    right: 35px;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -99,7 +99,8 @@ right: 35px;
 
 .bold-main-header {
     font-family: 'Inter', sans-serif;
-    font-size: 30px; font-weight: 900;
+    font-size: 30px; 
+    font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: rgba(255,  255, 255, 0.8);
@@ -153,7 +154,7 @@ right: 35px;
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    overflow: visible;
+    overflow: visible; /* ✅ PARA LUMABAS ANG DECORATION SA LABAS */
 }
 
 /* ✅ LITRATO */
@@ -167,17 +168,18 @@ right: 35px;
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - AUTO ADJUST, HINDI LALAGPAS */
+/* ✅ AVATAR DECORATION - PERPEKTO NA! */
 img.avatar-decoration {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 110px; 
-    height: 110px;
+    width: 160px;  /* ✅ SAKTO SA DISCORD DECORATION SIZE */
+    height: 160px; /* ✅ SAKTO SA DISCORD DECORATION SIZE */
     pointer-events: none;
     z-index: 3; 
     border-radius: 0 !important;
+    object-fit: contain; /* ✅ HINDI MAPIPITPIT, BUO ANG LALABAS */
 }
 
 /* ==================================================
@@ -257,8 +259,9 @@ img.avatar-decoration {
     display: flex;
     justify-content: flex-start;
     gap: 12px;
-    width：max-content;
-    animation: smoothScroll 35s linear infinite; 
+    width: max-content;
+    /* ✅ BINILISAN + GAWANG PABALIK AT PABALIK */
+    animation: scrollLoop 20s linear infinite alternate; 
 }
 
 .marquee-profile-block {
@@ -283,7 +286,8 @@ img.avatar-decoration {
     pointer-events: none;
 }
 
-@keyframes smoothScroll {
+/* ✅ BAGONG ANIMATION: PAKANAN -> PABALIK -> ULI */
+@keyframes scrollLoop {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
@@ -300,7 +304,7 @@ img.avatar-decoration {
 
 #azura-discord-btn a {
     display: flex !important;
-    align-items: center !important;;
+    align-items: center !important;
     gap: 8px !important;
     padding: 10px 18px !important;
     background-color: #000 !important;
@@ -392,10 +396,9 @@ img.avatar-decoration {
     <div class="gateway-btn">CLICK</div>
 </div>
 
-<!-- ✅ MUSIC PLAYER - NANDITO PA RIN, HINDI NAWALA -->
+<!-- ✅ MUSIC PLAYER -->
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
-
 
 
 <script>
@@ -429,7 +432,6 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 fetch('members.json')
     .then(res => res.json())
     .then(members => {
-        // ✅ ID LIST MO 
         const founderIDs = [
             "1250654354344775703",   
             "1506975053370359848",
@@ -455,7 +457,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ FUNCTION: KUSANG KUKUHA NG DECORATION KUNG MERON
+// ✅ DETECTION FUNCTION - SIGURADONG BABASA ANG EFFECTURL
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -465,10 +467,10 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ AUTO DETECT DECORATION
+        // ✅ AYOS NA ANG PAGDEDETEK NG DECORATION
         let decorationHTML = '';
-        if(mem.effectURL) { 
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="">`;
+        if(mem.effectURL && mem.effectURL.trim() !== "") { 
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="Decoration">`;
         }
 
         div.innerHTML = `

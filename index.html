@@ -51,7 +51,7 @@ body {
 
 .views-box {
     padding: 3px 8px;
-    border: 1px solid rgba(255,  255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 3px;
 }
 
@@ -76,7 +76,7 @@ body {
 
 .symbol-break {
     font-size: 28px;
-    color: rgba(255,  255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 20px;
     font-weight: 700;
 }
@@ -91,7 +91,7 @@ body {
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 5px;
-    color: rgba(255,  255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.3);
     text-transform: uppercase;
     display: block;
     margin-bottom: 3px;
@@ -102,7 +102,7 @@ body {
     font-size: 30px; font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255,  255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .horizontal-avatar-row {
@@ -146,7 +146,7 @@ body {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    border: 1px solid rgba(255,  255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     background: #000000;
     padding: 2px;
     display: flex;
@@ -189,7 +189,7 @@ img.avatar-decoration {
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     background: #000000;
-    border: 1px solid rgba(255,  255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 12px 15px;
     width: 180px;
@@ -239,7 +239,7 @@ img.avatar-decoration {
 }
 
 /* ==================================================
-   ✅ PINALAKAS NA MARQUEE TICKER (TABI AT DALAWA)
+   ✅ MARQUEE TICKER 
    ================================================== */
 .marquee-ticker {
     overflow: hidden;
@@ -249,7 +249,6 @@ img.avatar-decoration {
     background: transparent;
 }
 
-/* Container para sa pagitan ng dalawang row */
 .marquee-wrapper-group {
     display: flex;
     flex-direction: column;
@@ -262,7 +261,7 @@ img.avatar-decoration {
 .marquee-inner-wrap {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap; /* Pinupuwersang maging magkatabi */
+    flex-wrap: nowrap;
     gap: 12px;
     width: max-content;
 }
@@ -283,13 +282,13 @@ img.avatar-decoration {
     gap: 8px;
     font-size: 12px;
     font-weight: 500;
-    color: rgba(255,  255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
     background: #0c0c0c; 
     border: 1px solid rgba(255,255,255,0.08);
     padding: 6px 16px;
     border-radius: 30px; 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    white-space: nowrap; /* Bawal maputol ang teksto */
+    white-space: nowrap;
 }
 
 .marquee-profile-block img {
@@ -459,7 +458,6 @@ fetch('members.json')
         const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
         const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
         
-        // Mga listahan ng ID para sa dalawang magkaibang marquee rows
         const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
         const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
@@ -467,7 +465,6 @@ fetch('members.json')
         showGroup(members, aboveAllIDs.slice(0, 6), 'aboveall-container');
         showGroup(members, staffIDs.slice(0, 8), 'staff-container');
         
-        // I-render ang dalawang magkaibang hilera
         showMarquee(members, scrollingIDsRow1, "marquee-container-1");
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
@@ -475,15 +472,19 @@ fetch('members.json')
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
-    const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
+    
+    // I-filter ang members base sa pagkakasunod-sunod ng listIDs para hindi mag-iba ang pwesto
+    listIDs.forEach((id, i) => {
+        const mem = allMembers.find(m => m.id === id);
+        if (!mem) return; // Laktawan kung wala sa JSON file
 
-    filtered.forEach((mem, i) => {
         const div = document.createElement('div');
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
+        // ✅ MATATAG NA PAG-CHECK NG EFFECT/DECORATION URL
         let decorationHTML = '';
-        if(mem.effectURL) { 
+        if (mem.effectURL && mem.effectURL.trim() !== '' && mem.effectURL !== 'null') { 
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="">`;
         }
 
@@ -506,14 +507,16 @@ function showGroup(allMembers, listIDs, container) {
             </div>
         `;
         box.appendChild(div);
-    })
+    });
 }
 
 function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);
+    if (!box) return;
+
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
-    
-    // Ginawang tripleng kopya para mas mahaba at tuluy-tuloy ang loop na walang patlang
+    if (selectedMembers.length === 0) return;
+
     const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
     
     ulit.forEach(mem => {
@@ -521,7 +524,7 @@ function showMarquee(allMembers, listIDs, containerId) {
         block.className = 'marquee-profile-block';
         block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;
         box.appendChild(block);
-    })
+    });
 }
 </script>
 </body>

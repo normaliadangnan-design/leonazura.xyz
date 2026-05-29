@@ -168,7 +168,7 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - GAYA SA PUBLICENEMY */
+/* ✅ AVATAR DECORATION - DITO KO INAYOS ANG LAKI AT PWESE */
 img.avatar-decoration {
     position: absolute;
     top: 50%;
@@ -477,7 +477,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ BASAHIN NA DIRETSO ANG effectURL GALING SA BOT
+// ✅ DITO KO INAYOS! SIGURADO NA ITONG BABASA NG effectURL
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -487,10 +487,10 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ KUNG MAY effectURL galing kay Discord, ilalagay. Kung wala, wala.
+        // ✅ KUNG MAY effectURL, ILALAGAY. WALA, WALA.
         let decorationHTML = '';
-        if(mem.effectURL) { 
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="Decoration">`;
+        if(mem.effectURL && mem.effectURL !== null) { 
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="">`;
         }
 
         div.innerHTML = `

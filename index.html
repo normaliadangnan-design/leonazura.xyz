@@ -154,7 +154,7 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    overflow: visible; /* ✅ PARA LUMABAS ANG DECORATION SA LABAS */
+    overflow: visible; 
 }
 
 /* ✅ LITRATO */
@@ -168,18 +168,20 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - DITO KO INAYOS ANG LAKI AT PWESE */
+/* ✅ DITO KO INAYOS NG TAMA! SUMAKTO NA ANG LAKI AT PWESE */
 img.avatar-decoration {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 160px;  
-    height: 160px; 
+    width: 125px;  /* ✅ TAMA NA LAKI */
+    height: 125px;  /* ✅ TAMA NA LAKI */
     pointer-events: none;
     z-index: 3; 
     border-radius: 0 !important;
     object-fit: contain; 
+    background: transparent !important; /* ✅ TANGGAL ANG PUTING LIKOD */
+    border: none !important; /* ✅ TANGGAL ANG KAHON */
 }
 
 /* ==================================================
@@ -253,7 +255,6 @@ img.avatar-decoration {
     background: transparent;
 }
 
-/* ✅ IKOT 1: PAKALIWA */
 .marquee-inner-wrap-top {
     display: flex;
     justify-content: flex-start;
@@ -262,7 +263,6 @@ img.avatar-decoration {
     animation: scrollLeft 20s linear infinite; 
 }
 
-/* ✅ IKOT 2: PAKANAN (KABALIGTARAN) */
 .marquee-inner-wrap-bottom {
     display: flex;
     justify-content: flex-start;
@@ -293,13 +293,11 @@ img.avatar-decoration {
     pointer-events: none;
 }
 
-/* ✅ ANIMATION 1: PAKALIWA */
 @keyframes scrollLeft {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
 
-/* ✅ ANIMATION 2: PAKANAN (BALIK SA SIMULA) */
 @keyframes scrollRight {
     0% { transform: translateX(-50%); }
     100% { transform: translateX(0); }
@@ -392,7 +390,6 @@ img.avatar-decoration {
     </div>
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
-    <!-- ✅ DALAWANG LINYA NG SCROLL -->
     <div class="marquee-ticker">
       <div id="marquee-top" class="marquee-inner-wrap-top"></div>
     </div>
@@ -414,7 +411,6 @@ img.avatar-decoration {
     <div class="gateway-btn">CLICK</div>
 </div>
 
-<!-- ✅ MUSIC PLAYER -->
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
 
@@ -450,23 +446,10 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 fetch('members.json')
     .then(res => res.json())
     .then(members => {
-        const founderIDs = [
-            "1250654354344775703",   
-            "1506975053370359848",
-            "1123145717461033041"
-        ]; 
-
-        const aboveAllIDs = [
-            "1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"
-        ]; 
-
-        const staffIDs = [
-            "1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"
-        ]; 
-
-        const scrollingIDs = [
-            "1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588", "1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"
-        ]; 
+        const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
+        const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
+        const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
+        const scrollingIDs = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588", "1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"]; 
 
         showGroup(members, founderIDs.slice(0, 3), 'founder-container');
         showGroup(members, aboveAllIDs.slice(0, 6), 'aboveall-container');
@@ -477,7 +460,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ DITO KO INAYOS! SIGURADO NA ITONG BABASA NG effectURL
+// ✅ TAMA NA ITO, WALANG KAHON, WALANG SAKA
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -487,9 +470,8 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ KUNG MAY effectURL, ILALAGAY. WALA, WALA.
         let decorationHTML = '';
-        if(mem.effectURL && mem.effectURL !== null) { 
+        if(mem.effectURL) { 
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="">`;
         }
 

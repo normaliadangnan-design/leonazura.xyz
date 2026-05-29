@@ -16,7 +16,7 @@ const rest = new REST({ version: '10' }).setToken(BOT_TOKEN);
 
 const GUILD_ID = "1506830822207127552"; 
 const YOUR_ID = "1250654354344775703"; 
-const CHECK_INTERVAL = 30000;
+const CHECK_INTERVAL = 6000;
 
 let previousData = ""; 
 

@@ -156,7 +156,7 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - DIRETSO LANG IPAPAKITA */
+/* ✅ AVATAR DECORATION / PROFILE EFFECTS - GINAYA SA KANILA */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -400,7 +400,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ WALA NANG GINAGAWA, DIRETSO LANG IPAPAKITA YUNG GINAWA NI BOT
+// ✅ PAREHAS NA PAREHAS NG SISTEMA NILA
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -410,10 +410,10 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ KUNG MAY LAMAN YUNG GINAWA NI BOT, ILALAGAY LANG NATIN
+        // ✅ BASTA MAY "PROFILE EFFECTS" / DECORATION URL, ILALAGAY
         let decorationHTML = '';
-        if(mem.decorationURL) { 
-            decorationHTML = `<img src="${mem.decorationURL}" class="avatar-decoration" alt="" referrerpolicy="no-referrer">`;
+        if(mem.decoration_url) { 
+            decorationHTML = `<img src="${mem.decoration_url}" class="avatar-decoration" alt="" referrerpolicy="no-referrer">`;
         }
 
         div.innerHTML = `

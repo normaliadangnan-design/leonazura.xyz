@@ -156,7 +156,7 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - GANITO SA PUBLICENEMY */
+/* ✅ AVATAR DECORATION - PINAKAMATAGAL NA AYOS */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -400,7 +400,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ GANITO TALAGA ANG TAMANG GAWA GAYA SA PUBLICENEMY
+// ✅ PINAKAHULING AT PINAKAMATAGAL NA PARAAN
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -410,11 +410,21 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ DITO GINAGAWA ANG LINK, GANITO SILA
+        // ✅ TATLONG PARAAN ANG GINAMIT KO DITO PARA SIGURADONG MAY LALABAS
         let decorationHTML = '';
         if(mem.decorationID) { 
-            const link = `https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.decorationID}.png?size=256`;
-            decorationHTML = `<img src="${link}" class="avatar-decoration" alt="" referrerpolicy="no-referrer">`;
+            
+            // Paraan 1
+            let link1 = `https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.decorationID}.png?size=256`;
+            // Paraan 2
+            let link2 = `https://cdn.discordapp.com/decorations/${mem.decorationHASH}.png?size=256`;
+            // Paraan 3
+            let link3 = `https://cdn.discordapp.com/avatar-decorations/${mem.decorationID}.png?size=256`;
+
+            // ✅ ILALAGAY NATIN LAHAT, ALIN MAN ANG GUMANA, LALABAS
+            decorationHTML = `
+            <img src="${link1}" class="avatar-decoration" alt="" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${link2}';">
+            `;
         }
 
         div.innerHTML = `

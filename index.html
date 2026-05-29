@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>AZURA</title>
 
 <style>
@@ -39,7 +39,7 @@ body {
 .navigation-bar {
     position: absolute;
     top: 25px;
-right: 35px;
+    right: 35px;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -167,7 +167,7 @@ right: 35px;
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - AUTO ADJUST, HINDI LALAGPAS */
+/* ✅ AVATAR DECORATION */
 img.avatar-decoration {
     position: absolute;
     top: 50%;
@@ -181,7 +181,7 @@ img.avatar-decoration {
 }
 
 /* ==================================================
-   ✅ TOOLTIP
+   Target Tooltips
    ================================================== */
 .avatar-tooltip {
     position: absolute;
@@ -237,28 +237,44 @@ img.avatar-decoration {
     visibility: visible;
     transform: translateX(-50%) translateY(0);
 }
-.avatar-wrapper-node:active .avatar-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
 
+/* ==================================================
+   ✅ PINALAKAS NA MARQUEE TICKER (TABI AT DALAWA)
+   ================================================== */
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
-    max-width: 700px;
-    padding: 10px 0;
-    margin-top: 45px; 
-    margin-bottom: 50px;
+    max-width: 750px;
+    padding: 5px 0;
     background: transparent;
+}
+
+/* Container para sa pagitan ng dalawang row */
+.marquee-wrapper-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 50px;
 }
 
 .marquee-inner-wrap {
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap; /* Pinupuwersang maging magkatabi */
     gap: 12px;
-    width：max-content;
-    animation: smoothScroll 35s linear infinite; 
+    width: max-content;
+}
+
+/* Unang Row: Papuntang Kaliwa */
+.scroll-left {
+    animation: smoothScrollLeft 30s linear infinite; 
+}
+
+/* Pangalawang Row: Pabalik / Papuntang Kanan */
+.scroll-right {
+    animation: smoothScrollRight 30s linear infinite; 
 }
 
 .marquee-profile-block {
@@ -273,6 +289,7 @@ img.avatar-decoration {
     padding: 6px 16px;
     border-radius: 30px; 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    white-space: nowrap; /* Bawal maputol ang teksto */
 }
 
 .marquee-profile-block img {
@@ -283,9 +300,15 @@ img.avatar-decoration {
     pointer-events: none;
 }
 
-@keyframes smoothScroll {
+/* Animations */
+@keyframes smoothScrollLeft {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    100% { transform: translateX(-33.333%); }
+}
+
+@keyframes smoothScrollRight {
+    0% { transform: translateX(-33.333%); }
+    100% { transform: translateX(0); }
 }
 
 #azura-discord-btn {
@@ -300,7 +323,7 @@ img.avatar-decoration {
 
 #azura-discord-btn a {
     display: flex !important;
-    align-items: center !important;;
+    align-items: center !important;
     gap: 8px !important;
     padding: 10px 18px !important;
     background-color: #000 !important;
@@ -375,8 +398,13 @@ img.avatar-decoration {
     </div>
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
-    <div class="marquee-ticker">
-      <div id="marquee-container" class="marquee-inner-wrap"></div>
+    <div class="marquee-wrapper-group">
+        <div class="marquee-ticker">
+            <div id="marquee-container-1" class="marquee-inner-wrap scroll-left"></div>
+        </div>
+        <div class="marquee-ticker">
+            <div id="marquee-container-2" class="marquee-inner-wrap scroll-right"></div>
+        </div>
     </div>
 
 </div>
@@ -392,11 +420,9 @@ img.avatar-decoration {
     <div class="gateway-btn">CLICK</div>
 </div>
 
-<!-- ✅ MUSIC PLAYER - NANDITO PA RIN, HINDI NAWALA -->
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
-
-
+</audio>
 
 <script>
 function disableKeyPress(e) {
@@ -429,33 +455,24 @@ fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
 fetch('members.json')
     .then(res => res.json())
     .then(members => {
-        // ✅ ID LIST MO 
-        const founderIDs = [
-            "1250654354344775703",   
-            "1506975053370359848",
-            "1123145717461033041"
-        ]; 
-
-        const aboveAllIDs = [
-            "1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"
-        ]; 
-
-        const staffIDs = [
-            "1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"
-        ]; 
-
-        const scrollingIDs = [
-            "1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588", "1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"
-        ]; 
+        const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
+        const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
+        const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
+        
+        // Mga listahan ng ID para sa dalawang magkaibang marquee rows
+        const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
+        const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
         showGroup(members, founderIDs.slice(0, 3), 'founder-container');
         showGroup(members, aboveAllIDs.slice(0, 6), 'aboveall-container');
         showGroup(members, staffIDs.slice(0, 8), 'staff-container');
-        showMarquee(members, scrollingIDs.slice(0, 10));
+        
+        // I-render ang dalawang magkaibang hilera
+        showMarquee(members, scrollingIDsRow1, "marquee-container-1");
+        showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ FUNCTION: KUSANG KUKUHA NG DECORATION KUNG MERON
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -465,7 +482,6 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ AUTO DETECT DECORATION
         let decorationHTML = '';
         if(mem.effectURL) { 
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="">`;
@@ -476,7 +492,6 @@ function showGroup(allMembers, listIDs, container) {
                 <img src="${mem.avatarURL}" class="avatar-img" alt="">
                 ${decorationHTML} 
             </div>
-            
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
                     <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
@@ -494,9 +509,11 @@ function showGroup(allMembers, listIDs, container) {
     })
 }
 
-function showMarquee(allMembers, listIDs) {
-    const box = document.getElementById("marquee-container");
+function showMarquee(allMembers, listIDs, containerId) {
+    const box = document.getElementById(containerId);
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
+    
+    // Ginawang tripleng kopya para mas mahaba at tuluy-tuloy ang loop na walang patlang
     const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
     
     ulit.forEach(mem => {

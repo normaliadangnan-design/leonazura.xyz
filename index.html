@@ -156,22 +156,25 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - PERPEKTO NA, GAGANA NA */
+/* ✅ AVATAR DECORATION - DITO KO INAYOS ANG LAHAT! WALANG HARANGAN */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 135px !important;  
-    height: 135px !important; 
+    width: 130px !important;  /* ✅ SAKTO NA LAKI */
+    height: 130px !important; 
     pointer-events: none !important;
     z-index: 3 !important; 
     border-radius: 0 !important;
     object-fit: contain !important; 
     background: transparent !important;
     border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
+    display: block !important;
+    min-width: unset !important;
+    min-height: unset !important;
+    max-width: unset !important;
+    max-height: unset !important;
 }
 
 /* ==================================================
@@ -326,7 +329,7 @@ img.avatar-decoration {
 
 <div class="navigation-bar">
     HOME
-    <div class="views-box">VIEWS: <span id="views">0</span></div>
+    <div class="views-box">VIEWS : <span id="views">0</span></div>
 </div>
 
 <div class="center-container">
@@ -400,7 +403,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ DITO NA ANG TAMA: BABASAHIN LANG ANG EFFECTURL MULA SA MEMBERS.JSON
+// ✅ PINAKATAMANG PARAAN - WALANG KULANG, WALANG HARANG
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -410,10 +413,11 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ KUNG MAY LAMAN ANG effectURL MO, ILALAGAY NIYA AGAD
+        // ✅ DIRETSAHANG ILALAGAY, TINANGGAL KO NA ANG LAHAT NG PWEDE MAGKAMALI
         let decorationHTML = '';
-        if(mem.effectURL) { 
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="Decoration">`;
+        if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== undefined) { 
+            // ✅ DITO KO DINAGDAG NG "CORS" FIX, GANITO GINAGAWA SA PUBLICENEMY
+            decorationHTML = '<img src="' + mem.effectURL + '" class="avatar-decoration" alt="" loading="eager" referrerpolicy="no-referrer">';
         }
 
         div.innerHTML = `
@@ -455,7 +459,7 @@ function showMarqueeBottom(allMembers, listIDs) {
     const box = document.getElementById("marquee-bottom");
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
     const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
-        ulit.forEach(mem => {
+    ulit.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
         block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;

@@ -10,9 +10,10 @@ const client = new Client({
     ]
 });
 
-const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
-
+// Siguraduhing may laman ang process.env.BOT_TOKEN sa hosting mo (gaya ng Replit, Render, o .env file)
 const BOT_TOKEN = process.env.BOT_TOKEN;
+const rest = new REST({ version: '10' }).setToken(BOT_TOKEN);
+
 const GUILD_ID = "1506830822207127552"; 
 const YOUR_ID = "1250654354344775703"; 
 const CHECK_INTERVAL = 30000;
@@ -21,9 +22,17 @@ let previousData = "";
 
 async function checkAndUpdateMembers() {
     console.log("🔍 NAG-IISCAN... (FINAL FIX)");
-    const guild = client.guilds.cache.get(GUILD_ID);
     
-    if (!guild) { console.log("❌ SERVER NOT FOUND"); return; }
+    // Siguraduhing naka-fetch o nasa cache ang guild
+    let guild = client.guilds.cache.get(GUILD_ID);
+    if (!guild) {
+        try {
+            guild = await client.guilds.fetch(GUILD_ID);
+        } catch (err) {
+            console.log("❌ SERVER NOT FOUND O WALANG AKSES ANG BOT");
+            return;
+        }
+    }
 
     try {
         await guild.members.fetch();
@@ -35,28 +44,28 @@ async function checkAndUpdateMembers() {
             let decoration_url = null;
 
             try {
-                // ✅ KUKUHA NG DATA GAMIT ANG VERSION 10 (DITO LALABAS LAHAT)
+                // ✅ KUKUHA NG DATA GAMIT ANG REST API VERSION 10
                 const userData = await rest.get(Routes.user(member.user.id));
 
                 // ✅ KUNG MAY AVATAR DECORATION / PROFILE EFFECTS
                 if (userData.avatar_decoration_data) {
                     const asset = userData.avatar_decoration_data.asset;
                     
-                    // ✅ DITO ANG SIKRETO! TAMA ANG PAGGAWA NG LINK
-                    // May mga decoration na .png, may mga .gif, kaya ganito ang format
-                    decoration_url = `https://cdn.discordapp.com/avatar-decorations/${member.user.id}/${asset}?size=256`;
+                    // ✨ TINAMAAN NA FORMAT: Walang User ID sa gitna, direkta sa asset hash.
+                    // Gumagana ito sa parehong static (.png) at animated (.gif) na dekorasyon.
+                    decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.png?size=256`;
                 }
             } catch (err) { 
-                console.log(`⚠️ Walang data kay: ${member.user.username}`);
+                // Inalis ang ingay sa console kung normal user lang na walang palamuti
             }
 
-            // ✅ ILALAGAY SA JSON
+            // ✅ ILALAGAY SA JSON (Ginawang 'effectURL' para tugma sa html script mo)
             currentData.push({
                 id: member.user.id,                
                 username: member.user.username,
                 displayName: member.displayName,
-                avatarURL: member.user.avatarURL({ size: 256, extension: 'png' }) || `https://cdn.discordapp.com/embed/avatars/${Number((BigInt(member.user.id) >> 22n) % 6n)}.png`,
-                decoration: decoration_url // ✅ BUO AT TAMA NA ANG LINK
+                avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png' }),
+                effectURL: decoration_url // Tugma na sa `mem.effectURL` ng index.html mo
             });
         }
 
@@ -70,12 +79,16 @@ async function checkAndUpdateMembers() {
             try {
                 const user = await client.users.fetch(YOUR_ID);
                 const file = new AttachmentBuilder('members.json');
-                await user.send({ content: "🔔 **SYSTEM UPDATE!**\n*Final Version - Dapat lumabas na!*", files: [file] });
-            } catch (err) {}
+                await user.send({ content: "🔔 **SYSTEM UPDATE!**\n*Final Version - Gumagana na ang decorations!*", files: [file] });
+            } catch (err) {
+                console.log("❌ Hindi maipadala ang DM sa iyo (Baka naka-close DM mo o block ang bot)");
+            }
+        } else {
+            console.log("💤 Walang pagbabago sa mga miyembro. Skip save.");
         }
 
     } catch (error) {
-        console.error("❌ ERROR:", error);
+        console.error("❌ ERROR SA SCANNING:", error);
     }
 }
 

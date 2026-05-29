@@ -134,12 +134,6 @@ body {
     z-index: 9999 !important;
 }
 
-.avatar-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
 /* ✅ CONTAINER */
 .circle-avatar-container {
     position: relative;
@@ -153,10 +147,10 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    overflow: visible;
+    overflow: visible; /* Pinapayagang lumampas ang tenga/pakpak */
 }
 
-/* ✅ LITRATO */
+/* ✅ PROFILE PIC */
 .circle-avatar-container img.avatar-img {
     width: 100%;
     height: 100%;
@@ -167,7 +161,7 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION */
+/* ✅ DECORATION OVERLAY */
 img.avatar-decoration {
     position: absolute;
     top: 50%;
@@ -177,7 +171,7 @@ img.avatar-decoration {
     height: 110px;
     pointer-events: none;
     z-index: 3; 
-    border-radius: 0 !important;
+    border-radius: 0 !important; /* Bawal maging bilog ang dekorasyon */
 }
 
 /* ==================================================
@@ -200,6 +194,12 @@ img.avatar-decoration {
     pointer-events: none;
     z-index: 99999;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+.avatar-wrapper-node:hover .avatar-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 .tooltip-header {
@@ -232,12 +232,6 @@ img.avatar-decoration {
     font-weight: 500;
 }
 
-.avatar-wrapper-node:hover .avatar-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
-
 /* ==================================================
    ✅ MARQUEE TICKER 
    ================================================== */
@@ -266,15 +260,8 @@ img.avatar-decoration {
     width: max-content;
 }
 
-/* Unang Row: Papuntang Kaliwa */
-.scroll-left {
-    animation: smoothScrollLeft 30s linear infinite; 
-}
-
-/* Pangalawang Row: Pabalik / Papuntang Kanan */
-.scroll-right {
-    animation: smoothScrollRight 30s linear infinite; 
-}
+.scroll-left { animation: smoothScrollLeft 30s linear infinite; }
+.scroll-right { animation: smoothScrollRight 30s linear infinite; }
 
 .marquee-profile-block {
     display: flex;
@@ -299,12 +286,10 @@ img.avatar-decoration {
     pointer-events: none;
 }
 
-/* Animations */
 @keyframes smoothScrollLeft {
     0% { transform: translateX(0); }
     100% { transform: translateX(-33.333%); }
 }
-
 @keyframes smoothScrollRight {
     0% { transform: translateX(-33.333%); }
     100% { transform: translateX(0); }
@@ -316,8 +301,6 @@ img.avatar-decoration {
     right: 30px !important;
     z-index: 9999999 !important;
     display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
 }
 
 #azura-discord-btn a {
@@ -331,18 +314,7 @@ img.avatar-decoration {
     font-size: 11px !important;
     font-weight: bold !important;
     text-decoration: none !important;
-    letter-spacing: 1px !important;
     border-radius: 2px !important;
-}
-
-#azura-discord-btn a:hover {
-    background-color: #1a1a1a !important;
-    border-color: rgba(255,255,255,0.3) !important;
-}
-
-#azura-discord-btn img {
-    width: 18px !important;
-    height: auto !important;
 }
 
 #gateway-overlay {
@@ -354,7 +326,6 @@ img.avatar-decoration {
     align-items: center;
     z-index: 999999;
     cursor: pointer;
-    transition: opacity 0.5s ease, visibility 0.5s;
 }
 
 .gateway-btn {
@@ -362,17 +333,18 @@ img.avatar-decoration {
     font-size: 10px;
     letter-spacing: 5px;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 2 55, 255, 0.2);
     color: #ffffff;
 }
 
 .fade-gateway {
     opacity: 0;
     visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
 }
 </style>
 </head>
-<body oncontextmenu="return false;" onkeydown="return disableKeyPress(event);">
+<body oncontextmenu="return false;">
 
 <div class="navigation-bar">
     HOME
@@ -405,12 +377,11 @@ img.avatar-decoration {
             <div id="marquee-container-2" class="marquee-inner-wrap scroll-right"></div>
         </div>
     </div>
-
 </div>
 
 <div id="azura-discord-btn">
     <a href="https://discord.gg/eUaKEqXkWA" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord" style="width:18px;">
         <span>AZURA ORG</span>
     </a>
 </div>
@@ -424,20 +395,6 @@ img.avatar-decoration {
 </audio>
 
 <script>
-function disableKeyPress(e) {
-    if (e.keyCode == 123 || 
-        (e.ctrlKey && e.keyCode == 85) || 
-        (e.ctrlKey && e.keyCode == 83) || 
-        (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
-        (e.ctrlKey && e.shiftKey && e.keyCode == 74) || 
-        (e.ctrlKey && e.shiftKey && e.keyCode == 67) || 
-        (e.ctrlKey && e.keyCode == 80)) {
-        return false;
-    }
-}
-document.onkeydown = disableKeyPress;
-document.onmousedown = disableKeyPress;
-
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
 
@@ -445,11 +402,6 @@ document.getElementById("gateway-overlay").onclick = () => {
     audio.play().catch(() => {});
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
-
-fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
-.then(r => r.json())
-.then(d => { document.getElementById("views").innerText = d.record.views; })
-.catch(e => console.log(e));
 
 fetch('members.json')
     .then(res => res.json())
@@ -461,31 +413,30 @@ fetch('members.json')
         const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
         const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
-        showGroup(members, founderIDs.slice(0, 3), 'founder-container');
-        showGroup(members, aboveAllIDs.slice(0, 6), 'aboveall-container');
-        showGroup(members, staffIDs.slice(0, 8), 'staff-container');
+        showGroup(members, founderIDs, 'founder-container');
+        showGroup(members, aboveAllIDs, 'aboveall-container');
+        showGroup(members, staffIDs, 'staff-container');
         
         showMarquee(members, scrollingIDsRow1, "marquee-container-1");
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
-    })
-    .catch(err => console.error("Error:", err));
+    });
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     
-    // I-filter ang members base sa pagkakasunod-sunod ng listIDs para hindi mag-iba ang pwesto
     listIDs.forEach((id, i) => {
         const mem = allMembers.find(m => m.id === id);
-        if (!mem) return; // Laktawan kung wala sa JSON file
+        if (!mem) return;
 
         const div = document.createElement('div');
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ MATATAG NA PAG-CHECK NG EFFECT/DECORATION URL
+        // ✨ PINALAKAS NA PANALAG SA INPUT DATA
         let decorationHTML = '';
-        if (mem.effectURL && mem.effectURL.trim() !== '' && mem.effectURL !== 'null') { 
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="">`;
+        if (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '' && mem.effectURL.startsWith('http')) { 
+            // Kung may totoong link na nakuha ang bot, dito lang gagawa ng <img> tag
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
 
         div.innerHTML = `
@@ -498,12 +449,8 @@ function showGroup(allMembers, listIDs, container) {
                     <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
                     <span class="tooltip-emojis">👑</span>
                 </div>
-                <div class="tooltip-username">
-                    <span>◇</span> @${mem.username || 'username'}
-                </div>
-                <div class="tooltip-desc">
-                    ${mem.displayName || 'Walang Pangalan'}
-                </div>
+                <div class="tooltip-username">@${mem.username || 'username'}</div>
+                <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
             </div>
         `;
         box.appendChild(div);
@@ -512,13 +459,10 @@ function showGroup(allMembers, listIDs, container) {
 
 function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);
-    if (!box) return;
-
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
     if (selectedMembers.length === 0) return;
 
     const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
-    
     ulit.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';

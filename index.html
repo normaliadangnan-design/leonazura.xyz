@@ -156,13 +156,13 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - DITO KO INAYOS ANG LAHAT! WALANG HARANGAN */
+/* ✅ AVATAR DECORATION - GANITO SA PUBLICENEMY */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 130px !important;  /* ✅ SAKTO NA LAKI */
+    width: 130px !important;  
     height: 130px !important; 
     pointer-events: none !important;
     z-index: 3 !important; 
@@ -171,10 +171,6 @@ img.avatar-decoration {
     background: transparent !important;
     border: none !important;
     display: block !important;
-    min-width: unset !important;
-    min-height: unset !important;
-    max-width: unset !important;
-    max-height: unset !important;
 }
 
 /* ==================================================
@@ -378,6 +374,7 @@ function disableKeyPress(e) {
     if (e.keyCode == 123 || (e.ctrlKey && e.keyCode == 85) || (e.ctrlKey && e.keyCode == 83) || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.shiftKey && e.keyCode == 67) || (e.ctrlKey && e.keyCode == 80)) { return false; }
 }
 document.onkeydown = disableKeyPress;
+document.onmousedown = disableKeyPress;
 
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
@@ -403,7 +400,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ PINAKATAMANG PARAAN - WALANG KULANG, WALANG HARANG
+// ✅ GANITO TALAGA ANG TAMANG GAWA GAYA SA PUBLICENEMY
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -413,11 +410,11 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ DIRETSAHANG ILALAGAY, TINANGGAL KO NA ANG LAHAT NG PWEDE MAGKAMALI
+        // ✅ DITO GINAGAWA ANG LINK, GANITO SILA
         let decorationHTML = '';
-        if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== undefined) { 
-            // ✅ DITO KO DINAGDAG NG "CORS" FIX, GANITO GINAGAWA SA PUBLICENEMY
-            decorationHTML = '<img src="' + mem.effectURL + '" class="avatar-decoration" alt="" loading="eager" referrerpolicy="no-referrer">';
+        if(mem.decorationID) { 
+            const link = `https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.decorationID}.png?size=256`;
+            decorationHTML = `<img src="${link}" class="avatar-decoration" alt="" referrerpolicy="no-referrer">`;
         }
 
         div.innerHTML = `

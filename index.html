@@ -156,7 +156,7 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - DITO NA PERPEKTO! */
+/* ✅ AVATAR DECORATION - PERPEKTO NA, GAGANA NA */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -326,7 +326,7 @@ img.avatar-decoration {
 
 <div class="navigation-bar">
     HOME
-    <div class="views-box">VIEWS : <span id="views">0</span></div>
+    <div class="views-box">VIEWS: <span id="views">0</span></div>
 </div>
 
 <div class="center-container">
@@ -375,7 +375,6 @@ function disableKeyPress(e) {
     if (e.keyCode == 123 || (e.ctrlKey && e.keyCode == 85) || (e.ctrlKey && e.keyCode == 83) || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.shiftKey && e.keyCode == 67) || (e.ctrlKey && e.keyCode == 80)) { return false; }
 }
 document.onkeydown = disableKeyPress;
-document.onmousedown = disableKeyPress;
 
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
@@ -401,7 +400,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ SIGURADO NA ITONG BABASA AT ILALAGAY
+// ✅ DITO NA ANG TAMA: BABASAHIN LANG ANG EFFECTURL MULA SA MEMBERS.JSON
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -411,7 +410,7 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✅ DIRECT INSERTION, WALANG KULANG
+        // ✅ KUNG MAY LAMAN ANG effectURL MO, ILALAGAY NIYA AGAD
         let decorationHTML = '';
         if(mem.effectURL) { 
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="Decoration">`;
@@ -456,7 +455,7 @@ function showMarqueeBottom(allMembers, listIDs) {
     const box = document.getElementById("marquee-bottom");
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
     const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
-    ulit.forEach(mem => {
+        ulit.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
         block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;

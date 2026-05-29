@@ -123,23 +123,11 @@ body {
     z-index: 10;
 }
 
-.avatar-wrapper-node:first-child {
-    margin-left: 0;
-}
+.avatar-wrapper-node:first-child { margin-left: 0; }
+.avatar-wrapper-node.clickable { cursor: pointer; }
+.avatar-wrapper-node.clickable:hover { transform: scale(1.18); z-index: 9999 !important; }
 
-.avatar-wrapper-node.clickable {
-    cursor: pointer;
-}
-.avatar-wrapper-node.clickable:hover {
-    transform: scale(1.18);
-    z-index: 9999 !important;
-}
-
-.avatar-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
+.avatar-link { text-decoration: none; color: inherit; display: block; }
 
 /* ✅ CONTAINER */
 .circle-avatar-container {
@@ -168,20 +156,22 @@ body {
     z-index: 2;
 }
 
-/* ✅ DITO KO INAYOS NG TAMA! SUMAKTO NA ANG LAKI AT PWESE */
+/* ✅ AVATAR DECORATION - DITO NA PERPEKTO! */
 img.avatar-decoration {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 125px;  /* ✅ TAMA NA LAKI */
-    height: 125px;  /* ✅ TAMA NA LAKI */
-    pointer-events: none;
-    z-index: 3; 
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 135px !important;  
+    height: 135px !important; 
+    pointer-events: none !important;
+    z-index: 3 !important; 
     border-radius: 0 !important;
-    object-fit: contain; 
-    background: transparent !important; /* ✅ TANGGAL ANG PUTING LIKOD */
-    border: none !important; /* ✅ TANGGAL ANG KAHON */
+    object-fit: contain !important; 
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 /* ==================================================
@@ -218,9 +208,7 @@ img.avatar-decoration {
     border-radius: 50%;
     border: 1px solid #222;
 }
-.tooltip-emojis {
-    font-size: 14px;
-}
+.tooltip-emojis { font-size: 14px; }
 .tooltip-username {
     font-size: 11px;
     color: #888;
@@ -235,15 +223,10 @@ img.avatar-decoration {
     margin-top: 5px;
     font-weight: 500;
 }
-
-.avatar-wrapper-node:hover .avatar-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
+.avatar-wrapper-node:hover .avatar-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 
 /* ==================================================
-   ✅ SCROLLING AREA - DALAWANG LINYA
+   ✅ SCROLLING AREA
    ================================================== */
 .marquee-ticker {
     overflow: hidden;
@@ -254,7 +237,6 @@ img.avatar-decoration {
     margin-bottom: 10px;
     background: transparent;
 }
-
 .marquee-inner-wrap-top {
     display: flex;
     justify-content: flex-start;
@@ -262,7 +244,6 @@ img.avatar-decoration {
     width: max-content;
     animation: scrollLeft 20s linear infinite; 
 }
-
 .marquee-inner-wrap-bottom {
     display: flex;
     justify-content: flex-start;
@@ -270,7 +251,6 @@ img.avatar-decoration {
     width: max-content;
     animation: scrollRight 20s linear infinite; 
 }
-
 .marquee-profile-block {
     display: flex;
     align-items: center;
@@ -284,7 +264,6 @@ img.avatar-decoration {
     border-radius: 30px; 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
-
 .marquee-profile-block img {
     width: 32px;
     height: 32px;
@@ -292,16 +271,8 @@ img.avatar-decoration {
     object-fit: cover;
     pointer-events: none;
 }
-
-@keyframes scrollLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-@keyframes scrollRight {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(0); }
-}
+@keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 
 #azura-discord-btn {
     position: fixed !important;
@@ -312,7 +283,6 @@ img.avatar-decoration {
     visibility: visible !important;
     opacity: 1 !important;
 }
-
 #azura-discord-btn a {
     display: flex !important;
     align-items: center !important;
@@ -327,16 +297,8 @@ img.avatar-decoration {
     letter-spacing: 1px !important;
     border-radius: 2px !important;
 }
-
-#azura-discord-btn a:hover {
-    background-color: #1a1a1a !important;
-    border-color: rgba(255,255,255,0.3) !important;
-}
-
-#azura-discord-btn img {
-    width: 18px !important;
-    height: auto !important;
-}
+#azura-discord-btn a:hover { background-color: #1a1a1a !important; border-color: rgba(255,255,255,0.3) !important; }
+#azura-discord-btn img { width: 18px !important; height: auto !important; }
 
 #gateway-overlay {
     position: fixed;
@@ -349,7 +311,6 @@ img.avatar-decoration {
     cursor: pointer;
     transition: opacity 0.5s ease, visibility 0.5s;
 }
-
 .gateway-btn {
     padding: 12px 30px;
     font-size: 10px;
@@ -358,11 +319,7 @@ img.avatar-decoration {
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
 }
-
-.fade-gateway {
-    opacity: 0;
-    visibility: hidden;
-}
+.fade-gateway { opacity: 0; visibility: hidden; }
 </style>
 </head>
 <body oncontextmenu="return false;" onkeydown="return disableKeyPress(event);">
@@ -393,11 +350,9 @@ img.avatar-decoration {
     <div class="marquee-ticker">
       <div id="marquee-top" class="marquee-inner-wrap-top"></div>
     </div>
-    
     <div class="marquee-ticker">
       <div id="marquee-bottom" class="marquee-inner-wrap-bottom"></div>
     </div>
-
 </div>
 
 <div id="azura-discord-btn">
@@ -417,31 +372,17 @@ img.avatar-decoration {
 
 <script>
 function disableKeyPress(e) {
-    if (e.keyCode == 123 || 
-        (e.ctrlKey && e.keyCode == 85) || 
-        (e.ctrlKey && e.keyCode == 83) || 
-        (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
-        (e.ctrlKey && e.shiftKey && e.keyCode == 74) || 
-        (e.ctrlKey && e.shiftKey && e.keyCode == 67) || 
-        (e.ctrlKey && e.keyCode == 80)) {
-        return false;
-    }
+    if (e.keyCode == 123 || (e.ctrlKey && e.keyCode == 85) || (e.ctrlKey && e.keyCode == 83) || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.shiftKey && e.keyCode == 67) || (e.ctrlKey && e.keyCode == 80)) { return false; }
 }
 document.onkeydown = disableKeyPress;
 document.onmousedown = disableKeyPress;
 
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
-
-document.getElementById("gateway-overlay").onclick = () => {
-    audio.play().catch(() => {});
-    document.getElementById("gateway-overlay").classList.add("fade-gateway");
-};
+document.getElementById("gateway-overlay").onclick = () => { audio.play().catch(() => {}); document.getElementById("gateway-overlay").classList.add("fade-gateway"); };
 
 fetch("https://api.jsonbin.io/v3/b/6a0fde5e6877513b27b20766/latest")
-.then(r => r.json())
-.then(d => { document.getElementById("views").innerText = d.record.views; })
-.catch(e => console.log(e));
+.then(r => r.json()).then(d => { document.getElementById("views").innerText = d.record.views; }).catch(e => console.log(e));
 
 fetch('members.json')
     .then(res => res.json())
@@ -460,7 +401,7 @@ fetch('members.json')
     })
     .catch(err => console.error("Error:", err));
 
-// ✅ TAMA NA ITO, WALANG KAHON, WALANG SAKA
+// ✅ SIGURADO NA ITONG BABASA AT ILALAGAY
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     const filtered = allMembers.filter(mem => listIDs.includes(mem.id));
@@ -470,9 +411,10 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
+        // ✅ DIRECT INSERTION, WALANG KULANG
         let decorationHTML = '';
         if(mem.effectURL) { 
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="">`;
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="Decoration">`;
         }
 
         div.innerHTML = `
@@ -502,7 +444,6 @@ function showMarqueeTop(allMembers, listIDs) {
     const box = document.getElementById("marquee-top");
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
     const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
-    
     ulit.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
@@ -515,7 +456,6 @@ function showMarqueeBottom(allMembers, listIDs) {
     const box = document.getElementById("marquee-bottom");
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
     const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
-    
     ulit.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';

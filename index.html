@@ -57,7 +57,7 @@ body {
 
 .center-container {
     width: 100%;
-    max-width: 800px; /* Ibinalik sa orihinal para nakasentro ang lahat pati marquee mo */
+    max-width: 800px;
     margin: 50px auto 20px auto;
     display: flex;
     flex-direction: column;
@@ -106,7 +106,7 @@ body {
 }
 
 /* ==================================================
-   🔥 ROW NG AVATAR (SWAK NA OVERLAP STYLE)
+   🔥 HILERA NG AVATARS
    ================================================== */
 .horizontal-avatar-row {
     display: flex !important;
@@ -115,23 +115,22 @@ body {
     justify-content: center;
     align-items: center;
     width: auto;
-    padding: 20px 0;
-    /* Ginamit natin ang margin-left sa node para sa overlap kaya ginawa nating 0 ang gap */
+    padding: 25px 0; /* Dinagdagan para sa sapat na clearance sa itaas at ibaba */
     gap: 0px !important; 
+    overflow: visible !important;
 }
 
 /* ==================================================
-   🔥 NODE CONTROL - SAKTO ANG DIKIT GAYA NG PUBLIC ENEMY
+   🔥 WRAPPER AT DECORATION CONTROLS (FIXED)
    ================================================== */
 .avatar-wrapper-node {
     position: relative;
-    /* -5px hanggang -8px ang sikreto para dikit pero litaw pa rin ang decorations */
-    margin-left: -6px !important; 
+    margin-left: -6px !important; /* Swak na overlap para dikit pero hindi tabon */
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
+    overflow: visible !important; /* Pwersahang papayagan ang paglabas ng wings/tenga */
 }
 
-/* Tanggalin ang dikit sa pinakaunang avatar sa linya */
 .avatar-wrapper-node:first-child {
     margin-left: 0 !important;
 }
@@ -141,7 +140,7 @@ body {
 }
 .avatar-wrapper-node:hover {
     transform: scale(1.15);
-    z-index: 9999 !important;
+    z-index: 99999 !important;
 }
 
 /* CONTAINER SETUP */
@@ -157,8 +156,8 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    overflow: visible !important;
-    z-index: 1;
+    overflow: visible !important; /* Para lumabas ang gilid ng decorations */
+    z-index: 5;
 }
 
 /* PROFILE PIC LAYER */
@@ -169,20 +168,21 @@ body {
     object-fit: cover;
     pointer-events: none;
     position: relative;
-    z-index: 1 !important;
+    z-index: 2 !important;
 }
 
-/* DECORATION OVERLAY LAYER */
+/* ✨ DECORATION OVERLAY - PINALAKAS ANG Z-INDEX AT ALLOWANCE */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 108px !important; 
-    height: 108px !important;
+    width: 120px !important; /* Ginawang 120px para kitang-kita ang palamuti sa labas ng 90px profile */
+    height: 120px !important;
     pointer-events: none;
-    z-index: 999999 !important; 
+    z-index: 999999 !important; /* Mas mataas sa lahat para lumitaw */
     border-radius: 0 !important; 
+    display: block !important;
 }
 
 /* ==================================================
@@ -203,7 +203,7 @@ img.avatar-decoration {
     visibility: hidden;
     transition: all 0.2s ease;
     pointer-events: none;
-    z-index: 99999;
+    z-index: 999999;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
 }
 
@@ -244,7 +244,7 @@ img.avatar-decoration {
 }
 
 /* ==================================================
-   MARQUEE TICKER (INAYOS ANG CENTERING)
+   MARQUEE TICKER 
    ================================================== */
 .marquee-ticker {
     overflow: hidden;
@@ -259,7 +259,7 @@ img.avatar-decoration {
     flex-direction: column;
     gap: 15px;
     width: 100%;
-    align-items: center; /* Sinisigurong nakasentro ang scrolling bars */
+    align-items: center;
     margin-top: 40px;
     margin-bottom: 50px;
 }
@@ -442,10 +442,12 @@ function showGroup(allMembers, listIDs, container) {
 
         const div = document.createElement('div');
         div.className = 'avatar-wrapper-node';
+        div.style.zIndex = 50 - i; /* Ibinabalik ang stacking para gumana ang overlap layering */
 
         let decorationHTML = '';
-        if (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '' && mem.effectURL.startsWith('http')) { 
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
+        // Inalis ang sobrang higpit na filter para sigurdong babasahin ang effectURL basta may laman
+        if (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '') { 
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.opacity='0'">`;
         }
 
         div.innerHTML = `

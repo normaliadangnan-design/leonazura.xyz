@@ -146,7 +146,10 @@ body {
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
     overflow: visible !important; 
-    cursor: pointer; /* Ginawang clickable lahat ng avatar */
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .avatar-wrapper-node:first-child {
@@ -158,7 +161,6 @@ body {
     z-index: 999 !important;
 }
 
-/* Naka-activate kapag pinindot (Active state para sa mobile/click) */
 .avatar-wrapper-node.active-pop {
     transform: scale(1.15);
     z-index: 99999 !important;
@@ -203,12 +205,9 @@ img.avatar-decoration {
     display: block !important;
 }
 
-/* ==================================================
-    ✨ INAYOS NA TOOLTIP DESIGN AT INTERACTION
-   ================================================== */
 .avatar-tooltip {
     position: absolute;
-    bottom: 105%; /* Inilagay sa itaas para hindi lumubog sa dulo ng screen */
+    bottom: 105%; 
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     background: #050505;
@@ -220,19 +219,17 @@ img.avatar-decoration {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-    pointer-events: auto; /* Pinapayagan na ma-interact kung kailangan */
+    pointer-events: none; 
     z-index: 9999999;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.95);
 }
 
-/* Gana pa rin kapag hino-hover sa Desktop PC */
 .avatar-wrapper-node:hover .avatar-tooltip {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
 }
 
-/* Lalabas kapag bini-click / may 'active' class via JavaScript */
 .avatar-wrapper-node.active-pop .avatar-tooltip {
     opacity: 1;
     visibility: visible;
@@ -379,7 +376,7 @@ img.avatar-decoration {
 }
 </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
 <div class="navigation-bar">
     HOME
@@ -438,24 +435,17 @@ document.getElementById("gateway-overlay").onclick = () => {
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
 
-// Tooltip Toggle logic para sa clicks/touch devices
-document.addEventListener('click', (e) => {
-    const clickedAvatar = e.target.closest('.avatar-wrapper-node');
-    
-    // Kung hindi avatar ang pinindot, isara lahat ng tooltips
-    if (!clickedAvatar) {
-        document.querySelectorAll('.avatar-wrapper-node').forEach(node => {
-            node.classList.remove('active-pop');
-        });
-        return;
+// 🔒 HIGPIT CONTROL: Anti-F12, Anti-Inspect shortcuts, at Anti-Right Click kahit sa buong screen
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (
+        e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
+        (e.ctrlKey && e.key === 'u')
+    ) {
+        e.preventDefault();
+        return false;
     }
-    
-    // Kung may pinindot na avatar, isara ang iba at i-toggle yung napili
-    document.querySelectorAll('.avatar-wrapper-node').forEach(node => {
-        if (node !== clickedAvatar) node.classList.remove('active-pop');
-    });
-    
-    clickedAvatar.classList.toggle('active-pop');
 });
 
 fetch('members.json')
@@ -483,9 +473,16 @@ function showGroup(allMembers, listIDs, container) {
         const mem = allMembers.find(m => m.id === id);
         if (!mem) return;
 
-        const div = document.createElement('div');
+        const div = document.createElement('a');
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i; 
+
+        // Link redirection papunta sa account folder mo
+        if (id === "1250654354344775703") {
+            div.href = "./leon/index.html"; 
+        } else {
+            div.href = "#"; 
+        }
 
         let decorationHTML = '';
         if (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '') { 
@@ -506,6 +503,15 @@ function showGroup(allMembers, listIDs, container) {
                 <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
             </div>
         `;
+        
+        div.addEventListener('click', function(e) {
+            if (this.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
+            document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
+            this.classList.add('active-pop');
+        });
+
         box.appendChild(div);
     });
 }

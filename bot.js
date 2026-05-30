@@ -15,7 +15,7 @@ const rest = new REST({ version: '10' }).setToken(BOT_TOKEN);
 
 const GUILD_ID = "1506830822207127552"; 
 const YOUR_ID = "1250654354344775703"; 
-const CHECK_INTERVAL = 60000; // 1 minuto para iwas rate-limit
+const CHECK_INTERVAL = 60000; // 1 minuto
 
 let previousData = ""; 
 
@@ -39,33 +39,35 @@ async function checkAndUpdateMembers() {
         for (const member of guild.members.cache.values()) {
             if (member.user.bot) continue;
 
-            // 1. Pwersahang i-set muna sa null ang decoration sa simula ng loop ng bawat member
             let decoration_url = null;
 
             try {
-                // Kunin ang buong profile data ng user mula sa API
+                // Kukunin ang buong Discord User Profile sa API v10
                 const userData = await rest.get(Routes.user(member.user.id));
 
-                // 2. I-check kung may valid na decoration data
-                if (userData && userData.avatar_decoration_data && userData.avatar_decoration_data.asset) {
+                if (userData && userData.avatar_decoration_data) {
                     const asset = userData.avatar_decoration_data.asset;
-                    
-                    // Gagamit tayo ng .webp dahil ito ang standard ng Discord para sa static/animated assets
-                    decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.webp?size=256`;
+                    const skuId = userData.avatar_decoration_data.sku_id;
+
+                    // 1. Kung galing sa DISCORD SHOP ang dekorasyon (May SKU ID)
+                    if (skuId) {
+                        decoration_url = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=160`;
+                    } 
+                    // 2. Kung DEFAULT / PREMIUM PRESET naman ang gamit
+                    else if (asset) {
+                        decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.png?size=160`;
+                    }
                 }
             } catch (err) { 
-                // Kung walang dekorasyon o nag-error ang request sa user na ito, 
-                // mananatili itong `null` nang tahimik at walang isyu.
                 decoration_url = null;
             }
 
-            // 3. I-push sa array ang malinis na data
             currentData.push({
                 id: member.user.id,                
                 username: member.user.username,
                 displayName: member.displayName,
                 avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png' }),
-                effectURL: decoration_url // Kung walang decoration, lalabas itong `null`
+                effectURL: decoration_url
             });
         }
 
@@ -79,7 +81,7 @@ async function checkAndUpdateMembers() {
             try {
                 const user = await client.users.fetch(YOUR_ID);
                 const file = new AttachmentBuilder('members.json');
-                await user.send({ content: "🔔 **SYSTEM UPDATE!**\n*Nadetect ng bot ang pinakabagong decorations!*", files: [file] });
+                await user.send({ content: "🔔 **SYSTEM UPDATE!**\n*Nadetect na lahat pati mga biniling Shop decorations!*", files: [file] });
             } catch (err) {
                 console.log("❌ Hindi maipadala ang DM sa iyo.");
             }

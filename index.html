@@ -6,7 +6,7 @@
 <title>AZURA</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght=800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
 
 * {
     margin: 0;
@@ -36,7 +36,7 @@ body {
     align-items: center;
 }
 
-/* Typewriter + Metallic Gray Animation */
+/* Animations */
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
@@ -60,6 +60,20 @@ body {
     margin: 0 auto;
     animation: 
         typing 2s steps(20, end),
+        metallic-glow 3s infinite ease-in-out;
+}
+
+/* Animation para sa $ symbol */
+.symbol-break {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: fit-content;
+    margin: 0 auto 20px auto;
+    animation: 
+        typing 1s steps(5, end),
         metallic-glow 3s infinite ease-in-out;
 }
 
@@ -99,13 +113,6 @@ body {
     height: auto;
     margin-bottom: 5px;
     pointer-events: none;
-}
-
-.symbol-break {
-    font-size: 28px;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 20px;
-    font-weight: 700;
 }
 
 .title-group-block {
@@ -434,23 +441,16 @@ document.getElementById("gateway-overlay").onclick = () => {
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
 
-// 🔒 SECURITY
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
-    if (
-        e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
-        (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))
-    ) {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
         e.preventDefault();
         return false;
     }
 });
 
 setInterval(function() {
-    (function() {
-        return false;
-    }['constructor']('debugger')['call']());
+    (function() { return false; }['constructor']('debugger')['call']());
 }, 50);
 
 fetch('members.json')
@@ -466,32 +466,21 @@ fetch('members.json')
         showGroup(members, founderIDs, 'founder-container');
         showGroup(members, aboveAllIDs, 'aboveall-container');
         showGroup(members, staffIDs, 'staff-container');
-        
         showMarquee(members, scrollingIDsRow1, "marquee-container-1");
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     });
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
-    
     listIDs.forEach((id, i) => {
         const mem = allMembers.find(m => m.id === id);
         if (!mem) return;
-
         const div = document.createElement('a');
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i; 
-
-        if (id === "1250654354344775703") {
-            div.href = "./leon/index.html"; 
-        } else {
-            div.href = "#"; 
-        }
-
-        let decorationHTML = '';
-        if (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '') { 
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.opacity='0'">`;
-        }
+        div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
+        
+        let decorationHTML = (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '') ? `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.opacity='0'">` : '';
 
         div.innerHTML = `
             <div class="circle-avatar-container">
@@ -499,23 +488,16 @@ function showGroup(allMembers, listIDs, container) {
                 ${decorationHTML} 
             </div>
             <div class="avatar-tooltip">
-                <div class="tooltip-header">
-                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
-                    <span class="tooltip-emojis">👑</span>
-                </div>
+                <div class="tooltip-header"><img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt=""><span class="tooltip-emojis">👑</span></div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>
                 <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
             </div>
         `;
-        
         div.addEventListener('click', function(e) {
-            if (this.getAttribute('href') === '#') {
-                e.preventDefault();
-            }
+            if (this.getAttribute('href') === '#') e.preventDefault();
             document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
             this.classList.add('active-pop');
         });
-
         box.appendChild(div);
     });
 }
@@ -524,7 +506,6 @@ function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
     if (selectedMembers.length === 0) return;
-
     const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
     ulit.forEach(mem => {
         const block = document.createElement('div');

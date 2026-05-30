@@ -57,7 +57,7 @@ body {
 
 .center-container {
     width: 100%;
-    max-width: 1200px; /* Nilakihan para magkasya ang maluwag na hilera */
+    max-width: 800px; /* Ibinalik sa orihinal para nakasentro ang lahat pati marquee mo */
     margin: 50px auto 20px auto;
     display: flex;
     flex-direction: column;
@@ -106,35 +106,41 @@ body {
 }
 
 /* ==================================================
-   ✨ ROW NG AVATAR (GAYA NG PUBLIC ENEMY)
+   🔥 ROW NG AVATAR (SWAK NA OVERLAP STYLE)
    ================================================== */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: wrap !important; /* Ginawang wrap para kapag marami, bumababa nang kusa */
+    flex-wrap: wrap !important;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 1000px;
-    padding: 25px 0; /* Dinagdagan ang taas at babang allowance para sa mga tenga/wings */
-    gap: 30px; /* ✨ Eto ang pinaka-sikreto para maging hiwalay at may space ang mga palamuti niyo */
+    width: auto;
+    padding: 20px 0;
+    /* Ginamit natin ang margin-left sa node para sa overlap kaya ginawa nating 0 ang gap */
+    gap: 0px !important; 
 }
 
 /* ==================================================
-   ✨ WRAPPER NODE SETUP
+   🔥 NODE CONTROL - SAKTO ANG DIKIT GAYA NG PUBLIC ENEMY
    ================================================== */
 .avatar-wrapper-node {
     position: relative;
-    margin-left: 0 !important; /* Binura ang -22px na salarin para tuluyang maghiwalay */
+    /* -5px hanggang -8px ang sikreto para dikit pero litaw pa rin ang decorations */
+    margin-left: -6px !important; 
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
+}
+
+/* Tanggalin ang dikit sa pinakaunang avatar sa linya */
+.avatar-wrapper-node:first-child {
+    margin-left: 0 !important;
 }
 
 .avatar-wrapper-node.clickable {
     cursor: pointer;
 }
 .avatar-wrapper-node:hover {
-    transform: scale(1.15); /* Pinalitan para gumana sa lahat ng node habang naka-hover */
+    transform: scale(1.15);
     z-index: 9999 !important;
 }
 
@@ -151,7 +157,7 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    overflow: visible !important; /* Mahalaga para lumabas ang gilid ng decorations */
+    overflow: visible !important;
     z-index: 1;
 }
 
@@ -238,7 +244,7 @@ img.avatar-decoration {
 }
 
 /* ==================================================
-   MARQUEE TICKER 
+   MARQUEE TICKER (INAYOS ANG CENTERING)
    ================================================== */
 .marquee-ticker {
     overflow: hidden;
@@ -253,6 +259,7 @@ img.avatar-decoration {
     flex-direction: column;
     gap: 15px;
     width: 100%;
+    align-items: center; /* Sinisigurong nakasentro ang scrolling bars */
     margin-top: 40px;
     margin-bottom: 50px;
 }

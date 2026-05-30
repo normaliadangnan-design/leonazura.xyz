@@ -6,7 +6,7 @@
 <title>AZURA</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;500;700;900&family=Kanit:wght=800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght=800;900&display=swap');
 
 * {
     margin: 0;
@@ -36,21 +36,16 @@ body {
     align-items: center;
 }
 
-/* Typewriter + RGB Metal Animation */
+/* Typewriter + Metallic Gray Animation */
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
 }
 
-@keyframes cursor-blink {
-    50% { border-color: transparent; }
-}
-
-@keyframes rgb-glow {
-    0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #cccccc; }
-    33% { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; color: #ffffff; }
-    66% { text-shadow: 0 0 5px #0000ff, 0 0 10px #0000ff; color: #cccccc; }
-    100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #cccccc; }
+@keyframes metallic-glow {
+    0% { color: #808080; text-shadow: 0 0 5px #555555; }
+    50% { color: #ffffff; text-shadow: 0 0 10px #aaaaaa; }
+    100% { color: #808080; text-shadow: 0 0 5px #555555; }
 }
 
 .typewriter-header {
@@ -61,13 +56,11 @@ body {
     text-transform: uppercase;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 3px solid #fff;
     width: fit-content;
     margin: 0 auto;
     animation: 
         typing 2s steps(20, end),
-        cursor-blink .75s step-end infinite,
-        rgb-glow 4s infinite alternate;
+        metallic-glow 3s infinite ease-in-out;
 }
 
 .navigation-bar {
@@ -441,7 +434,7 @@ document.getElementById("gateway-overlay").onclick = () => {
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
 
-// 🔒 SECURITY: Bloques ng Right-click at Inspect Keys
+// 🔒 SECURITY
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
     if (
@@ -454,7 +447,6 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// Awtomatikong debugger loop
 setInterval(function() {
     (function() {
         return false;

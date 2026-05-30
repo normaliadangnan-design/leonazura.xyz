@@ -74,6 +74,98 @@ body {
     pointer-events: none;
 }
 
+/* ==================================================
+   ⚡ PUBLIC ENEMY ANIMATION EFFECTS (NEW)
+   ================================================== */
+
+/* Hacker Typewriter Ticker */
+.typewriter-text {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    display: inline-block;
+    border-right: 2px solid rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typeWriting 3s steps(30, end) forwards, blinkCursor 0.75s step-end infinite;
+}
+
+/* Cyberpunk Glitch Header */
+.glitch-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 30px; 
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    color: rgba(255, 255, 255, 0.9);
+    display: inline-block;
+    animation: glitchShake 0.4s infinite alternate-reverse;
+}
+
+.glitch-header::before,
+.glitch-header::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+/* RGB Split Red Layer */
+.glitch-header::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff0055;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitchSliceEffect 4s infinite linear alternate-reverse;
+}
+
+/* RGB Split Cyan Layer */
+.glitch-header::after {
+    left: -2px;
+    text-shadow: -2px 0 #00f0ff;
+    clip: rect(85px, 450px, 140px, 0);
+    animation: glitchSliceEffect 2s infinite linear alternate-reverse;
+}
+
+/* Keyframes Setup */
+@keyframes typeWriting {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blinkCursor {
+    from, to { border-color: transparent; }
+    50% { border-color: rgba(255, 255, 255, 0.75); }
+}
+
+@keyframes glitchShake {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(-0.5deg) cubic-bezier(0.1, 0.9, 0.2, 1); }
+    60% { transform: skew(0.5deg); }
+    100% { transform: skew(0deg); }
+}
+
+@keyframes glitchSliceEffect {
+    0% { clip: rect(31px, 9999px, 94px, 0); }
+    10% { clip: rect(112px, 9999px, 76px, 0); }
+    20% { clip: rect(85px, 9999px, 5px, 0); }
+    30% { clip: rect(27px, 9999px, 115px, 0); }
+    40% { clip: rect(73px, 9999px, 29px, 0); }
+    50% { clip: rect(142px, 9999px, 153px, 0); }
+    60% { clip: rect(12px, 9999px, 87px, 0); }
+    70% { clip: rect(95px, 9999px, 140px, 0); }
+    80% { clip: rect(33px, 9999px, 102px, 0); }
+    90% { clip: rect(121px, 9999px, 43px, 0); }
+    100% { clip: rect(54px, 9999px, 133px, 0); }
+}
+
+/* Original Components */
 .symbol-break {
     font-size: 28px;
     color: rgba(255, 255, 255, 0.8);
@@ -85,28 +177,13 @@ body {
     margin-top: 45px;
     margin-bottom: 15px;
     text-align: center;
-}
-
-.tiny-top-text {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 5px;
-    color: rgba(255, 255, 255, 0.3);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 3px;
-}
-
-.bold-main-header {
-    font-family: 'Inter', sans-serif;
-    font-size: 30px; font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* ==================================================
-   🔥 HILERA NG AVATARS
+    🔥 HILERA NG AVATARS
    ================================================== */
 .horizontal-avatar-row {
     display: flex !important;
@@ -115,20 +192,20 @@ body {
     justify-content: center;
     align-items: center;
     width: auto;
-    padding: 25px 0; /* Dinagdagan para sa sapat na clearance sa itaas at ibaba */
+    padding: 25px 0; 
     gap: 0px !important; 
     overflow: visible !important;
 }
 
 /* ==================================================
-   🔥 WRAPPER AT DECORATION CONTROLS (FIXED)
+    🔥 WRAPPER AT DECORATION CONTROLS
    ================================================== */
 .avatar-wrapper-node {
     position: relative;
-    margin-left: -6px !important; /* Swak na overlap para dikit pero hindi tabon */
+    margin-left: -6px !important; 
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
-    overflow: visible !important; /* Pwersahang papayagan ang paglabas ng wings/tenga */
+    overflow: visible !important; 
 }
 
 .avatar-wrapper-node:first-child {
@@ -156,7 +233,7 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    overflow: visible !important; /* Para lumabas ang gilid ng decorations */
+    overflow: visible !important; 
     z-index: 5;
 }
 
@@ -171,22 +248,22 @@ body {
     z-index: 2 !important;
 }
 
-/* ✨ DECORATION OVERLAY - PINALAKAS ANG Z-INDEX AT ALLOWANCE */
+/* DECORATION OVERLAY */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 120px !important; /* Ginawang 120px para kitang-kita ang palamuti sa labas ng 90px profile */
+    width: 120px !important; 
     height: 120px !important;
     pointer-events: none;
-    z-index: 999999 !important; /* Mas mataas sa lahat para lumitaw */
+    z-index: 999999 !important; 
     border-radius: 0 !important; 
     display: block !important;
 }
 
 /* ==================================================
-   Target Tooltips
+    Target Tooltips
    ================================================== */
 .avatar-tooltip {
     position: absolute;
@@ -244,7 +321,7 @@ img.avatar-decoration {
 }
 
 /* ==================================================
-   MARQUEE TICKER 
+    MARQUEE TICKER 
    ================================================== */
 .marquee-ticker {
     overflow: hidden;
@@ -370,14 +447,14 @@ img.avatar-decoration {
     <div id="founder-container" class="horizontal-avatar-row"></div>
 
     <div class="title-group-block">
-        <span class="tiny-top-text">ABOVE ALL</span>
-        <h2 class="bold-main-header">ABOVE ALL</h2>
+        <span class="typewriter-text">AZURA OWNERS NETWORK</span>
+        <h2 class="glitch-header" data-text="ABOVE ALL">ABOVE ALL</h2>
     </div>
     <div id="aboveall-container" class="horizontal-avatar-row"></div>
 
     <div class="title-group-block">
-        <span class="tiny-top-text">STAFF</span>
-        <h2 class="bold-main-header">STAFF</h2>
+        <span class="typewriter-text">TEAM MANAGEMENT</span>
+        <h2 class="glitch-header" data-text="STAFF">STAFF</h2>
     </div>
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
@@ -442,10 +519,9 @@ function showGroup(allMembers, listIDs, container) {
 
         const div = document.createElement('div');
         div.className = 'avatar-wrapper-node';
-        div.style.zIndex = 50 - i; /* Ibinabalik ang stacking para gumana ang overlap layering */
+        div.style.zIndex = 50 - i; 
 
         let decorationHTML = '';
-        // Inalis ang sobrang higpit na filter para sigurdong babasahin ang effectURL basta may laman
         if (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '') { 
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.opacity='0'">`;
         }

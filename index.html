@@ -36,6 +36,40 @@ body {
     align-items: center;
 }
 
+/* Typewriter + RGB Metal Animation */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes cursor-blink {
+    50% { border-color: transparent; }
+}
+
+@keyframes rgb-glow {
+    0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #cccccc; }
+    33% { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; color: #ffffff; }
+    66% { text-shadow: 0 0 5px #0000ff, 0 0 10px #0000ff; color: #cccccc; }
+    100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; color: #cccccc; }
+}
+
+.typewriter-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 30px; 
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid #fff;
+    width: fit-content;
+    margin: 0 auto;
+    animation: 
+        typing 2s steps(20, end),
+        cursor-blink .75s step-end infinite,
+        rgb-glow 4s infinite alternate;
+}
+
 .navigation-bar {
     position: absolute;
     top: 25px;
@@ -74,25 +108,6 @@ body {
     pointer-events: none;
 }
 
-.fade-in-text {
-    opacity: 0;
-    animation: smoothFadeIn 1.5s ease-out forwards;
-}
-
-@keyframes smoothFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(4px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.delay-short { animation-delay: 0.2s; }
-.delay-long { animation-delay: 0.5s; }
-
 .symbol-break {
     font-size: 28px;
     color: rgba(255, 255, 255, 0.8);
@@ -117,15 +132,6 @@ body {
     text-transform: uppercase;
     display: block;
     margin-bottom: 3px;
-}
-
-.bold-main-header {
-    font-family: 'Inter', sans-serif;
-    font-size: 30px; 
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8);
 }
 
 .horizontal-avatar-row {
@@ -192,7 +198,6 @@ body {
     z-index: 2 !important;
 }
 
-/* FIX: Tiniyak na lulutang sa pinaka-itaas ang decoration kahit clickable link ang wrapper */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -391,14 +396,14 @@ img.avatar-decoration {
     <div id="founder-container" class="horizontal-avatar-row"></div>
 
     <div class="title-group-block">
-        <span class="tiny-top-text fade-in-text delay-short">ABOVE ALL</span>
-        <h2 class="bold-main-header fade-in-text delay-long">ABOVE ALL</h2>
+        <span class="tiny-top-text">ABOVE ALL</span>
+        <h2 class="typewriter-header">ABOVE ALL</h2>
     </div>
     <div id="aboveall-container" class="horizontal-avatar-row"></div>
 
     <div class="title-group-block">
-        <span class="tiny-top-text fade-in-text delay-short">STAFF</span>
-        <h2 class="bold-main-header fade-in-text delay-long">STAFF</h2>
+        <span class="tiny-top-text">STAFF</span>
+        <h2 class="typewriter-header">STAFF</h2>
     </div>
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
@@ -436,7 +441,7 @@ document.getElementById("gateway-overlay").onclick = () => {
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
 
-// 🔒 HIGH-LEVEL SECURITY: Hinaharangan ang lahat ng keys + Sinisira ang Inspect Tab gamit ang loop debugger
+// 🔒 SECURITY: Bloques ng Right-click at Inspect Keys
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
     if (
@@ -449,7 +454,7 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// Awtomatikong nagpapatakbo ng debugger loop para mag-crash ang source view kapag binuksan ang tools
+// Awtomatikong debugger loop
 setInterval(function() {
     (function() {
         return false;

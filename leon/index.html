@@ -60,7 +60,7 @@ letter-spacing:4px;
 margin-bottom:25px;
 }
 
-/* FIX: Ginawang visible ang overflow para lumabas ang decoration sa labas ng bilog */
+/* 🎯 FIXED AVATAR CONTAINER: Ginawang visible para lumawit ang dekorasyon sa labas ng bilog */
 .avatar{
 position: relative;
 width:110px;
@@ -70,7 +70,7 @@ margin-bottom:15px;
 overflow: visible !important;
 }
 
-/* Hiwalay na container para sa mismong bilog na mukha mo */
+/* 🎯 INNER IMAGE HOLDER: Dito nakakulong ang bilog na mukha mo */
 .avatar-img-holder {
 width: 100%;
 height: 100%;
@@ -86,14 +86,14 @@ height:100%;
 object-fit:cover;
 }
 
-/* FIX: Absolute layer para sa avatar decoration mo na nakapatong sa mukha mo */
+/* 🎯 PERFECTLY CENTERED DECORATION: Swak na swak sa sukat at gitnang-gitna */
 img.avatar-decoration {
 position: absolute !important;
 top: 50% !important;
 left: 50% !important;
 transform: translate(-50%, -50%) !important;
-width: 145px !important; 
-height: 145px !important;
+width: 135px !important; /* 135px ang pinaka-optimal na lapat sa 110px na mukha */
+height: 135px !important;
 pointer-events: none !important;
 z-index: 9999 !important; 
 display: block !important;
@@ -171,7 +171,7 @@ background:rgba(255,255,255,.12);
     <div class="avatar-img-holder">
         <img src="../members/founder/user1.jpg" alt="Leon Avatar">
     </div>
-    <img src="ILAGAY_MO_DITO_YUNG_URL_NG_DECORATION.png" class="avatar-decoration" onerror="this.style.opacity='0'">
+    <img src="https://cdn.discordapp.com/avatar-decoration-presets/a_3c97a2d37f433a7913a1c7b7a735d000.png?size=160" class="avatar-decoration" onerror="this.style.opacity='0'">
 </div>
 
 <div class="username">@wtf.leon</div>
@@ -199,7 +199,7 @@ window.addEventListener('click', () => {
     audio.play().catch(e => console.log(e));
 }, { once: true });
 
-// 🔒 TOTAL SECURITY LOCK: Patay ang Right-Click at lahat ng Inspect keys para sa Leon Page mo
+// 🔒 TOTAL SECURITY LOCKDOWN (Anti-Right Click & Anti-Inspect)
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
     if (
@@ -212,7 +212,7 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// Awtomatikong pinipigilan at nira-crash ang DevTools inspector window kapag pinilit buksan
+// Awtomatikong debugger loop para sirain/i-freeze ang inspection window kung makalusot man sila
 setInterval(function() {
     (function() {
         return false;

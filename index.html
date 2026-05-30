@@ -134,7 +134,7 @@ body {
     z-index: 9999 !important;
 }
 
-/* ✅ CONTAINER */
+/* ✅ CONTAINER - INAYOS ANG CONTROL STACK */
 .circle-avatar-container {
     position: relative;
     width: 90px;
@@ -147,10 +147,11 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    overflow: visible; /* Pinapayagang lumampas ang tenga/pakpak */
+    overflow: visible !important; /* Siguradong pwedeng lumabas ang tenga */
+    z-index: 1;
 }
 
-/* ✅ PROFILE PIC */
+/* ✅ PROFILE PIC - BINABAAN ANG LAYER PARA MATAKPAN NG PALAMUTI */
 .circle-avatar-container img.avatar-img {
     width: 100%;
     height: 100%;
@@ -158,20 +159,20 @@ body {
     object-fit: cover;
     pointer-events: none;
     position: relative;
-    z-index: 2;
+    z-index: 1 !important;
 }
 
-/* ✅ DECORATION OVERLAY */
+/* ✅ DECORATION OVERLAY - PWERSAHANG INILAGAY SA PINAKA-IBABAW */
 img.avatar-decoration {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 110px; 
-    height: 110px;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 108px !important; /* Swak na sukat para lumampas sa 90px na mukha */
+    height: 108px !important;
     pointer-events: none;
-    z-index: 3; 
-    border-radius: 0 !important; /* Bawal maging bilog ang dekorasyon */
+    z-index: 999999 !important; /* Pwersahang nasa ibabaw ng kahit ano */
+    border-radius: 0 !important; 
 }
 
 /* ==================================================
@@ -333,7 +334,7 @@ img.avatar-decoration {
     font-size: 10px;
     letter-spacing: 5px;
     background: transparent;
-    border: 1px solid rgba(255, 2 55, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
 }
 
@@ -432,10 +433,8 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i;
 
-        // ✨ PINALAKAS NA PANALAG SA INPUT DATA
         let decorationHTML = '';
         if (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '' && mem.effectURL.startsWith('http')) { 
-            // Kung may totoong link na nakuha ang bot, dito lang gagawa ng <img> tag
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
 

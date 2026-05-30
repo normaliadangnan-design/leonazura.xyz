@@ -73,22 +73,23 @@ z-index:2;
 text-align:center;
 padding:40px;
 width:320px;
-/* GINAWA KONG MAS TRANSPARENT DITO PARA KITA BACKGROUND */
-backdrop-filter:blur(8px);
-background:rgba(0,0,0,0.15); 
+backdrop-filter:blur(10px);
+background:rgba(0,0,0,0.4); 
 border-radius:25px;
 border:1px solid rgba(255,255,255,0.05);
-box-shadow:0 0 20px rgba(0,0,0,0.3);
+box-shadow:0 0 30px rgba(0,0,0,0.5);
 }
 
-/* GINAWANG TRANSPARENT ANG LOGO CONTAINER PARA WALANG BOX NA HALATA */
+/* 🎯 FIXED: SOLID BLACK BACKGROUND PARA SA LOGO */
 .logo-img-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
     width: 100%;
-    background: transparent; 
+    background: #000000; 
+    padding: 10px;
+    border-radius: 12px;
 }
 
 .main-logo {
@@ -166,14 +167,14 @@ border-radius:50%;
 display:flex;
 justify-content:center;
 align-items:center;
-background:rgba(255,255,255,0.05);
+background:rgba(255,255,255,.05);
 text-decoration:none;
 transition:.3s;
 }
 
 .social:hover{
 transform:translateY(-4px);
-background:rgba(255,255,255,0.15);
+background:rgba(255,255,255,.15);
 }
 
 .social svg {
@@ -186,7 +187,7 @@ fill:white;
 display: block;
 text-decoration: none;
 color: white;
-background: rgba(0,0,0,0.2);
+background: rgba(0,0,0,0.3);
 border-radius: 15px;
 padding: 14px;
 transition: .3s;
@@ -195,7 +196,7 @@ border: 1px solid rgba(255,255,255,0.05);
 
 .music-container:hover {
 transform: scale(1.03);
-background: rgba(255,255,255,0.08);
+background: rgba(255,255,255,0.1);
 }
 
 .music-title {
@@ -222,7 +223,7 @@ border-radius: 20px;
 border: 1px solid rgba(255, 255, 255, 0.1);
 font-size: 12px;
 font-weight: 500;
-background: rgba(0, 0, 0, 0.1);
+background: rgba(0, 0, 0, 0.2);
 letter-spacing: 1px;
 }
 </style>

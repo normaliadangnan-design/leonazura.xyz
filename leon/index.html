@@ -44,7 +44,7 @@ left: 0;
 width: 100%;
 height: 100%;
 background: #090909;
-z-index: 9999999; /* Tinitiyak na nasa pinaka-ibabaw bago i-click */
+z-index: 9999999; 
 display: flex;
 justify-content: center;
 align-items: center;
@@ -80,7 +80,7 @@ border:1px solid rgba(255,255,255,.08);
 box-shadow:0 0 35px rgba(0,0,0,.45);
 }
 
-/* 🎯 NEW: CSS PARA SA WEBP LOGO MO */
+/* 🎯 WEBP LOGO CSS */
 .logo-img-container {
     display: flex;
     justify-content: center;
@@ -90,10 +90,10 @@ box-shadow:0 0 35px rgba(0,0,0,.45);
 }
 
 .main-logo {
-    max-width: 80px; /* Saktong sukat para hindi dambuhala sa card */
+    max-width: 80px; 
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); /* May swabeng glow effect */
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); 
 }
 
 .title{
@@ -102,7 +102,7 @@ letter-spacing:4px;
 margin-bottom:25px;
 }
 
-/* 🎯 FIXED AVATAR CONTAINER: Overflow visible para lumawit ang decoration sa labas ng bilog */
+/* 🎯 FIXED AVATAR CONTAINER */
 .avatar{
 position: relative;
 width:110px;
@@ -112,7 +112,7 @@ margin-bottom:15px;
 overflow: visible !important;
 }
 
-/* 🎯 INNER IMAGE HOLDER: Dito nakakulong ang pfp mo */
+/* 🎯 INNER IMAGE HOLDER */
 .avatar-img-holder {
 width: 100%;
 height: 100%;
@@ -134,7 +134,7 @@ position: absolute !important;
 top: 50% !important;
 left: 50% !important;
 transform: translate(-50%, -50%) !important;
-width: 135px !important; /* Optimal na lapat para yakap ang 110px na pfp mo */
+width: 135px !important; 
 height: 135px !important;
 pointer-events: none !important;
 z-index: 9999 !important; 
@@ -186,20 +186,49 @@ height:24px;
 fill:white;
 }
 
-.music{
-display:block;
-padding:14px;
-border-radius:15px;
-background:rgba(0,0,0,.45);
-font-size:13px;
-color:white;
-text-decoration:none;
-transition:.3s;
+/* 🎯 FIXED: BAGONG MUSIC BOX STYLE (Hango sa Luhod layout) */
+.music-container {
+display: block;
+text-decoration: none;
+color: white;
+background: rgba(0,0,0,.45);
+border-radius: 15px;
+padding: 14px;
+transition: .3s;
 }
 
-.music:hover{
-transform:scale(1.05);
-background:rgba(255,255,255,.12);
+.music-container:hover {
+transform: scale(1.03);
+background: rgba(255,255,255,.12);
+}
+
+.music-title {
+font-size: 15px;
+font-weight: 600;
+display: block;
+margin-bottom: 2px;
+color: #fff;
+}
+
+.music-artist {
+font-size: 12px;
+opacity: 0.8;
+display: block;
+margin-bottom: 10px;
+color: #ccc;
+letter-spacing: 0.5px;
+}
+
+/* 🎯 FIXED: VIEWS COUNTER PILL-SHAPED LOOK */
+.views-pill {
+display: inline-block;
+padding: 4px 18px;
+border-radius: 20px;
+border: 1px solid rgba(255, 255, 255, 0.25);
+font-size: 12px;
+font-weight: 500;
+background: rgba(0, 0, 0, 0.2);
+letter-spacing: 1px;
 }
 </style>
 </head>
@@ -234,18 +263,22 @@ background:rgba(255,255,255,.12);
 </a>
 </div>
 
-<a class="music" href="https://open.spotify.com/track/7GmUJDvP0KBIx9KsYiMjHD?si=c24145eff0c14681" target="_blank">🎵 5 Mil</a>
+<a class="music-container" href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank">
+    <span class="music-title">Luhod</span>
+    <span class="music-artist">Dreycruz (Official Music Video)</span>
+    <span class="views-pill">Views: 5669</span>
+</a>
 </div>
 
 <audio id="bgMusic" autoplay loop>
-<source src="../5-mil_2RPY2b9n.mp3" type="audio/mpeg">
+<source src="../luhod.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 const audio = document.getElementById("bgMusic");
 audio.volume = 0.5;
 
-// 🎯 LOADING OVERLAY CLICK: Pinapatugtog ang music sabay fade-out ng loading panel
+// 🎯 LOADING OVERLAY CLICK INTERACTION
 const overlay = document.getElementById("loading-overlay");
 overlay.addEventListener('click', () => {
     audio.play().catch(e => console.log(e));
@@ -255,7 +288,7 @@ overlay.addEventListener('click', () => {
     }, 800);
 });
 
-// 🔒 HIGH-LEVEL SECURITY LOCKDOWN (Anti-Right Click & Anti-Source Code)
+// 🔒 TOTAL SECURITY LOCKDOWN (Anti-Right Click & Anti-Source Code)
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
     if (
@@ -268,7 +301,7 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// Patuloy na loop debugger para i-freeze ang browser dev tools kung piliting i-bypass
+// DevTools Freeze Loop
 setInterval(function() {
     (function() {
         return false;

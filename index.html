@@ -141,7 +141,7 @@ body {
 }
 
 .avatar-wrapper-node {
-    position: relative;
+    position: relative !important;
     margin-left: -6px !important; 
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
@@ -167,7 +167,7 @@ body {
 }
 
 .circle-avatar-container {
-    position: relative;
+    position: relative !important;
     width: 90px;
     height: 90px;
     border-radius: 50%;
@@ -179,7 +179,7 @@ body {
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
     overflow: visible !important; 
-    z-index: 5;
+    z-index: 5 !important;
 }
 
 .circle-avatar-container img.avatar-img {
@@ -192,6 +192,7 @@ body {
     z-index: 2 !important;
 }
 
+/* FIX: Tiniyak na lulutang sa pinaka-itaas ang decoration kahit clickable link ang wrapper */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -199,7 +200,7 @@ img.avatar-decoration {
     transform: translate(-50%, -50%) !important;
     width: 120px !important; 
     height: 120px !important;
-    pointer-events: none;
+    pointer-events: none !important;
     z-index: 999999 !important; 
     border-radius: 0 !important; 
     display: block !important;
@@ -435,18 +436,25 @@ document.getElementById("gateway-overlay").onclick = () => {
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
 
-// 🔒 HIGPIT CONTROL: Anti-F12, Anti-Inspect shortcuts, at Anti-Right Click kahit sa buong screen
+// 🔒 HIGH-LEVEL SECURITY: Hinaharangan ang lahat ng keys + Sinisira ang Inspect Tab gamit ang loop debugger
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
     if (
         e.key === 'F12' || 
         (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
-        (e.ctrlKey && e.key === 'u')
+        (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))
     ) {
         e.preventDefault();
         return false;
     }
 });
+
+// Awtomatikong nagpapatakbo ng debugger loop para mag-crash ang source view kapag binuksan ang tools
+setInterval(function() {
+    (function() {
+        return false;
+    }['constructor']('debugger')['call']());
+}, 50);
 
 fetch('members.json')
     .then(res => res.json())
@@ -477,7 +485,6 @@ function showGroup(allMembers, listIDs, container) {
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i; 
 
-        // Link redirection papunta sa account folder mo
         if (id === "1250654354344775703") {
             div.href = "./leon/index.html"; 
         } else {

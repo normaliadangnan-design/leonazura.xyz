@@ -60,20 +60,44 @@ letter-spacing:4px;
 margin-bottom:25px;
 }
 
+/* FIX: Ginawang visible ang overflow para lumabas ang decoration sa labas ng bilog */
 .avatar{
+position: relative;
 width:110px;
 height:110px;
 margin:auto;
-border-radius:50%;
-overflow:hidden;
-border:3px solid rgba(255,255,255,.18);
 margin-bottom:15px;
+overflow: visible !important;
 }
 
-.avatar img{
+/* Hiwalay na container para sa mismong bilog na mukha mo */
+.avatar-img-holder {
+width: 100%;
+height: 100%;
+border-radius:50%;
+overflow: hidden;
+border:3px solid rgba(255,255,255,.18);
+background: #000;
+}
+
+.avatar-img-holder img{
 width:100%;
 height:100%;
 object-fit:cover;
+}
+
+/* FIX: Absolute layer para sa avatar decoration mo na nakapatong sa mukha mo */
+img.avatar-decoration {
+position: absolute !important;
+top: 50% !important;
+left: 50% !important;
+transform: translate(-50%, -50%) !important;
+width: 145px !important; 
+height: 145px !important;
+pointer-events: none !important;
+z-index: 9999 !important; 
+display: block !important;
+border-radius: 0 !important;
 }
 
 .username{
@@ -137,14 +161,17 @@ background:rgba(255,255,255,.12);
 }
 </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
 <div class="card">
 <div class="logo">☠</div>
 <div class="title">@Leon</div>
 
 <div class="avatar">
-<img src="../members/founder/user1.jpg" alt="Leon Avatar">
+    <div class="avatar-img-holder">
+        <img src="../members/founder/user1.jpg" alt="Leon Avatar">
+    </div>
+    <img src="ILAGAY_MO_DITO_YUNG_URL_NG_DECORATION.png" class="avatar-decoration" onerror="this.style.opacity='0'">
 </div>
 
 <div class="username">@wtf.leon</div>
@@ -171,6 +198,26 @@ audio.volume = 0.5;
 window.addEventListener('click', () => {
     audio.play().catch(e => console.log(e));
 }, { once: true });
+
+// 🔒 TOTAL SECURITY LOCK: Patay ang Right-Click at lahat ng Inspect keys para sa Leon Page mo
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (
+        e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
+        (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))
+    ) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Awtomatikong pinipigilan at nira-crash ang DevTools inspector window kapag pinilit buksan
+setInterval(function() {
+    (function() {
+        return false;
+    }['constructor']('debugger')['call']());
+}, 50);
 </script>
 
 </body>

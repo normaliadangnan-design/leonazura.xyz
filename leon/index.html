@@ -192,19 +192,19 @@ ShadowLeon • $
 
 </div>
 
-<!-- ✅ INAYOS ANG PANGALAN NG MUSIC FILE (WALANG SPACE) -->
 <audio id="bgMusic" autoplay loop>
-<source src="../5-mil_2RPY2b9n.mp3" type="audio/mpeg">
- <!-- ✅ DINAGDAG ANG CLOSING TAG -->
+  <source src="../5-mil_2RPY2b9n.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const music = document.getElementById("bgMusic");
-music.volume = .5;
-music.play().catch(()=>{
-document.body.onclick = ()=>{
-music.play();
-};
-});  
+music.volume = 0.5;
+
+// Dahil hinaharang ng mga browser ang autoplay nang walang interaction,
+// tutugtog ito sa unang click ng user sa kahit saang parte ng page.
+window.addEventListener('click', () => {
+    music.play().catch(err => console.log("Audio play blocked ng browser:", err));
+}, { once: true });
 </script>
 
 </body>

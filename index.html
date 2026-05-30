@@ -6,7 +6,7 @@
 <title>AZURA</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;500;700;900&family=Kanit:wght=800;900&display=swap');
 
 * {
     margin: 0;
@@ -74,9 +74,6 @@ body {
     pointer-events: none;
 }
 
-/* ==================================================
-   ✨ SWABENG FADE IN ANIMATION FOR TEXT
-   ================================================== */
 .fade-in-text {
     opacity: 0;
     animation: smoothFadeIn 1.5s ease-out forwards;
@@ -85,7 +82,7 @@ body {
 @keyframes smoothFadeIn {
     from {
         opacity: 0;
-        transform: translateY(4px); /* Bahagyang umaangat habang nagfe-fade in para mas swabe */
+        transform: translateY(4px);
     }
     to {
         opacity: 1;
@@ -93,16 +90,8 @@ body {
     }
 }
 
-/* Idinagdag ang delay para mas maunang lumitaw nang kaunti yung maliliit na text */
-.delay-short {
-    animation-delay: 0.2s;
-}
-
-.delay-long {
-    animation-delay: 0.5s;
-}
-
-/* ================================================== */
+.delay-short { animation-delay: 0.2s; }
+.delay-long { animation-delay: 0.5s; }
 
 .symbol-break {
     font-size: 28px;
@@ -139,9 +128,6 @@ body {
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* ==================================================
-    🔥 HILERA NG AVATARS
-   ================================================== */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -154,30 +140,30 @@ body {
     overflow: visible !important;
 }
 
-/* ==================================================
-    🔥 WRAPPER AT DECORATION CONTROLS
-   ================================================== */
 .avatar-wrapper-node {
     position: relative;
     margin-left: -6px !important; 
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
     overflow: visible !important; 
+    cursor: pointer; /* Ginawang clickable lahat ng avatar */
 }
 
 .avatar-wrapper-node:first-child {
     margin-left: 0 !important;
 }
 
-.avatar-wrapper-node.clickable {
-    cursor: pointer;
-}
 .avatar-wrapper-node:hover {
+    transform: scale(1.15);
+    z-index: 999 !important;
+}
+
+/* Naka-activate kapag pinindot (Active state para sa mobile/click) */
+.avatar-wrapper-node.active-pop {
     transform: scale(1.15);
     z-index: 99999 !important;
 }
 
-/* CONTAINER SETUP */
 .circle-avatar-container {
     position: relative;
     width: 90px;
@@ -194,7 +180,6 @@ body {
     z-index: 5;
 }
 
-/* PROFILE PIC LAYER */
 .circle-avatar-container img.avatar-img {
     width: 100%;
     height: 100%;
@@ -205,7 +190,6 @@ body {
     z-index: 2 !important;
 }
 
-/* DECORATION OVERLAY */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -220,28 +204,36 @@ img.avatar-decoration {
 }
 
 /* ==================================================
-    Target Tooltips
+    ✨ INAYOS NA TOOLTIP DESIGN AT INTERACTION
    ================================================== */
 .avatar-tooltip {
     position: absolute;
-    bottom: -85px;
+    bottom: 105%; /* Inilagay sa itaas para hindi lumubog sa dulo ng screen */
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #000000;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #050505;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 12px;
     padding: 12px 15px;
-    width: 180px;
+    width: 190px;
     white-space: normal;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease;
-    pointer-events: none;
-    z-index: 999999;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    pointer-events: auto; /* Pinapayagan na ma-interact kung kailangan */
+    z-index: 9999999;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.95);
 }
 
+/* Gana pa rin kapag hino-hover sa Desktop PC */
 .avatar-wrapper-node:hover .avatar-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Lalabas kapag bini-click / may 'active' class via JavaScript */
+.avatar-wrapper-node.active-pop .avatar-tooltip {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
@@ -277,9 +269,6 @@ img.avatar-decoration {
     font-weight: 500;
 }
 
-/* ==================================================
-    MARQUEE TICKER 
-   ================================================== */
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
@@ -390,7 +379,7 @@ img.avatar-decoration {
 }
 </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
 <div class="navigation-bar">
     HOME
@@ -448,6 +437,26 @@ document.getElementById("gateway-overlay").onclick = () => {
     audio.play().catch(() => {});
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
 };
+
+// Tooltip Toggle logic para sa clicks/touch devices
+document.addEventListener('click', (e) => {
+    const clickedAvatar = e.target.closest('.avatar-wrapper-node');
+    
+    // Kung hindi avatar ang pinindot, isara lahat ng tooltips
+    if (!clickedAvatar) {
+        document.querySelectorAll('.avatar-wrapper-node').forEach(node => {
+            node.classList.remove('active-pop');
+        });
+        return;
+    }
+    
+    // Kung may pinindot na avatar, isara ang iba at i-toggle yung napili
+    document.querySelectorAll('.avatar-wrapper-node').forEach(node => {
+        if (node !== clickedAvatar) node.classList.remove('active-pop');
+    });
+    
+    clickedAvatar.classList.toggle('active-pop');
+});
 
 fetch('members.json')
     .then(res => res.json())

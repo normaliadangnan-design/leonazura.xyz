@@ -8,221 +8,232 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;600&display=swap');
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
 }
 
 body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.55)),url("../members/founder/leon.gif");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-color:white;
-overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.55)),url("../members/founder/leon.gif");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    color:white;
+    overflow:hidden;
 }
 
 body::before{
-content:"";
-position:absolute;
-inset:0;
-background:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
-background-size:8px 8px;
-z-index:1;
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:8px 8px;
+    z-index:1;
 }
 
 #loading-overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: #090909;
-z-index: 9999999;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
-transition: opacity 0.8s ease, visibility 0.8s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #090909;
+    z-index: 9999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
 .click-text {
-font-size: 28px;
-font-weight: 600;
-letter-spacing: 8px;
-color: #ffffff;
-text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-animation: pulse 1.5s infinite alternate;
-text-transform: uppercase;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 8px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: pulse 1.5s infinite alternate;
+    text-transform: uppercase;
 }
 
 @keyframes pulse {
-0% { opacity: 0.3; transform: scale(0.98); }
-100% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+    0% { opacity: 0.3; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1.05); }
 }
 
 .card{
-position:relative;
-z-index:2;
-text-align:center;
-padding:40px;
-width:320px;
-/* SOLID BLACK - HINDI NA KITA ANG BACKGROUND SA LIKOD NG CARD */
-background: #000000; 
-border-radius:25px;
-border:1px solid rgba(255,255,255,0.1);
-box-shadow:0 10px 30px rgba(0,0,0,0.8);
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px;
+    width:320px;
+    background: #000000; 
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 10px 30px rgba(0,0,0,0.8);
 }
 
 .logo-img-container {
-display: flex;
-justify-content: center;
-align-items: center;
-margin-bottom: 15px;
-width: 100%;
-background: #000000;
-padding: 10px;
-border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+    background: #000000;
+    padding: 10px;
+    border-radius: 12px;
 }
 
 .main-logo {
-max-width: 80px;
-height: auto;
-object-fit: contain;
+    max-width: 80px;
+    height: auto;
+    object-fit: contain;
 }
 
-.title{
-font-size:20px;
-letter-spacing:4px;
-margin-bottom:25px;
+/* Typewriter Animation para sa @Leon */
+.title {
+    font-size: 20px;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0; 
+    width: fit-content;
+    margin: 0 auto 25px auto;
+    animation: typing 2s steps(20, end);
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100px; } /* Ajustado para sa @Leon */
 }
 
 .avatar{
-position: relative;
-width:110px;
-height:110px;
-margin:auto;
-margin-bottom:15px;
-overflow: visible !important;
+    position: relative;
+    width:110px;
+    height:110px;
+    margin:auto;
+    margin-bottom:15px;
+    overflow: visible !important;
 }
 
 .avatar-img-holder {
-width: 100%;
-height: 100%;
-border-radius:50%;
-overflow: hidden;
-border:3px solid rgba(255,255,255,.18);
-background: #000;
+    width: 100%;
+    height: 100%;
+    border-radius:50%;
+    overflow: hidden;
+    border:3px solid rgba(255,255,255,.18);
+    background: #000;
 }
 
 .avatar-img-holder img{
-width:100%;
-height:100%;
-object-fit:cover;
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 img.avatar-decoration {
-position: absolute !important;
-top: 50% !important;
-left: 50% !important;
-transform: translate(-50%, -50%) !important;
-width: 135px !important;
-height: 135px !important;
-pointer-events: none !important;
-z-index: 9999 !important;
-display: block !important;
-border-radius: 0 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 135px !important;
+    height: 135px !important;
+    pointer-events: none !important;
+    z-index: 9999 !important;
+    display: block !important;
+    border-radius: 0 !important;
 }
 
 .username{
-font-size:22px;
-font-weight:600;
-margin-bottom:5px;
+    font-size:22px;
+    font-weight:600;
+    margin-bottom:5px;
 }
 
 .bio{
-opacity:.75;
-font-size:13px;
-margin-bottom:25px;
+    opacity:.75;
+    font-size:13px;
+    margin-bottom:25px;
 }
 
 .socials{
-display:flex;
-justify-content:center;
-gap:14px;
-margin-bottom:20px;
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:20px;
 }
 
 .social{
-width:48px;
-height:48px;
-border-radius:50%;
-display:flex;
-justify-content:center;
-align-items:center;
-background:rgba(255,255,255,.05);
-text-decoration:none;
-transition:.3s;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(255,255,255,.05);
+    text-decoration:none;
+    transition:.3s;
 }
 
 .social:hover{
-transform:translateY(-4px);
-background:rgba(255,255,255,.15);
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.15);
 }
 
 .social svg {
-width:22px;
-height:22px;
-fill:white;
+    width:22px;
+    height:22px;
+    fill:white;
 }
 
 .music-container {
-display: block;
-text-decoration: none;
-color: white;
-background: #111111; /* Darker rin ang music box para sakto sa theme */
-border-radius: 15px;
-padding: 14px;
-transition: .3s;
-border: 1px solid rgba(255,255,255,0.05);
+    display: block;
+    text-decoration: none;
+    color: white;
+    background: #111111;
+    border-radius: 15px;
+    padding: 14px;
+    transition: .3s;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .music-container:hover {
-transform: scale(1.03);
-background: #1a1a1a;
+    transform: scale(1.03);
+    background: #1a1a1a;
 }
 
 .music-title {
-font-size: 15px;
-font-weight: 600;
-display: block;
-margin-bottom: 2px;
-color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+    color: #fff;
 }
 
 .music-artist {
-font-size: 12px;
-opacity: 0.8;
-display: block;
-margin-bottom: 10px;
-color: #ccc;
-letter-spacing: 0.5px;
+    font-size: 12px;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 10px;
+    color: #ccc;
+    letter-spacing: 0.5px;
 }
 
 .views-pill {
-display: inline-block;
-padding: 4px 18px;
-border-radius: 20px;
-border: 1px solid rgba(255, 255, 255, 0.1);
-font-size: 12px;
-font-weight: 500;
-background: #000000;
-letter-spacing: 1px;
+    display: inline-block;
+    padding: 4px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+    font-weight: 500;
+    background: #000000;
+    letter-spacing: 1px;
 }
 </style>
 </head>
@@ -268,7 +279,7 @@ letter-spacing: 1px;
     </a>
 </div>
 
-<audio id="bgMusic" autoplay loop>
+<audio id="bgMusic" loop>
     <source src="../luhod.mp3" type="audio/mpeg">
 </audio>
 

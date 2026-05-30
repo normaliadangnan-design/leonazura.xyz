@@ -36,6 +36,37 @@ background-size:8px 8px;
 z-index:1;
 }
 
+/* 🎯 INTERACTIVE LOADING SCREEN OVERLAY */
+#loading-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: #090909;
+z-index: 9999999; /* Tinitiyak na nasa pinaka-ibabaw bago i-click */
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.click-text {
+font-size: 28px;
+font-weight: 600;
+letter-spacing: 8px;
+color: #ffffff;
+text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+animation: pulse 1.5s infinite alternate;
+text-transform: uppercase;
+}
+
+@keyframes pulse {
+0% { opacity: 0.3; transform: scale(0.98); }
+100% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+}
+
 .card{
 position:relative;
 z-index:2;
@@ -49,9 +80,20 @@ border:1px solid rgba(255,255,255,.08);
 box-shadow:0 0 35px rgba(0,0,0,.45);
 }
 
-.logo{
-font-size:42px;
-margin-bottom:10px;
+/* 🎯 NEW: CSS PARA SA WEBP LOGO MO */
+.logo-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.main-logo {
+    max-width: 80px; /* Saktong sukat para hindi dambuhala sa card */
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); /* May swabeng glow effect */
 }
 
 .title{
@@ -60,7 +102,7 @@ letter-spacing:4px;
 margin-bottom:25px;
 }
 
-/* 🎯 FIXED AVATAR CONTAINER: Ginawang visible para lumawit ang dekorasyon sa labas ng bilog */
+/* 🎯 FIXED AVATAR CONTAINER: Overflow visible para lumawit ang decoration sa labas ng bilog */
 .avatar{
 position: relative;
 width:110px;
@@ -70,7 +112,7 @@ margin-bottom:15px;
 overflow: visible !important;
 }
 
-/* 🎯 INNER IMAGE HOLDER: Dito nakakulong ang bilog na mukha mo */
+/* 🎯 INNER IMAGE HOLDER: Dito nakakulong ang pfp mo */
 .avatar-img-holder {
 width: 100%;
 height: 100%;
@@ -86,13 +128,13 @@ height:100%;
 object-fit:cover;
 }
 
-/* 🎯 PERFECTLY CENTERED DECORATION: Swak na swak sa sukat at gitnang-gitna */
+/* 🎯 PERFECTLY CENTERED AVATAR DECORATION */
 img.avatar-decoration {
 position: absolute !important;
 top: 50% !important;
 left: 50% !important;
 transform: translate(-50%, -50%) !important;
-width: 135px !important; /* 135px ang pinaka-optimal na lapat sa 110px na mukha */
+width: 135px !important; /* Optimal na lapat para yakap ang 110px na pfp mo */
 height: 135px !important;
 pointer-events: none !important;
 z-index: 9999 !important; 
@@ -163,8 +205,15 @@ background:rgba(255,255,255,.12);
 </head>
 <body oncontextmenu="return false;">
 
+<div id="loading-overlay">
+    <div class="click-text">CLICK</div>
+</div>
+
 <div class="card">
-<div class="logo">☠</div>
+<div class="logo-img-container">
+    <img src="logo.webp" alt="Leon Logo" class="main-logo" onerror="this.src='https://i.imgur.com/w1A2v2A.png';">
+</div>
+
 <div class="title">@Leon</div>
 
 <div class="avatar">
@@ -195,11 +244,18 @@ background:rgba(255,255,255,.12);
 <script>
 const audio = document.getElementById("bgMusic");
 audio.volume = 0.5;
-window.addEventListener('click', () => {
-    audio.play().catch(e => console.log(e));
-}, { once: true });
 
-// 🔒 TOTAL SECURITY LOCKDOWN (Anti-Right Click & Anti-Inspect)
+// 🎯 LOADING OVERLAY CLICK: Pinapatugtog ang music sabay fade-out ng loading panel
+const overlay = document.getElementById("loading-overlay");
+overlay.addEventListener('click', () => {
+    audio.play().catch(e => console.log(e));
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+        overlay.style.visibility = "hidden";
+    }, 800);
+});
+
+// 🔒 HIGH-LEVEL SECURITY LOCKDOWN (Anti-Right Click & Anti-Source Code)
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
     if (
@@ -212,7 +268,7 @@ document.addEventListener('keydown', e => {
     }
 });
 
-// Awtomatikong debugger loop para sirain/i-freeze ang inspection window kung makalusot man sila
+// Patuloy na loop debugger para i-freeze ang browser dev tools kung piliting i-bypass
 setInterval(function() {
     (function() {
         return false;

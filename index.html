@@ -57,7 +57,7 @@ body {
 
 .center-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px; /* Nilakihan para magkasya ang maluwag na hilera */
     margin: 50px auto 20px auto;
     display: flex;
     flex-direction: column;
@@ -105,36 +105,40 @@ body {
     color: rgba(255, 255, 255, 0.8);
 }
 
+/* ==================================================
+   ✨ ROW NG AVATAR (GAYA NG PUBLIC ENEMY)
+   ================================================== */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important; /* Ginawang wrap para kapag marami, bumababa nang kusa */
     justify-content: center;
     align-items: center;
-    width: auto;
-    padding: 5px 0;
+    width: 100%;
+    max-width: 1000px;
+    padding: 25px 0; /* Dinagdagan ang taas at babang allowance para sa mga tenga/wings */
+    gap: 30px; /* ✨ Eto ang pinaka-sikreto para maging hiwalay at may space ang mga palamuti niyo */
 }
 
+/* ==================================================
+   ✨ WRAPPER NODE SETUP
+   ================================================== */
 .avatar-wrapper-node {
     position: relative;
-    margin-left: -22px;
+    margin-left: 0 !important; /* Binura ang -22px na salarin para tuluyang maghiwalay */
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
-}
-
-.avatar-wrapper-node:first-child {
-    margin-left: 0;
 }
 
 .avatar-wrapper-node.clickable {
     cursor: pointer;
 }
-.avatar-wrapper-node.clickable:hover {
-    transform: scale(1.18);
+.avatar-wrapper-node:hover {
+    transform: scale(1.15); /* Pinalitan para gumana sa lahat ng node habang naka-hover */
     z-index: 9999 !important;
 }
 
-/* ✅ CONTAINER - INAYOS ANG CONTROL STACK */
+/* CONTAINER SETUP */
 .circle-avatar-container {
     position: relative;
     width: 90px;
@@ -147,11 +151,11 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
-    overflow: visible !important; /* Siguradong pwedeng lumabas ang tenga */
+    overflow: visible !important; /* Mahalaga para lumabas ang gilid ng decorations */
     z-index: 1;
 }
 
-/* ✅ PROFILE PIC - BINABAAN ANG LAYER PARA MATAKPAN NG PALAMUTI */
+/* PROFILE PIC LAYER */
 .circle-avatar-container img.avatar-img {
     width: 100%;
     height: 100%;
@@ -162,16 +166,16 @@ body {
     z-index: 1 !important;
 }
 
-/* ✅ DECORATION OVERLAY - PWERSAHANG INILAGAY SA PINAKA-IBABAW */
+/* DECORATION OVERLAY LAYER */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 108px !important; /* Swak na sukat para lumampas sa 90px na mukha */
+    width: 108px !important; 
     height: 108px !important;
     pointer-events: none;
-    z-index: 999999 !important; /* Pwersahang nasa ibabaw ng kahit ano */
+    z-index: 999999 !important; 
     border-radius: 0 !important; 
 }
 
@@ -234,7 +238,7 @@ img.avatar-decoration {
 }
 
 /* ==================================================
-   ✅ MARQUEE TICKER 
+   MARQUEE TICKER 
    ================================================== */
 .marquee-ticker {
     overflow: hidden;
@@ -431,7 +435,6 @@ function showGroup(allMembers, listIDs, container) {
 
         const div = document.createElement('div');
         div.className = 'avatar-wrapper-node';
-        div.style.zIndex = 50 - i;
 
         let decorationHTML = '';
         if (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '' && mem.effectURL.startsWith('http')) { 

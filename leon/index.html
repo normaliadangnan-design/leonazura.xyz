@@ -19,7 +19,7 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.78)),url("../members/founder/leon.gif");
+background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.55)),url("../members/founder/leon.gif");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
@@ -31,7 +31,7 @@ body::before{
 content:"";
 position:absolute;
 inset:0;
-background:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);
+background:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
 background-size:8px 8px;
 z-index:1;
 }
@@ -73,23 +73,22 @@ z-index:2;
 text-align:center;
 padding:40px;
 width:320px;
-backdrop-filter:blur(14px);
-background:rgba(0,0,0,.28);
+/* GINAWA KONG MAS TRANSPARENT DITO PARA KITA BACKGROUND */
+backdrop-filter:blur(8px);
+background:rgba(0,0,0,0.15); 
 border-radius:25px;
-border:1px solid rgba(255,255,255,.08);
-box-shadow:0 0 35px rgba(0,0,0,.45);
+border:1px solid rgba(255,255,255,0.05);
+box-shadow:0 0 20px rgba(0,0,0,0.3);
 }
 
-/* 🎯 FIXED ALL BLACK BACKGROUND PARA SA LOGO */
+/* GINAWANG TRANSPARENT ANG LOGO CONTAINER PARA WALANG BOX NA HALATA */
 .logo-img-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
     width: 100%;
-    background: #000000; /* Solid black para hindi halata ang gray box ng logo */
-    padding: 8px;
-    border-radius: 8px;
+    background: transparent; 
 }
 
 .main-logo {
@@ -104,7 +103,6 @@ letter-spacing:4px;
 margin-bottom:25px;
 }
 
-/* 🎯 FIXED AVATAR CONTAINER */
 .avatar{
 position: relative;
 width:110px;
@@ -114,7 +112,6 @@ margin-bottom:15px;
 overflow: visible !important;
 }
 
-/* 🎯 INNER IMAGE HOLDER */
 .avatar-img-holder {
 width: 100%;
 height: 100%;
@@ -130,7 +127,6 @@ height:100%;
 object-fit:cover;
 }
 
-/* 🎯 PERFECTLY CENTERED AVATAR DECORATION */
 img.avatar-decoration {
 position: absolute !important;
 top: 50% !important;
@@ -156,7 +152,6 @@ font-size:13px;
 margin-bottom:25px;
 }
 
-/* 🎯 SOCIALS CONTAINER GAP */
 .socials{
 display:flex;
 justify-content:center;
@@ -171,14 +166,14 @@ border-radius:50%;
 display:flex;
 justify-content:center;
 align-items:center;
-background:rgba(255,255,255,.08);
+background:rgba(255,255,255,0.05);
 text-decoration:none;
 transition:.3s;
 }
 
 .social:hover{
 transform:translateY(-4px);
-background:rgba(255,255,255,.18);
+background:rgba(255,255,255,0.15);
 }
 
 .social svg {
@@ -187,20 +182,20 @@ height:22px;
 fill:white;
 }
 
-/* 🎯 MUSIC BOX STYLE */
 .music-container {
 display: block;
 text-decoration: none;
 color: white;
-background: rgba(0,0,0,.45);
+background: rgba(0,0,0,0.2);
 border-radius: 15px;
 padding: 14px;
 transition: .3s;
+border: 1px solid rgba(255,255,255,0.05);
 }
 
 .music-container:hover {
 transform: scale(1.03);
-background: rgba(255,255,255,.12);
+background: rgba(255,255,255,0.08);
 }
 
 .music-title {
@@ -220,15 +215,14 @@ color: #ccc;
 letter-spacing: 0.5px;
 }
 
-/* 🎯 VIEWS COUNTER PILL-SHAPED LOOK */
 .views-pill {
 display: inline-block;
 padding: 4px 18px;
 border-radius: 20px;
-border: 1px solid rgba(255, 255, 255, 0.25);
+border: 1px solid rgba(255, 255, 255, 0.1);
 font-size: 12px;
 font-weight: 500;
-background: rgba(0, 0, 0, 0.2);
+background: rgba(0, 0, 0, 0.1);
 letter-spacing: 1px;
 }
 </style>
@@ -258,21 +252,13 @@ letter-spacing: 1px;
 
 <div class="socials">
     <a class="social" href="https://discord.gg/CwsGFu6D" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/></svg>
     </a>
-
     <a class="social" href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/></svg>
     </a>
-
     <a class="social" href="https://www.instagram.com/leonky.2/" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
     </a>
 </div>
 
@@ -291,36 +277,21 @@ letter-spacing: 1px;
 const audio = document.getElementById("bgMusic");
 audio.volume = 0.5;
 
-// 🎯 LOADING OVERLAY CLICK INTERACTION
 const overlay = document.getElementById("loading-overlay");
 overlay.addEventListener('click', () => {
     audio.play().catch(e => console.log(e));
     overlay.style.opacity = "0";
-    setTimeout(() => {
-        overlay.style.visibility = "hidden";
-    }, 800);
+    setTimeout(() => { overlay.style.visibility = "hidden"; }, 800);
 });
 
-// 🔒 TOTAL SECURITY LOCKDOWN (Anti-Right Click & Anti-Source Code)
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
-    if (
-        e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
-        (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))
-    ) {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
         e.preventDefault();
         return false;
     }
 });
-
-// DevTools Freeze Loop
-setInterval(function() {
-    (function() {
-        return false;
-    }['constructor']('debugger')['call']());
-}, 50);
+setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
 </script>
-
 </body>
 </html>

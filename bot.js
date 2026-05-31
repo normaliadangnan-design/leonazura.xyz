@@ -6,7 +6,7 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildPresences, // ⚠️ IMPORTANTE: Kailangan ito para makita ang status
+        GatewayIntentBits.GuildPresences, // ⚠️ Kailangan ito para mabasa status
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent
     ],
@@ -21,25 +21,25 @@ const rest = new REST({ version: '10' }).setToken(BOT_TOKEN);
 
 const GUILD_ID = "1506830822207127552"; 
 const YOUR_ID = "1250654354344775703"; 
-const CHECK_INTERVAL = 30000; // ⏱️ 30 segundo - Mas mabilis mag-update
+const CHECK_INTERVAL = 5000; // ⏱️ 5 SEKONDO LANG - Sobrang bilis na ng update
 
 let previousData = ""; 
 
 async function checkAndUpdateMembers() {
-    console.log("🔍 INI-SCAN ANG SERVER... KUKUHA ANG STATUS");
+    console.log("🔍 SCANNING SERVER... REAL-TIME MODE");
     
     let guild = client.guilds.cache.get(GUILD_ID);
     if (!guild) {
         try {
             guild = await client.guilds.fetch(GUILD_ID);
         } catch (err) {
-            console.log("❌ SERVER NOT FOUND O WALANG AKSES ANG BOT");
+            console.log("❌ SERVER NOT FOUND O WALANG AKSES");
             return;
         }
     }
 
     try {
-        // Siguraduhing nakuha ang lahat ng miyembro at ang kanilang presensya/status
+        // ⚠️ MAHALAGA: Siguraduhing nakuha ang lahat ng presensya/status
         await guild.members.fetch({ withPresences: true }); 
         const currentData = [];
 
@@ -47,13 +47,8 @@ async function checkAndUpdateMembers() {
             if (member.user.bot) continue;
 
             let decoration_url = null;
-            
-            // ✅ AYOS NA: SIGURADONG KUKUHA ANG TAMANG STATUS
-            // Kung wala nakuha, ituturing na 'offline'
-            let userStatus = 'offline'; 
-            if (member.presence && member.presence.status) {
-                userStatus = member.presence.status; 
-            }
+            // ⚡ KUKUHA AGAD NG STATUS: online / idle / dnd / offline
+            let userStatus = (member.presence && member.presence.status) ? member.presence.status : 'offline';
 
             try {
                 const userData = await rest.get(Routes.user(member.user.id));
@@ -69,7 +64,6 @@ async function checkAndUpdateMembers() {
                     }
                 }
             } catch (err) { 
-                // Kung may error sa pagkuha ng palamuti, wala lang, tuloy lang
                 decoration_url = null;
             }
 
@@ -79,54 +73,51 @@ async function checkAndUpdateMembers() {
                 displayName: member.displayName,
                 avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png' }),
                 effectURL: decoration_url,
-                status: userStatus // ✅ Ito ang ipapasa: online / idle / dnd / offline
+                status: userStatus 
             });
         }
 
         const newDataString = JSON.stringify(currentData, null, 2);
 
-        // ✅ Ikukumpara ang luma at bago para lang mag-save kapag may nagbago
+        // 💾 MAG-SAVE LANG KAPAG MAY PAGBABAGO
         if (newDataString !== previousData) {
-            console.log("✅ MAY PAGBABAGO! NA-UPDATE ANG STATUS AT DATA!");
+            console.log("✅ NA-UPDATE! STATUS AT DECORATION NAI-SAVE!");
             fs.writeFileSync('members.json', newDataString);
             previousData = newDataString;
 
-            // ✅ Ipapadala sa iyo ang bagong file kapag may pagbabago
+            // ✅ IPAPAALAM SA IYO VIA DM
             try {
                 const user = await client.users.fetch(YOUR_ID);
                 const file = new AttachmentBuilder('members.json');
                 await user.send({ 
-                    content: "🔔 **SYSTEM UPDATE!**\n✅ Na-update na!\n• Online / Idle / Do Not Disturb / Offline\n• Kasama na ang mga palamuti", 
+                    content: "🔔 **SYSTEM UPDATE**\n✅ Real-time active\n• Status: Online/Idle/DND/Offline\n• Decorations synced", 
                     files: [file] 
                 });
             } catch (err) {
-                console.log("❌ Hindi maipadala ang DM sa iyo. Baka naka-off o hindi ka ka-server ng bot.");
+                console.log("❌ Hindi maipadala ang DM.");
             }
         } else {
-            console.log("💤 Walang nagbago sa status o data.");
+            console.log("💤 Walang pagbabago...");
         }
 
     } catch (error) {
-        console.error("❌ ERROR SA SCANNING:", error.message);
+        console.error("❌ ERROR:", error.message);
     }
 }
 
 client.on('ready', async () => {
     console.log(`✅ LOGGED IN AS: ${client.user.tag}`);
-    console.log("🌐 NAKA-CONNECT SA SERVER:", GUILD_ID);
+    console.log("🚀 REAL-TIME STATUS ACTIVE");
     
-    // Simulan agad ang unang scan
+    // Simulan agad
     await checkAndUpdateMembers();
-    
-    // Ulitin bawat 30 segundo (pwedeng baguhin, mas mabagal = mas kaunti ang reserbang gamit)
-    setInterval(async () => { 
-        await checkAndUpdateMembers(); 
-    }, CHECK_INTERVAL);
+    // Ulitin bawat 5 segundo
+    setInterval(async () => { await checkAndUpdateMembers(); }, CHECK_INTERVAL);
 });
 
-// ✅ HINUHULING PARA HINDI TUMIGIL ANG BOT KAHIT MAY MALI
+// 🛡️ PROTEKSIYON PARA HINDI TUMIGIL ANG BOT
 process.on('unhandledRejection', error => {
-    console.error('⚠️ UNHANDLED ERROR:', error.message);
+    console.error('⚠️ BOT SAFETY:', error.message);
 });
 
 client.login(BOT_TOKEN);

@@ -67,7 +67,7 @@ body {
     width: 0;
 }
 
-/* WALANG ANIMATION ANG $ SIGN */
+/* INILAGAY KO NA ANG METALLIC GLOW AT GRAY COLOR SA $ SIGN, WALANG ANIMATION */
 .symbol-break {
     font-size: 28px;
     font-weight: 700;
@@ -76,9 +76,8 @@ body {
     white-space: normal;
     width: auto;
     margin: 0 auto 20px auto;
-    animation: none;
-    color: #ffffff;
-    text-shadow: 0 0 10px #aaaaaa;
+    animation: metallic-glow 3s infinite ease-in-out; /* MAY GLOW EPEKTO */
+    color: #808080; /* SIMULA SA GRAY KATULAD NG IBA */
 }
 
 .navigation-bar {
@@ -475,7 +474,7 @@ fetch('members.json')
         showGroup(members, aboveAllIDs, 'aboveall-container');
         showGroup(members, staffIDs, 'staff-container');
         showMarquee(members, scrollingIDsRow1, "marquee-container-1");
-        showMarquee(members, scrollingIDsRow2, "marquee-container-2"); // INAYOS KO NA ITO
+        showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     });
 
 function showGroup(allMembers, listIDs, container) {

@@ -6,9 +6,9 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildPresences, // ✅ MAHALAGA: Kailangan ito para mabasa STATUS
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers
+        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
     ],
     presence: {
         status: 'online',
@@ -46,22 +46,18 @@ async function checkAndUpdateMembers() {
             if (member.user.bot) continue;
 
             let decoration_url = null;
-            let userStatus = member.presence ? member.presence.status : 'offline'; // ✅ KINUHA ANG STATUS
+            let userStatus = member.presence ? member.presence.status : 'offline';
 
             try {
-                // Kukunin ang buong Discord User Profile sa API v10
                 const userData = await rest.get(Routes.user(member.user.id));
 
                 if (userData && userData.avatar_decoration_data) {
                     const asset = userData.avatar_decoration_data.asset;
                     const skuId = userData.avatar_decoration_data.sku_id;
 
-                    // 1. Kung galing sa DISCORD SHOP ang dekorasyon (May SKU ID)
                     if (skuId) {
                         decoration_url = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=160`;
-                    } 
-                    // 2. Kung DEFAULT / PREMIUM PRESET naman ang gamit
-                    else if (asset) {
+                    } else if (asset) {
                         decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.png?size=160`;
                     }
                 }
@@ -75,7 +71,7 @@ async function checkAndUpdateMembers() {
                 displayName: member.displayName,
                 avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png' }),
                 effectURL: decoration_url,
-                status: userStatus // ✅ IDINAGDAG SA JSON: online / idle / dnd / offline
+                status: userStatus 
             });
         }
 

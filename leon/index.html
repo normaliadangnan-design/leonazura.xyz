@@ -99,14 +99,13 @@ body::before{
 .title {
     font-size: 20px;
     letter-spacing: 4px;
-    margin-bottom: 25px;
+    margin-bottom: 10px; /* ✅ Binago para magkasya sa status */
     overflow: hidden;
     white-space: nowrap;
     border-right: 0; 
     width: fit-content;
-    margin: 0 auto 25px auto;
-    /* Animation removed here, will add via class later */
-    width: 0; /* Start with 0 width */
+    margin: 0 auto 10px auto;
+    width: 0; 
 }
 
 /* Active class that will be added after click */
@@ -116,8 +115,35 @@ body::before{
 
 @keyframes typing {
     from { width: 0; }
-    to { width: 100px; } /* Adjusted para sa @Leon */
+    to { width: 100px; } 
 }
+
+/* ✅ BAGONG STYLE PARA SA STATUS */
+.status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 15px;
+    background: #111;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.status-online { background-color: #23a55a; }
+.status-idle { background-color: #f0b232; }
+.status-dnd { background-color: #f13f43; }
+.status-offline { background-color: #80848e; }
 
 .avatar{
     position: relative;
@@ -256,6 +282,12 @@ img.avatar-decoration {
 
     <div class="title">@𝗟𝗲𝗼𝗻</div>
 
+    <!-- ✅ DITO LALABAS ANG STATUS -->
+    <div id="statusArea" class="status-container" style="display: none;">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText"></span>
+    </div>
+
     <div class="avatar">
         <div class="avatar-img-holder">
             <img src="../members/founder/user1.jpg" alt="Leon Avatar">
@@ -294,14 +326,13 @@ const audio = document.getElementById("bgMusic");
 audio.volume = 0.5;
 
 const overlay = document.getElementById("loading-overlay");
-const typewriterText = document.querySelector('.title'); // select typewriter element
+const typewriterText = document.querySelector('.title'); 
 
 overlay.addEventListener('click', () => {
     audio.play().catch(e => console.log(e));
     overlay.style.opacity = "0";
     setTimeout(() => { 
         overlay.style.visibility = "hidden"; 
-        // Start typewriter animation ONLY after overlay is clicked
         typewriterText.classList.add('typing-active');
     }, 800);
 });
@@ -314,6 +345,41 @@ document.addEventListener('keydown', e => {
     }
 });
 setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
+
+// ✅ BAGONG CODE: KUKUHA ANG STATUS MO SA MEMBERS.JSON
+const YOUR_ID = "1250654354344775703"; // Huwag palitan, tama na ito
+
+fetch('../members.json')
+    .then(res => res.json())
+    .then(data => {
+        const me = data.find(user => user.id === YOUR_ID);
+        if (me) {
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const statusArea = document.getElementById('statusArea');
+
+            // Tanggalin lahat ng dating kulay
+            statusDot.className = "status-dot";
+
+            // Ayusin base sa status
+            if(me.status === 'online') {
+                statusDot.classList.add('status-online');
+                statusText.innerText = 'Online';
+            } else if(me.status === 'idle') {
+                statusDot.classList.add('status-idle');
+                statusText.innerText = 'Idle';
+            } else if(me.status === 'dnd') {
+                statusDot.classList.add('status-dnd');
+                statusText.innerText = 'Do Not Disturb';
+            } else {
+                statusDot.classList.add('status-offline');
+                statusText.innerText = 'Offline / Invisible';
+            }
+            
+            // Ipakita na
+            statusArea.style.display = 'flex';
+        }
+    });
 </script>
 </body>
 </html>

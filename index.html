@@ -50,6 +50,7 @@ body {
     100% { color: #808080; text-shadow: 0 0 5px #555555; }
 }
 
+/* NAGDAGDAG AKO: Naka-pause muna ang animation bago mag-click */
 .typewriter-header {
     font-family: 'Inter', sans-serif;
     font-size: 30px; 
@@ -61,8 +62,10 @@ body {
     width: fit-content;
     margin: 0 auto;
     animation: 
-        typing 2s steps(20, end),
+        typing 2s steps(20, end) forwards,
         metallic-glow 3s infinite ease-in-out;
+    animation-play-state: paused; /* HINDI TUMATAKBO MUNA */
+    width: 0; /* NAKA-ZERO MUNA HANGGANG DI NA-CLICK */
 }
 
 .symbol-break {
@@ -74,8 +77,10 @@ body {
     width: fit-content;
     margin: 0 auto 20px auto;
     animation: 
-        typing 1s steps(5, end),
+        typing 1s steps(5, end) forwards,
         metallic-glow 3s infinite ease-in-out;
+    animation-play-state: paused; /* HINDI TUMATAKBO MUNA */
+    width: 0; /* NAKA-ZERO MUNA HANGGANG DI NA-CLICK */
 }
 
 .navigation-bar {
@@ -365,6 +370,7 @@ img.avatar-decoration {
     align-items: center;
     z-index: 999999;
     cursor: pointer;
+    transition: opacity 0.5s ease, visibility 0.5s;
 }
 
 .gateway-btn {
@@ -379,7 +385,6 @@ img.avatar-decoration {
 .fade-gateway {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s;
 }
 </style>
 </head>
@@ -431,7 +436,7 @@ img.avatar-decoration {
 
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
-</audio>
+
 
 <script>
 const audio = document.getElementById("soundtrack");
@@ -440,6 +445,12 @@ audio.volume = 0.4;
 document.getElementById("gateway-overlay").onclick = () => {
     audio.play().catch(() => {});
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
+    
+    // DITO NAG SIMULA ANG PAGTAKBO NG TYPEWRITER PAGKATAPOS I-CLICK
+    document.querySelectorAll('.typewriter-header, .symbol-break').forEach(el => {
+        el.style.animationPlayState = 'running';
+        el.style.width = '100%';
+    });
 };
 
 document.addEventListener('contextmenu', e => e.preventDefault());
@@ -468,7 +479,7 @@ fetch('members.json')
         showGroup(members, aboveAllIDs, 'aboveall-container');
         showGroup(members, staffIDs, 'staff-container');
         showMarquee(members, scrollingIDsRow1, "marquee-container-1");
-        showMarquee(members, scrollingIDsRow2, "marquee-container-2");
+        showMarquee(members, scrollingIDsIDsRow2, "marquee-container-2");
     });
 
 function showGroup(allMembers, listIDs, container) {

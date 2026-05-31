@@ -531,9 +531,13 @@ function showGroup(allMembers, listIDs, container) {
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        let decorationHTML = (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '') ? `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.opacity='0'">` : '';
+        // ✅ AYOS NA: Babasahin na nang tama kahit null ang effectURL (gaya ng sa file mo)
+        let decorationHTML = '';
+        if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
+        }
         
-        // ✅ STATUS COLOR & TEXT
+        // ✅ STATUS COLOR & TEXT - EKSAKTO SA LAMAN NG JSON MO
         let statusText = '';
         let statusClass = '';
         let statusDotClass = '';
@@ -544,7 +548,7 @@ function showGroup(allMembers, listIDs, container) {
         } else if(mem.status === 'dnd') {
             statusText = 'Do Not Disturb'; statusClass = 'status-dnd'; statusDotClass = 'status-dnd';
         } else {
-            statusText = 'Offline'; statusClass = 'status-offline'; statusDotClass = 'status-offline';
+            statusText = 'Offline / Invisible'; statusClass = 'status-offline'; statusDotClass = 'status-offline';
         }
 
         div.innerHTML = `

@@ -137,22 +137,22 @@ body {
     margin-bottom: 3px;
 }
 
-/* INAYOS KO ANG AGWAT: TINANGGAL ANG NEGATIVE MARGIN, NAGLAGAY NG GAP */
+/* INAYOS: LAHAT AY NASA ISANG LINYA, WALANG BABABA */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important; /* Pinigilan ang pagbaba pababa */
     justify-content: center;
     align-items: center;
-    width: auto;
+    width: 100%;
     padding: 25px 0; 
-    gap: 12px !important; /* <<< DITO NILAGAY ANG SAKTO LANG NA AGWAT */
-    overflow: visible !important;
+    gap: 12px !important; 
+    overflow-x: auto !important; /* Kung sobra sa lapad, magkakaroon ng scroll sa gilid */
+    overflow-y: hidden !important;
 }
 
 .avatar-wrapper-node {
     position: relative !important;
-    /* Tinanggal ko na yung margin-left: -6px !important; para hindi dikit */
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
     overflow: visible !important; 
@@ -160,6 +160,7 @@ body {
     text-decoration: none;
     color: inherit;
     display: block;
+    flex-shrink: 0 !important; /* Hindi liliit ang avatar */
 }
 
 .avatar-wrapper-node:hover {

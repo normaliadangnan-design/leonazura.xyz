@@ -508,52 +508,58 @@ setInterval(() => {
     (function() {})['constructor']('debugger')['call']();
 }, 50);
 
-// ✅ REAL-TIME UPDATE SYSTEM
+// ✅ REAL-TIME UPDATE SYSTEM - INAYOS NA!
 const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
 const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
 const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
 const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
 const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
-let currentMembersData = []; // IIMBAN ANG DATOS
-let renderedElements = {};  // IIMBAN ANG MGA GINUHIT NA ELEMENTO
+let currentDataHash = "";
 
-// 🚀 SIMULAN ANG PAGKUHA NG DATA AGAD
-fetchAndRenderData();
-// 🔄 ULITIN BAWAT 5 SEGUNDO (5000ms)
-setInterval(fetchAndRenderData, 5000);
+// 🚀 SIMULAN AGAD
+fetchData();
+// 🔄 TUWING 15 SEKUNDO LANG (KAPAREHO NG BOT, WALA NANG ERROR!)
+setInterval(fetchData, 30000);
 
-async function fetchAndRenderData() {
+async function fetchData() {
     try {
-        // ⚡ ANG SUSI: DAGDAG RANDOM NUMBER PARA HINDI MAG-CACHE AT LAGING BAGO ANG BASAHIN
-        const res = await fetch(`members.json?v=${Date.now()}`);
-        const newData = await res.json();
+        // ⚡ PINAKAMATATAG NA PARAAN - HINDI NA KAYANG I-CACHE NG BROWSER
+        const response = await fetch(`members.json?time=${Date.now()}`, {
+            cache: "no-store",
+            headers: {'Cache-Control': 'no-cache, no-store, must-revalidate'}
+        });
 
-        // 📉 IKUMBARA KUNG MAY PAGBABAGO
-        if(JSON.stringify(newData) !== JSON.stringify(currentMembersData)) {
-            currentMembersData = newData;
-            updateAllSections(); // ✅ I-UPDATE ANG LAHAT KAPAG MAY BAGO
+        if (!response.ok) throw new Error("File not found");
+        const newData = await response.json();
+        const newHash = JSON.stringify(newData);
+
+        // 🧐 TIGNAN KUNG MAY NAGBAGO LANG
+        if (newHash !== currentDataHash) {
+            currentDataHash = newHash;
+            renderAll(newData); // ✅ I-UPDATE AGAD ANG ITSURA
+            console.log("🔄 Nag-update ang status/data!"); // Makikita mo sa console kung gumagana
         }
 
-    } catch (err) {
-        console.log("❌ Hindi mabasa ang data...");
+    } catch (error) {
+        console.error("❌ Error sa pagbasa:", error);
     }
 }
 
-function updateAllSections() {
-    // LINISIN ANG LAMAN BAGO GUMAWA ULIT
+function renderAll(members) {
+    // Linisin ang laman bago ilagay ulit
     document.getElementById('founder-container').innerHTML = '';
     document.getElementById('aboveall-container').innerHTML = '';
     document.getElementById('staff-container').innerHTML = '';
     document.getElementById('marquee-container-1').innerHTML = '';
     document.getElementById('marquee-container-2').innerHTML = '';
 
-    // GUMAWA ULIT NG BAGONG LAMAN
-    showGroup(currentMembersData, founderIDs, 'founder-container');
-    showGroup(currentMembersData, aboveAllIDs, 'aboveall-container');
-    showGroup(currentMembersData, staffIDs, 'staff-container');
-    showMarquee(currentMembersData, scrollingIDsRow1, "marquee-container-1");
-    showMarquee(currentMembersData, scrollingIDsRow2, "marquee-container-2");
+    // Ipakita ulit lahat ng may bagong data
+    showGroup(members, founderIDs, 'founder-container');
+    showGroup(members, aboveAllIDs, 'aboveall-container');
+    showGroup(members, staffIDs, 'staff-container');
+    showMarquee(members, scrollingIDsRow1, "marquee-container-1");
+    showMarquee(members, scrollingIDsRow2, "marquee-container-2");
 }
 
 function showGroup(allMembers, listIDs, container) {
@@ -561,29 +567,31 @@ function showGroup(allMembers, listIDs, container) {
     listIDs.forEach((id, i) => {
         const mem = allMembers.find(m => m.id === id);
         if (!mem) return;
+
         const div = document.createElement('a');
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        // ✅ Babasahin na nang tama kahit null ang effectURL
         let decorationHTML = '';
         if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
         
-        // ✅ STATUS COLOR & TEXT - GANAP NA AYOS
-        let statusText = '';
-        let statusClass = '';
-        let statusDotClass = '';
-        if(mem.status === 'online') {
-            statusText = 'Online'; statusClass = 'status-online'; statusDotClass = 'status-online';
-        } else if(mem.status === 'idle') {
-            statusText = 'Idle'; statusClass = 'status-idle'; statusDotClass = 'status-idle';
-        } else if(mem.status === 'dnd') {
-            statusText = 'Do Not Disturb'; statusClass = 'status-dnd'; statusDotClass = 'status-dnd';
-        } else {
-            statusText = 'Offline / Invisible'; statusClass = 'status-offline'; statusDotClass = 'status-offline';
+        // ✅ STATUS LOGIC - GANAP NA AYOS AT MAY GANDA NG PAGPAPALIT
+        let statusText, statusClass, dotClass;
+        switch(mem.status) {
+            case 'online':
+                statusText = 'Online'; statusClass = 'status-online'; dotClass = 'status-online';
+                break;
+            case 'idle':
+                statusText = 'Idle'; statusClass = 'status-idle'; dotClass = 'status-idle';
+                break;
+            case 'dnd':
+                statusText = 'Do Not Disturb'; statusClass = 'status-dnd'; dotClass = 'status-dnd';
+                break;
+            default:
+                statusText = 'Offline / Invisible'; statusClass = 'status-offline'; dotClass = 'status-offline';
         }
 
         div.innerHTML = `
@@ -599,16 +607,18 @@ function showGroup(allMembers, listIDs, container) {
                 <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>
                 <div class="tooltip-status">
-                    <span class="status-dot-sm ${statusDotClass}"></span>
+                    <span class="status-dot-sm ${dotClass}"></span>
                     <span>${statusText}</span>
                 </div>
             </div>
         `;
+        
         div.addEventListener('click', function(e) {
             if (this.getAttribute('href') === '#') e.preventDefault();
             document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
             this.classList.add('active-pop');
         });
+
         box.appendChild(div);
     });
 }

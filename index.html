@@ -146,7 +146,7 @@ body {
     margin-bottom: 3px;
 }
 
-/* ✅ INAYOS: SAKTO LANG ANG LAYO, HINDI MASYADONG MALAPIT HINDI RIN MASYADONG MALAYO */
+/* ✅ SAKTO LANG ANG LAYO NG BILOG */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -155,7 +155,7 @@ body {
     align-items: center;
     width: 100%;
     padding: 20px 0; 
-    gap: 20px !important; /* ✅ BINAWASAN ANG LAYO - SAKTO NA ITO */
+    gap: 20px !important; 
     overflow: visible !important; 
 }
 
@@ -235,14 +235,14 @@ img.avatar-decoration {
     display: block !important;
 }
 
-/* ✅ CARD / TOOLTIP DESIGN - KASAMA NA ANG STATUS DITO */
+/* ✅ INAYOS: CARD PURONG ITIM #000000, TINANGGAL ANG BORDER */
 .avatar-tooltip {
     position: absolute;
     bottom: 110%; 
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #18191c;
-    border: 1px solid #292b2f;
+    background: #000000 !important; /* PURONG ITIM */
+    border: none !important; /* WALA NANG BORDER */
     border-radius: 8px;
     padding: 12px;
     width: 200px;
@@ -274,8 +274,9 @@ img.avatar-decoration {
     border-radius: 50%;
 }
 
+/* ✅ TINANGGAL NA ANG CORONA / CROWN */
 .tooltip-emojis {
-    font-size: 14px;
+    display: none !important;
 }
 
 .tooltip-username {
@@ -298,7 +299,7 @@ img.avatar-decoration {
     gap: 6px;
     padding: 4px 6px;
     border-radius: 3px;
-    background: #292b2f;
+    background: #1a1a1a; /* Medyo mas maliwanag na itim para makita */
 }
 .status-dot-sm {
     width: 8px;
@@ -531,13 +532,13 @@ function showGroup(allMembers, listIDs, container) {
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        // ✅ AYOS NA: Babasahin na nang tama kahit null ang effectURL
+        // ✅ Babasahin na nang tama kahit null ang effectURL
         let decorationHTML = '';
         if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
         
-        // ✅ STATUS COLOR & TEXT - TAMA NA ANG PAGBASA
+        // ✅ STATUS COLOR & TEXT
         let statusText = '';
         let statusClass = '';
         let statusDotClass = '';
@@ -560,11 +561,10 @@ function showGroup(allMembers, listIDs, container) {
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
                     <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
-                    <span class="tooltip-emojis">👑</span>
+                    <!-- ✅ TINANGGAL NA ANG CORONA DITO -->
                 </div>
                 <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>
-                <!-- ✅ STATUS NASA LOOB NG CARD -->
                 <div class="tooltip-status">
                     <span class="status-dot-sm ${statusDotClass}"></span>
                     <span>${statusText}</span>

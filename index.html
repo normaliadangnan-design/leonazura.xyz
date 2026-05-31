@@ -67,7 +67,7 @@ body {
     width: 0;
 }
 
-/* INILAGAY KO NA ANG METALLIC GLOW AT GRAY COLOR SA $ SIGN, WALANG ANIMATION */
+/* MAY GLOW AT GRAY COLOR ANG $, WALANG ANIMATION */
 .symbol-break {
     font-size: 28px;
     font-weight: 700;
@@ -76,8 +76,8 @@ body {
     white-space: normal;
     width: auto;
     margin: 0 auto 20px auto;
-    animation: metallic-glow 3s infinite ease-in-out; /* MAY GLOW EPEKTO */
-    color: #808080; /* SIMULA SA GRAY KATULAD NG IBA */
+    animation: metallic-glow 3s infinite ease-in-out;
+    color: #808080;
 }
 
 .navigation-bar {
@@ -137,6 +137,7 @@ body {
     margin-bottom: 3px;
 }
 
+/* INAYOS KO ANG AGWAT: TINANGGAL ANG NEGATIVE MARGIN, NAGLAGAY NG GAP */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -145,13 +146,13 @@ body {
     align-items: center;
     width: auto;
     padding: 25px 0; 
-    gap: 0px !important; 
+    gap: 12px !important; /* <<< DITO NILAGAY ANG SAKTO LANG NA AGWAT */
     overflow: visible !important;
 }
 
 .avatar-wrapper-node {
     position: relative !important;
-    margin-left: -6px !important; 
+    /* Tinanggal ko na yung margin-left: -6px !important; para hindi dikit */
     transition: transform 0.2s ease, z-index 0.2s ease;
     z-index: 10;
     overflow: visible !important; 
@@ -159,10 +160,6 @@ body {
     text-decoration: none;
     color: inherit;
     display: block;
-}
-
-.avatar-wrapper-node:first-child {
-    margin-left: 0 !important;
 }
 
 .avatar-wrapper-node:hover {

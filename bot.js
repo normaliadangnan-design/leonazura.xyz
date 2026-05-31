@@ -21,7 +21,9 @@ const rest = new REST({ version: '10' }).setToken(BOT_TOKEN);
 
 const GUILD_ID = "1506830822207127552"; 
 const YOUR_ID = "1250654354344775703"; 
-const CHECK_INTERVAL = 5000; // ⏱️ 5 SEKONDO LANG - Sobrang bilis na ng update
+
+// ✅ INAYOS NA: 15,000 ms = 15 segundo. LIGTAS NA ITO, WALA NANG RATE LIMIT!
+const CHECK_INTERVAL = 15000; 
 
 let previousData = ""; 
 
@@ -85,23 +87,20 @@ async function checkAndUpdateMembers() {
             fs.writeFileSync('members.json', newDataString);
             previousData = newDataString;
 
-            // ✅ IPAPAALAM SA IYO VIA DM
-            try {
-                const user = await client.users.fetch(YOUR_ID);
-                const file = new AttachmentBuilder('members.json');
-                await user.send({ 
-                    content: "🔔 **SYSTEM UPDATE**\n✅ Real-time active\n• Status: Online/Idle/DND/Offline\n• Decorations synced", 
-                    files: [file] 
-                });
-            } catch (err) {
-                console.log("❌ Hindi maipadala ang DM.");
-            }
+            // ✅ TINANGGAL KO ANG PAGPAPADALA NG FILE SA DM PARA HINDI NA MAGKAROON NG ERROR
+            console.log("ℹ️ Nakasave na ang bagong data sa members.json");
+
         } else {
             console.log("💤 Walang pagbabago...");
         }
 
     } catch (error) {
-        console.error("❌ ERROR:", error.message);
+        // ✅ INAYOS NA: Kapag may rate limit, lalaktawan lang niya at susubok ulit mamaya
+        if (error.message.includes('rate limited')) {
+            console.log("⚠️ Hinihintay ang Discord... Magbabalik agad!");
+        } else {
+            console.error("❌ ERROR:", error.message);
+        }
     }
 }
 
@@ -111,7 +110,7 @@ client.on('ready', async () => {
     
     // Simulan agad
     await checkAndUpdateMembers();
-    // Ulitin bawat 5 segundo
+    // Ulitin bawat 15 segundo
     setInterval(async () => { await checkAndUpdateMembers(); }, CHECK_INTERVAL);
 });
 

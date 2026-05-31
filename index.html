@@ -50,7 +50,6 @@ body {
     100% { color: #808080; text-shadow: 0 0 5px #555555; }
 }
 
-/* NAGDAGDAG AKO: Naka-pause muna ang animation bago mag-click */
 .typewriter-header {
     font-family: 'Inter', sans-serif;
     font-size: 30px; 
@@ -64,23 +63,22 @@ body {
     animation: 
         typing 2s steps(20, end) forwards,
         metallic-glow 3s infinite ease-in-out;
-    animation-play-state: paused; /* HINDI TUMATAKBO MUNA */
-    width: 0; /* NAKA-ZERO MUNA HANGGANG DI NA-CLICK */
+    animation-play-state: paused;
+    width: 0;
 }
 
+/* WALANG ANIMATION ANG $ SIGN */
 .symbol-break {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 20px;
-    overflow: hidden;
-    white-space: nowrap;
-    width: fit-content;
+    overflow: visible;
+    white-space: normal;
+    width: auto;
     margin: 0 auto 20px auto;
-    animation: 
-        typing 1s steps(5, end) forwards,
-        metallic-glow 3s infinite ease-in-out;
-    animation-play-state: paused; /* HINDI TUMATAKBO MUNA */
-    width: 0; /* NAKA-ZERO MUNA HANGGANG DI NA-CLICK */
+    animation: none;
+    color: #ffffff;
+    text-shadow: 0 0 10px #aaaaaa;
 }
 
 .navigation-bar {
@@ -189,7 +187,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
     overflow: visible !important; 
     z-index: 5 !important;
 }
@@ -244,8 +241,7 @@ img.avatar-decoration {
 
 .avatar-wrapper-node.active-pop .avatar-tooltip {
     opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    visibility: visible; transform: translateX(-50%) translateY(0);
 }
 
 .tooltip-header {
@@ -446,8 +442,8 @@ document.getElementById("gateway-overlay").onclick = () => {
     audio.play().catch(() => {});
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
     
-    // DITO NAG SIMULA ANG PAGTAKBO NG TYPEWRITER PAGKATAPOS I-CLICK
-    document.querySelectorAll('.typewriter-header, .symbol-break').forEach(el => {
+    // TUMATAKBO LANG ANG TYPEWRITER SA MGA HEADER PAGKATAPOS I-CLICK
+    document.querySelectorAll('.typewriter-header').forEach(el => {
         el.style.animationPlayState = 'running';
         el.style.width = '100%';
     });
@@ -479,7 +475,7 @@ fetch('members.json')
         showGroup(members, aboveAllIDs, 'aboveall-container');
         showGroup(members, staffIDs, 'staff-container');
         showMarquee(members, scrollingIDsRow1, "marquee-container-1");
-        showMarquee(members, scrollingIDsIDsRow2, "marquee-container-2");
+        showMarquee(members, scrollingIDsRow2, "marquee-container-2"); // INAYOS KO NA ITO
     });
 
 function showGroup(allMembers, listIDs, container) {

@@ -137,18 +137,17 @@ body {
     margin-bottom: 3px;
 }
 
-/* INAYOS: LAHAT AY NASA ISANG LINYA, WALANG BABABA */
+/* INAYOS: WALANG SCROLLBAR, LAHAT NASA ISANG LINYA */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important; /* Pinigilan ang pagbaba pababa */
+    flex-wrap: nowrap !important;
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: 25px 0; 
-    gap: 12px !important; 
-    overflow-x: auto !important; /* Kung sobra sa lapad, magkakaroon ng scroll sa gilid */
-    overflow-y: hidden !important;
+    gap: 10px !important; /* Pinaliit nang kaunti ang agwat para magkasya */
+    overflow: hidden !important; /* Tinanggal ang scrollbar */
 }
 
 .avatar-wrapper-node {
@@ -160,7 +159,7 @@ body {
     text-decoration: none;
     color: inherit;
     display: block;
-    flex-shrink: 0 !important; /* Hindi liliit ang avatar */
+    flex-shrink: 1 !important; /* Hayaang lumiliit nang kaunti para magkasya */
 }
 
 .avatar-wrapper-node:hover {
@@ -175,8 +174,8 @@ body {
 
 .circle-avatar-container {
     position: relative !important;
-    width: 90px;
-    height: 90px;
+    width: 80px; /* Pinaliit nang kaunti ang laki ng bilog */
+    height: 80px;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: #000000;
@@ -203,8 +202,8 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 120px !important; 
-    height: 120px !important;
+    width: 110px !important; 
+    height: 110px !important;
     pointer-events: none !important;
     z-index: 999999 !important; 
     border-radius: 0 !important; 
@@ -378,6 +377,15 @@ img.avatar-decoration {
 .fade-gateway {
     opacity: 0;
     visibility: hidden;
+}
+
+/* TINANGGAL ANG LAHAT NG SCROLLBAR SA BUONG PAGE */
+::-webkit-scrollbar {
+    display: none !important;
+}
+html, body {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
 }
 </style>
 </head>

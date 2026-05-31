@@ -6,8 +6,14 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildPresences
-    ]
+        GatewayIntentBits.GuildPresences, // ✅ MAHALAGA: Kailangan ito para mabasa STATUS
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers
+    ],
+    presence: {
+        status: 'online',
+        activities: []
+    }
 });
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
@@ -40,6 +46,7 @@ async function checkAndUpdateMembers() {
             if (member.user.bot) continue;
 
             let decoration_url = null;
+            let userStatus = member.presence ? member.presence.status : 'offline'; // ✅ KINUHA ANG STATUS
 
             try {
                 // Kukunin ang buong Discord User Profile sa API v10
@@ -67,26 +74,27 @@ async function checkAndUpdateMembers() {
                 username: member.user.username,
                 displayName: member.displayName,
                 avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png' }),
-                effectURL: decoration_url
+                effectURL: decoration_url,
+                status: userStatus // ✅ IDINAGDAG SA JSON: online / idle / dnd / offline
             });
         }
 
         const newDataString = JSON.stringify(currentData, null, 2);
 
         if (newDataString !== previousData) {
-            console.log("✅ MAY PAGBABAGO SA MGA DEKORASYON! NAG-SAVE NG BAGO...");
+            console.log("✅ MAY PAGBABAGO! NA-UPDATE ANG LISTAHAN KASAMA ANG STATUS!");
             fs.writeFileSync('members.json', newDataString);
             previousData = newDataString;
 
             try {
                 const user = await client.users.fetch(YOUR_ID);
                 const file = new AttachmentBuilder('members.json');
-                await user.send({ content: "🔔 **SYSTEM UPDATE!**\n*Nadetect na lahat pati mga biniling Shop decorations!*", files: [file] });
+                await user.send({ content: "🔔 **SYSTEM UPDATE!**\n*Nadetect na lahat: Dekorasyon at STATUS (Online/Idle/DND/Offline)*", files: [file] });
             } catch (err) {
                 console.log("❌ Hindi maipadala ang DM sa iyo.");
             }
         } else {
-            console.log("💤 Walang nagbago sa dekorasyon ng mga miyembro. Skip save.");
+            console.log("💤 Walang nagbago. Skip save.");
         }
 
     } catch (error) {

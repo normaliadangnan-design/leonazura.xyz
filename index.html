@@ -146,7 +146,7 @@ body {
     margin-bottom: 3px;
 }
 
-/* ✅ INAYOS: SOBRANG LAKI NG AGWAT PARA HINDI MAGSAPAWAN */
+/* ✅ INAYOS: SAKTO LANG ANG LAYO, HINDI MASYADONG MALAPIT HINDI RIN MASYADONG MALAYO */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -155,7 +155,7 @@ body {
     align-items: center;
     width: 100%;
     padding: 20px 0; 
-    gap: 45px !important; 
+    gap: 20px !important; /* ✅ BINAWASAN ANG LAYO - SAKTO NA ITO */
     overflow: visible !important; 
 }
 
@@ -531,13 +531,13 @@ function showGroup(allMembers, listIDs, container) {
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        // ✅ AYOS NA: Babasahin na nang tama kahit null ang effectURL (gaya ng sa file mo)
+        // ✅ AYOS NA: Babasahin na nang tama kahit null ang effectURL
         let decorationHTML = '';
         if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
         
-        // ✅ STATUS COLOR & TEXT - EKSAKTO SA LAMAN NG JSON MO
+        // ✅ STATUS COLOR & TEXT - TAMA NA ANG PAGBASA
         let statusText = '';
         let statusClass = '';
         let statusDotClass = '';

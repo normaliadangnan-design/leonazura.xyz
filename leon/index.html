@@ -82,7 +82,7 @@ body::before{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom:15px;
     width: 100%;
     background: #000000;
     padding: 10px;
@@ -95,7 +95,7 @@ body::before{
     object-fit: contain;
 }
 
-/* Typewriter Animation para sa @Leon */
+/* Typewriter Animation - inactive by default */
 .title {
     font-size: 20px;
     letter-spacing: 4px;
@@ -105,12 +105,18 @@ body::before{
     border-right: 0; 
     width: fit-content;
     margin: 0 auto 25px auto;
-    animation: typing 2s steps(20, end);
+    /* Animation removed here, will add via class later */
+    width: 0; /* Start with 0 width */
+}
+
+/* Active class that will be added after click */
+.title.typing-active {
+    animation: typing 2s steps(20, end) forwards;
 }
 
 @keyframes typing {
     from { width: 0; }
-    to { width: 100px; } /* Ajustado para sa @Leon */
+    to { width: 100px; } /* Adjusted para sa @Leon */
 }
 
 .avatar{
@@ -281,17 +287,23 @@ img.avatar-decoration {
 
 <audio id="bgMusic" loop>
     <source src="../luhod.mp3" type="audio/mpeg">
-</audio>
+
 
 <script>
 const audio = document.getElementById("bgMusic");
 audio.volume = 0.5;
 
 const overlay = document.getElementById("loading-overlay");
+const typewriterText = document.querySelector('.title'); // select typewriter element
+
 overlay.addEventListener('click', () => {
     audio.play().catch(e => console.log(e));
     overlay.style.opacity = "0";
-    setTimeout(() => { overlay.style.visibility = "hidden"; }, 800);
+    setTimeout(() => { 
+        overlay.style.visibility = "hidden"; 
+        // Start typewriter animation ONLY after overlay is clicked
+        typewriterText.classList.add('typing-active');
+    }, 800);
 });
 
 document.addEventListener('contextmenu', e => e.preventDefault());

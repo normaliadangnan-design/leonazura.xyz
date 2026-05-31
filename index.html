@@ -118,7 +118,7 @@ body {
 
 .center-container {
     width: 100%;
-    max-width: 900px; /* ✅ Pinalaki nang kaunti para magkasya */
+    max-width: 1000px; 
     margin: 50px auto 20px auto;
     display: flex;
     flex-direction: column;
@@ -146,7 +146,7 @@ body {
     margin-bottom: 3px;
 }
 
-/* ✅ INAYOS: PINALAKI ANG AGWAT AT LAKI NG BILOG PARA KITANG-KITA LAHAT */
+/* ✅ INAYOS: SOBRANG LAKI NG AGWAT PARA HINDI MAGSAPAWAN */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -155,8 +155,8 @@ body {
     align-items: center;
     width: 100%;
     padding: 20px 0; 
-    gap: 25px !important; /* ✅ DITO! Pinalaki ko ang pagitan, hindi na dikit-dikit */
-    overflow: visible !important; /* ✅ Para makita buo, walang natatabunan */
+    gap: 45px !important; 
+    overflow: visible !important; 
 }
 
 .avatar-wrapper-node {
@@ -168,7 +168,7 @@ body {
     text-decoration: none;
     color: inherit;
     display: block;
-    flex-shrink: 0 !important; /* ✅ HINDI LUMILIIT, nasa tamang laki lahat */
+    flex-shrink: 0 !important; 
 }
 
 .avatar-wrapper-node:hover {
@@ -183,8 +183,8 @@ body {
 
 .circle-avatar-container {
     position: relative !important;
-    width: 95px; /* ✅ Pinalaki nang kaunti ang laki ng bilog */
-    height: 95px; /* ✅ Pinalaki nang kaunti ang laki ng bilog */
+    width: 95px; 
+    height: 95px; 
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: #000000;
@@ -195,6 +195,22 @@ body {
     overflow: visible !important; 
     z-index: 5 !important;
 }
+
+/* ✅ STATUS DOT SA BABA KANAN */
+.status-indicator {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    z-index: 10;
+}
+.status-online { background-color: #23a55a; }  /* Green */
+.status-idle { background-color: #f0b232; }    /* Yellow */
+.status-dnd { background-color: #f13f43; }     /* Red */
+.status-offline { background-color: #80848e; } /* Gray */
 
 .circle-avatar-container img.avatar-img {
     width: 100%;
@@ -211,25 +227,26 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 125px !important; /* ✅ Sakto sa laki ng bilog */
-    height: 125px !important; /* ✅ Sakto sa laki ng bilog */
+    width: 130px !important; 
+    height: 130px !important; 
     pointer-events: none !important;
-    z-index: 999999 !important; 
+    z-index: 1 !important; 
     border-radius: 0 !important; 
     display: block !important;
 }
 
+/* ✅ CARD / TOOLTIP DESIGN - KASAMA NA ANG STATUS DITO */
 .avatar-tooltip {
     position: absolute;
     bottom: 110%; 
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #050505;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 12px 15px;
-    width: 190px;
-    white-space: normal;
+    background: #18191c;
+    border: 1px solid #292b2f;
+    border-radius: 8px;
+    padding: 12px;
+    width: 200px;
+    color: #fff;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
@@ -255,7 +272,6 @@ img.avatar-decoration {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid #222;
 }
 
 .tooltip-emojis {
@@ -263,19 +279,32 @@ img.avatar-decoration {
 }
 
 .tooltip-username {
-    font-size: 11px;
-    color: #888;
-    margin-top: 4px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    font-size: 12px;
+    color: #96989d;
+    margin: 4px 0;
 }
 
 .tooltip-desc {
-    font-size: 12px;
-    color: #fff;
-    margin-top: 5px;
+    font-size: 14px;
     font-weight: 500;
+    margin-bottom: 6px;
+}
+
+/* ✅ STATUS TEXT SA LOOB NG CARD */
+.tooltip-status {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    border-radius: 3px;
+    background: #292b2f;
+}
+.status-dot-sm {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 .marquee-ticker {
@@ -503,16 +532,39 @@ function showGroup(allMembers, listIDs, container) {
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
         let decorationHTML = (mem.effectURL && mem.effectURL !== 'null' && mem.effectURL.trim() !== '') ? `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.opacity='0'">` : '';
+        
+        // ✅ STATUS COLOR & TEXT
+        let statusText = '';
+        let statusClass = '';
+        let statusDotClass = '';
+        if(mem.status === 'online') {
+            statusText = 'Online'; statusClass = 'status-online'; statusDotClass = 'status-online';
+        } else if(mem.status === 'idle') {
+            statusText = 'Idle'; statusClass = 'status-idle'; statusDotClass = 'status-idle';
+        } else if(mem.status === 'dnd') {
+            statusText = 'Do Not Disturb'; statusClass = 'status-dnd'; statusDotClass = 'status-dnd';
+        } else {
+            statusText = 'Offline'; statusClass = 'status-offline'; statusDotClass = 'status-offline';
+        }
 
         div.innerHTML = `
             <div class="circle-avatar-container">
                 <img src="${mem.avatarURL}" class="avatar-img" alt="">
                 ${decorationHTML} 
+                <span class="status-indicator ${statusClass}"></span>
             </div>
             <div class="avatar-tooltip">
-                <div class="tooltip-header"><img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt=""><span class="tooltip-emojis">👑</span></div>
-                <div class="tooltip-username">@${mem.username || 'username'}</div>
+                <div class="tooltip-header">
+                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
+                    <span class="tooltip-emojis">👑</span>
+                </div>
                 <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
+                <div class="tooltip-username">@${mem.username || 'username'}</div>
+                <!-- ✅ STATUS NASA LOOB NG CARD -->
+                <div class="tooltip-status">
+                    <span class="status-dot-sm ${statusDotClass}"></span>
+                    <span>${statusText}</span>
+                </div>
             </div>
         `;
         div.addEventListener('click', function(e) {

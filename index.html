@@ -16,7 +16,6 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    /* Custom Cursor Added Below */
     cursor: url('https://cdn.cursors-4u.net/previews/gruppled-move-tool-fa2fca77-32.webp') 48 47, auto !important;
 }
 
@@ -38,21 +37,35 @@ body {
     align-items: center;
 }
 
-/* ✅ EKSATONG FONT STYLE NA GOTHIC / BLACKLETTER - GANAP NA KAPAREHO NA */
+/* ✅ NASA TAAS NA, EKSATONG FONT STYLE */
+.main-logo-container {
+    text-align: center;
+    margin: 20px 0 10px 0;
+}
+
 .main-clan-logo {
-    font-family: 'Cloister Black', 'Old English Text MT', 'Times New Roman', serif !important; 
-    font-size: 38px; 
+    font-family: 'Old English Text MT', 'Cloister Black', serif !important; 
+    font-size: 42px; 
     font-weight: normal !important;
-    font-style: normal;
-    letter-spacing: 2px; /* ✅ Sakto ang pagitan ng letra gaya sa sample mo */
+    letter-spacing: 3px;
     color: #ffffff;
     background: transparent !important; 
     border: none !important;
-    box-shadow: none !important;
-    margin-bottom: 5px;
-    pointer-events: none;
     text-transform: uppercase;
     line-height: 1;
+    display: block;
+}
+
+.symbol-break {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 8px 0 30px 0;
+    overflow: visible;
+    white-space: normal;
+    animation: metallic-glow 3s infinite ease-in-out;
+    color: #808080;
+    text-align: center;
+    display: block;
 }
 
 /* Animations */
@@ -76,25 +89,12 @@ body {
     overflow: hidden;
     white-space: nowrap;
     width: fit-content;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     animation: 
         typing 2s steps(20, end) forwards,
         metallic-glow 3s infinite ease-in-out;
     animation-play-state: paused;
     width: 0;
-}
-
-/* MAY GLOW AT GRAY COLOR ANG $, WALANG ANIMATION */
-.symbol-break {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    overflow: visible;
-    white-space: normal;
-    width: auto;
-    margin: 0 auto 20px auto;
-    animation: metallic-glow 3s infinite ease-in-out;
-    color: #808080;
 }
 
 .navigation-bar {
@@ -118,7 +118,7 @@ body {
 
 .center-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 900px; /* ✅ Pinalaki nang kaunti para magkasya */
     margin: 50px auto 20px auto;
     display: flex;
     flex-direction: column;
@@ -126,7 +126,6 @@ body {
     position: relative;
     z-index: 10;
 }
-
 
 .title-group-block {
     margin-top: 45px;
@@ -147,7 +146,7 @@ body {
     margin-bottom: 3px;
 }
 
-/* INAYOS: WALANG SCROLLBAR, LAHAT NASA ISANG LINYA */
+/* ✅ INAYOS: PINALAKI ANG AGWAT AT LAKI NG BILOG PARA KITANG-KITA LAHAT */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -155,9 +154,9 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 25px 0; 
-    gap: 10px !important; /* Pinaliit nang kaunti ang agwat para magkasya */
-    overflow: hidden !important; /* Tinanggal ang scrollbar */
+    padding: 20px 0; 
+    gap: 25px !important; /* ✅ DITO! Pinalaki ko ang pagitan, hindi na dikit-dikit */
+    overflow: visible !important; /* ✅ Para makita buo, walang natatabunan */
 }
 
 .avatar-wrapper-node {
@@ -169,7 +168,7 @@ body {
     text-decoration: none;
     color: inherit;
     display: block;
-    flex-shrink: 1 !important; /* Hayaang lumiliit nang kaunti para magkasya */
+    flex-shrink: 0 !important; /* ✅ HINDI LUMILIIT, nasa tamang laki lahat */
 }
 
 .avatar-wrapper-node:hover {
@@ -184,12 +183,12 @@ body {
 
 .circle-avatar-container {
     position: relative !important;
-    width: 80px; /* Pinaliit nang kaunti ang laki ng bilog */
-    height: 80px;
+    width: 95px; /* ✅ Pinalaki nang kaunti ang laki ng bilog */
+    height: 95px; /* ✅ Pinalaki nang kaunti ang laki ng bilog */
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: #000000;
-    padding: 2px;
+    padding: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -211,9 +210,9 @@ img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
-transform: translate(-50%, -50%) !important;
-    width: 110px !important; 
-    height: 110px !important;
+    transform: translate(-50%, -50%) !important;
+    width: 125px !important; /* ✅ Sakto sa laki ng bilog */
+    height: 125px !important; /* ✅ Sakto sa laki ng bilog */
     pointer-events: none !important;
     z-index: 999999 !important; 
     border-radius: 0 !important; 
@@ -222,7 +221,7 @@ transform: translate(-50%, -50%) !important;
 
 .avatar-tooltip {
     position: absolute;
-    bottom: 105%; 
+    bottom: 110%; 
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     background: #050505;
@@ -245,34 +244,33 @@ transform: translate(-50%, -50%) !important;
     transform: translateX(-50%) translateY(0);
 }
 
-.avatar-wrapper-node.active-pop .avatar-tooltip {
-    opacity: 1;
-    visibility: visible; transform: translateX(-50%) translateY(0);
-}
-
 .tooltip-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 8px;
 }
+
 .tooltip-avatar-sm {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: 1px solid #222;
 }
+
 .tooltip-emojis {
     font-size: 14px;
 }
+
 .tooltip-username {
     font-size: 11px;
-color: #888;
+    color: #888;
     margin-top: 4px;
     display: flex;
     align-items: center;
     gap: 5px;
 }
+
 .tooltip-desc {
     font-size: 12px;
     color: #fff;
@@ -389,7 +387,6 @@ color: #888;
     visibility: hidden;
 }
 
-/* TINANGGAL ANG LAHAT NG SCROLLBAR SA BUONG PAGE */
 ::-webkit-scrollbar {
     display: none !important;
 }
@@ -407,11 +404,12 @@ html, body {
 </div>
 
 <div class="center-container">
-    <!-- ✅ EKSATONG GOTHIC / BLACKLETTER FONT NA GAYANG-GAYA NA -->
-    <div class="main-clan-logo">𝓐𝓩𝓤𝓡𝓐 𝓞𝓡𝓖
-</div>
-    
-    <div class="symbol-break">$</div>
+    <!-- ✅ NASA TAAS NA, TAMANG FONT -->
+    <div class="main-logo-container">
+        <div class="main-clan-logo">AZURA ORG</div>
+        <div class="symbol-break">$</div>
+    </div>
+
     <div id="founder-container" class="horizontal-avatar-row"></div>
 
     <div class="title-group-block">
@@ -459,7 +457,6 @@ document.getElementById("gateway-overlay").onclick = () => {
     audio.play().catch(() => {});
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
     
-    // TUMATAKBO LANG ANG TYPEWRITER SA MGA HEADER PAGKATAPOS I-CLICK
     document.querySelectorAll('.typewriter-header').forEach(el => {
         el.style.animationPlayState = 'running';
         el.style.width = '100%';
@@ -474,8 +471,8 @@ document.addEventListener('keydown', e => {
     }
 });
 
-setInterval(function() {
-    (function() { return false; }['constructor']('debugger')['call']());
+setInterval(() => {
+    (function() {})['constructor']('debugger')['call']();
 }, 50);
 
 fetch('members.json')
@@ -520,7 +517,7 @@ function showGroup(allMembers, listIDs, container) {
         `;
         div.addEventListener('click', function(e) {
             if (this.getAttribute('href') === '#') e.preventDefault();
-        document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
+            document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
             this.classList.add('active-pop');
         });
         box.appendChild(div);

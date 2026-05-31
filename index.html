@@ -24,7 +24,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #000000;
     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), /* ✅ PINADILIM NANG KONTI LANG (dating 0.45 -> naging 0.60) */
+        linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), 
         url("background.webp");
     background-size: cover;
     background-position: center center;
@@ -36,6 +36,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* ✅ BAGO: GINAWANG TEXT NA LANG ANG LOGO PARA WALANG BACKGROUND */
+.main-clan-logo {
+    font-family: 'Chiller', 'Old English Text MT', serif; /* Ito yung font na kapareho sa gusto mo */
+    font-size: 32px;
+    font-weight: normal;
+    color: #ffffff;
+    background: transparent !important; /* TINANGGAL ANG ITIM NA LIKOD */
+    border: none !important;
+    box-shadow: none !important;
+    margin-bottom: 5px;
+    pointer-events: none;
 }
 
 /* Animations */
@@ -110,13 +123,6 @@ body {
     z-index: 10;
 }
 
-.main-clan-logo {
-    max-width: 180px;
-    width: 100%;
-    height: auto;
-    margin-bottom: 5px;
-    pointer-events: none;
-}
 
 .title-group-block {
     margin-top: 45px;
@@ -257,7 +263,7 @@ transform: translate(-50%, -50%) !important;
 }
 .tooltip-username {
     font-size: 11px;
-    color: #888;
+color: #888;
     margin-top: 4px;
     display: flex;
     align-items: center;
@@ -397,7 +403,8 @@ html, body {
 </div>
 
 <div class="center-container">
-    <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
+    <!-- ✅ TINANGGAL ANG IMAGE, GINAING TEXT NA LANG -->
+    <div class="main-clan-logo">AZURA ORG</div>
     
     <div class="symbol-break">$</div>
     <div id="founder-container" class="horizontal-avatar-row"></div>

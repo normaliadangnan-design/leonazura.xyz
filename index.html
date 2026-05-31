@@ -22,26 +22,20 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #000000;
-    background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-        url("banner.gif");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("banner.gif");
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     color: #ffffff;
     min-height: 100vh;
-    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
+/* Animations */
+@keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes metallic-glow {
     0% { color: #808080; text-shadow: 0 0 5px #555555; }
     50% { color: #ffffff; text-shadow: 0 0 10px #aaaaaa; }
@@ -49,270 +43,72 @@ body {
 }
 
 .typewriter-header {
-    font-family: 'Inter', sans-serif;
-    font-size: 30px; 
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    overflow: hidden;
-    white-space: nowrap;
-    width: fit-content;
-    margin: 0 auto;
-    animation: 
-        typing 2s steps(20, end) forwards,
-        metallic-glow 3s infinite ease-in-out;
-    animation-play-state: paused;
-    width: 0;
+    font-size: 30px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
+    white-space: nowrap; margin: 0 auto;
+    animation: typing 2s steps(20, end) forwards, metallic-glow 3s infinite ease-in-out;
+    animation-play-state: paused; width: 0; overflow: hidden;
 }
 
-.symbol-break {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    animation: metallic-glow 3s infinite ease-in-out;
-    color: #808080;
-}
+.center-container { width: 100%; max-width: 800px; display: flex; flex-direction: column; align-items: center; z-index: 10; }
 
-.navigation-bar {
-    position: absolute;
-    top: 25px;
-    right: 35px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 10px;
-    letter-spacing: 2px;
-    opacity: 0.5;
-    z-index: 100;
-}
-
-.views-box {
-    padding: 3px 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-}
-
-.center-container {
-    width: 100%;
-    max-width: 900px; /* Inadjust ko ang width para mas kumasya */
-    margin: 50px auto 20px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 10;
-}
-
-.main-clan-logo {
-    max-width: 180px;
-    width: 100%;
-    height: auto;
-    margin-bottom: 5px;
-    pointer-events: none;
-}
-
-.title-group-block {
-    margin-top: 45px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.tiny-top-text {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 5px;
-    color: rgba(255, 255, 255, 0.3);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 3px;
-}
-
+/* INAYOS NA ROW - HINDI NA NAG-WRAP */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important; /* DITO INAYOS: Bawal mag-wrap */
-    justify-content: center;
+    flex-wrap: nowrap !important; 
+    justify-content: center !important;
     align-items: center;
-    padding: 25px 0; 
-    gap: 12px !important;
+    padding: 20px 0;
+    gap: 15px !important; 
     width: 100%;
-    overflow-x: auto; /* Para scrollable kung sobrang dami */
 }
 
 .avatar-wrapper-node {
-    position: relative !important;
-    transition: transform 0.2s ease, z-index 0.2s ease;
-    z-index: 10;
+    position: relative;
     cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    flex-shrink: 0; /* Para hindi sila ma-compress */
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
 }
 
-.avatar-wrapper-node:hover {
-    transform: scale(1.15);
-    z-index: 999 !important;
-}
-
-.avatar-wrapper-node.active-pop {
-    transform: scale(1.15);
-    z-index: 99999 !important;
-}
+.avatar-wrapper-node:hover { transform: scale(1.15); z-index: 999; }
 
 .circle-avatar-container {
-    position: relative !important;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+    width: 80px; height: 80px; border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    background: #000000;
-    padding: 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: #000; padding: 2px;
+    display: flex; justify-content: center; align-items: center;
 }
 
-.circle-avatar-container img.avatar-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    pointer-events: none;
-}
+.circle-avatar-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-img.avatar-decoration {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 120px !important; 
-    height: 120px !important;
-    pointer-events: none !important;
-    z-index: 999999 !important; 
-}
-
-.avatar-tooltip {
-    position: absolute;
-    bottom: 105%; 
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: #050505;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 12px 15px;
-    width: 190px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    pointer-events: none; 
-    z-index: 9999999;
-}
-
-.avatar-wrapper-node:hover .avatar-tooltip,
-.avatar-wrapper-node.active-pop .avatar-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
-
-.marquee-ticker {
-    overflow: hidden;
-    width: 100%;
-    max-width: 750px;
-    padding: 5px 0;
-}
-
-.marquee-wrapper-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-    margin-top: 40px;
-    margin-bottom: 50px;
-}
-
-.marquee-inner-wrap {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 12px;
-    width: max-content;
-}
-
+/* Marquee Styles */
+.marquee-wrapper-group { display: flex; flex-direction: column; gap: 15px; margin-top: 40px; width: 100%; align-items: center; }
+.marquee-ticker { overflow: hidden; width: 100%; max-width: 750px; }
+.marquee-inner-wrap { display: flex; flex-direction: row; gap: 12px; width: max-content; }
 .scroll-left { animation: smoothScrollLeft 30s linear infinite; }
 .scroll-right { animation: smoothScrollRight 30s linear infinite; }
 
+@keyframes smoothScrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes smoothScrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
 .marquee-profile-block {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    background: #0c0c0c; 
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 6px 16px;
-    border-radius: 30px; 
-    white-space: nowrap;
-}
-
-.marquee-profile-block img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-}
-
-@keyframes smoothScrollLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-33.333%); }
-}
-@keyframes smoothScrollRight {
-    0% { transform: translateX(-33.333%); }
-    100% { transform: translateX(0); }
-}
-
-#azura-discord-btn {
-    position: fixed !important;
-    bottom: 30px !important;
-    right: 30px !important;
-    z-index: 9999999 !important;
+    display: flex; align-items: center; gap: 8px; font-size: 12px;
+    background: #0c0c0c; border: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 16px; border-radius: 30px; white-space: nowrap;
 }
 
 #gateway-overlay {
-    position: fixed;
-    inset: 0;
-    background: #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999999;
-    cursor: pointer;
-    transition: opacity 0.5s ease;
+    position: fixed; inset: 0; background: #000; display: flex; justify-content: center; align-items: center; z-index: 999999; cursor: pointer; transition: 0.5s;
 }
-
 .fade-gateway { opacity: 0; visibility: hidden; }
 </style>
 </head>
-<body oncontextmenu="return false;">
-
-<div class="navigation-bar">
-    HOME
-    <div class="views-box">VIEWS : <span id="views">5569</span></div>
-</div>
+<body>
 
 <div class="center-container">
-    <img src="azura-logo.webp" alt="AZURA" class="main-clan-logo">
-    <div class="symbol-break">$</div>
+    <img src="azura-logo.webp" style="max-width:180px; margin-top:50px;">
     <div id="founder-container" class="horizontal-avatar-row"></div>
-
-    <div class="title-group-block">
-        <span class="tiny-top-text">ABOVE ALL</span>
-        <h2 class="typewriter-header">ABOVE ALL</h2>
-    </div>
-    <div id="aboveall-container" class="horizontal-avatar-row"></div>
-
-    <div class="title-group-block">
-        <span class="tiny-top-text">STAFF</span>
-        <h2 class="typewriter-header">STAFF</h2>
-    </div>
+    <div class="typewriter-header">STAFF</div>
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
     <div class="marquee-wrapper-group">
@@ -321,61 +117,39 @@ img.avatar-decoration {
     </div>
 </div>
 
-<div id="azura-discord-btn">
-    <a href="https://discord.gg/eUaKEqXkWA" target="_blank" style="display:flex; align-items:center; gap:8px; padding:10px 18px; background:#000; border:1px solid #333; color:#fff; text-decoration:none; font-size:11px; border-radius:2px;">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" style="width:18px;"> AZURA ORG
-    </a>
-</div>
-
-<div id="gateway-overlay">
-    <div class="gateway-btn" style="padding:12px 30px; border:1px solid #444; font-size:10px; letter-spacing:5px;">CLICK</div>
-</div>
-
-<audio id="soundtrack" loop><source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg"></audio>
+<div id="gateway-overlay"><div style="border:1px solid #fff; padding:10px 20px;">CLICK</div></div>
 
 <script>
-const audio = document.getElementById("soundtrack");
-audio.volume = 0.4;
+const audio = new Audio('5-mil_2RPY2b9n.mp3');
 document.getElementById("gateway-overlay").onclick = () => {
-    audio.play().catch(() => {});
+    audio.play();
     document.getElementById("gateway-overlay").classList.add("fade-gateway");
-    document.querySelectorAll('.typewriter-header').forEach(el => {
-        el.style.animationPlayState = 'running';
-        el.style.width = '100%';
-    });
+    document.querySelectorAll('.typewriter-header').forEach(el => { el.style.animationPlayState = 'running'; el.style.width = '100%'; });
 };
 
-// Data loading logic...
-fetch('members.json')
-    .then(res => res.json())
-    .then(members => {
-        const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
-        const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
-        const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
-        
-        showGroup(members, founderIDs, 'founder-container');
-        showGroup(members, aboveAllIDs, 'aboveall-container');
-        showGroup(members, staffIDs, 'staff-container');
-    });
+fetch('members.json').then(res => res.json()).then(members => {
+    const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"];
+    const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789"];
+    
+    showGroup(members, founderIDs, 'founder-container');
+    showGroup(members, staffIDs, 'staff-container');
+    showMarquee(members, staffIDs, 'marquee-container-1');
+});
 
-function showGroup(allMembers, listIDs, container) {
-    const box = document.getElementById(container);
-    listIDs.forEach(id => {
-        const mem = allMembers.find(m => m.id === id);
-        if (!mem) return;
-        const div = document.createElement('div');
-        div.className = 'avatar-wrapper-node';
-        div.innerHTML = `
-            <div class="circle-avatar-container">
-                <img src="${mem.avatarURL}" class="avatar-img">
-                ${mem.effectURL ? `<img src="${mem.effectURL}" class="avatar-decoration">` : ''}
-            </div>
-            <div class="avatar-tooltip">
-                <div class="tooltip-username">@${mem.username}</div>
-                <div class="tooltip-desc">${mem.displayName}</div>
-            </div>
-        `;
-        box.appendChild(div);
+function showGroup(all, ids, cont) {
+    const box = document.getElementById(cont);
+    ids.forEach(id => {
+        const m = all.find(x => x.id === id);
+        if(!m) return;
+        box.innerHTML += `<div class="avatar-wrapper-node"><div class="circle-avatar-container"><img src="${m.avatarURL}"></div></div>`;
+    });
+}
+
+function showMarquee(all, ids, cont) {
+    const box = document.getElementById(cont);
+    const list = [...all, ...all];
+    list.forEach(m => {
+        box.innerHTML += `<div class="marquee-profile-block"><img src="${m.avatarURL}" style="width:25px;height:25px;border-radius:50%"> ${m.displayName}</div>`;
     });
 }
 </script>

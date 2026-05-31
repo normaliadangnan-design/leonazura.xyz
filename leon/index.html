@@ -56,7 +56,7 @@ body::before{
     font-weight: 600;
     letter-spacing: 8px;
     color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
     animation: pulse 1.5s infinite alternate;
     text-transform: uppercase;
 }
@@ -268,10 +268,11 @@ img.avatar-decoration {
     letter-spacing: 1px;
 }
 
-/* ✅ TINANGGAL LAHAT NG ARROW O LINK PABALIK */
+/* ✅ WALA NANG PWEDENG PAGDADALIAN O PAGBALIKAN */
 a {
-    text-decoration: none;
-    color: inherit;
+    text-decoration: none !important;
+    color: inherit !important;
+    pointer-events: auto;
 }
 </style>
 </head>
@@ -383,10 +384,15 @@ fetch('../members.json')
         }
     });
 
-// ✅ PINIGIL ANG PAGBALIK SA NAKARAANG PAHINA
-history.pushState(null, document.title, location.href);
-window.addEventListener('popstate', function (event) {
-    history.pushState(null, document.title, location.href);
+// ✅ PINIGILANG MABUTI ANG PAGBALIK SA NAKARAANG PAHINA
+history.replaceState(null, null, location.href);
+window.onpopstate = function () {
+    history.go(1);
+};
+
+// ✅ TINANGGAL ANG LAHAT NG BAKAS SA HISTORY PARA WALA NANG BABALIKAN
+window.addEventListener('load', function() {
+    history.pushState(null, null, location.href);
 });
 </script>
 </body>

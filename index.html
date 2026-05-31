@@ -38,17 +38,20 @@ body {
     align-items: center;
 }
 
-/* ✅ BAGO: GINAWANG TEXT NA LANG ANG LOGO PARA WALANG BACKGROUND */
+/* ✅ EKSATONG FONT AT ITSURA NG "AZURA ORG" GAYA NG SEND MO */
 .main-clan-logo {
-    font-family: 'Chiller', 'Old English Text MT', serif; /* Ito yung font na kapareho sa gusto mo */
-    font-size: 32px;
+    font-family: 'Old English Text MT', 'Chiller', 'Blackletter', serif; 
+    font-size: 36px; /* Sakto sa laki */
     font-weight: normal;
+    font-style: normal;
+    letter-spacing: 1px; /* Sakto ang pagitan ng letra */
     color: #ffffff;
-    background: transparent !important; /* TINANGGAL ANG ITIM NA LIKOD */
+    background: transparent !important; 
     border: none !important;
     box-shadow: none !important;
     margin-bottom: 5px;
     pointer-events: none;
+    text-transform: uppercase;
 }
 
 /* Animations */
@@ -403,7 +406,7 @@ html, body {
 </div>
 
 <div class="center-container">
-    <!-- ✅ TINANGGAL ANG IMAGE, GINAING TEXT NA LANG -->
+    <!-- ✅ EKSATONG FONT AT ITSURA -->
     <div class="main-clan-logo">AZURA ORG</div>
     
     <div class="symbol-break">$</div>
@@ -515,7 +518,7 @@ function showGroup(allMembers, listIDs, container) {
         `;
         div.addEventListener('click', function(e) {
             if (this.getAttribute('href') === '#') e.preventDefault();
-            document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
+        document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
             this.classList.add('active-pop');
         });
         box.appendChild(div);

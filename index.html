@@ -351,7 +351,7 @@ img.avatar-decoration {
     border: 1px solid rgba(255,255,255,0.08);
     padding: 6px 16px;
     border-radius: 30px; 
-    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
 }
 
@@ -537,7 +537,7 @@ async function initLiveUpdate() {
     }, 30000);
 }
 
-// ✅ DITO KUMUKUHA SA LIVE API (Lanyard)
+// ✅ DITO KUMUKUHA SA TUNAY NA LANYARD API
 async function fetchLiveStatus(ids) {
     try {
         const res = await fetch(`https://api.lanyard.rest/v1/users/${ids.join(',')}`);

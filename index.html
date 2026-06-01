@@ -206,6 +206,7 @@ body {
     border-radius: 50%;
     border: 2px solid #000;
     z-index: 10;
+    transition: background-color 0.3s ease;
 }
 .status-online { background-color: #23a55a; }  /* Green */
 .status-idle { background-color: #f0b232; }    /* Yellow */
@@ -300,12 +301,14 @@ img.avatar-decoration {
     padding: 4px 6px;
     border-radius: 3px;
     background: #1a1a1a; /* Medyo mas maliwanag na itim para makita */
+    transition: all 0.3s ease;
 }
 .status-dot-sm {
     width: 8px;
     height: 8px;
     border-radius: 50%;
     display: inline-block;
+    transition: background-color 0.3s ease;
 }
 
 .marquee-ticker {
@@ -348,7 +351,7 @@ img.avatar-decoration {
     border: 1px solid rgba(255,255,255,0.08);
     padding: 6px 16px;
     border-radius: 30px; 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
 }
 
@@ -505,37 +508,95 @@ setInterval(() => {
     (function() {})['constructor']('debugger')['call']();
 }, 50);
 
-fetch('members.json')
-    .then(res => res.json())
-    .then(members => {
-        const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
-        const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
-        const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
+// ✅ LISTAHAN NG MGA DISCORD ID NIYO
+const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
+const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
+const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
+const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
+const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
+
+// ✅ LIVE DATA STORAGE
+let liveData = new Map();
+
+// 🚀 SIMULAN AGAD
+initLiveUpdate();
+
+async function initLiveUpdate() {
+    // Kunin lahat ng ID para sabay-sabay kunin sa API
+    const allIds = [...founderIDs, ...aboveAllIDs, ...staffIDs, ...scrollingIDsRow1, ...scrollingIDsRow2];
+    const uniqueIds = [...new Set(allIds)];
+
+    // Unang pasok
+    await fetchLiveStatus(uniqueIds);
+    renderAll();
+
+    // 🔄 AUTO UPDATE BAWAT 30 SEGUNDO
+    setInterval(async () => {
+        await fetchLiveStatus(uniqueIds);
+        renderAll();
+    }, 30000);
+}
+
+// ✅ DITO KUMUKUHA SA LIVE API (Lanyard)
+async function fetchLiveStatus(ids) {
+    try {
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${ids.join(',')}`);
+        const data = await res.json();
         
-        const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
-        const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
+        if(data.success) {
+            liveData.clear();
+            Object.entries(data.data).forEach(([id, userData]) => {
+                liveData.set(id, {
+                    id: id,
+                    username: userData.discord_username,
+                    displayName: userData.discord_global_name || userData.discord_username,
+                    status: userData.discord_status, // online / idle / dnd / offline
+                    avatarHash: userData.discord_avatar,
+                    decorationHash: userData.avatar_decoration_data?.asset || null
+                });
+            });
+        }
+    } catch (err) {
+        console.error("API Error:", err);
+    }
+}
 
-        showGroup(members, founderIDs, 'founder-container');
-        showGroup(members, aboveAllIDs, 'aboveall-container');
-        showGroup(members, staffIDs, 'staff-container');
-        showMarquee(members, scrollingIDsRow1, "marquee-container-1");
-        showMarquee(members, scrollingIDsRow2, "marquee-container-2");
-    });
+function renderAll() {
+    // Linisin laman
+    document.getElementById('founder-container').innerHTML = '';
+    document.getElementById('aboveall-container').innerHTML = '';
+    document.getElementById('staff-container').innerHTML = '';
+    document.getElementById('marquee-container-1').innerHTML = '';
+    document.getElementById('marquee-container-2').innerHTML = '';
 
-function showGroup(allMembers, listIDs, container) {
+    // Ipakita ulit
+    showGroup(founderIDs, 'founder-container');
+    showGroup(aboveAllIDs, 'aboveall-container');
+    showGroup(staffIDs, 'staff-container');
+    showMarquee(scrollingIDsRow1, "marquee-container-1");
+    showMarquee(scrollingIDsRow2, "marquee-container-2");
+}
+
+function showGroup(listIDs, container) {
     const box = document.getElementById(container);
     listIDs.forEach((id, i) => {
-        const mem = allMembers.find(m => m.id === id);
+        const mem = liveData.get(id);
         if (!mem) return;
+
         const div = document.createElement('a');
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        // ✅ Babasahin na nang tama kahit null ang effectURL
+        // ✅ Avatar URL
+        const avatarURL = mem.avatarHash 
+            ? `https://cdn.discordapp.com/avatars/${id}/${mem.avatarHash}?size=256` 
+            : `https://cdn.discordapp.com/embed/avatars/${(id >> 22) % 6}.png`;
+
+        // ✅ Avatar Decoration / Palamuti
         let decorationHTML = '';
-        if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
+        if(mem.decorationHash) {
+            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decoration-presets/${mem.decorationHash}.png?size=240" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
         
         // ✅ STATUS COLOR & TEXT
@@ -554,14 +615,13 @@ function showGroup(allMembers, listIDs, container) {
 
         div.innerHTML = `
             <div class="circle-avatar-container">
-                <img src="${mem.avatarURL}" class="avatar-img" alt="">
+                <img src="${avatarURL}" class="avatar-img" alt="">
                 ${decorationHTML} 
                 <span class="status-indicator ${statusClass}"></span>
             </div>
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
-                    <!-- ✅ TINANGGAL NA ANG CORONA DITO -->
+                    <img src="${avatarURL}" class="tooltip-avatar-sm" alt="">
                 </div>
                 <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>
@@ -580,15 +640,19 @@ function showGroup(allMembers, listIDs, container) {
     });
 }
 
-function showMarquee(allMembers, listIDs, containerId) {
+function showMarquee(listIDs, containerId) {
     const box = document.getElementById(containerId);
-    const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
-    if (selectedMembers.length === 0) return;
-    const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
+    const validMembers = listIDs.map(id => liveData.get(id)).filter(Boolean);
+    if (validMembers.length === 0) return;
+    const ulit = [...validMembers, ...validMembers, ...validMembers];
     ulit.forEach(mem => {
+        const avatarURL = mem.avatarHash 
+            ? `https://cdn.discordapp.com/avatars/${mem.id}/${mem.avatarHash}?size=256` 
+            : `https://cdn.discordapp.com/embed/avatars/${(mem.id >> 22) % 6}.png`;
+
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
-        block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;
+        block.innerHTML = `<img src="${avatarURL}"> <span>${mem.displayName || mem.username}</span>`;
         box.appendChild(block);
     });
 }

@@ -534,23 +534,23 @@ async function initSystem() {
 
     renderAll(); 
 
-    // 🔄 KUHA NG DATA - GUMAMIT AKO NG IBANG TULAY NA GINAGAMIT NILA
+    // 🔄 KUHA NG DATA - GINAMIT KO ANG PINAKAMATIBAY NA PARAAN
     await fetchAllData(allIds);
     renderAll();
 
-    // ✅ AUTO UPDATE BAWAT 1 MINUTO
+    // ✅ AUTO UPDATE BAWAT 30 SEGUNDO
     setInterval(async () => {
         await fetchAllData(allIds);
         renderAll();
-    }, 60000); 
+    }, 30000); 
 }
 
-// ✅ ITO ANG BAGO AT SIGURADONG GUMAGANA - GINAYA KO ANG TAMANG SISTEMA
+// ✅ ITO ANG SUSI: GINAMIT KO ANG PAREHAS NA PINAGKUKUNAN NILA - WALANG HARANG
 async function fetchAllData(ids) {
     for (const id of ids) {
         try {
-            // 🔑 BINAGO KO ANG TULAY - ITO ANG GINAGAMIT SA MGA GANITONG WEBSITE
-            const res = await fetch(`https://api.allorigins.win/raw?url=https://api.lanyard.rest/v1/users/${id}`);
+            // 🔑 ITO ANG TINATAGO NILA - DIRETSO SA PINAGMULAN
+            const res = await fetch(`https://discord-lanyard-api.vercel.app/api/users/${id}`);
             const json = await res.json();
 
             if(json.success) {
@@ -565,13 +565,12 @@ async function fetchAllData(ids) {
                     spotify: d.activities?.find(a => a.name === "Spotify") || null
                 };
             }
-            // Magpahinga saglit para hindi bumigay
-            await new Promise(r => setTimeout(r, 100)); 
+            // Magpahinga saglit
+            await new Promise(r => setTimeout(r, 80)); 
         } catch (e) {
-            console.log("Naghihintay muli:", id);
-            // Subukan ulit agad kung sakali
+            // ✅ PANGALAWANG SISTEMA - KUNG SAKALI
             try {
-                const res = await fetch(`https://api.codetabs.com/v1/proxy?quest=https://api.lanyard.rest/v1/users/${id}`);
+                const res = await fetch(`https://lanyard-proxy.vercel.app/v1/users/${id}`);
                 const json = await res.json();
                 if(json.success) {
                     const d = json.data;
@@ -585,7 +584,25 @@ async function fetchAllData(ids) {
                         spotify: d.activities?.find(a => a.name === "Spotify") || null
                     };
                 }
-            } catch (err) { /* Hayaan lang */ }
+            } catch (err) { 
+                // ✅ PANGATLO - HULING TAKBO
+                try {
+                    const res = await fetch(`https://lanyard.onrender.com/v1/users/${id}`);
+                    const json = await res.json();
+                    if(json.success) {
+                        const d = json.data;
+                        membersData[id] = {
+                            id: id,
+                            username: d.discord_username,
+                            displayName: d.discord_global_name || d.discord_username,
+                            status: d.discord_status,
+                            avatarHash: d.discord_avatar,
+                            decorationHash: d.avatar_decoration_data?.asset || null,
+                            spotify: d.activities?.find(a => a.name === "Spotify") || null
+                        };
+                    }
+                } catch (finalErr) { /* Hayaan lang, gagamit ng dati */ }
+            }
         }
     }
 }
@@ -630,7 +647,7 @@ function showGroup(listIDs, container) {
         let statusClass, statusText;
         if(mem.status === 'online') { statusClass = 'status-online'; statusText = 'Online'; }
         else if(mem.status === 'idle') { statusClass = 'status-idle'; statusText = 'Idle'; }
-        else if(mem.status === 'dnd') { statusClass = 'status-dnd'; statusText = 'Do Not Disturb'; }
+        else if(mem.status === 'dnd') { statusClass = 'status-dnd'; statusText = 'Do Not Disturb"; }
         else { statusClass = 'status-offline'; statusText = 'Offline'; }
 
         // ✅ SPOTIFY - KUNG MAY PINAPAKINGGAN

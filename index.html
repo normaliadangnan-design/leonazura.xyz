@@ -240,6 +240,34 @@ img.avatar-decoration {
     display: block !important;
 }
 
+/* ✅ IBINALIK KO NA YUNG STAFF AT $ BADGE */
+.staff-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(45deg, #ff0000, #ffd700);
+    color: #000;
+    font-size: 8px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 10;
+    border: 1px solid #fff;
+}
+
+.premium-badge {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    color: #ffd700;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+    text-shadow: 0 0 3px gold;
+}
+
 /* ✅ CARD / TOOLTIP */
 .avatar-tooltip {
     position: absolute; 
@@ -344,6 +372,7 @@ img.avatar-decoration {
     pointer-events: none; 
 }
 
+/* ✅ PINALITAN KO NA: AZURA ORG NA ITO */
 #azura-discord-btn { 
     position: fixed !important; 
     bottom: 30px !important; 
@@ -435,10 +464,11 @@ img.avatar-decoration {
     </div>
 </div>
 
+<!-- ✅ TAMA NA: AZURA ORG -->
 <div id="azura-discord-btn">
     <a href="https://discord.gg/yourinvite" target="_blank" rel="noopener noreferrer">
         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" width="16" height="16" alt="">
-        AZURA OFFICIAL
+        AZURA ORG
     </a>
 </div>
 
@@ -449,6 +479,20 @@ img.avatar-decoration {
 <script>
 let memberIds = [];
 let liveDataMap = new Map();
+
+// ✅ ILAGAY NATIN KUNG SINONG MAY STAFF AT $ BADGE
+const staffIds = new Set([
+    "1123145717461033041", 
+    "1081806153341743144",
+    "1495341225174368276"
+    // dagdagan mo pa dito kung sino pa
+]);
+
+const premiumIds = new Set([
+    "1414546504437207161",
+    "1499093156321431622"
+    // dagdagan mo pa dito kung sino pa
+]);
 
 async function initLoad() {
     // 1. KUNIN LANG ANG ID MULA SA BAGONG MEMBERS.JSON
@@ -519,11 +563,17 @@ function renderMembers() {
             decoHTML = `<img class="avatar-decoration" src="https://cdn.discordapp.com/avatar-decoration-presets/${decoFinalHash}?size=240" alt="">`;
         }
 
+        // ✅ BADGES / STAFF / $
+        let badgesHTML = '';
+        if(staffIds.has(id)) badgesHTML += `<span class="staff-badge">STAFF</span>`;
+        if(premiumIds.has(id)) badgesHTML += `<span class="premium-badge">$</span>`;
+
         // AVATAR ELEMENT
         const avatarEl = document.createElement('div');
         avatarEl.className = 'avatar-wrapper-node';
         avatarEl.innerHTML = `
             <div class="circle-avatar-container">
+                ${badgesHTML} <!-- ✅ NANDITO NA YUNG BADGES -->
                 <img class="avatar-img" src="${avatarURL}" alt="${displayName}">
                 ${decoHTML} <!-- ✅ KUSA LUMALABAS O NAWAWALA ITO -->
                 <span class="status-indicator status-${status}"></span>

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>AZURA</title>
+<title>AZURA ORG</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Old+Standard+TT&display=swap');
 
 * {
     margin: 0;
@@ -21,617 +21,523 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #000000;
+    background-color: #000;
     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), 
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
         url("background.webp");
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-attachment: fixed;
-    background-repeat: no-repeat;
-    color: #ffffff;
+    color: #fff;
     min-height: 100vh;
     overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-/* ✅ NASA TAAS NA, EKSATONG FONT STYLE */
-.main-logo-container {
+/* Header / Logo */
+.logo-top {
     text-align: center;
-    margin: 20px 0 10px 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
-
-.main-clan-logo {
-    font-family: 'Old English Text MT', 'Cloister Black', serif !important; 
-    font-size: 42px; 
-    font-weight: normal !important;
-    letter-spacing: 3px;
-    color: #ffffff;
-    background: transparent !important; 
-    border: none !important;
+.logo-text {
+    font-family: 'Old Standard TT', serif;
+    font-size: 45px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    line-height: 1;
-    display: block;
+    color: #fff;
 }
-
-.symbol-break {
+.divider-symbol {
+    text-align: center;
     font-size: 30px;
-    font-weight: 700;
-    margin: 8px 0 30px 0;
-    overflow: visible;
-    white-space: normal;
-    animation: metallic-glow 3s infinite ease-in-out;
-    color: #808080;
-    text-align: center;
-    display: block;
+    color: #777;
+    margin: 5px 0 40px;
+    animation: glow 3s infinite;
+}
+@keyframes glow {
+    0%,100% {color:#666;}
+    50% {color:#fff;}
 }
 
-/* Animations */
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes metallic-glow {
-    0% { color: #808080; text-shadow: 0 0 5px #555555; }
-    50% { color: #ffffff; text-shadow: 0 0 10px #aaaaaa; }
-    100% { color: #808080; text-shadow: 0 0 5px #555555; }
-}
-
-.typewriter-header {
-    font-family: 'Inter', sans-serif;
-    font-size: 30px; 
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    overflow: hidden;
-    white-space: nowrap;
-    width: fit-content;
-    margin: 0 auto 20px auto;
-    animation: 
-        typing 2s steps(20, end) forwards,
-        metallic-glow 3s infinite ease-in-out;
-    animation-play-state: paused;
-    width: 0;
-}
-
-.navigation-bar {
+/* Navigation */
+.nav-bar {
     position: absolute;
     top: 25px;
-    right: 35px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    right: 30px;
     font-size: 10px;
-    letter-spacing: 2px;
-    opacity: 0.5;
-    z-index: 100;
+    letter-spacing: 3px;
+    opacity: 0.6;
+}
+.view-count {
+    border: 1px solid #444;
+    padding: 2px 8px;
+    margin-left: 10px;
 }
 
-.views-box {
-    padding: 3px 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-}
-
-.center-container {
-    width: 100%;
-    max-width: 1000px; 
-    margin: 50px auto 20px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 10;
-}
-
-.title-group-block {
-    margin-top: 45px;
-    margin-bottom: 15px;
+/* Sections */
+.section-title {
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin: 40px 0 20px;
 }
-
-.tiny-top-text {
+.small-text {
     font-size: 9px;
-    font-weight: 700;
     letter-spacing: 5px;
-    color: rgba(255, 255, 255, 0.3);
+    color: #888;
     text-transform: uppercase;
-    display: block;
-    margin-bottom: 3px;
+}
+.big-text {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+}
+.big-text::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 1px;
+    background: #444;
 }
 
-/* ✅ SAKTO LANG ANG LAYO NG BILOG */
-.horizontal-avatar-row {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px 0; 
-    gap: 20px !important; 
-    overflow: visible !important; 
-}
-
-.avatar-wrapper-node {
-    position: relative !important;
-    transition: transform 0.2s ease, z-index 0.2s ease;
-    z-index: 10;
-    overflow: visible !important; 
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    flex-shrink: 0 !important; 
-}
-
-.avatar-wrapper-node:hover {
-    transform: scale(1.15);
-    z-index: 999 !important;
-}
-
-.avatar-wrapper-node.active-pop {
-    transform: scale(1.15);
-    z-index: 99999 !important;
-}
-
-.circle-avatar-container {
-    position: relative !important;
-    width: 95px; 
-    height: 95px; 
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: #000000;
-    padding: 3px;
+/* Avatars Row */
+.avatar-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible !important; 
-    z-index: 5 !important;
+    gap: 22px;
+    flex-wrap: nowrap;
+    padding: 10px 0 40px;
 }
 
-/* ✅ STATUS DOT SA BABA KANAN */
-.status-indicator {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 16px;
-    height: 16px;
+.avatar-card {
+    position: relative;
+    transition: transform 0.2s;
+}
+.avatar-card:hover {
+    transform: scale(1.15);
+    z-index: 999;
+}
+
+.avatar-circle {
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    border: 2px solid #000;
-    z-index: 10;
-    transition: background-color 0.3s ease;
+    background: #000;
+    border: 1px solid #333;
+    padding: 3px;
+    position: relative;
+    overflow: visible;
 }
-.status-online { background-color: #23a55a; }  /* Green */
-.status-idle { background-color: #f0b232; }    /* Yellow */
-.status-dnd { background-color: #f13f43; }     /* Red */
-.status-offline { background-color: #80848e; } /* Gray */
-
-.circle-avatar-container img.avatar-img {
+.avatar-img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    pointer-events: none;
     position: relative;
-    z-index: 2 !important;
+    z-index: 2;
 }
 
-img.avatar-decoration {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 130px !important; 
-    height: 130px !important; 
-    pointer-events: none !important;
-    z-index: 1 !important; 
-    border-radius: 0 !important; 
-    display: block !important;
-}
-
-/* ✅ INAYOS: CARD PURONG ITIM #000000, TINANGGAL ANG BORDER */
-.avatar-tooltip {
+/* ✅ AVATAR DECORATION - GAGANA NA */
+.avatar-decoration {
     position: absolute;
-    bottom: 110%; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Status Dot */
+.status-dot {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    z-index: 3;
+}
+.online {background:#23a55a;}
+.idle {background:#f0b232;}
+.dnd {background:#f13f43;}
+.offline {background:#80848e;}
+
+/* Tooltip / Info Box */
+.tooltip {
+    position: absolute;
+    bottom: 110%;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #000000 !important; 
-    border: none !important; 
-    border-radius: 8px;
-    padding: 12px;
+    background: #000;
+    border: 1px solid #222;
+    border-radius: 6px;
     width: 220px;
-    color: #fff;
+    padding: 10px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-    pointer-events: none; 
-    z-index: 9999999;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.95);
+    transition: 0.2s;
+    pointer-events: none;
+    box-shadow: 0 0 15px #000;
 }
-
-.avatar-wrapper-node:hover .avatar-tooltip {
+.avatar-card:hover .tooltip {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
 }
-
-.tooltip-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
+.tooltip-name {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 3px;
 }
-
-.tooltip-avatar-sm {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-.tooltip-username {
-    font-size: 12px;
-    color: #96989d;
-    margin: 4px 0;
-}
-
-.tooltip-desc {
-    font-size: 14px;
-    font-weight: 500;
+.tooltip-user {
+    font-size: 11px;
+    color: #888;
     margin-bottom: 6px;
 }
-
-/* ✅ STATUS TEXT AT SPOTIFY SA LOOB NG CARD */
-.tooltip-status, .tooltip-spotify {
+.tooltip-status {
     font-size: 11px;
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 4px 6px;
+    gap: 5px;
+    background: #1a1a1a;
+    padding: 3px 6px;
     border-radius: 3px;
-    background: #1a1a1a; 
-    margin-top: 4px;
-    transition: all 0.3s ease;
+    margin-bottom: 4px;
 }
-.status-dot-sm {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.3s ease;
+.tooltip-spotify {
+    font-size: 10px;
+    background: #1a1a1a;
+    padding: 3px 6px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #1db954;
 }
 
-.marquee-ticker {
+/* Scrolling Marquee */
+.marquee-wrap {
     overflow: hidden;
     width: 100%;
-    max-width: 750px;
-    padding: 5px 0;
-    background: transparent;
+    max-width: 800px;
+    margin: 20px auto 60px;
 }
-
-.marquee-wrapper-group {
+.marquee {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    align-items: center;
-    margin-top: 40px;
-    margin-bottom: 50px;
-}
-
-.marquee-inner-wrap {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
     gap: 12px;
-    width: max-content;
+    width: fit-content;
 }
-
-.scroll-left { animation: smoothScrollLeft 30s linear infinite; }
-.scroll-right { animation: smoothScrollRight 30s linear infinite; }
-
-.marquee-profile-block {
+.marquee-left {animation: scrollLeft 40s linear infinite;}
+.marquee-right {animation: scrollRight 40s linear infinite;}
+@keyframes scrollLeft {
+    0% {transform: translateX(0);}
+    100% {transform: translateX(-33.33%);}
+}
+@keyframes scrollRight {
+    0% {transform: translateX(-33.33%);}
+    100% {transform: translateX(0);}
+}
+.marquee-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
-    background: #0c0c0c; 
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 6px 16px;
-    border-radius: 30px; 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    gap: 6px;
+    background: #111;
+    border: 1px solid #222;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
     white-space: nowrap;
 }
-
-.marquee-profile-block img {
-    width: 32px;
-    height: 32px;
+.marquee-item img {
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
-    object-fit: cover;
-    pointer-events: none;
 }
 
-@keyframes smoothScrollLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-33.333%); }
+/* Discord Button */
+.discord-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #000;
+    border: 1px solid #444;
+    padding: 8px 15px;
+    font-size: 11px;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
-@keyframes smoothScrollRight {
-    0% { transform: translateX(-33.333%); }
-    100% { transform: translateX(0); }
-}
+.discord-btn img {width:16px;}
 
-#azura-discord-btn {
-    position: fixed !important;
-    bottom: 30px !important;
-    right: 30px !important;
-    z-index: 9999999 !important;
-    display: block !important;
-}
-
-#azura-discord-btn a {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    padding: 10px 18px !important;
-    background-color: #000 !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
-    color: #fff !important;
-    font-size: 11px !important;
-    font-weight: bold !important;
-    text-decoration: none !important;
-    border-radius: 2px !important;
-}
-
-#gateway-overlay {
+/* Entry Overlay */
+#entry-screen {
     position: fixed;
     inset: 0;
-    background: #000000;
+    background: #000;
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 999999;
+    justify-content: center;
+    z-index: 9999;
     cursor: pointer;
-    transition: opacity 0.5s ease, visibility 0.5s;
 }
-
-.gateway-btn {
-    padding: 12px 30px;
+.entry-text {
+    border: 1px solid #555;
+    padding: 10px 30px;
     font-size: 10px;
-    letter-spacing: 5px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    letter-spacing: 4px;
 }
-
-.fade-gateway {
+.fade-out {
     opacity: 0;
     visibility: hidden;
+    transition: 0.5s;
 }
 
-::-webkit-scrollbar {
-    display: none !important;
-}
-html, body {
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-}
+/* Scrollbar */
+::-webkit-scrollbar {display:none;}
+body {scrollbar-width:none;}
 </style>
 </head>
 <body oncontextmenu="return false;">
 
-<div class="navigation-bar">
-    HOME
-    <div class="views-box">VIEWS : <span id="views">7304</span></div>
+<div id="entry-screen" onclick="this.classList.add('fade-out');playAudio()">
+    <div class="entry-text">CLICK</div>
 </div>
 
-<div class="center-container">
-    <div class="main-logo-container">
-        <div class="main-clan-logo">AZURA ORG</div>
-        <div class="symbol-break">$</div>
-    </div>
-
-    <div id="founder-container" class="horizontal-avatar-row"></div>
-
-    <div class="title-group-block">
-        <span class="tiny-top-text">ABOVE ALL</span>
-        <h2 class="typewriter-header">ABOVE ALL</h2>
-    </div>
-    <div id="aboveall-container" class="horizontal-avatar-row"></div>
-
-    <div class="title-group-block">
-        <span class="tiny-top-text">STAFF</span>
-        <h2 class="typewriter-header">STAFF</h2>
-    </div>
-    <div id="staff-container" class="horizontal-avatar-row"></div>
-
-    <div class="marquee-wrapper-group">
-        <div class="marquee-ticker">
-            <div id="marquee-container-1" class="marquee-inner-wrap scroll-left"></div>
-        </div>
-        <div class="marquee-ticker">
-            <div id="marquee-container-2" class="marquee-inner-wrap scroll-right"></div>
-        </div>
-    </div>
-</div>
-
-<div id="azura-discord-btn">
-    <a href="https://discord.gg/eUaKEqXkWA" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord" style="width:18px;">
-        <span>AZURA ORG</span>
-    </a>
-</div>
-
-<div id="gateway-overlay">
-    <div class="gateway-btn">CLICK</div>
-</div>
-
-<audio id="soundtrack" loop>
+<audio id="bg-audio" loop>
     <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
 
 
+<div class="nav-bar">
+    HOME <span class="view-count">VIEWS : 7304</span>
+</div>
+
+<div class="logo-top">
+    <div class="logo-text">AZURA ORG</div>
+    <div class="divider-symbol">$</div>
+</div>
+
+<!-- FOUNDER SECTION -->
+<div class="section-title">
+    <div class="small-text">LEADERSHIP</div>
+    <div class="big-text">FOUNDER</div>
+</div>
+<div class="avatar-row" id="founder-row"></div>
+
+<!-- ABOVE ALL SECTION -->
+<div class="section-title">
+    <div class="small-text">ABOVE ALL</div>
+    <div class="big-text">ABOVE ALL ENEMIES</div>
+</div>
+<div class="avatar-row" id="aboveall-row"></div>
+
+<!-- STAFF SECTION -->
+<div class="section-title">
+    <div class="small-text">STAFF</div>
+    <div class="big-text">STAFF</div>
+</div>
+<div class="avatar-row" id="staff-row"></div>
+
+<!-- SCROLLING NAMES -->
+<div class="marquee-wrap">
+    <div class="marquee marquee-left" id="marquee-1"></div>
+</div>
+<div class="marquee-wrap">
+    <div class="marquee marquee-right" id="marquee-2"></div>
+</div>
+
+<a href="https://discord.gg/eUaKEqXkWA" target="_blank" class="discord-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
+    AZURA ORG
+</a>
+
 <script>
-const audio = document.getElementById("soundtrack");
-audio.volume = 0.4;
+function playAudio(){
+    const a = document.getElementById("bg-audio");
+    a.volume = 0.4;
+    a.play().catch(e=>{});
+}
 
-document.getElementById("gateway-overlay").onclick = () => {
-    audio.play().catch(() => {});
-    document.getElementById("gateway-overlay").classList.add("fade-gateway");
-    
-    document.querySelectorAll('.typewriter-header').forEach(el => {
-        el.style.animationPlayState = 'running';
-        el.style.width = '100%';
-    });
-};
+// ✅ ITO YUNG BUONG LISTAHAN MULA SA MEMBERS.JSON MO
+const ALL_MEMBERS = [
+  {"id": "1414546504437207161"},
+  {"id": "1499093156321431622"},
+  {"id": "1495366872516923553"},
+  {"id": "1314554124976656505"},
+  {"id": "1123145717461033041"},
+  {"id": "1081806153341743144"},
+  {"id": "1495341225174368276"},
+  {"id": "1366187912118665276"},
+  {"id": "1501438491207405588"},
+  {"id": "1498999674969784426"},
+  {"id": "1488388828241723513"},
+  {"id": "1509479201114296353"},
+  {"id": "1374740899422277703"},
+  {"id": "995205070679453789"},
+  {"id": "1418157973867597845"},
+  {"id": "1459797319863242797"},
+  {"id": "1250654354344775703"},
+  {"id": "1506434429613113405"},
+  {"id": "1398759472821702773"},
+  {"id": "1057219921907556404"},
+  {"id": "1486015538026123358"},
+  {"id": "1085580321623375938"},
+  {"id": "1506975053370359848"},
+  {"id": "918633044276019232"},
+  {"id": "1469640368361439357"},
+  {"id": "1436822049002623137"}
+];
 
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
-        e.preventDefault();
-        return false;
+// ✅ PAG HATI-HATI NATIN SILA SA SEKSYON
+const FOUNDER_IDS = ["1250654354344775703", "1506975053370359848", "1123145717461033041"];
+const ABOVEALL_IDS = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"];
+const STAFF_IDS = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"];
+
+// ✅ DITO ITATAGO ANG TOTOONG DATA MULA SA DISCORD
+let userData = {};
+
+// ✅ GINAMIT KO ANG SISTEMA NG PUBLICENEMY.XYZ - LANYARD + MATIBAY NA TULAY
+async function fetchAllData() {
+    const ids = ALL_MEMBERS.map(m => m.id);
+    for (const id of ids) {
+        try {
+            // ITO ANG MATIBAY NA LINK NA GUMAGANA SA KANILA
+            const res = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
+            const json = await res.json();
+            
+            if(json.success) {
+                const d = json.data;
+                userData[id] = {
+                    username: d.discord_username,
+                    displayName: d.discord_global_name || d.discord_username,
+                    status: d.discord_status,
+                    avatarHash: d.discord_avatar,
+                    decorationHash: d.avatar_decoration_data?.asset || null,
+                    spotify: d.activities?.find(a => a.name === "Spotify") || null
+                };
+            }
+            // Pahinga saglit para hindi bumigay
+            await new Promise(r => setTimeout(r, 100));
+        } catch (e) {
+            // KUNG HINDI GUMANA, SUBUKAN ITO (PAREHAS DIN)
+            try {
+                const res2 = await fetch(`https://lanyard.atomr.cc/v1/users/${id}`);
+                const json2 = await res2.json();
+                if(json2.success) {
+                    const d = json2.data;
+                    userData[id] = {
+                        username: d.discord_username,
+                        displayName: d.discord_global_name || d.discord_username,
+                        status: d.discord_status,
+                        avatarHash: d.discord_avatar,
+                        decorationHash: d.avatar_decoration_data?.asset || null,
+                        spotify: d.activities?.find(a => a.name === "Spotify") || null
+                    };
+                }
+            } catch (err) {
+                // Kung wala pa rin, lalagyan natin ng pansamantala
+                userData[id] = {
+                    username: "User", displayName: "Loading...", status: "offline",
+                    avatarHash: null, decorationHash: null, spotify: null
+                };
+            }
+        }
     }
-});
-
-setInterval(() => {
-    (function() {})['constructor']('debugger')['call']();
-}, 50);
-
-// ✅ DISCORD ID NIYO - PAREHAS LANG
-const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
-const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
-const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
-const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
-const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
-
-// ✅ DITO KO NA LAGAY ANG TUNAY NA DATA - HINDI NA GAGALAW SA INTERNET
-let membersData = {
-    "1250654354344775703": { id: "1250654354344775703", username: "Le0n", displayName: "LEON", status: "online", avatarHash: "a_8b4f5e6d7c8a9b0c1d2e3f4a5b6c7d8e", decorationHash: null, spotify: null },
-    "1506975053370359848": { id: "1506975053370359848", username: "xKaiser", displayName: "KAISER", status: "online", avatarHash: "a_1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e", decorationHash: null, spotify: null },
-    "1123145717461033041": { id: "1123145717461033041", username: "Zeth", displayName: "ZETH", status: "idle", avatarHash: "a_9z8y7x6w5v4u3t2s1r0q9p8o7n6m5l4k3j2h1g", decorationHash: null, spotify: null },
-
-    "1081806153341743144": { id: "1081806153341743144", username: "Vex", displayName: "VEX", status: "dnd", avatarHash: "a_1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0", decorationHash: null, spotify: null },
-    "1416019497051095091": { id: "1416019497051095091", username: "Raze", displayName: "RAZE", status: "online", avatarHash: "a_9i8u7y6t5r4e3w2q1a0s9d8f7g6h5j4k3l2;1", decorationHash: null, spotify: null },
-    "918633044276019232": { id: "918633044276019232", username: "Nyx", displayName: "NYX", status: "online", avatarHash: "a_z1x2c3v4b5n6m7l8k9j0h1g2f3d4s5a6q7w8e9r", decorationHash: null, spotify: null },
-    "1499093156321431622": { id: "1499093156321431622", username: "Krow", displayName: "KROW", status: "online", avatarHash: "a_q1w2e3r4t5y6u7i8o9p0a1s2d3f4g5h6j7k8l9", decorationHash: null, spotify: null },
-    "1506434429613113405": { id: "1506434429613113405", username: "Aeon", displayName: "AEON", status: "online", avatarHash: "a_m1n2b3v4c5x6z7l8k9j0h1g2f3d4s5a6q7w8e9", decorationHash: null, spotify: null },
-    "1498999674969784426": { id: "1498999674969784426", username: "Syx", displayName: "SYX", status: "online", avatarHash: "a_p0o9i8u7y6t5r4e3w2q1a0s9d8f7g6h5j4k5l6", decorationHash: null, spotify: null },
-
-    "1501438491207405588": { id: "1501438491207405588", username: "Zade", displayName: "ZADE", status: "dnd", avatarHash: "a_1q2w3e4r5t6y7u8i9o0p0l9k8j7h6g5f4d3s2a1", decorationHash: null, spotify: null },
-    "1374740899422277703": { id: "1374740899422277703", username: "Kyro", displayName: "KYRO", status: "offline", avatarHash: "a_z9x8c7v6b5n4m3l2k1j0h9g8f7d6s5a4q3w2e1r", decorationHash: null, spotify: null },
-    "995205070679453789": { id: "995205070679453789", username: "Vrai", displayName: "VRAI", status: "dnd", avatarHash: "a_1m2n3b4v5c6x7z8l9k0j9h8g7f6d5s4a3q2w1e", decorationHash: null, spotify: null },
-    "1366187912118665276": { id: "1366187912118665276", username: "Xen", displayName: "XEN", status: "offline", avatarHash: "a_p9o8i7u6y5t4r3e2w1q0a9s8d7f6g5h4j3k2l1", decorationHash: null, spotify: null },
-    "1459797319863242797": { id: "1459797319863242797", username: "Jinx", displayName: "JINX", status: "online", avatarHash: "a_1z2x3c4v5b6n7m8l9k0j1h2g3f4d5s6a7q8w9e0", decorationHash: null, spotify: null },
-    "1495366872516923553": { id: "1495366872516923553", username: "Kaze", displayName: "KAZE", status: "offline", avatarHash: "a_q9w8e7r6t5y4u3i2o1p0a9s8d7f6g5h4j3k2l1", decorationHash: null, spotify: null },
-    "1314554124976656505": { id: "1314554124976656505", username: "Nix", displayName: "NIX", status: "online", avatarHash: "a_1m2n3b4v5c6x7z8l9k0j1h2g3f4d5s6a7q8w9e0", decorationHash: null, spotify: null },
-    "1398759472821702773": { id: "1398759472821702773", username: "Oryn", displayName: "ORYN", status: "offline", avatarHash: "a_p0o9i8u7y6t5r4e3w2q1a0s9d8f7g6h5j4k3l2", decorationHash: null, spotify: null }
-};
-
-// 🚀 SIMULAN AGAD
-initSystem();
-
-function initSystem() {
-    renderAll(); 
+    renderAll();
 }
 
+// ✅ KUMUHA NG LINK NG LITRATO
+function getAvatarUrl(id, hash) {
+    if(!hash) return `https://cdn.discordapp.com/embed/avatars/${(Number(id) >> 22) % 6}.png`;
+    return `https://cdn.discordapp.com/avatars/${id}/${hash}.png?size=256`;
+}
+
+// ✅ KUMUHA NG LINK NG PALAMUTI
+function getDecorationUrl(hash) {
+    if(!hash) return "";
+    return `https://cdn.discordapp.com/avatar-decoration-presets/${hash}.png?size=240`;
+}
+
+// ✅ GUMAGAWA NG BAWAT BILOG - MAY TUNAY NA DETALYE
+function createAvatarElement(id) {
+    const data = userData[id] || {status:"offline"};
+    const avatarUrl = getAvatarUrl(id, data.avatarHash);
+    const decorationUrl = getDecorationUrl(data.decorationHash);
+
+    let statusClass = 'offline';
+    if(data.status === 'online') statusClass = 'online';
+    if(data.status === 'idle') statusClass = 'idle';
+    if(data.status === 'dnd') statusClass = 'dnd';
+
+    let spotifyHtml = "";
+    if(data.spotify) {
+        spotifyHtml = `<div class="tooltip-spotify">🎵 ${data.spotify.details}</div>`;
+    }
+
+    const card = document.createElement('div');
+    card.className = 'avatar-card';
+
+    card.innerHTML = `
+    <div class="avatar-circle">
+        ${decorationUrl ? `<img class="avatar-decoration" src="${decorationUrl}">` : ''}
+        <img class="avatar-img" src="${avatarUrl}" alt="">
+        <span class="status-dot ${statusClass}"></span>
+    </div>
+    <div class="tooltip">
+        <div class="tooltip-name">${data.displayName || 'Member'}</div>
+        <div class="tooltip-user">@${data.username || id}</div>
+        <div class="tooltip-status">
+            <span class="status-dot ${statusClass}" style="width:8px;height:8px;position:static;"></span>
+            <span>${statusClass.charAt(0).toUpperCase() + statusClass.slice(1)}</span>
+        </div>
+        ${spotifyHtml}
+    </div>
+    `;
+    return card;
+}
+
+// ✅ ILAGAY ANG MGA TAO SA SEKSYON
+function renderSection(ids, containerId) {
+    const cont = document.getElementById(containerId);
+    cont.innerHTML = '';
+    ids.forEach(id => cont.appendChild(createAvatarElement(id)));
+}
+
+// ✅ GAWIN ANG SCROLLING
+function renderMarquee(containerId) {
+    const cont = document.getElementById(containerId);
+    cont.innerHTML = '';
+    const list = [...ALL_MEMBERS, ...ALL_MEMBERS, ...ALL_MEMBERS];
+    list.forEach(m => {
+        const d = userData[m.id] || {};
+        const name = d.displayName || d.username || `User${m.id.slice(0,3)}`;
+        const img = getAvatarUrl(m.id, d.avatarHash);
+        const div = document.createElement('div');
+        div.className = 'marquee-item';
+        div.innerHTML = `<img src="${img}"> <span>${name}</span>`;
+        cont.appendChild(div);
+    });
+}
+
+// ✅ IPAKITA LAHAT
 function renderAll() {
-    document.getElementById('founder-container').innerHTML = '';
-    document.getElementById('aboveall-container').innerHTML = '';
-    document.getElementById('staff-container').innerHTML = '';
-    document.getElementById('marquee-container-1').innerHTML = '';
-    document.getElementById('marquee-container-2').innerHTML = '';
-
-    showGroup(founderIDs, 'founder-container');
-    showGroup(aboveAllIDs, 'aboveall-container');
-    showGroup(staffIDs, 'staff-container');
-    showMarquee(scrollingIDsRow1, "marquee-container-1");
-    showMarquee(scrollingIDsRow2, "marquee-container-2");
+    renderSection(FOUNDER_IDS, 'founder-row');
+    renderSection(ABOVEALL_IDS, 'aboveall-row');
+    renderSection(STAFF_IDS, 'staff-row');
+    renderMarquee('marquee-1');
+    renderMarquee('marquee-2');
 }
 
-function showGroup(listIDs, container) {
-    const box = document.getElementById(container);
-    listIDs.forEach((id, i) => {
-        const mem = membersData[id];
-        if (!mem) return;
-
-        const div = document.createElement('a');
-        div.className = 'avatar-wrapper-node';
-        div.style.zIndex = 50 - i; 
-        div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
-        
-        // ✅ AVATAR - SIGURADONG LALABAS
-        const avatarURL = `https://cdn.discordapp.com/avatars/${mem.id}/${mem.avatarHash}?size=256`;
-
-        // ✅ DECORATION - GAYA SA KANILA
-        let decorationHTML = '';
-        if(mem.decorationHash) {
-            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decoration-presets/${mem.decorationHash}.png?size=240" class="avatar-decoration">`;
-        }
-
-        // ✅ STATUS COLOR
-        let statusClass, statusText;
-        if(mem.status === 'online') { statusClass = 'status-online'; statusText = 'Online'; }
-        else if(mem.status === 'idle') { statusClass = 'status-idle'; statusText = 'Idle'; }
-        else if(mem.status === 'dnd') { statusClass = 'status-dnd'; statusText = 'Do Not Disturb'; }
-        else { statusClass = 'status-offline'; statusText = 'Offline'; }
-
-        // ✅ SPOTIFY - KUNG MAY PINAPAKINGGAN
-        let spotifyHTML = '';
-        if(mem.spotify) {
-            spotifyHTML = `
-            <div class="tooltip-spotify">
-                🎵 ${mem.spotify.details} - ${mem.spotify.state}
-            </div>`;
-        }
-
-        div.innerHTML = `
-            <div class="circle-avatar-container">
-                <img src="${avatarURL}" class="avatar-img" alt="">
-                ${decorationHTML}
-                <span class="status-indicator ${statusClass}"></span>
-            </div>
-            <div class="avatar-tooltip">
-                <div class="tooltip-header">
-                    <img src="${avatarURL}" class="tooltip-avatar-sm" alt="">
-                </div>
-                <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
-                <div class="tooltip-username">@${mem.username || id}</div>
-                <div class="tooltip-status">
-                    <span class="status-dot-sm ${statusClass}"></span>
-                    <span>${statusText}</span>
-                </div>
-                ${spotifyHTML}
-            </div>
-        `;
-        div.addEventListener('click', function(e) {
-            if (this.getAttribute('href') === '#') e.preventDefault();
-            document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
-            this.classList.add('active-pop');
-        });
-        box.appendChild(div);
-    });
-}
-
-function showMarquee(listIDs, containerId) {
-    const box = document.getElementById(containerId);
-    const validMembers = listIDs.map(id => membersData[id]).filter(Boolean);
-    if (validMembers.length === 0) return;
-    const ulit = [...validMembers, ...validMembers, ...validMembers];
-    ulit.forEach(mem => {
-        const avatarURL = `https://cdn.discordapp.com/avatars/${mem.id}/${mem.avatarHash}?size=256`;
-
-        const block = document.createElement('div');
-        block.className = 'marquee-profile-block';
-        block.innerHTML = `<img src="${avatarURL}"> <span>${mem.displayName || mem.username || 'Member'}</span>`;
-        box.appendChild(block);
-    });
-}
+// ✅ SIMULAN: KUHA NG DATA -> IPAKITA -> MAG-UPDATE BAWAT 1 MINUTO
+fetchAllData();
+setInterval(fetchAllData, 60000);
 </script>
 </body>
 </html>

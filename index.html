@@ -6,7 +6,7 @@
 <title>AZURA ORG</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Old+Standard+TT&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Old+English+Text+MT&display=swap');
 
 * {
     margin: 0;
@@ -23,7 +23,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #000;
     background-image: 
-        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+        linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), 
         url("background.webp");
     background-size: cover;
     background-position: center;
@@ -40,15 +40,15 @@ body {
     margin-bottom: 10px;
 }
 .logo-text {
-    font-family: 'Old Standard TT', serif;
-    font-size: 45px;
+    font-family: 'Old English Text MT', serif;
+    font-size: 48px;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: #fff;
 }
 .divider-symbol {
     text-align: center;
-    font-size: 30px;
+    font-size: 32px;
     color: #777;
     margin: 5px 0 40px;
     animation: glow 3s infinite;
@@ -110,6 +110,7 @@ body {
     gap: 22px;
     flex-wrap: nowrap;
     padding: 10px 0 40px;
+    min-height: 110px;
 }
 
 .avatar-card {
@@ -140,7 +141,7 @@ body {
     z-index: 2;
 }
 
-/* ✅ AVATAR DECORATION - GAGANA NA */
+/* Avatar Decoration */
 .avatar-decoration {
     position: absolute;
     top: 50%;
@@ -365,7 +366,7 @@ function playAudio(){
     a.play().catch(e=>{});
 }
 
-// ✅ ITO YUNG BUONG LISTAHAN MULA SA MEMBERS.JSON MO
+// ✅ ITO ANG BUONG LISTAHAN MULA SA MEMBERS.JSON MO
 const ALL_MEMBERS = [
   {"id": "1414546504437207161"},
   {"id": "1499093156321431622"},
@@ -403,12 +404,12 @@ const STAFF_IDS = ["1501438491207405588", "1374740899422277703", "99520507067945
 // ✅ DITO ITATAGO ANG TOTOONG DATA MULA SA DISCORD
 let userData = {};
 
-// ✅ GINAMIT KO ANG SISTEMA NG PUBLICENEMY.XYZ - LANYARD + MATIBAY NA TULAY
+// ✅ GINAMIT KO ANG PINAKAMATATIBAY NA LINK NA GUMAGANA TALAGA
 async function fetchAllData() {
     const ids = ALL_MEMBERS.map(m => m.id);
     for (const id of ids) {
         try {
-            // ITO ANG MATIBAY NA LINK NA GUMAGANA SA KANILA
+            // Ito ang pangunahing source
             const res = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
             const json = await res.json();
             
@@ -422,35 +423,28 @@ async function fetchAllData() {
                     decorationHash: d.avatar_decoration_data?.asset || null,
                     spotify: d.activities?.find(a => a.name === "Spotify") || null
                 };
-            }
-            // Pahinga saglit para hindi bumigay
-            await new Promise(r => setTimeout(r, 100));
-        } catch (e) {
-            // KUNG HINDI GUMANA, SUBUKAN ITO (PAREHAS DIN)
-            try {
-                const res2 = await fetch(`https://lanyard.atomr.cc/v1/users/${id}`);
-                const json2 = await res2.json();
-                if(json2.success) {
-                    const d = json2.data;
-                    userData[id] = {
-                        username: d.discord_username,
-                        displayName: d.discord_global_name || d.discord_username,
-                        status: d.discord_status,
-                        avatarHash: d.discord_avatar,
-                        decorationHash: d.avatar_decoration_data?.asset || null,
-                        spotify: d.activities?.find(a => a.name === "Spotify") || null
-                    };
-                }
-            } catch (err) {
-                // Kung wala pa rin, lalagyan natin ng pansamantala
+            } else {
+                // Kung walang makuha, ilagay natin ang default
                 userData[id] = {
-                    username: "User", displayName: "Loading...", status: "offline",
-                    avatarHash: null, decorationHash: null, spotify: null
+                    username: "User", 
+                    displayName: "Member", 
+                    status: "offline",
+                    avatarHash: null, 
+                    decorationHash: null, 
+                    spotify: null
                 };
             }
+            // Maliit na pahinga para hindi mabigla
+            await new Promise(r => setTimeout(r, 50));
+        } catch (e) {
+            // Kung sakaling may error
+            userData[id] = {
+                username: "User", displayName: "Member", status: "offline",
+                avatarHash: null, decorationHash: null, spotify: null
+            };
         }
     }
-    renderAll();
+    renderAll(); // ✅ SIGURADONG ILALAGAY LANG KAPAG MERON NA LAHAT
 }
 
 // ✅ KUMUHA NG LINK NG LITRATO
@@ -465,9 +459,9 @@ function getDecorationUrl(hash) {
     return `https://cdn.discordapp.com/avatar-decoration-presets/${hash}.png?size=240`;
 }
 
-// ✅ GUMAGAWA NG BAWAT BILOG - MAY TUNAY NA DETALYE
+// ✅ GUMAGAWA NG BAWAT BILOG
 function createAvatarElement(id) {
-    const data = userData[id] || {status:"offline"};
+    const data = userData[id];
     const avatarUrl = getAvatarUrl(id, data.avatarHash);
     const decorationUrl = getDecorationUrl(data.decorationHash);
 
@@ -516,7 +510,7 @@ function renderMarquee(containerId) {
     cont.innerHTML = '';
     const list = [...ALL_MEMBERS, ...ALL_MEMBERS, ...ALL_MEMBERS];
     list.forEach(m => {
-        const d = userData[m.id] || {};
+        const d = userData[m.id];
         const name = d.displayName || d.username || `User${m.id.slice(0,3)}`;
         const img = getAvatarUrl(m.id, d.avatarHash);
         const div = document.createElement('div');

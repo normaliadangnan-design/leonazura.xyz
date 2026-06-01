@@ -181,12 +181,13 @@ body {
     z-index: 99999 !important;
 }
 
+/* ✅ BILOG / BORDER NAGBABAGO NG KULAY BASE SA STATUS */
 .circle-avatar-container {
     position: relative !important;
     width: 95px; 
     height: 95px; 
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 2px solid; /* KULAY DEPENDE SA STATUS */
     background: #000000;
     padding: 3px;
     display: flex;
@@ -194,7 +195,14 @@ body {
     align-items: center;
     overflow: visible !important; 
     z-index: 5 !important;
+    transition: all 0.3s ease;
 }
+
+/* ✅ STATUS COLORS PARA SA BORDER AT GLOW */
+.border-online { border-color: #23a55a; box-shadow: 0 0 10px rgba(35, 165, 90, 0.4); }  /* Green */
+.border-idle { border-color: #f0b232; box-shadow: 0 0 10px rgba(240, 178, 50, 0.4); }    /* Yellow */
+.border-dnd { border-color: #f13f43; box-shadow: 0 0 10px rgba(241, 63, 67, 0.4); }     /* Red */
+.border-offline { border-color: #80848e; box-shadow: 0 0 10px rgba(128, 132, 142, 0.4); } /* Gray */
 
 /* ✅ STATUS DOT SA BABA KANAN */
 .status-indicator {
@@ -206,7 +214,7 @@ body {
     border-radius: 50%;
     border: 2px solid #000;
     z-index: 10;
-    transition: background-color 0.3s ease; /* ✅ GANDA NG PAGPAPALIT */
+    transition: background-color 0.3s ease;
 }
 .status-online { background-color: #23a55a; }  /* Green */
 .status-idle { background-color: #f0b232; }    /* Yellow */
@@ -236,24 +244,24 @@ img.avatar-decoration {
     display: block !important;
 }
 
-/* ✅ INAYOS: CARD PURONG ITIM #000000, TINANGGAL ANG BORDER */
+/* ✅ CARD STYLE */
 .avatar-tooltip {
     position: absolute;
     bottom: 110%; 
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #000000 !important; /* PURONG ITIM */
-    border: none !important; /* WALA NANG BORDER */
+    background: #000000 !important;
+    border: 1px solid #333;
     border-radius: 8px;
     padding: 12px;
-    width: 200px;
+    width: 240px;
     color: #fff;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
     pointer-events: none; 
     z-index: 9999999;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.95);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
 }
 
 .avatar-wrapper-node:hover .avatar-tooltip {
@@ -262,34 +270,38 @@ img.avatar-decoration {
     transform: translateX(-50%) translateY(0);
 }
 
+/* ✅ LAYOUT: BILOG + PANGALAN KATABI */
 .tooltip-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #222;
 }
 
 .tooltip-avatar-sm {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 1px solid #444;
 }
 
-/* ✅ TINANGGAL NA ANG CORONA / CROWN */
-.tooltip-emojis {
-    display: none !important;
-}
-
-.tooltip-username {
-    font-size: 12px;
-    color: #96989d;
-    margin: 4px 0;
+.tooltip-name-group {
+    display: flex;
+    flex-direction: column;
 }
 
 .tooltip-desc {
     font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.tooltip-username {
+    font-size: 11px;
+    color: #96989d;
+    margin: 0;
 }
 
 /* ✅ STATUS TEXT SA LOOB NG CARD */
@@ -300,7 +312,8 @@ img.avatar-decoration {
     gap: 6px;
     padding: 4px 6px;
     border-radius: 3px;
-    background: #1a1a1a; /* Medyo mas maliwanag na itim para makita */
+    background: #1a1a1a;
+    margin-bottom: 8px;
     transition: all 0.3s ease;
 }
 .status-dot-sm {
@@ -310,6 +323,22 @@ img.avatar-decoration {
     display: inline-block;
     transition: background-color 0.3s ease;
 }
+
+/* ✅ ACTIVITY SECTION (SPOTIFY / LARO / IBA PA) */
+.tooltip-activity {
+    background: #121212;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 11px;
+    line-height: 1.4;
+    border-left: 2px solid;
+}
+.activity-spotify { border-left-color: #1DB954; }
+.activity-game { border-left-color: #7289da; }
+.activity-custom { border-left-color: #b9bbbe; }
+
+.activity-title { font-weight: 600; color: #fff; }
+.activity-details { color: #b9bbbe; font-size: 10px; }
 
 .marquee-ticker {
     overflow: hidden;
@@ -519,12 +548,11 @@ let currentDataHash = "";
 
 // 🚀 SIMULAN AGAD
 fetchData();
-// 🔄 TUWING 15 SEKUNDO LANG (KAPAREHO NG BOT, WALA NANG ERROR!)
-setInterval(fetchData, 30000);
+// 🔄 TUWING 15 SEKUNDO LANG
+setInterval(fetchData, 15000);
 
 async function fetchData() {
     try {
-        // ⚡ PINAKAMATATAG NA PARAAN - HINDI NA KAYANG I-CACHE NG BROWSER
         const response = await fetch(`members.json?time=${Date.now()}`, {
             cache: "no-store",
             headers: {'Cache-Control': 'no-cache, no-store, must-revalidate'}
@@ -534,11 +562,10 @@ async function fetchData() {
         const newData = await response.json();
         const newHash = JSON.stringify(newData);
 
-        // 🧐 TIGNAN KUNG MAY NAGBAGO LANG
         if (newHash !== currentDataHash) {
             currentDataHash = newHash;
-            renderAll(newData); // ✅ I-UPDATE AGAD ANG ITSURA
-            console.log("🔄 Nag-update ang status/data!"); // Makikita mo sa console kung gumagana
+            renderAll(newData);
+            console.log("🔄 Nag-update ang status/data!");
         }
 
     } catch (error) {
@@ -547,14 +574,12 @@ async function fetchData() {
 }
 
 function renderAll(members) {
-    // Linisin ang laman bago ilagay ulit
     document.getElementById('founder-container').innerHTML = '';
     document.getElementById('aboveall-container').innerHTML = '';
     document.getElementById('staff-container').innerHTML = '';
     document.getElementById('marquee-container-1').innerHTML = '';
     document.getElementById('marquee-container-2').innerHTML = '';
 
-    // Ipakita ulit lahat ng may bagong data
     showGroup(members, founderIDs, 'founder-container');
     showGroup(members, aboveAllIDs, 'aboveall-container');
     showGroup(members, staffIDs, 'staff-container');
@@ -578,38 +603,71 @@ function showGroup(allMembers, listIDs, container) {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
         
-        // ✅ STATUS LOGIC - GANAP NA AYOS AT MAY GANDA NG PAGPAPALIT
-        let statusText, statusClass, dotClass;
+        // ✅ STATUS LOGIC - TAMA NA!
+        let statusText, statusClass, dotClass, borderClass;
         switch(mem.status) {
             case 'online':
-                statusText = 'Online'; statusClass = 'status-online'; dotClass = 'status-online';
+                statusText = 'Online'; 
+                statusClass = 'status-online'; 
+                dotClass = 'status-online';
+                borderClass = 'border-online'; // GREEN BORDER
                 break;
             case 'idle':
-                statusText = 'Idle'; statusClass = 'status-idle'; dotClass = 'status-idle';
+                statusText = 'Idle'; 
+                statusClass = 'status-idle'; 
+                dotClass = 'status-idle';
+                borderClass = 'border-idle'; // YELLOW BORDER
                 break;
             case 'dnd':
-                statusText = 'Do Not Disturb'; statusClass = 'status-dnd'; dotClass = 'status-dnd';
+                statusText = 'Do Not Disturb'; 
+                statusClass = 'status-dnd'; 
+                dotClass = 'status-dnd';
+                borderClass = 'border-dnd'; // RED BORDER
                 break;
             default:
-                statusText = 'Offline / Invisible'; statusClass = 'status-offline'; dotClass = 'status-offline';
+                statusText = 'Offline / Invisible'; 
+                statusClass = 'status-offline'; 
+                dotClass = 'status-offline';
+                borderClass = 'border-offline'; // GRAY BORDER
+        }
+
+        // ✅ ACTIVITY LOGIC (SPOTIFY / LARO / CUSTOM)
+        let activityHTML = '';
+        if(mem.activity) {
+            let actClass = 'activity-custom';
+            if(mem.activity.type === 'LISTENING') actClass = 'activity-spotify';
+            if(mem.activity.type === 'PLAYING') actClass = 'activity-game';
+
+            activityHTML = `
+            <div class="tooltip-activity ${actClass}">
+                <div class="activity-title">${mem.activity.name || 'Custom Status'}</div>
+                ${mem.activity.details ? `<div class="activity-details">${mem.activity.details}</div>` : ''}
+                ${mem.activity.state ? `<div class="activity-details">${mem.activity.state}</div>` : ''}
+            </div>`;
         }
 
         div.innerHTML = `
-            <div class="circle-avatar-container">
+            <div class="circle-avatar-container ${borderClass}">
                 <img src="${mem.avatarURL}" class="avatar-img" alt="">
                 ${decorationHTML} 
                 <span class="status-indicator ${statusClass}"></span>
             </div>
             <div class="avatar-tooltip">
+                <!-- ✅ BILOG + PANGALAN KATABI -->
                 <div class="tooltip-header">
                     <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
+                    <div class="tooltip-name-group">
+                        <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
+                        <div class="tooltip-username">@${mem.username || 'username'}</div>
+                    </div>
                 </div>
-                <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
-                <div class="tooltip-username">@${mem.username || 'username'}</div>
+
                 <div class="tooltip-status">
                     <span class="status-dot-sm ${dotClass}"></span>
                     <span>${statusText}</span>
                 </div>
+
+                ${activityHTML}
             </div>
         `;
         

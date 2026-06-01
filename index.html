@@ -515,41 +515,64 @@ const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453
 const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
 const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
-// ✅ ITATAGO NATIN ANG TAMANG DETALYE DITO
-let membersData = [];
+// ✅ DITO ITATAGO ANG DATA, MAY DEFAULT NA PARA LAGI MAY LALABAS
+let membersData = {};
 
 // 🚀 SIMULAN AGAD
-initAll();
+initSystem();
 
-async function initAll() {
-    const allIds = [...founderIDs, ...aboveAllIDs, ...staffIDs, ...scrollingIDsRow1, ...scrollingIDsRow2];
-    const uniqueIds = [...new Set(allIds)];
+async function initSystem() {
+    // Gumawa muna ng DEFAULT na data para sigurado may laman agad at hindi walang laman
+    const allIds = [...new Set([...founderIDs, ...aboveAllIDs, ...staffIDs, ...scrollingIDsRow1, ...scrollingIDsRow2])];
+    allIds.forEach(id => {
+        membersData[id] = {
+            id: id,
+            username: "Member",
+            displayName: "Member",
+            status: "offline",
+            avatarHash: null,
+            decorationHash: null
+        };
+    });
 
-    // ✅ DITO NA ANG TAMANG PAGKUHA! GAGAMIT NATIN NG LEGIT NA LINK
-    for (const id of uniqueIds) {
-        let avatarHash = null;
-        let username = "Member";
+    renderAll(); // Ipakita agad kahit default lang
 
+    // KUNIN ANG TUNAY NA DATA - ISA-ISA LANG PARA HINDI MAG ERROR
+    await fetchDataOneByOne(allIds);
+    renderAll(); // Ipakita ang totoong data
+
+    // 🔄 AUTO UPDATE BAWAT 2 MINUTO
+    setInterval(async () => {
+        await fetchDataOneByOne(allIds);
+        renderAll();
+    }, 120000); // 120,000 ms = 2 minutes
+}
+
+// ✅ TAMANG PARAAN: ISA-ISA LANG KUKUHA, PARA HINDI BARAHAN NG SERVER
+async function fetchDataOneByOne(ids) {
+    for (const id of ids) {
         try {
-            // KUKUHA NATIN SA LANYARD, PERO KAHIT HINDI NAKA-MONITOR, MAY LALABAS PA RIN
             const res = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
             const json = await res.json();
-            
+
             if(json.success) {
-                avatarHash = json.data.discord_avatar;
-                username = json.data.discord_global_name || json.data.discord_username;
+                const d = json.data;
+                membersData[id] = {
+                    id: id,
+                    username: d.discord_username,
+                    displayName: d.discord_global_name || d.discord_username,
+                    status: d.discord_status,
+                    avatarHash: d.discord_avatar,
+                    decorationHash: d.avatar_decoration_data?.asset || null
+                };
             }
-        } catch(e) {}
-
-        // ✅ TAMANG LINK NG LITRATO - SIGURADONG LALABAS KAHIT ANO
-        const avatarURL = avatarHash 
-            ? `https://cdn.discordapp.com/avatars/${id}/${avatarHash}.png?size=256` 
-            : `https://cdn.discordapp.com/embed/avatars/${(Number(id) >> 22) % 6}.png`;
-
-        membersData.push({ id, username, avatarURL });
+            // Magpahinga ng kaunti bago ang susunod para hindi ma-detect na spam
+            await new Promise(r => setTimeout(r, 200)); 
+        } catch (e) {
+            // Kapag nag-error, manatili sa lumang data
+            console.log("Hindi nakuha:", id);
+        }
     }
-
-    renderAll();
 }
 
 function renderAll() {
@@ -571,7 +594,7 @@ function renderAll() {
 function showGroup(listIDs, container) {
     const box = document.getElementById(container);
     listIDs.forEach((id, i) => {
-        const mem = membersData.find(m => m.id === id);
+        const mem = membersData[id];
         if (!mem) return;
 
         const div = document.createElement('a');
@@ -579,20 +602,39 @@ function showGroup(listIDs, container) {
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
+        // ✅ Avatar URL - SIGURADONG MAY LALABAS
+        const avatarURL = mem.avatarHash 
+            ? `https://cdn.discordapp.com/avatars/${mem.id}/${mem.avatarHash}?size=256` 
+            : `https://cdn.discordapp.com/embed/avatars/${(Number(mem.id) >> 22) % 6}.png`;
+
+        // ✅ Decoration
+        let decorationHTML = '';
+        if(mem.decorationHash) {
+            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decoration-presets/${mem.decorationHash}.png?size=240" class="avatar-decoration">`;
+        }
+
+        // ✅ STATUS
+        let statusClass, statusText, statusDot;
+        if(mem.status === 'online') { statusClass = 'status-online'; statusText = 'Online'; statusDot = 'status-online'; }
+        else if(mem.status === 'idle') { statusClass = 'status-idle'; statusText = 'Idle'; statusDot = 'status-idle'; }
+        else if(mem.status === 'dnd') { statusClass = 'status-dnd'; statusText = 'Do Not Disturb'; statusDot = 'status-dnd'; }
+        else { statusClass = 'status-offline'; statusText = 'Offline / Invisible'; statusDot = 'status-offline'; }
+
         div.innerHTML = `
             <div class="circle-avatar-container">
-                <img src="${mem.avatarURL}" class="avatar-img" alt="">
-                <span class="status-indicator status-online"></span>
+                <img src="${avatarURL}" class="avatar-img" alt="">
+                ${decorationHTML}
+                <span class="status-indicator ${statusClass}"></span>
             </div>
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
+                    <img src="${avatarURL}" class="tooltip-avatar-sm" alt="">
                 </div>
-                <div class="tooltip-desc">${mem.username}</div>
-                <div class="tooltip-username">@${id}</div>
+                <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
+                <div class="tooltip-username">@${mem.username || id}</div>
                 <div class="tooltip-status">
-                    <span class="status-dot-sm status-online"></span>
-                    <span>Online</span>
+                    <span class="status-dot-sm ${statusDot}"></span>
+                    <span>${statusText}</span>
                 </div>
             </div>
         `;
@@ -607,13 +649,17 @@ function showGroup(listIDs, container) {
 
 function showMarquee(listIDs, containerId) {
     const box = document.getElementById(containerId);
-    const validMembers = listIDs.map(id => membersData.find(m => m.id === id)).filter(Boolean);
+    const validMembers = listIDs.map(id => membersData[id]).filter(Boolean);
     if (validMembers.length === 0) return;
     const ulit = [...validMembers, ...validMembers, ...validMembers];
     ulit.forEach(mem => {
+        const avatarURL = mem.avatarHash 
+            ? `https://cdn.discordapp.com/avatars/${mem.id}/${mem.avatarHash}?size=256` 
+            : `https://cdn.discordapp.com/embed/avatars/${(Number(mem.id) >> 22) % 6}.png`;
+
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
-        block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.username}</span>`;
+        block.innerHTML = `<img src="${avatarURL}"> <span>${mem.displayName || mem.username || 'Member'}</span>`;
         box.appendChild(block);
     });
 }

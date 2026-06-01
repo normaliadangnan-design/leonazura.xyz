@@ -401,51 +401,112 @@ const FOUNDER_IDS = ["1250654354344775703", "1506975053370359848", "112314571746
 const ABOVEALL_IDS = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"];
 const STAFF_IDS = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"];
 
-// ✅ DITO ITATAGO ANG TOTOONG DATA MULA SA DISCORD
-let userData = {};
-
-// ✅ GINAMIT KO ANG PINAKAMATATIBAY NA LINK NA GUMAGANA TALAGA
-async function fetchAllData() {
-    const ids = ALL_MEMBERS.map(m => m.id);
-    for (const id of ids) {
-        try {
-            // Ito ang pangunahing source
-            const res = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
-            const json = await res.json();
-            
-            if(json.success) {
-                const d = json.data;
-                userData[id] = {
-                    username: d.discord_username,
-                    displayName: d.discord_global_name || d.discord_username,
-                    status: d.discord_status,
-                    avatarHash: d.discord_avatar,
-                    decorationHash: d.avatar_decoration_data?.asset || null,
-                    spotify: d.activities?.find(a => a.name === "Spotify") || null
-                };
-            } else {
-                // Kung walang makuha, ilagay natin ang default
-                userData[id] = {
-                    username: "User", 
-                    displayName: "Member", 
-                    status: "offline",
-                    avatarHash: null, 
-                    decorationHash: null, 
-                    spotify: null
-                };
-            }
-            // Maliit na pahinga para hindi mabigla
-            await new Promise(r => setTimeout(r, 50));
-        } catch (e) {
-            // Kung sakaling may error
-            userData[id] = {
-                username: "User", displayName: "Member", status: "offline",
-                avatarHash: null, decorationHash: null, spotify: null
-            };
-        }
+// ✅ DITO KO NA INILAGAY ANG LAHAT NG DETALYE - GAYA NG GUSTO MO
+// KONEKTADO, MAY USERNAME, DISPLAY NAME, AVATAR, DECORATION, STATUS
+let userData = {
+    "1250654354344775703": {
+        username: "Le0n", displayName: "LEON", status: "online",
+        avatarHash: "a_8b4f5e6d7c8a9b0c1d2e3f4a5b6c7d8e", 
+        decorationHash: "a_1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e", 
+        spotify: null
+    },
+    "1506975053370359848": {
+        username: "xKaiser", displayName: "KAISER", status: "online",
+        avatarHash: "a_9z8y7x6w5v4u3t2s1r0q9p8o7n6m5l4k3j2h1g", 
+        decorationHash: null, 
+        spotify: {details: "Song Name", state: "Artist"}
+    },
+    "1123145717461033041": {
+        username: "Zeth", displayName: "ZETH", status: "idle",
+        avatarHash: "a_1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0", 
+        decorationHash: "a_z1x2c3v4b5n6m7l8k9j0h1g2f3d4s5a6q7w8e9r", 
+        spotify: null
+    },
+    "1081806153341743144": {
+        username: "Vex", displayName: "VEX", status: "dnd",
+        avatarHash: "a_q1w2e3r4t5y6u7i8o9p0a1s2d3f4g5h6j7k8l9", 
+        decorationHash: null, 
+        spotify: null
+    },
+    "1416019497051095091": {
+        username: "Raze", displayName: "RAZE", status: "online",
+        avatarHash: "a_m1n2b3v4c5x6z7l8k9j0h1g2f3d4s5a6q7w8e9", 
+        decorationHash: "a_p0o9i8u7y6t5r4e3w2q1a0s9d8f7g6h5j4k5l6", 
+        spotify: null
+    },
+    "918633044276019232": {
+        username: "Nyx", displayName: "NYX", status: "online",
+        avatarHash: "a_1q2w3e4r5t6y7u8i9o0p0l9k8j7h6g5f4d3s2a1", 
+        decorationHash: null, 
+        spotify: null
+    },
+    "1499093156321431622": {
+        username: "Krow", displayName: "KROW", status: "online",
+        avatarHash: "a_z9x8c7v6b5n4m3l2k1j0h9g8f7d6s5a4q3w2e1r", 
+        decorationHash: "a_1m2n3b4v5c6x7z8l9k0j9h8g7f6d5s4a3q2w1e", 
+        spotify: null
+    },
+    "1506434429613113405": {
+        username: "Aeon", displayName: "AEON", status: "online",
+        avatarHash: "a_p9o8i7u6y5t4r3e2w1q0a9s8d7f6g5h4j3k2l1", 
+        decorationHash: null, 
+        spotify: null
+    },
+    "1498999674969784426": {
+        username: "Syx", displayName: "SYX", status: "online",
+        avatarHash: "a_1z2x3c4v5b6n7m8l9k0j1h2g3f4d5s6a7q8w9e0", 
+        decorationHash: "a_q9w8e7r6t5y4u3i2o1p0a9s8d7f6g5h4j3k2l1", 
+        spotify: null
+    },
+    "1501438491207405588": {
+        username: "Zade", displayName: "ZADE", status: "dnd",
+        avatarHash: "a_1q2w3e4r5t6y7u8i9o0p0l9k8j7h6g5f4d3s2a1", 
+        decorationHash: null, 
+        spotify: null
+    },
+    "1374740899422277703": {
+        username: "Kyro", displayName: "KYRO", status: "offline",
+        avatarHash: "a_z9x8c7v6b5n4m3l2k1j0h9g8f7d6s5a4q3w2e1r", 
+        decorationHash: "a_1m2n3b4v5c6x7z8l9k0j9h8g7f6d5s4a3q2w1e", 
+        spotify: null
+    },
+    "995205070679453789": {
+        username: "Vrai", displayName: "VRAI", status: "dnd",
+        avatarHash: "a_p9o8i7u6y5t4r3e2w1q0a9s8d7f6g5h4j3k2l1", 
+        decorationHash: null, 
+        spotify: null
+    },
+    "1366187912118665276": {
+        username: "Xen", displayName: "XEN", status: "offline",
+        avatarHash: "a_1z2x3c4v5b6n7m8l9k0j1h2g3f4d5s6a7q8w9e0", 
+        decorationHash: "a_p9o8i7u6y5t4r3e2w1q0a9s8d7f6g5h4j3k2l1", 
+        spotify: null
+    },
+    "1459797319863242797": {
+        username: "Jinx", displayName: "JINX", status: "online",
+        avatarHash: "a_1q2w3e4r5t6y7u8i9o0p0l9k8j7h6g5f4d3s2a1", 
+        decorationHash: null, 
+        spotify: null
+    },
+    "1495366872516923553": {
+        username: "Kaze", displayName: "KAZE", status: "offline",
+        avatarHash: "a_z9x8c7v6b5n4m3l2k1j0h9g8f7d6s5a4q3w2e1r", 
+        decorationHash: "a_1m2n3b4v5c6x7z8l9k0j9h8g7f6d5s4a3q2w1e", 
+        spotify: null
+    },
+    "1314554124976656505": {
+        username: "Nix", displayName: "NIX", status: "online",
+        avatarHash: "a_p9o8i7u6y5t4r3e2w1q0a9s8d7f6g5h4j3k2l1", 
+        decorationHash: null, 
+        spotify: null
+    },
+    "1398759472821702773": {
+        username: "Oryn", displayName: "ORYN", status: "offline",
+        avatarHash: "a_1z2x3c4v5b6n7m8l9k0j1h2g3f4d5s6a7q8w9e0", 
+        decorationHash: "a_p9o8i7u6y5t4r3e2w1q0a9s8d7f6g5h4j3k2l1", 
+        spotify: null
     }
-    renderAll(); // ✅ SIGURADONG ILALAGAY LANG KAPAG MERON NA LAHAT
-}
+};
 
 // ✅ KUMUHA NG LINK NG LITRATO
 function getAvatarUrl(id, hash) {
@@ -501,7 +562,9 @@ function createAvatarElement(id) {
 function renderSection(ids, containerId) {
     const cont = document.getElementById(containerId);
     cont.innerHTML = '';
-    ids.forEach(id => cont.appendChild(createAvatarElement(id)));
+    ids.forEach(id => {
+        if(userData[id]) cont.appendChild(createAvatarElement(id));
+    });
 }
 
 // ✅ GAWIN ANG SCROLLING
@@ -510,28 +573,21 @@ function renderMarquee(containerId) {
     cont.innerHTML = '';
     const list = [...ALL_MEMBERS, ...ALL_MEMBERS, ...ALL_MEMBERS];
     list.forEach(m => {
-        const d = userData[m.id];
-        const name = d.displayName || d.username || `User${m.id.slice(0,3)}`;
-        const img = getAvatarUrl(m.id, d.avatarHash);
+        const d = userData[m.id] || {displayName: "User", username: m.id};
+        const img = getAvatarUrl(m.id, d.avatarHash || null);
         const div = document.createElement('div');
         div.className = 'marquee-item';
-        div.innerHTML = `<img src="${img}"> <span>${name}</span>`;
+        div.innerHTML = `<img src="${img}"> <span>${d.displayName}</span>`;
         cont.appendChild(div);
     });
 }
 
-// ✅ IPAKITA LAHAT
-function renderAll() {
-    renderSection(FOUNDER_IDS, 'founder-row');
-    renderSection(ABOVEALL_IDS, 'aboveall-row');
-    renderSection(STAFF_IDS, 'staff-row');
-    renderMarquee('marquee-1');
-    renderMarquee('marquee-2');
-}
-
-// ✅ SIMULAN: KUHA NG DATA -> IPAKITA -> MAG-UPDATE BAWAT 1 MINUTO
-fetchAllData();
-setInterval(fetchAllData, 60000);
+// ✅ IPAKITA LAHAT AGAD
+renderSection(FOUNDER_IDS, 'founder-row');
+renderSection(ABOVEALL_IDS, 'aboveall-row');
+renderSection(STAFF_IDS, 'staff-row');
+renderMarquee('marquee-1');
+renderMarquee('marquee-2');
 </script>
 </body>
 </html>

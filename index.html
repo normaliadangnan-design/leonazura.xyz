@@ -515,57 +515,41 @@ const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453
 const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
 const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
-// ✅ DITO ITATAGO ANG TAMANG IMPORMASYON
+// ✅ ITATAGO NATIN ANG TAMANG DETALYE DITO
 let membersData = [];
 
 // 🚀 SIMULAN AGAD
 initAll();
 
 async function initAll() {
-    // Pagsama-samahin lahat ng ID
     const allIds = [...founderIDs, ...aboveAllIDs, ...staffIDs, ...scrollingIDsRow1, ...scrollingIDsRow2];
     const uniqueIds = [...new Set(allIds)];
 
-    // KUKUHA TAYO NG DIREKTA SA DISCORD CDN, WALANG KULANG, WALANG ERROR
-    membersData = uniqueIds.map(id => {
-        return {
-            id: id,
-            // ✅ ITO ANG TAMANG LINK NG LITRATO, SIGURADONG LALABAS
-            avatarURL: `https://cdn.discordapp.com/avatars/${id}/avatar.png?size=256`,
-            // ✅ PANGALAN - DITO KO INILAGAY ANG PANGALAN NILA PARA SIGURADO, PWEDENG PALITAN LATER
-            name: getDisplayName(id),
-            // ✅ STATUS - ONLINE LANG MUNA PARA MAKITA ANG BILOG, PWEDE RIN PALITAN
-            status: 'online' 
-        };
-    });
+    // ✅ DITO NA ANG TAMANG PAGKUHA! GAGAMIT NATIN NG LEGIT NA LINK
+    for (const id of uniqueIds) {
+        let avatarHash = null;
+        let username = "Member";
+
+        try {
+            // KUKUHA NATIN SA LANYARD, PERO KAHIT HINDI NAKA-MONITOR, MAY LALABAS PA RIN
+            const res = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
+            const json = await res.json();
+            
+            if(json.success) {
+                avatarHash = json.data.discord_avatar;
+                username = json.data.discord_global_name || json.data.discord_username;
+            }
+        } catch(e) {}
+
+        // ✅ TAMANG LINK NG LITRATO - SIGURADONG LALABAS KAHIT ANO
+        const avatarURL = avatarHash 
+            ? `https://cdn.discordapp.com/avatars/${id}/${avatarHash}.png?size=256` 
+            : `https://cdn.discordapp.com/embed/avatars/${(Number(id) >> 22) % 6}.png`;
+
+        membersData.push({ id, username, avatarURL });
+    }
 
     renderAll();
-}
-
-// ✅ PANGALAN NILA - INILAGAY KO NA DITO PARA HINDI MAGING "undefined"
-function getDisplayName(id) {
-    const names = {
-        "1250654354344775703": "Leon",
-        "1506975053370359848": "Founder 2",
-        "1123145717461033041": "Founder 3",
-        "1081806153341743144": "Above 1",
-        "1416019497051095091": "Above 2",
-        "918633044276019232": "Above 3",
-        "1499093156321431622": "Above 4",
-        "1506434429613113405": "Above 5",
-        "1498999674969784426": "Above 6",
-        "1501438491207405588": "Staff 1",
-        "1374740899422277703": "Staff 2",
-        "995205070679453789": "Staff 3",
-        "1366187912118665276": "Staff 4",
-        "1459797319863242797": "Staff 5",
-        "1495366872516923553": "Staff 6",
-        "1314554124976656505": "Staff 7",
-        "1398759472821702773": "Staff 8",
-        "1414546504437207161": "Scroll 1",
-        "1509479201114296353": "Scroll 2"
-    };
-    return names[id] || "Member";
 }
 
 function renderAll() {
@@ -595,23 +579,20 @@ function showGroup(listIDs, container) {
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        // ✅ STATUS COLOR
-        const statusClass = mem.status === 'online' ? 'status-online' : 'status-offline';
-
         div.innerHTML = `
             <div class="circle-avatar-container">
-                <img src="${mem.avatarURL}" class="avatar-img" alt="" onerror="this.src='https://cdn.discordapp.com/embed/avatars/1.png'">
-                <span class="status-indicator ${statusClass}"></span>
+                <img src="${mem.avatarURL}" class="avatar-img" alt="">
+                <span class="status-indicator status-online"></span>
             </div>
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="" onerror="this.src='https://cdn.discordapp.com/embed/avatars/1.png'">
+                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
                 </div>
-                <div class="tooltip-desc">${mem.name}</div>
-                <div class="tooltip-username">@${mem.id}</div>
+                <div class="tooltip-desc">${mem.username}</div>
+                <div class="tooltip-username">@${id}</div>
                 <div class="tooltip-status">
-                    <span class="status-dot-sm ${statusClass}"></span>
-                    <span>${mem.status === 'online' ? 'Online' : 'Offline'}</span>
+                    <span class="status-dot-sm status-online"></span>
+                    <span>Online</span>
                 </div>
             </div>
         `;
@@ -632,7 +613,7 @@ function showMarquee(listIDs, containerId) {
     ulit.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
-        block.innerHTML = `<img src="${mem.avatarURL}" onerror="this.src='https://cdn.discordapp.com/embed/avatars/1.png'"> <span>${mem.name}</span>`;
+        block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.username}</span>`;
         box.appendChild(block);
     });
 }

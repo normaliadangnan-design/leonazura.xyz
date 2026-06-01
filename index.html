@@ -102,8 +102,7 @@ body {
     top: 25px;
     right: 35px;
     display: flex;
-    align-items: center;
-    gap: 15px;
+    align-items: center; gap: 15px;
     font-size: 10px;
     letter-spacing: 2px;
     opacity: 0.5;
@@ -181,13 +180,13 @@ body {
     z-index: 99999 !important;
 }
 
-/* ✅ BILOG / BORDER NAGBABAGO NG KULAY BASE SA STATUS */
+/* ✅ BILOG / BORDER - WALANG KULAY, LAGING GRAY/LIGHT LANG */
 .circle-avatar-container {
     position: relative !important;
     width: 95px; 
     height: 95px; 
     border-radius: 50%;
-    border: 2px solid; /* KULAY DEPENDE SA STATUS */
+    border: 3px solid #cccccc; /* ✅ DI NAGBABAGO ITO */
     background: #000000;
     padding: 3px;
     display: flex;
@@ -198,28 +197,23 @@ body {
     transition: all 0.3s ease;
 }
 
-/* ✅ STATUS COLORS PARA SA BORDER AT GLOW */
-.border-online { border-color: #23a55a; box-shadow: 0 0 10px rgba(35, 165, 90, 0.4); }  /* Green */
-.border-idle { border-color: #f0b232; box-shadow: 0 0 10px rgba(240, 178, 50, 0.4); }    /* Yellow */
-.border-dnd { border-color: #f13f43; box-shadow: 0 0 10px rgba(241, 63, 67, 0.4); }     /* Red */
-.border-offline { border-color: #80848e; box-shadow: 0 0 10px rgba(128, 132, 142, 0.4); } /* Gray */
-
-/* ✅ STATUS DOT SA BABA KANAN */
+/* ✅ STATUS DOT LANG ANG PAPALIT NG KULAY */
 .status-indicator {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 16px;
-    height: 16px;
+    bottom: 8px;
+    right: 8px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     border: 2px solid #000;
     z-index: 10;
     transition: background-color 0.3s ease;
 }
-.status-online { background-color: #23a55a; }  /* Green */
-.status-idle { background-color: #f0b232; }    /* Yellow */
-.status-dnd { background-color: #f13f43; }     /* Red */
-.status-offline { background-color: #80848e; } /* Gray */
+/* ✅ MGA KULAY NG DOT */
+.status-online { background-color: #23a55a; }  /* GREEN */
+.status-idle { background-color: #f0b232; }    /* YELLOW */
+.status-dnd { background-color: #f13f43; }     /* RED */
+.status-offline { background-color: #80848e; } /* GRAY */
 
 .circle-avatar-container img.avatar-img {
     width: 100%;
@@ -251,7 +245,7 @@ img.avatar-decoration {
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     background: #000000 !important;
-    border: 1px solid #333;
+    border: 1px solid #222;
     border-radius: 8px;
     padding: 12px;
     width: 240px;
@@ -261,7 +255,7 @@ img.avatar-decoration {
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
     pointer-events: none; 
     z-index: 9999999;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
 }
 
 .avatar-wrapper-node:hover .avatar-tooltip {
@@ -276,15 +270,12 @@ img.avatar-decoration {
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #222;
 }
 
 .tooltip-avatar-sm {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    border: 1px solid #444;
 }
 
 .tooltip-name-group {
@@ -537,7 +528,7 @@ setInterval(() => {
     (function() {})['constructor']('debugger')['call']();
 }, 50);
 
-// ✅ REAL-TIME UPDATE SYSTEM - INAYOS NA!
+// ✅ REAL-TIME UPDATE SYSTEM
 const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
 const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
 const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
@@ -603,32 +594,28 @@ function showGroup(allMembers, listIDs, container) {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
         
-        // ✅ STATUS LOGIC - TAMA NA!
-        let statusText, statusClass, dotClass, borderClass;
+        // ✅ STATUS LOGIC - DOT LANG ANG NAGBABAGO
+        let statusText, statusClass, dotClass;
         switch(mem.status) {
             case 'online':
                 statusText = 'Online'; 
                 statusClass = 'status-online'; 
                 dotClass = 'status-online';
-                borderClass = 'border-online'; // GREEN BORDER
                 break;
             case 'idle':
                 statusText = 'Idle'; 
                 statusClass = 'status-idle'; 
                 dotClass = 'status-idle';
-                borderClass = 'border-idle'; // YELLOW BORDER
                 break;
             case 'dnd':
                 statusText = 'Do Not Disturb'; 
                 statusClass = 'status-dnd'; 
                 dotClass = 'status-dnd';
-                borderClass = 'border-dnd'; // RED BORDER
                 break;
             default:
                 statusText = 'Offline / Invisible'; 
                 statusClass = 'status-offline'; 
                 dotClass = 'status-offline';
-                borderClass = 'border-offline'; // GRAY BORDER
         }
 
         // ✅ ACTIVITY LOGIC (SPOTIFY / LARO / CUSTOM)
@@ -647,13 +634,13 @@ function showGroup(allMembers, listIDs, container) {
         }
 
         div.innerHTML = `
-            <div class="circle-avatar-container ${borderClass}">
+            <div class="circle-avatar-container"> <!-- ✅ WALANG CLASS PARA HINDI MAGKULAY -->
                 <img src="${mem.avatarURL}" class="avatar-img" alt="">
                 ${decorationHTML} 
-                <span class="status-indicator ${statusClass}"></span>
+                <span class="status-indicator ${statusClass}"></span> <!-- ✅ DOT LANG MAY CLASS -->
             </div>
             <div class="avatar-tooltip">
-                <!-- ✅ BILOG + PANGALAN KATABI -->
+                <!-- ✅ EKSAKTO SA LAYOUT -->
                 <div class="tooltip-header">
                     <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
                     <div class="tooltip-name-group">

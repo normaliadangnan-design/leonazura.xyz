@@ -180,13 +180,13 @@ body {
     z-index: 99999 !important;
 }
 
-/* ✅ BILOG / BORDER - WALANG KULAY, LAGING GRAY/LIGHT LANG */
+/* ✅ BILOG / BORDER - PURONG PUTI LANG, WALANG KULAY KAHIT KAILAN */
 .circle-avatar-container {
     position: relative !important;
     width: 95px; 
     height: 95px; 
     border-radius: 50%;
-    border: 3px solid #cccccc; /* ✅ DI NAGBABAGO ITO */
+    border: 2px solid #ffffff !important; /* ✅ LAGING PUTI */
     background: #000000;
     padding: 3px;
     display: flex;
@@ -194,22 +194,23 @@ body {
     align-items: center;
     overflow: visible !important; 
     z-index: 5 !important;
-    transition: all 0.3s ease;
+    transition: none !important; /* ✅ TINANGGAL ANG ANIMATION NG KULAY */
+    box-shadow: none !important; /* ✅ TINANGGAL ANG GLOW */
 }
 
-/* ✅ STATUS DOT LANG ANG PAPALIT NG KULAY */
+/* ✅ STATUS DOT LANG ANG MAY KULAY */
 .status-indicator {
     position: absolute;
-    bottom: 8px;
-    right: 8px;
+    bottom: 5px;
+    right: 5px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
     border: 2px solid #000;
     z-index: 10;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
 }
-/* ✅ MGA KULAY NG DOT */
+/* ✅ MGA KULAY NG DOT LANG */
 .status-online { background-color: #23a55a; }  /* GREEN */
 .status-idle { background-color: #f0b232; }    /* YELLOW */
 .status-dnd { background-color: #f13f43; }     /* RED */
@@ -594,7 +595,7 @@ function showGroup(allMembers, listIDs, container) {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
         
-        // ✅ STATUS LOGIC - DOT LANG ANG NAGBABAGO
+        // ✅ STATUS LOGIC - DOT LANG MAY KULAY, BILOG HINDI
         let statusText, statusClass, dotClass;
         switch(mem.status) {
             case 'online':
@@ -634,10 +635,10 @@ function showGroup(allMembers, listIDs, container) {
         }
 
         div.innerHTML = `
-            <div class="circle-avatar-container"> <!-- ✅ WALANG CLASS PARA HINDI MAGKULAY -->
+            <div class="circle-avatar-container"> <!-- ✅ WALANG KULAY, LAGING PUTI -->
                 <img src="${mem.avatarURL}" class="avatar-img" alt="">
                 ${decorationHTML} 
-                <span class="status-indicator ${statusClass}"></span> <!-- ✅ DOT LANG MAY CLASS -->
+                <span class="status-indicator ${statusClass}"></span> <!-- ✅ DOT LANG MAY KULAY -->
             </div>
             <div class="avatar-tooltip">
                 <!-- ✅ EKSAKTO SA LAYOUT -->

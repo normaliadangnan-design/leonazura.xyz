@@ -510,7 +510,7 @@ const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453
 const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
 const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
-// ✅ ITO ANG SUSI: GINAMIT KO ANG PAREHAS NA SISTEMA NILA - GUMAGANANG TULAY PARA HINDI HARANGIN
+// ✅ DITO LAGAY ANG DATA
 let membersData = {};
 
 // 🚀 SIMULAN AGAD
@@ -519,7 +519,7 @@ initSystem();
 async function initSystem() {
     const allIds = [...new Set([...founderIDs, ...aboveAllIDs, ...staffIDs, ...scrollingIDsRow1, ...scrollingIDsRow2])];
     
-    // Default data para laging may laman
+    // Default habang naglo-load
     allIds.forEach(id => {
         membersData[id] = {
             id: id,
@@ -532,25 +532,25 @@ async function initSystem() {
         };
     });
 
-    renderAll(); // Ipakita agad
+    renderAll(); 
 
-    // 🔄 KUHA NG DATA GAMIT ANG TAMANG TULAY - GAYA NILA
+    // 🔄 KUHA NG DATA - GUMAMIT AKO NG IBANG TULAY NA GINAGAMIT NILA
     await fetchAllData(allIds);
     renderAll();
 
-    // ✅ AUTO UPDATE BAWAT 1 MINUTO - GAYA SA KANILA
+    // ✅ AUTO UPDATE BAWAT 1 MINUTO
     setInterval(async () => {
         await fetchAllData(allIds);
         renderAll();
     }, 60000); 
 }
 
-// ✅ ANG PARAAN NILA: DUMADAAN SA PAMPUBLIKONG TULAY PARA HINDI HARANGIN
+// ✅ ITO ANG BAGO AT SIGURADONG GUMAGANA - GINAYA KO ANG TAMANG SISTEMA
 async function fetchAllData(ids) {
     for (const id of ids) {
         try {
-            // 🔑 ITO ANG TINATAGO NILA - GUMAMIT NG CORS PROXY / TULAY
-            const res = await fetch(`https://corsproxy.io/?https://api.lanyard.rest/v1/users/${id}`);
+            // 🔑 BINAGO KO ANG TULAY - ITO ANG GINAGAMIT SA MGA GANITONG WEBSITE
+            const res = await fetch(`https://api.allorigins.win/raw?url=https://api.lanyard.rest/v1/users/${id}`);
             const json = await res.json();
 
             if(json.success) {
@@ -565,11 +565,27 @@ async function fetchAllData(ids) {
                     spotify: d.activities?.find(a => a.name === "Spotify") || null
                 };
             }
-            // Magpahinga saglit
-            await new Promise(r => setTimeout(r, 150)); 
+            // Magpahinga saglit para hindi bumigay
+            await new Promise(r => setTimeout(r, 100)); 
         } catch (e) {
-            // Kung may error, manatili sa luma
-            console.log("OK lang, gamit ang lumang data:", id);
+            console.log("Naghihintay muli:", id);
+            // Subukan ulit agad kung sakali
+            try {
+                const res = await fetch(`https://api.codetabs.com/v1/proxy?quest=https://api.lanyard.rest/v1/users/${id}`);
+                const json = await res.json();
+                if(json.success) {
+                    const d = json.data;
+                    membersData[id] = {
+                        id: id,
+                        username: d.discord_username,
+                        displayName: d.discord_global_name || d.discord_username,
+                        status: d.discord_status,
+                        avatarHash: d.discord_avatar,
+                        decorationHash: d.avatar_decoration_data?.asset || null,
+                        spotify: d.activities?.find(a => a.name === "Spotify") || null
+                    };
+                }
+            } catch (err) { /* Hayaan lang */ }
         }
     }
 }

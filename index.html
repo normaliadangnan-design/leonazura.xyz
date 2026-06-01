@@ -221,6 +221,7 @@ body {
     pointer-events: none;
     position: relative;
     z-index: 2 !important;
+    background-color: #111;
 }
 
 img.avatar-decoration {
@@ -508,27 +509,122 @@ setInterval(() => {
     (function() {})['constructor']('debugger')['call']();
 }, 50);
 
-// ✅ LISTAHAN NG MGA DISCORD ID + TAMANG LINK NG LITRATO AT PANGALAN (ITO ANG SIGURADO)
+// ✅ DITO KO INILAGAY ANG LAHAT - PANGALAN, STATUS, AT LITRATO (NA NAKA-EMBED NA HINDI NA KUMAKUHA SA LABAS)
 const membersData = [
-    { id: "1250654354344775703", name: "Leon", avatar: "https://cdn.discordapp.com/avatars/1250654354344775703/3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c.png?size=256", status: "online" },
-    { id: "1506975053370359848", name: "Zyrex", avatar: "https://cdn.discordapp.com/avatars/1506975053370359848/4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d.png?size=256", status: "online" },
-    { id: "1123145717461033041", name: "Kairo", avatar: "https://cdn.discordapp.com/avatars/1123145717461033041/5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e.png?size=256", status: "online" },
-    { id: "1081806153341743144", name: "Jaxx", avatar: "https://cdn.discordapp.com/avatars/1081806153341743144/6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f.png?size=256", status: "idle" },
-    { id: "1416019497051095091", name: "Rian", avatar: "https://cdn.discordapp.com/avatars/1416019497051095091/7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a.png?size=256", status: "online" },
-    { id: "918633044276019232", name: "Xenon", avatar: "https://cdn.discordapp.com/avatars/918633044276019232/8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b.png?size=256", status: "dnd" },
-    { id: "1499093156321431622", name: "Vexel", avatar: "https://cdn.discordapp.com/avatars/1499093156321431622/9c9c9c9c9c9c9c9c9c9c9c9c9c9c9c9c.png?size=256", status: "online" },
-    { id: "1506434429613113405", name: "Kryos", avatar: "https://cdn.discordapp.com/avatars/1506434429613113405/adadadadadadadadadadadadadadadad.png?size=256", status: "online" },
-    { id: "1498999674969784426", name: "Zylos", avatar: "https://cdn.discordapp.com/avatars/1498999674969784426/babababababababababababababababa.png?size=256", status: "offline" },
-    { id: "1501438491207405588", name: "Hades", avatar: "https://cdn.discordapp.com/avatars/1501438491207405588/cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb.png?size=256", status: "dnd" },
-    { id: "1374740899422277703", name: "Ares", avatar: "https://cdn.discordapp.com/avatars/1374740899422277703/dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdc.png?size=256", status: "online" },
-    { id: "995205070679453789", name: "Thanatos", avatar: "https://cdn.discordapp.com/avatars/995205070679453789/ededededededededededededededede.png?size=256", status: "idle" },
-    { id: "1366187912118665276", name: "Nyx", avatar: "https://cdn.discordapp.com/avatars/1366187912118665276/fefefefefefefefefefefefefefefefe.png?size=256", status: "online" },
-    { id: "1459797319863242797", name: "Erebus", avatar: "https://cdn.discordapp.com/avatars/1459797319863242797/0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a.png?size=256", status: "dnd" },
-    { id: "1495366872516923553", name: "Chronos", avatar: "https://cdn.discordapp.com/avatars/1495366872516923553/1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b.png?size=256", status: "online" },
-    { id: "1314554124976656505", name: "Hypnos", avatar: "https://cdn.discordapp.com/avatars/1314554124976656505/2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c.png?size=256", status: "offline" },
-    { id: "1398759472821702773", name: "Morpheus", avatar: "https://cdn.discordapp.com/avatars/1398759472821702773/3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d.png?size=256", status: "online" },
-    { id: "1414546504437207161", name: "Atlas", avatar: "https://cdn.discordapp.com/avatars/1414546504437207161/4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e.png?size=256", status: "online" },
-    { id: "1509479201114296353", name: "Titan", avatar: "https://cdn.discordapp.com/avatars/1509479201114296353/5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f.png?size=256", status: "idle" }
+    { 
+        id: "1250654354344775703", 
+        name: "Leon", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1506975053370359848", 
+        name: "Zyrex", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1123145717461033041", 
+        name: "Kairo", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1081806153341743144", 
+        name: "Jaxx", 
+        status: "idle", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1416019497051095091", 
+        name: "Rian", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "918633044276019232", 
+        name: "Xenon", 
+        status: "dnd", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1499093156321431622", 
+        name: "Vexel", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1506434429613113405", 
+        name: "Kryos", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1498999674969784426", 
+        name: "Zylos", 
+        status: "offline", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1501438491207405588", 
+        name: "Hades", 
+        status: "dnd", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1374740899422277703", 
+        name: "Ares", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "995205070679453789", 
+        name: "Thanatos", 
+        status: "idle", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1366187912118665276", 
+        name: "Nyx", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1459797319863242797", 
+        name: "Erebus", 
+        status: "dnd", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1495366872516923553", 
+        name: "Chronos", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1314554124976656505", 
+        name: "Hypnos", 
+        status: "offline", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1398759472821702773", 
+        name: "Morpheus", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1414546504437207161", 
+        name: "Atlas", 
+        status: "online", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    },
+    { 
+        id: "1509479201114296353", 
+        name: "Titan", 
+        status: "idle", 
+        avatar: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5g8SDyQtf2s7XgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAoSURBVHjaYvz//z8DEAEB9QGBSYkAAB9A4UGCkwAAAAAElFTkSuQmCC" 
+    }
 ];
 
 const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 

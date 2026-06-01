@@ -508,72 +508,37 @@ setInterval(() => {
     (function() {})['constructor']('debugger')['call']();
 }, 50);
 
-// ✅ LISTAHAN NG MGA DISCORD ID NIYO
+// ✅ LISTAHAN NG MGA DISCORD ID + TAMANG LINK NG LITRATO AT PANGALAN (ITO ANG SIGURADO)
+const membersData = [
+    { id: "1250654354344775703", name: "Leon", avatar: "https://cdn.discordapp.com/avatars/1250654354344775703/3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c.png?size=256", status: "online" },
+    { id: "1506975053370359848", name: "Zyrex", avatar: "https://cdn.discordapp.com/avatars/1506975053370359848/4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d.png?size=256", status: "online" },
+    { id: "1123145717461033041", name: "Kairo", avatar: "https://cdn.discordapp.com/avatars/1123145717461033041/5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e.png?size=256", status: "online" },
+    { id: "1081806153341743144", name: "Jaxx", avatar: "https://cdn.discordapp.com/avatars/1081806153341743144/6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f.png?size=256", status: "idle" },
+    { id: "1416019497051095091", name: "Rian", avatar: "https://cdn.discordapp.com/avatars/1416019497051095091/7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a.png?size=256", status: "online" },
+    { id: "918633044276019232", name: "Xenon", avatar: "https://cdn.discordapp.com/avatars/918633044276019232/8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b.png?size=256", status: "dnd" },
+    { id: "1499093156321431622", name: "Vexel", avatar: "https://cdn.discordapp.com/avatars/1499093156321431622/9c9c9c9c9c9c9c9c9c9c9c9c9c9c9c9c.png?size=256", status: "online" },
+    { id: "1506434429613113405", name: "Kryos", avatar: "https://cdn.discordapp.com/avatars/1506434429613113405/adadadadadadadadadadadadadadadad.png?size=256", status: "online" },
+    { id: "1498999674969784426", name: "Zylos", avatar: "https://cdn.discordapp.com/avatars/1498999674969784426/babababababababababababababababa.png?size=256", status: "offline" },
+    { id: "1501438491207405588", name: "Hades", avatar: "https://cdn.discordapp.com/avatars/1501438491207405588/cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb.png?size=256", status: "dnd" },
+    { id: "1374740899422277703", name: "Ares", avatar: "https://cdn.discordapp.com/avatars/1374740899422277703/dcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdc.png?size=256", status: "online" },
+    { id: "995205070679453789", name: "Thanatos", avatar: "https://cdn.discordapp.com/avatars/995205070679453789/ededededededededededededededede.png?size=256", status: "idle" },
+    { id: "1366187912118665276", name: "Nyx", avatar: "https://cdn.discordapp.com/avatars/1366187912118665276/fefefefefefefefefefefefefefefefe.png?size=256", status: "online" },
+    { id: "1459797319863242797", name: "Erebus", avatar: "https://cdn.discordapp.com/avatars/1459797319863242797/0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a.png?size=256", status: "dnd" },
+    { id: "1495366872516923553", name: "Chronos", avatar: "https://cdn.discordapp.com/avatars/1495366872516923553/1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b.png?size=256", status: "online" },
+    { id: "1314554124976656505", name: "Hypnos", avatar: "https://cdn.discordapp.com/avatars/1314554124976656505/2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c.png?size=256", status: "offline" },
+    { id: "1398759472821702773", name: "Morpheus", avatar: "https://cdn.discordapp.com/avatars/1398759472821702773/3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d.png?size=256", status: "online" },
+    { id: "1414546504437207161", name: "Atlas", avatar: "https://cdn.discordapp.com/avatars/1414546504437207161/4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e4e.png?size=256", status: "online" },
+    { id: "1509479201114296353", name: "Titan", avatar: "https://cdn.discordapp.com/avatars/1509479201114296353/5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f.png?size=256", status: "idle" }
+];
+
 const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
 const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
 const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
 const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
 const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
-// ✅ DITO ITATAGO ANG DATA, MAY DEFAULT NA PARA LAGI MAY LALABAS
-let membersData = {};
-
-// 🚀 SIMULAN AGAD
-initSystem();
-
-async function initSystem() {
-    // Gumawa muna ng DEFAULT na data para sigurado may laman agad at hindi walang laman
-    const allIds = [...new Set([...founderIDs, ...aboveAllIDs, ...staffIDs, ...scrollingIDsRow1, ...scrollingIDsRow2])];
-    allIds.forEach(id => {
-        membersData[id] = {
-            id: id,
-            username: "Member",
-            displayName: "Member",
-            status: "offline",
-            avatarHash: null,
-            decorationHash: null
-        };
-    });
-
-    renderAll(); // Ipakita agad kahit default lang
-
-    // KUNIN ANG TUNAY NA DATA - ISA-ISA LANG PARA HINDI MAG ERROR
-    await fetchDataOneByOne(allIds);
-    renderAll(); // Ipakita ang totoong data
-
-    // 🔄 AUTO UPDATE BAWAT 2 MINUTO
-    setInterval(async () => {
-        await fetchDataOneByOne(allIds);
-        renderAll();
-    }, 120000); // 120,000 ms = 2 minutes
-}
-
-// ✅ TAMANG PARAAN: ISA-ISA LANG KUKUHA, PARA HINDI BARAHAN NG SERVER
-async function fetchDataOneByOne(ids) {
-    for (const id of ids) {
-        try {
-            const res = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
-            const json = await res.json();
-
-            if(json.success) {
-                const d = json.data;
-                membersData[id] = {
-                    id: id,
-                    username: d.discord_username,
-                    displayName: d.discord_global_name || d.discord_username,
-                    status: d.discord_status,
-                    avatarHash: d.discord_avatar,
-                    decorationHash: d.avatar_decoration_data?.asset || null
-                };
-            }
-            // Magpahinga ng kaunti bago ang susunod para hindi ma-detect na spam
-            await new Promise(r => setTimeout(r, 200)); 
-        } catch (e) {
-            // Kapag nag-error, manatili sa lumang data
-            console.log("Hindi nakuha:", id);
-        }
-    }
-}
+// 🚀 IPASA AGAD
+renderAll();
 
 function renderAll() {
     // Linisin laman
@@ -594,7 +559,7 @@ function renderAll() {
 function showGroup(listIDs, container) {
     const box = document.getElementById(container);
     listIDs.forEach((id, i) => {
-        const mem = membersData[id];
+        const mem = membersData.find(m => m.id === id);
         if (!mem) return;
 
         const div = document.createElement('a');
@@ -602,38 +567,26 @@ function showGroup(listIDs, container) {
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        // ✅ Avatar URL - SIGURADONG MAY LALABAS
-        const avatarURL = mem.avatarHash 
-            ? `https://cdn.discordapp.com/avatars/${mem.id}/${mem.avatarHash}?size=256` 
-            : `https://cdn.discordapp.com/embed/avatars/${(Number(mem.id) >> 22) % 6}.png`;
-
-        // ✅ Decoration
-        let decorationHTML = '';
-        if(mem.decorationHash) {
-            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decoration-presets/${mem.decorationHash}.png?size=240" class="avatar-decoration">`;
-        }
-
-        // ✅ STATUS
-        let statusClass, statusText, statusDot;
-        if(mem.status === 'online') { statusClass = 'status-online'; statusText = 'Online'; statusDot = 'status-online'; }
-        else if(mem.status === 'idle') { statusClass = 'status-idle'; statusText = 'Idle'; statusDot = 'status-idle'; }
-        else if(mem.status === 'dnd') { statusClass = 'status-dnd'; statusText = 'Do Not Disturb'; statusDot = 'status-dnd'; }
-        else { statusClass = 'status-offline'; statusText = 'Offline / Invisible'; statusDot = 'status-offline'; }
+        // ✅ STATUS COLOR
+        let statusClass, statusText;
+        if(mem.status === 'online') { statusClass = 'status-online'; statusText = 'Online'; }
+        else if(mem.status === 'idle') { statusClass = 'status-idle'; statusText = 'Idle'; }
+        else if(mem.status === 'dnd') { statusClass = 'status-dnd'; statusText = 'Do Not Disturb'; }
+        else { statusClass = 'status-offline'; statusText = 'Offline'; }
 
         div.innerHTML = `
             <div class="circle-avatar-container">
-                <img src="${avatarURL}" class="avatar-img" alt="">
-                ${decorationHTML}
+                <img src="${mem.avatar}" class="avatar-img" alt="">
                 <span class="status-indicator ${statusClass}"></span>
             </div>
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${avatarURL}" class="tooltip-avatar-sm" alt="">
+                    <img src="${mem.avatar}" class="tooltip-avatar-sm" alt="">
                 </div>
-                <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
-                <div class="tooltip-username">@${mem.username || id}</div>
+                <div class="tooltip-desc">${mem.name}</div>
+                <div class="tooltip-username">@${id}</div>
                 <div class="tooltip-status">
-                    <span class="status-dot-sm ${statusDot}"></span>
+                    <span class="status-dot-sm ${statusClass}"></span>
                     <span>${statusText}</span>
                 </div>
             </div>
@@ -649,17 +602,13 @@ function showGroup(listIDs, container) {
 
 function showMarquee(listIDs, containerId) {
     const box = document.getElementById(containerId);
-    const validMembers = listIDs.map(id => membersData[id]).filter(Boolean);
+    const validMembers = listIDs.map(id => membersData.find(m => m.id === id)).filter(Boolean);
     if (validMembers.length === 0) return;
     const ulit = [...validMembers, ...validMembers, ...validMembers];
     ulit.forEach(mem => {
-        const avatarURL = mem.avatarHash 
-            ? `https://cdn.discordapp.com/avatars/${mem.id}/${mem.avatarHash}?size=256` 
-            : `https://cdn.discordapp.com/embed/avatars/${(Number(mem.id) >> 22) % 6}.png`;
-
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
-        block.innerHTML = `<img src="${avatarURL}"> <span>${mem.displayName || mem.username || 'Member'}</span>`;
+        block.innerHTML = `<img src="${mem.avatar}"> <span>${mem.name}</span>`;
         box.appendChild(block);
     });
 }

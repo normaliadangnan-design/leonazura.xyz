@@ -150,7 +150,7 @@ body {
 .horizontal-avatar-row {
     display: flex !important; 
     flex-direction: row !important; 
-    flex-wrap: nowrap !important; 
+    flex-wrap: wrap !important; 
     justify-content: center; 
     align-items: center; 
     width: 100%; 
@@ -477,43 +477,58 @@ img.avatar-decoration {
 
 
 <script>
-let memberIds = [];
-let liveDataMap = new Map();
+// ✅ DI NA KUKUHA SA FILE, NAKALAGAY NA DITO LAHAT NG ID MO
+const MEMBER_IDS = [
+    "1414546504437207161",
+    "1499093156321431622",
+    "1495366872516923553",
+    "1314554124976656505",
+    "1123145717461033041",
+    "1081806153341743144",
+    "1495341225174368276",
+    "1366187912118665276",
+    "1501438491207405588",
+    "1498999674969784426",
+    "1488388828241723513",
+    "1509479201114296353",
+    "1374740899422277703",
+    "995205070679453789",
+    "1418157973867597845",
+    "1459797319863242797",
+    "1250654354344775703",
+    "1506434429613113405",
+    "1398759472821702773",
+    "1057219921907556404",
+    "1486015538026123358",
+    "1085580321623375938",
+    "1506975053370359848",
+    "918633044276019232",
+    "1469640368361439357",
+    "1436822049002623137"
+];
 
-// ✅ ILAGAY NATIN KUNG SINONG MAY STAFF AT $ BADGE
-const staffIds = new Set([
+// ✅ SINONG MAY BADGE
+const STAFF_IDS = new Set([
     "1123145717461033041", 
     "1081806153341743144",
     "1495341225174368276"
-    // dagdagan mo pa dito kung sino pa
 ]);
 
-const premiumIds = new Set([
+const PREMIUM_IDS = new Set([
     "1414546504437207161",
     "1499093156321431622"
-    // dagdagan mo pa dito kung sino pa
 ]);
 
+let liveDataMap = new Map();
+
 async function initLoad() {
-    // 1. KUNIN LANG ANG ID MULA SA BAGONG MEMBERS.JSON
-    try {
-        const resJson = await fetch(`members.json?nocache=${Date.now()}`);
-        memberIds = await resJson.json();
-        memberIds = memberIds.map(m => m.id); // Kunin lang yung array ng mga ID
-    } catch (e) {
-        console.error("Error reading members.json:", e);
-        return;
-    }
-
-    // 2. KUNIN LAHAT NG DETALYE MULA SA API (NAME, AVATAR, STATUS, DECORATION)
-    await fetchLiveStatus(memberIds);
-
-    // 3. IPAKITA SA WEBSITE
+    // KUNIN DATA MULA API
+    await fetchLiveStatus(MEMBER_IDS);
+    // IPAKITA SA WEBSITE
     renderMembers();
-    
-    // Auto-refresh bawat 30s para laging updated
+    // AUTO REFRESH
     setInterval(async () => {
-        await fetchLiveStatus(memberIds);
+        await fetchLiveStatus(MEMBER_IDS);
         renderMembers();
     }, 30000);
 }
@@ -522,12 +537,9 @@ async function fetchLiveStatus(ids) {
     try {
         const res = await fetch(`https://api.lanyard.rest/v1/users/${ids.join(',')}`);
         const apiData = await res.json();
-        
         if(apiData.success) {
             liveDataMap.clear();
-            Object.values(apiData.data).forEach(userData => {
-                liveDataMap.set(userData.discord_id, userData);
-            });
+            Object.values(apiData.data).forEach(u => liveDataMap.set(u.discord_id, u));
         }
     } catch (err) {
         console.error("API Error:", err);
@@ -540,47 +552,46 @@ function renderMembers() {
     container.innerHTML = '';
     marquee.innerHTML = '';
 
-    memberIds.forEach(id => {
+    MEMBER_IDS.forEach(id => {
         const data = liveDataMap.get(id);
         if(!data) return;
 
-        // ✅ AUTOMATIC NA KINUKUHA ANG LAHAT
         const username = data.discord_username;
         const displayName = data.discord_global_name || username;
         const status = data.discord_status;
         const avatarHash = data.discord_avatar;
-        const decoHash = data.avatar_decoration_data?.asset; // <-- AUTOMATIC DECORATION
+        const decoHash = data.avatar_decoration_data?.asset;
 
-        // ✅ AVATAR URL (GIF kung animated)
+        // Avatar URL
         let avatarURL = avatarHash 
             ? `https://cdn.discordapp.com/avatars/${id}/${avatarHash}?size=256` 
             : `https://cdn.discordapp.com/embed/avatars/${(id >> 22) % 6}.png`;
 
-        // ✅ DECORATION URL (KUNG MERON)
+        // Decoration
         let decoHTML = '';
         if(decoHash) {
-            const decoFinalHash = decoHash.startsWith('a_') ? decoHash : decoHash;
-            decoHTML = `<img class="avatar-decoration" src="https://cdn.discordapp.com/avatar-decoration-presets/${decoFinalHash}?size=240" alt="">`;
+            const h = decoHash.startsWith('a_') ? decoHash : decoHash;
+            decoHTML = `<img class="avatar-decoration" src="https://cdn.discordapp.com/avatar-decoration-presets/${h}?size=240">`;
         }
 
-        // ✅ BADGES / STAFF / $
+        // Badges
         let badgesHTML = '';
-        if(staffIds.has(id)) badgesHTML += `<span class="staff-badge">STAFF</span>`;
-        if(premiumIds.has(id)) badgesHTML += `<span class="premium-badge">$</span>`;
+        if(STAFF_IDS.has(id)) badgesHTML += `<span class="staff-badge">STAFF</span>`;
+        if(PREMIUM_IDS.has(id)) badgesHTML += `<span class="premium-badge">$</span>`;
 
-        // AVATAR ELEMENT
-        const avatarEl = document.createElement('div');
-        avatarEl.className = 'avatar-wrapper-node';
-        avatarEl.innerHTML = `
+        // Avatar Element
+        const el = document.createElement('div');
+        el.className = 'avatar-wrapper-node';
+        el.innerHTML = `
             <div class="circle-avatar-container">
-                ${badgesHTML} <!-- ✅ NANDITO NA YUNG BADGES -->
-                <img class="avatar-img" src="${avatarURL}" alt="${displayName}">
-                ${decoHTML} <!-- ✅ KUSA LUMALABAS O NAWAWALA ITO -->
+                ${badgesHTML}
+                <img class="avatar-img" src="${avatarURL}" alt="">
+                ${decoHTML}
                 <span class="status-indicator status-${status}"></span>
             </div>
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${avatarURL}" alt="">
+                    <img src="${avatarURL}">
                     <div class="tooltip-content">
                         <div class="tooltip-name">${displayName}</div>
                         <div class="tooltip-username">@${username}</div>
@@ -589,32 +600,27 @@ function renderMembers() {
                 ${renderActivity(data.activities)}
             </div>
         `;
-        container.appendChild(avatarEl);
+        container.appendChild(el);
 
-        // MARQUEE ITEM
-        const marqEl = document.createElement('div');
-        marqEl.className = 'marquee-item';
-        marqEl.innerHTML = `<img src="${avatarURL}" alt=""><span>${displayName} • ${status.toUpperCase()}</span>`;
-        marquee.appendChild(marqEl);
+        // Marquee
+        const mEl = document.createElement('div');
+        mEl.className = 'marquee-item';
+        mEl.innerHTML = `<img src="${avatarURL}"><span>${displayName} • ${status.toUpperCase()}</span>`;
+        marquee.appendChild(mEl);
     });
-
-    marquee.innerHTML += marquee.innerHTML; // Infinite loop
+    marquee.innerHTML += marquee.innerHTML;
 }
 
-function renderActivity(activities) {
-    if (!activities || activities.length === 0) return '';
-    const act = activities.find(a => a.type === 0 || a.type === 2); // Game or Spotify
-    if (!act) return '';
-
-    if (act.type === 2) { // Spotify
-        return `<div class="tooltip-activity activity-spotify">🎵 ${act.details || 'Playing'}<br><small>${act.state || ''}</small></div>`;
-    } else if (act.type === 0) { // Game
-        return `<div class="tooltip-activity activity-game">🎮 ${act.name || 'Playing'}<br><small>${act.state || ''}</small></div>`;
-    }
+function renderActivity(act) {
+    if (!act || act.length === 0) return '';
+    const a = act.find(x => x.type === 0 || x.type === 2);
+    if (!a) return '';
+    if (a.type === 2) return `<div class="tooltip-activity activity-spotify">🎵 ${a.details}<br><small>${a.state}</small></div>`;
+    if (a.type === 0) return `<div class="tooltip-activity activity-game">🎮 ${a.name}<br><small>${a.state}</small></div>`;
     return '';
 }
 
-// --- EXTRA SCRIPTS (WAG BAGUHIN) ---
+// --- FUNCTIONS ---
 function startTypewriter() {
     setTimeout(() => {
         document.querySelector('.typewriter-header').style.animationPlayState = 'running';
@@ -625,7 +631,7 @@ function enterSite() {
     document.getElementById('gateway-overlay').style.opacity = '0';
     document.getElementById('gateway-overlay').style.visibility = 'hidden';
     document.getElementById('audio-player').play().catch(e=>{});
-    initLoad(); // Simulan ang pagbasa ng data
+    initLoad();
 }
 
 let viewCount = 0;

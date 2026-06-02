@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<!-- ✅ ETO NA ANG EKSAKTO, HINDI NA ITO MALILITO NI GOOGLE -->
 <title>/ AZURA ORG</title>
 <meta name="description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
 <meta name="robots" content="index, follow">
@@ -14,7 +13,6 @@
 <meta property="og:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
 <meta name="twitter:title" content="/ AZURA ORG">
 <meta name="twitter:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
-<!-- ✅ TAPOS NA DITO, WALA NANG IBANG BABASAHEIN -->
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
@@ -48,7 +46,6 @@ body {
     align-items: center;
 }
 
-/* ✅ NASA TAAS NA, EKSATONG FONT STYLE */
 .main-logo-container {
     text-align: center;
     margin: 20px 0 10px 0;
@@ -79,7 +76,6 @@ body {
     display: block;
 }
 
-/* Animations */
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
@@ -157,7 +153,6 @@ body {
     margin-bottom: 3px;
 }
 
-/* ✅ SAKTO LANG ANG LAYO NG BILOG */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -207,7 +202,6 @@ body {
     z-index: 5 !important;
 }
 
-/* ✅ STATUS DOT SA BABA KANAN */
 .status-indicator {
     position: absolute;
     bottom: 5px;
@@ -218,10 +212,10 @@ body {
     border: 2px solid #000;
     z-index: 10;
 }
-.status-online { background-color: #23a55a; }  /* Green */
-.status-idle { background-color: #f0b232; }    /* Yellow */
-.status-dnd { background-color: #f13f43; }     /* Red */
-.status-offline { background-color: #80848e; } /* Gray */
+.status-online { background-color: #23a55a; } 
+.status-idle { background-color: #f0b232; }   
+.status-dnd { background-color: #f13f43; }     
+.status-offline { background-color: #80848e; } 
 
 .circle-avatar-container img.avatar-img {
     width: 100%;
@@ -246,14 +240,13 @@ img.avatar-decoration {
     display: block !important;
 }
 
-/* ✅ INAYOS: CARD PURONG ITIM #000000, TINANGGAL ANG BORDER */
 .avatar-tooltip {
     position: absolute;
     bottom: 110%; 
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #000000 !important; /* PURONG ITIM */
-    border: none !important; /* WALA NANG BORDER */
+    background: #000000 !important;
+    border: none !important;
     border-radius: 8px;
     padding: 12px;
     width: 200px;
@@ -285,11 +278,6 @@ img.avatar-decoration {
     border-radius: 50%;
 }
 
-/* ✅ TINANGGAL NA ANG CORONA / CROWN */
-.tooltip-emojis {
-    display: none !important;
-}
-
 .tooltip-username {
     font-size: 12px;
     color: #96989d;
@@ -302,7 +290,6 @@ img.avatar-decoration {
     margin-bottom: 6px;
 }
 
-/* ✅ STATUS TEXT SA LOOB NG CARD */
 .tooltip-status {
     font-size: 12px;
     display: flex;
@@ -310,7 +297,7 @@ img.avatar-decoration {
     gap: 6px;
     padding: 4px 6px;
     border-radius: 3px;
-    background: #1a1a1a; /* Medyo mas maliwanag na itim para makita */
+    background: #1a1a1a;
 }
 .status-dot-sm {
     width: 8px;
@@ -428,16 +415,10 @@ img.avatar-decoration {
     visibility: hidden;
 }
 
-::-webkit-scrollbar {
-    display: none !important;
-}
-html, body {
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-}
+::-webkit-scrollbar { display: none !important; }
 </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
 <div class="navigation-bar">
     HOME
@@ -445,7 +426,6 @@ html, body {
 </div>
 
 <div class="center-container">
-    <!-- ✅ NASA TAAS NA, TAMANG FONT -->
     <div class="main-logo-container">
         <div class="main-clan-logo">AZURA ORG</div>
         <div class="symbol-break">$</div>
@@ -488,7 +468,7 @@ html, body {
 
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
-
+</audio>
 
 <script>
 const audio = document.getElementById("soundtrack");
@@ -504,20 +484,8 @@ document.getElementById("gateway-overlay").onclick = () => {
     });
 };
 
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
-        e.preventDefault();
-        return false;
-    }
-});
-
-setInterval(() => {
-    (function() {})['constructor']('debugger')['call']();
-}, 50);
-
-// ✅ KUHA SA JSON
-fetch('members.json')
+// ✅ LIVE API FETCH
+fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(members => {
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
@@ -593,8 +561,8 @@ function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
     if (selectedMembers.length === 0) return;
-    const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
-    ulit.forEach(mem => {
+    const list = [...selectedMembers, ...selectedMembers, ...selectedMembers];
+    list.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
         block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;

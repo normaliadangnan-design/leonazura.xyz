@@ -504,27 +504,40 @@ fetch('https://api.leonazura.xyz/api/members')
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
+    if (!box) return; // Proteksyon kung sakaling walang container
+
     listIDs.forEach((id, i) => {
         const mem = allMembers.find(m => m.id === id);
         if (!mem) return;
+        
         const div = document.createElement('a');
         div.className = 'avatar-wrapper-node';
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
+        // --- DITO ANG UPDATED LOGIC ---
         let decorationHTML = '';
-        if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
+        if (mem.effectURL && 
+            mem.effectURL !== "null" && 
+            mem.effectURL !== null && 
+            mem.effectURL !== "undefined" && 
+            mem.effectURL.trim() !== "") {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
-        
+        // ------------------------------
+
         let statusText = '';
         let statusClass = '';
         let statusDotClass = '';
-        if(mem.status === 'online') {
+        
+        // Siguraduhin natin na may laman ang status bago i-check
+        const status = mem.status || 'offline';
+        
+        if(status === 'online') {
             statusText = 'Online'; statusClass = 'status-online'; statusDotClass = 'status-online';
-        } else if(mem.status === 'idle') {
+        } else if(status === 'idle') {
             statusText = 'Idle'; statusClass = 'status-idle'; statusDotClass = 'status-idle';
-        } else if(mem.status === 'dnd') {
+        } else if(status === 'dnd') {
             statusText = 'Do Not Disturb'; statusClass = 'status-dnd'; statusDotClass = 'status-dnd';
         } else {
             statusText = 'Offline / Invisible'; statusClass = 'status-offline'; statusDotClass = 'status-offline';
@@ -532,15 +545,15 @@ function showGroup(allMembers, listIDs, container) {
 
         div.innerHTML = `
             <div class="circle-avatar-container">
-                <img src="${mem.avatarURL}" class="avatar-img" alt="">
+                <img src="${mem.avatarURL || 'default-avatar.png'}" class="avatar-img" alt="">
                 ${decorationHTML} 
                 <span class="status-indicator ${statusClass}"></span>
             </div>
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
+                    <img src="${mem.avatarURL || 'default-avatar.png'}" class="tooltip-avatar-sm" alt="">
                 </div>
-                <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
+                <div class="tooltip-desc">${mem.displayName || mem.username || 'Member'}</div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>
                 <div class="tooltip-status">
                     <span class="status-dot-sm ${statusDotClass}"></span>
@@ -548,11 +561,13 @@ function showGroup(allMembers, listIDs, container) {
                 </div>
             </div>
         `;
+        
         div.addEventListener('click', function(e) {
             if (this.getAttribute('href') === '#') e.preventDefault();
             document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
             this.classList.add('active-pop');
         });
+        
         box.appendChild(div);
     });
 }

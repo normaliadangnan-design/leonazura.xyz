@@ -156,13 +156,12 @@ body {
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important; /* Binago mula sa nowrap para mag-wrap sa mobile */
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 20px 0; 
     gap: 20px !important; 
-    overflow: visible !important; 
+    padding: 20px 0;
 }
 
 .avatar-wrapper-node {
@@ -528,52 +527,51 @@ function showGroup(allMembers, listIDs, container) {
         const mem = allMembers.find(m => m.id === id);
         if (!mem) return;
         
-        const div = document.createElement('a');
+        const div = document.createElement('div'); // Binago mula sa 'a' para mas stable
         div.className = 'avatar-wrapper-node';
-        div.style.zIndex = 50 - i; 
-        div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-       // ... sa loob ng showGroup function
-let decorationHTML = '';
-                        if (mem.effectURL && mem.effectURL !== "null" && mem.effectURL !== "") {
-                            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" 
-                                              onload="this.classList.add('loaded')" 
-                                              onerror="this.style.display='none'">`;
-                        }
+        // Decoration Logic
+        let decorationHTML = '';
+        if (mem.effectURL && mem.effectURL !== "null" && mem.effectURL !== "") {
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" 
+                               onload="this.classList.add('loaded')" 
+                               onerror="this.style.display='none'">`;
+        }
 
-                        // FIX: Spotify (type 2) at Game (type 0) detection
-                        const act = mem.activities && mem.activities.length > 0 ? mem.activities[0] : null;
-                        let statusText = 'Offline', statusClass = 'status-offline';
-                        
-                        if (act) {
-                            if (act.type === 2) {
-                                statusText = `Listening to ${act.details || 'Spotify'}`;
-                                statusClass = 'status-online';
-                            } else if (act.type === 0) {
-                                statusText = `Playing ${act.name}`;
-                                statusClass = 'status-online';
-                            } else {
-                                statusText = mem.status || 'Online';
-                                statusClass = `status-${mem.status || 'offline'}`;
-                            }
-                        } else {
-                            statusClass = `status-${mem.status || 'offline'}`;
-                            statusText = mem.status || 'Offline';
-                        }
+        // Status Logic
+        let statusText = 'Offline';
+        let statusClass = 'status-offline';
+        
+        if (mem.activities && mem.activities.length > 0) {
+            const act = mem.activities[0];
+            if (act.type === 2) {
+                statusText = `Listening to ${act.details || 'Spotify'}`;
+                statusClass = 'status-online';
+            } else if (act.type === 0) {
+                statusText = `Playing ${act.name}`;
+                statusClass = 'status-online';
+            } else {
+                statusText = mem.status || 'Online';
+                statusClass = `status-${mem.status || 'online'}`;
+            }
+        } else {
+            statusText = mem.status || 'Offline';
+            statusClass = `status-${mem.status || 'offline'}`;
+        }
 
-                        div.innerHTML = `
-                            <div class="circle-avatar-container">
-                                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img">
-                                ${decorationHTML}
-                                <span class="status-indicator ${statusClass}"></span>
-                            </div>
-                            <div class="avatar-tooltip">
-                                <div style="font-weight:bold">${mem.displayName || mem.username}</div>
-                                <div style="font-size:11px; color:#aaa; margin-top:5px;">${statusText}</div>
-                            </div>
-                        `;
-                        box.appendChild(div);
-                    });
+        div.innerHTML = `
+            <div class="circle-avatar-container">
+                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img">
+                ${decorationHTML}
+                <span class="status-indicator ${statusClass}"></span>
+            </div>
+            <div class="avatar-tooltip">
+                <div style="font-weight:bold">${mem.displayName || mem.username}</div>
+                <div style="font-size:11px; color:#aaa; margin-top:5px;">${statusText}</div>
+            </div>
+        `;
+        box.appendChild(div);
+    });
 }
 function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);

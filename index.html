@@ -505,9 +505,19 @@ setInterval(() => {
     (function() {})['constructor']('debugger')['call']();
 }, 50);
 
-fetch('members.json')
+fetch('https://discord.com/api/guilds/1506830822207127552/widget.json')
     .then(res => res.json())
-    .then(members => {
+    .then(data => {
+        // Ang data.members ay listahan ng mga ONLINE users mula sa Discord
+        // Ginagawa nating compatible ang format sa logic mo
+        const members = data.members.map(m => ({
+            id: m.id,
+            username: m.username,
+            displayName: m.username,
+            avatarURL: m.avatar_url,
+            status: 'online', // Ang widget ay nagpapakita lang ng mga online
+            effectURL: null // Walang effect sa widget
+        }));
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
         const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 

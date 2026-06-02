@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>AZURA</title>
+
+<!-- ✅ INAYOS PARA MAGANDA SA GOOGLE, KATULAD NG PUBLIC ENEMY -->
+<title>/ AZURA ORG</title>
+<meta name="description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
+<meta name="keywords" content="Azura Org, Above All Enemies, Discord Community, Leonazura">
+<meta property="og:title" content="/ AZURA ORG">
+<meta property="og:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
+<meta property="og:url" content="https://leonazura.xyz">
+<meta property="og:type" content="website">
+<!-- ✅ TAPOS NA -->
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
@@ -505,6 +514,7 @@ setInterval(() => {
     (function() {})['constructor']('debugger')['call']();
 }, 50);
 
+// ✅ ORIHINAL NA KUHA SA members.json, WALANG NAKALAGAY NA ID DITO
 fetch('members.json')
     .then(res => res.json())
     .then(members => {
@@ -532,13 +542,11 @@ function showGroup(allMembers, listIDs, container) {
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        // ✅ Babasahin na nang tama kahit null ang effectURL
         let decorationHTML = '';
         if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
         }
         
-        // ✅ STATUS COLOR & TEXT
         let statusText = '';
         let statusClass = '';
         let statusDotClass = '';
@@ -561,7 +569,6 @@ function showGroup(allMembers, listIDs, container) {
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
                     <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
-                    <!-- ✅ TINANGGAL NA ANG CORONA DITO -->
                 </div>
                 <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>

@@ -227,7 +227,9 @@ body {
     z-index: 2 !important;
 }
 
+/* FIX: Siguradong display none kapag walang valid src */
 img.avatar-decoration {
+    display: none !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
@@ -237,6 +239,10 @@ img.avatar-decoration {
     pointer-events: none !important;
     z-index: 1 !important; 
     border-radius: 0 !important; 
+}
+
+/* FIX: Kapag may valid src, ipakita ang image */
+img.avatar-decoration[src]:not([src=""]) {
     display: block !important;
 }
 
@@ -484,7 +490,6 @@ document.getElementById("gateway-overlay").onclick = () => {
     });
 };
 
-// ✅ LIVE API FETCH
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(members => {
@@ -504,7 +509,7 @@ fetch('https://api.leonazura.xyz/api/members')
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
-    if (!box) return; // Proteksyon kung sakaling walang container
+    if (!box) return;
 
     listIDs.forEach((id, i) => {
         const mem = allMembers.find(m => m.id === id);
@@ -515,22 +520,19 @@ function showGroup(allMembers, listIDs, container) {
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        // --- DITO ANG UPDATED LOGIC ---
         let decorationHTML = '';
         if (mem.effectURL && 
             mem.effectURL !== "null" && 
             mem.effectURL !== null && 
             mem.effectURL !== "undefined" && 
             mem.effectURL.trim() !== "") {
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
         }
-        // ------------------------------
 
         let statusText = '';
         let statusClass = '';
         let statusDotClass = '';
         
-        // Siguraduhin natin na may laman ang status bago i-check
         const status = mem.status || 'offline';
         
         if(status === 'online') {
@@ -545,13 +547,13 @@ function showGroup(allMembers, listIDs, container) {
 
         div.innerHTML = `
             <div class="circle-avatar-container">
-                <img src="${mem.avatarURL || 'default-avatar.png'}" class="avatar-img" alt="">
+                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="">
                 ${decorationHTML} 
                 <span class="status-indicator ${statusClass}"></span>
             </div>
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL || 'default-avatar.png'}" class="tooltip-avatar-sm" alt="">
+                    <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="tooltip-avatar-sm" alt="">
                 </div>
                 <div class="tooltip-desc">${mem.displayName || mem.username || 'Member'}</div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>

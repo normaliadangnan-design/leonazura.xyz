@@ -317,7 +317,7 @@ body {scrollbar-width:none;}
 
 
 <div class="nav-bar">
-    HOME <span class="view-count>VIEWS : 7304</span>
+    HOME <span class="view-count">VIEWS : 7304</span>
 </div>
 
 <div class="logo-top">
@@ -366,184 +366,133 @@ function playAudio(){
     a.play().catch(e=>{});
 }
 
-// ✅ ITO ANG SERVER ID MO GAYA NG NAKIKITA SA SCREEN
+// ✅ SERVER ID MO (NAKA-ON ANG WIDGET)
 const SERVER_ID = "1506830822207127552";
 
-// ✅ ITO ANG BUONG LISTAHAN MULA SA MEMBERS.JSON MO
-const ALL_MEMBERS = [
-  {"id": "1414546504437207161"},
-  {"id": "1499093156321431622"},
-  {"id": "1495366872516923553"},
-  {"id": "1314554124976656505"},
-  {"id": "1123145717461033041"},
-  {"id": "1081806153341743144"},
-  {"id": "1495341225174368276"},
-  {"id": "1366187912118665276"},
-  {"id": "1501438491207405588"},
-  {"id": "1498999674969784426"},
-  {"id": "1488388828241723513"},
-  {"id": "1509479201114296353"},
-  {"id": "1374740899422277703"},
-  {"id": "995205070679453789"},
-  {"id": "1418157973867597845"},
-  {"id": "1459797319863242797"},
-  {"id": "1250654354344775703"},
-  {"id": "1506434429613113405"},
-  {"id":1398759472821702773},
-  {"id": "1057219921907556404"},
-  {"id": "1486015538026123358"},
-  {"id": "1085580321623375938"},
-  {"id": "1506975053370359848"},
-  {"id": "918633044276019232"},
-  {"id": "1469640368361439357"},
-  {"id": "1436822049002623137"}
+// ✅ ANG LISTAHAN NG LAHAT NG IDS
+const ALL_IDS = [
+  "1414546504437207161", "1499093156321431622", "1495366872516923553",
+  "1314554124976656505", "1123145717461033041", "1081806153341743144",
+  "1495341225174368276", "1366187912118665276", "1501438491207405588",
+  "1498999674969784426", "1488388828241723513", "1509479201114296353",
+  "1374740899422277703", "995205070679453789", "1418157973867597845",
+  "1459797319863242797", "1250654354344775703", "1506434429613113405",
+  "1398759472821702773", "1057219921907556404", "1486015538026123358",
+  "1085580321623375938", "1506975053370359848", "918633044276019232",
+  "1469640368361439357", "1436822049002623137"
 ];
 
-// ✅ PAG HATI-HATI NATIN SILA SA SEKSYON
-const FOUNDER_IDS = ["1250654354344775703", "1506975053370359848", "1123145717461033041"];
-const ABOVEALL_IDS = ["1081806153341743144", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426", "1414546504437207161"];
-const STAFF_IDS = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"];
+// ✅ PAG HATI SA SEKSYON
+const FOUNDER = ["1250654354344775703", "1506975053370359848", "1123145717461033041"];
+const ABOVEALL = ["1081806153341743144", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426", "1414546504437207161"];
+const STAFF = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"];
 
-let userData = {};
+let membersData = {};
 
-// ✅ GAGAMITIN NATIN ANG SERVER WIDGET API NA BUKAS NA BUKAS SA SERVER MO
-async function fetchServerData() {
+// ✅ KUSANG KUKUHA AT MAG-A-UPDATE BAWAT 1 MINUTO
+async function fetchData() {
     try {
-        // Ito mismo ang link na nakikita mo sa screen mo
+        // Ito ang link galing mismo sa settings mo
         const res = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
-        const json = await res.json();
+        const data = await res.json();
 
-        // Ayusin at ilagay ang lahat ng impormasyon
-        json.members.forEach(member => {
-            userData[member.id] = {
-                username: member.username,
-                displayName: member.username,
-                status: member.status,
-                avatarHash: member.avatar_url,
-                decorationHash: null,
-                spotify: null
+        // Ayusin ang mga datos
+        data.members.forEach(m => {
+            membersData[m.id] = {
+                name: m.username,
+                status: m.status,
+                avatar: m.avatar_url
             };
         });
 
-        // Siguraduhing kasama lahat kahit offline
-        ALL_MEMBERS.forEach(m => {
-            if(!userData[m.id]) {
-                userData[m.id] = {
-                    username: "Offline", displayName: "Member", status: "offline",
-                    avatarHash: `https://cdn.discordapp.com/embed/avatars/${(Number(m.id) >> 22) % 6}.png`,
-                    decorationHash: null, spotify: null
+        // Siguraduhing may data lahat kahit offline
+        ALL_IDS.forEach(id => {
+            if (!membersData[id]) {
+                membersData[id] = {
+                    name: `USER ${id.slice(-4)}`,
+                    status: 'offline',
+                    avatar: `https://cdn.discordapp.com/embed/avatars/${(Number(id) >> 22) % 6}.png`
                 };
             }
         });
 
-        renderAll();
+        renderAll(); // Ipakita lahat
     } catch (e) {
-        // Kung sakaling may mali, gamitin ang backup
-        loadBackupData();
+        console.log("Error, gumamit ng backup");
+        // Backup kung sakaling may mali
+        ALL_IDS.forEach(id => {
+            if (!membersData[id]) {
+                membersData[id] = {
+                    name: `USER ${id.slice(-4)}`,
+                    status: ['online','idle','dnd','offline'][Math.floor(Math.random()*4)],
+                    avatar: `https://cdn.discordapp.com/embed/avatars/${(Number(id) >> 22) % 6}.png`
+                };
+            }
+        });
+        renderAll();
     }
 }
 
-// ✅ KUNG MAY ERROR, ITO ANG LALABAS
-function loadBackupData() {
-    ALL_MEMBERS.forEach(m => {
-        userData[m.id] = {
-            username: `User${m.id.slice(-4)}`,
-            displayName: `MEMBER ${m.id.slice(-4)}`,
-            status: ['online','idle','dnd','offline'][Math.floor(Math.random()*4)],
-            avatarHash: `https://cdn.discordapp.com/embed/avatars/${(Number(m.id) >> 22) % 6}.png`,
-            decorationHash: null, spotify: null
-        };
-    });
-    renderAll();
-}
-
-// ✅ KUMUHA NG LINK NG LITRATO
-function getAvatarUrl(id, hash) {
-    if(!hash) return `https://cdn.discordapp.com/embed/avatars/${(Number(id) >> 22) % 6}.png`;
-    // Kung buong link na ang ibinigay ng Widget, gamitin yun
-    return (hash.startsWith('http')) ? hash : `https://cdn.discordapp.com/avatars/${id}/${hash}.png?size=256`;
-}
-
-// ✅ KUMUHA NG LINK NG PALAMUTI
-function getDecorationUrl(hash) {
-    if(!hash) return "";
-    return `https://cdn.discordapp.com/avatar-decoration-presets/${hash}.png?size=240`;
-}
-
-// ✅ GUMAGAWA NG BAWAT BILOG
-function createAvatarElement(id) {
-    const data = userData[id];
-    const avatarUrl = getAvatarUrl(id, data.avatarHash);
-    const decorationUrl = getDecorationUrl(data.decorationHash);
+// ✅ GUMAWA NG BAWAT BILOG
+function createAvatar(id) {
+    const d = membersData[id];
+    if (!d) return document.createElement('div');
 
     let statusClass = 'offline';
-    if(data.status === 'online') statusClass = 'online';
-    if(data.status === 'idle') statusClass = 'idle';
-    if(data.status === 'dnd') statusClass = 'dnd';
-
-    let spotifyHtml = "";
-    if(data.spotify) {
-        spotifyHtml = `<div class="tooltip-spotify">🎵 ${data.spotify.details}</div>`;
-    }
+    if (d.status === 'online') statusClass = 'online';
+    if (d.status === 'idle') statusClass = 'idle';
+    if (d.status === 'dnd') statusClass = 'dnd';
 
     const card = document.createElement('div');
     card.className = 'avatar-card';
-
     card.innerHTML = `
     <div class="avatar-circle">
-        ${decorationUrl ? `<img class="avatar-decoration" src="${decorationUrl}">` : ''}
-        <img class="avatar-img" src="${avatarUrl}" alt="">
+        <img class="avatar-img" src="${d.avatar}" alt="">
         <span class="status-dot ${statusClass}"></span>
     </div>
     <div class="tooltip">
-        <div class="tooltip-name">${data.displayName || 'Member'}</div>
-        <div class="tooltip-user">@${data.username || id}</div>
+        <div class="tooltip-name">${d.name}</div>
+        <div class="tooltip-user">@${d.name.toLowerCase()}</div>
         <div class="tooltip-status">
             <span class="status-dot ${statusClass}" style="width:8px;height:8px;position:static;"></span>
             <span>${statusClass.charAt(0).toUpperCase() + statusClass.slice(1)}</span>
         </div>
-        ${spotifyHtml}
-    </div>
-    `;
+    </div>`;
     return card;
 }
 
-// ✅ ILAGAY ANG MGA TAO SA SEKSYON
-function renderSection(ids, containerId) {
-    const cont = document.getElementById(containerId);
-    cont.innerHTML = '';
-    ids.forEach(id => {
-        if(userData[id]) cont.appendChild(createAvatarElement(id));
-    });
+// ✅ ILAGAY SA SEKSYON
+function renderSection(ids, idEl) {
+    const el = document.getElementById(idEl);
+    el.innerHTML = '';
+    ids.forEach(i => el.appendChild(createAvatar(i)));
 }
 
-// ✅ GAWIN ANG SCROLLING
-function renderMarquee(containerId) {
-    const cont = document.getElementById(containerId);
-    cont.innerHTML = '';
-    const list = [...ALL_MEMBERS, ...ALL_MEMBERS, ...ALL_MEMBERS];
-    list.forEach(m => {
-        const d = userData[m.id] || {displayName: "User", username: m.id};
-        const img = getAvatarUrl(m.id, d.avatarHash || null);
+// ✅ SCROLLING NAMES
+function renderMarquee(idEl) {
+    const el = document.getElementById(idEl);
+    el.innerHTML = '';
+    const list = Object.values(membersData);
+    [...list, ...list, ...list].forEach(m => {
         const div = document.createElement('div');
         div.className = 'marquee-item';
-        div.innerHTML = `<img src="${img}"> <span>${d.displayName}</span>`;
-        cont.appendChild(div);
+        div.innerHTML = `<img src="${m.avatar}"> <span>${m.name}</span>`;
+        el.appendChild(div);
     });
 }
 
 // ✅ IPAKITA LAHAT
 function renderAll() {
-    renderSection(FOUNDER_IDS, 'founder-row');
-    renderSection(ABOVEALL_IDS, 'aboveall-row');
-    renderSection(STAFF_IDS, 'staff-row');
+    renderSection(FOUNDER, 'founder-row');
+    renderSection(ABOVEALL, 'aboveall-row');
+    renderSection(STAFF, 'staff-row');
     renderMarquee('marquee-1');
     renderMarquee('marquee-2');
 }
 
-// ✅ SIMULAN ANG PAGKUHA GAMIT ANG BINUKSAN MONG SERVER WIDGET
-fetchServerData();
-setInterval(fetchServerData, 60000);
+// ✅ SIMULAN: KUHA NG DATA -> IPAKITA -> MAG-UPDATE BAWAT 60 SEGUNDOS
+fetchData();
+setInterval(fetchData, 60000);
 </script>
 </body>
 </html>

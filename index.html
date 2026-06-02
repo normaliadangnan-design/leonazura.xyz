@@ -164,43 +164,30 @@ body {
     padding: 20px 0;
 }
 
-.avatar-wrapper-node {
-    position: relative !important;
-    transition: transform 0.2s ease, z-index 0.2s ease;
-    z-index: 10;
-    overflow: visible !important; 
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    flex-shrink: 0 !important; 
-}
-
-.avatar-wrapper-node:hover {
-    transform: scale(1.15);
-    z-index: 999 !important;
-}
-
-.avatar-wrapper-node.active-pop {
-    transform: scale(1.15);
-    z-index: 99999 !important;
-}
-
+/* Ang mismong bilog na container */
 .circle-avatar-container {
-    position: relative !important;
-    width: 95px; 
-    height: 95px; 
+    position: relative;
+    width: 95px;
+    height: 95px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: #000000;
-    padding: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible !important; 
-    z-index: 5 !important;
+    overflow: hidden; /* IMPORTANTE: Dito piniputol yung labis na image */
 }
 
+/* Ang user avatar (yung picture) */
+.circle-avatar-container img.avatar-img {
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Mas mataas dapat kaysa sa decoration */
+    position: relative;
+}
+
+/* Ang decoration (yung effect sa likod) */
+img.avatar-decoration {
+    position: absolute;
+    z-index: 1; /* Mas mababa sa avatar */
+    width: 130px; 
+    height: 130px;
+}
 .status-indicator {
     position: absolute;
     bottom: 5px;

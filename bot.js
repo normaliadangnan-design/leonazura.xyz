@@ -16,32 +16,38 @@ const client = new Client({
 });
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
-const PORT = 8080; // Port para sa API
+const PORT = 8080;
 const rest = new REST({ version: '10' }).setToken(BOT_TOKEN);
 
 const GUILD_ID = "1506830822207127552"; 
 const CHECK_INTERVAL = 30000; 
 let previousData = ""; 
 
-// --- API ENDPOINT ---
+// --- API ENDPOINT (Inayos: hindi na magka-crash kung wala pa ang file) ---
 app.get('/api/members', (req, res) => {
-    try {
+    if (fs.existsSync('members.json')) {
         const data = fs.readFileSync('members.json', 'utf8');
         res.json(JSON.parse(data));
-    } catch (err) {
-        res.status(500).json({ error: "Walang data na makita" });
+    } else {
+        res.json([]);
     }
 });
 
-app.listen(PORT, () => console.log(`🚀 API Server running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🚀 API Server running on port ${PORT}`));
 
 // --- BOT LOGIC ---
 async function checkAndUpdateMembers() {
     console.log("🔍 SCANNING SERVER...");
     let guild = client.guilds.cache.get(GUILD_ID);
-    if (!guild) return;
+    
+    if (!guild) {
+        console.log("❌ Guild not found, trying to fetch...");
+        return;
+    }
 
     try {
+        // ✅ CRITICAL FIX: I-fetch ang members para siguradong hindi empty ang cache
+        await guild.members.fetch();
         const members = guild.members.cache;
         const currentData = [];
 
@@ -52,12 +58,13 @@ async function checkAndUpdateMembers() {
             let userStatus = member.presence ? member.presence.status : 'offline';
 
             try {
+                // Babala: Huwag masyadong maraming members sa server para iwas rate limit
                 const userData = await rest.get(Routes.user(member.id));
                 if (userData && userData.avatar_decoration_data) {
                     const asset = userData.avatar_decoration_data.asset;
                     decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.png?size=160`;
                 }
-            } catch (err) { continue; }
+            } catch (err) { /* silent fail */ }
 
             currentData.push({
                 id: member.id,
@@ -73,10 +80,10 @@ async function checkAndUpdateMembers() {
         if (newDataString !== previousData) {
             fs.writeFileSync('members.json', newDataString);
             previousData = newDataString;
-            console.log("✅ JSON Updated!");
+            console.log("✅ members.json Updated!");
         }
     } catch (error) {
-        console.error("❌ ERROR:", error.message);
+        console.error("❌ ERROR in scan:", error.message);
     }
 }
 
@@ -84,10 +91,6 @@ client.on('ready', () => {
     console.log(`✅ LOGGED IN AS: ${client.user.tag}`);
     checkAndUpdateMembers();
     setInterval(checkAndUpdateMembers, CHECK_INTERVAL);
-});
-
-process.on('unhandledRejection', (reason) => {
-    console.log("⚠️ Minor error, continuing...");
 });
 
 client.login(BOT_TOKEN);

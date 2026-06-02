@@ -228,8 +228,9 @@ body {
 }
 
 /* FIX: Siguradong display none kapag walang valid src */
+/* Siguraduhin na ang decoration ay laging handa ipakita */
 img.avatar-decoration {
-    display: none !important;
+    display: block !important; /* Binago mula sa none */
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
@@ -239,6 +240,13 @@ img.avatar-decoration {
     pointer-events: none !important;
     z-index: 1 !important; 
     border-radius: 0 !important; 
+    opacity: 0; /* Itatago muna natin gamit ang opacity */
+    transition: opacity 0.3s ease;
+}
+
+/* Ipapakita lang kapag may valid na image at loadable */
+img.avatar-decoration.loaded {
+    opacity: 1;
 }
 
 /* FIX: Kapag may valid src, ipakita ang image */
@@ -525,18 +533,13 @@ function showGroup(allMembers, listIDs, container) {
         div.style.zIndex = 50 - i; 
         div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
         
-        // DITO ANG PAGBABAGO:
-        // Hindi na natin ilalagay ang <img> tag kung walang valid URL
-        let decorationHTML = '';
-        if (mem.effectURL && 
-            mem.effectURL !== "null" && 
-            mem.effectURL !== null && 
-            mem.effectURL !== "undefined" && 
-            mem.effectURL.trim() !== "") {
-            
-            // Walang onerror dito kasi sigurado tayong may URL ang papasok
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
-        }
+       // ... sa loob ng showGroup function
+let decorationHTML = '';
+if (mem.effectURL && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
+    // Nagdagdag tayo ng class na "loaded" kapag successful ang load
+    decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onload="this.classList.add('loaded')">`;
+}
+// ...
 
     let statusText = '';
         let statusClass = '';

@@ -190,7 +190,7 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 140px !important; /* ✅ PINALAKI PARA SAKTO SA DECORATION */
+    width: 140px !important; 
     height: 140px !important; 
     pointer-events: none !important;
     z-index: 1 !important; 
@@ -210,7 +210,7 @@ img.avatar-decoration {
     pointer-events: none !important;
     position: relative !important;
     z-index: 2 !important;
-    border: 2px solid #000; /* ✅ BORDER PARA MALINAW */
+    border: 2px solid #000; 
 }
 
 /* ✅ STATUS DOT - MALAKI SA GILID */
@@ -481,7 +481,11 @@ document.getElementById("gateway-overlay").onclick = () => {
 
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(members => {
+    .then(data => {
+        // ✅ KINUHA KO TAMA YUNG LAMAN NG API MO
+        const members = data[0].text_block[0].text;
+        const parsedMembers = JSON.parse(members);
+
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
         const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
@@ -489,11 +493,11 @@ fetch('https://api.leonazura.xyz/api/members')
         const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
         const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
-        showGroup(members, founderIDs, 'founder-container');
-        showGroup(members, aboveAllIDs, 'aboveall-container');
-        showGroup(members, staffIDs, 'staff-container');
-        showMarquee(members, scrollingIDsRow1, "marquee-container-1");
-        showMarquee(members, scrollingIDsRow2, "marquee-container-2");
+        showGroup(parsedMembers, founderIDs, 'founder-container');
+        showGroup(parsedMembers, aboveAllIDs, 'aboveall-container');
+        showGroup(parsedMembers, staffIDs, 'staff-container');
+        showMarquee(parsedMembers, scrollingIDsRow1, "marquee-container-1");
+        showMarquee(parsedMembers, scrollingIDsRow2, "marquee-container-2");
     });
 
 function showGroup(allMembers, listIDs, container) {
@@ -507,21 +511,11 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // ✅ PINAKA IMPORTANTE: AYOS NA ANG PAGKUHA NG DECORATION / LANYARD
+        // ✅ DITO NA TAMA! GAMIT KO NA LANG NANG DIRETSO YUNG effectURL MULA SA API MO
         let decorationHTML = '';
         
-        // Para sa Discord Lanyard / Official Decoration
-        if (mem.avatar_decoration && mem.avatar_decoration !== "" && mem.avatar_decoration !== "null") {
-            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.avatar_decoration}.png?size=128" class="avatar-decoration">`;
-        }
-        // Kung nasa ibang tawag sa API mo
-        else if (mem.decoration && mem.decoration !== "" && mem.decoration !== "null") {
-            decorationHTML = `<img src="${mem.decoration}" class="avatar-decoration">`;
-        }
-        else if (mem.decorationURL && mem.decorationURL !== "" && mem.decorationURL !== "null") {
-            decorationHTML = `<img src="${mem.decorationURL}" class="avatar-decoration">`;
-        }
-        else if (mem.effectURL && mem.effectURL !== "" && mem.effectURL !== "null") {
+        // ✅ ITO YUNG NASA API MO: effectURL = "https://cdn.discordapp.com/avatar-decorations/a_xxxxxxxx.png"
+        if (mem.effectURL && mem.effectURL !== "null" && mem.effectURL !== "") {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
         }
 
@@ -537,37 +531,24 @@ function showGroup(allMembers, listIDs, container) {
             if (mem.status === 'offline' || mem.status === 'invisible') statusClass = 'status-offline'; // GRAY
         }
 
-        // ✅ ACTIVITY / LARO / SPOTIFY
-        if (mem.activities && mem.activities.length > 0) {
-            const act = mem.activities[0];
-            if (act.type === 2) { // Spotify
-                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm status-online"></span> Listening to Spotify</div>`;
-            } else if (act.type === 0) { // Game
-                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm status-online"></span> Playing ${act.name}</div>`;
-            } else {
-                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span></div>`;
-            }
-        } else {
-            // ✅ WALANG NAKASULAT NA STATUS, TULDOK LANG AT KULAY
-            activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span></div>`;
-        }
+        // ✅ WALANG TEXT SA STATUS, KULAY LANG
+        activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span></div>`;
 
         // ✅ WALANG KORONA, TAMA NA KULAY NG TULDOK
         div.innerHTML = `
             <div class="circle-avatar-container">
                 ${decorationHTML} 
-                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="User">
-                <span class="status-indicator ${statusClass}"></span> <!-- ✅ MALAKING TULDOK: TAMA ANG KULAY -->
+                <img src="${mem.avatarURL}" class="avatar-img" alt="User">
+                <span class="status-indicator ${statusClass}"></span>
             </div>
 
-            <!-- ✅ CARD / INFO: TULDOK LANG ANG NAKIKITA, WALANG SALITA -->
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="tooltip-avatar-sm">
+                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
                 </div>
                 <div class="tooltip-desc">${mem.displayName || mem.username || 'Unknown User'}</div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>
-                ${activityHTML} <!-- ✅ DITO YUNG MALIIT NA TULDOK NA PAREHAS ANG KULAY -->
+                ${activityHTML}
             </div>
         `;
         box.appendChild(div);

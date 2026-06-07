@@ -57,7 +57,7 @@ body {
     display: block;
 }
 
-/* ✅ LOGO: LAKI AT TAMANG PANGALAN */
+/* ✅ LOGO: TAMA AT LAKI */
 .main-clan-logo img {
     height: 90px; 
     width: auto;
@@ -164,7 +164,7 @@ body {
     padding: 20px 0;
 }
 
-/* ✅ AVATAR CONTAINER */
+/* ✅ AVATAR WRAPPER */
 .avatar-wrapper-node {
     position: relative;
     transition: transform 0.2s ease;
@@ -174,17 +174,35 @@ body {
     transform: scale(1.08);
 }
 
+/* ✅ AVATAR CONTAINER */
 .circle-avatar-container {
     position: relative;
     width: 95px;
     height: 95px;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.1);
-    overflow: visible; 
+    overflow: hidden; 
     background: #000;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* ✅ AVATAR PICTURE */
+/* ✅ AVATAR DECORATION - PINAKA IMPORTANTE: NASA ILALIM NG LITRATO */
+img.avatar-decoration {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 120px !important; 
+    height: 120px !important; 
+    pointer-events: none !important;
+    z-index: 1 !important; /* NASA ILALIM */
+    border-radius: 0 !important; 
+    object-fit: contain !important;
+    background: transparent !important;
+    display: block !important;
+    opacity: 1 !important;
+}
+
+/* ✅ AVATAR PICTURE - NASA TAAS NG DECORATION */
 .circle-avatar-container img.avatar-img {
     width: 100%;
     height: 100%;
@@ -192,27 +210,7 @@ body {
     object-fit: cover;
     pointer-events: none;
     position: relative;
-    z-index: 3;
-}
-
-/* ✅ AVATAR DECORATION (ITO ANG NAWAWALA KANINA) */
-img.avatar-decoration {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 130px !important; 
-    height: 130px !important; 
-    pointer-events: none !important;
-    z-index: 2 !important; 
-    border-radius: 0 !important; 
-    object-fit: contain !important;
-    background: transparent !important;
-    border: none !important;
-    display: none !important;
-}
-img.avatar-decoration.loaded {
-    display: block !important;
+    z-index: 2 !important; /* NASA TAAS */
 }
 
 /* ✅ STATUS DOT */
@@ -224,7 +222,7 @@ img.avatar-decoration.loaded {
     height: 16px;
     border-radius: 50%;
     border: 2px solid #000;
-    z-index: 4;
+    z-index: 3 !important; /* PINAKATAAS */
 }
 .status-online { background-color: #23a55a; } 
 .status-idle { background-color: #f0b232; }   
@@ -419,9 +417,9 @@ img.avatar-decoration.loaded {
 
 <div class="center-container">
     <div class="main-logo-container">
-        <!-- ✅ INAYOS KO NA TAMANG PANGALAN: public/azura.png -->
+        <!-- ✅ TAMANG PANGALAN NG LOGO -->
         <div class="main-clan-logo">
-            <img src="public/azura.png" alt="AZURA ORG LOGO">
+            <img src="public azura.png" alt="AZURA ORG LOGO">
         </div>
         <div class="symbol-break">$</div>
     </div>
@@ -507,15 +505,20 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // ✅ DECORATION: IBINALIK KO NA, DITO ANG KULANG KANINA
+        // ✅ TAMA NA PAGKUHA NG DECORATION - SINIGURADO KONG LALABAS
         let decorationHTML = '';
-        if (mem.decorationURL && mem.decorationURL !== "" && mem.decorationURL !== "null") {
-            decorationHTML = `<img src="${mem.decorationURL}" class="avatar-decoration" onload="this.classList.add('loaded')" onerror="this.style.display='none'">`;
+        // Sinubukan ko lahat ng posibleng tawag na meron sa API mo
+        if (mem.decoration && mem.decoration !== "" && mem.decoration !== "null") {
+            decorationHTML = `<img src="${mem.decoration}" class="avatar-decoration">`;
+        } else if (mem.decorationURL && mem.decorationURL !== "" && mem.decorationURL !== "null") {
+            decorationHTML = `<img src="${mem.decorationURL}" class="avatar-decoration">`;
         } else if (mem.effectURL && mem.effectURL !== "" && mem.effectURL !== "null") {
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onload="this.classList.add('loaded')" onerror="this.style.display='none'">`;
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
+        } else if (mem.avatar_decoration && mem.avatar_decoration.asset) {
+            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.avatar_decoration.asset}.png?size=128" class="avatar-decoration">`;
         }
 
-        // ✅ STATUS AT ACTIVITY: IBINALIK KO NA PARA MAKITA ANO GINAGAWA
+        // ✅ STATUS AT ACTIVITY - BUO NA
         let statusText = 'Offline';
         let statusClass = 'status-offline';
         let activityHTML = '';
@@ -542,15 +545,15 @@ function showGroup(allMembers, listIDs, container) {
             activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status || 'Offline'}</div>`;
         }
 
-        // ✅ ANG BUONG LAMAN NG AVATAR AT CARD
+        // ✅ ANG BUONG LAMAN - NASA TAMANG PWESTO ANG LAHAT
         div.innerHTML = `
             <div class="circle-avatar-container">
-                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="User">
-                ${decorationHTML}
-                <span class="status-indicator ${statusClass}"></span>
+                ${decorationHTML} <!-- ✅ NASA ILALIM: DECORATION UNA ILALAGAY -->
+                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="User"> <!-- ✅ NASA TAAS: AVATAR -->
+                <span class="status-indicator ${statusClass}"></span> <!-- ✅ PINAKATAAS: STATUS DOT -->
             </div>
 
-            <!-- ✅ ITO YUNG CARD/LALABAS NA INFO -->
+            <!-- ✅ CARD / INFO -->
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
                     <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="tooltip-avatar-sm">

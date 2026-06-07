@@ -52,16 +52,16 @@ body {
 }
 
 .main-clan-logo {
-    font-family: 'Old English Text MT', 'Cloister Black', serif !important; 
-    font-size: 42px; 
-    font-weight: normal !important;
-    letter-spacing: 3px;
-    color: #ffffff;
     background: transparent !important; 
     border: none !important;
-    text-transform: uppercase;
-    line-height: 1;
     display: block;
+}
+
+/* ✅ INAYOS KO ANG LAYANAN AT LAKI NG LOGO */
+.main-clan-logo img {
+    height: 45px; /* ✅ Sakto lang ang laki, hindi sobrang laki */
+    width: auto;
+    object-fit: contain;
 }
 
 .symbol-break {
@@ -432,7 +432,10 @@ img.avatar-decoration[src]:not([src=""]) {
 
 <div class="center-container">
     <div class="main-logo-container">
-        <div class="main-clan-logo">AZURA ORG</div>
+        <!-- ✅ INAYOS KO NA: public azura.png -->
+        <div class="main-clan-logo">
+            <img src="public azura.png" alt="AZURA ORG LOGO">
+        </div>
         <div class="symbol-break">$</div>
     </div>
 
@@ -473,7 +476,7 @@ img.avatar-decoration[src]:not([src=""]) {
 
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
-</audio>
+
 
 <script>
 const audio = document.getElementById("soundtrack");

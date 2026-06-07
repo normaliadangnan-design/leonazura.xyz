@@ -180,21 +180,20 @@ body {
     width: 95px;
     height: 95px;
     border-radius: 50%;
-    overflow: hidden; 
-    background: #000;
-    border: 1px solid rgba(255,255,255,0.1);
+    overflow: visible; /* ✅ GINAWANG VISIBLE PARA MAKITA ANG BUONG DECORATION */
+    background: transparent; 
 }
 
-/* ✅ AVATAR DECORATION - PINAKA IMPORTANTE: NASA ILALIM NG LITRATO */
+/* ✅ AVATAR DECORATION - NASA ILALIM, SAKTO SA LANYARD/DISCORD DECORATION */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 120px !important; 
-    height: 120px !important; 
+    width: 140px !important; /* ✅ PINALAKI PARA SAKTO SA DECORATION */
+    height: 140px !important; 
     pointer-events: none !important;
-    z-index: 1 !important; /* NASA ILALIM */
+    z-index: 1 !important; 
     border-radius: 0 !important; 
     object-fit: contain !important;
     background: transparent !important;
@@ -202,18 +201,19 @@ img.avatar-decoration {
     opacity: 1 !important;
 }
 
-/* ✅ AVATAR PICTURE - NASA TAAS NG DECORATION */
+/* ✅ AVATAR PICTURE - NASA TAAS */
 .circle-avatar-container img.avatar-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    pointer-events: none;
-    position: relative;
-    z-index: 2 !important; /* NASA TAAS */
+    width: 95px !important;
+    height: 95px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    pointer-events: none !important;
+    position: relative !important;
+    z-index: 2 !important;
+    border: 2px solid #000; /* ✅ BORDER PARA MALINAW */
 }
 
-/* ✅ STATUS DOT */
+/* ✅ STATUS DOT - MALAKI SA GILID */
 .status-indicator {
     position: absolute;
     bottom: 4px;
@@ -222,14 +222,16 @@ img.avatar-decoration {
     height: 16px;
     border-radius: 50%;
     border: 2px solid #000;
-    z-index: 3 !important; /* PINAKATAAS */
+    z-index: 3 !important;
 }
-.status-online { background-color: #23a55a; } 
-.status-idle { background-color: #f0b232; }   
-.status-dnd { background-color: #f13f43; }     
-.status-offline { background-color: #80848e; } 
 
-/* ✅ TOOLTIP / CARD NA LALABAS KAPAG TINUTOK */
+/* ✅ TAMA NA KULAY NG STATUS */
+.status-online { background-color: #23a55a; }  /* BERDE */
+.status-idle { background-color: #f0b232; }    /* KAHEL / ORANGE */
+.status-dnd { background-color: #f13f43; }     /* PULA */
+.status-offline { background-color: #80848e; } /* ABO / GRAY */
+
+/* ✅ TOOLTIP / CARD - WALANG KORONA, TAMA NA KULAY NG TULDOK */
 .avatar-tooltip {
     position: absolute;
     bottom: 115%; 
@@ -257,7 +259,7 @@ img.avatar-decoration {
 .tooltip-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 8px;
 }
 .tooltip-avatar-sm {
@@ -417,7 +419,7 @@ img.avatar-decoration {
 
 <div class="center-container">
     <div class="main-logo-container">
-        <!-- ✅ TAMANG PANGALAN NG LOGO -->
+        <!-- ✅ TAMANG PANGALAN NG LOGO: WALANG SPACE -->
         <div class="main-clan-logo">
             <img src="public azura.png" alt="AZURA ORG LOGO">
         </div>
@@ -505,63 +507,67 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // ✅ TAMA NA PAGKUHA NG DECORATION - SINIGURADO KONG LALABAS
+        // ✅ PINAKA IMPORTANTE: AYOS NA ANG PAGKUHA NG DECORATION / LANYARD
         let decorationHTML = '';
-        // Sinubukan ko lahat ng posibleng tawag na meron sa API mo
-        if (mem.decoration && mem.decoration !== "" && mem.decoration !== "null") {
+        
+        // Para sa Discord Lanyard / Official Decoration
+        if (mem.avatar_decoration && mem.avatar_decoration !== "" && mem.avatar_decoration !== "null") {
+            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.avatar_decoration}.png?size=128" class="avatar-decoration">`;
+        }
+        // Kung nasa ibang tawag sa API mo
+        else if (mem.decoration && mem.decoration !== "" && mem.decoration !== "null") {
             decorationHTML = `<img src="${mem.decoration}" class="avatar-decoration">`;
-        } else if (mem.decorationURL && mem.decorationURL !== "" && mem.decorationURL !== "null") {
+        }
+        else if (mem.decorationURL && mem.decorationURL !== "" && mem.decorationURL !== "null") {
             decorationHTML = `<img src="${mem.decorationURL}" class="avatar-decoration">`;
-        } else if (mem.effectURL && mem.effectURL !== "" && mem.effectURL !== "null") {
+        }
+        else if (mem.effectURL && mem.effectURL !== "" && mem.effectURL !== "null") {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
-        } else if (mem.avatar_decoration && mem.avatar_decoration.asset) {
-            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.avatar_decoration.asset}.png?size=128" class="avatar-decoration">`;
         }
 
-        // ✅ STATUS AT ACTIVITY - BUO NA
-        let statusText = 'Offline';
-        let statusClass = 'status-offline';
+        // ✅ TAMA NA STATUS LOGIC: KULAY LANG, WALANG SALITA
+        let statusClass = 'status-offline'; // Default: Gray
         let activityHTML = '';
         
+        // ✅ TAMA NA PAGBASA NG STATUS GAYA SA DISCORD
         if (mem.status) {
-            statusClass = `status-${mem.status}`;
-            statusText = mem.status;
+            if (mem.status === 'online') statusClass = 'status-online';   // BERDE
+            if (mem.status === 'idle') statusClass = 'status-idle';       // KAHEL
+            if (mem.status === 'dnd') statusClass = 'status-dnd';         // PULA
+            if (mem.status === 'offline' || mem.status === 'invisible') statusClass = 'status-offline'; // GRAY
         }
 
+        // ✅ ACTIVITY / LARO / SPOTIFY
         if (mem.activities && mem.activities.length > 0) {
             const act = mem.activities[0];
-            if (act.type === 2) {
-                statusText = 'Listening to Spotify';
-                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm status-online"></span> ${act.details || 'Spotify'}</div>`;
-                statusClass = 'status-online';
-            } else if (act.type === 0) {
-                statusText = 'Playing Game';
-                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm status-online"></span> ${act.name}</div>`;
-                statusClass = 'status-online';
+            if (act.type === 2) { // Spotify
+                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm status-online"></span> Listening to Spotify</div>`;
+            } else if (act.type === 0) { // Game
+                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm status-online"></span> Playing ${act.name}</div>`;
             } else {
-                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status || 'Online'}</div>`;
+                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span></div>`;
             }
         } else {
-            activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status || 'Offline'}</div>`;
+            // ✅ WALANG NAKASULAT NA STATUS, TULDOK LANG AT KULAY
+            activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span></div>`;
         }
 
-        // ✅ ANG BUONG LAMAN - NASA TAMANG PWESTO ANG LAHAT
+        // ✅ WALANG KORONA, TAMA NA KULAY NG TULDOK
         div.innerHTML = `
             <div class="circle-avatar-container">
-                ${decorationHTML} <!-- ✅ NASA ILALIM: DECORATION UNA ILALAGAY -->
-                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="User"> <!-- ✅ NASA TAAS: AVATAR -->
-                <span class="status-indicator ${statusClass}"></span> <!-- ✅ PINAKATAAS: STATUS DOT -->
+                ${decorationHTML} 
+                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="User">
+                <span class="status-indicator ${statusClass}"></span> <!-- ✅ MALAKING TULDOK: TAMA ANG KULAY -->
             </div>
 
-            <!-- ✅ CARD / INFO -->
+            <!-- ✅ CARD / INFO: TULDOK LANG ANG NAKIKITA, WALANG SALITA -->
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
                     <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="tooltip-avatar-sm">
-                    <span>👑</span>
                 </div>
                 <div class="tooltip-desc">${mem.displayName || mem.username || 'Unknown User'}</div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>
-                ${activityHTML}
+                ${activityHTML} <!-- ✅ DITO YUNG MALIIT NA TULDOK NA PAREHAS ANG KULAY -->
             </div>
         `;
         box.appendChild(div);

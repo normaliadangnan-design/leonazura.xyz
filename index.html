@@ -57,7 +57,7 @@ body {
     display: block;
 }
 
-/* ✅ PINALAKI KO NA TALAGA: mula 45px → 90px */
+/* ✅ LOGO: LAKI AT TAMANG PANGALAN */
 .main-clan-logo img {
     height: 90px; 
     width: auto;
@@ -156,7 +156,7 @@ body {
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: wrap !important; /* Binago mula sa nowrap para mag-wrap sa mobile */
+    flex-wrap: wrap !important; 
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -164,45 +164,27 @@ body {
     padding: 20px 0;
 }
 
-/* Ang mismong bilog na container */
+/* ✅ AVATAR CONTAINER */
+.avatar-wrapper-node {
+    position: relative;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+.avatar-wrapper-node:hover {
+    transform: scale(1.08);
+}
+
 .circle-avatar-container {
     position: relative;
     width: 95px;
     height: 95px;
     border-radius: 50%;
-    overflow: hidden; /* IMPORTANTE: Dito piniputol yung labis na image */
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: visible; 
+    background: #000;
 }
 
-/* Ang user avatar (yung picture) */
-.circle-avatar-container img.avatar-img {
-    width: 100%;
-    height: 100%;
-    z-index: 2; /* Mas mataas dapat kaysa sa decoration */
-    position: relative;
-}
-
-/* Ang decoration (yung effect sa likod) */
-img.avatar-decoration {
-    position: absolute;
-    z-index: 1; /* Mas mababa sa avatar */
-    width: 130px; 
-    height: 130px;
-}
-.status-indicator {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 2px solid #000;
-    z-index: 10;
-}
-.status-online { background-color: #23a55a; } 
-.status-idle { background-color: #f0b232; }   
-.status-dnd { background-color: #f13f43; }     
-.status-offline { background-color: #80848e; } 
-
+/* ✅ AVATAR PICTURE */
 .circle-avatar-container img.avatar-img {
     width: 100%;
     height: 100%;
@@ -210,13 +192,11 @@ img.avatar-decoration {
     object-fit: cover;
     pointer-events: none;
     position: relative;
-    z-index: 2 !important;
+    z-index: 3;
 }
 
-/* FIX: Siguradong display none kapag walang valid src */
-/* Siguraduhin na ang decoration ay laging handa ipakita */
+/* ✅ AVATAR DECORATION (ITO ANG NAWAWALA KANINA) */
 img.avatar-decoration {
-    display: block !important; /* Binago mula sa none */
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
@@ -224,41 +204,52 @@ img.avatar-decoration {
     width: 130px !important; 
     height: 130px !important; 
     pointer-events: none !important;
-    z-index: 1 !important; 
+    z-index: 2 !important; 
     border-radius: 0 !important; 
-    opacity: 0; /* Itatago muna natin gamit ang opacity */
-    transition: opacity 0.3s ease;
+    object-fit: contain !important;
+    background: transparent !important;
+    border: none !important;
+    display: none !important;
 }
-
-/* Ipapakita lang kapag may valid na image at loadable */
 img.avatar-decoration.loaded {
-    opacity: 1;
-}
-
-/* FIX: Kapag may valid src, ipakita ang image */
-img.avatar-decoration[src]:not([src=""]) {
     display: block !important;
 }
 
+/* ✅ STATUS DOT */
+.status-indicator {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    z-index: 4;
+}
+.status-online { background-color: #23a55a; } 
+.status-idle { background-color: #f0b232; }   
+.status-dnd { background-color: #f13f43; }     
+.status-offline { background-color: #80848e; } 
+
+/* ✅ TOOLTIP / CARD NA LALABAS KAPAG TINUTOK */
 .avatar-tooltip {
     position: absolute;
-    bottom: 110%; 
+    bottom: 115%; 
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #000000 !important;
-    border: none !important;
-    border-radius: 8px;
-    padding: 12px;
+    background: #0a0a0a !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 10px;
+    padding: 12px 15px;
     width: 200px;
     color: #fff;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    transition: all 0.2s ease;
     pointer-events: none; 
-    z-index: 9999999;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.95);
+    z-index: 99999;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
 }
-
 .avatar-wrapper-node:hover .avatar-tooltip {
     opacity: 1;
     visibility: visible;
@@ -271,25 +262,21 @@ img.avatar-decoration[src]:not([src=""]) {
     justify-content: space-between;
     margin-bottom: 8px;
 }
-
 .tooltip-avatar-sm {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
-
 .tooltip-username {
     font-size: 12px;
     color: #96989d;
     margin: 4px 0;
 }
-
 .tooltip-desc {
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 6px;
 }
-
 .tooltip-status {
     font-size: 11px;
     display: flex;
@@ -298,7 +285,6 @@ img.avatar-decoration[src]:not([src=""]) {
     padding: 4px 6px;
     border-radius: 3px;
     background: #1a1a1a;
-    /* Idagdag ang mga ito: */
     max-width: 180px; 
     white-space: nowrap;
     overflow: hidden;
@@ -311,6 +297,7 @@ img.avatar-decoration[src]:not([src=""]) {
     display: inline-block;
 }
 
+/* ✅ SCROLLING NAMES */
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
@@ -432,9 +419,9 @@ img.avatar-decoration[src]:not([src=""]) {
 
 <div class="center-container">
     <div class="main-logo-container">
-        <!-- ✅ INAYOS KO NA TAMANG PANGALAN: public/azura.png (walang space!) -->
+        <!-- ✅ INAYOS KO NA TAMANG PANGALAN: public/azura.png -->
         <div class="main-clan-logo">
-            <img src="public azura.png" alt="AZURA ORG LOGO">
+            <img src="public/azura.png" alt="AZURA ORG LOGO">
         </div>
         <div class="symbol-break">$</div>
     </div>
@@ -517,52 +504,67 @@ function showGroup(allMembers, listIDs, container) {
         const mem = allMembers.find(m => m.id === id);
         if (!mem) return;
         
-        const div = document.createElement('div'); // Binago mula sa 'a' para mas stable
+        const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // Decoration Logic
+        // ✅ DECORATION: IBINALIK KO NA, DITO ANG KULANG KANINA
         let decorationHTML = '';
-        if (mem.effectURL && mem.effectURL !== "null" && mem.effectURL !== "") {
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" 
-                               onload="this.classList.add('loaded')" 
-                               onerror="this.style.display='none'">`;
+        if (mem.decorationURL && mem.decorationURL !== "" && mem.decorationURL !== "null") {
+            decorationHTML = `<img src="${mem.decorationURL}" class="avatar-decoration" onload="this.classList.add('loaded')" onerror="this.style.display='none'">`;
+        } else if (mem.effectURL && mem.effectURL !== "" && mem.effectURL !== "null") {
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onload="this.classList.add('loaded')" onerror="this.style.display='none'">`;
         }
 
-        // Status Logic
+        // ✅ STATUS AT ACTIVITY: IBINALIK KO NA PARA MAKITA ANO GINAGAWA
         let statusText = 'Offline';
         let statusClass = 'status-offline';
+        let activityHTML = '';
         
+        if (mem.status) {
+            statusClass = `status-${mem.status}`;
+            statusText = mem.status;
+        }
+
         if (mem.activities && mem.activities.length > 0) {
             const act = mem.activities[0];
             if (act.type === 2) {
-                statusText = `Listening to ${act.details || 'Spotify'}`;
+                statusText = 'Listening to Spotify';
+                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm status-online"></span> ${act.details || 'Spotify'}</div>`;
                 statusClass = 'status-online';
             } else if (act.type === 0) {
-                statusText = `Playing ${act.name}`;
+                statusText = 'Playing Game';
+                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm status-online"></span> ${act.name}</div>`;
                 statusClass = 'status-online';
             } else {
-                statusText = mem.status || 'Online';
-                statusClass = `status-${mem.status || 'online'}`;
+                activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status || 'Online'}</div>`;
             }
         } else {
-            statusText = mem.status || 'Offline';
-            statusClass = `status-${mem.status || 'offline'}`;
+            activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status || 'Offline'}</div>`;
         }
 
+        // ✅ ANG BUONG LAMAN NG AVATAR AT CARD
         div.innerHTML = `
             <div class="circle-avatar-container">
-                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img">
+                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="User">
                 ${decorationHTML}
                 <span class="status-indicator ${statusClass}"></span>
             </div>
+
+            <!-- ✅ ITO YUNG CARD/LALABAS NA INFO -->
             <div class="avatar-tooltip">
-                <div style="font-weight:bold">${mem.displayName || mem.username}</div>
-                <div style="font-size:11px; color:#aaa; margin-top:5px;">${statusText}</div>
+                <div class="tooltip-header">
+                    <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="tooltip-avatar-sm">
+                    <span>👑</span>
+                </div>
+                <div class="tooltip-desc">${mem.displayName || mem.username || 'Unknown User'}</div>
+                <div class="tooltip-username">@${mem.username || 'username'}</div>
+                ${activityHTML}
             </div>
         `;
         box.appendChild(div);
     });
 }
+
 function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);
     const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));

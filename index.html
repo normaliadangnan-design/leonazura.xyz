@@ -469,17 +469,18 @@ img.avatar-decoration {
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
 
-document.getElementById("gateway-overlay").onclick = () => {
+// ✅ INAYOS KO ANG CLICK FUNCTION, DITO NASIRA KANINA
+document.getElementById("gateway-overlay").addEventListener("click", function() {
     audio.play().catch(() => {});
-    document.getElementById("gateway-overlay").classList.add("fade-gateway");
+    this.classList.add("fade-gateway");
     
     document.querySelectorAll('.typewriter-header').forEach(el => {
         el.style.animationPlayState = 'running';
         el.style.width = '100%';
     });
-};
+});
 
-// ✅ IBINALIK KO SA TAMANG PAGBASA NG API - DITO NAWALA KANINA
+// ✅ TAMA NA PAGBASA NG API - WALANG MALI DITO
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(members => {
@@ -508,7 +509,7 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // ✅ TAMA NA PAGKUHA NG DECORATION / LANYARD GAYA NG DATI
+        // ✅ TAMA NA PAGKUHA NG DECORATION / LANYARD
         let decorationHTML = '';
         if (mem.effectURL && mem.effectURL !== "null" && mem.effectURL !== "") {
             decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
@@ -517,10 +518,10 @@ function showGroup(allMembers, listIDs, container) {
         // ✅ TAMA NA STATUS LOGIC: KULAY LANG, WALANG SALITA
         let statusClass = 'status-offline'; 
         if (mem.status) {
-            if (mem.status === 'online") statusClass = 'status-online';
-            if (mem.status === 'idle") statusClass = 'status-idle';
-            if (mem.status === 'dnd") statusClass = 'status-dnd';
-            if (mem.status === 'offline" || mem.status === 'invisible") statusClass = 'status-offline';
+            if (mem.status === 'online') statusClass = 'status-online';
+            if (mem.status === 'idle') statusClass = 'status-idle';
+            if (mem.status === 'dnd') statusClass = 'status-dnd';
+            if (mem.status === 'offline' || mem.status === 'invisible') statusClass = 'status-offline';
         }
 
         // ✅ WALANG TEXT SA STATUS, KULAY LANG

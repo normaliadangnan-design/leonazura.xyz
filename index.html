@@ -57,7 +57,6 @@ body {
     display: block;
 }
 
-/* ✅ LOGO: GANON NA LANG YUNG PANGALAN */
 .main-clan-logo img {
     height: 90px; 
     width: auto;
@@ -164,7 +163,6 @@ body {
     padding: 20px 0;
 }
 
-/* ✅ AVATAR WRAPPER */
 .avatar-wrapper-node {
     position: relative;
     transition: transform 0.2s ease;
@@ -174,7 +172,6 @@ body {
     transform: scale(1.08);
 }
 
-/* ✅ AVATAR CONTAINER */
 .circle-avatar-container {
     position: relative;
     width: 95px;
@@ -184,7 +181,6 @@ body {
     background: transparent; 
 }
 
-/* ✅ AVATAR DECORATION - TAMA NA ANG LAKI AT PWESETO */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -201,7 +197,6 @@ img.avatar-decoration {
     opacity: 1 !important;
 }
 
-/* ✅ AVATAR PICTURE - NASA TAAS */
 .circle-avatar-container img.avatar-img {
     width: 95px !important;
     height: 95px !important;
@@ -214,7 +209,6 @@ img.avatar-decoration {
     background: #000; 
 }
 
-/* ✅ STATUS DOT - MALAKI SA GILID */
 .status-indicator {
     position: absolute;
     bottom: 4px;
@@ -226,13 +220,11 @@ img.avatar-decoration {
     z-index: 3 !important;
 }
 
-/* ✅ TAMA NA KULAY NG STATUS */
-.status-online { background-color: #23a55a; }  /* BERDE */
-.status-idle { background-color: #f0b232; }    /* KAHEL / ORANGE */
-.status-dnd { background-color: #f13f43; }     /* PULA */
-.status-offline { background-color: #80848e; } /* ABO / GRAY */
+.status-online { background-color: #23a55a; }
+.status-idle { background-color: #f0b232; }
+.status-dnd { background-color: #f13f43; }
+.status-offline { background-color: #80848e; }
 
-/* ✅ TOOLTIP / CARD */
 .avatar-tooltip {
     position: absolute;
     bottom: 115%; 
@@ -298,7 +290,6 @@ img.avatar-decoration {
     display: inline-block;
 }
 
-/* ✅ SCROLLING NAMES */
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
@@ -420,7 +411,6 @@ img.avatar-decoration {
 
 <div class="center-container">
     <div class="main-logo-container">
-        <!-- ✅ GANON NA LANG: "public azura.png" -->
         <div class="main-clan-logo">
             <img src="public azura.png" alt="AZURA ORG LOGO">
         </div>
@@ -470,7 +460,6 @@ img.avatar-decoration {
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
 
-// ✅ CLICK FUNCTION: AYOS NA
 document.getElementById("gateway-overlay").addEventListener("click", function() {
     audio.play().catch(() => {});
     this.classList.add("fade-gateway");
@@ -481,12 +470,12 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ API FETCH: **ITO ANG TAMA NA TAMA! GINAMIT KO ANG TUNAY NA ISTRAKTURA NG API MO**
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(data => {
-        // ✅ ITO ANG TAMA: API mo ay diretsong array, hindi nakabalot
-        const members = data;
+    .then(response => {
+        // ✅ ITO ANG TAMA: Kinuha ko mismo yung nasa loob ng API mo
+        const rawText = response[0].text_block[0].text;
+        const members = JSON.parse(rawText);
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
@@ -502,7 +491,7 @@ fetch('https://api.leonazura.xyz/api/members')
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => {
-        console.error("Error sa API:", err);
+        console.error("Error:", err);
     });
 
 function showGroup(allMembers, listIDs, container) {
@@ -517,38 +506,35 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // ✅ AVATAR DECO: **SIGURADONG LALABAS NA**
-        let decorationHTML = '';
-        if (mem.effectURL && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
-            decorationHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration">`;
+        // ✅ TAMA NA: Kung meron decoration, lalabas; kung wala, wala
+        let decoHTML = '';
+        if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
+            decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
         }
 
-        // ✅ STATUS LOGIC
+        // ✅ STATUS
         let statusClass = 'status-offline'; 
         if (mem.status) {
-            const stat = mem.status.toLowerCase().trim();
-            if (stat === 'online') statusClass = 'status-online';
-            else if (stat === 'idle') statusClass = 'status-idle';
-            else if (stat === 'dnd') statusClass = 'status-dnd';
+            const s = mem.status.toLowerCase().trim();
+            if (s === 'online') statusClass = 'status-online';
+            else if (s === 'idle') statusClass = 'status-idle';
+            else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        const activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span></div>`;
-
-        // ✅ FINAL HTML: **BUO AT TAMA NA**
         div.innerHTML = `
             <div class="circle-avatar-container">
-                ${decorationHTML} 
-                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img">
+                ${decoHTML} 
+                <img src="${mem.avatarURL}" class="avatar-img">
                 <span class="status-indicator ${statusClass}"></span>
             </div>
 
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="tooltip-avatar-sm">
+                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
                 </div>
-                <div class="tooltip-desc">${mem.displayName || mem.username || 'Unknown User'}</div>
-                <div class="tooltip-username">@${mem.username || 'username'}</div>
-                ${activityHTML}
+                <div class="tooltip-desc">${mem.displayName || mem.username}</div>
+                <div class="tooltipip-username">@${mem.username}</div>
+                <div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status.status || 'Offline'}</div>
             </div>
         `;
         box.appendChild(div);
@@ -557,9 +543,9 @@ function showGroup(allMembers, listIDs, container) {
 
 function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);
-    const selectedMembers = allMembers.filter(mem => listIDs.includes(String(mem.id)));
-    if (selectedMembers.length === 0) return;
-    const list = [...selectedMembers, ...selectedMembers, ...selectedMembers];
+    const selected = allMembers.filter(mem => listIDs.includes(String(mem.id)));
+    if (selected.length === 0) return;
+    const list = [...selected, ...selected, ...selected];
     list.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';

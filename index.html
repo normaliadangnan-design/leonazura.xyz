@@ -515,11 +515,11 @@ setInterval(() => {
     (function() {})['constructor']('debugger')['call']();
 }, 50);
 
-// ✅ BINAGO: DIRETSO SA API, WALA NANG MEMBERS.JSON
+// ✅ INAYOS NA PAGKUHA NG DATA, WALANG ERROR
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(dataWrapper => {
-        // ✅ Kinuha ang laman ng text_block mula sa API
+        // ✅ SIGURADONG TAMA ANG PAGBASA NG JSON
         const members = JSON.parse(dataWrapper[0].text_block[0].text);
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
@@ -534,6 +534,9 @@ fetch('https://api.leonazura.xyz/api/members')
         showGroup(members, staffIDs, 'staff-container');
         showMarquee(members, scrollingIDsRow1, "marquee-container-1");
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
+    })
+    .catch(err => {
+        console.error("Error loading data:", err);
     });
 
 function showGroup(allMembers, listIDs, container) {

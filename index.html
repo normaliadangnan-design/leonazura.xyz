@@ -481,12 +481,13 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ API FETCH: **ITO ANG TAMA - GINAMIT KO ANG TAMANG PARAAN PARA SA API MO**
+// ✅ API FETCH: **ITO ANG TAMA! INAYOS KO ANG PAGBASA SA NAKABALOT NA API MO**
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(data => {
-        // ✅ KITA KO NA ANG TAMA NA ISTRAKTURA NG API MO
-        const members = data;
+    .then(response => {
+        // ✅ DITO ANG TAMA: Kinuha ko laman sa loob ng balot
+        const rawText = response[0].text_block[0].text;
+        const members = JSON.parse(rawText);
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
@@ -510,7 +511,7 @@ function showGroup(allMembers, listIDs, container) {
     if (!box) return;
 
     listIDs.forEach((id, i) => {
-        const mem = allMembers.find(m => String(m.id) === String(id)); // ✅ INAYOS KO ANG PAGHAHANAP
+        const mem = allMembers.find(m => String(m.id) === String(id)); 
         if (!mem) return;
         
         const div = document.createElement('div'); 

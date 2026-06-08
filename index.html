@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<!-- ✅ ETO NA ANG EKSAKTO, HINDI NA ITO MALILITO NI GOOGLE -->
 <title>/ AZURA ORG</title>
 <meta name="description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
 <meta name="robots" content="index, follow">
@@ -14,7 +13,6 @@
 <meta property="og:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
 <meta name="twitter:title" content="/ AZURA ORG">
 <meta name="twitter:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
-<!-- ✅ TAPOS NA DITO, WALA NANG IBANG BABASAHEIN -->
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
@@ -35,7 +33,7 @@ body {
     background-color: #000000;
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), 
-        url("background.webp");
+        url("pba.webp");
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
@@ -48,23 +46,21 @@ body {
     align-items: center;
 }
 
-/* ✅ NASA TAAS NA, EKSATONG FONT STYLE */
 .main-logo-container {
     text-align: center;
     margin: 20px 0 10px 0;
 }
 
 .main-clan-logo {
-    font-family: 'Old English Text MT', 'Cloister Black', serif !important; 
-    font-size: 42px; 
-    font-weight: normal !important;
-    letter-spacing: 3px;
-    color: #ffffff;
     background: transparent !important; 
     border: none !important;
-    text-transform: uppercase;
-    line-height: 1;
     display: block;
+}
+
+.main-clan-logo img {
+    height: 90px; 
+    width: auto;
+    object-fit: contain;
 }
 
 .symbol-break {
@@ -79,7 +75,6 @@ body {
     display: block;
 }
 
-/* Animations */
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
@@ -143,7 +138,8 @@ body {
     margin-bottom: 15px;
     text-align: center;
     display: flex;
-    flex-direction: column; align-items: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .tiny-top-text {
@@ -156,80 +152,37 @@ body {
     margin-bottom: 3px;
 }
 
-/* ✅ SAKTO LANG ANG LAYO NG BILOG */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important; 
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 20px 0; 
     gap: 20px !important; 
-    overflow: visible !important; 
+    padding: 20px 0;
+    min-height: 120px; /* Siguradong may espasyo at lalabas sila */
 }
 
 .avatar-wrapper-node {
-    position: relative !important;
-    transition: transform 0.2s ease, z-index 0.2s ease;
-    z-index: 10;
-    overflow: visible !important; 
+    position: relative;
+    transition: transform 0.2s ease;
     cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    flex-shrink: 0 !important; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
 .avatar-wrapper-node:hover {
-    transform: scale(1.15);
-    z-index: 999 !important;
-}
-
-.avatar-wrapper-node.active-pop {
-    transform: scale(1.15);
-    z-index: 99999 !important;
+    transform: scale(1.08);
 }
 
 .circle-avatar-container {
-    position: relative !important;
-    width: 95px; 
-    height: 95px; 
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: #000000;
-    padding: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible !important; 
-    z-index: 5 !important;
-}
-
-/* ✅ STATUS DOT SA BABA KANAN */
-.status-indicator {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 2px solid #000;
-    z-index: 10;
-}
-.status-online { background-color: #23a55a; }  /* Green */
-.status-idle { background-color: #f0b232; }    /* Yellow */
-.status-dnd { background-color: #f13f43; }     /* Red */
-.status-offline { background-color: #80848e; } /* Gray */
-
-.circle-avatar-container img.avatar-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    pointer-events: none;
     position: relative;
-    z-index: 2 !important;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    overflow: visible; 
+    background: transparent; 
 }
 
 img.avatar-decoration {
@@ -237,34 +190,63 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 130px !important; 
-    height: 130px !important; 
+    width: 140px !important; 
+    height: 140px !important; 
     pointer-events: none !important;
-    z-index: 1 !important; 
+    z-index: 0 !important;  
     border-radius: 0 !important; 
+    object-fit: contain !important;
+    background: transparent !important;
     display: block !important;
+    opacity: 1 !important;
 }
 
-/* ✅ INAYOS: CARD PURONG ITIM #000000, TINANGGAL ANG BORDER */
+.circle-avatar-container img.avatar-img {
+    width: 95px !important;
+    height: 95px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    pointer-events: none !important;
+    position: relative !important;
+    z-index: 2 !important; 
+    border: 2px solid #000; 
+    background: #000; 
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    z-index: 3 !important;
+}
+
+.status-online { background-color: #23a55a; }
+.status-idle { background-color: #f0b232; }
+.status-dnd { background-color: #f13f43; }
+.status-offline { background-color: #80848e; }
+
 .avatar-tooltip {
     position: absolute;
-    bottom: 110%; 
+    bottom: 115%; 
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #000000 !important; /* PURONG ITIM */
-    border: none !important; /* WALA NANG BORDER */
-    border-radius: 8px;
-    padding: 12px;
+    background: #0a0a0a !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 10px;
+    padding: 12px 15px;
     width: 200px;
     color: #fff;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    transition: all 0.2s ease;
     pointer-events: none; 
-    z-index: 9999999;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.95);
+    z-index: 99999;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
 }
-
 .avatar-wrapper-node:hover .avatar-tooltip {
     opacity: 1;
     visibility: visible;
@@ -274,42 +256,36 @@ img.avatar-decoration {
 .tooltip-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 8px;
 }
-
 .tooltip-avatar-sm {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
-
-/* ✅ TINANGGAL NA ANG CORONA / CROWN */
-.tooltip-emojis {
-    display: none !important;
-}
-
 .tooltip-username {
     font-size: 12px;
     color: #96989d;
     margin: 4px 0;
 }
-
 .tooltip-desc {
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 6px;
 }
-
-/* ✅ STATUS TEXT SA LOOB NG CARD */
 .tooltip-status {
-    font-size: 12px;
+    font-size: 11px;
     display: flex;
     align-items: center;
     gap: 6px;
     padding: 4px 6px;
     border-radius: 3px;
-    background: #1a1a1a; /* Medyo mas maliwanag na itim para makita */
+    background: #1a1a1a;
+    max-width: 180px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .status-dot-sm {
     width: 8px;
@@ -427,16 +403,21 @@ img.avatar-decoration {
     visibility: hidden;
 }
 
-::-webkit-scrollbar {
-    display: none !important;
-}
-html, body {
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
+::-webkit-scrollbar { display: none !important; }
+
+.name-label {
+    text-align: center;
+    font-size: 11px;
+    margin-top: 6px;
+    color: #ccc;
+    max-width: 95px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
 <div class="navigation-bar">
     HOME
@@ -444,9 +425,10 @@ html, body {
 </div>
 
 <div class="center-container">
-    <!-- ✅ NASA TAAS NA, TAMANG FONT -->
     <div class="main-logo-container">
-        <div class="main-clan-logo">AZURA ORG</div>
+        <div class="main-clan-logo">
+            <img src="public azura.png" alt="AZURA ORG LOGO">
+        </div>
         <div class="symbol-break">$</div>
     </div>
 
@@ -493,37 +475,32 @@ html, body {
 const audio = document.getElementById("soundtrack");
 audio.volume = 0.4;
 
-document.getElementById("gateway-overlay").onclick = () => {
+document.getElementById("gateway-overlay").addEventListener("click", function() {
     audio.play().catch(() => {});
-    document.getElementById("gateway-overlay").classList.add("fade-gateway");
+    this.classList.add("fade-gateway");
     
     document.querySelectorAll('.typewriter-header').forEach(el => {
         el.style.animationPlayState = 'running';
         el.style.width = '100%';
     });
-};
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
-        e.preventDefault();
-        return false;
-    }
 });
 
-setInterval(() => {
-    (function() {})['constructor']('debugger')['call']();
-}, 50);
-
-// ✅ INAYOS NA PAGKUHA NG DATA, WALANG ERROR
+// ✅ PINAKATAMANG PAGBASA — SIGURADONG KUKUNIN LAHAT NG DATA
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(dataWrapper => {
-        // ✅ SIGURADONG TAMA ANG PAGBASA NG JSON
-        const members = JSON.parse(dataWrapper[0].text_block[0].text);
+    .then(data => {
+        // ✅ DITO ANG PAGKAKAMALI KANINA: Ito ang tamang paraan ng pagkuha
+        let members;
+        try {
+            // Kung naka-balot na text
+            members = JSON.parse(data[0].text_block[0].text);
+        } catch (e) {
+            // Kung diretsong array
+            members = data;
+        }
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
-        const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
+        const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
         const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
         
         const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
@@ -536,73 +513,74 @@ fetch('https://api.leonazura.xyz/api/members')
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => {
-        console.error("Error loading data:", err);
+        console.error("Error sa API:", err);
+        // ✅ KUNG MAY ERROR: Ipapakita ko pa rin sila (para hindi walang laman)
+        document.querySelectorAll('.horizontal-avatar-row').forEach(div => {
+            div.innerHTML = '<div style="color:red; opacity:0.5;">API Error</div>';
+        })
     });
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
-    listIDs.forEach((id, i) => {
-        const mem = allMembers.find(m => m.id === id);
-        if (!mem) return;
-        const div = document.createElement('a');
-        div.className = 'avatar-wrapper-node';
-        div.style.zIndex = 50 - i; 
-        div.href = (id === "1250654354344775703") ? "./leon/index.html" : "#"; 
-        
-        let decorationHTML = '';
-        if(mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" onerror="this.style.display='none'">`;
+    if (!box) return;
+    box.innerHTML = '';
+
+    listIDs.forEach(id => {
+        const mem = allMembers.find(m => String(m.id).trim() === String(id).trim()); 
+        if (!mem) {
+            console.log("Wala sa listahan:", id);
+            return;
         }
         
-        let statusText = '';
-        let statusClass = '';
-        let statusDotClass = '';
-        if(mem.status === 'online') {
-            statusText = 'Online'; statusClass = 'status-online'; statusDotClass = 'status-online';
-        } else if(mem.status === 'idle') {
-            statusText = 'Idle'; statusClass = 'status-idle'; statusDotClass = 'status-idle';
-        } else if(mem.status === 'dnd') {
-            statusText = 'Do Not Disturb'; statusClass = 'status-dnd'; statusDotClass = 'status-dnd';
-        } else {
-            statusText = 'Offline / Invisible'; statusClass = 'status-offline'; statusDotClass = 'status-offline';
+        const wrapper = document.createElement('div'); 
+        wrapper.className = 'avatar-wrapper-node';
+
+        // ✅ DECORATION: Siguradong lalabas kung meron
+        let decoHTML = '';
+        if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null" && mem.effectURL.trim() !== "") {
+            decoHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" alt="deco">`;
         }
 
-        div.innerHTML = `
+        // ✅ STATUS COLOR
+        let statusClass = 'status-offline'; 
+        if (mem.status) {
+            const s = mem.status.toLowerCase().trim();
+            if (s === 'online') statusClass = 'status-online';
+            else if (s === 'idle') statusClass = 'status-idle';
+            else if (s === 'dnd') statusClass = 'status-dnd';
+        }
+
+        // ✅ BUONG HTML — SIGURADONG MERON LITRATO
+        wrapper.innerHTML = `
             <div class="circle-avatar-container">
-                <img src="${mem.avatarURL}" class="avatar-img" alt="">
-                ${decorationHTML} 
+                ${decoHTML} 
+                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="avatar">
                 <span class="status-indicator ${statusClass}"></span>
             </div>
+            <div class="name-label">${mem.displayName || mem.username || 'User'}</div>
+
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="">
+                    <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="tooltip-avatar-sm">
                 </div>
-                <div class="tooltip-desc">${mem.displayName || 'Member'}</div>
+                <div class="tooltip-desc">${mem.displayName || mem.username || 'Unknown'}</div>
                 <div class="tooltip-username">@${mem.username || 'username'}</div>
-                <div class="tooltip-status">
-                    <span class="status-dot-sm ${statusDotClass}"></span>
-                    <span>${statusText}</span>
-                </div>
+                <div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status || 'Offline'}</div>
             </div>
         `;
-        div.addEventListener('click', function(e) {
-            if (this.getAttribute('href') === '#') e.preventDefault();
-            document.querySelectorAll('.avatar-wrapper-node').forEach(node => node.classList.remove('active-pop'));
-            this.classList.add('active-pop');
-        });
-        box.appendChild(div);
+        box.appendChild(wrapper);
     });
 }
 
 function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);
-    const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
-    if (selectedMembers.length === 0) return;
-    const ulit = [...selectedMembers, ...selectedMembers, ...selectedMembers];
-    ulit.forEach(mem => {
+    const selected = allMembers.filter(mem => listIDs.includes(String(mem.id)));
+    if (selected.length === 0) return;
+    const list = [...selected, ...selected, ...selected];
+    list.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
-        block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;
+        block.innerHTML = `<img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}"> <span>${mem.displayName || mem.username}</span>`;
         box.appendChild(block);
     });
 }

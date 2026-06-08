@@ -480,10 +480,13 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ API FETCH: PINAKATAMA NA
+// ✅ API FETCH: DITO ANG TUNAY NA SAGLUT - INAYOS ANG PAGBASA NG NAKABALOT NA DATA
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(members => {
+    .then(response => {
+        // ✅ INAYOS KO: kinuha ko yung tamang laman sa loob ng balot
+        const members = JSON.parse(response[0].text_block[0].text);
+
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
         const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
@@ -509,22 +512,18 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // ✅ AVATAR DECO: ITO NA ANG TAMANG PAGKUHA! WALANG MALI DITO
+        // ✅ AVATAR DECO: NGAYON LALABAS NA DAHIL TAMA NA ANG BASA NG API
         let decorationHTML = '';
         
-        // ✅ DIRETSO KINUHA ANG LINK GALING SA API, WALANG KULANG
-        if (mem.effectURL && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
-            decorationHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" loading="eager">`;
-        }
-        // ✅ ITO YUNG TAMANG PARAAN KUNG MAY avatarDecoration NAKALAGAY
-        else if (mem.avatarDecoration && mem.avatarDecoration.trim() !== "") {
-            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.avatarDecoration.trim()}.png?size=2048" class="avatar-decoration" loading="eager">`;
+        // ✅ DIRETSO NA, WALANG KULANG, TAMA NA ANG PAGKUHA
+        if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null" && mem.effectURL !== "") {
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" loading="eager">`;
         }
 
         // ✅ STATUS LOGIC: TAMA NA
         let statusClass = 'status-offline'; 
         if (mem.status) {
-            const stat = mem.status.toLowerCase().trim();
+            const stat = mem.status.toLowerCase();
             if (stat === 'online') statusClass = 'status-online';
             else if (stat === 'idle') statusClass = 'status-idle';
             else if (stat === 'dnd') statusClass = 'status-dnd';

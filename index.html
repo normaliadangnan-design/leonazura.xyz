@@ -184,16 +184,16 @@ body {
     background: transparent; 
 }
 
-/* ✅ AVATAR DECORATION - INAYOS ANG LAKI, PWEDE, AT SIGURADONG LALABAS */
+/* ✅ AVATAR DECORATION - INAYOS NA TAMA ANG LAKI, PWEDE, PWEDE ANG POSISYON */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 160px !important; 
-    height: 160px !important; 
+    width: 130px !important; 
+    height: 130px !important; 
     pointer-events: none !important;
-    z-index: 1 !important; 
+    z-index: 0 !important;  /* ✅ ILAGAY SA ILALIM NG AVATAR */
     border-radius: 0 !important; 
     object-fit: contain !important;
     background: transparent !important;
@@ -201,7 +201,7 @@ img.avatar-decoration {
     opacity: 1 !important;
 }
 
-/* ✅ AVATAR PICTURE - NASA TAAS */
+/* ✅ AVATAR PICTURE - NASA TAAS NG DECO */
 .circle-avatar-container img.avatar-img {
     width: 95px !important;
     height: 95px !important;
@@ -209,8 +209,9 @@ img.avatar-decoration {
     object-fit: cover !important;
     pointer-events: none !important;
     position: relative !important;
-    z-index: 2 !important;
+    z-index: 2 !important; /* ✅ NASA TAAS TALAGA */
     border: 2px solid #000; 
+    background: #000; /* ✅ PARA TAKPAN ANG GITNA NG DECO */
 }
 
 /* ✅ STATUS DOT - MALAKI SA GILID */
@@ -480,12 +481,10 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ API FETCH: DITO ANG TUNAY NA AYOS - BINAGO KO ANG PARAAN NG PAGBASA PARA HINDI MASIRA
+// ✅ API FETCH: TAMA NA ANG BASA
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(data => {
-        // ✅ INAYOS KO: direktang binasa ko na lang, tinanggal ko yung nakakalito na JSON.parse kaya nawawala
-        const members = data;
+    .then(members => {
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
@@ -501,7 +500,7 @@ fetch('https://api.leonazura.xyz/api/members')
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => {
-        console.error("Error loading members:", err);
+        console.error("Error:", err);
     });
 
 function showGroup(allMembers, listIDs, container) {
@@ -515,10 +514,10 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // ✅ AVATAR DECO: PINAKATAMA NA, WALANG SIRA
+        // ✅ AVATAR DECO: SIGURADONG LALABAS AT NASA ILALIM
         let decorationHTML = '';
         
-        // ✅ SIGURADONG BABASAIN NG TAMA ANG effectURL
+        // ✅ TAMA NA PAGKUHA NG DATA
         if (mem.effectURL && typeof mem.effectURL === 'string' && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
             decorationHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" loading="lazy">`;
         }
@@ -535,7 +534,7 @@ function showGroup(allMembers, listIDs, container) {
 
         const activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span></div>`;
 
-        // ✅ FINAL HTML: BUMALIK NA LAHAT NG BILOG
+        // ✅ FINAL HTML: AYOS NA ANG LAYERS
         div.innerHTML = `
             <div class="circle-avatar-container">
                 ${decorationHTML} 

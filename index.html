@@ -400,6 +400,18 @@ img.avatar-decoration {
 }
 
 ::-webkit-scrollbar { display: none !important; }
+
+/* ✅ DAGDAG PARA LUMABAS ANG MGA PANGALAN SA ILALIM */
+.name-label {
+    text-align: center;
+    font-size: 11px;
+    margin-top: 6px;
+    color: #ccc;
+    max-width: 95px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -470,10 +482,10 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
+// ✅ PINAKA TAMANG PAGBASA NG API — WALANG MALI DITO
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(response => {
-        // ✅ ITO ANG TAMA: Kinuha ko mismo yung nasa loob ng API mo
         const rawText = response[0].text_block[0].text;
         const members = JSON.parse(rawText);
 
@@ -491,7 +503,7 @@ fetch('https://api.leonazura.xyz/api/members')
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => {
-        console.error("Error:", err);
+        console.error("Error sa API:", err);
     });
 
 function showGroup(allMembers, listIDs, container) {
@@ -503,16 +515,16 @@ function showGroup(allMembers, listIDs, container) {
         const mem = allMembers.find(m => String(m.id) === String(id)); 
         if (!mem) return;
         
-        const div = document.createElement('div'); 
-        div.className = 'avatar-wrapper-node';
-        
-        // ✅ TAMA NA: Kung meron decoration, lalabas; kung wala, wala
+        const wrapper = document.createElement('div'); 
+        wrapper.className = 'avatar-wrapper-node';
+
+        // ✅ DECO: Kung meron, lalabas nang tama; kung wala, wala talaga
         let decoHTML = '';
-        if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
-            decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
+        if (mem.effectURL && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
+            decoHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration">`;
         }
 
-        // ✅ STATUS
+        // ✅ STATUS COLOR
         let statusClass = 'status-offline'; 
         if (mem.status) {
             const s = mem.status.toLowerCase().trim();
@@ -521,23 +533,25 @@ function showGroup(allMembers, listIDs, container) {
             else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        div.innerHTML = `
+        // ✅ BUONG HTML
+        wrapper.innerHTML = `
             <div class="circle-avatar-container">
                 ${decoHTML} 
-                <img src="${mem.avatarURL}" class="avatar-img">
+                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img">
                 <span class="status-indicator ${statusClass}"></span>
             </div>
+            <div class="name-label">${mem.displayName || mem.username || 'User'}</div>
 
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
+                    <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="tooltip-avatar-sm">
                 </div>
-                <div class="tooltip-desc">${mem.displayName || mem.username}</div>
-                <div class="tooltipip-username">@${mem.username}</div>
-                <div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status.status || 'Offline'}</div>
+                <div class="tooltip-desc">${mem.displayName || mem.username || 'Unknown'}</div>
+                <div class="tooltip-username">@${mem.username || 'username'}</div>
+                <div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status || 'Offline'}</div>
             </div>
         `;
-        box.appendChild(div);
+        box.appendChild(wrapper);
     });
 }
 

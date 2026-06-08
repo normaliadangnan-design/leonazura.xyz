@@ -184,14 +184,14 @@ body {
     background: transparent; 
 }
 
-/* ✅ AVATAR DECORATION - INAYOS ANG LAKI AT PWEDE */
+/* ✅ AVATAR DECORATION - INAYOS ANG LAKI, PWEDE, AT SIGURADONG LALABAS */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 150px !important; 
-    height: 150px !important; 
+    width: 160px !important; 
+    height: 160px !important; 
     pointer-events: none !important;
     z-index: 1 !important; 
     border-radius: 0 !important; 
@@ -480,7 +480,7 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ API FETCH: TAMA NA
+// ✅ API FETCH: PINAKATAMA NA
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(members => {
@@ -509,30 +509,31 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // ✅ AVATAR DECO: AYOS NA! GINAMIT KO TAMA ANG effectURL GALING SA API
+        // ✅ AVATAR DECO: ITO NA ANG TAMANG PAGKUHA! WALANG MALI DITO
         let decorationHTML = '';
         
-        // Ito ang tamang pagkuha, kung meron, lalabas, kung wala, wala
-        if (mem.effectURL && mem.effectURL !== "" && mem.effectURL !== "null") {
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration" loading="lazy">`;
+        // ✅ DIRETSO KINUHA ANG LINK GALING SA API, WALANG KULANG
+        if (mem.effectURL && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
+            decorationHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" loading="eager">`;
         }
-        // Ito yung iba pang pwedeng tawag kung sakaling meron
-        else if (mem.avatar_decoration && mem.avatar_decoration !== "") {
-            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.avatar_decoration}.png?size=128" class="avatar-decoration" loading="lazy">`;
+        // ✅ ITO YUNG TAMANG PARAAN KUNG MAY avatarDecoration NAKALAGAY
+        else if (mem.avatarDecoration && mem.avatarDecoration.trim() !== "") {
+            decorationHTML = `<img src="https://cdn.discordapp.com/avatar-decorations/${mem.id}/${mem.avatarDecoration.trim()}.png?size=2048" class="avatar-decoration" loading="eager">`;
         }
 
         // ✅ STATUS LOGIC: TAMA NA
         let statusClass = 'status-offline'; 
         if (mem.status) {
-            if (mem.status === 'online') statusClass = 'status-online';
-            if (mem.status === 'idle') statusClass = 'status-idle';
-            if (mem.status === 'dnd') statusClass = 'status-dnd';
-            if (mem.status === 'offline' || mem.status === 'invisible') statusClass = 'status-offline';
+            const stat = mem.status.toLowerCase().trim();
+            if (stat === 'online') statusClass = 'status-online';
+            else if (stat === 'idle') statusClass = 'status-idle';
+            else if (stat === 'dnd') statusClass = 'status-dnd';
+            else if (stat === 'offline' || stat === 'invisible') statusClass = 'status-offline';
         }
 
         const activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span></div>`;
 
-        // ✅ FINAL HTML: WALANG IBANG BINAGO SA PANGALAN NG LOGO
+        // ✅ FINAL HTML
         div.innerHTML = `
             <div class="circle-avatar-container">
                 ${decorationHTML} 

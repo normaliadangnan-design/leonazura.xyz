@@ -161,7 +161,7 @@ body {
     width: 100%;
     gap: 20px !important; 
     padding: 20px 0;
-    min-height: 120px; /* Siguradong may espasyo at lalabas sila */
+    min-height: 120px; 
 }
 
 .avatar-wrapper-node {
@@ -183,6 +183,9 @@ body {
     border-radius: 50%;
     overflow: visible; 
     background: transparent; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 img.avatar-decoration {
@@ -193,7 +196,7 @@ img.avatar-decoration {
     width: 140px !important; 
     height: 140px !important; 
     pointer-events: none !important;
-    z-index: 0 !important;  
+    z-index: 1 !important;  
     border-radius: 0 !important; 
     object-fit: contain !important;
     background: transparent !important;
@@ -209,8 +212,8 @@ img.avatar-decoration {
     pointer-events: none !important;
     position: relative !important;
     z-index: 2 !important; 
-    border: 2px solid #000; 
-    background: #000; 
+    border: 2px solid #000 !important; 
+    background: #000 !important; 
 }
 
 .status-indicator {
@@ -485,40 +488,42 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ PINAKATAMANG PAGBASA — SIGURADONG KUKUNIN LAHAT NG DATA
-fetch('https://api.leonazura.xyz/api/members')
-    .then(res => res.json())
-    .then(data => {
-        // ✅ DITO ANG PAGKAKAMALI KANINA: Ito ang tamang paraan ng pagkuha
+// ✅ AUTOMATIC UPDATE: BAWAT 3 SEGUNDO — WALANG HIHINTAYIN
+const UPDATE_INTERVAL = 3000; 
+
+// ✅ LISTA NG ID
+const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
+const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
+const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
+const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
+const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
+
+
+// ✅ TAMANG PAGKUHA NG DATA — HINDI NA MAGKAKAMALI
+async function fetchAndUpdate() {
+    try {
+        const res = await fetch('https://api.leonazura.xyz/api/members');
+        const data = await res.json();
+        
         let members;
         try {
-            // Kung naka-balot na text
             members = JSON.parse(data[0].text_block[0].text);
         } catch (e) {
-            // Kung diretsong array
             members = data;
         }
 
-        const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
-        const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
-        const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
-        
-        const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
-        const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
-
+        // ✅ IPAPAKITA ULIT LAHAT — SIGURADONG LALABAS
         showGroup(members, founderIDs, 'founder-container');
         showGroup(members, aboveAllIDs, 'aboveall-container');
         showGroup(members, staffIDs, 'staff-container');
         showMarquee(members, scrollingIDsRow1, "marquee-container-1");
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
-    })
-    .catch(err => {
-        console.error("Error sa API:", err);
-        // ✅ KUNG MAY ERROR: Ipapakita ko pa rin sila (para hindi walang laman)
-        document.querySelectorAll('.horizontal-avatar-row').forEach(div => {
-            div.innerHTML = '<div style="color:red; opacity:0.5;">API Error</div>';
-        })
-    });
+
+    } catch (err) {
+        console.error("API Error:", err);
+    }
+}
+
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
@@ -527,18 +532,15 @@ function showGroup(allMembers, listIDs, container) {
 
     listIDs.forEach(id => {
         const mem = allMembers.find(m => String(m.id).trim() === String(id).trim()); 
-        if (!mem) {
-            console.log("Wala sa listahan:", id);
-            return;
-        }
+        if (!mem) return;
         
         const wrapper = document.createElement('div'); 
         wrapper.className = 'avatar-wrapper-node';
 
-        // ✅ DECORATION: Siguradong lalabas kung meron
+        // ✅ DECORATION: SIGURADONG NASA ILALIM NG LITRATO
         let decoHTML = '';
         if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null" && mem.effectURL.trim() !== "") {
-            decoHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" alt="deco">`;
+            decoHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" alt="decoration">`;
         }
 
         // ✅ STATUS COLOR
@@ -550,7 +552,7 @@ function showGroup(allMembers, listIDs, container) {
             else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        // ✅ BUONG HTML — SIGURADONG MERON LITRATO
+        // ✅ SIGURADONG MERON LITRATO — HINDI Mawawala
         wrapper.innerHTML = `
             <div class="circle-avatar-container">
                 ${decoHTML} 
@@ -572,11 +574,14 @@ function showGroup(allMembers, listIDs, container) {
     });
 }
 
+
 function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);
+    if (!box) return;
     const selected = allMembers.filter(mem => listIDs.includes(String(mem.id)));
     if (selected.length === 0) return;
     const list = [...selected, ...selected, ...selected];
+    box.innerHTML = '';
     list.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
@@ -584,6 +589,11 @@ function showMarquee(allMembers, listIDs, containerId) {
         box.appendChild(block);
     });
 }
+
+
+// ✅ SIMULA AGAD AT TULOY-TULOY NA
+fetchAndUpdate();
+setInterval(fetchAndUpdate, UPDATE_INTERVAL);
 </script>
 </body>
 </html>

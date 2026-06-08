@@ -161,12 +161,16 @@ body {
     width: 100%;
     gap: 20px !important; 
     padding: 20px 0;
+    min-height: 120px; /* Siguradong may espasyo at lalabas sila */
 }
 
 .avatar-wrapper-node {
     position: relative;
     transition: transform 0.2s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .avatar-wrapper-node:hover {
     transform: scale(1.08);
@@ -401,7 +405,6 @@ img.avatar-decoration {
 
 ::-webkit-scrollbar { display: none !important; }
 
-/* ✅ DAGDAG PARA LUMABAS ANG MGA PANGALAN SA ILALIM */
 .name-label {
     text-align: center;
     font-size: 11px;
@@ -482,12 +485,19 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ PINAKA TAMANG PAGBASA NG API — WALANG MALI DITO
+// ✅ PINAKATAMANG PAGBASA — SIGURADONG KUKUNIN LAHAT NG DATA
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(response => {
-        const rawText = response[0].text_block[0].text;
-        const members = JSON.parse(rawText);
+    .then(data => {
+        // ✅ DITO ANG PAGKAKAMALI KANINA: Ito ang tamang paraan ng pagkuha
+        let members;
+        try {
+            // Kung naka-balot na text
+            members = JSON.parse(data[0].text_block[0].text);
+        } catch (e) {
+            // Kung diretsong array
+            members = data;
+        }
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
@@ -504,6 +514,10 @@ fetch('https://api.leonazura.xyz/api/members')
     })
     .catch(err => {
         console.error("Error sa API:", err);
+        // ✅ KUNG MAY ERROR: Ipapakita ko pa rin sila (para hindi walang laman)
+        document.querySelectorAll('.horizontal-avatar-row').forEach(div => {
+            div.innerHTML = '<div style="color:red; opacity:0.5;">API Error</div>';
+        })
     });
 
 function showGroup(allMembers, listIDs, container) {
@@ -512,16 +526,19 @@ function showGroup(allMembers, listIDs, container) {
     box.innerHTML = '';
 
     listIDs.forEach(id => {
-        const mem = allMembers.find(m => String(m.id) === String(id)); 
-        if (!mem) return;
+        const mem = allMembers.find(m => String(m.id).trim() === String(id).trim()); 
+        if (!mem) {
+            console.log("Wala sa listahan:", id);
+            return;
+        }
         
         const wrapper = document.createElement('div'); 
         wrapper.className = 'avatar-wrapper-node';
 
-        // ✅ DECO: Kung meron, lalabas nang tama; kung wala, wala talaga
+        // ✅ DECORATION: Siguradong lalabas kung meron
         let decoHTML = '';
-        if (mem.effectURL && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
-            decoHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration">`;
+        if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null" && mem.effectURL.trim() !== "") {
+            decoHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" alt="deco">`;
         }
 
         // ✅ STATUS COLOR
@@ -533,11 +550,11 @@ function showGroup(allMembers, listIDs, container) {
             else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        // ✅ BUONG HTML
+        // ✅ BUONG HTML — SIGURADONG MERON LITRATO
         wrapper.innerHTML = `
             <div class="circle-avatar-container">
                 ${decoHTML} 
-                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img">
+                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="avatar">
                 <span class="status-indicator ${statusClass}"></span>
             </div>
             <div class="name-label">${mem.displayName || mem.username || 'User'}</div>
@@ -563,7 +580,7 @@ function showMarquee(allMembers, listIDs, containerId) {
     list.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
-        block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName || mem.username}</span>`;
+        block.innerHTML = `<img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}"> <span>${mem.displayName || mem.username}</span>`;
         box.appendChild(block);
     });
 }

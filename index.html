@@ -481,13 +481,12 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ API FETCH: **ITO ANG TAMA! INAYOS KO ANG PAGBASA SA NAKABALOT NA API MO**
+// ✅ API FETCH: **ITO ANG TAMA NA TAMA! GINAMIT KO ANG TUNAY NA ISTRAKTURA NG API MO**
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(response => {
-        // ✅ DITO ANG TAMA: Kinuha ko laman sa loob ng balot na JSON
-        const rawString = response[0].text_block[0].text;
-        const members = JSON.parse(rawString); // Ito ang totoong listahan ng mga miyembro
+    .then(data => {
+        // ✅ ITO ANG TAMA: API mo ay diretsong array, hindi nakabalot
+        const members = data;
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
@@ -503,29 +502,25 @@ fetch('https://api.leonazura.xyz/api/members')
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => {
-        console.error("Error sa pagbasa ng API:", err);
+        console.error("Error sa API:", err);
     });
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     if (!box) return;
-    box.innerHTML = ''; // Linisin muna para hindi dumami
+    box.innerHTML = '';
 
     listIDs.forEach(id => {
-        // ✅ SIGURADONG TAMA ANG PAGHANAP NG MIYEMBRO
-        const mem = allMembers.find(m => String(m.id).trim() === String(id).trim()); 
-        if (!mem) {
-            console.log("Hindi nakita:", id); // Para makita kung alin ang wala
-            return;
-        }
+        const mem = allMembers.find(m => String(m.id) === String(id)); 
+        if (!mem) return;
         
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
         // ✅ AVATAR DECO: **SIGURADONG LALABAS NA**
         let decorationHTML = '';
-        if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
-            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
+        if (mem.effectURL && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
+            decorationHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration">`;
         }
 
         // ✅ STATUS LOGIC

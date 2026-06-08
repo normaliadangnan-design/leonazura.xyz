@@ -485,12 +485,12 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(response => {
-        // ✅ DITO ANG TAMA: Kinuha ko laman sa loob ng balot
-        const rawText = response[0].text_block[0].text;
-        const members = JSON.parse(rawText);
+        // ✅ DITO ANG TAMA: Kinuha ko laman sa loob ng balot na JSON
+        const rawString = response[0].text_block[0].text;
+        const members = JSON.parse(rawString); // Ito ang totoong listahan ng mga miyembro
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
-        const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
+        const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
         const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
         
         const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
@@ -503,24 +503,29 @@ fetch('https://api.leonazura.xyz/api/members')
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => {
-        console.error("Error:", err);
+        console.error("Error sa pagbasa ng API:", err);
     });
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
     if (!box) return;
+    box.innerHTML = ''; // Linisin muna para hindi dumami
 
-    listIDs.forEach((id, i) => {
-        const mem = allMembers.find(m => String(m.id) === String(id)); 
-        if (!mem) return;
+    listIDs.forEach(id => {
+        // ✅ SIGURADONG TAMA ANG PAGHANAP NG MIYEMBRO
+        const mem = allMembers.find(m => String(m.id).trim() === String(id).trim()); 
+        if (!mem) {
+            console.log("Hindi nakita:", id); // Para makita kung alin ang wala
+            return;
+        }
         
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
         // ✅ AVATAR DECO: **SIGURADONG LALABAS NA**
         let decorationHTML = '';
-        if (mem.effectURL && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
-            decorationHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration">`;
+        if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null") {
+            decorationHTML = `<img src="${mem.effectURL}" class="avatar-decoration">`;
         }
 
         // ✅ STATUS LOGIC

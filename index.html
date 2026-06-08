@@ -481,10 +481,12 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ API FETCH: **ITO ANG PINAKAMAHALAGA - TINANGGAL KO ANG NAKAKALITONG JSON.PARSE**
+// ✅ API FETCH: **ITO ANG TAMA - GINAMIT KO ANG TAMANG PARAAN PARA SA API MO**
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(members => {  // ✅ DIRETSO NA, WALANG BALOT, WALANG ERROR
+    .then(data => {
+        // ✅ KITA KO NA ANG TAMA NA ISTRAKTURA NG API MO
+        const members = data;
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
@@ -508,7 +510,7 @@ function showGroup(allMembers, listIDs, container) {
     if (!box) return;
 
     listIDs.forEach((id, i) => {
-        const mem = allMembers.find(m => m.id === id);
+        const mem = allMembers.find(m => String(m.id) === String(id)); // ✅ INAYOS KO ANG PAGHAHANAP
         if (!mem) return;
         
         const div = document.createElement('div'); 
@@ -523,7 +525,7 @@ function showGroup(allMembers, listIDs, container) {
         // ✅ STATUS LOGIC
         let statusClass = 'status-offline'; 
         if (mem.status) {
-            const stat = mem.status.toLowerCase();
+            const stat = mem.status.toLowerCase().trim();
             if (stat === 'online') statusClass = 'status-online';
             else if (stat === 'idle') statusClass = 'status-idle';
             else if (stat === 'dnd') statusClass = 'status-dnd';
@@ -554,7 +556,7 @@ function showGroup(allMembers, listIDs, container) {
 
 function showMarquee(allMembers, listIDs, containerId) {
     const box = document.getElementById(containerId);
-    const selectedMembers = allMembers.filter(mem => listIDs.includes(mem.id));
+    const selectedMembers = allMembers.filter(mem => listIDs.includes(String(mem.id)));
     if (selectedMembers.length === 0) return;
     const list = [...selectedMembers, ...selectedMembers, ...selectedMembers];
     list.forEach(mem => {

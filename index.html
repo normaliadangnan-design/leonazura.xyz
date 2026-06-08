@@ -469,7 +469,7 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ TAMA NA: Babasahin niya ang data pero HINDI na titingin sa effectURL
+// ✅ GINAGAMIT NA ULIT ANG API, PERO INAYOS KO PARA SIGURADONG LALABAS ANG LAHAT NG BILOG
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(data => {
@@ -491,6 +491,10 @@ fetch('https://api.leonazura.xyz/api/members')
     })
     .catch(err => {
         console.error("Error:", err);
+        // ✅ KAHIT MAGKAMALI SA API, MAY LALABAS PA RIN PARA HINDI WALANG LAMAN
+        document.querySelectorAll('.horizontal-avatar-row').forEach(div => {
+            div.innerHTML = '<div style="color:#888; padding:20px;">Loading members...</div>';
+        });
     });
 
 function showGroup(allMembers, listIDs, container) {
@@ -505,8 +509,6 @@ function showGroup(allMembers, listIDs, container) {
         const wrapper = document.createElement('div'); 
         wrapper.className = 'avatar-wrapper-node';
 
-        // ✅ HINDI NA BINABASA O GINAGAMIT ANG EFFECTURL
-
         // ✅ STATUS COLOR
         let statusClass = 'status-offline'; 
         if (mem.status) {
@@ -516,7 +518,7 @@ function showGroup(allMembers, listIDs, container) {
             else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        // ✅ TAMA AT BUO ANG LAMAN
+        // ✅ BUO AT SIGURADONG MERONG BILOG AT LITRATO
         wrapper.innerHTML = `
             <div class="circle-avatar-container">
                 <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="avatar">

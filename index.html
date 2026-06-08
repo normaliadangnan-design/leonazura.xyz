@@ -469,12 +469,13 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ GINAGAMIT NA ULIT ANG API, PERO INAYOS KO PARA SIGURADONG LALABAS ANG LAHAT NG BILOG
+// ✅ PURONG API LANG, WALANG KAMAYANG NILAGAY NA DATA
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(data => {
-        const rawText = data[0].text_block[0].text;
-        const members = JSON.parse(rawText);
+        // ✅ TAMA AT TAMANG TAMA ANG PAGBASA SA API
+        const raw = data[0].text_block[0].text;
+        const members = JSON.parse(raw);
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
@@ -490,12 +491,13 @@ fetch('https://api.leonazura.xyz/api/members')
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => {
-        console.error("Error:", err);
-        // ✅ KAHIT MAGKAMALI SA API, MAY LALABAS PA RIN PARA HINDI WALANG LAMAN
-        document.querySelectorAll('.horizontal-avatar-row').forEach(div => {
-            div.innerHTML = '<div style="color:#888; padding:20px;">Loading members...</div>';
+        console.error("API Error:", err);
+        // ✅ KUNG MAY ERROR, SASABIHIN LANG PERO WALANG MANUAL NA DATA
+        document.querySelectorAll('.horizontal-avatar-row').forEach(el => {
+            el.innerHTML = '<div style="opacity:0.4; font-size:12px;">Failed to load</div>';
         });
     });
+
 
 function showGroup(allMembers, listIDs, container) {
     const box = document.getElementById(container);
@@ -518,7 +520,7 @@ function showGroup(allMembers, listIDs, container) {
             else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        // ✅ BUO AT SIGURADONG MERONG BILOG AT LITRATO
+        // ✅ PURONG GAMIT ANG DATA MULA SA API
         wrapper.innerHTML = `
             <div class="circle-avatar-container">
                 <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="avatar">

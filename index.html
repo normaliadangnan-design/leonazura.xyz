@@ -184,16 +184,16 @@ body {
     background: transparent; 
 }
 
-/* ✅ AVATAR DECORATION - PINAKATAMA NA, HINDI NATATAKPAN, KITA LAHAT */
+/* ✅ AVATAR DECORATION - TAMA NA ANG LAKI AT PWESETO */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 145px !important; /* ✅ INAYOS ANG LAKI - HINDI SOBRANG LAKI, HINDI SOBRANG LIIT */
-    height: 145px !important; 
+    width: 140px !important; 
+    height: 140px !important; 
     pointer-events: none !important;
-    z-index: 0 !important;  /* ✅ NASA ILALIM TALAGA */
+    z-index: 0 !important;  
     border-radius: 0 !important; 
     object-fit: contain !important;
     background: transparent !important;
@@ -201,7 +201,7 @@ img.avatar-decoration {
     opacity: 1 !important;
 }
 
-/* ✅ AVATAR PICTURE - NASA TAAS, MAY BLACK BG SA GITNA LANG */
+/* ✅ AVATAR PICTURE - NASA TAAS */
 .circle-avatar-container img.avatar-img {
     width: 95px !important;
     height: 95px !important;
@@ -209,7 +209,7 @@ img.avatar-decoration {
     object-fit: cover !important;
     pointer-events: none !important;
     position: relative !important;
-    z-index: 2 !important; /* ✅ NASA TAAS */
+    z-index: 2 !important; 
     border: 2px solid #000; 
     background: #000; 
 }
@@ -232,7 +232,7 @@ img.avatar-decoration {
 .status-dnd { background-color: #f13f43; }     /* PULA */
 .status-offline { background-color: #80848e; } /* ABO / GRAY */
 
-/* ✅ TOOLTIP / CARD - WALANG KORONA */
+/* ✅ TOOLTIP / CARD */
 .avatar-tooltip {
     position: absolute;
     bottom: 115%; 
@@ -481,12 +481,10 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ API FETCH: DITO ANG TUNAY NA SOLUSYON - INAYOS ANG PAGBASA SA NAKABALOT NA API MO
+// ✅ API FETCH: **ITO ANG PINAKAMAHALAGA - TINANGGAL KO ANG NAKAKALITONG JSON.PARSE**
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(response => {
-        // ✅ ITO ANG DATI NAMING PROBLEMA: NAKABALOT YUNG DATA, KAYA HINDI NABABASA
-        const members = JSON.parse(response[0].text_block[0].text);
+    .then(members => {  // ✅ DIRETSO NA, WALANG BALOT, WALANG ERROR
 
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
@@ -502,7 +500,7 @@ fetch('https://api.leonazura.xyz/api/members')
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => {
-        console.error("Error loading data:", err);
+        console.error("Error:", err);
     });
 
 function showGroup(allMembers, listIDs, container) {
@@ -516,31 +514,28 @@ function showGroup(allMembers, listIDs, container) {
         const div = document.createElement('div'); 
         div.className = 'avatar-wrapper-node';
         
-        // ✅ AVATAR DECO: SIGURADONG LALABAS NA DAHIL TAMA NA ANG BASA
+        // ✅ AVATAR DECO: **SIGURADONG LALABAS NA**
         let decorationHTML = '';
-        
-        // ✅ TAMA NA PAGKUHA NG effectURL
-        if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null" && mem.effectURL.trim() !== "") {
-            decorationHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" loading="eager">`;
+        if (mem.effectURL && mem.effectURL.trim() !== "" && mem.effectURL !== "null") {
+            decorationHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration">`;
         }
 
-        // ✅ STATUS LOGIC: TAMA NA
+        // ✅ STATUS LOGIC
         let statusClass = 'status-offline'; 
         if (mem.status) {
-            const stat = mem.status.toLowerCase().trim();
+            const stat = mem.status.toLowerCase();
             if (stat === 'online') statusClass = 'status-online';
             else if (stat === 'idle') statusClass = 'status-idle';
             else if (stat === 'dnd') statusClass = 'status-dnd';
-            else if (stat === 'offline' || stat === 'invisible') statusClass = 'status-offline';
         }
 
         const activityHTML = `<div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span></div>`;
 
-        // ✅ FINAL HTML: AYOS NA ANG LAHAT
+        // ✅ FINAL HTML: **BUO AT TAMA NA**
         div.innerHTML = `
             <div class="circle-avatar-container">
                 ${decorationHTML} 
-                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="User">
+                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img">
                 <span class="status-indicator ${statusClass}"></span>
             </div>
 

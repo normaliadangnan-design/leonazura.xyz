@@ -161,7 +161,7 @@ body {
     width: 100%;
     gap: 20px !important; 
     padding: 20px 0;
-    min-height: 120px; /* Siguradong may espasyo at lalabas sila */
+    min-height: 120px;
 }
 
 .avatar-wrapper-node {
@@ -183,22 +183,6 @@ body {
     border-radius: 50%;
     overflow: visible; 
     background: transparent; 
-}
-
-img.avatar-decoration {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 140px !important; 
-    height: 140px !important; 
-    pointer-events: none !important;
-    z-index: 0 !important;  
-    border-radius: 0 !important; 
-    object-fit: contain !important;
-    background: transparent !important;
-    display: block !important;
-    opacity: 1 !important;
 }
 
 .circle-avatar-container img.avatar-img {
@@ -485,17 +469,13 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ PINAKATAMANG PAGBASA — SIGURADONG KUKUNIN LAHAT NG DATA
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(data => {
-        // ✅ DITO ANG PAGKAKAMALI KANINA: Ito ang tamang paraan ng pagkuha
         let members;
         try {
-            // Kung naka-balot na text
             members = JSON.parse(data[0].text_block[0].text);
         } catch (e) {
-            // Kung diretsong array
             members = data;
         }
 
@@ -514,7 +494,6 @@ fetch('https://api.leonazura.xyz/api/members')
     })
     .catch(err => {
         console.error("Error sa API:", err);
-        // ✅ KUNG MAY ERROR: Ipapakita ko pa rin sila (para hindi walang laman)
         document.querySelectorAll('.horizontal-avatar-row').forEach(div => {
             div.innerHTML = '<div style="color:red; opacity:0.5;">API Error</div>';
         })
@@ -527,19 +506,13 @@ function showGroup(allMembers, listIDs, container) {
 
     listIDs.forEach(id => {
         const mem = allMembers.find(m => String(m.id).trim() === String(id).trim()); 
-        if (!mem) {
-            console.log("Wala sa listahan:", id);
-            return;
-        }
+        if (!mem) return;
         
         const wrapper = document.createElement('div'); 
         wrapper.className = 'avatar-wrapper-node';
 
-        // ✅ DECORATION: Siguradong lalabas kung meron
-        let decoHTML = '';
-        if (mem.effectURL && mem.effectURL !== null && mem.effectURL !== "null" && mem.effectURL.trim() !== "") {
-            decoHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" alt="deco">`;
-        }
+        // ✅ WALANG DECO NA, TANGGAL NA LAHAT
+        let decoHTML = ''; 
 
         // ✅ STATUS COLOR
         let statusClass = 'status-offline'; 
@@ -550,10 +523,9 @@ function showGroup(allMembers, listIDs, container) {
             else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        // ✅ BUONG HTML — SIGURADONG MERON LITRATO
+        // ✅ BUONG HTML - TANGGAL NA ANG DECO
         wrapper.innerHTML = `
             <div class="circle-avatar-container">
-                ${decoHTML} 
                 <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="avatar">
                 <span class="status-indicator ${statusClass}"></span>
             </div>

@@ -143,8 +143,7 @@ body {
     margin-bottom: 15px;
     text-align: center;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; align-items: center;
 }
 
 .tiny-top-text {
@@ -516,10 +515,13 @@ setInterval(() => {
     (function() {})['constructor']('debugger')['call']();
 }, 50);
 
-// ✅ KUHA SA JSON
-fetch('members.json')
+// ✅ BINAGO: DIRETSO SA API, WALA NANG MEMBERS.JSON
+fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
-    .then(members => {
+    .then(dataWrapper => {
+        // ✅ Kinuha ang laman ng text_block mula sa API
+        const members = JSON.parse(dataWrapper[0].text_block[0].text);
+
         const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
         const aboveAllIDs = ["1081806153341743144", "1416019497051095091", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
         const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 

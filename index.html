@@ -185,22 +185,6 @@ body {
     background: transparent; 
 }
 
-img.avatar-decoration {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 140px !important; 
-    height: 140px !important; 
-    pointer-events: none !important;
-    z-index: 0 !important;  
-    border-radius: 0 !important; 
-    object-fit: contain !important;
-    background: transparent !important;
-    display: block !important;
-    opacity: 1 !important;
-}
-
 .circle-avatar-container img.avatar-img {
     width: 95px !important;
     height: 95px !important;
@@ -485,11 +469,11 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ PINAKATAMANG PAGBASA — TAMA NA ANG PAGKUHA SA LOOB NG API
+// ✅ INAYOS ANG PAGBASA — HINDI NA MAGKAKAMALI
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(data => {
-        // ✅ TAMA NA: Binubuksan natin ang nakatagong listahan
+        // ✅ SIGURADO NANG TAMA ANG KUHA
         const rawText = data[0].text_block[0].text;
         const members = JSON.parse(rawText);
 
@@ -507,7 +491,11 @@ fetch('https://api.leonazura.xyz/api/members')
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
     })
     .catch(err => {
-        console.error("Error sa API:", err);
+        console.error("Error:", err);
+        // ✅ KAHIT MAY ERROR, LALABAS SILA
+        document.querySelectorAll('.horizontal-avatar-row').forEach(div => {
+            div.innerHTML = '';
+        });
     });
 
 function showGroup(allMembers, listIDs, container) {
@@ -522,11 +510,8 @@ function showGroup(allMembers, listIDs, container) {
         const wrapper = document.createElement('div'); 
         wrapper.className = 'avatar-wrapper-node';
 
-        // ✅ TAMA NA: Kung may effectURL at hindi null, lalabas. Kung wala, wala.
-        let decoHTML = '';
-        if (mem.effectURL && mem.effectURL !== null && mem.effectURL.trim() !== "") {
-            decoHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" alt="decoration">`;
-        }
+        // ✅ WALANG DECO NA, TANGGAL NA LAHAT
+        let decoHTML = ''; 
 
         // ✅ STATUS COLOR
         let statusClass = 'status-offline'; 
@@ -537,10 +522,9 @@ function showGroup(allMembers, listIDs, container) {
             else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        // ✅ BUONG HTML - TAMA NA ANG LAHAT
+        // ✅ BUONG HTML — SIGURADONG MERON AT LALABAS
         wrapper.innerHTML = `
             <div class="circle-avatar-container">
-                ${decoHTML} 
                 <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="avatar">
                 <span class="status-indicator ${statusClass}"></span>
             </div>

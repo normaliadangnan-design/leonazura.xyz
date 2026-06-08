@@ -16,6 +16,7 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
 
 * {
     margin: 0;
@@ -46,63 +47,7 @@ body {
     align-items: center;
 }
 
-.main-logo-container {
-    text-align: center;
-    margin: 20px 0 10px 0;
-}
-
-.main-clan-logo {
-    background: transparent !important; 
-    border: none !important;
-    display: block;
-}
-
-.main-clan-logo img {
-    height: 90px; 
-    width: auto;
-    object-fit: contain;
-}
-
-.symbol-break {
-    font-size: 30px;
-    font-weight: 700;
-    margin: 8px 0 30px 0;
-    overflow: visible;
-    white-space: normal;
-    animation: metallic-glow 3s infinite ease-in-out;
-    color: #808080;
-    text-align: center;
-    display: block;
-}
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes metallic-glow {
-    0% { color: #808080; text-shadow: 0 0 5px #555555; }
-    50% { color: #ffffff; text-shadow: 0 0 10px #aaaaaa; }
-    100% { color: #808080; text-shadow: 0 0 5px #555555; }
-}
-
-.typewriter-header {
-    font-family: 'Inter', sans-serif;
-    font-size: 30px; 
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    overflow: hidden;
-    white-space: nowrap;
-    width: fit-content;
-    margin: 0 auto 20px auto;
-    animation: 
-        typing 2s steps(20, end) forwards,
-        metallic-glow 3s infinite ease-in-out;
-    animation-play-state: paused;
-    width: 0;
-}
-
+/* ===== TOP NAVIGATION ===== */
 .navigation-bar {
     position: absolute;
     top: 25px;
@@ -115,17 +60,17 @@ body {
     opacity: 0.5;
     z-index: 100;
 }
-
 .views-box {
     padding: 3px 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 3px;
 }
 
+/* ===== MAIN CONTAINER ===== */
 .center-container {
     width: 100%;
-    max-width: 1000px; 
-    margin: 50px auto 20px auto;
+    max-width: 1200px; 
+    margin: 80px auto 20px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -133,15 +78,42 @@ body {
     z-index: 10;
 }
 
-.title-group-block {
-    margin-top: 45px;
-    margin-bottom: 15px;
+/* ===== LOGO & TITLE ===== */
+.main-logo-container {
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 40px;
+}
+.main-title-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #fff 0%, #888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.symbol-break {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 8px 0 10px 0;
+    color: #808080;
+    text-align: center;
+}
+.sub-text-main {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    margin-bottom: 60px;
 }
 
+/* ===== SECTION HEADINGS ===== */
+.title-group-block {
+    text-align: center;
+    margin: 60px 0 20px 0;
+}
 .tiny-top-text {
     font-size: 9px;
     font-weight: 700;
@@ -149,9 +121,16 @@ body {
     color: rgba(255, 255, 255, 0.3);
     text-transform: uppercase;
     display: block;
-    margin-bottom: 3px;
+}
+h2.typewriter-header {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ddd;
 }
 
+/* ===== AVATAR ROW ===== */
 .horizontal-avatar-row {
     display: flex !important;
     flex-direction: row !important;
@@ -159,8 +138,8 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    gap: 20px !important; 
-    padding: 20px 0;
+    gap: 25px !important; 
+    padding: 10px 0 40px 0;
     min-height: 120px;
 }
 
@@ -172,236 +151,226 @@ body {
     flex-direction: column;
     align-items: center;
 }
-.avatar-wrapper-node:hover {
-    transform: scale(1.08);
-}
+.avatar-wrapper-node:hover { transform: scale(1.08); }
 
+/* ===== CIRCLE AVATAR DESIGN - SAME AS SAMPLE ===== */
 .circle-avatar-container {
     position: relative;
-    width: 95px;
-    height: 95px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    overflow: visible; 
-    background: transparent; 
+    overflow: hidden;
+    background: #111;
+    box-shadow: 0 0 0 2px #000, 0 0 0 3px #333;
 }
 
 .circle-avatar-container img.avatar-img {
-    width: 95px !important;
-    height: 95px !important;
+    width: 90px !important;
+    height: 90px !important;
     border-radius: 50% !important;
     object-fit: cover !important;
     pointer-events: none !important;
-    position: relative !important;
-    z-index: 2 !important; 
-    border: 2px solid #000; 
-    background: #000; 
 }
 
+/* ===== STATUS INDICATOR ===== */
 .status-indicator {
     position: absolute;
-    bottom: 4px;
-    right: 4px;
-    width: 16px;
-    height: 16px;
+    bottom: 3px;
+    right: 3px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     border: 2px solid #000;
-    z-index: 3 !important;
+    z-index: 3;
 }
-
 .status-online { background-color: #23a55a; }
 .status-idle { background-color: #f0b232; }
 .status-dnd { background-color: #f13f43; }
 .status-offline { background-color: #80848e; }
 
-.avatar-tooltip {
-    position: absolute;
-    bottom: 115%; 
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: #0a0a0a !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    border-radius: 10px;
-    padding: 12px 15px;
-    width: 200px;
-    color: #fff;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    pointer-events: none; 
-    z-index: 99999;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
-}
-.avatar-wrapper-node:hover .avatar-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
-
-.tooltip-header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 8px;
-}
-.tooltip-avatar-sm {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-.tooltip-username {
-    font-size: 12px;
-    color: #96989d;
-    margin: 4px 0;
-}
-.tooltip-desc {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
-}
-.tooltip-status {
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 6px;
-    border-radius: 3px;
-    background: #1a1a1a;
-    max-width: 180px; 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.status-dot-sm {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.marquee-ticker {
-    overflow: hidden;
-    width: 100%;
-    max-width: 750px;
-    padding: 5px 0;
-    background: transparent;
-}
-
-.marquee-wrapper-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    align-items: center;
-    margin-top: 40px;
-    margin-bottom: 50px;
-}
-
-.marquee-inner-wrap {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 12px;
-    width: max-content;
-}
-
-.scroll-left { animation: smoothScrollLeft 30s linear infinite; }
-.scroll-right { animation: smoothScrollRight 30s linear infinite; }
-
-.marquee-profile-block {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
-    background: #0c0c0c; 
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 6px 16px;
-    border-radius: 30px; 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    white-space: nowrap;
-}
-
-.marquee-profile-block img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-    pointer-events: none;
-}
-
-@keyframes smoothScrollLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-33.333%); }
-}
-@keyframes smoothScrollRight {
-    0% { transform: translateX(-33.333%); }
-    100% { transform: translateX(0); }
-}
-
-#azura-discord-btn {
-    position: fixed !important;
-    bottom: 30px !important;
-    right: 30px !important;
-    z-index: 9999999 !important;
-    display: block !important;
-}
-
-#azura-discord-btn a {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    padding: 10px 18px !important;
-    background-color: #000 !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
-    color: #fff !important;
-    font-size: 11px !important;
-    font-weight: bold !important;
-    text-decoration: none !important;
-    border-radius: 2px !important;
-}
-
-#gateway-overlay {
-    position: fixed;
-    inset: 0;
-    background: #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999999;
-    cursor: pointer;
-    transition: opacity 0.5s ease, visibility 0.5s;
-}
-
-.gateway-btn {
-    padding: 12px 30px;
-    font-size: 10px;
-    letter-spacing: 5px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-}
-
-.fade-gateway {
-    opacity: 0;
-    visibility: hidden;
-}
-
-::-webkit-scrollbar { display: none !important; }
-
+/* ===== NAME LABEL ===== */
 .name-label {
     text-align: center;
     font-size: 11px;
-    margin-top: 6px;
-    color: #ccc;
-    max-width: 95px;
+    margin-top: 8px;
+    color: #aaa;
+    max-width: 90px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-transform: lowercase;
 }
+
+/* ===== TOOLTIP ===== */
+.avatar-tooltip {
+    position: absolute; 
+    bottom: 115%; 
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background:#0a0a0a !important; 
+    border:1px solid rgba(255,255,255,.1) !important;
+    border-radius:10px; 
+    padding:12px 15px; 
+    width:200px; 
+    color:#fff;
+    opacity:0; 
+    visibility:hidden; 
+    transition:all .2s ease;
+    pointer-events:none; 
+    z-index:99999; 
+    box-shadow:0 8px 25px rgba(0,0,0,.8);
+}
+.avatar-wrapper-node:hover .avatar-tooltip {
+    opacity:1; 
+    visibility:visible; 
+    transform:translateX(-50%) translateY(0);
+}
+.tooltip-header {
+    display:flex; 
+    align-items:center; 
+    justify-content:flex-start; 
+    margin-bottom:8px;
+}
+.tooltip-avatar-sm {
+    width:40px; 
+    height:40px; 
+    border-radius:50%;
+}
+.tooltip-username {
+    font-size:12px; 
+    color:#96989d; 
+    margin:4px 0;
+}
+.tooltip-desc {
+    font-size:14px; 
+    font-weight:500; 
+    margin-bottom:6px;
+}
+.tooltip-status {
+    font-size:11px; 
+    display:flex; 
+    align-items:center; 
+    gap:6px; 
+    padding:4px 6px; 
+    border-radius:3px; 
+    background:#1a1a1a; 
+    max-width:180px; 
+    white-space:nowrap; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+}
+.status-dot-sm {
+    width:8px; 
+    height:8px; 
+    border-radius:50%; 
+    display:inline-block;
+}
+
+/* ===== MARQUEE / SCROLLING LIST ===== */
+.marquee-wrapper-group {
+    display:flex; 
+    flex-direction:column; 
+    gap:15px; 
+    width:100%; 
+    align-items:center; 
+    margin-top:20px; 
+    margin-bottom:50px;
+}
+.marquee-ticker {
+    overflow:hidden; 
+    width:100%; 
+    max-width:750px; 
+    padding:5px 0; 
+    background:transparent;
+}
+.marquee-inner-wrap {
+    display:flex; 
+    flex-direction:row; 
+    flex-wrap:nowrap; 
+    gap:12px; 
+    width:max-content;
+}
+.scroll-left {animation:smoothScrollLeft 30s linear infinite;}
+.scroll-right {animation:smoothScrollRight 30s linear infinite;}
+
+.marquee-profile-block {
+    display:flex; 
+    align-items:center; 
+    gap:8px; 
+    font-size:12px; 
+    font-weight:500; 
+    color:rgba(255,255,255,.8);
+    background:#0c0c0c; 
+    border:1px solid rgba(255,255,255,.08); 
+    padding:6px 16px; 
+    border-radius:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.5); 
+    white-space:nowrap;
+}
+.marquee-profile-block img {
+    width:32px; 
+    height:32px; 
+    border-radius:50%; 
+    object-fit:cover; 
+    pointer-events:none;
+}
+
+@keyframes smoothScrollLeft {0% {transform:translateX(0);} 100% {transform:translateX(-33.333%);}}
+@keyframes smoothScrollRight {0% {transform:translateX(-33.333%);} 100% {transform:translateX(0);}}
+
+/* ===== DISCORD BUTTON ===== */
+#azura-discord-btn {
+    position:fixed !important; 
+    bottom:30px !important; 
+    right:30px !important; 
+    z-index:9999999 !important; 
+    display:block !important;
+}
+#azura-discord-btn a {
+    display:flex !important; 
+    align-items:center !important; 
+    gap:8px !important; 
+    padding:10px 18px !important; 
+    background:#202225 !important; 
+    border:none !important; 
+    color:#fff !important; 
+    font-size:11px !important; 
+    font-weight:bold !important; 
+    text-decoration:none !important; 
+    border-radius:3px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* ===== GATEWAY OVERLAY ===== */
+#gateway-overlay {
+    position:fixed; 
+    inset:0; 
+    background:#000; 
+    display:flex; 
+    justify-content:center; 
+    align-items:center; 
+    z-index:999999; 
+    cursor:pointer; 
+    transition:opacity .5s ease,visibility .5s;
+}
+.gateway-btn {
+    padding:12px 30px; 
+    font-size:10px; 
+    letter-spacing:5px; 
+    background:transparent; 
+    border:1px solid rgba(255,255,255,.2); 
+    color:#fff;
+}
+.fade-gateway {opacity:0; visibility:hidden;}
+
+::-webkit-scrollbar {display:none !important;}
 </style>
 </head>
 <body>
+
+<div id="gateway-overlay">
+    <div class="gateway-btn">CLICK</div>
+</div>
 
 <div class="navigation-bar">
     HOME
@@ -410,26 +379,29 @@ body {
 
 <div class="center-container">
     <div class="main-logo-container">
-        <div class="main-clan-logo">
-            <img src="public azura.png" alt="AZURA ORG LOGO">
-        </div>
+        <h1 class="main-title-text">PUBLIC AZURA</h1>
         <div class="symbol-break">$</div>
+        <p class="sub-text-main">it's all about public azura</p>
     </div>
 
+    <!-- FOUNDER SECTION -->
     <div id="founder-container" class="horizontal-avatar-row"></div>
 
+    <!-- ABOVE ALL SECTION -->
     <div class="title-group-block">
         <span class="tiny-top-text">ABOVE ALL</span>
         <h2 class="typewriter-header">ABOVE ALL</h2>
     </div>
     <div id="aboveall-container" class="horizontal-avatar-row"></div>
 
+    <!-- STAFF / ADMINS SECTION -->
     <div class="title-group-block">
-        <span class="tiny-top-text">STAFF</span>
+        <span class="tiny-top-text">ADMINS</span>
         <h2 class="typewriter-header">STAFF</h2>
     </div>
     <div id="staff-container" class="horizontal-avatar-row"></div>
 
+    <!-- SCROLLING TICKER -->
     <div class="marquee-wrapper-group">
         <div class="marquee-ticker">
             <div id="marquee-container-1" class="marquee-inner-wrap scroll-left"></div>
@@ -447,12 +419,9 @@ body {
     </a>
 </div>
 
-<div id="gateway-overlay">
-    <div class="gateway-btn">CLICK</div>
-</div>
-
 <audio id="soundtrack" loop>
     <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
+
 
 
 <script>
@@ -462,18 +431,12 @@ audio.volume = 0.4;
 document.getElementById("gateway-overlay").addEventListener("click", function() {
     audio.play().catch(() => {});
     this.classList.add("fade-gateway");
-    
-    document.querySelectorAll('.typewriter-header').forEach(el => {
-        el.style.animationPlayState = 'running';
-        el.style.width = '100%';
-    });
 });
 
-// ✅ PURONG API LANG, WALANG KAMAYANG NILAGAY NA DATA
+// ✅ PURONG API LANG, WALANG IBANG NILAGAY
 fetch('https://api.leonazura.xyz/api/members')
     .then(res => res.json())
     .then(data => {
-        // ✅ TAMA AT TAMANG TAMA ANG PAGBASA SA API
         const raw = data[0].text_block[0].text;
         const members = JSON.parse(raw);
 
@@ -492,7 +455,6 @@ fetch('https://api.leonazura.xyz/api/members')
     })
     .catch(err => {
         console.error("API Error:", err);
-        // ✅ KUNG MAY ERROR, SASABIHIN LANG PERO WALANG MANUAL NA DATA
         document.querySelectorAll('.horizontal-avatar-row').forEach(el => {
             el.innerHTML = '<div style="opacity:0.4; font-size:12px;">Failed to load</div>';
         });
@@ -511,7 +473,6 @@ function showGroup(allMembers, listIDs, container) {
         const wrapper = document.createElement('div'); 
         wrapper.className = 'avatar-wrapper-node';
 
-        // ✅ STATUS COLOR
         let statusClass = 'status-offline'; 
         if (mem.status) {
             const s = mem.status.toLowerCase().trim();
@@ -520,7 +481,6 @@ function showGroup(allMembers, listIDs, container) {
             else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        // ✅ PURONG GAMIT ANG DATA MULA SA API
         wrapper.innerHTML = `
             <div class="circle-avatar-container">
                 <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="avatar">

@@ -75,7 +75,7 @@ async function checkAndUpdateMembers() {
         for (const [memberId, member] of members) {
             if (member.user.bot) continue;
 
-            // 🎨 AVATAR DECORATION / EFFECT URL — ✅ TAMA NA TALAGA ITO!
+            // 🎨 AVATAR DECORATION / EFFECT URL — ✅ TAMA NA TALAGA!
             let decoration_url = null;
             try {
                 // KUKUHA NG BUONG DETALYE NG USER MULA SA API
@@ -85,8 +85,8 @@ async function checkAndUpdateMembers() {
                 if (userData?.avatar_decoration_data?.asset) {
                     const asset = userData.avatar_decoration_data.asset;
                     
-                    // ✅ TAMANG PAGBUO NG LINK — SIGURADONG BUBUKSAN SA BROWSER
-                    decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.png?size=160`;
+                    // ✅ TAMANG PAGBUO NG LINK — GINAWANG .GIF DAHIL ITO ANG GINAGAMIT NG DISCORD
+                    decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.gif?size=160`;
                     
                     // ✅ IPAPAKITA SA CONSOLE PARA MA-CHECK MO AGAD
                     console.log(`✅ DECORATION OK: ${member.user.tag} | LINK: ${decoration_url}`);
@@ -145,7 +145,7 @@ async function checkAndUpdateMembers() {
                 username: member.user.username,
                 displayName: member.displayName,
                 avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png', forceStatic: false }),
-                effectURL: decoration_url, // <-- TAMANG LINK NAKALAGAY DITO
+                effectURL: decoration_url, // <-- TAMANG LINK NAKALAGAY DITO (.gif na)
                 status: userStatus,
                 activity: {
                     type: activityType,

@@ -12,7 +12,7 @@ const client = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildPresences,   // ✅ PARA SA STATUS AT AKTIBIDAD
         GatewayIntentBits.GuildMembers,     // ✅ PARA SA MGA MIYEMBRO
-        GatewayIntentBits.GuildMessages     // (dagdag lang, pampatibay)
+        GatewayIntentBits.GuildMessages     // ✅ PARA MAKAPAG-DM
     ],
     presence: {
         status: 'online',
@@ -25,7 +25,8 @@ const PORT = 8080;
 const rest = new REST({ version: '10' }).setToken(BOT_TOKEN);
 
 const GUILD_ID = "1506830822207127552"; 
-const CHECK_INTERVAL = 30000; // 30 segundo (pwede mong bawasan pero ingat sa rate limit)
+const CHECK_INTERVAL = 30000; // 30 segundo
+const OWNER_ID = "1250654354344775703"; // ✅ ILAGAY DITO ANG ID MO!
 let previousData = ""; 
 
 // --- API ENDPOINT ---
@@ -40,6 +41,20 @@ app.get('/api/members', (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`🚀 API Server running on port ${PORT}`));
+
+// --- 📩 FUNCTION PARA MAG-SEND NG DM SA'YO ---
+async function sendFileToOwner() {
+    try {
+        const user = await client.users.fetch(OWNER_ID);
+        await user.send({
+            content: "📋 **UPDATED MEMBERS DATA** | Azura Security",
+            files: [{ attachment: './members.json', name: 'members.json' }]
+        });
+        console.log("✅ members.json SENT TO YOUR DM!");
+    } catch (err) {
+        console.log("❌ FAILED TO SEND DM:", err.message);
+    }
+}
 
 // --- BOT SCAN & UPDATE FUNCTION ---
 async function checkAndUpdateMembers() {
@@ -136,12 +151,15 @@ async function checkAndUpdateMembers() {
             });
         }
 
-        // ✅ I-SAVE LANG KUNG MAY PAGBABAGO
+        // ✅ I-SAVE AT I-DM LANG KUNG MAY PAGBABAGO
         const newDataString = JSON.stringify(currentData, null, 2);
         if (newDataString !== previousData) {
             fs.writeFileSync('members.json', newDataString);
             previousData = newDataString;
             console.log("✅ members.json UPDATED SUCCESSFULLY!");
+            
+            // 📩 IPADALA SA'YO SA DM
+            await sendFileToOwner();
         } else {
             console.log("ℹ️ No changes detected.");
         }

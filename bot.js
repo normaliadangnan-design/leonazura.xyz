@@ -75,25 +75,25 @@ async function checkAndUpdateMembers() {
         for (const [memberId, member] of members) {
             if (member.user.bot) continue;
 
-            // 🎨 AVATAR DECORATION / EFFECT URL — ✅ PERFECT NA ITO!
-            let decoration_url = null; // ✅ DEFAULT: NULL KUNG WALA
+            // 🎨 AVATAR DECORATION / EFFECT URL — ✅ INAYOS ANG LINK FORMAT!
+            let decoration_url = null; 
             try {
                 const userData = await rest.get(Routes.user(member.id));
                 
-                // ✅ SIGURADUHIN MUNA NA MAY DATA AT ASSET BAGO GUMAWA NG LINK
                 if (userData && userData.avatar_decoration_data && userData.avatar_decoration_data.asset) {
                     const asset = userData.avatar_decoration_data.asset;
-                    // ✅ TAMANG LINK FORMAT (.gif) — GAGANA SA BROWSER
-                    decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.gif?size=160`;
-                    console.log(`✅ DECORATION FOUND: ${member.user.tag} → ${decoration_url}`);
+                    
+                    // ✅ TAMANG PAGBUO NG LINK — DITO ANG PAGKAKAMALI KANINA!
+                    decoration_url = `https://cdn.discordapp.com/avatars/avatar-decorations/${asset}.gif?size=160`;
+                    
+                    console.log(`✅ DECORATION OK: ${member.user.tag} | LINK: ${decoration_url}`);
                 } else {
-                    // ✅ KUNG WALA, MANATILING NULL
+                    decoration_url = null;
                     console.log(`⚪ NO DECORATION: ${member.user.tag}`);
                 }
             } catch (err) { 
-                // ✅ KUNG MAY ERROR, NULL PARIN ANG ILALAGAY
-                console.log(`❌ ERROR GETTING DECORATION: ${member.user.tag}`);
                 decoration_url = null;
+                console.log(`❌ ERROR: ${member.user.tag}`);
             }
 
             // 🟢 STATUS: online / idle / dnd / offline
@@ -146,7 +146,7 @@ async function checkAndUpdateMembers() {
                 username: member.user.username,
                 displayName: member.displayName,
                 avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png', forceStatic: false }),
-                effectURL: decoration_url, // ✅ TAMA: LINK KUNG MERON, NULL KUNG WALA
+                effectURL: decoration_url, // ✅ TAMA NA ANG LINK DITO
                 status: userStatus,
                 activity: {
                     type: activityType,

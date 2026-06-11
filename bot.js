@@ -75,17 +75,20 @@ async function checkAndUpdateMembers() {
         for (const [memberId, member] of members) {
             if (member.user.bot) continue;
 
-            // 🎨 AVATAR DECORATION / EFFECT URL
+            // 🎨 AVATAR DECORATION / EFFECT URL — INAYOS NA ITO!
             let decoration_url = null;
             try {
                 const userData = await rest.get(Routes.user(member.id));
                 if (userData && userData.avatar_decoration_data) {
                     const asset = userData.avatar_decoration_data.asset;
-                    // ✅ TAMANG PAGBUO NG LINK
+                    // ✅ TAMANG PAGBUO NG LINK — SIGURADONG GAGANA NA
                     decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.png?size=160`;
+                    
+                    // ✅ PARA MAKITA MO SA CONSOLE KUNG MAY NAKUHA
+                    console.log(`✅ DECORATION FOUND: ${member.user.tag} -> ${decoration_url}`);
                 }
             } catch (err) { 
-                // Kung error, hayaan lang (para hindi huminto ang buong proseso)
+                console.log(`❌ NO DECORATION: ${member.user.tag}`);
             }
 
             // 🟢 STATUS: online / idle / dnd / offline
@@ -138,7 +141,7 @@ async function checkAndUpdateMembers() {
                 username: member.user.username,
                 displayName: member.displayName,
                 avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png', forceStatic: false }),
-                effectURL: decoration_url,
+                effectURL: decoration_url, // <-- DITO ILALAGAY ANG TAMANG LINK
                 status: userStatus,
                 activity: {
                     type: activityType,

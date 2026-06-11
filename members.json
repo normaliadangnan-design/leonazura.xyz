@@ -52,7 +52,7 @@
     "username": "hahacarll",
     "displayName": "Hev",
     "avatarURL": "https://cdn.discordapp.com/embed/avatars/0.png",
-    "effectURL": "https://cdn.discordapp.com/avatar-decorations/a_1c4016e16beaa185cd8422a1f2071a20.gif?size=160",
+    "effectURL": "https://cdn.discordapp.com/avatars/avatar-decorations/a_1c4016e16beaa185cd8422a1f2071a20.gif?size=160",
     "status": "offline",
     "activity": {
       "type": null,
@@ -116,11 +116,11 @@
     "username": "brybry0007_16510",
     "displayName": "Rage",
     "avatarURL": "https://cdn.discordapp.com/avatars/1242051125776093256/bc566ffbb43971f285175f05948e016d.png?size=256",
-    "effectURL": "https://cdn.discordapp.com/avatar-decorations/a_0559ecfc5e0d72ed1a2c5f1a6fd84558.gif?size=160",
-    "status": "idle",
+    "effectURL": "https://cdn.discordapp.com/avatars/avatar-decorations/a_0559ecfc5e0d72ed1a2c5f1a6fd84558.gif?size=160",
+    "status": "online",
     "activity": {
-      "type": null,
-      "name": null
+      "type": "Playing",
+      "name": "ROBLOX"
     },
     "customStatus": {
       "note": null,
@@ -164,7 +164,7 @@
     "username": "0asis__z",
     "displayName": "sunako",
     "avatarURL": "https://cdn.discordapp.com/avatars/1057219921907556404/5f5a5ff1ddd84cc4291c0c7688aebf86.png?size=256",
-    "effectURL": "https://cdn.discordapp.com/avatar-decorations/a_0559ecfc5e0d72ed1a2c5f1a6fd84558.gif?size=160",
+    "effectURL": "https://cdn.discordapp.com/avatars/avatar-decorations/a_0559ecfc5e0d72ed1a2c5f1a6fd84558.gif?size=160",
     "status": "idle",
     "activity": {
       "type": "Playing",
@@ -228,7 +228,7 @@
     "username": "wtf.leon",
     "displayName": "kids.xyz",
     "avatarURL": "https://cdn.discordapp.com/avatars/1250654354344775703/7ff9fb357f4b0b791c5039e01a12b29d.png?size=256",
-    "effectURL": "https://cdn.discordapp.com/avatar-decorations/a_55393fb776ecc721bc551823d4ea52df.gif?size=160",
+    "effectURL": "https://cdn.discordapp.com/avatars/avatar-decorations/a_55393fb776ecc721bc551823d4ea52df.gif?size=160",
     "status": "dnd",
     "activity": {
       "type": null,
@@ -242,13 +242,13 @@
   {
     "id": "1506514620192657559",
     "username": "ilovechinitamestiza",
-    "displayName": "sak",
+    "displayName": "gloryboy",
     "avatarURL": "https://cdn.discordapp.com/avatars/1506514620192657559/2f344d7518e561985b6042daf5f4d0ac.png?size=256",
     "effectURL": null,
     "status": "dnd",
     "activity": {
-      "type": "Listening to Spotify",
-      "name": "Vibrate - La Mave"
+      "type": null,
+      "name": null
     },
     "customStatus": {
       "note": null,
@@ -372,7 +372,7 @@
     "username": "driziyo",
     "displayName": "Way2𝕯re",
     "avatarURL": "https://cdn.discordapp.com/avatars/931432188539445268/4a433aeac873482d8a77339fc3fb34c6.png?size=256",
-    "effectURL": "https://cdn.discordapp.com/avatar-decorations/a_401041801efe2618180692bfdd7a66c3.gif?size=160",
+    "effectURL": "https://cdn.discordapp.com/avatars/avatar-decorations/a_401041801efe2618180692bfdd7a66c3.gif?size=160",
     "status": "idle",
     "activity": {
       "type": null,
@@ -452,7 +452,7 @@
     "username": "bakingthoughts",
     "displayName": "— ilysm , ` komi ⋆˚࿔",
     "avatarURL": "https://cdn.discordapp.com/avatars/1495341225174368276/ad91680c55e3f36170b513ef8699a0b4.png?size=256",
-    "effectURL": "https://cdn.discordapp.com/avatar-decorations/a_d3e51a9751016df2778a47efbb8bb455.gif?size=160",
+    "effectURL": "https://cdn.discordapp.com/avatars/avatar-decorations/a_d3e51a9751016df2778a47efbb8bb455.gif?size=160",
     "status": "offline",
     "activity": {
       "type": null,

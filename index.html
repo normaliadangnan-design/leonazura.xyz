@@ -499,18 +499,11 @@ const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999
 const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
 
-// ✅ TAMANG PAGKUHA NG DATA — HINDI NA MAGKAKAMALI
+// ✅ BINASA NA MULA SA LOCAL NA members.json
 async function fetchAndUpdate() {
     try {
-        const res = await fetch('https://api.leonazura.xyz/api/members');
-        const data = await res.json();
-        
-        let members;
-        try {
-            members = JSON.parse(data[0].text_block[0].text);
-        } catch (e) {
-            members = data;
-        }
+        const res = await fetch('members.json'); // <-- ITO ANG PAGBABAGO
+        const members = await res.json();
 
         // ✅ IPAPAKITA ULIT LAHAT — SIGURADONG LALABAS
         showGroup(members, founderIDs, 'founder-container');
@@ -520,7 +513,7 @@ async function fetchAndUpdate() {
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
 
     } catch (err) {
-        console.error("API Error:", err);
+        console.error("Error reading members.json:", err);
     }
 }
 

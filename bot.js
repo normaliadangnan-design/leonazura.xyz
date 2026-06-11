@@ -75,20 +75,24 @@ async function checkAndUpdateMembers() {
         for (const [memberId, member] of members) {
             if (member.user.bot) continue;
 
-            // 🎨 AVATAR DECORATION / EFFECT URL — INAYOS NA ITO!
+            // 🎨 AVATAR DECORATION / EFFECT URL — ✅ TAMA NA TALAGA ITO!
             let decoration_url = null;
             try {
+                // KUKUHA NG BUONG DETALYE NG USER MULA SA API
                 const userData = await rest.get(Routes.user(member.id));
-                if (userData && userData.avatar_decoration_data) {
+                
+                // KUNG MAY DECORATION
+                if (userData?.avatar_decoration_data?.asset) {
                     const asset = userData.avatar_decoration_data.asset;
-                    // ✅ TAMANG PAGBUO NG LINK — SIGURADONG GAGANA NA
+                    
+                    // ✅ TAMANG PAGBUO NG LINK — SIGURADONG BUBUKSAN SA BROWSER
                     decoration_url = `https://cdn.discordapp.com/avatar-decorations/${asset}.png?size=160`;
                     
-                    // ✅ PARA MAKITA MO SA CONSOLE KUNG MAY NAKUHA
-                    console.log(`✅ DECORATION FOUND: ${member.user.tag} -> ${decoration_url}`);
+                    // ✅ IPAPAKITA SA CONSOLE PARA MA-CHECK MO AGAD
+                    console.log(`✅ DECORATION OK: ${member.user.tag} | LINK: ${decoration_url}`);
                 }
             } catch (err) { 
-                console.log(`❌ NO DECORATION: ${member.user.tag}`);
+                console.log(`❌ NO DECORATION / ERROR: ${member.user.tag}`);
             }
 
             // 🟢 STATUS: online / idle / dnd / offline
@@ -141,7 +145,7 @@ async function checkAndUpdateMembers() {
                 username: member.user.username,
                 displayName: member.displayName,
                 avatarURL: member.user.displayAvatarURL({ size: 256, extension: 'png', forceStatic: false }),
-                effectURL: decoration_url, // <-- DITO ILALAGAY ANG TAMANG LINK
+                effectURL: decoration_url, // <-- TAMANG LINK NAKALAGAY DITO
                 status: userStatus,
                 activity: {
                     type: activityType,

@@ -188,10 +188,14 @@ img.avatar-decoration {
     margin-bottom:5px;
 }
 
+/* ✅ INAYOS PARA MALINAW ANG NOTES / CUSTOM STATUS */
 .bio{
-    opacity:.75;
-    font-size:13px;
+    opacity:.85;
+    font-size:14px;
     margin-bottom:25px;
+    min-height: 20px;
+    transition: all 0.3s ease;
+    line-height: 1.4;
 }
 
 .socials{
@@ -296,13 +300,15 @@ a {
 
     <div class="avatar">
         <div class="avatar-img-holder">
-            <img src="../members/founder/user1.jpg" alt="Leon Avatar">
+            <img id="avatarImg" src="" alt="Leon Avatar">
         </div>
-        <img src="https://cdn.discordapp.com/avatar-decoration-presets/a_3c97a2d37f433a7913a1c7b7a735d000.png?size=160" class="avatar-decoration" onerror="this.style.opacity='0'">
+        <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.opacity='0'">
     </div>
 
-    <div class="username">@wtf.leon</div>
-    <div class="bio">tara sleep call</div>
+    <div id="usernameText" class="username">@wtf.leon</div>
+    
+    <!-- ✅ DITO LALABAS ANG DISCORD NOTE MO -->
+    <div id="noteText" class="bio">tara sleep call</div>
 
     <div class="socials">
         <a class="social" href="https://discord.gg/CwsGFu6D" target="_blank">
@@ -312,7 +318,7 @@ a {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/></svg>
         </a>
         <a class="social" href="https://www.instagram.com/leonky.2/" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 0 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
         </a>
     </div>
 
@@ -352,18 +358,54 @@ document.addEventListener('keydown', e => {
 });
 setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
 
-// KUKUHA ANG STATUS MO SA MEMBERS.JSON
+// ✅ DIRETSYO NA SA API MO, HINDI NA SA LOCAL FILE
 const YOUR_ID = "1250654354344775703";
+const API_URL = "https://api.leonazura.xyz/api/members";
 
-fetch('../members.json')
-    .then(res => res.json())
-    .then(data => {
-        const me = data.find(user => user.id === YOUR_ID);
+// ✅ KUKUHA AT MAG-A-UPDATE BAWAT 30 SEGUNDO
+async function fetchData() {
+    try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        
+        let members;
+        if (Array.isArray(data)) {
+            members = data;
+        } else if (data[0] && data[0].text_block) {
+            members = JSON.parse(data[0].text_block[0].text);
+        } else {
+            members = [];
+        }
+
+        const me = members.find(user => user.id === YOUR_ID);
         if (me) {
+            // ✅ PALITAN ANG LITRATO
+            document.getElementById('avatarImg').src = me.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
+            
+            // ✅ PALITAN ANG PALAMUTI
+            const decoEl = document.getElementById('decoImg');
+            if (me.effectURL && me.effectURL !== null) {
+                decoEl.src = me.effectURL;
+                decoEl.style.opacity = '1';
+            } else {
+                decoEl.style.opacity = '0';
+            }
+
+            // ✅ PALITAN ANG PANGALAN
+            document.getElementById('usernameText').innerText = me.displayName || me.username || '@wtf.leon';
+
+            // ✅ DITO ANG BAGO: IPAPAKITA ANG DISCORD NOTE / CUSTOM STATUS MO
+            const noteEl = document.getElementById('noteText');
+            if (me.customStatus && me.customStatus !== "" && me.customStatus !== null) {
+                noteEl.innerText = me.customStatus; // Kung may ilalagay ka, ito lalabas
+            } else {
+                noteEl.innerText = "tara sleep call"; // Kung wala, ito ang default
+            }
+
+            // ✅ PALITAN ANG STATUS (Online/Idle/DND/Offline)
             const statusDot = document.getElementById('statusDot');
             const statusText = document.getElementById('statusText');
             const statusArea = document.getElementById('statusArea');
-
             statusDot.className = "status-dot";
 
             if(me.status === 'online') {
@@ -379,10 +421,16 @@ fetch('../members.json')
                 statusDot.classList.add('status-offline');
                 statusText.innerText = 'Offline / Invisible';
             }
-            
             statusArea.style.display = 'flex';
         }
-    });
+    } catch (err) {
+        console.error("API Error:", err);
+    }
+}
+
+// ✅ SIMULA AGAD AT TULUY-TULOY
+fetchData();
+setInterval(fetchData, 30000); // Bawat 30 segundo nagre-refresh
 
 // ✅ PINIGILANG MABUTI ANG PAGBALIK SA NAKARAANG PAHINA
 history.replaceState(null, null, location.href);

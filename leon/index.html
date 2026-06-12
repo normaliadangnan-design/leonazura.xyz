@@ -161,6 +161,8 @@ body::before{
     overflow: hidden;
     border:3px solid rgba(255,255,255,.18);
     background: #000;
+    position: relative;
+    z-index: 2;
 }
 
 .avatar-img-holder img{
@@ -169,17 +171,19 @@ body::before{
     object-fit:cover;
 }
 
+/* ✅ INAYOS ANG Pwesto at laki ng decoration */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 135px !important;
-    height: 135px !important;
+    width: 140px !important;
+    height: 140px !important;
     pointer-events: none !important;
-    z-index: 9999 !important;
+    z-index: 1 !important;  /* Nasa ilalim ng avatar */
     display: block !important;
     border-radius: 0 !important;
+    background: transparent !important;
 }
 
 .username{
@@ -188,7 +192,7 @@ img.avatar-decoration {
     margin-bottom:5px;
 }
 
-/* ✅ INAYOS PARA MALINAW ANG NOTES / CUSTOM STATUS */
+/* ✅ INAYOS PARA HINDI LUMABAS ANG [object Object] */
 .bio{
     opacity:.85;
     font-size:14px;
@@ -196,6 +200,7 @@ img.avatar-decoration {
     min-height: 20px;
     transition: all 0.3s ease;
     line-height: 1.4;
+    word-break: break-word;
 }
 
 .socials{
@@ -299,15 +304,16 @@ a {
     </div>
 
     <div class="avatar">
+        <!-- ✅ DITO LALABAS ANG DECORATION -->
+        <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
         <div class="avatar-img-holder">
             <img id="avatarImg" src="" alt="Leon Avatar">
         </div>
-        <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.opacity='0'">
     </div>
 
     <div id="usernameText" class="username">@wtf.leon</div>
     
-    <!-- ✅ DITO LALABAS ANG DISCORD NOTE MO -->
+    <!-- ✅ DITO LALABAS ANG NOTE / CUSTOM STATUS (WALA NANG OBJECT OBJECT) -->
     <div id="noteText" class="bio">tara sleep call</div>
 
     <div class="socials">
@@ -358,71 +364,78 @@ document.addEventListener('keydown', e => {
 });
 setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
 
-// ✅ DIRETSYO NA SA API MO, HINDI NA SA LOCAL FILE
+// ✅ DIRETSYO NA SA API MO
 const YOUR_ID = "1250654354344775703";
 const API_URL = "https://api.leonazura.xyz/api/members";
 
-// ✅ KUKUHA AT MAG-A-UPDATE BAWAT 30 SEGUNDO
+// ✅ KUKUHA AT MAG-A-UPDATE
 async function fetchData() {
     try {
         const res = await fetch(API_URL);
         const data = await res.json();
         
-        let members;
+        let members = [];
+        // ✅ TAMA ANG PAGBASA NG DATA GALING SA BOT MO
         if (Array.isArray(data)) {
             members = data;
         } else if (data[0] && data[0].text_block) {
             members = JSON.parse(data[0].text_block[0].text);
+        }
+
+        const me = members.find(user => String(user.id) === String(YOUR_ID));
+        if (!me) return;
+
+        // ✅ 1. AVATAR DECORATION - LALABAS NA
+        const decoEl = document.getElementById('decoImg');
+        if (me.effectURL && typeof me.effectURL === 'string' && me.effectURL.trim() !== '') {
+            decoEl.src = me.effectURL.trim();
+            decoEl.style.display = 'block';
         } else {
-            members = [];
+            decoEl.style.display = 'none';
         }
 
-        const me = members.find(user => user.id === YOUR_ID);
-        if (me) {
-            // ✅ PALITAN ANG LITRATO
-            document.getElementById('avatarImg').src = me.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
-            
-            // ✅ PALITAN ANG PALAMUTI
-            const decoEl = document.getElementById('decoImg');
-            if (me.effectURL && me.effectURL !== null) {
-                decoEl.src = me.effectURL;
-                decoEl.style.opacity = '1';
-            } else {
-                decoEl.style.opacity = '0';
+        // ✅ 2. AVATAR IMAGE
+        document.getElementById('avatarImg').src = me.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
+
+        // ✅ 3. USERNAME
+        document.getElementById('usernameText').innerText = me.displayName || me.username || '@wtf.leon';
+
+        // ✅ 4. NOTE / CUSTOM STATUS - WALA NANG [object Object]
+        const noteEl = document.getElementById('noteText');
+        let statusText = "tara sleep call"; // Default
+
+        if (me.customStatus !== undefined && me.customStatus !== null) {
+            // ✅ DITO INAYOS: Kung bagay o string, kukunin; kung object, babasahin nang tama
+            if (typeof me.customStatus === 'string') {
+                statusText = me.customStatus;
+            } 
+            else if (typeof me.customStatus === 'object' && me.customStatus.text) {
+                statusText = me.customStatus.text;
             }
-
-            // ✅ PALITAN ANG PANGALAN
-            document.getElementById('usernameText').innerText = me.displayName || me.username || '@wtf.leon';
-
-            // ✅ DITO ANG BAGO: IPAPAKITA ANG DISCORD NOTE / CUSTOM STATUS MO
-            const noteEl = document.getElementById('noteText');
-            if (me.customStatus && me.customStatus !== "" && me.customStatus !== null) {
-                noteEl.innerText = me.customStatus; // Kung may ilalagay ka, ito lalabas
-            } else {
-                noteEl.innerText = "tara sleep call"; // Kung wala, ito ang default
-            }
-
-            // ✅ PALITAN ANG STATUS (Online/Idle/DND/Offline)
-            const statusDot = document.getElementById('statusDot');
-            const statusText = document.getElementById('statusText');
-            const statusArea = document.getElementById('statusArea');
-            statusDot.className = "status-dot";
-
-            if(me.status === 'online') {
-                statusDot.classList.add('status-online');
-                statusText.innerText = 'Online';
-            } else if(me.status === 'idle') {
-                statusDot.classList.add('status-idle');
-                statusText.innerText = 'Idle';
-            } else if(me.status === 'dnd') {
-                statusDot.classList.add('status-dnd');
-                statusText.innerText = 'Do Not Disturb';
-            } else {
-                statusDot.classList.add('status-offline');
-                statusText.innerText = 'Offline / Invisible';
-            }
-            statusArea.style.display = 'flex';
         }
+        noteEl.innerText = statusText;
+
+        // ✅ 5. STATUS (Online/Idle/DND/Offline)
+        const statusDot = document.getElementById('statusDot');
+        const statusTextEl = document.getElementById('statusText');
+        const statusArea = document.getElementById('statusArea');
+        statusDot.className = "status-dot";
+
+        if(me.status === 'online') {
+            statusDot.classList.add('status-online');
+            statusTextEl.innerText = 'Online';
+        } else if(me.status === 'idle') {
+            statusDot.classList.add('status-idle');
+            statusTextEl.innerText = 'Idle';
+        } else if(me.status === 'dnd') {
+            statusDot.classList.add('status-dnd');
+            statusTextEl.innerText = 'Do Not Disturb';
+        } else {
+            statusDot.classList.add('status-offline');
+            statusTextEl.innerText = 'Offline / Invisible';
+        }
+        statusArea.style.display = 'flex';
+
     } catch (err) {
         console.error("API Error:", err);
     }
@@ -430,7 +443,7 @@ async function fetchData() {
 
 // ✅ SIMULA AGAD AT TULUY-TULOY
 fetchData();
-setInterval(fetchData, 30000); // Bawat 30 segundo nagre-refresh
+setInterval(fetchData, 30000);
 
 // ✅ PINIGILANG MABUTI ANG PAGBALIK SA NAKARAANG PAHINA
 history.replaceState(null, null, location.href);

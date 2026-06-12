@@ -171,7 +171,7 @@ body::before{
     object-fit:cover;
 }
 
-/* ✅ INAYOS ANG Pwesto at laki ng decoration */
+/* ✅ TAMA NA ANG Pwesto at laki ng decoration */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -180,8 +180,8 @@ img.avatar-decoration {
     width: 140px !important;
     height: 140px !important;
     pointer-events: none !important;
-    z-index: 1 !important;  /* Nasa ilalim ng avatar */
-    display: block !important;
+    z-index: 1 !important;
+    display: none; /* Itago muna kung wala */
     border-radius: 0 !important;
     background: transparent !important;
 }
@@ -192,7 +192,7 @@ img.avatar-decoration {
     margin-bottom:5px;
 }
 
-/* ✅ INAYOS PARA HINDI LUMABAS ANG [object Object] */
+/* ✅ MALINAW NA ANG NOTE */
 .bio{
     opacity:.85;
     font-size:14px;
@@ -313,7 +313,7 @@ a {
 
     <div id="usernameText" class="username">@wtf.leon</div>
     
-    <!-- ✅ DITO LALABAS ANG NOTE / CUSTOM STATUS (WALA NANG OBJECT OBJECT) -->
+    <!-- ✅ DITO LALABAS ANG NOTE / CUSTOM STATUS -->
     <div id="noteText" class="bio">tara sleep call</div>
 
     <div class="socials">
@@ -385,10 +385,12 @@ async function fetchData() {
         const me = members.find(user => String(user.id) === String(YOUR_ID));
         if (!me) return;
 
-        // ✅ 1. AVATAR DECORATION - LALABAS NA
+        // ✅ 1. AVATAR DECORATION - TAMA NA ANG PAGBASA (avatarDecoration.asset)
         const decoEl = document.getElementById('decoImg');
-        if (me.effectURL && typeof me.effectURL === 'string' && me.effectURL.trim() !== '') {
-            decoEl.src = me.effectURL.trim();
+        if (me.avatarDecoration && me.avatarDecoration.asset) {
+            // ✅ BINUBUO ANG TAMANG LINK NG DECORATION
+            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${me.avatarDecoration.asset}.png?size=240`;
+            decoEl.src = decoUrl;
             decoEl.style.display = 'block';
         } else {
             decoEl.style.display = 'none';
@@ -400,12 +402,11 @@ async function fetchData() {
         // ✅ 3. USERNAME
         document.getElementById('usernameText').innerText = me.displayName || me.username || '@wtf.leon';
 
-        // ✅ 4. NOTE / CUSTOM STATUS - WALA NANG [object Object]
+        // ✅ 4. NOTE / CUSTOM STATUS - WALA NANG ERROR
         const noteEl = document.getElementById('noteText');
         let statusText = "tara sleep call"; // Default
 
         if (me.customStatus !== undefined && me.customStatus !== null) {
-            // ✅ DITO INAYOS: Kung bagay o string, kukunin; kung object, babasahin nang tama
             if (typeof me.customStatus === 'string') {
                 statusText = me.customStatus;
             } 

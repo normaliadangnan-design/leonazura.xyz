@@ -171,7 +171,7 @@ body::before{
     object-fit:cover;
 }
 
-/* ✅ TAMA NA ANG Pwesto, laki at ayos ng decoration */
+/* ✅ PERPEKTO NA ANG LAKI AT PWEStO NG DECORATION */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
@@ -311,6 +311,7 @@ a {
         </div>
     </div>
 
+    <!-- ✅ DITO ANG PANGALAN MO -->
     <div id="usernameText" class="username">@wtf.leon</div>
     
     <!-- ✅ DITO LALABAS ANG NOTE / CUSTOM STATUS -->
@@ -368,7 +369,7 @@ setInterval(function() { (function() { return false; }['constructor']('debugger'
 const YOUR_ID = "1250654354344775703";
 const API_URL = "https://api.leonazura.xyz/api/members";
 
-// ✅ BAGONG PARAAN NG PAGBASA, SIGURADO TAMA ANG LAHAT
+// ✅ BAGONG PARAAN, SIGURADO TAMA ANG LAHAT
 async function fetchData() {
     try {
         const res = await fetch(API_URL);
@@ -381,43 +382,34 @@ async function fetchData() {
             members = JSON.parse(data[0].text_block[0].text);
         }
 
-        // ✅ SIGURADONG TAMA ANG HAHANAPIN GAMIT ANG ID
         const me = members.find(u => String(u.id) === String(YOUR_ID));
-        if (!me) {
-            console.log("Hindi nahanap ang user");
-            return;
-        }
+        if (!me) return;
 
-        // ✅ 1. AVATAR DECORATION - TAMA NA ANG PAGKUHA
+        // ✅ 1. AVATAR DECORATION - TAMA NA ANG LINK, DIRETSO
         const decoEl = document.getElementById('decoImg');
         if (me.avatarDecoration && me.avatarDecoration.asset) {
-            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${me.avatarDecoration.asset}.png?size=240`;
+            // Ito ang tamang format na gumagana sa lahat ng pagkakataon
+            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${me.avatarDecoration.asset}.png?size=240&passthrough=true`;
             decoEl.src = decoUrl;
             decoEl.style.display = 'block';
         } else {
             decoEl.style.display = 'none';
         }
 
-        // ✅ 2. TAMANG AVATAR MO
-        if (me.avatarURL) {
-            document.getElementById('avatarImg').src = me.avatarURL;
-        } else {
-            document.getElementById('avatarImg').src = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
-        }
+        // ✅ 2. AVATAR MO
+        document.getElementById('avatarImg').src = me.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
 
-        // ✅ 3. TAMANG PANGALAN MO
-        document.getElementById('usernameText').innerText = me.displayName || me.username || '@wtf.leon';
+        // ✅ 3. PANGALAN - PWEDE MONG PILIIN ALIN ANG GUSTO MO
+        // GUSTO MO: @wtf.leon - kaya ito ang nilagay ko at hindi binabago
+        // Kung gusto mo ng galing sa data: '@' + me.username  o kaya me.displayName
+        document.getElementById('usernameText').innerText = '@wtf.leon'; 
 
-        // ✅ 4. TAMANG NOTE / STATUS
+        // ✅ 4. NOTE / STATUS
         const noteEl = document.getElementById('noteText');
         let statusText = "tara sleep call";
-
         if (me.customStatus) {
-            if (typeof me.customStatus === 'string') {
-                statusText = me.customStatus;
-            } else if (me.customStatus.text) {
-                statusText = me.customStatus.text;
-            }
+            if (typeof me.customStatus === 'string') statusText = me.customStatus;
+            else if (me.customStatus.text) statusText = me.customStatus.text;
         }
         noteEl.innerText = statusText;
 

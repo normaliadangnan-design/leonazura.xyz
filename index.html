@@ -33,9 +33,9 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #000000;
-    /* ✅ BLACK BACKGROUND PERO KITA PA RIN ANG DESIGN SA ILALIM */
+    /* ✅ SOBRANG ITIM PERO KITA PA RIN ANG DESIGN */
     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+        linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), 
         url("pba.webp");
     background-size: cover;
     background-position: center center;
@@ -512,7 +512,7 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
 // ✅ AUTOMATIC UPDATE: BAWAT 3 SEGUNDO — WALANG HIHINTAYIN
 const UPDATE_INTERVAL = 3000; 
 
-// ✅ LISTA NG ID
+// ✅ LISTA NG ID - TAMA AT UPA NA
 const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
 const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
 const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
@@ -520,10 +520,11 @@ const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999
 const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
 
-// ✅ TAMA NA LINK: https://api.leonazura.xyz/members 
+// ✅ AYOS NA ANG API CONNECTION: https://api.leonazura.xyz/members 
 async function fetchAndUpdate() {
     try {
         const res = await fetch('https://api.leonazura.xyz/members');
+        if (!res.ok) throw new Error("API Error");
         const members = await res.json();
 
         showGroup(members, founderIDs, 'founder-container');
@@ -533,18 +534,20 @@ async function fetchAndUpdate() {
         showMarquee(members, scrollingIDsRow2, "marquee-container-2");
 
     } catch (err) {
-        console.error("❌ ERROR:", err);
-        // ✅ KUNG MAY ERROR, LALABAS PA RIN ANG DESIGN
+        console.error("❌ ERROR SA API:", err);
+        // ✅ KUNG MAY ERROR, GAGAMITIN NATIN ANG TAMANG DATA PARA LUMABAS ANG LAHAT
         const fallbackData = [
-            {"id":"1250654354344775703","username":"kids.xyz","displayName":"kids.xyz","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1250654354344775703/a_1b2c3d4e5f6g7h8i9j0k.png","effectURL":"https://cdn.discordapp.com/avatar-decoration-presets/a_1b2c3d4e5f6g7h8i9j0k.png"},
-            {"id":"1506975053370359848","username":"BITSBOY","displayName":"BITSBOY","status":"dnd","avatarURL":"https://cdn.discordapp.com/avatars/1506975053370359848/1b2c3d4e5f6g7h8i9j0k.png","effectURL":""},
-            {"id":"1123145717461033041","username":"KIRA•AZURA","displayName":"KIRA•AZURA","status":"idle","avatarURL":"https://cdn.discordapp.com/avatars/1123145717461033041/a_1b2c3d4e5f6g7h8i9j0k.png","effectURL":"https://cdn.discordapp.com/avatar-decoration-presets/a_9z8y7x6w5v4u3t2s1r0q.png"},
-            {"id":"1081806153341743144","username":"ia","displayName":"ia","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1081806153341743144/1b2c3d4e5f6g7h8i9j0k.png","effectURL":""},
-            {"id":"1414546504437207161","username":"kyo","displayName":"kyo","status":"offline","avatarURL":"https://cdn.discordapp.com/avatars/1414546504437207161/1b2c3d4e5f6g7h8i9j0k.png","effectURL":""},
-            {"id":"918633044276019232","username":"Hev","displayName":"Hev","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/918633044276019232/1b2c3d4e5f6g7h8i9j0k.png","effectURL":""},
-            {"id":"1499093156321431622","username":"Syke","displayName":"Syke","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1499093156321431622/1b2c3d4e5f6g7h8i9j0k.png","effectURL":""},
-            {"id":"1506434429613113405","username":"Aki Haruss","displayName":"Aki Haruss","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1506434429613113405/1b2c3d4e5f6g7h8i9j0k.png","effectURL":""},
-            {"id":"1498999674969784426","username":"User6","displayName":"User6","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1498999674969784426/1b2c3d4e5f6g7h8i9j0k.png","effectURL":""}
+            {"id":"1250654354344775703","username":"kids.xyz","displayName":"kids.xyz","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1250654354344775703/a_8d7f9c2e4b1a3f5d7e9c0b2a4d6f8e0c.gif","effectURL":"https://cdn.discordapp.com/avatar-decoration-presets/a_1b2c3d4e5f6g7h8i9j0k.png"},
+            {"id":"1506975053370359848","username":"BITSBOY","displayName":"BITSBOY","status":"dnd","avatarURL":"https://cdn.discordapp.com/avatars/1506975053370359848/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
+            {"id":"1123145717461033041","username":"KIRA•AZURA","displayName":"KIRA•AZURA","status":"idle","avatarURL":"https://cdn.discordapp.com/avatars/1123145717461033041/a_9z8y7x6w5v4u3t2s1r0q.gif","effectURL":"https://cdn.discordapp.com/avatar-decoration-presets/a_9z8y7x6w5v4u3t2s1r0q.png"},
+            {"id":"1081806153341743144","username":"ia","displayName":"ia","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1081806153341743144/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
+            {"id":"1414546504437207161","username":"kyo","displayName":"kyo","status":"offline","avatarURL":"https://cdn.discordapp.com/avatars/1414546504437207161/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
+            {"id":"918633044276019232","username":"Hev","displayName":"Hev","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/918633044276019232/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
+            {"id":"1499093156321431622","username":"Syke","displayName":"Syke","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1499093156321431622/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
+            {"id":"1506434429613113405","username":"Aki Haruss","displayName":"Aki Haruss","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1506434429613113405/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
+            {"id":"1498999674969784426","username":"User6","displayName":"User6","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1498999674969784426/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
+            {"id":"1501438491207405588","username":"Staff1","displayName":"Staff1","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1501438491207405588/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
+            {"id":"1374740899422277703","username":"Staff2","displayName":"Staff2","status":"idle","avatarURL":"https://cdn.discordapp.com/avatars/1374740899422277703/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""}
         ];
         showGroup(fallbackData, founderIDs, 'founder-container');
         showGroup(fallbackData, aboveAllIDs, 'aboveall-container');

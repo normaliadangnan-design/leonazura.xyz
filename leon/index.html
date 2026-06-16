@@ -158,6 +158,8 @@ body::before{
     border-radius: 50%;
     padding: 3px;
     box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+    /* ✅ PARA MAKITA ANG POPUP */
+    cursor: pointer;
 }
 
 .avatar-img-holder {
@@ -295,6 +297,77 @@ a {
     color: inherit !important;
     pointer-events: auto;
 }
+
+/* ✅ BAGONG DAGDAG: YUNG POPUP BOX NA LALABAS PAG TINUTOK ANG MOUSE */
+.profile-popup {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 15px;
+    width: 220px;
+    background: #0a0a0a;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.9);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+/* ✅ LALABAS LANG PAG NAKA-HOVER SA AVATAR */
+.avatar:hover .profile-popup {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #222;
+}
+
+.popup-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+.popup-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.popup-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.popup-status {
+    font-size: 11px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.popup-note {
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+    padding-top: 4px;
+}
+
 </style>
 </head>
 <body oncontextmenu="return false;">
@@ -320,6 +393,23 @@ a {
         <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
         <div class="avatar-img-holder">
             <img id="avatarImg" src="" alt="Leon Avatar">
+        </div>
+
+        <!-- ✅ BAGONG DAGDAG: ITO YUNG BOX NA LALABAS PAG TINUTOK ANG MOUSE -->
+        <div class="profile-popup">
+            <div class="popup-header">
+                <div class="popup-avatar">
+                    <img id="popupAvatarImg" src="" alt="">
+                </div>
+                <div>
+                    <div class="popup-name" id="popupUsername"></div>
+                    <div class="popup-status">
+                        <span id="popupStatusDot" class="status-dot"></span>
+                        <span id="popupStatusText"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="popup-note" id="popupNote"></div>
         </div>
     </div>
 
@@ -390,11 +480,15 @@ async function fetchData() {
 
         // ✅ AVATAR
         const avatarEl = document.getElementById('avatarImg');
+        const popupAvatarEl = document.getElementById('popupAvatarImg');
+        let avatarUrl = "";
         if (d.discord_user.avatar) {
-            avatarEl.src = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
+            avatarUrl = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
         } else {
-            avatarEl.src = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
+            avatarUrl = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
         }
+        avatarEl.src = avatarUrl;
+        popupAvatarEl.src = avatarUrl;
 
         // ✅ AVATAR DECORATION
         const decoEl = document.getElementById('decoImg');
@@ -407,40 +501,55 @@ async function fetchData() {
         }
 
         // ✅ USERNAME (GAGALING SA API, NAKIKITA NA)
-        document.getElementById('usernameText').innerText = d.discord_user.username; 
+        const username = d.discord_user.username;
+        document.getElementById('usernameText').innerText = username; 
+        document.getElementById('popupUsername').innerText = username;
 
         // ✅ CUSTOM STATUS / NOTE
         const noteEl = document.getElementById('noteText');
+        const popupNoteEl = document.getElementById('popupNote');
         const customStatus = d.activities.find(a => a.type === 4);
+        let statusText = "tara sleep call";
         if (customStatus && customStatus.state) {
-            noteEl.innerText = customStatus.state;
-        } else {
-            noteEl.innerText = "tara sleep call";
+            statusText = customStatus.state;
         }
+        noteEl.innerText = statusText;
+        popupNoteEl.innerText = statusText;
 
         // ✅ STATUS (Online/Idle/DND/Offline)
         const statusDot = document.getElementById('statusDot');
         const statusTextEl = document.getElementById('statusText');
+        const popupStatusDot = document.getElementById('popupStatusDot');
+        const popupStatusText = document.getElementById('popupStatusText');
         const statusArea = document.getElementById('statusArea');
         statusDot.className = "status-dot";
+        popupStatusDot.className = "status-dot";
+
+        let statusString = "";
+        let statusClass = "";
 
         switch(d.discord_status) {
             case 'online':
-                statusDot.classList.add('status-online');
-                statusTextEl.innerText = 'Online';
+                statusClass = 'status-online';
+                statusString = 'Online';
                 break;
             case 'idle':
-                statusDot.classList.add('status-idle');
-                statusTextEl.innerText = 'Idle';
+                statusClass = 'status-idle';
+                statusString = 'Idle';
                 break;
             case 'dnd':
-                statusDot.classList.add('status-dnd');
-                statusTextEl.innerText = 'Do Not Disturb';
+                statusClass = 'status-dnd';
+                statusString = 'Do Not Disturb';
                 break;
             default:
-                statusDot.classList.add('status-offline');
-                statusTextEl.innerText = 'Offline / Invisible';
+                statusClass = 'status-offline';
+                statusString = 'Offline / Invisible';
         }
+
+        statusDot.classList.add(statusClass);
+        statusTextEl.innerText = statusString;
+        popupStatusDot.classList.add(statusClass);
+        popupStatusText.innerText = statusString;
         statusArea.style.display = 'flex';
 
     } catch (err) {

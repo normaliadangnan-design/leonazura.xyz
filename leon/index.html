@@ -91,7 +91,7 @@ body::before{
 
 /* ✅ SOBRANG LAKI NA NG LOGO */
 .main-logo {
-    max-width: 240px; /* ✅ DATI 200, NGAYON 240 NA */
+    max-width: 240px;
     height: auto;
     object-fit: contain;
 }
@@ -118,20 +118,25 @@ body::before{
     to { width: 80px; } 
 }
 
+/* ✅ STATUS CONTAINER: INAYOS PARA LUMABAS */
 .status-container {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     gap: 8px;
     margin-bottom: 18px;
     font-size: 15px;
     font-weight: 500;
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 15px;
     background: #111;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 10;
+    position: relative;
 }
 
 /* ✅ PARE-PAREHO ANG LAKI NG DOTS */
@@ -298,11 +303,11 @@ a {
     left: 50%;
     transform: translateX(-50%);
     margin-bottom: 12px;
-    width: 380px; /* ✅ PINALAKI NANG MABUTI, DATI 320 */
+    width: 380px;
     background: #000000 !important;
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 8px;
-    padding: 16px; /* ✅ MAS MARAMING LOOB */
+    padding: 16px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.9);
     z-index: 999;
     opacity: 0;
@@ -326,7 +331,7 @@ a {
 
 .popup-avatar-wrapper {
     position: relative;
-    width: 45px; /* ✅ MEDYO LAKI RIN */
+    width: 45px;
     height: 45px;
     flex-shrink: 0;
 }
@@ -366,7 +371,7 @@ a {
 }
 
 .popup-nickname {
-    font-size: 16px; /* ✅ MAS MALAKING FONT */
+    font-size: 16px;
     font-weight: 600;
     color: #ffffff;
     display: block;
@@ -422,7 +427,8 @@ a {
 
     <div class="title">$Leon</div>
 
-    <div id="statusArea" class="status-container" style="display: none;">
+    <!-- ✅ STATUS CONTAINER: HINDI NA NAKATAGO -->
+    <div id="statusArea" class="status-container">
         <span id="statusDot" class="status-dot"></span>
         <span id="statusText"></span>
     </div>
@@ -557,12 +563,14 @@ async function fetchData() {
         noteEl.innerText = statusText;
         popupNoteEl.innerText = statusText;
 
-        // ✅ STATUS: NASA MAIN BOX AT NASA POPUP BOX
+        // ✅ STATUS: NASA MAIN BOX AT NASA POPUP BOX - INAYOS ANG PAGBASA
         const statusDot = document.getElementById('statusDot');
         const statusTextEl = document.getElementById('statusText');
         const popupStatusDot = document.getElementById('popupStatusDot');
         const popupStatusText = document.getElementById('popupStatusText');
         const statusArea = document.getElementById('statusArea');
+        
+        // ✅ LINISIN MUNA ANG LAHAT NG CLASS
         statusDot.className = "status-dot";
         popupStatusDot.className = "status-dot";
 
@@ -587,6 +595,7 @@ async function fetchData() {
                 statusString = 'Offline / Invisible';
         }
 
+        // ✅ ILAGAY ANG TAMANG KULAY AT TEKSTO
         statusDot.classList.add(statusClass);
         statusTextEl.innerText = statusString;
         popupStatusDot.classList.add(statusClass);

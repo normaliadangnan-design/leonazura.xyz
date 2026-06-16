@@ -118,7 +118,7 @@ body::before{
     to { width: 80px; } 
 }
 
-/* ✅ STATUS CONTAINER: INAYOS PARA LUMABAS */
+/* ✅ STATUS CONTAINER: SIGURADONG LUMALABAS AT NAKIKITA */
 .status-container {
     display: flex !important;
     align-items: center;
@@ -135,8 +135,9 @@ body::before{
     margin-right: auto;
     opacity: 1 !important;
     visibility: visible !important;
-    z-index: 10;
+    z-index: 999;
     position: relative;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* ✅ PARE-PAREHO ANG LAKI NG DOTS */
@@ -309,7 +310,7 @@ a {
     border-radius: 8px;
     padding: 16px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.9);
-    z-index: 999;
+    z-index: 9999;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, visibility 0.2s ease;
@@ -427,10 +428,10 @@ a {
 
     <div class="title">$Leon</div>
 
-    <!-- ✅ STATUS CONTAINER: HINDI NA NAKATAGO -->
+    <!-- ✅ STATUS CONTAINER: HINDI NA TATAGO, SIGURADONG NAKIKITA -->
     <div id="statusArea" class="status-container">
         <span id="statusDot" class="status-dot"></span>
-        <span id="statusText"></span>
+        <span id="statusText">Loading...</span>
     </div>
 
     <div class="avatar">
@@ -447,7 +448,7 @@ a {
                     <div class="popup-name" id="popupUsername">@wtf.leon</div>
                     <div class="popup-status">
                         <span id="popupStatusDot" class="status-dot"></span>
-                        <span id="popupStatusText">dnd</span>
+                        <span id="popupStatusText">Loading...</span>
                     </div>
                 </div>
             </div>
@@ -511,6 +512,7 @@ document.addEventListener('keydown', e => {
 });
 setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
 
+// ✅ EKSAKTO ANG LINK NG API MO
 const YOUR_ID = "1250654354344775703";
 const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
 
@@ -519,9 +521,13 @@ async function fetchData() {
         const res = await fetch(API_URL);
         const json = await res.json();
 
-        if (!json.success) return;
+        if (!json.success) {
+            console.error("API Error:", json);
+            return;
+        }
         const d = json.data;
 
+        // ✅ AVATAR
         const avatarEl = document.getElementById('avatarImg');
         const popupAvatarEl = document.getElementById('popupAvatarImg');
         let avatarUrl = "";
@@ -533,6 +539,7 @@ async function fetchData() {
         avatarEl.src = avatarUrl;
         popupAvatarEl.src = avatarUrl;
 
+        // ✅ DECORATION
         const decoEl = document.getElementById('decoImg');
         const popupDecoEl = document.getElementById('popupDeco');
         if (d.discord_user.avatar_decoration_data) {
@@ -547,36 +554,36 @@ async function fetchData() {
             popupDecoEl.style.display = 'none';
         }
 
+        // ✅ NICKNAME & USERNAME
         const nickname = d.discord_user.global_name || "Leon";
         const username = d.discord_user.username || "wtf.leon";
         document.getElementById('popupNickname').innerText = nickname;
         document.getElementById('popupUsername').innerText = `@${username}`;
         document.getElementById('usernameText').innerText = username;
 
+        // ✅ CUSTOM STATUS / NOTE
         const noteEl = document.getElementById('noteText');
-        const popupNoteEl = document.getElementById('popupNote');
         const customStatus = d.activities.find(a => a.type === 4);
         let statusText = "PA KISS NGA";
         if (customStatus && customStatus.state) {
             statusText = customStatus.state;
         }
         noteEl.innerText = statusText;
-        popupNoteEl.innerText = statusText;
 
-        // ✅ STATUS: NASA MAIN BOX AT NASA POPUP BOX - INAYOS ANG PAGBASA
+        // ✅ STATUS: EKSAKTO ANG PAGBASA
         const statusDot = document.getElementById('statusDot');
         const statusTextEl = document.getElementById('statusText');
         const popupStatusDot = document.getElementById('popupStatusDot');
         const popupStatusText = document.getElementById('popupStatusText');
-        const statusArea = document.getElementById('statusArea');
         
-        // ✅ LINISIN MUNA ANG LAHAT NG CLASS
+        // Linisin muna ang mga klase
         statusDot.className = "status-dot";
         popupStatusDot.className = "status-dot";
 
         let statusString = "";
         let statusClass = "";
 
+        // ✅ EKSAKTO ANG PAGBASA NG STATUS
         switch(d.discord_status) {
             case 'online':
                 statusClass = 'status-online';
@@ -588,27 +595,28 @@ async function fetchData() {
                 break;
             case 'dnd':
                 statusClass = 'status-dnd';
-                statusString = 'dnd';
+                statusString = 'Do Not Disturb';
                 break;
             default:
                 statusClass = 'status-offline';
                 statusString = 'Offline / Invisible';
         }
 
-        // ✅ ILAGAY ANG TAMANG KULAY AT TEKSTO
+        // ✅ ILAGAY ANG KULAY AT TEKSTO
         statusDot.classList.add(statusClass);
         statusTextEl.innerText = statusString;
         popupStatusDot.classList.add(statusClass);
         popupStatusText.innerText = statusString;
-        statusArea.style.display = 'flex';
 
     } catch (err) {
-        console.error("API Error:", err);
+        console.error("API Fetch Error:", err);
+        document.getElementById('statusText').innerText = 'Error';
     }
 }
 
+// ✅ TAWAGIN ANG FUNCTION AGAD
 fetchData();
-setInterval(fetchData, 30000);
+setInterval(fetchData, 15000); // ✅ BAWAS ANG ORAS NG UPDATE
 
 history.replaceState(null, null, location.href);
 window.onpopstate = () => history.go(1);

@@ -6,6 +6,7 @@
 <title>Leon</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap');
 
 *{
     margin:0;
@@ -66,78 +67,70 @@ body::before{
     100% { opacity: 1; transform: scale(1.05); }
 }
 
+/* ✅ BAGONG CARD: SAKTO SA LAKI, HUGIS, AT ITSURA */
 .card{
     position:relative;
     z-index:2;
     text-align:center;
-    padding:40px;
-    width:380px;
-    background: #000000; 
-    border-radius:25px;
-    border:1px solid rgba(255,255,255,0.1);
-    box-shadow:0 10px 30px rgba(0,0,0,0.8);
+    padding:30px 25px;
+    width:320px; /* ✅ SAKTO LANG ANG LAKI */
+    background: #0a0a0a; /* ✅ MAS MABABAW NA ITIM */
+    border-radius:12px; /* ✅ MAS KONTI ANG KURBA */
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 8px 25px rgba(0,0,0,0.7);
 }
 
 .logo-img-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom:20px;
-    width: 100%;
-    background: #000000;
-    padding: 15px;
-    border-radius: 12px;
+    display: none; /* ✅ TINANGGAL ANG LOGO SA TAAS */
 }
 
-.main-logo {
-    max-width: 160px;
-    height: auto;
-    object-fit: contain;
-}
-
-/* ✅ INAYOS: PANGALAN LANG, WALANG @, NASA TAAS */
+/* ✅ TITLE: GAYA SA EXAMPLE, MAY $, IBANG FONT */
 .title {
-    font-size: 22px;
-    letter-spacing: 4px;
-    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
     overflow: hidden;
     white-space: nowrap;
     border-right: 0; 
     width: fit-content;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 12px auto;
     width: 0; 
-    font-weight: 600;
+    font-weight: 500;
+    color: #e0e0e0;
 }
 
 .title.typing-active {
-    animation: typing 2s steps(20, end) forwards;
+    animation: typing 2s steps(15, end) forwards;
 }
 
 @keyframes typing {
     from { width: 0; }
-    to { width: 80px; } 
+    to { width: 70px; } 
 }
 
+/* ✅ STATUS: NASA TAAS NG AVATAR, MALIIT LANG */
 .status-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-bottom: 18px;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 6px 14px;
-    border-radius: 15px;
-    background: #111;
+    gap: 6px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: #121212;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    color: #b0b0b0;
 }
 
 .status-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
+    width:8px;
+    height:8px;
+    border-radius:50%;
 }
 .status-online { background-color: #23a55a; }
 .status-idle { background-color: #f0b232; }
@@ -146,10 +139,10 @@ body::before{
 
 .avatar{
     position: relative;
-    width:140px;
-    height:140px;
+    width:110px; /* ✅ PINALIIT ANG BILOG */
+    height:110px;
     margin:auto;
-    margin-bottom:18px;
+    margin-bottom:12px;
     overflow: visible !important;
 }
 
@@ -158,7 +151,7 @@ body::before{
     height: 100%;
     border-radius:50%;
     overflow: hidden;
-    border:3px solid rgba(255,255,255,.18);
+    border:2px solid rgba(255,255,255,.12);
     background: #000;
     position: relative;
     z-index: 2;
@@ -175,8 +168,8 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 180px !important;
-    height: 180px !important;
+    width: 140px !important;
+    height: 140px !important;
     pointer-events: none !important;
     z-index: 1 !important;
     display: none;
@@ -185,97 +178,112 @@ img.avatar-decoration {
     image-rendering: -webkit-optimize-contrast;
 }
 
-/* ✅ TINANGGAL ANG @wtf.leon, WALA NA ITO */
+/* ✅ USERNAME: KUSA GAGALING SA API */
 .username{
-    display: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #ffffff;
+    display: block !important;
 }
 
+/* ✅ NICKNAME / NOTE: MAS MALINAW AT MALIIT */
 .bio{
-    opacity:.85;
-    font-size:15px;
-    margin-bottom:28px;
-    min-height: 20px;
+    opacity:.75;
+    font-size:12px;
+    margin-bottom:20px;
+    min-height: 16px;
     transition: all 0.3s ease;
-    line-height: 1.4;
+    line-height: 1.3;
     word-break: break-word;
+    color: #aaaaaa;
 }
 
+/* ✅ SOCIALS: MAS MALIIT, SAKTO SA LAYO */
 .socials{
     display:flex;
     justify-content:center;
-    gap:18px;
-    margin-bottom:25px;
+    gap:15px;
+    margin-bottom:20px;
 }
 
 .social{
-    width:58px;
-    height:58px;
+    width:42px;
+    height:42px;
     border-radius:50%;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:rgba(255,255,255,.05);
+    background:rgba(255,255,255,.04);
     text-decoration:none;
     transition:.3s;
 }
 
 .social:hover{
-    transform:translateY(-4px);
-    background:rgba(255,255,255,.15);
+    transform:translateY(-3px);
+    background:rgba(255,255,255,.1);
 }
 
 .social svg {
-    width:26px;
-    height:26px;
+    width:18px;
+    height:18px;
     fill:white;
 }
 
+/* ✅ MUSIC BOX: GANYAN NA GANYAN ANG HUGIS AT LAKI */
 .music-container {
     display: block;
     color: white;
     background: #000000;
-    border-radius: 12px;
-    padding: 22px 18px;
+    border-radius: 8px;
+    padding: 12px 10px;
     width: 100%;
     transition: .3s;
     border: none;
     pointer-events: none;
     cursor: default;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
+    text-align: left;
 }
 
 .music-container:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
     background: #000000;
 }
 
 .music-title {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
     color: #ffffff;
+    text-align: center;
 }
 
 .music-artist {
-    font-size: 14px;
-    opacity: 0.7;
+    font-size: 11px;
+    opacity: 0.6;
     display: block;
-    margin-bottom: 0;
+    margin-bottom: 6px;
     color: #cccccc;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    text-align: center;
 }
 
+/* ✅ VIEWS: WALANG GUHIT, BILOG, ITIM LAMANG */
 .views-pill {
-    display: inline-block;
-    padding: 5px 24px;
-    border-radius: 30px;
-    border: 1px solid #ffffff;
-    font-size: 13px;
+    display: block;
+    padding: 4px 16px;
+    border-radius: 20px;
+    border: none; /* ✅ TINANGGAL ANG PUTING GUHIT */
+    font-size: 11px;
     font-weight: 500;
-    background: transparent;
-    letter-spacing: 1px;
-    margin-top: 4px;
+    background: #000000;
+    letter-spacing: 0.5px;
+    margin: 0 auto;
+    width: fit-content;
+    color: #ddd;
 }
 
 a {
@@ -292,11 +300,8 @@ a {
 </div>
 
 <div class="card">
-    <div class="logo-img-container">
-        <img src="public azura.png" alt="Leon Logo" class="main-logo" onerror="this.src='https://i.imgur.com/w1A2v2A.png';">
-    </div>
 
-    <!-- ✅ NAGING "LEON" NA LANG, WALANG @ -->
+    <!-- ✅ TITLE: $Leon -->
     <div class="title">$Leon</div>
 
     <div id="statusArea" class="status-container" style="display: none;">
@@ -311,10 +316,11 @@ a {
         </div>
     </div>
 
-    <!-- ✅ TINANGGAL NA ANG @wtf.leon DITO -->
+    <!-- ✅ USERNAME: GAGALING SA API -->
     <div id="usernameText" class="username"></div>
     
-    <div id="noteText" class="bio">tara sleep call</div>
+    <!-- ✅ NOTE / CUSTOM STATUS: GAGALING SA API -->
+    <div id="noteText" class="bio"></div>
 
     <div class="socials">
         <a class="social" href="https://discord.gg/CwsGFu6D" target="_blank">
@@ -364,6 +370,7 @@ document.addEventListener('keydown', e => {
 });
 setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
 
+// ✅ API MO
 const YOUR_ID = "1250654354344775703";
 const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
 
@@ -375,6 +382,7 @@ async function fetchData() {
         if (!json.success) return;
         const d = json.data;
 
+        // ✅ AVATAR
         const avatarEl = document.getElementById('avatarImg');
         if (d.discord_user.avatar) {
             avatarEl.src = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
@@ -382,6 +390,7 @@ async function fetchData() {
             avatarEl.src = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
         }
 
+        // ✅ AVATAR DECORATION
         const decoEl = document.getElementById('decoImg');
         if (d.discord_user.avatar_decoration_data) {
             const asset = d.discord_user.avatar_decoration_data.asset;
@@ -391,9 +400,10 @@ async function fetchData() {
             decoEl.style.display = 'none';
         }
 
-        // ✅ TINANGGAL NA ANG PAGBABAWAS NG @wtf.leon
-        document.getElementById('usernameText').innerText = ''; 
+        // ✅ USERNAME (GAGALING SA API)
+        document.getElementById('usernameText').innerText = d.discord_user.username; 
 
+        // ✅ CUSTOM STATUS / NOTE
         const noteEl = document.getElementById('noteText');
         const customStatus = d.activities.find(a => a.type === 4);
         if (customStatus && customStatus.state) {
@@ -402,6 +412,7 @@ async function fetchData() {
             noteEl.innerText = "tara sleep call";
         }
 
+        // ✅ STATUS (Online/Idle/DND/Offline)
         const statusDot = document.getElementById('statusDot');
         const statusTextEl = document.getElementById('statusText');
         const statusArea = document.getElementById('statusArea');

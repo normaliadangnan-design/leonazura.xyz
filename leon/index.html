@@ -144,7 +144,7 @@ body::before{
 .status-dnd { background-color: #f13f43; }
 .status-offline { background-color: #80848e; }
 
-/* ✅ AVATAR BOX: GAYA SA GUSTO MO, BALIK SA ORIHINAL NA LAKI */
+/* ✅ AVATAR: TINANGGAL NA ANG RAINBOW BORDER, BALIK SA DATI */
 .avatar{
     position: relative;
     width:140px;
@@ -152,14 +152,8 @@ body::before{
     margin:auto;
     margin-bottom:18px;
     overflow: visible !important;
-    /* ✅ YUNG BOX NA GUSTO MO */
-    border: 2px solid;
-    border-image: linear-gradient(45deg, #ffd700, #ff69b4, #9932cc) 1;
-    border-radius: 50%;
-    padding: 3px;
-    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
-    /* ✅ PARA MAKITA ANG POPUP */
-    cursor: pointer;
+    /* ✅ WALA NANG BORDER / RAINBOW */
+    cursor: pointer; /* ✅ PARA MAKITA ANG POPUP */
 }
 
 .avatar-img-holder {
@@ -298,18 +292,18 @@ a {
     pointer-events: auto;
 }
 
-/* ✅ BAGONG DAGDAG: YUNG POPUP BOX NA LALABAS PAG TINUTOK ANG MOUSE */
+/* ✅ BAGONG AYOS: POPUP NASA TAAS, MALAKI, GAYA SA EXAMPLE */
 .profile-popup {
     position: absolute;
-    top: 100%;
+    bottom: 100%; /* ✅ NASA TAAS NA */
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 15px;
-    width: 220px;
-    background: #0a0a0a;
+    margin-bottom: 15px; /* ✅ LAYO MULA SA AVATAR */
+    width: 260px; /* ✅ PINALAKI */
+    background: #0a0a0a; /* ✅ ITIM NA ITIM */
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 8px;
-    padding: 12px;
+    padding: 15px; /* ✅ MAS MALAKING LOOB */
     box-shadow: 0 4px 15px rgba(0,0,0,0.9);
     z-index: 999;
     opacity: 0;
@@ -327,15 +321,15 @@ a {
 .popup-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-    padding-bottom: 6px;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
     border-bottom: 1px solid #222;
 }
 
 .popup-avatar {
-    width: 35px;
-    height: 35px;
+    width: 45px; /* ✅ PINALAKI ANG MALIIT NA AVATAR */
+    height: 45px;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid #333;
@@ -348,24 +342,24 @@ a {
 }
 
 .popup-name {
-    font-size: 13px;
+    font-size: 15px; /* ✅ PINALAKI ANG SULAT */
     font-weight: 600;
     color: #fff;
 }
 
 .popup-status {
-    font-size: 11px;
+    font-size: 12px; /* ✅ PINALAKI ANG SULAT */
     color: #888;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
 }
 
 .popup-note {
-    font-size: 12px;
+    font-size: 13px; /* ✅ PINALAKI ANG SULAT */
     color: #aaa;
     text-align: center;
-    padding-top: 4px;
+    padding-top: 5px;
 }
 
 </style>
@@ -390,12 +384,7 @@ a {
     </div>
 
     <div class="avatar">
-        <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
-        <div class="avatar-img-holder">
-            <img id="avatarImg" src="" alt="Leon Avatar">
-        </div>
-
-        <!-- ✅ BAGONG DAGDAG: ITO YUNG BOX NA LALABAS PAG TINUTOK ANG MOUSE -->
+        <!-- ✅ POPUP NASA TAAS NA -->
         <div class="profile-popup">
             <div class="popup-header">
                 <div class="popup-avatar">
@@ -410,6 +399,11 @@ a {
                 </div>
             </div>
             <div class="popup-note" id="popupNote"></div>
+        </div>
+
+        <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
+        <div class="avatar-img-holder">
+            <img id="avatarImg" src="" alt="Leon Avatar">
         </div>
     </div>
 

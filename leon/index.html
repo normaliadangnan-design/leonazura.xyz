@@ -71,7 +71,7 @@ body::before{
     z-index:2;
     text-align:center;
     padding:40px;
-    width:320px;
+    width:380px; /* ✅ PINALAKI ANG LAMAN NG CARD */
     background: #000000; 
     border-radius:25px;
     border:1px solid rgba(255,255,255,0.1);
@@ -82,22 +82,22 @@ body::before{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom:18px;
+    margin-bottom:20px;
     width: 100%;
     background: #000000;
-    padding: 12px;
+    padding: 15px;
     border-radius: 12px;
 }
 
 .main-logo {
-    max-width: 110px; /* ✅ LAKI NANG LOGO, DATI 80 LANG */
+    max-width: 160px; /* ✅ SOBRANG LAKI NA NG LOGO */
     height: auto;
     object-fit: contain;
 }
 
 /* Typewriter Animation - inactive by default */
 .title {
-    font-size: 20px;
+    font-size: 22px;
     letter-spacing: 4px;
     margin-bottom: 10px;
     overflow: hidden;
@@ -124,10 +124,10 @@ body::before{
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-bottom: 15px;
-    font-size: 14px;
+    margin-bottom: 18px;
+    font-size: 15px;
     font-weight: 500;
-    padding: 4px 12px;
+    padding: 6px 14px;
     border-radius: 15px;
     background: #111;
     width: fit-content;
@@ -136,8 +136,8 @@ body::before{
 }
 
 .status-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
 }
 .status-online { background-color: #23a55a; }
@@ -147,10 +147,10 @@ body::before{
 
 .avatar{
     position: relative;
-    width:110px;
-    height:110px;
+    width:140px; /* ✅ PINALAKI ANG BILOG */
+    height:140px; /* ✅ PINALAKI ANG BILOG */
     margin:auto;
-    margin-bottom:15px;
+    margin-bottom:18px;
     overflow: visible !important;
 }
 
@@ -177,8 +177,8 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 145px !important;
-    height: 145px !important;
+    width: 180px !important; /* ✅ SINABAYAN SA LAKI NG BILOG */
+    height: 180px !important; /* ✅ SINABAYAN SA LAKI NG BILOG */
     pointer-events: none !important;
     z-index: 1 !important;
     display: none;
@@ -188,7 +188,7 @@ img.avatar-decoration {
 }
 
 .username{
-    font-size:22px;
+    font-size:24px;
     font-weight:600;
     margin-bottom:5px;
 }
@@ -196,8 +196,8 @@ img.avatar-decoration {
 /* ✅ MALINAW NA ANG NOTE */
 .bio{
     opacity:.85;
-    font-size:14px;
-    margin-bottom:25px;
+    font-size:15px;
+    margin-bottom:28px;
     min-height: 20px;
     transition: all 0.3s ease;
     line-height: 1.4;
@@ -207,13 +207,13 @@ img.avatar-decoration {
 .socials{
     display:flex;
     justify-content:center;
-    gap:14px;
-    margin-bottom:20px;
+    gap:18px;
+    margin-bottom:25px;
 }
 
 .social{
-    width:48px;
-    height:48px;
+    width:58px; /* ✅ PINALAKI ANG SOCIAL BUTTONS */
+    height:58px; /* ✅ PINALAKI ANG SOCIAL BUTTONS */
     border-radius:50%;
     display:flex;
     justify-content:center;
@@ -229,20 +229,22 @@ img.avatar-decoration {
 }
 
 .social svg {
-    width:22px;
-    height:22px;
+    width:26px; /* ✅ PINALAKI ANG ICON SA LOOB */
+    height:26px; /* ✅ PINALAKI ANG ICON SA LOOB */
     fill:white;
 }
 
 .music-container {
     display: block;
-    text-decoration: none;
+    /* ✅ TINANGGAL ANG LINK: text-decoration: none; */
     color: white;
     background: #111111;
     border-radius: 15px;
-    padding: 14px;
+    padding: 18px; /* ✅ PINALAKI ANG PADDING */
     transition: .3s;
     border: 1px solid rgba(255,255,255,0.05);
+    pointer-events: none; /* ✅ HINDI NA PWEDENG PINDUTIN */
+    cursor: default; /* ✅ NAGIGING KURSOR LANG HINDI KAMAY */
 }
 
 .music-container:hover {
@@ -251,28 +253,28 @@ img.avatar-decoration {
 }
 
 .music-title {
-    font-size: 15px;
+    font-size: 17px; /* ✅ PINALAKI ANG FONT */
     font-weight: 600;
     display: block;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     color: #fff;
 }
 
 .music-artist {
-    font-size: 12px;
+    font-size: 13px; /* ✅ PINALAKI ANG FONT */
     opacity: 0.8;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: #ccc;
     letter-spacing: 0.5px;
 }
 
 .views-pill {
     display: inline-block;
-    padding: 4px 18px;
+    padding: 6px 22px; /* ✅ PINALAKI ANG LAKI NG BOX */
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 12px;
+    font-size: 13px; /* ✅ PINALAKI ANG FONT */
     font-weight: 500;
     background: #000000;
     letter-spacing: 1px;
@@ -329,11 +331,12 @@ a {
         </a>
     </div>
 
-    <a class="music-container" href="https://youtu.be/PPFODl1-pEY?si=hkDBwUA8L_H5gOTK" target="_blank">
+    <!-- ✅ TINANGGAL ANG <a> TAG, HINDI NA LINK -->
+    <div class="music-container">
         <span class="music-title">CHILL OUT</span>
         <span class="music-artist">HYU1 (Official Music Video)</span>
         <span class="views-pill">Views: 5669</span>
-    </a>
+    </div>
 </div>
 
 <audio id="bgMusic" loop>

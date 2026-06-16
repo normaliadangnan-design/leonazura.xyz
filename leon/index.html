@@ -66,32 +66,37 @@ body::before{
     100% { opacity: 1; transform: scale(1.05); }
 }
 
-/* ✅ TINANGGAL NA ANG MALAKING BLACK BOX (.card) */
+.card{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px;
+    width:380px;
+    background: transparent !important; /* ✅ TANGGAL NA ANG ITIM NA BACKGROUND */
+    border-radius:25px;
+    border: none; /* ✅ TINANGGAL DIN ANG BORDER */
+    box-shadow: none; /* ✅ TINANGGAL ANG ANINO */
+}
 
 .logo-img-container {
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: transparent;
-    padding: 0;
-    margin: 0;
-    width: auto;
-    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:20px;
+    width: 100%;
+    background: transparent; /* ✅ TANGGAL ITIM DITO */
+    padding: 15px;
+    border-radius: 12px;
 }
 
 .main-logo {
-    max-width: 140px;
+    max-width: 160px;
     height: auto;
     object-fit: contain;
 }
 
 /* ✅ ORIHINAL NA TITLE */
 .title {
-    position: absolute;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 22px;
     letter-spacing: 4px;
     margin-bottom: 10px;
@@ -102,7 +107,6 @@ body::before{
     margin: 0 auto 10px auto;
     width: 0; 
     font-weight: 600;
-    z-index: 10;
 }
 
 .title.typing-active {
@@ -140,17 +144,15 @@ body::before{
 .status-dnd { background-color: #f13f43; }
 .status-offline { background-color: #80848e; }
 
-/* ✅ AVATAR: PINALITI, SAKTO LANG ANG LAKI */
+/* ✅ AVATAR: SAKTO LANG ANG LAKI, HINDI SOBRANG LAKI */
 .avatar{
     position: relative;
-    width:140px; /* ✅ DATI 180, NGAYON 140 NA */
+    width:140px; /* ✅ PINALIIT PARA HINDI SOBRANG LAKI */
     height:140px;
     margin:auto;
-    margin-top: 150px; /* ✅ INILIPAT SA GITNA */
     margin-bottom:18px;
     overflow: visible !important;
     cursor: pointer;
-    z-index: 5;
 }
 
 .avatar-img-holder {
@@ -159,7 +161,7 @@ body::before{
     border-radius:50%;
     overflow: hidden;
     border:3px solid rgba(255,255,255,.18);
-    background: #000;
+    background: transparent;
     position: relative;
     z-index: 2;
 }
@@ -175,7 +177,7 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 170px !important; /* ✅ DATI 220, NGAYON 170 NA */
+    width: 170px !important; /* ✅ SAKTO LANG, HINDI SOBRANG LAKI */
     height: 170px !important;
     pointer-events: none !important;
     z-index: 1 !important;
@@ -185,14 +187,13 @@ img.avatar-decoration {
     image-rendering: -webkit-optimize-contrast;
 }
 
-/* ✅ USERNAME: NASA ILALIM NG AVATAR */
+/* ✅ USERNAME: NASA ORIHINAL NA Pwesto */
 .username{
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 8px;
     color: #ddd;
     display: block;
-    text-align: center;
 }
 
 .bio{
@@ -203,7 +204,6 @@ img.avatar-decoration {
     transition: all 0.3s ease;
     line-height: 1.4;
     word-break: break-word;
-    text-align: center;
 }
 
 .socials{
@@ -211,7 +211,6 @@ img.avatar-decoration {
     justify-content:center;
     gap:18px;
     margin-bottom:25px;
-    margin-top: 10px;
 }
 
 .social{
@@ -240,12 +239,10 @@ img.avatar-decoration {
 .music-container {
     display: block;
     color: white;
-    background: #000000;
+    background: rgba(0,0,0,0.6); /* ✅ MEDYO LANG ITIM, MALINAW PA RIN */
     border-radius: 12px;
     padding: 22px 18px;
-    width: 280px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
     transition: .3s;
     border: none;
     pointer-events: none;
@@ -255,7 +252,7 @@ img.avatar-decoration {
 
 .music-container:hover {
     transform: scale(1.03);
-    background: #000000;
+    background: rgba(0,0,0,0.8);
 }
 
 .music-title {
@@ -275,7 +272,7 @@ img.avatar-decoration {
     letter-spacing: 0.5px;
 }
 
-/* ✅ VIEWS: IBINALIK SA DATI, WALANG BILOG/LINYA */
+/* ✅ VIEWS: IBINALIK SA DATI */
 .views-pill {
     display: inline-block;
     padding: 5px 24px;
@@ -294,19 +291,19 @@ a {
     pointer-events: auto;
 }
 
-/* ✅ POPUP BOX: PINALAKI, GAYA KAY MONSY */
+/* ✅ POPUP BOX: PINALAKI GAYA KAY MONSY */
 .profile-popup {
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 15px;
-    width: 320px; /* ✅ PINALAKI, SAKTO SA EXAMPLE */
+    margin-bottom: 12px;
+    width: 320px; /* ✅ PINALAKI NA */
     background: #000000 !important;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.9);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.9);
     z-index: 999;
     opacity: 0;
     visibility: hidden;
@@ -322,16 +319,15 @@ a {
 .popup-header {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     margin: 0;
     position: relative;
 }
 
-/* ✅ AVATAR + DECORATION SA POPUP */
 .popup-avatar-wrapper {
     position: relative;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
 }
 
@@ -356,8 +352,8 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
     pointer-events: none;
     z-index: 1;
     display: none;
@@ -369,44 +365,41 @@ a {
     overflow: hidden;
 }
 
-/* ✅ NICKNAME: MALAKI AT MALINAW */
 .popup-nickname {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 600;
     color: #ffffff;
     display: block;
-    line-height: 1.2;
+    line-height: 1.1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* ✅ USERNAME: MAY @, GRAY */
 .popup-name {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     color: #8a8a8a;
     display: block;
-    line-height: 1.2;
-    margin: 2px 0 4px 0;
+    line-height: 1.1;
+    margin: 1px 0 3px 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* ✅ STATUS: MAY TULDOK */
 .popup-status {
-    font-size: 12px;
+    font-size: 11px;
     color: #888;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     line-height: 1;
 }
 
 .popup-status .status-dot {
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
 }
 
 .popup-note {
@@ -421,66 +414,65 @@ a {
     <div class="click-text">CLICK</div>
 </div>
 
-<!-- ✅ TINANGGAL NA ANG MALAKING CARD BOX -->
+<div class="card"> <!-- ✅ NASA ORIHINAL NA Pwesto pa rin -->
+    <div class="logo-img-container">
+        <img src="public azura.png" alt="Leon Logo" class="main-logo" onerror="this.src='https://i.imgur.com/w1A2v2A.png';">
+    </div>
 
-<div class="logo-img-container">
-    <img src="public azura.png" alt="Leon Logo" class="main-logo" onerror="this.src='https://i.imgur.com/w1A2v2A.png';">
-</div>
+    <div class="title">$Leon</div>
 
-<div class="title">$Leon</div>
+    <div id="statusArea" class="status-container" style="display: none;">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText"></span>
+    </div>
 
-<div id="statusArea" class="status-container" style="display: none;">
-    <span id="statusDot" class="status-dot"></span>
-    <span id="statusText"></span>
-</div>
-
-<div class="avatar">
-    <!-- ✅ POPUP: PINALAKI NA -->
-    <div class="profile-popup">
-        <div class="popup-header">
-            <div class="popup-avatar-wrapper">
-                <img id="popupDeco" class="popup-decoration" src="" alt="">
-                <div class="popup-avatar">
-                    <img id="popupAvatarImg" src="" alt="">
+    <div class="avatar">
+        <div class="profile-popup">
+            <div class="popup-header">
+                <div class="popup-avatar-wrapper">
+                    <img id="popupDeco" class="popup-decoration" src="" alt="">
+                    <div class="popup-avatar">
+                        <img id="popupAvatarImg" src="" alt="">
+                    </div>
                 </div>
-            </div>
-            <div class="popup-info">
-                <div class="popup-nickname" id="popupNickname">Leon</div>
-                <div class="popup-name" id="popupUsername">@wtf.leon</div>
-                <div class="popup-status">
-                    <span id="popupStatusDot" class="status-dot"></span>
-                    <span id="popupStatusText">dnd</span>
+                <div class="popup-info">
+                    <div class="popup-nickname" id="popupNickname">Leon</div>
+                    <div class="popup-name" id="popupUsername">@wtf.leon</div>
+                    <div class="popup-status">
+                        <span id="popupStatusDot" class="status-dot"></span>
+                        <span id="popupStatusText">dnd</span>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
+        <div class="avatar-img-holder">
+            <img id="avatarImg" src="" alt="Leon Avatar">
+        </div>
     </div>
 
-    <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
-    <div class="avatar-img-holder">
-        <img id="avatarImg" src="" alt="Leon Avatar">
+    <div id="usernameText" class="username"></div>
+    
+    <div id="noteText" class="bio">PA KISS NGA</div>
+
+    <div class="socials">
+        <a class="social" href="https://discord.gg/CwsGFu6D" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/></svg>
+        </a>
+        <a class="social" href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/></svg>
+        </a>
+        <a class="social" href="https://www.instagram.com/leonky.2/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 0 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
     </div>
-</div>
 
-<!-- ✅ NASA ILALIM NA NG AVATAR -->
-<div id="usernameText" class="username"></div>
-<div id="noteText" class="bio">PA KISS NGA</div>
-
-<div class="socials">
-    <a class="social" href="https://discord.gg/CwsGFu6D" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/></svg>
-    </a>
-    <a class="social" href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/></svg>
-    </a>
-    <a class="social" href="https://www.instagram.com/leonky.2/" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 0 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-    </a>
-</div>
-
-<div class="music-container">
-    <span class="music-title">CHILL OUT</span>
-    <span class="music-artist">HYU1 (Official Music Video)</span>
-    <span class="views-pill">Views: 5669</span>
+    <div class="music-container">
+        <span class="music-title">CHILL OUT</span>
+        <span class="music-artist">HYU1 (Official Music Video)</span>
+        <span class="views-pill">Views: 5669</span>
+    </div>
 </div>
 
 <audio id="bgMusic" loop>
@@ -536,7 +528,7 @@ async function fetchData() {
         avatarEl.src = avatarUrl;
         popupAvatarEl.src = avatarUrl;
 
-        // ✅ AVATAR DECORATION: TAMA NA ANG LAKI
+        // ✅ AVATAR DECORATION: SAKTO LANG ANG LAKI
         const decoEl = document.getElementById('decoImg');
         const popupDecoEl = document.getElementById('popupDeco');
         if (d.discord_user.avatar_decoration_data) {

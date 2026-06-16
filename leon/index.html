@@ -71,7 +71,7 @@ body::before{
     z-index:2;
     text-align:center;
     padding:40px;
-    width:380px; /* ✅ PINALAKI ANG LAMAN NG CARD */
+    width:380px;
     background: #000000; 
     border-radius:25px;
     border:1px solid rgba(255,255,255,0.1);
@@ -90,12 +90,12 @@ body::before{
 }
 
 .main-logo {
-    max-width: 160px; /* ✅ SOBRANG LAKI NA NG LOGO */
+    max-width: 160px;
     height: auto;
     object-fit: contain;
 }
 
-/* Typewriter Animation - inactive by default */
+/* ✅ INAYOS: PANGALAN LANG, WALANG @, NASA TAAS */
 .title {
     font-size: 22px;
     letter-spacing: 4px;
@@ -106,19 +106,18 @@ body::before{
     width: fit-content;
     margin: 0 auto 10px auto;
     width: 0; 
+    font-weight: 600;
 }
 
-/* Active class that will be added after click */
 .title.typing-active {
     animation: typing 2s steps(20, end) forwards;
 }
 
 @keyframes typing {
     from { width: 0; }
-    to { width: 100px; } 
+    to { width: 80px; } 
 }
 
-/* Style para sa Status */
 .status-container {
     display: flex;
     align-items: center;
@@ -147,8 +146,8 @@ body::before{
 
 .avatar{
     position: relative;
-    width:140px; /* ✅ PINALAKI ANG BILOG */
-    height:140px; /* ✅ PINALAKI ANG BILOG */
+    width:140px;
+    height:140px;
     margin:auto;
     margin-bottom:18px;
     overflow: visible !important;
@@ -171,14 +170,13 @@ body::before{
     object-fit:cover;
 }
 
-/* ✅ PERPEKTO NA ANG LAKI AT PWEStO NG DECORATION */
 img.avatar-decoration {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 180px !important; /* ✅ SINABAYAN SA LAKI NG BILOG */
-    height: 180px !important; /* ✅ SINABAYAN SA LAKI NG BILOG */
+    width: 180px !important;
+    height: 180px !important;
     pointer-events: none !important;
     z-index: 1 !important;
     display: none;
@@ -187,13 +185,11 @@ img.avatar-decoration {
     image-rendering: -webkit-optimize-contrast;
 }
 
+/* ✅ TINANGGAL ANG @wtf.leon, WALA NA ITO */
 .username{
-    font-size:24px;
-    font-weight:600;
-    margin-bottom:5px;
+    display: none;
 }
 
-/* ✅ MALINAW NA ANG NOTE */
 .bio{
     opacity:.85;
     font-size:15px;
@@ -212,8 +208,8 @@ img.avatar-decoration {
 }
 
 .social{
-    width:58px; /* ✅ PINALAKI ANG SOCIAL BUTTONS */
-    height:58px; /* ✅ PINALAKI ANG SOCIAL BUTTONS */
+    width:58px;
+    height:58px;
     border-radius:50%;
     display:flex;
     justify-content:center;
@@ -229,55 +225,57 @@ img.avatar-decoration {
 }
 
 .social svg {
-    width:26px; /* ✅ PINALAKI ANG ICON SA LOOB */
-    height:26px; /* ✅ PINALAKI ANG ICON SA LOOB */
+    width:26px;
+    height:26px;
     fill:white;
 }
 
 .music-container {
     display: block;
-    /* ✅ TINANGGAL ANG LINK: text-decoration: none; */
     color: white;
-    background: #111111;
-    border-radius: 15px;
-    padding: 18px; /* ✅ PINALAKI ANG PADDING */
+    background: #000000;
+    border-radius: 12px;
+    padding: 22px 18px;
+    width: 100%;
     transition: .3s;
-    border: 1px solid rgba(255,255,255,0.05);
-    pointer-events: none; /* ✅ HINDI NA PWEDENG PINDUTIN */
-    cursor: default; /* ✅ NAGIGING KURSOR LANG HINDI KAMAY */
+    border: none;
+    pointer-events: none;
+    cursor: default;
+    margin-bottom: 8px;
 }
 
 .music-container:hover {
     transform: scale(1.03);
-    background: #1a1a1a;
+    background: #000000;
 }
 
 .music-title {
-    font-size: 17px; /* ✅ PINALAKI ANG FONT */
+    font-size: 18px;
     font-weight: 600;
     display: block;
-    margin-bottom: 4px;
-    color: #fff;
+    margin-bottom: 6px;
+    color: #ffffff;
 }
 
 .music-artist {
-    font-size: 13px; /* ✅ PINALAKI ANG FONT */
-    opacity: 0.8;
+    font-size: 14px;
+    opacity: 0.7;
     display: block;
-    margin-bottom: 12px;
-    color: #ccc;
+    margin-bottom: 0;
+    color: #cccccc;
     letter-spacing: 0.5px;
 }
 
 .views-pill {
     display: inline-block;
-    padding: 6px 22px; /* ✅ PINALAKI ANG LAKI NG BOX */
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 13px; /* ✅ PINALAKI ANG FONT */
+    padding: 5px 24px;
+    border-radius: 30px;
+    border: 1px solid #ffffff;
+    font-size: 13px;
     font-weight: 500;
-    background: #000000;
+    background: transparent;
     letter-spacing: 1px;
+    margin-top: 4px;
 }
 
 a {
@@ -298,7 +296,8 @@ a {
         <img src="public azura.png" alt="Leon Logo" class="main-logo" onerror="this.src='https://i.imgur.com/w1A2v2A.png';">
     </div>
 
-    <div class="title">@𝗟𝗲𝗼𝗻</div>
+    <!-- ✅ NAGING "LEON" NA LANG, WALANG @ -->
+    <div class="title">$Leon</div>
 
     <div id="statusArea" class="status-container" style="display: none;">
         <span id="statusDot" class="status-dot"></span>
@@ -306,17 +305,15 @@ a {
     </div>
 
     <div class="avatar">
-        <!-- ✅ DITO LALABAS ANG DECORATION -->
         <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
         <div class="avatar-img-holder">
             <img id="avatarImg" src="" alt="Leon Avatar">
         </div>
     </div>
 
-    <!-- ✅ DITO ANG PANGALAN MO -->
-    <div id="usernameText" class="username">@wtf.leon</div>
+    <!-- ✅ TINANGGAL NA ANG @wtf.leon DITO -->
+    <div id="usernameText" class="username"></div>
     
-    <!-- ✅ DITO LALABAS ANG NOTE / CUSTOM STATUS -->
     <div id="noteText" class="bio">tara sleep call</div>
 
     <div class="socials">
@@ -331,7 +328,6 @@ a {
         </a>
     </div>
 
-    <!-- ✅ TINANGGAL ANG <a> TAG, HINDI NA LINK -->
     <div class="music-container">
         <span class="music-title">CHILL OUT</span>
         <span class="music-artist">HYU1 (Official Music Video)</span>
@@ -368,21 +364,17 @@ document.addEventListener('keydown', e => {
 });
 setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
 
-// ✅ GINAMIT KO NA ANG TAMA MONG API: https://api.lanyard.rest/v1/users/1250654354344775703
 const YOUR_ID = "1250654354344775703";
 const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
 
-// ✅ BAGONG PARAAN, SIGURADO TAMA ANG LAHAT GAMIT ANG LANYARD
 async function fetchData() {
     try {
         const res = await fetch(API_URL);
         const json = await res.json();
 
-        // Kung walang nakuha o mali
         if (!json.success) return;
         const d = json.data;
 
-        // ✅ 1. AVATAR MO
         const avatarEl = document.getElementById('avatarImg');
         if (d.discord_user.avatar) {
             avatarEl.src = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
@@ -390,7 +382,6 @@ async function fetchData() {
             avatarEl.src = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
         }
 
-        // ✅ 2. AVATAR DECORATION
         const decoEl = document.getElementById('decoImg');
         if (d.discord_user.avatar_decoration_data) {
             const asset = d.discord_user.avatar_decoration_data.asset;
@@ -400,19 +391,17 @@ async function fetchData() {
             decoEl.style.display = 'none';
         }
 
-        // ✅ 3. PANGALAN - NAKA-FIX SA @wtf.leon gaya ng gusto mo
-        document.getElementById('usernameText').innerText = '@wtf.leon'; 
+        // ✅ TINANGGAL NA ANG PAGBABAWAS NG @wtf.leon
+        document.getElementById('usernameText').innerText = ''; 
 
-        // ✅ 4. CUSTOM STATUS / NOTE
         const noteEl = document.getElementById('noteText');
         const customStatus = d.activities.find(a => a.type === 4);
         if (customStatus && customStatus.state) {
             noteEl.innerText = customStatus.state;
         } else {
-            noteEl.innerText = "tara sleep call"; // Default kung wala
+            noteEl.innerText = "tara sleep call";
         }
 
-        // ✅ 5. STATUS (Online/Idle/DND/Offline)
         const statusDot = document.getElementById('statusDot');
         const statusTextEl = document.getElementById('statusText');
         const statusArea = document.getElementById('statusArea');
@@ -442,11 +431,9 @@ async function fetchData() {
     }
 }
 
-// ✅ SIMULA AGAD AT TULUY-TULOY UPDATE BAWAT 30 SEGUNDO
 fetchData();
 setInterval(fetchData, 30000);
 
-// ✅ PIGIL ANG PAGBALIK
 history.replaceState(null, null, location.href);
 window.onpopstate = () => history.go(1);
 window.addEventListener('load', () => history.pushState(null, null, location.href));

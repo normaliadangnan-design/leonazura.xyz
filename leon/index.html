@@ -72,10 +72,10 @@ body::before{
     text-align:center;
     padding:40px;
     width:380px;
-    background: transparent !important; /* ✅ TANGGAL NA ANG ITIM NA BACKGROUND */
+    background: transparent !important;
     border-radius:25px;
-    border: none; /* ✅ TINANGGAL DIN ANG BORDER */
-    box-shadow: none; /* ✅ TINANGGAL ANG ANINO */
+    border: none;
+    box-shadow: none;
 }
 
 .logo-img-container {
@@ -84,18 +84,18 @@ body::before{
     align-items: center;
     margin-bottom:20px;
     width: 100%;
-    background: transparent; /* ✅ TANGGAL ITIM DITO */
+    background: transparent;
     padding: 15px;
     border-radius: 12px;
 }
 
+/* ✅ PINALAKI ANG LOGO */
 .main-logo {
-    max-width: 160px;
+    max-width: 200px; /* ✅ DATI 160, NGAYON 200 NA */
     height: auto;
     object-fit: contain;
 }
 
-/* ✅ ORIHINAL NA TITLE */
 .title {
     font-size: 22px;
     letter-spacing: 4px;
@@ -134,20 +134,21 @@ body::before{
     margin-right: auto;
 }
 
+/* ✅ PARE-PAREHO ANG LAKI NG DOTS */
 .status-dot {
-    width: 12px;
-    height: 12px;
+    width: 10px; /* ✅ PARE-PAREHO NA ANG LAKI */
+    height: 10px;
     border-radius: 50%;
+    display: inline-block;
 }
-.status-online { background-color: #23a55a; }
-.status-idle { background-color: #f0b232; }
-.status-dnd { background-color: #f13f43; }
-.status-offline { background-color: #80848e; }
+.status-online { background-color: #23a55a; } /* ✅ GREEN */
+.status-idle { background-color: #f0b232; } /* ✅ YELLOW */
+.status-dnd { background-color: #f13f43; } /* ✅ RED */
+.status-offline { background-color: #80848e; } /* ✅ GRAY */
 
-/* ✅ AVATAR: SAKTO LANG ANG LAKI, HINDI SOBRANG LAKI */
 .avatar{
     position: relative;
-    width:140px; /* ✅ PINALIIT PARA HINDI SOBRANG LAKI */
+    width:140px;
     height:140px;
     margin:auto;
     margin-bottom:18px;
@@ -177,7 +178,7 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 170px !important; /* ✅ SAKTO LANG, HINDI SOBRANG LAKI */
+    width: 170px !important;
     height: 170px !important;
     pointer-events: none !important;
     z-index: 1 !important;
@@ -187,7 +188,6 @@ img.avatar-decoration {
     image-rendering: -webkit-optimize-contrast;
 }
 
-/* ✅ USERNAME: NASA ORIHINAL NA Pwesto */
 .username{
     font-size: 16px;
     font-weight: 500;
@@ -236,10 +236,11 @@ img.avatar-decoration {
     fill:white;
 }
 
+/* ✅ MUSIC BOX: FULL BLACK NA */
 .music-container {
     display: block;
     color: white;
-    background: rgba(0,0,0,0.6); /* ✅ MEDYO LANG ITIM, MALINAW PA RIN */
+    background: #000000 !important; /* ✅ PURONG ITIM */
     border-radius: 12px;
     padding: 22px 18px;
     width: 100%;
@@ -252,7 +253,7 @@ img.avatar-decoration {
 
 .music-container:hover {
     transform: scale(1.03);
-    background: rgba(0,0,0,0.8);
+    background: #000000;
 }
 
 .music-title {
@@ -272,7 +273,6 @@ img.avatar-decoration {
     letter-spacing: 0.5px;
 }
 
-/* ✅ VIEWS: IBINALIK SA DATI */
 .views-pill {
     display: inline-block;
     padding: 5px 24px;
@@ -291,14 +291,14 @@ a {
     pointer-events: auto;
 }
 
-/* ✅ POPUP BOX: PINALAKI GAYA KAY MONSY */
+/* ✅ POPUP BOX: PINALAKI AT AYOS NA */
 .profile-popup {
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
     margin-bottom: 12px;
-    width: 320px; /* ✅ PINALAKI NA */
+    width: 320px;
     background: #000000 !important;
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 6px;
@@ -388,6 +388,7 @@ a {
     text-overflow: ellipsis;
 }
 
+/* ✅ STATUS SA POPUP: PARE-PAREHO ANG LAKI NG DOTS */
 .popup-status {
     font-size: 11px;
     color: #888;
@@ -398,8 +399,8 @@ a {
 }
 
 .popup-status .status-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px !important; /* ✅ PARE-PAREHO NA */
+    height: 10px !important;
 }
 
 .popup-note {
@@ -414,7 +415,7 @@ a {
     <div class="click-text">CLICK</div>
 </div>
 
-<div class="card"> <!-- ✅ NASA ORIHINAL NA Pwesto pa rin -->
+<div class="card">
     <div class="logo-img-container">
         <img src="public azura.png" alt="Leon Logo" class="main-logo" onerror="this.src='https://i.imgur.com/w1A2v2A.png';">
     </div>
@@ -504,7 +505,6 @@ document.addEventListener('keydown', e => {
 });
 setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
 
-// ✅ API MO
 const YOUR_ID = "1250654354344775703";
 const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
 
@@ -516,7 +516,6 @@ async function fetchData() {
         if (!json.success) return;
         const d = json.data;
 
-        // ✅ AVATAR
         const avatarEl = document.getElementById('avatarImg');
         const popupAvatarEl = document.getElementById('popupAvatarImg');
         let avatarUrl = "";
@@ -528,7 +527,6 @@ async function fetchData() {
         avatarEl.src = avatarUrl;
         popupAvatarEl.src = avatarUrl;
 
-        // ✅ AVATAR DECORATION: SAKTO LANG ANG LAKI
         const decoEl = document.getElementById('decoImg');
         const popupDecoEl = document.getElementById('popupDeco');
         if (d.discord_user.avatar_decoration_data) {
@@ -543,14 +541,12 @@ async function fetchData() {
             popupDecoEl.style.display = 'none';
         }
 
-        // ✅ NICKNAME & USERNAME
         const nickname = d.discord_user.global_name || "Leon";
         const username = d.discord_user.username || "wtf.leon";
         document.getElementById('popupNickname').innerText = nickname;
         document.getElementById('popupUsername').innerText = `@${username}`;
         document.getElementById('usernameText').innerText = username;
 
-        // ✅ CUSTOM STATUS / NOTE
         const noteEl = document.getElementById('noteText');
         const popupNoteEl = document.getElementById('popupNote');
         const customStatus = d.activities.find(a => a.type === 4);
@@ -561,7 +557,6 @@ async function fetchData() {
         noteEl.innerText = statusText;
         popupNoteEl.innerText = statusText;
 
-        // ✅ STATUS (Online/Idle/DND/Offline)
         const statusDot = document.getElementById('statusDot');
         const statusTextEl = document.getElementById('statusText');
         const popupStatusDot = document.getElementById('popupStatusDot');

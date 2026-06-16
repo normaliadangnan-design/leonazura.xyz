@@ -147,8 +147,8 @@ body::before{
 /* ✅ AVATAR: PINALAKI NANG MABUTI, WALANG RAINBOW */
 .avatar{
     position: relative;
-    width:180px; /* ✅ DATI 140, NGAYON 180 NA */
-    height:180px; /* ✅ DATI 140, NGAYON 180 NA */
+    width:180px;
+    height:180px;
     margin:auto;
     margin-bottom:18px;
     overflow: visible !important;
@@ -177,8 +177,8 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 220px !important; /* ✅ SINABAYAN ANG LAKI */
-    height: 220px !important; /* ✅ SINABAYAN ANG LAKI */
+    width: 220px !important;
+    height: 220px !important;
     pointer-events: none !important;
     z-index: 1 !important;
     display: none;
@@ -291,18 +291,18 @@ a {
     pointer-events: auto;
 }
 
-/* ✅ POPUP BOX: PINALAKI, NASA TAAS, MAY NICKNAME */
+/* ✅ POPUP BOX: PINAKAMALAKI, PURONG ITIM, GAYA SA EXAMPLE */
 .profile-popup {
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
     margin-bottom: 15px;
-    width: 300px; /* ✅ MAS MALAKI PA */
-    background: #0a0a0a;
+    width: 420px; /* ✅ SOBRANG LAKI NA, GAYA SA PICTURE */
+    background: #000000 !important; /* ✅ PURONG ITIM, WALANG GRAY */
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 8px;
-    padding: 18px; /* ✅ MAS MALAKING LOOB */
+    padding: 20px; /* ✅ MAS MALAKING LOOB */
     box-shadow: 0 4px 15px rgba(0,0,0,0.9);
     z-index: 999;
     opacity: 0;
@@ -319,18 +319,19 @@ a {
 .popup-header {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
     margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #222;
+    position: relative; /* ✅ PARA SA DECORATION */
 }
 
 .popup-avatar {
-    width: 50px; /* ✅ PINALAKI ANG MALIIT NA AVATAR */
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid #333;
+    position: relative;
+    z-index: 2;
 }
 
 .popup-avatar img {
@@ -339,36 +340,64 @@ a {
     object-fit: cover;
 }
 
-/* ✅ NICKNAME: PINAKAMALAKI AT PINAKAMALINAW */
+/* ✅ AVATAR DECORATION SA LOOB NG POPUP */
+.popup-decoration {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 75px;
+    height: 75px;
+    pointer-events: none;
+    z-index: 1;
+    display: none;
+}
+
+.popup-info {
+    text-align: left;
+    flex: 1;
+}
+
+/* ✅ NICKNAME: MALAKI AT PUTI */
 .popup-nickname {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: #ffffff;
     display: block;
+    line-height: 1.2;
 }
 
+/* ✅ USERNAME: MALINAW, GRAY */
 .popup-name {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
-    color: #999999; /* ✅ MAS MABABA ANG KULAY PARA MALINAW ANG PAGKAKAIBA */
+    color: #999999;
     display: block;
-    margin-top: 2px;
+    margin-bottom: 4px;
 }
 
+/* ✅ STATUS: MAY PULANG TULDOK, GAYA SA EXAMPLE */
 .popup-status {
-    font-size: 12px;
+    font-size: 13px;
     color: #888;
     display: flex;
     align-items: center;
-    gap: 5px;
-    margin-top: 4px;
+    gap: 6px;
 }
 
+.popup-status .status-dot {
+    width: 10px;
+    height: 10px;
+}
+
+/* ✅ NOTE SA ILALIM: GAYA SA "PA KISS NGA" */
 .popup-note {
-    font-size: 13px;
-    color: #aaa;
+    font-size: 14px;
+    color: #ffffff;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 10px;
+    margin-top: 8px;
+    border-top: 1px solid #222;
 }
 
 </style>
@@ -393,23 +422,24 @@ a {
     </div>
 
     <div class="avatar">
-        <!-- ✅ POPUP NASA TAAS, MAY NICKNAME -->
+        <!-- ✅ POPUP: SOBRANG LAKI, PURONG ITIM, MAY DECORATION -->
         <div class="profile-popup">
             <div class="popup-header">
+                <!-- ✅ DECORATION DITO SA LOOB -->
+                <img id="popupDeco" class="popup-decoration" src="" alt="">
                 <div class="popup-avatar">
                     <img id="popupAvatarImg" src="" alt="">
                 </div>
-                <div>
-                    <!-- ✅ DITO ILALAGAY ANG NICKNAME MO -->
-                    <div class="popup-nickname" id="popupNickname"></div>
-                    <div class="popup-name" id="popupUsername"></div>
+                <div class="popup-info">
+                    <div class="popup-nickname" id="popupNickname">Leon</div>
+                    <div class="popup-name" id="popupUsername">@wtf.leon</div>
                     <div class="popup-status">
                         <span id="popupStatusDot" class="status-dot"></span>
-                        <span id="popupStatusText"></span>
+                        <span id="popupStatusText">Do Not Disturb</span>
                     </div>
                 </div>
             </div>
-            <div class="popup-note" id="popupNote"></div>
+            <div class="popup-note" id="popupNote">PA KISS NGA</div>
         </div>
 
         <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
@@ -495,32 +525,33 @@ async function fetchData() {
         avatarEl.src = avatarUrl;
         popupAvatarEl.src = avatarUrl;
 
-        // ✅ AVATAR DECORATION
+        // ✅ AVATAR DECORATION: DITO LALABAS SA POPUP
         const decoEl = document.getElementById('decoImg');
+        const popupDecoEl = document.getElementById('popupDeco');
         if (d.discord_user.avatar_decoration_data) {
             const asset = d.discord_user.avatar_decoration_data.asset;
-            decoEl.src = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=240&passthrough=true`;
+            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=240&passthrough=true`;
+            decoEl.src = decoUrl;
             decoEl.style.display = 'block';
+            popupDecoEl.src = decoUrl;
+            popupDecoEl.style.display = 'block';
         } else {
             decoEl.style.display = 'none';
+            popupDecoEl.style.display = 'none';
         }
 
-        // ✅ NICKNAME: KUNIN SA API (kung meron, kung wala ay username)
-        const nickname = d.discord_user.global_name || d.discord_user.username;
-        const username = d.discord_user.username;
-
-        // ✅ ILAGAY SA POPUP
+        // ✅ NICKNAME & USERNAME
+        const nickname = d.discord_user.global_name || "Leon";
+        const username = d.discord_user.username || "wtf.leon";
         document.getElementById('popupNickname').innerText = nickname;
         document.getElementById('popupUsername').innerText = `@${username}`;
-
-        // ✅ ILAGAY SA PANGALAN SA ILALIM NG AVATAR
         document.getElementById('usernameText').innerText = username;
 
         // ✅ CUSTOM STATUS / NOTE
         const noteEl = document.getElementById('noteText');
         const popupNoteEl = document.getElementById('popupNote');
         const customStatus = d.activities.find(a => a.type === 4);
-        let statusText = "tara sleep call";
+        let statusText = "PA KISS NGA"; // ✅ DEFAULT GAYA SA EXAMPLE
         if (customStatus && customStatus.state) {
             statusText = customStatus.state;
         }

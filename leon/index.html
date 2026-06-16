@@ -144,16 +144,15 @@ body::before{
 .status-dnd { background-color: #f13f43; }
 .status-offline { background-color: #80848e; }
 
-/* ✅ AVATAR: TINANGGAL NA ANG RAINBOW BORDER, BALIK SA DATI */
+/* ✅ AVATAR: PINALAKI NANG MABUTI, WALANG RAINBOW */
 .avatar{
     position: relative;
-    width:140px;
-    height:140px;
+    width:180px; /* ✅ DATI 140, NGAYON 180 NA */
+    height:180px; /* ✅ DATI 140, NGAYON 180 NA */
     margin:auto;
     margin-bottom:18px;
     overflow: visible !important;
-    /* ✅ WALA NANG BORDER / RAINBOW */
-    cursor: pointer; /* ✅ PARA MAKITA ANG POPUP */
+    cursor: pointer;
 }
 
 .avatar-img-holder {
@@ -178,8 +177,8 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 180px !important;
-    height: 180px !important;
+    width: 220px !important; /* ✅ SINABAYAN ANG LAKI */
+    height: 220px !important; /* ✅ SINABAYAN ANG LAKI */
     pointer-events: none !important;
     z-index: 1 !important;
     display: none;
@@ -292,18 +291,18 @@ a {
     pointer-events: auto;
 }
 
-/* ✅ BAGONG AYOS: POPUP NASA TAAS, MALAKI, GAYA SA EXAMPLE */
+/* ✅ POPUP BOX: PINALAKI, NASA TAAS, MAY NICKNAME */
 .profile-popup {
     position: absolute;
-    bottom: 100%; /* ✅ NASA TAAS NA */
+    bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 15px; /* ✅ LAYO MULA SA AVATAR */
-    width: 260px; /* ✅ PINALAKI */
-    background: #0a0a0a; /* ✅ ITIM NA ITIM */
+    margin-bottom: 15px;
+    width: 300px; /* ✅ MAS MALAKI PA */
+    background: #0a0a0a;
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 8px;
-    padding: 15px; /* ✅ MAS MALAKING LOOB */
+    padding: 18px; /* ✅ MAS MALAKING LOOB */
     box-shadow: 0 4px 15px rgba(0,0,0,0.9);
     z-index: 999;
     opacity: 0;
@@ -312,7 +311,6 @@ a {
     pointer-events: none;
 }
 
-/* ✅ LALABAS LANG PAG NAKA-HOVER SA AVATAR */
 .avatar:hover .profile-popup {
     opacity: 1;
     visibility: visible;
@@ -321,15 +319,15 @@ a {
 .popup-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #222;
 }
 
 .popup-avatar {
-    width: 45px; /* ✅ PINALAKI ANG MALIIT NA AVATAR */
-    height: 45px;
+    width: 50px; /* ✅ PINALAKI ANG MALIIT NA AVATAR */
+    height: 50px;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid #333;
@@ -341,22 +339,33 @@ a {
     object-fit: cover;
 }
 
+/* ✅ NICKNAME: PINAKAMALAKI AT PINAKAMALINAW */
+.popup-nickname {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    display: block;
+}
+
 .popup-name {
-    font-size: 15px; /* ✅ PINALAKI ANG SULAT */
-    font-weight: 600;
-    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    color: #999999; /* ✅ MAS MABABA ANG KULAY PARA MALINAW ANG PAGKAKAIBA */
+    display: block;
+    margin-top: 2px;
 }
 
 .popup-status {
-    font-size: 12px; /* ✅ PINALAKI ANG SULAT */
+    font-size: 12px;
     color: #888;
     display: flex;
     align-items: center;
     gap: 5px;
+    margin-top: 4px;
 }
 
 .popup-note {
-    font-size: 13px; /* ✅ PINALAKI ANG SULAT */
+    font-size: 13px;
     color: #aaa;
     text-align: center;
     padding-top: 5px;
@@ -384,13 +393,15 @@ a {
     </div>
 
     <div class="avatar">
-        <!-- ✅ POPUP NASA TAAS NA -->
+        <!-- ✅ POPUP NASA TAAS, MAY NICKNAME -->
         <div class="profile-popup">
             <div class="popup-header">
                 <div class="popup-avatar">
                     <img id="popupAvatarImg" src="" alt="">
                 </div>
                 <div>
+                    <!-- ✅ DITO ILALAGAY ANG NICKNAME MO -->
+                    <div class="popup-nickname" id="popupNickname"></div>
                     <div class="popup-name" id="popupUsername"></div>
                     <div class="popup-status">
                         <span id="popupStatusDot" class="status-dot"></span>
@@ -494,10 +505,16 @@ async function fetchData() {
             decoEl.style.display = 'none';
         }
 
-        // ✅ USERNAME (GAGALING SA API, NAKIKITA NA)
+        // ✅ NICKNAME: KUNIN SA API (kung meron, kung wala ay username)
+        const nickname = d.discord_user.global_name || d.discord_user.username;
         const username = d.discord_user.username;
-        document.getElementById('usernameText').innerText = username; 
-        document.getElementById('popupUsername').innerText = username;
+
+        // ✅ ILAGAY SA POPUP
+        document.getElementById('popupNickname').innerText = nickname;
+        document.getElementById('popupUsername').innerText = `@${username}`;
+
+        // ✅ ILAGAY SA PANGALAN SA ILALIM NG AVATAR
+        document.getElementById('usernameText').innerText = username;
 
         // ✅ CUSTOM STATUS / NOTE
         const noteEl = document.getElementById('noteText');

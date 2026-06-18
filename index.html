@@ -90,7 +90,7 @@ body {
     100% { color: #808080; text-shadow: 0 0 5px #555555; }
 }
 
-/* ✅ PINALAKI ANG TEXT NG ABOVE ALL / STAFF - 40px */
+/* ✅ PINABAGAL ANG SPEED NG TYPEWRITER */
 .typewriter-header {
     font-family: 'Inter', sans-serif;
     font-size: 40px; 
@@ -102,10 +102,29 @@ body {
     width: fit-content;
     margin: 0 auto 20px auto;
     animation: 
-        typing 2s steps(20, end) forwards,
+        typing 3.5s steps(20, end) forwards,
         metallic-glow 3s infinite ease-in-out;
     animation-play-state: paused;
     width: 0;
+    position: relative;
+}
+
+/* ✅ DALAWANG LINYA ITAAS AT BABA (MALABO) */
+.typewriter-header::before,
+.typewriter-header::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+}
+.typewriter-header::before {
+    top: -8px;
+}
+.typewriter-header::after {
+    bottom: -8px;
 }
 
 .navigation-bar {
@@ -302,6 +321,14 @@ img.avatar-decoration {
     height: 8px;
     border-radius: 50%;
     display: inline-block;
+}
+
+/* ✅ CUSTOM STATUS / NOTES - GRAY COLOR */
+.tooltip-note {
+    font-size: 11px;
+    color: #888888;
+    margin-top: 4px;
+    line-height: 1.4;
 }
 
 .marquee-ticker {
@@ -580,21 +607,21 @@ function showGroup(members, container) {
         }
 
         let statusClass = 'status-offline'; 
+        let statusText = 'Offline';
+        
+        // ✅ DND: PULANG TULDOK LANG, WALANG IBANG NAKASULAT
         if (mem.status) {
             const s = mem.status.toLowerCase().trim();
-            if (s === 'online') statusClass = 'status-online';
-            else if (s === 'idle') statusClass = 'status-idle';
-            else if (s === 'dnd') statusClass = 'status-dnd';
+            if (s === 'online') { statusClass = 'status-online'; statusText = 'Online'; }
+            else if (s === 'idle') { statusClass = 'status-idle'; statusText = 'Idle'; }
+            else if (s === 'dnd') { statusClass = 'status-dnd'; statusText = ''; } // WALA NAKASULAT KUNG DND
         }
 
-        let activityText = '';
-        if (mem.activity && mem.activity.name) {
-            const type = {0:'Naglalaro',1:'Nanonood',2:'Nakikinig',3:'Custom',4:'Status'}[mem.activity.type] || 'Ginagawa';
-            activityText = `<div style="font-size:10px; color:#aaa; margin-top:2px;">${type}: ${mem.activity.name}</div>`;
-        }
+        // ✅ TINANGGAL NA ANG "STATUS : CUSTOM STATUS"
         let customStatusText = '';
         if (mem.customStatus?.state) {
-            customStatusText = `<div style="font-size:10px; color:#ffcc00; margin-top:2px;">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
+            // ✅ KULAY GRAY ANG NOTES
+            customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
         }
 
         wrapper.innerHTML = `
@@ -611,8 +638,7 @@ function showGroup(members, container) {
                 </div>
                 <div class="tooltip-desc">${mem.displayName}</div>
                 <div class="tooltip-username">@${mem.username}</div>
-                <div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status || 'Offline'}</div>
-                ${activityText}
+                <div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${statusText}</div>
                 ${customStatusText}
             </div>
         `;

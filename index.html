@@ -283,15 +283,42 @@ img.avatar-decoration {
 }
 
 .tooltip-header {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 8px;
 }
+/* ✅ AVATAR DECO SA LOOB NG POPUP */
+.tooltip-decoration {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translate(-50%, -50%);
+    width: 55px;
+    height: 55px;
+    pointer-events: none;
+    z-index: 1;
+}
 .tooltip-avatar-sm {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+.tooltip-header-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+/* ✅ STATUS CIRCLE SA TABI NG PANGALAN */
+.tooltip-status-dot-inline {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
 }
 .tooltip-username {
     font-size: 12px;
@@ -302,28 +329,10 @@ img.avatar-decoration {
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 6px;
-}
-.tooltip-status {
-    font-size: 11px;
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 4px 6px;
-    border-radius: 3px;
-    background: #1a1a1a;
-    max-width: 180px; 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
-.status-dot-sm {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-/* ✅ CUSTOM STATUS / NOTES - GRAY COLOR */
 .tooltip-note {
     font-size: 11px;
     color: #888888;
@@ -607,14 +616,11 @@ function showGroup(members, container) {
         }
 
         let statusClass = 'status-offline'; 
-        let statusText = 'Offline';
-        
-        // ✅ DND: PULANG TULDOK LANG, WALANG IBANG NAKASULAT
         if (mem.status) {
             const s = mem.status.toLowerCase().trim();
-            if (s === 'online') { statusClass = 'status-online'; statusText = 'Online'; }
-            else if (s === 'idle') { statusClass = 'status-idle'; statusText = 'Idle'; }
-            else if (s === 'dnd') { statusClass = 'status-dnd'; statusText = ''; } // WALA NAKASULAT KUNG DND
+            if (s === 'online') statusClass = 'status-online';
+            else if (s === 'idle') statusClass = 'status-idle';
+            else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
         // ✅ TINANGGAL NA ANG "STATUS : CUSTOM STATUS"
@@ -622,6 +628,12 @@ function showGroup(members, container) {
         if (mem.customStatus?.state) {
             // ✅ KULAY GRAY ANG NOTES
             customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
+        }
+
+        // ✅ AVATAR DECO SA LOOB NG POPUP
+        let tooltipDeco = '';
+        if (mem.effectURL) {
+            tooltipDeco = `<img src="${mem.effectURL}" class="tooltip-decoration" alt="decoration">`;
         }
 
         wrapper.innerHTML = `
@@ -634,11 +646,15 @@ function showGroup(members, container) {
 
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
+                    ${tooltipDeco}
+                    <div class="tooltip-header-inner">
+                        <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
+                        <!-- ✅ STATUS CIRCLE SA TABI NG PANGALAN -->
+                        <span class="tooltip-status-dot-inline ${statusClass}"></span>
+                    </div>
                 </div>
                 <div class="tooltip-desc">${mem.displayName}</div>
                 <div class="tooltip-username">@${mem.username}</div>
-                <div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${statusText}</div>
                 ${customStatusText}
             </div>
         `;

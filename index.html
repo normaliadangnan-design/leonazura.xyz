@@ -43,15 +43,20 @@ body {
     background-repeat: no-repeat;
     color: #ffffff;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden; /* ✅ TINANGGAL ANG SCROLL, KASYA LAHAT SA SCREEN */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* ✅ GITNAIN LAHAT */
+    padding: 20px 0;
+    opacity: 0; /* ✅ PARA SA SMOOTH LOADING */
+    transition: opacity 0.4s ease;
 }
+body.loaded { opacity: 1; } /* ✅ LALABAS NA MAAYOS */
 
 .main-logo-container {
     text-align: center;
-    margin: 20px 0 10px 0;
+    margin: 0 0 5px 0; /* ✅ PINALIIT ANG LAYO */
 }
 
 .main-clan-logo {
@@ -61,7 +66,7 @@ body {
 }
 
 .main-clan-logo img {
-    height: 90px; 
+    height: 70px; /* ✅ PINALIIT NG KONTI PARA KASYA */
     width: auto;
     object-fit: contain;
 }
@@ -70,7 +75,7 @@ body {
 .symbol-break {
     font-size: 32px; 
     font-weight: 900;
-    margin: 8px 0 30px 0;
+    margin: 3px 0 15px 0; /* ✅ PINALIIT ANG LAYO */
     overflow: visible;
     white-space: normal;
     animation: metallic-glow 3s infinite ease-in-out;
@@ -100,7 +105,7 @@ body {
     overflow: hidden;
     white-space: nowrap;
     width: fit-content;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 10px auto; /* ✅ PINALIIT ANG LAYO */
     animation: 
         typing 3.5s steps(20, end) forwards,
         metallic-glow 3s infinite ease-in-out;
@@ -149,19 +154,19 @@ body {
 /* ✅ GAYA SA PUBLIC ENEMY: MAS MALIIT AT PULIDO ANG CONTAINER */
 .center-container {
     width: 100%;
-    max-width: 900px; /* ✅ PINALIIT GAYA SA SAMPLE */
-    margin: 50px auto 20px auto;
+    max-width: 900px;
+    margin: 0 auto; /* ✅ GITNAIN LANG, WALANG SOBRANG TAAS */
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     z-index: 10;
     padding: 0 20px;
+    gap: 10px; /* ✅ PANTAY PANTAY NA LAYO */
 }
 
 .title-group-block {
-    margin-top: 45px;
-    margin-bottom: 30px; /* ✅ DAGDAG DISTANSYA PARA SA LINYA */
+    margin: 15px 0; /* ✅ PANTAY NA LAYO */
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -185,9 +190,9 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    gap: 25px !important; 
-    padding: 20px 0;
-    min-height: 120px; 
+    gap: 20px !important; /* ✅ PINALIIT ANG LAYO NG AVATAR */
+    padding: 5px 0; /* ✅ PINALIIT ANG TAAS */
+    min-height: 80px; /* ✅ PINALIIT */
 }
 
 .avatar-wrapper-node {
@@ -204,8 +209,8 @@ body {
 
 .circle-avatar-container {
     position: relative;
-    width: 95px;
-    height: 95px;
+    width: 80px; /* ✅ PINALIIT NG KONTI */
+    height: 80px; /* ✅ PINALIIT NG KONTI */
     border-radius: 50%;
     overflow: visible; 
     background: transparent; 
@@ -219,8 +224,8 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 140px !important; 
-    height: 140px !important; 
+    width: 120px !important; /* ✅ KASYA SA BAGONG LAKI */
+    height: 120px !important; 
     pointer-events: none !important;
     z-index: 1 !important;  
     border-radius: 0 !important; 
@@ -231,8 +236,8 @@ img.avatar-decoration {
 }
 
 .circle-avatar-container img.avatar-img {
-    width: 95px !important;
-    height: 95px !important;
+    width: 80px !important;
+    height: 80px !important;
     border-radius: 50% !important;
     object-fit: cover !important;
     pointer-events: none !important;
@@ -246,8 +251,8 @@ img.avatar-decoration {
     position: absolute;
     bottom: 4px;
     right: 4px;
-    width: 16px;
-    height: 16px;
+    width: 14px; /* ✅ SAKTO LANG */
+    height: 14px;
     border-radius: 50%;
     border: 2px solid #000;
     z-index: 3 !important;
@@ -339,23 +344,32 @@ img.avatar-decoration {
     margin-top: 4px;
     line-height: 1.4;
 }
+/* ✅ BAGO: STATUS NG LARO / STREAMING */
+.tooltip-activity {
+    font-size: 11px;
+    color: #b9bbbe;
+    margin-top: 4px;
+    line-height: 1.4;
+    padding: 3px 5px;
+    background: #1a1a1a;
+    border-radius: 3px;
+}
 
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
     max-width: 900px;
-    padding: 5px 0;
+    padding: 2px 0; /* ✅ PINALIIT ANG TAAS */
     background: transparent;
 }
 
 .marquee-wrapper-group {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 8px; /* ✅ PINALIIT ANG LAYO NG SCROLL */
     width: 100%;
     align-items: center;
-    margin-top: 40px;
-    margin-bottom: 50px;
+    margin: 10px 0 0 0; /* ✅ WALA NANG SOBRANG TAAS */
 }
 
 .marquee-inner-wrap {
@@ -378,15 +392,15 @@ img.avatar-decoration {
     color: rgba(255, 255, 255, 0.8);
     background: #0c0c0c; 
     border: 1px solid rgba(255,255,255,0.08);
-    padding: 6px 16px;
+    padding: 4px 12px; /* ✅ PINALIIT NG KONTI */
     border-radius: 30px; 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
 }
 
 .marquee-profile-block img {
-    width: 32px;
-    height: 32px;
+    width: 28px; /* ✅ PINALIIT NG KONTI */
+    height: 28px;
     border-radius: 50%;
     object-fit: cover;
     pointer-events: none;
@@ -413,7 +427,7 @@ img.avatar-decoration {
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
-    padding: 10px 18px !important;
+    padding: 8px 14px !important; /* ✅ PINALIIT NG KONTI */
     background-color: #000 !important;
     border: 1px solid rgba(255,255,255,0.15) !important;
     color: #fff !important;
@@ -432,7 +446,7 @@ img.avatar-decoration {
     align-items: center;
     z-index: 999999;
     cursor: pointer;
-    transition: opacity 0.2s ease, visibility 0.2s; /* ✅ PINABILIS ANG LALABAS */
+    transition: opacity 0.3s ease, visibility 0.3s; /* ✅ PINABILIS AT PINAGANDA */
 }
 
 .gateway-btn {
@@ -442,6 +456,10 @@ img.avatar-decoration {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
+    transition: all 0.2s ease;
+}
+.gateway-btn:hover {
+    background: rgba(255,255,255,0.05);
 }
 
 .fade-gateway {
@@ -454,9 +472,9 @@ img.avatar-decoration {
 .name-label {
     text-align: center;
     font-size: 11px;
-    margin-top: 6px;
+    margin-top: 4px; /* ✅ PINALIIT ANG LAYO */
     color: #ccc;
-    max-width: 95px;
+    max-width: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -538,6 +556,7 @@ audio.volume = 0.4;
 document.getElementById("gateway-overlay").addEventListener("click", function() {
     audio.play().catch(() => {});
     this.classList.add("fade-gateway");
+    document.body.classList.add('loaded'); /* ✅ SMOOTH LOAD */
     
     document.querySelectorAll('.typewriter-header').forEach(el => {
         el.style.animationPlayState = 'running';
@@ -630,6 +649,19 @@ function showGroup(members, container) {
             customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
         }
 
+        // ✅ BAGO: STATUS NG LARO / STREAMING
+        let activityText = '';
+        if (mem.activity && mem.activity.name) {
+            let typeText = '';
+            if (mem.activity.type === 0) typeText = 'Playing';
+            if (mem.activity.type === 1) typeText = 'Streaming';
+            if (mem.activity.type === 2) typeText = 'Listening to';
+            if (mem.activity.type === 3) typeText = 'Watching';
+            if (typeText) {
+                activityText = `<div class="tooltip-activity">${typeText}: ${mem.activity.name}</div>`;
+            }
+        }
+
         // ✅ AVATAR DECO SA LOOB NG POPUP
         let tooltipDeco = '';
         if (mem.effectURL) {
@@ -655,6 +687,7 @@ function showGroup(members, container) {
                 </div>
                 <div class="tooltip-desc">${mem.displayName}</div>
                 <div class="tooltip-username">@${mem.username}</div>
+                ${activityText}
                 ${customStatusText}
             </div>
         `;

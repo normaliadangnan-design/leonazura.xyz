@@ -33,7 +33,6 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #000000;
-    /* ✅ SOBRANG ITIM PERO KITA PA RIN ANG DESIGN */
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), 
         url("pba.webp");
@@ -43,20 +42,20 @@ body {
     background-repeat: no-repeat;
     color: #ffffff;
     min-height: 100vh;
-    overflow: hidden; /* ✅ TINANGGAL ANG SCROLL, KASYA LAHAT SA SCREEN */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* ✅ GITNAIN LAHAT */
+    justify-content: center;
     padding: 20px 0;
-    opacity: 0; /* ✅ PARA SA SMOOTH LOADING */
+    opacity: 0;
     transition: opacity 0.4s ease;
 }
-body.loaded { opacity: 1; } /* ✅ LALABAS NA MAAYOS */
+body.loaded { opacity: 1; }
 
 .main-logo-container {
     text-align: center;
-    margin: 0 0 5px 0; /* ✅ PINALIIT ANG LAYO */
+    margin: 0 0 5px 0;
 }
 
 .main-clan-logo {
@@ -66,16 +65,15 @@ body.loaded { opacity: 1; } /* ✅ LALABAS NA MAAYOS */
 }
 
 .main-clan-logo img {
-    height: 70px; /* ✅ PINALIIT NG KONTI PARA KASYA */
+    height: 70px;
     width: auto;
     object-fit: contain;
 }
 
-/* ✅ SAKTO LANG ANG LAKI NG $ SIGN - GAYA SA PUBLIC ENEMY */
 .symbol-break {
     font-size: 32px; 
     font-weight: 900;
-    margin: 3px 0 15px 0; /* ✅ PINALIIT ANG LAYO */
+    margin: 3px 0 15px 0;
     overflow: visible;
     white-space: normal;
     animation: metallic-glow 3s infinite ease-in-out;
@@ -95,7 +93,6 @@ body.loaded { opacity: 1; } /* ✅ LALABAS NA MAAYOS */
     100% { color: #808080; text-shadow: 0 0 5px #555555; }
 }
 
-/* ✅ SAKTO LANG ANG LAKI NG TEXT - GAYA SA PUBLIC ENEMY */
 .typewriter-header {
     font-family: 'Inter', sans-serif;
     font-size: 32px; 
@@ -105,7 +102,7 @@ body.loaded { opacity: 1; } /* ✅ LALABAS NA MAAYOS */
     overflow: hidden;
     white-space: nowrap;
     width: fit-content;
-    margin: 0 auto 10px auto; /* ✅ PINALIIT ANG LAYO */
+    margin: 0 auto 10px auto;
     animation: 
         typing 3.5s steps(20, end) forwards,
         metallic-glow 3s infinite ease-in-out;
@@ -114,7 +111,6 @@ body.loaded { opacity: 1; } /* ✅ LALABAS NA MAAYOS */
     position: relative;
 }
 
-/* ✅ DALAWANG LINYA ITAAS AT BABA (GAYA SA PUBLIC ENEMY) */
 .typewriter-header::before,
 .typewriter-header::after {
     content: '';
@@ -151,22 +147,21 @@ body.loaded { opacity: 1; } /* ✅ LALABAS NA MAAYOS */
     border-radius: 3px;
 }
 
-/* ✅ GAYA SA PUBLIC ENEMY: MAS MALIIT AT PULIDO ANG CONTAINER */
 .center-container {
     width: 100%;
     max-width: 900px;
-    margin: 0 auto; /* ✅ GITNAIN LANG, WALANG SOBRANG TAAS */
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     z-index: 10;
     padding: 0 20px;
-    gap: 10px; /* ✅ PANTAY PANTAY NA LAYO */
+    gap: 10px;
 }
 
 .title-group-block {
-    margin: 15px 0; /* ✅ PANTAY NA LAYO */
+    margin: 15px 0;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -190,9 +185,9 @@ body.loaded { opacity: 1; } /* ✅ LALABAS NA MAAYOS */
     justify-content: center;
     align-items: center;
     width: 100%;
-    gap: 20px !important; /* ✅ PINALIIT ANG LAYO NG AVATAR */
-    padding: 5px 0; /* ✅ PINALIIT ANG TAAS */
-    min-height: 80px; /* ✅ PINALIIT */
+    gap: 20px !important;
+    padding: 5px 0;
+    min-height: 80px;
 }
 
 .avatar-wrapper-node {
@@ -209,8 +204,8 @@ body.loaded { opacity: 1; } /* ✅ LALABAS NA MAAYOS */
 
 .circle-avatar-container {
     position: relative;
-    width: 80px; /* ✅ PINALIIT NG KONTI */
-    height: 80px; /* ✅ PINALIIT NG KONTI */
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     overflow: visible; 
     background: transparent; 
@@ -224,7 +219,7 @@ img.avatar-decoration {
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 120px !important; /* ✅ KASYA SA BAGONG LAKI */
+    width: 120px !important;
     height: 120px !important; 
     pointer-events: none !important;
     z-index: 1 !important;  
@@ -251,7 +246,7 @@ img.avatar-decoration {
     position: absolute;
     bottom: 4px;
     right: 4px;
-    width: 14px; /* ✅ SAKTO LANG */
+    width: 14px;
     height: 14px;
     border-radius: 50%;
     border: 2px solid #000;
@@ -263,16 +258,17 @@ img.avatar-decoration {
 .status-dnd { background-color: #f13f43; }
 .status-offline { background-color: #80848e; }
 
+/* ✅ ONLY POPUP BOX IS FULL BLACK */
 .avatar-tooltip {
     position: absolute;
     bottom: 115%; 
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #0a0a0a !important;
+    background: #000000 !important; /* ✅ FULL BLACK POPUP ONLY */
     border: 1px solid rgba(255,255,255,0.1) !important;
     border-radius: 10px;
-    padding: 12px 15px;
-    width: 200px;
+    padding: 16px 20px;
+    width: 280px; /* ✅ BIGGER POPUP */
     color: #fff;
     opacity: 0;
     visibility: hidden;
@@ -292,9 +288,9 @@ img.avatar-decoration {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
-/* ✅ AVATAR DECO SA LOOB NG POPUP */
+
 .tooltip-decoration {
     position: absolute;
     top: 50%;
@@ -317,7 +313,7 @@ img.avatar-decoration {
     align-items: center;
     gap: 8px;
 }
-/* ✅ STATUS CIRCLE SA TABI NG PANGALAN */
+
 .tooltip-status-dot-inline {
     width: 10px;
     height: 10px;
@@ -331,45 +327,46 @@ img.avatar-decoration {
     margin: 4px 0;
 }
 .tooltip-desc {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 .tooltip-note {
-    font-size: 11px;
+    font-size: 12px;
     color: #888888;
     margin-top: 4px;
     line-height: 1.4;
 }
-/* ✅ BAGO: STATUS NG LARO / STREAMING */
+
 .tooltip-activity {
-    font-size: 11px;
+    font-size: 12px;
     color: #b9bbbe;
-    margin-top: 4px;
-    line-height: 1.4;
-    padding: 3px 5px;
-    background: #1a1a1a;
-    border-radius: 3px;
+    margin-top: 6px;
+    line-height: 1.5;
+    padding: 6px 8px;
+    background: #0a0a0a;
+    border-radius: 4px;
+    word-break: break-word;
 }
 
 .marquee-ticker {
     overflow: hidden;
     width: 100%;
     max-width: 900px;
-    padding: 2px 0; /* ✅ PINALIIT ANG TAAS */
+    padding: 2px 0;
     background: transparent;
 }
 
 .marquee-wrapper-group {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* ✅ PINALIIT ANG LAYO NG SCROLL */
+    gap: 8px;
     width: 100%;
     align-items: center;
-    margin: 10px 0 0 0; /* ✅ WALA NANG SOBRANG TAAS */
+    margin: 10px 0 0 0;
 }
 
 .marquee-inner-wrap {
@@ -392,14 +389,14 @@ img.avatar-decoration {
     color: rgba(255, 255, 255, 0.8);
     background: #0c0c0c; 
     border: 1px solid rgba(255,255,255,0.08);
-    padding: 4px 12px; /* ✅ PINALIIT NG KONTI */
+    padding: 4px 12px;
     border-radius: 30px; 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
 }
 
 .marquee-profile-block img {
-    width: 28px; /* ✅ PINALIIT NG KONTI */
+    width: 28px;
     height: 28px;
     border-radius: 50%;
     object-fit: cover;
@@ -427,7 +424,7 @@ img.avatar-decoration {
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
-    padding: 8px 14px !important; /* ✅ PINALIIT NG KONTI */
+    padding: 8px 14px !important;
     background-color: #000 !important;
     border: 1px solid rgba(255,255,255,0.15) !important;
     color: #fff !important;
@@ -437,6 +434,7 @@ img.avatar-decoration {
     border-radius: 2px !important;
 }
 
+/* ✅ WHITE CLICK TEXT */
 #gateway-overlay {
     position: fixed;
     inset: 0;
@@ -446,7 +444,7 @@ img.avatar-decoration {
     align-items: center;
     z-index: 999999;
     cursor: pointer;
-    transition: opacity 0.3s ease, visibility 0.3s; /* ✅ PINABILIS AT PINAGANDA */
+    transition: opacity 0.3s ease, visibility 0.3s;
 }
 
 .gateway-btn {
@@ -455,7 +453,7 @@ img.avatar-decoration {
     letter-spacing: 5px;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    color: #ffffff !important; /* ✅ WHITE COLOR */
     transition: all 0.2s ease;
 }
 .gateway-btn:hover {
@@ -472,7 +470,7 @@ img.avatar-decoration {
 .name-label {
     text-align: center;
     font-size: 11px;
-    margin-top: 4px; /* ✅ PINALIIT ANG LAYO */
+    margin-top: 4px;
     color: #ccc;
     max-width: 80px;
     overflow: hidden;
@@ -556,7 +554,7 @@ audio.volume = 0.4;
 document.getElementById("gateway-overlay").addEventListener("click", function() {
     audio.play().catch(() => {});
     this.classList.add("fade-gateway");
-    document.body.classList.add('loaded'); /* ✅ SMOOTH LOAD */
+    document.body.classList.add('loaded');
     
     document.querySelectorAll('.typewriter-header').forEach(el => {
         el.style.animationPlayState = 'running';
@@ -564,10 +562,8 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ AUTOMATIC UPDATE: BAWAT 5 SEGUNDO
 const UPDATE_INTERVAL = 5000; 
 
-// ✅ LISTA NG ID — ILAGAY LAHAT NG ID NIYO DITO
 const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
 const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
 const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
@@ -575,13 +571,11 @@ const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999
 const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
 
-// ✅ LANYARD API: BABASA LAMANG KUNG NASA LOOB NG SERVER
 async function getUserData(userId) {
     try {
         const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
         const json = await res.json();
 
-        // ✅ KUNG NASA LOOB NG SERVER: MAY DATA
         if (json.success) {
             const d = json.data;
             return {
@@ -594,10 +588,10 @@ async function getUserData(userId) {
                     ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256` 
                     : null,
                 activity: d.activities?.[0] || null,
-                customStatus: d.activities?.find(a => a.type === 4) || null
+                customStatus: d.activities?.find(a => a.type === 4) || null,
+                allActivities: d.activities || []
             };
         }
-        // ❌ KUNG WALA SA SERVER: WALANG IBABALIK = HINDI LALABAS
         return null;
     } catch (e) {
         return null;
@@ -642,27 +636,31 @@ function showGroup(members, container) {
             else if (s === 'dnd') statusClass = 'status-dnd';
         }
 
-        // ✅ TINANGGAL NA ANG "STATUS : CUSTOM STATUS"
         let customStatusText = '';
         if (mem.customStatus?.state) {
-            // ✅ KULAY GRAY ANG NOTES
             customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
         }
 
-        // ✅ BAGO: STATUS NG LARO / STREAMING
         let activityText = '';
-        if (mem.activity && mem.activity.name) {
-            let typeText = '';
-            if (mem.activity.type === 0) typeText = 'Playing';
-            if (mem.activity.type === 1) typeText = 'Streaming';
-            if (mem.activity.type === 2) typeText = 'Listening to';
-            if (mem.activity.type === 3) typeText = 'Watching';
-            if (typeText) {
-                activityText = `<div class="tooltip-activity">${typeText}: ${mem.activity.name}</div>`;
-            }
+        if (mem.allActivities && mem.allActivities.length > 0) {
+            mem.allActivities.forEach(act => {
+                if (act.type === 4) return;
+
+                let typeText = '';
+                if (act.type === 0) typeText = 'Playing';
+                if (act.type === 1) typeText = '🔴 Streaming';
+                if (act.type === 2) typeText = 'Listening to';
+                if (act.type === 3) typeText = 'Watching';
+                if (act.type === 5) typeText = 'Competing in';
+
+                if (typeText && act.name) {
+                    let details = act.details ? ` - ${act.details}` : '';
+                    let state = act.state ? ` (${act.state})` : '';
+                    activityText += `<div class="tooltip-activity">${typeText}: ${act.name}${details}${state}</div>`;
+                }
+            });
         }
 
-        // ✅ AVATAR DECO SA LOOB NG POPUP
         let tooltipDeco = '';
         if (mem.effectURL) {
             tooltipDeco = `<img src="${mem.effectURL}" class="tooltip-decoration" alt="decoration">`;
@@ -681,7 +679,6 @@ function showGroup(members, container) {
                     ${tooltipDeco}
                     <div class="tooltip-header-inner">
                         <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
-                        <!-- ✅ STATUS CIRCLE SA TABI NG PANGALAN -->
                         <span class="tooltip-status-dot-inline ${statusClass}"></span>
                     </div>
                 </div>

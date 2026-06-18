@@ -434,7 +434,7 @@ img.avatar-decoration {
     border-radius: 2px !important;
 }
 
-/* ✅ IMPROVED CLICK TEXT - CLEAR, BIGGER, GLOWING */
+/* ✅ FIXED: CLICK TEXT - FULL WHITE, BIG, VISIBLE, HIGHEST Z-INDEX */
 #gateway-overlay {
     position: fixed;
     inset: 0;
@@ -442,25 +442,28 @@ img.avatar-decoration {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999999;
+    z-index: 9999999 !important; /* ✅ PINAKA-IBABAW */
     cursor: pointer;
     transition: opacity 0.3s ease, visibility 0.3s;
 }
 
 .gateway-btn {
-    padding: 15px 40px;
-    font-size: 14px; /* ✅ PINALAKI */
-    letter-spacing: 8px; /* ✅ MAS MALINAW */
+    padding: 20px 50px;
+    font-size: 18px !important; /* ✅ SOBRANG LAKI */
+    letter-spacing: 10px; /* ✅ MALAWAK ANG LETRA */
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #ffffff !important;
-    text-shadow: 0 0 8px #ffffff; /* ✅ MAY GLOW PARA AGAW-PANSIN */
+    border: 2px solid #ffffff !important; /* ✅ KULAY PUTI ANG BORDER */
+    color: #ffffff !important; /* ✅ SIGURADONG PUTI ANG TEXT */
+    text-shadow: 0 0 15px #ffffff, 0 0 25px #ffffff !important; /* ✅ MALINAW NA GLOW */
     transition: all 0.2s ease;
-    font-weight: 600;
+    font-weight: bold !important;
+    font-family: 'Inter', sans-serif !important;
+    opacity: 1 !important; /* ✅ HINDI NAKATAGO */
+    visibility: visible !important;
 }
 .gateway-btn:hover {
-    background: rgba(255,255,255,0.08);
-    text-shadow: 0 0 12px #ffffff;
+    background: rgba(255,255,255,0.1);
+    text-shadow: 0 0 20px #ffffff, 0 0 30px #ffffff;
 }
 
 .fade-gateway {

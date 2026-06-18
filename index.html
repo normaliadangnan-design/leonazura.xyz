@@ -434,7 +434,7 @@ img.avatar-decoration {
     border-radius: 2px !important;
 }
 
-/* ✅ WHITE CLICK TEXT */
+/* ✅ IMPROVED CLICK TEXT - CLEAR, BIGGER, GLOWING */
 #gateway-overlay {
     position: fixed;
     inset: 0;
@@ -448,16 +448,19 @@ img.avatar-decoration {
 }
 
 .gateway-btn {
-    padding: 12px 30px;
-    font-size: 10px;
-    letter-spacing: 5px;
+    padding: 15px 40px;
+    font-size: 14px; /* ✅ PINALAKI */
+    letter-spacing: 8px; /* ✅ MAS MALINAW */
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff !important; /* ✅ WHITE COLOR */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff !important;
+    text-shadow: 0 0 8px #ffffff; /* ✅ MAY GLOW PARA AGAW-PANSIN */
     transition: all 0.2s ease;
+    font-weight: 600;
 }
 .gateway-btn:hover {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.08);
+    text-shadow: 0 0 12px #ffffff;
 }
 
 .fade-gateway {

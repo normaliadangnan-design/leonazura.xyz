@@ -15,7 +15,7 @@
 <meta name="twitter:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
 
 <!-- 🛡️ SECURITY: DISABLE INSPECT ELEMENT & RIGHT CLICK -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.leonazura.xyz https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
 
@@ -509,10 +509,10 @@ document.getElementById("gateway-overlay").addEventListener("click", function() 
     });
 });
 
-// ✅ AUTOMATIC UPDATE: BAWAT 3 SEGUNDO — WALANG HIHINTAYIN
-const UPDATE_INTERVAL = 3000; 
+// ✅ AUTOMATIC UPDATE: BAWAT 5 SEGUNDO
+const UPDATE_INTERVAL = 5000; 
 
-// ✅ LISTA NG ID - TAMA AT UPA NA
+// ✅ LISTA NG ID — ILAGAY LAHAT NG ID NIYO DITO
 const founderIDs = ["1250654354344775703", "1506975053370359848", "1123145717461033041"]; 
 const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1506434429613113405", "1498999674969784426"]; 
 const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
@@ -520,59 +520,63 @@ const scrollingIDsRow1 = ["1499093156321431622", "1506434429613113405", "1498999
 const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
 
-// ✅ AYOS NA ANG API CONNECTION: https://api.leonazura.xyz/members 
-async function fetchAndUpdate() {
+// ✅ LANYARD API: BABASA LAMANG KUNG NASA LOOB NG SERVER
+async function getUserData(userId) {
     try {
-        const res = await fetch('https://api.leonazura.xyz/members');
-        if (!res.ok) throw new Error("API Error");
-        const members = await res.json();
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+        const json = await res.json();
 
-        showGroup(members, founderIDs, 'founder-container');
-        showGroup(members, aboveAllIDs, 'aboveall-container');
-        showGroup(members, staffIDs, 'staff-container');
-        showMarquee(members, scrollingIDsRow1, "marquee-container-1");
-        showMarquee(members, scrollingIDsRow2, "marquee-container-2");
-
-    } catch (err) {
-        console.error("❌ ERROR SA API:", err);
-        // ✅ KUNG MAY ERROR, GAGAMITIN NATIN ANG TAMANG DATA PARA LUMABAS ANG LAHAT
-        const fallbackData = [
-            {"id":"1250654354344775703","username":"kids.xyz","displayName":"kids.xyz","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1250654354344775703/a_8d7f9c2e4b1a3f5d7e9c0b2a4d6f8e0c.gif","effectURL":"https://cdn.discordapp.com/avatar-decoration-presets/a_1b2c3d4e5f6g7h8i9j0k.png"},
-            {"id":"1506975053370359848","username":"BITSBOY","displayName":"BITSBOY","status":"dnd","avatarURL":"https://cdn.discordapp.com/avatars/1506975053370359848/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
-            {"id":"1123145717461033041","username":"KIRA•AZURA","displayName":"KIRA•AZURA","status":"idle","avatarURL":"https://cdn.discordapp.com/avatars/1123145717461033041/a_9z8y7x6w5v4u3t2s1r0q.gif","effectURL":"https://cdn.discordapp.com/avatar-decoration-presets/a_9z8y7x6w5v4u3t2s1r0q.png"},
-            {"id":"1081806153341743144","username":"ia","displayName":"ia","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1081806153341743144/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
-            {"id":"1414546504437207161","username":"kyo","displayName":"kyo","status":"offline","avatarURL":"https://cdn.discordapp.com/avatars/1414546504437207161/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
-            {"id":"918633044276019232","username":"Hev","displayName":"Hev","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/918633044276019232/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
-            {"id":"1499093156321431622","username":"Syke","displayName":"Syke","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1499093156321431622/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
-            {"id":"1506434429613113405","username":"Aki Haruss","displayName":"Aki Haruss","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1506434429613113405/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
-            {"id":"1498999674969784426","username":"User6","displayName":"User6","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1498999674969784426/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
-            {"id":"1501438491207405588","username":"Staff1","displayName":"Staff1","status":"online","avatarURL":"https://cdn.discordapp.com/avatars/1501438491207405588/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""},
-            {"id":"1374740899422277703","username":"Staff2","displayName":"Staff2","status":"idle","avatarURL":"https://cdn.discordapp.com/avatars/1374740899422277703/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d.png","effectURL":""}
-        ];
-        showGroup(fallbackData, founderIDs, 'founder-container');
-        showGroup(fallbackData, aboveAllIDs, 'aboveall-container');
-        showGroup(fallbackData, staffIDs, 'staff-container');
-        showMarquee(fallbackData, scrollingIDsRow1, "marquee-container-1");
-        showMarquee(fallbackData, scrollingIDsRow2, "marquee-container-2");
+        // ✅ KUNG NASA LOOB NG SERVER: MAY DATA
+        if (json.success) {
+            const d = json.data;
+            return {
+                id: userId,
+                username: d.discord_user.username,
+                displayName: d.discord_user.global_name || d.discord_user.username,
+                status: d.discord_status,
+                avatarURL: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
+                effectURL: d.discord_user.avatar_decoration_data?.asset 
+                    ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256` 
+                    : null,
+                activity: d.activities?.[0] || null,
+                customStatus: d.activities?.find(a => a.type === 4) || null
+            };
+        }
+        // ❌ KUNG WALA SA SERVER: WALANG IBABALIK = HINDI LALABAS
+        return null;
+    } catch (e) {
+        return null;
     }
 }
 
 
-function showGroup(allMembers, listIDs, container) {
+async function fetchAndUpdate() {
+    const allFounder = await Promise.all(founderIDs.map(id => getUserData(id)));
+    const allAboveAll = await Promise.all(aboveAllIDs.map(id => getUserData(id)));
+    const allStaff = await Promise.all(staffIDs.map(id => getUserData(id)));
+    const allScroll1 = await Promise.all(scrollingIDsRow1.map(id => getUserData(id)));
+    const allScroll2 = await Promise.all(scrollingIDsRow2.map(id => getUserData(id)));
+
+    showGroup(allFounder.filter(Boolean), 'founder-container');
+    showGroup(allAboveAll.filter(Boolean), 'aboveall-container');
+    showGroup(allStaff.filter(Boolean), 'staff-container');
+    showMarquee(allScroll1.filter(Boolean), "marquee-container-1");
+    showMarquee(allScroll2.filter(Boolean), "marquee-container-2");
+}
+
+
+function showGroup(members, container) {
     const box = document.getElementById(container);
     if (!box) return;
     box.innerHTML = '';
 
-    listIDs.forEach(id => {
-        const mem = allMembers.find(m => String(m.id).trim() === String(id).trim()); 
-        if (!mem) return;
-        
+    members.forEach(mem => {
         const wrapper = document.createElement('div'); 
         wrapper.className = 'avatar-wrapper-node';
 
         let decoHTML = '';
-        if (mem.effectURL && typeof mem.effectURL === 'string' && mem.effectURL.startsWith('https://')) {
-            decoHTML = `<img src="${mem.effectURL.trim()}" class="avatar-decoration" alt="decoration" loading="lazy">`;
+        if (mem.effectURL) {
+            decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy">`;
         }
 
         let statusClass = 'status-offline'; 
@@ -584,28 +588,29 @@ function showGroup(allMembers, listIDs, container) {
         }
 
         let activityText = '';
-        if (mem.activity && mem.activity.type && mem.activity.name) {
-            activityText = `<div style="font-size:10px; color:#aaa; margin-top:2px;">${mem.activity.type}: ${mem.activity.name}</div>`;
+        if (mem.activity && mem.activity.name) {
+            const type = {0:'Naglalaro',1:'Nanonood',2:'Nakikinig',3:'Custom',4:'Status'}[mem.activity.type] || 'Ginagawa';
+            activityText = `<div style="font-size:10px; color:#aaa; margin-top:2px;">${type}: ${mem.activity.name}</div>`;
         }
         let customStatusText = '';
-        if (mem.customStatus && mem.customStatus.note) {
-            customStatusText = `<div style="font-size:10px; color:#ffcc00; margin-top:2px;">${mem.customStatus.emoji || ''} ${mem.customStatus.note}</div>`;
+        if (mem.customStatus?.state) {
+            customStatusText = `<div style="font-size:10px; color:#ffcc00; margin-top:2px;">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
         }
 
         wrapper.innerHTML = `
             <div class="circle-avatar-container">
                 ${decoHTML} 
-                <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="avatar-img" alt="avatar">
+                <img src="${mem.avatarURL}" class="avatar-img" alt="avatar">
                 <span class="status-indicator ${statusClass}"></span>
             </div>
-            <div class="name-label">${mem.displayName || mem.username || 'User'}</div>
+            <div class="name-label">${mem.displayName}</div>
 
             <div class="avatar-tooltip">
                 <div class="tooltip-header">
-                    <img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}" class="tooltip-avatar-sm">
+                    <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
                 </div>
-                <div class="tooltip-desc">${mem.displayName || mem.username || 'Unknown'}</div>
-                <div class="tooltip-username">@${mem.username || 'username'}</div>
+                <div class="tooltip-desc">${mem.displayName}</div>
+                <div class="tooltip-username">@${mem.username}</div>
                 <div class="tooltip-status"><span class="status-dot-sm ${statusClass}"></span> ${mem.status || 'Offline'}</div>
                 ${activityText}
                 ${customStatusText}
@@ -616,17 +621,15 @@ function showGroup(allMembers, listIDs, container) {
 }
 
 
-function showMarquee(allMembers, listIDs, containerId) {
+function showMarquee(members, containerId) {
     const box = document.getElementById(containerId);
-    if (!box) return;
-    const selected = allMembers.filter(mem => listIDs.includes(String(mem.id)));
-    if (selected.length === 0) return;
-    const list = [...selected, ...selected, ...selected];
+    if (!box || members.length === 0) return;
+    const list = [...members, ...members, ...members];
     box.innerHTML = '';
     list.forEach(mem => {
         const block = document.createElement('div');
         block.className = 'marquee-profile-block';
-        block.innerHTML = `<img src="${mem.avatarURL || 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png'}"> <span>${mem.displayName || mem.username}</span>`;
+        block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName}</span>`;
         box.appendChild(block);
     });
 }

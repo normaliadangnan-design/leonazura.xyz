@@ -161,8 +161,7 @@
         }
 
         .center-container {
-            width: 100%;
-            max-width: 900px;
+           max-width: 1400px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -198,7 +197,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            gap: 20px !important;
+            gap: 45px !important;
             padding: 5px 0;
             min-height: 80px;
         }
@@ -216,9 +215,9 @@
         }
 
         .circle-avatar-container {
-            position: relative;
-            width: 80px;
-            height: 80px;
+          position: relative;
+            width: 95px;
+            height: 95px;
             border-radius: 50%;
             overflow: visible; 
             background: transparent; 
@@ -244,8 +243,8 @@
         }
 
         .circle-avatar-container img.avatar-img {
-            width: 80px !important;
-            height: 80px !important;
+            width: 95px !important;
+            height: 95px !important;
             border-radius: 50% !important;
             object-fit: cover !important;
             pointer-events: none !important;
@@ -526,7 +525,7 @@
 
         ::-webkit-scrollbar { display: none !important; }
 
-        .name-label {
+       .name-label {
             text-align: center;
             font-size: 11px;
             margin-top: 4px;
@@ -536,6 +535,13 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+        .section-divider {
+    width: 100%;
+    max-width: 1300px;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 25px 0;
+}
     </style>
 </head>
 <body oncontextmenu="return false;" onkeydown="return disableKeys(event);">
@@ -554,13 +560,13 @@
         </div>
 
         <div id="founder-container" class="horizontal-avatar-row"></div>
-
+        <div class="section-divider"></div>
         <div class="title-group-block">
             <span class="tiny-top-text">ABOVE ALL</span>
             <h2 class="typewriter-header">ABOVE ALL</h2>
         </div>
         <div id="aboveall-container" class="horizontal-avatar-row"></div>
-
+        <div class="section-divider"></div>
         <div class="title-group-block">
             <span class="tiny-top-text">STAFF</span>
             <h2 class="typewriter-header">STAFF</h2>

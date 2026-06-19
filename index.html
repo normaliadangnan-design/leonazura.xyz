@@ -33,8 +33,9 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000000;
+            /* ✅ INAYOS ANG BACKGROUND — KITA NA AT SAKTO LANG ANG DILIM */
             background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), 
+                linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
                 url("pba.webp");
             background-size: cover;
             background-position: center center;
@@ -271,7 +272,7 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ INAYOS NA POPUP BOX */
+        /* ✅ INAYOS NA POPUP BOX — MALINAW ANG LAHAT NG LAMAN */
         .avatar-tooltip {
             position: absolute;
             bottom: 115%; 
@@ -660,7 +661,7 @@
                     customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
                 }
 
-                // ✅ INAYOS NA PAGBASA NG LAHAT NG ACTIVITY
+                // ✅ INAYOS NA PAGBASA — KASAMA NA ANG SPOTIFY AT LAHAT NG STATUS
                 let activityText = '';
                 if (mem.allActivities && mem.allActivities.length > 0) {
                     mem.allActivities.forEach(act => {
@@ -669,16 +670,16 @@
                         let typeText = '';
                         if (act.type === 0) typeText = 'Playing';
                         if (act.type === 1) typeText = '🔴 Streaming';
-                        if (act.type === 2) typeText = 'Listening to';
+                        if (act.type === 2) typeText = 'Listening to Spotify'; // ✅ SAKTO ANG PANGALAN
                         if (act.type === 3) typeText = 'Watching';
                         if (act.type === 5) typeText = 'Competing in';
                         if (act.type === 6) typeText = 'Custom Status';
                         if (act.type === 7) typeText = 'Working on';
 
                         if (typeText && act.name) {
-                            let details = act.details ? `\n${act.details}` : '';
-                            let state = act.state ? ` • ${act.state}` : '';
-                            activityText += `<div class="tooltip-activity">${typeText}: ${act.name}${details}${state}</div>`;
+                            let details = act.details ? `<div>${act.details}</div>` : '';
+                            let state = act.state ? `<div>• ${act.state}</div>` : '';
+                            activityText += `<div class="tooltip-activity"><strong>${typeText}</strong>: ${act.name}${details}${state}</div>`;
                         }
                     });
                 }
@@ -733,4 +734,4 @@
         setInterval(fetchAndUpdate, UPDATE_INTERVAL);
     </script>
 </body>
-</html>
+</html>+

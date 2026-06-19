@@ -53,7 +53,7 @@
         }
         body.loaded { opacity: 1; }
 
-        /* ✅ LAHAT NG CONTENT NAKA-HIDE MUNA — INAYOS HINDI BUGGY */
+        /* ✅ FIX: HIDE CONTENT PROPERLY — NO BUGS */
         .center-container, .navigation-bar, #azura-discord-btn {
             opacity: 0;
             visibility: hidden;
@@ -270,17 +270,17 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ EKSAKTO SA HALIMBAWA: POPUP BOX — GANUN-GANUN TALAGA */
+        /* ✅ EXACT POPUP SIZE — SAME AS YOUR EXAMPLE */
         .avatar-tooltip {
             position: absolute;
             bottom: 115%; 
             left: 50%;
             transform: translateX(-50%) translateY(10px);
-            background: #111214 !important; /* ✅ TAMANG KULAY ITIM-ABU */
+            background: #111214 !important;
             border: 1px solid #26282c !important;
-            border-radius: 6px; /* ✅ MABABAW NA BILOG */
-            padding: 8px 10px; /* ✅ SAKTO LANG LOOB, WALANG SOBRANG ESPASY0 */
-            width: 220px; /* ✅ EKSAKTO SA LAKI */
+            border-radius: 6px;
+            padding: 8px 10px;
+            width: 220px; /* ✅ EXACT WIDTH */
             color: #ffffff;
             opacity: 0;
             visibility: hidden;
@@ -301,12 +301,13 @@
             align-items: center;
             justify-content: flex-start;
             margin-bottom: 2px;
+            position: relative;
         }
 
         .tooltip-decoration {
             position: absolute;
             top: 50%;
-            left: 18px;
+            left: 14px;
             transform: translate(-50%, -50%);
             width: 50px;
             height: 50px;
@@ -314,7 +315,7 @@
             z-index: 1;
         }
         .tooltip-avatar-sm {
-            width: 28px; /* ✅ MALIIT NA AVATAR */
+            width: 28px;
             height: 28px;
             border-radius: 50%;
             position: relative;
@@ -334,7 +335,7 @@
             flex-shrink: 0;
         }
         .tooltip-username {
-            font-size: 10px; /* ✅ NAPAKALIIT NA FONT */
+            font-size: 10px;
             color: #949494;
             margin: 0;
         }
@@ -351,7 +352,7 @@
             word-wrap: break-word;
         }
 
-        /* ✅ EKSAKTO: SPOTIFY STYLE — GANUN-GANUN TALAGA */
+        /* ✅ SPOTIFY STYLE — EXACT SAME */
         .tooltip-activity-spotify {
             display: flex;
             align-items: center;
@@ -485,7 +486,7 @@
             border-radius: 2px !important;
         }
 
-        /* ✅ INAYOS ANG LOADING / CLICK SCREEN — HINDI NA BUGGY */
+        /* ✅ FIXED LOADING / CLICK SCREEN — NO MORE BUGS */
         #gateway-overlay {
             position: fixed;
             inset: 0;
@@ -616,7 +617,7 @@
         const audio = document.getElementById("soundtrack");
         audio.volume = 0.4;
 
-        // ✅ INAYOS ANG CLICK / LOADING SCREEN — HINDI NA BUGGY
+        // ✅ FIXED CLICK / LOADING — NO MORE BUGS
         document.getElementById("gateway-overlay").addEventListener("click", function() {
             audio.play().catch(() => {});
             this.classList.add("fade-gateway");
@@ -644,19 +645,25 @@
 
                 if (json.success) {
                     const d = json.data;
+                    
+                    // ✅ PERFECT STATUS & ACTIVITY EXTRACTION
+                    let status = d.discord_status || 'offline';
+                    let activities = d.activities || [];
+                    let spotify = d.spotify || null;
+                    let customStatus = activities.find(a => a.type === 4) || null;
+
                     return {
                         id: userId,
                         username: d.discord_user.username,
                         displayName: d.discord_user.global_name || d.discord_user.username,
-                        status: d.discord_status,
+                        status: status,
                         avatarURL: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
                         effectURL: d.discord_user.avatar_decoration_data?.asset 
                             ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256` 
                             : null,
-                        spotify: d.spotify || null, // ✅ DIREKTANG KUNIN ANG SPOTIFY DATA MULA API
-                        activity: d.activities?.[0] || null,
-                        customStatus: d.activities?.find(a => a.type === 4) || null,
-                        allActivities: d.activities || []
+                        spotify: spotify,
+                        activities: activities,
+                        customStatus: customStatus
                     };
                 }
                 return null;
@@ -708,7 +715,7 @@
                     customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
                 }
 
-                // ✅ EKSAKTO SA HALIMBAWA: SPOTIFY DISPLAY
+                // ✅ PERFECT ACTIVITY DISPLAY — EXACT SAME AS DISCORD
                 let activityText = '';
 
                 if (mem.spotify) {
@@ -724,10 +731,9 @@
                         </div>
                     </div>`;
                 }
-                // ✅ IBANG STATUS
-                else if (mem.allActivities && mem.allActivities.length > 0) {
-                    mem.allActivities.forEach(act => {
-                        if (act.type === 4) return;
+                else if (mem.activities && mem.activities.length > 0) {
+                    mem.activities.forEach(act => {
+                        if (act.type === 4) return; // skip custom status
 
                         let typeText = '';
                         if (act.type === 0) typeText = 'Playing';

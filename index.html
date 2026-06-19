@@ -271,7 +271,7 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ PINALAKI AT PINAHABA ANG POPUP BOX — KASYA LAHAT NG DETALYE */
+        /* ✅ EKSAKTO SA HALIMBAWA: POPUP BOX DESIGN */
         .avatar-tooltip {
             position: absolute;
             bottom: 115%; 
@@ -280,9 +280,8 @@
             background: #000000 !important;
             border: 1px solid rgba(255,255,255,0.15) !important;
             border-radius: 12px;
-            padding: 18px 22px;
-            width: 320px; /* ✅ MAS MALAKI */
-            min-height: auto;
+            padding: 16px 18px;
+            width: 270px; /* ✅ SAKTO SA LAKI NG HALIMBAWA */
             color: #fff;
             opacity: 0;
             visibility: hidden;
@@ -290,7 +289,7 @@
             pointer-events: none; 
             z-index: 99999;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
-            line-height: 1.5;
+            line-height: 1.4;
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
@@ -299,11 +298,10 @@
         }
 
         .tooltip-header {
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .tooltip-decoration {
@@ -339,15 +337,12 @@
         .tooltip-username {
             font-size: 12px;
             color: #96989d;
-            margin: 4px 0;
+            margin: 2px 0 8px 0;
         }
         .tooltip-desc {
             font-size: 15px;
             font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-bottom: 6px;
         }
         .tooltip-note {
             font-size: 12px;
@@ -357,20 +352,53 @@
             word-wrap: break-word;
         }
 
-        /* ✅ MALINAW AT HINDI TINATAGO ANG SPOTIFY */
+        /* ✅ EKSAKTO: SPOTIFY STYLE MAY LOGO AT AYOS */
+        .tooltip-activity-spotify {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #b9bbbe;
+            line-height: 1.5;
+            padding: 6px 8px;
+            background: #0a0a0a;
+            border-radius: 6px;
+            margin-top: 4px;
+        }
+        .spotify-icon {
+            width: 16px;
+            height: 16px;
+            background: #1DB954;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+        .spotify-text strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .spotify-text .song {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .spotify-text .artist {
+            color: #b9bbbe;
+        }
+
         .tooltip-activity {
             font-size: 12px;
             color: #b9bbbe;
             margin-top: 6px;
-            line-height: 1.6;
-            padding: 8px 10px;
+            line-height: 1.5;
+            padding: 6px 8px;
             background: #0a0a0a;
             border-radius: 6px;
             word-break: break-word;
-            white-space: normal;
-        }
-        .tooltip-activity strong {
-            color: #1DB954; /* ✅ SPOTIFY GREEN */
         }
 
         .marquee-ticker {
@@ -671,22 +699,23 @@
                     customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
                 }
 
-                // ✅ TAMA AT TUMPAK ANG PAGBASA — SPOTIFY PRIORITY
+                // ✅ EKSAKTO SA HALIMBAWA: SPOTIFY DISPLAY
                 let activityText = '';
 
-                // ✅ KUNG MAY SPOTIFY, ITO ANG LALABAS
                 if (mem.spotify) {
                     const track = mem.spotify.song;
                     const artist = mem.spotify.artist;
-                    const album = mem.spotify.album;
-                    activityText = `<div class="tooltip-activity">
-                        <strong>Listening to Spotify 🎵</strong>
-                        <div><strong>${track}</strong></div>
-                        <div>• ${artist}</div>
-                        <div style="font-size:11px; opacity:0.8;">Album: ${album}</div>
+                    activityText = `
+                    <div class="tooltip-activity-spotify">
+                        <div class="spotify-icon">♫</div>
+                        <div class="spotify-text">
+                            <div><strong>Listening to Spotify</strong></div>
+                            <div class="song">${track}</div>
+                            <div class="artist">${artist}</div>
+                        </div>
                     </div>`;
                 }
-                // ✅ KUNG WALANG SPOTIFY, IBANG STATUS ANG LALABAS
+                // ✅ IBANG STATUS
                 else if (mem.allActivities && mem.allActivities.length > 0) {
                     mem.allActivities.forEach(act => {
                         if (act.type === 4) return;

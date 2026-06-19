@@ -270,25 +270,26 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ EXACT POPUP SIZE — SAME AS YOUR EXAMPLE */
+        /* ✅ PINAKA IMPORTANTE: INAYOS ANG LAKI NG POPUP — EKSAKTO SA SCREENSHOT MO */
         .avatar-tooltip {
             position: absolute;
-            bottom: 115%; 
+            bottom: 120%; 
             left: 50%;
             transform: translateX(-50%) translateY(10px);
             background: #111214 !important;
             border: 1px solid #26282c !important;
-            border-radius: 6px;
-            padding: 8px 10px;
-            width: 220px; /* ✅ EXACT WIDTH */
+            border-radius: 8px; /* ✅ BILOG NA SULTO KATULAD SA DISCORD */
+            padding: 12px 15px; /* ✅ DAGDAG LOOB PARA LUWAG */
+            width: 320px !important; /* ✅ PINALAKI — EKSAKTO SA LAKI NG HALIMBAWA MO */
+            min-height: 110px; /* ✅ TAMANG TAAS */
             color: #ffffff;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
             pointer-events: none; 
             z-index: 99999;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-            line-height: 1.2;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            line-height: 1.4;
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
@@ -300,23 +301,23 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            margin-bottom: 2px;
+            margin-bottom: 6px;
             position: relative;
         }
 
         .tooltip-decoration {
             position: absolute;
             top: 50%;
-            left: 14px;
+            left: 16px;
             transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             pointer-events: none;
             z-index: 1;
         }
         .tooltip-avatar-sm {
-            width: 28px;
-            height: 28px;
+            width: 32px; /* ✅ PINALAKI RIN ANG MALIIT NA AVATAR */
+            height: 32px;
             border-radius: 50%;
             position: relative;
             z-index: 2;
@@ -324,50 +325,50 @@
         .tooltip-header-inner {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px; /* ✅ DAGDAG DISTANSYA */
         }
 
         .tooltip-status-dot-inline {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             display: inline-block;
             flex-shrink: 0;
         }
         .tooltip-username {
-            font-size: 10px;
+            font-size: 11px; /* ✅ TAMANG LAKI NG FONT */
             color: #949494;
             margin: 0;
         }
         .tooltip-desc {
-            font-size: 13px;
+            font-size: 15px; /* ✅ MALAKING PANGALAN — TAMA SA SCREENSHOT */
             font-weight: 600;
-            margin: 0 0 2px 0;
+            margin: 0 0 4px 0;
         }
         .tooltip-note {
-            font-size: 10px;
+            font-size: 11px;
             color: #888888;
-            margin-top: 2px;
-            line-height: 1.2;
+            margin-top: 4px;
+            line-height: 1.3;
             word-wrap: break-word;
         }
 
-        /* ✅ SPOTIFY STYLE — EXACT SAME */
+        /* ✅ SPOTIFY STYLE — EKSAKTO */
         .tooltip-activity-spotify {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 10px;
+            gap: 6px;
+            font-size: 11px;
             color: #b9bbbe;
-            line-height: 1.3;
-            padding: 3px 5px;
+            line-height: 1.4;
+            padding: 4px 6px;
             background: #1a1b1d;
-            border-radius: 3px;
-            margin-top: 2px;
+            border-radius: 4px;
+            margin-top: 4px;
         }
         .spotify-icon {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             background: #1DB954;
             border-radius: 50%;
             display: flex;
@@ -375,32 +376,32 @@
             justify-content: center;
             color: #000;
             font-weight: bold;
-            font-size: 8px;
+            font-size: 9px;
             flex-shrink: 0;
         }
         .spotify-text strong {
             color: #ffffff;
             font-weight: 500;
-            font-size: 10px;
+            font-size: 11px;
         }
         .spotify-text .song {
             color: #ffffff;
             font-weight: 500;
-            font-size: 10px;
+            font-size: 11px;
         }
         .spotify-text .artist {
             color: #949494;
-            font-size: 9px;
+            font-size: 10px;
         }
 
         .tooltip-activity {
-            font-size: 10px;
+            font-size: 11px;
             color: #b9bbbe;
-            margin-top: 2px;
-            line-height: 1.3;
-            padding: 3px 5px;
+            margin-top: 4px;
+            line-height: 1.4;
+            padding: 4px 6px;
             background: #1a1b1d;
-            border-radius: 3px;
+            border-radius: 4px;
             word-break: break-word;
         }
 

@@ -270,7 +270,7 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ PINAKA IMPORTANTE: INAYOS ANG LAKI NG POPUP — EKSAKTO SA SCREENSHOT MO */
+        /* ✅ TAMANG LAKI NG POPUP — EKSAKTO SA SCREENSHOT MO */
         .avatar-tooltip {
             position: absolute;
             bottom: 120%; 
@@ -278,10 +278,10 @@
             transform: translateX(-50%) translateY(10px);
             background: #111214 !important;
             border: 1px solid #26282c !important;
-            border-radius: 8px; /* ✅ BILOG NA SULTO KATULAD SA DISCORD */
-            padding: 12px 15px; /* ✅ DAGDAG LOOB PARA LUWAG */
-            width: 320px !important; /* ✅ PINALAKI — EKSAKTO SA LAKI NG HALIMBAWA MO */
-            min-height: 110px; /* ✅ TAMANG TAAS */
+            border-radius: 8px;
+            padding: 12px 15px;
+            width: 320px !important;
+            min-height: 110px;
             color: #ffffff;
             opacity: 0;
             visibility: hidden;
@@ -316,7 +316,7 @@
             z-index: 1;
         }
         .tooltip-avatar-sm {
-            width: 32px; /* ✅ PINALAKI RIN ANG MALIIT NA AVATAR */
+            width: 32px;
             height: 32px;
             border-radius: 50%;
             position: relative;
@@ -325,7 +325,7 @@
         .tooltip-header-inner {
             display: flex;
             align-items: center;
-            gap: 8px; /* ✅ DAGDAG DISTANSYA */
+            gap: 8px;
         }
 
         .tooltip-status-dot-inline {
@@ -336,12 +336,12 @@
             flex-shrink: 0;
         }
         .tooltip-username {
-            font-size: 11px; /* ✅ TAMANG LAKI NG FONT */
+            font-size: 11px;
             color: #949494;
             margin: 0;
         }
         .tooltip-desc {
-            font-size: 15px; /* ✅ MALAKING PANGALAN — TAMA SA SCREENSHOT */
+            font-size: 15px;
             font-weight: 600;
             margin: 0 0 4px 0;
         }
@@ -353,7 +353,7 @@
             word-wrap: break-word;
         }
 
-        /* ✅ SPOTIFY STYLE — EKSAKTO */
+        /* ✅ SPOTIFY STYLE — TAMA */
         .tooltip-activity-spotify {
             display: flex;
             align-items: center;
@@ -647,7 +647,7 @@
                 if (json.success) {
                     const d = json.data;
                     
-                    // ✅ PERFECT STATUS & ACTIVITY EXTRACTION
+                    // ✅ KUMPLETONG KUHA NG DATA MULA API
                     let status = d.discord_status || 'offline';
                     let activities = d.activities || [];
                     let spotify = d.spotify || null;
@@ -703,6 +703,7 @@
                     decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy">`;
                 }
 
+                // ✅ TAMANG STATUS COLOR
                 let statusClass = 'status-offline'; 
                 if (mem.status) {
                     const s = mem.status.toLowerCase().trim();
@@ -711,14 +712,16 @@
                     else if (s === 'dnd') statusClass = 'status-dnd';
                 }
 
+                // ✅ CUSTOM STATUS
                 let customStatusText = '';
                 if (mem.customStatus?.state) {
                     customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
                 }
 
-                // ✅ PERFECT ACTIVITY DISPLAY — EXACT SAME AS DISCORD
+                // ✅ KUMPLETONG ACTIVITY DISPLAY — LAHAT MULA API
                 let activityText = '';
 
+                // ✅ SPOTIFY
                 if (mem.spotify) {
                     const track = mem.spotify.song;
                     const artist = mem.spotify.artist;
@@ -732,6 +735,7 @@
                         </div>
                     </div>`;
                 }
+                // ✅ IBANG ACTIVITIES: Playing, Streaming, Listening, Watching, Competing, Working on
                 else if (mem.activities && mem.activities.length > 0) {
                     mem.activities.forEach(act => {
                         if (act.type === 4) return; // skip custom status

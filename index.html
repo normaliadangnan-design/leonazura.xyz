@@ -53,6 +53,19 @@
         }
         body.loaded { opacity: 1; }
 
+        /* ✅ LAHAT NG CONTENT NAKA-HIDE MUNA */
+        .center-container, .navigation-bar, #azura-discord-btn {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+        body.loaded .center-container,
+        body.loaded .navigation-bar,
+        body.loaded #azura-discord-btn {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .main-logo-container {
             text-align: center;
             margin: 0 0 5px 0;
@@ -258,7 +271,7 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ ONLY POPUP BOX IS FULL BLACK */
+        /* ✅ INAYOS NA POPUP BOX */
         .avatar-tooltip {
             position: absolute;
             bottom: 115%; 
@@ -647,6 +660,7 @@
                     customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
                 }
 
+                // ✅ INAYOS NA PAGBASA NG LAHAT NG ACTIVITY
                 let activityText = '';
                 if (mem.allActivities && mem.allActivities.length > 0) {
                     mem.allActivities.forEach(act => {
@@ -658,10 +672,12 @@
                         if (act.type === 2) typeText = 'Listening to';
                         if (act.type === 3) typeText = 'Watching';
                         if (act.type === 5) typeText = 'Competing in';
+                        if (act.type === 6) typeText = 'Custom Status';
+                        if (act.type === 7) typeText = 'Working on';
 
                         if (typeText && act.name) {
-                            let details = act.details ? ` - ${act.details}` : '';
-                            let state = act.state ? ` (${act.state})` : '';
+                            let details = act.details ? `\n${act.details}` : '';
+                            let state = act.state ? ` • ${act.state}` : '';
                             activityText += `<div class="tooltip-activity">${typeText}: ${act.name}${details}${state}</div>`;
                         }
                     });

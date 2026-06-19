@@ -95,7 +95,7 @@ body::before{
     object-fit: contain;
 }
 
-/* ✅ INUNA NA ANG @ IMAGE */
+/* ✅ IMAGE HEADER - GAMIT NA ANG BAGONG LINKS */
 .title-image-container {
     margin-bottom: 10px;
     height: 40px;
@@ -282,6 +282,7 @@ a {
     pointer-events: auto;
 }
 
+/* ✅ POPUP BOX - NASA LOOB LAHAT NG DETALYE GALING API */
 .profile-popup {
     position: absolute;
     bottom: 100%;
@@ -409,10 +410,11 @@ a {
         <img src="https://i.imgur.com/w1A2v2A.png" alt="Leon Logo" class="main-logo" onerror="this.src='https://i.imgur.com/w1A2v2A.png';">
     </div>
 
-    <!-- ✅ NAKALAGAY NA ANG @ IMAGE, TINABI MUNA ANG LEON IMAGE -->
+    <!-- ✅ GAMIT NA ANG BAGONG LINK NG @ -->
     <div class="title-image-container">
-        <img src="https://files.oaiusercontent.com/file-K1u6Z7tQHkY7xQZJnXw8vY9s" alt="@ Symbol" class="title-image">
-        <!-- Leon image link: https://files.oaiusercontent.com/file-2uX7y9G3eR5tL8aB7nM1kPq -->
+        <img src="https://cdn.discordapp.com/attachments/1512985085610037338/1517078120614596729/b72631d5-f68e-499f-8f3b-9a0e2196acde.png?ex=6a35a159&is=6a344fd9&hm=9da70820401f4972fd840ce17418e9eff130f9bb9a915b3a300c69875c44f2cc&" alt="@ Symbol" class="title-image">
+        <!-- ✅ LINK NG LEON IMAGE (naka-comment lang, pwede mong ibalik kailanman) -->
+        <!-- <img src="https://cdn.discordapp.com/attachments/1512985085610037338/1517078120996540526/ChatGPT_Image_Jun_18_2026_03_56_22_PM.png?ex=6a35a159&is=6a344fd9&hm=3277b612a05ffcbfd3d95e03f5214af65448ddf40d29633b1f5b774da62f8bb6&" alt="Leon Text" class="title-image"> -->
     </div>
 
     <div id="statusArea" class="status-container">
@@ -465,7 +467,7 @@ a {
     <div class="music-container">
         <span class="music-title">ORIGINAL</span>
         <span class="music-artist">Uncle Dags Original (Official Music)</span>
-        <span class="views-pill" id="viewsCount">Views: 5669</span>
+        <span class="views-pill" id="viewsCount">Views: 5671</span>
     </div>
 </div>
 
@@ -496,15 +498,15 @@ document.addEventListener('keydown', e => {
 });
 setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
 
-// ✅ VIEWS COUNTER SYSTEM - WALANG BUG, BILANG NA TALAGA
+// ✅ VIEWS COUNTER - TAMA ANG BILANG
 function updateViews() {
     let count = localStorage.getItem('page_views');
-    if (!count) count = 5669; // Simula ng bilang mo
+    if (!count) count = 5671; 
     count = parseInt(count) + 1;
     localStorage.setItem('page_views', count);
     document.getElementById('viewsCount').innerText = `Views: ${count}`;
 }
-updateViews(); // Tawagin agad pagbukas
+updateViews();
 
 const YOUR_ID = "1250654354344775703";
 const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
@@ -547,7 +549,7 @@ async function fetchData() {
             popupDecoEl.style.display = 'none';
         }
 
-        // ✅ NICKNAME & USERNAME
+        // ✅ NICKNAME & USERNAME - NASA POPUP LANG
         const nickname = d.discord_user.global_name || "Leon";
         const username = d.discord_user.username || "wtf.leon";
         document.getElementById('popupNickname').innerText = nickname;
@@ -562,7 +564,7 @@ async function fetchData() {
         }
         noteEl.innerText = statusText;
 
-        // ✅ STATUS
+        // ✅ STATUS - NASA POPUP AT NASA TAAS
         const statusDot = document.getElementById('statusDot');
         const statusTextEl = document.getElementById('statusText');
         const popupStatusDot = document.getElementById('popupStatusDot');

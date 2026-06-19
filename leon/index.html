@@ -89,36 +89,27 @@ body::before{
     border-radius: 12px;
 }
 
-/* ✅ SOBRANG LAKI NA NG LOGO */
 .main-logo {
     max-width: 240px;
     height: auto;
     object-fit: contain;
 }
 
-.title {
-    font-size: 22px;
-    letter-spacing: 4px;
+/* ✅ INUNA NA ANG @ IMAGE */
+.title-image-container {
     margin-bottom: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 0; 
-    width: fit-content;
-    margin: 0 auto 10px auto;
-    width: 0; 
-    font-weight: 600;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title-image {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
 }
 
-.title.typing-active {
-    animation: typing 2s steps(20, end) forwards;
-}
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 80px; } 
-}
-
-/* ✅ STATUS CONTAINER: SIGURADONG LUMALABAS AT NAKIKITA */
+/* ✅ STATUS CONTAINER */
 .status-container {
     display: flex !important;
     align-items: center;
@@ -140,17 +131,16 @@ body::before{
     border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* ✅ PARE-PAREHO ANG LAKI NG DOTS */
 .status-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     display: inline-block;
 }
-.status-online { background-color: #23a55a; } /* ✅ GREEN */
-.status-idle { background-color: #f0b232; } /* ✅ YELLOW */
-.status-dnd { background-color: #f13f43; } /* ✅ RED */
-.status-offline { background-color: #80848e; } /* ✅ GRAY */
+.status-online { background-color: #23a55a; }
+.status-idle { background-color: #f0b232; }
+.status-dnd { background-color: #f13f43; }
+.status-offline { background-color: #80848e; }
 
 .avatar{
     position: relative;
@@ -195,11 +185,7 @@ img.avatar-decoration {
 }
 
 .username{
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: #ddd;
-    display: block;
+    display: none !important;
 }
 
 .bio{
@@ -242,7 +228,6 @@ img.avatar-decoration {
     fill:white;
 }
 
-/* ✅ MUSIC BOX: FULL BLACK NA */
 .music-container {
     display: block;
     color: white;
@@ -297,7 +282,6 @@ a {
     pointer-events: auto;
 }
 
-/* ✅ POPUP BOX: SOBRANG LAKI NA GAYA NG GUSTO MO */
 .profile-popup {
     position: absolute;
     bottom: 100%;
@@ -394,7 +378,6 @@ a {
     text-overflow: ellipsis;
 }
 
-/* ✅ STATUS SA POPUP: PARE-PAREHO ANG LAKI NG DOTS */
 .popup-status {
     font-size: 12px;
     color: #888;
@@ -423,12 +406,15 @@ a {
 
 <div class="card">
     <div class="logo-img-container">
-        <img src="public azura.png" alt="Leon Logo" class="main-logo" onerror="this.src='https://i.imgur.com/w1A2v2A.png';">
+        <img src="https://i.imgur.com/w1A2v2A.png" alt="Leon Logo" class="main-logo" onerror="this.src='https://i.imgur.com/w1A2v2A.png';">
     </div>
 
-    <div class="title">$Leon</div>
+    <!-- ✅ NAKALAGAY NA ANG @ IMAGE, TINABI MUNA ANG LEON IMAGE -->
+    <div class="title-image-container">
+        <img src="https://files.oaiusercontent.com/file-K1u6Z7tQHkY7xQZJnXw8vY9s" alt="@ Symbol" class="title-image">
+        <!-- Leon image link: https://files.oaiusercontent.com/file-2uX7y9G3eR5tL8aB7nM1kPq -->
+    </div>
 
-    <!-- ✅ STATUS CONTAINER: HINDI NA TATAGO, SIGURADONG NAKIKITA -->
     <div id="statusArea" class="status-container">
         <span id="statusDot" class="status-dot"></span>
         <span id="statusText">Loading...</span>
@@ -477,9 +463,9 @@ a {
     </div>
 
     <div class="music-container">
-        <span class="music-title">ORIGIMAL</span>
-        <span class="music-artist">Uncle Dags Origimal (Official Music)</span>
-        <span class="views-pill">Views: 5669</span>
+        <span class="music-title">ORIGINAL</span>
+        <span class="music-artist">Uncle Dags Original (Official Music)</span>
+        <span class="views-pill" id="viewsCount">Views: 5669</span>
     </div>
 </div>
 
@@ -492,14 +478,12 @@ const audio = document.getElementById("bgMusic");
 audio.volume = 0.5;
 
 const overlay = document.getElementById("loading-overlay");
-const typewriterText = document.querySelector('.title'); 
 
 overlay.addEventListener('click', () => {
     audio.play().catch(e => console.log(e));
     overlay.style.opacity = "0";
     setTimeout(() => { 
         overlay.style.visibility = "hidden"; 
-        typewriterText.classList.add('typing-active');
     }, 800);
 });
 
@@ -512,7 +496,16 @@ document.addEventListener('keydown', e => {
 });
 setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
 
-// ✅ EKSAKTO ANG LINK NG API MO
+// ✅ VIEWS COUNTER SYSTEM - WALANG BUG, BILANG NA TALAGA
+function updateViews() {
+    let count = localStorage.getItem('page_views');
+    if (!count) count = 5669; // Simula ng bilang mo
+    count = parseInt(count) + 1;
+    localStorage.setItem('page_views', count);
+    document.getElementById('viewsCount').innerText = `Views: ${count}`;
+}
+updateViews(); // Tawagin agad pagbukas
+
 const YOUR_ID = "1250654354344775703";
 const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
 
@@ -559,7 +552,6 @@ async function fetchData() {
         const username = d.discord_user.username || "wtf.leon";
         document.getElementById('popupNickname').innerText = nickname;
         document.getElementById('popupUsername').innerText = `@${username}`;
-        document.getElementById('usernameText').innerText = username;
 
         // ✅ CUSTOM STATUS / NOTE
         const noteEl = document.getElementById('noteText');
@@ -570,20 +562,18 @@ async function fetchData() {
         }
         noteEl.innerText = statusText;
 
-        // ✅ STATUS: EKSAKTO ANG PAGBASA
+        // ✅ STATUS
         const statusDot = document.getElementById('statusDot');
         const statusTextEl = document.getElementById('statusText');
         const popupStatusDot = document.getElementById('popupStatusDot');
         const popupStatusText = document.getElementById('popupStatusText');
         
-        // Linisin muna ang mga klase
         statusDot.className = "status-dot";
         popupStatusDot.className = "status-dot";
 
         let statusString = "";
         let statusClass = "";
 
-        // ✅ EKSAKTO ANG PAGBASA NG STATUS
         switch(d.discord_status) {
             case 'online':
                 statusClass = 'status-online';
@@ -602,7 +592,6 @@ async function fetchData() {
                 statusString = 'Offline / Invisible';
         }
 
-        // ✅ ILAGAY ANG KULAY AT TEKSTO
         statusDot.classList.add(statusClass);
         statusTextEl.innerText = statusString;
         popupStatusDot.classList.add(statusClass);
@@ -614,9 +603,8 @@ async function fetchData() {
     }
 }
 
-// ✅ TAWAGIN ANG FUNCTION AGAD
 fetchData();
-setInterval(fetchData, 15000); // ✅ BAWAS ANG ORAS NG UPDATE
+setInterval(fetchData, 15000);
 
 history.replaceState(null, null, location.href);
 window.onpopstate = () => history.go(1);

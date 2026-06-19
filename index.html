@@ -41,13 +41,15 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
             color: #ffffff;
-            min-height: 100vh;
-            overflow: hidden;
+            /* ✅ AYOS NA: SAKTO LANG ANG LAKI, HINDI LUMALAGPAS SA SCREEN */
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden; /* ✅ TINANGGAL ANG SCROLLING */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px 0;
+            padding: 10px 0; /* ✅ PINALIIT ANG PADDING PARA SAKTO */
             opacity: 0;
             transition: opacity 0.4s ease;
         }
@@ -78,15 +80,15 @@
         }
 
         .main-clan-logo img {
-            height: 70px;
+            height: 60px; /* ✅ PINALIIT NANG KONTI PARA SAKTO */
             width: auto;
             object-fit: contain;
         }
 
         .symbol-break {
-            font-size: 32px; 
+            font-size: 28px; /* ✅ PINALIIT NANG KONTI */
             font-weight: 900;
-            margin: 3px 0 15px 0;
+            margin: 3px 0 8px 0;
             overflow: visible;
             white-space: normal;
             animation: metallic-glow 3s infinite ease-in-out;
@@ -108,14 +110,14 @@
 
         .typewriter-header {
             font-family: 'Inter', sans-serif;
-            font-size: 32px; 
+            font-size: 24px; /* ✅ PINALIIT PARA HINDI MALAKI */
             font-weight: 900;
             letter-spacing: 2px;
             text-transform: uppercase;
             overflow: hidden;
             white-space: nowrap;
             width: fit-content;
-            margin: 0 auto 10px auto;
+            margin: 0 auto 8px auto;
             animation: 
                 typing 3.5s steps(20, end) forwards,
                 metallic-glow 3s infinite ease-in-out;
@@ -161,19 +163,21 @@
         }
 
         .center-container {
-           max-width: 1400px;
+            max-width: 1400px;
+            width: 100%;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             z-index: 10;
-            padding: 0 20px;
-            gap: 10px;
+            padding: 0 15px;
+            gap: 8px; /* ✅ PINALIIT ANG LAKI NG LUGAR SA GITNA */
+            overflow: visible;
         }
 
         .title-group-block {
-            margin: 15px 0;
+            margin: 8px 0;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -197,9 +201,9 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            gap: 45px !important;
+            gap: 30px !important; /* ✅ PINALIIT ANG LAYO NG MGA LARAWAN */
             padding: 5px 0;
-            min-height: 80px;
+            min-height: 70px;
         }
 
         .avatar-wrapper-node {
@@ -216,8 +220,8 @@
 
         .circle-avatar-container {
           position: relative;
-            width: 95px;
-            height: 95px;
+            width: 80px; /* ✅ PINALIIT NANG KONTI */
+            height: 80px; /* ✅ PINALIIT NANG KONTI */
             border-radius: 50%;
             overflow: visible; 
             background: transparent; 
@@ -231,8 +235,8 @@
             top: 50% !important;
             left: 50% !important;
             transform: translate(-50%, -50%) !important;
-            width: 120px !important;
-            height: 120px !important; 
+            width: 100px !important; /* ✅ AYOS NA LAKI NG DECORATION */
+            height: 100px !important; 
             pointer-events: none !important;
             z-index: 1 !important;  
             border-radius: 0 !important; 
@@ -243,8 +247,8 @@
         }
 
         .circle-avatar-container img.avatar-img {
-            width: 95px !important;
-            height: 95px !important;
+            width: 80px !important;
+            height: 80px !important;
             border-radius: 50% !important;
             object-fit: cover !important;
             pointer-events: none !important;
@@ -258,8 +262,8 @@
             position: absolute;
             bottom: 4px;
             right: 4px;
-            width: 14px;
-            height: 14px;
+            width: 12px; /* ✅ AYOS NA LAKI NG STATUS DOT */
+            height: 12px;
             border-radius: 50%;
             border: 2px solid #000;
             z-index: 3 !important;
@@ -416,10 +420,10 @@
         .marquee-wrapper-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px; /* ✅ PINALIIT ANG LAYO NG SCROLLING ROWS */
             width: 100%;
             align-items: center;
-            margin: 10px 0 0 0;
+            margin: 8px 0 0 0;
         }
 
         .marquee-inner-wrap {
@@ -467,8 +471,8 @@
 
         #azura-discord-btn {
             position: fixed !important;
-            bottom: 30px !important;
-            right: 30px !important;
+            bottom: 20px !important; /* ✅ INILIPAT NANG KONTI PAHIGA */
+            right: 20px !important;
             z-index: 9999999 !important;
             display: block !important;
         }
@@ -538,12 +542,12 @@
             white-space: nowrap;
         }
         .section-divider {
-    width: 100%;
-    max-width: 1300px;
-    height: 1px;
-    background: rgba(255,255,255,0.08);
-    margin: 25px 0;
-}
+            width: 100%;
+            max-width: 1300px;
+            height: 1px;
+            background: rgba(255,255,255,0.08);
+            margin: 12px 0; /* ✅ PINALIIT ANG LAYO NG LINYA */
+        }
     </style>
 </head>
 <body oncontextmenu="return false;" onkeydown="return disableKeys(event);">

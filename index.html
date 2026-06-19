@@ -33,7 +33,6 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000000;
-            /* ✅ INAYOS ANG BACKGROUND — KITA NA AT SAKTO LANG ANG DILIM */
             background-image: 
                 linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
                 url("pba.webp");
@@ -54,7 +53,7 @@
         }
         body.loaded { opacity: 1; }
 
-        /* ✅ LAHAT NG CONTENT NAKA-HIDE MUNA */
+        /* ✅ LAHAT NG CONTENT NAKA-HIDE MUNA — INAYOS HINDI BUGGY */
         .center-container, .navigation-bar, #azura-discord-btn {
             opacity: 0;
             visibility: hidden;
@@ -272,17 +271,18 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ INAYOS NA POPUP BOX — MALINAW ANG LAHAT NG LAMAN */
+        /* ✅ PINALAKI AT PINAHABA ANG POPUP BOX — KASYA LAHAT NG DETALYE */
         .avatar-tooltip {
             position: absolute;
             bottom: 115%; 
             left: 50%;
             transform: translateX(-50%) translateY(10px);
             background: #000000 !important;
-            border: 1px solid rgba(255,255,255,0.1) !important;
-            border-radius: 10px;
-            padding: 16px 20px;
-            width: 280px;
+            border: 1px solid rgba(255,255,255,0.15) !important;
+            border-radius: 12px;
+            padding: 18px 22px;
+            width: 320px; /* ✅ MAS MALAKI */
+            min-height: auto;
             color: #fff;
             opacity: 0;
             visibility: hidden;
@@ -290,6 +290,7 @@
             pointer-events: none; 
             z-index: 99999;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+            line-height: 1.5;
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
@@ -302,7 +303,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .tooltip-decoration {
@@ -353,17 +354,23 @@
             color: #888888;
             margin-top: 4px;
             line-height: 1.4;
+            word-wrap: break-word;
         }
 
+        /* ✅ MALINAW AT HINDI TINATAGO ANG SPOTIFY */
         .tooltip-activity {
             font-size: 12px;
             color: #b9bbbe;
             margin-top: 6px;
-            line-height: 1.5;
-            padding: 6px 8px;
+            line-height: 1.6;
+            padding: 8px 10px;
             background: #0a0a0a;
-            border-radius: 4px;
+            border-radius: 6px;
             word-break: break-word;
+            white-space: normal;
+        }
+        .tooltip-activity strong {
+            color: #1DB954; /* ✅ SPOTIFY GREEN */
         }
 
         .marquee-ticker {
@@ -448,7 +455,7 @@
             border-radius: 2px !important;
         }
 
-        /* ✅ FIXED: CLICK TEXT - FULL WHITE, BIG, VISIBLE, HIGHEST Z-INDEX */
+        /* ✅ INAYOS ANG LOADING / CLICK SCREEN — HINDI NA BUGGY */
         #gateway-overlay {
             position: fixed;
             inset: 0;
@@ -458,7 +465,7 @@
             align-items: center;
             z-index: 9999999 !important;
             cursor: pointer;
-            transition: opacity 0.3s ease, visibility 0.3s;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
         }
 
         .gateway-btn {
@@ -481,8 +488,9 @@
         }
 
         .fade-gateway {
-            opacity: 0;
-            visibility: hidden;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
         }
 
         ::-webkit-scrollbar { display: none !important; }
@@ -571,6 +579,7 @@
         const audio = document.getElementById("soundtrack");
         audio.volume = 0.4;
 
+        // ✅ INAYOS ANG CLICK / LOADING SCREEN — HINDI NA BUGGY
         document.getElementById("gateway-overlay").addEventListener("click", function() {
             audio.play().catch(() => {});
             this.classList.add("fade-gateway");
@@ -607,6 +616,7 @@
                         effectURL: d.discord_user.avatar_decoration_data?.asset 
                             ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256` 
                             : null,
+                        spotify: d.spotify || null, // ✅ DIREKTANG KUNIN ANG SPOTIFY DATA MULA API
                         activity: d.activities?.[0] || null,
                         customStatus: d.activities?.find(a => a.type === 4) || null,
                         allActivities: d.activities || []
@@ -661,19 +671,32 @@
                     customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
                 }
 
-                // ✅ INAYOS NA PAGBASA — KASAMA NA ANG SPOTIFY AT LAHAT NG STATUS
+                // ✅ TAMA AT TUMPAK ANG PAGBASA — SPOTIFY PRIORITY
                 let activityText = '';
-                if (mem.allActivities && mem.allActivities.length > 0) {
+
+                // ✅ KUNG MAY SPOTIFY, ITO ANG LALABAS
+                if (mem.spotify) {
+                    const track = mem.spotify.song;
+                    const artist = mem.spotify.artist;
+                    const album = mem.spotify.album;
+                    activityText = `<div class="tooltip-activity">
+                        <strong>Listening to Spotify 🎵</strong>
+                        <div><strong>${track}</strong></div>
+                        <div>• ${artist}</div>
+                        <div style="font-size:11px; opacity:0.8;">Album: ${album}</div>
+                    </div>`;
+                }
+                // ✅ KUNG WALANG SPOTIFY, IBANG STATUS ANG LALABAS
+                else if (mem.allActivities && mem.allActivities.length > 0) {
                     mem.allActivities.forEach(act => {
                         if (act.type === 4) return;
 
                         let typeText = '';
                         if (act.type === 0) typeText = 'Playing';
                         if (act.type === 1) typeText = '🔴 Streaming';
-                        if (act.type === 2) typeText = 'Listening to Spotify'; // ✅ SAKTO ANG PANGALAN
+                        if (act.type === 2) typeText = 'Listening';
                         if (act.type === 3) typeText = 'Watching';
                         if (act.type === 5) typeText = 'Competing in';
-                        if (act.type === 6) typeText = 'Custom Status';
                         if (act.type === 7) typeText = 'Working on';
 
                         if (typeText && act.name) {

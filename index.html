@@ -15,7 +15,7 @@
     <meta name="twitter:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
 
     <!-- 🛡️ SECURITY: DISABLE INSPECT ELEMENT & RIGHT CLICK -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net https://cdn-icons-png.flaticon.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
@@ -29,6 +29,11 @@
             -ms-user-select: none;
             user-select: none;
             cursor: url('https://cdn.cursors-4u.net/previews/gruppled-move-tool-fa2fca77-32.webp') 48 47, auto !important;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
         }
 
         body {
@@ -51,14 +56,14 @@
             justify-content: center;
             padding: 10px 0;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s ease;
         }
         body.loaded { opacity: 1; }
 
         .center-container, .navigation-bar {
             opacity: 0;
             visibility: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.6s ease;
         }
         body.loaded .center-container,
         body.loaded .navigation-bar {
@@ -95,16 +100,11 @@
         }
 
         @keyframes metallicRGB {
-            0% { color: #666; text-shadow: 0 0 4px #444, 0 0 8px #555; }
-            25% { color: #888; text-shadow: 0 0 6px #666, 0 0 12px #777; }
-            50% { color: #ccc; text-shadow: 0 0 8px #999, 0 0 16px #aaa; }
-            75% { color: #eee; text-shadow: 0 0 6px #bbb, 0 0 12px #ccc; }
-            100% { color: #fff; text-shadow: 0 0 4px #ddd, 0 0 8px #eee; }
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+            0%   { color: #555; text-shadow: 0 0 4px #333, 0 0 8px #444; }
+            25%  { color: #888; text-shadow: 0 0 6px #666, 0 0 12px #777; }
+            50%  { color: #bbb; text-shadow: 0 0 10px #999, 0 0 18px #aaa; }
+            75%  { color: #e6e6e6; text-shadow: 0 0 8px #bbb, 0 0 14px #ccc; }
+            100% { color: #ffffff; text-shadow: 0 0 6px #ddd, 0 0 10px #eee; }
         }
 
         /* ✅ ABOVE ALL — NO LINES, METALLIC GLOW */
@@ -130,7 +130,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* ❌ REMOVED ALL LINES */
         }
 
         .tiny-top-text {
@@ -154,7 +153,7 @@
             animation: metallicRGB 2s infinite alternate;
         }
 
-        /* ✅ HOME & VIEWS — GRAY TEXT, NO BOX BORDER */
+        /* ✅ HOME & VIEWS */
         .navigation-bar {
             position: absolute;
             top: 25px;
@@ -171,7 +170,7 @@
 
         .views-box {
             padding: 3px 0;
-            border: none !important; /* ❌ REMOVED BOX LINE */
+            border: none !important;
             border-radius: 0;
             font-size: 11px;
             letter-spacing: 1px;
@@ -179,8 +178,9 @@
             color: #888;
         }
         #views {
-            font-weight: 500;
-            color: #888;
+            font-weight: 700;
+            color: #bbb;
+            font-variant-numeric: tabular-nums;
         }
 
         .center-container {
@@ -209,8 +209,6 @@
             min-height: 120px;
             position: relative;
         }
-
-        /* ❌ REMOVED JOIN LINK */
 
         .avatar-wrapper-node {
             position: relative;
@@ -276,12 +274,12 @@
             z-index: 3 !important;
         }
 
-        .status-online { background-color: #23a55a; }
-        .status-idle { background-color: #f0b232; }
-        .status-dnd { background-color: #f13f43; }
+        .status-online  { background-color: #23a55a; }
+        .status-idle    { background-color: #f0b232; }
+        .status-dnd     { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ POPUP BOX — CLEAN, NO EXTRA LINES */
+        /* ✅ POPUP BOX */
         .avatar-tooltip {
             position: absolute;
             top: 110%;
@@ -290,7 +288,7 @@
             background: #0a0a0b;
             border: 1px solid #222;
             border-radius: 4px;
-            width: 220px;
+            width: 230px;
             padding: 10px 12px;
             color: #fff;
             opacity: 0;
@@ -298,7 +296,6 @@
             transition: all 0.2s ease;
             pointer-events: none;
             z-index: 9999;
-            box-shadow: none;
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
@@ -309,7 +306,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         .tooltip-avatar-sm {
             width: 32px;
@@ -330,16 +327,19 @@
 
         .tooltip-activity-wrapper {
             background: #111;
-            border-radius: 2px;
-            padding: 4px 6px;
+            border-radius: 3px;
+            padding: 5px 7px;
             margin-top: 4px;
-            font-size: 10px;
-            color: #888;
+            font-size: 10.5px;
+            color: #aaa;
+            line-height: 1.4;
+            word-wrap: break-word;
         }
-        .activity-playing { color: #43b581; }
-        .activity-streaming { color: #9146ff; }
-        .activity-listening { color: #1db954; }
-        .activity-watching { color: #faa61a; }
+        .activity-playing    { color: #43b581; }
+        .activity-streaming  { color: #9146ff; }
+        .activity-listening  { color: #1db954; }
+        .activity-watching   { color: #faa61a; }
+        .activity-custom     { color: #b9bbbe; }
 
         .marquee-ticker {
             overflow: hidden;
@@ -366,7 +366,7 @@
             width: max-content;
         }
 
-        .scroll-left { animation: smoothScrollLeft 30s linear infinite; }
+        .scroll-left  { animation: smoothScrollLeft 30s linear infinite; }
         .scroll-right { animation: smoothScrollRight 30s linear infinite; }
 
         .marquee-profile-block {
@@ -393,68 +393,100 @@
         }
 
         @keyframes smoothScrollLeft {
-            0% { transform: translateX(0); }
+            0%   { transform: translateX(0); }
             100% { transform: translateX(-33.333%); }
         }
         @keyframes smoothScrollRight {
-            0% { transform: translateX(-33.333%); }
+            0%   { transform: translateX(-33.333%); }
             100% { transform: translateX(0); }
         }
 
-        /* ❌ REMOVED AZURA ORG BUTTON */
-
-        /* ✅ ANIMATED DISCORD LOGO — PULSE EFFECT */
-        .discord-animated {
+        /* ✨ ✅ BAGO: DISCORD LOGO + AZURA TEXT — BOTH ANIMATED + GLOW ✨ */
+        .azura-discord-link {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 22px;
+            right: 28px;
             z-index: 9999;
-            animation: discordPulse 1.5s infinite alternate;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px;
+            animation: azuraPulse 1.6s infinite alternate;
+            cursor: pointer;
+            user-select: none;
         }
-        .discord-animated img {
-            width: 24px;
-            height: 24px;
-            opacity: 0.7;
+        /* Animated Discord SVG Logo */
+        .discord-icon-svg {
+            width: 26px;
+            height: 22px;
+            filter: drop-shadow(0 0 3px #5865F2);
+            animation: metallicRGB 2s infinite alternate, discordGlow 1.6s infinite alternate;
         }
-        @keyframes discordPulse {
-            0% { transform: scale(1); opacity: 0.6; filter: drop-shadow(0 0 2px #5865F2); }
-            100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 8px #5865F2); }
+        /* AZURA Glowing Text */
+        .azura-text-glow {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 5px;
+            animation: metallicRGB 2s infinite alternate;
+        }
+        @keyframes azuraPulse {
+            0%   { transform: scale(1);    filter: drop-shadow(0 0 2px #5865F2); }
+            100% { transform: scale(1.15); filter: drop-shadow(0 0 10px #5865F2) drop-shadow(0 0 18px #5865F2); }
+        }
+        @keyframes discordGlow {
+            0%   { filter: drop-shadow(0 0 2px #5865F2); }
+            100% { filter: drop-shadow(0 0 8px #7289da) drop-shadow(0 0 14px #5865F2); }
         }
 
-        /* ✅ LOADING SCREEN — CLEAN */
+        /* ✅ ✨ INAYOS NA LOADING / GATEWAY SCREEN */
         #gateway-overlay {
             position: fixed;
             inset: 0;
-            background: #000000;
+            width: 100vw;
+            height: 100vh;
+            background: #000000 !important;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999999 !important;
             cursor: pointer;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            animation: gatewayFadeIn 0.8s ease forwards;
         }
-
-        .gateway-btn {
-            font-size: 14px !important;
-            letter-spacing: 4px;
-            background: transparent;
-            border: none !important;
-            color: #444 !important;
-            text-transform: uppercase;
-            transition: all 0.2s ease;
-            font-weight: 400 !important;
-            font-family: 'Inter', sans-serif !important;
-            opacity: 1 !important;
-            visibility: visible !important;
+        @keyframes gatewayFadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
         }
-        .gateway-btn:hover {
-            color: #888;
-        }
-
-        .fade-gateway {
+        #gateway-overlay.fade-gateway {
             opacity: 0 !important;
             visibility: hidden !important;
             pointer-events: none !important;
+        }
+
+        .gateway-btn {
+            font-size: 16px !important;
+            letter-spacing: 8px;
+            background: transparent;
+            border: none !important;
+            color: #666 !important;
+            text-transform: uppercase;
+            font-weight: 500 !important;
+            font-family: 'Inter', sans-serif !important;
+            transition: all 0.3s ease;
+            animation: gatewayBlink 1.8s ease-in-out infinite;
+        }
+        .gateway-btn:hover {
+            color: #ffffff !important;
+            text-shadow: 0 0 8px #aaa, 0 0 14px #fff;
+            letter-spacing: 12px;
+        }
+        @keyframes gatewayBlink {
+            0%, 100% { opacity: 0.4; }
+            50%      { opacity: 1;   }
         }
 
         ::-webkit-scrollbar { display: none !important; }
@@ -474,7 +506,7 @@
             width: 100%;
             max-width: 1300px;
             height: 1px;
-            background: #222;
+            background: #1a1a1a;
             margin: 15px 0;
         }
     </style>
@@ -483,7 +515,7 @@
 
     <div class="navigation-bar">
         HOME
-        <div class="views-box">VIEWS : <span id="views">6529</span></div>
+        <div class="views-box">VIEWS : <span id="views">0</span></div>
     </div>
 
     <div class="center-container">
@@ -507,9 +539,8 @@
         <div class="title-group-block">
             <h2 class="staff-header">STAFF</h2>
         </div>
-        <div id="staff-container" class="horizontal-avatar-row">
-            <!-- ❌ REMOVED JOIN LINK -->
-        </div>
+
+        <div id="staff-container" class="horizontal-avatar-row"></div>
 
         <div class="marquee-wrapper-group">
             <div class="marquee-ticker">
@@ -521,149 +552,215 @@
         </div>
     </div>
 
-    <!-- ✅ ANIMATED DISCORD LOGO -->
-    <a href="https://discord.gg/azuraorg" class="discord-animated" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
+    <!-- ✨ ANIMATED DISCORD LOGO + AZURA GLOW TEXT — ISANG LINK LANG ✨ -->
+    <a href="https://discord.gg/azuraorg" class="azura-discord-link" target="_blank" title="Join AZURA ORG">
+        <!-- Animated Official Discord Logo SVG -->
+        <svg class="discord-icon-svg" viewBox="0 0 71 55" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.91471 10.8048 4.9429 10.7797 4.97958C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5577C12.64 54.7196 25.1257 60.0044 37.6459 60.9245C37.7526 60.933 37.8593 60.8991 37.9361 60.8282C39.2989 59.5973 40.5643 58.2316 41.7054 56.7695C41.7586 56.6986 41.7837 56.6048 41.7753 56.511C41.7753 56.4687 41.7669 56.4265 41.7529 56.387C38.8711 55.2626 36.1831 53.8532 33.7465 52.1923C33.6513 52.1271 33.6373 51.9834 33.7213 51.9039C34.2979 51.3389 34.8491 50.7482 35.3642 50.1265C35.409 50.0727 35.4793 50.0445 35.5505 50.0473C46.2269 51.6796 57.0403 51.6796 67.6314 50.0473C67.7026 50.0445 67.7729 50.0727 67.8177 50.1265C68.3356 50.7454 68.8868 51.3389 69.4662 51.9067C69.5502 51.9862 69.5362 52.1299 69.441 52.1951C66.9902 53.8645 64.3022 55.274 61.4176 56.3902C61.4036 56.4297 61.3952 56.472 61.3952 56.5142C61.3868 56.608 61.4119 56.7018 61.4651 56.7727C62.6148 58.2372 63.8774 59.6001 65.2374 60.831C65.3114 60.8991 65.421 60.9358 65.5277 60.9245C78.0479 60.0016 90.5336 54.7167 102.788 45.5577C102.838 45.5182 102.874 45.4562 102.88 45.3914C104.648 27.0739 97.5986 9.76577 80.9478 4.98238C80.9226 4.9429 80.8891 4.91471 80.8499 4.8978H60.1045ZM23.7259 38.3253C20.2276 38.3253 17.3458 35.1136 17.3458 31.1593C17.3458 27.2078 20.1717 23.9932 23.7259 23.9932C27.308 23.9932 30.1618 27.2332 30.1059 31.1593C30.1059 35.1136 27.28 38.3253 23.7259 38.3253ZM47.3178 38.3253C43.8196 38.3253 40.9378 35.1136 40.9378 31.1593C40.9378 27.2078 43.7636 23.9932 47.3178 23.9932C50.9 23.9932 53.7537 27.2332 53.6978 31.1593C53.6978 35.1136 50.9 38.3253 47.3178 38.3253Z"/>
+        </svg>
+        <span class="azura-text-glow">AZURA</span>
     </a>
 
+    <!-- ✅ INAYOS NA GATEWAY / LOADING SCREEN -->
     <div id="gateway-overlay">
         <div class="gateway-btn">CLICK</div>
     </div>
 
-    <audio id="soundtrack" loop>
+    <audio id="soundtrack" loop preload="auto">
         <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
     
 
     <script>
-        // 🛡️ SECURITY: BLOCK INSPECT ELEMENT, VIEW SOURCE, RIGHT CLICK
+        // 🛡️ SECURITY
         function disableKeys(e) {
             if(e.keyCode == 123 || 
                (e.ctrlKey && e.keyCode == 85) || 
                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
-               (e.ctrlKey && e.keyCode == 83)) {
+               (e.ctrlKey && e.keyCode == 83) ||
+               (e.ctrlKey && e.shiftKey && e.keyCode == 67) ||
+               (e.ctrlKey && e.keyCode == 73)) {
+                e.preventDefault();
                 return false;
             }
         }
         document.onkeydown = disableKeys;
-        document.oncontextmenu = function() { return false; };
-        document.onmousedown = function(e) { if(e.button === 2) return false; };
+        document.oncontextmenu = () => false;
+        document.onmousedown = e => e.button === 2 ? false : true;
+
+
+        // 🔢 ✅ TUNAY NA VISITOR COUNTER — BAGONG BISITA LANG DADAGDAGAN
+        const VIEWS_STORAGE_KEY = "azura_org_total_views";
+        const VISITOR_KEY       = "azura_org_visited_before";
+        const BASE_VIEWS        = 5569; // ⬅️ simula base sa totoong bilang ng site mo
+
+        function initVisitorCounter(){
+            // Kunin ang nakaimbak na bilang, kung wala pa gamitin yung base
+            let totalViews = parseInt(localStorage.getItem(VIEWS_STORAGE_KEY)) || BASE_VIEWS;
+            const hasVisited = localStorage.getItem(VISITOR_KEY) === "true";
+
+            // ✅ KUNG BAGONG BISITA TALAGA → +1 LANG ISANG BESES
+            if(!hasVisited){
+                totalViews += 1;
+                localStorage.setItem(VISITOR_KEY, "true");
+                localStorage.setItem(VIEWS_STORAGE_KEY, totalViews);
+            }
+
+            // ✅ SMOOTH COUNTING ANIMATION
+            const viewsEl = document.getElementById("views");
+            const duration = 1800; // ms
+            const start = 0;
+            const end = totalViews;
+            const startTime = performance.now();
+
+            function animateCount(now){
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
+                const current = Math.floor(start + (end - start) * eased);
+                viewsEl.textContent = current.toLocaleString();
+
+                if(progress < 1) requestAnimationFrame(animateCount);
+                else viewsEl.textContent = end.toLocaleString();
+            }
+            requestAnimationFrame(animateCount);
+        }
+        // Patakbuhin agad pagkabukas
+        initVisitorCounter();
 
 
         const audio = document.getElementById("soundtrack");
-        audio.volume = 0.4;
+        audio.volume = 0.35;
 
-        document.getElementById("gateway-overlay").addEventListener("click", function() {
+        const gateway = document.getElementById("gateway-overlay");
+        gateway.addEventListener("click", function() {
             audio.play().catch(() => {});
             this.classList.add("fade-gateway");
             document.body.classList.add('loaded');
         });
 
+        window.addEventListener("load", () => {
+            gateway.style.display = "flex";
+        });
+
         const UPDATE_INTERVAL = 5000; 
 
-        const founderIDs = ["1250654354344775703", "1123145717461033041", "1085580321623375938"]; 
-        const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1242051125776093256", "1498999674969784426"]; 
-        const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
-        const scrollingIDsRow1 = ["1276210406880317522", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
-        const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
+        const founderIDs      = ["1250654354344775703", "1123145717461033041", "1085580321623375938"]; 
+        const aboveAllIDs     = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1242051125776093256", "1498999674969784426"]; 
+        const staffIDs        = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
+        const scrollingIDsRow1= ["1276210406880317522", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
+        const scrollingIDsRow2= ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
 
+        // ✅ ✨ ACTIVITY DETECTION — BUO AT TUMPAK ✨
         async function getUserData(userId) {
             try {
-                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`, { cache: "no-store" });
                 const json = await res.json();
 
-                if (json.success) {
-                    const d = json.data;
+                if (!json.success) return null;
+                const d = json.data;
                     
-                    let status = d.discord_status || 'offline';
-                    let activities = d.activities || [];
-                    let spotify = d.spotify || null;
-                    let customStatus = activities.find(a => a.type === 4) || null;
+                const activities = d.activities || [];
+                const customStatus = activities.find(a => a.type === 4) || null;
+                const realActivities = activities.filter(a => a.type !== 4);
+                const mainAct = realActivities[0] || null;
 
-                    return {
-                        id: userId,
-                        username: d.discord_user.username,
-                        displayName: d.discord_user.global_name || d.discord_user.username,
-                        status: status,
-                        avatarURL: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
-                        effectURL: d.discord_user.avatar_decoration_data?.asset 
-                            ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256` 
-                            : null,
-                        spotify: spotify,
-                        activities: activities,
-                        customStatus: customStatus
+                let activityInfo = { type: null, text: null, class: '' };
+
+                if (d.spotify) {
+                    activityInfo = {
+                        type: "listening",
+                        text: `🎧 Listening to ${d.spotify.song}\nby ${d.spotify.artist}`,
+                        class: "activity-listening"
                     };
                 }
-                return null;
+                else if (mainAct && mainAct.type === 0) {
+                    let details = mainAct.name;
+                    if (mainAct.details) details += `\n${mainAct.details}`;
+                    if (mainAct.state)   details += `\n${mainAct.state}`;
+                    activityInfo = { type:"playing", text:`🎮 Playing ${details}`, class:"activity-playing" };
+                }
+                else if (mainAct && mainAct.type === 1) {
+                    activityInfo = { type:"streaming", text:`📡 Streaming ${mainAct.name}`, class:"activity-streaming" };
+                }
+                else if (mainAct && mainAct.type === 2) {
+                    activityInfo = { type:"listening", text:`🎧 Listening to ${mainAct.name}`, class:"activity-listening" };
+                }
+                else if (mainAct && mainAct.type === 3) {
+                    activityInfo = { type:"watching", text:`📺 Watching ${mainAct.name}`, class:"activity-watching" };
+                }
+                else if (customStatus) {
+                    let emoji = customStatus.emoji?.name || '';
+                    let txt   = customStatus.state || '';
+                    activityInfo = { 
+                        type:"custom", 
+                        text: txt ? `${emoji ? emoji+' ' : ''}${txt}` : (emoji ? emoji : 'No activity'),
+                        class:"activity-custom" 
+                    };
+                }
+
+                return {
+                    id: userId,
+                    username: d.discord_user.username,
+                    displayName: d.discord_user.global_name || d.discord_user.username,
+                    status: d.discord_status || 'offline',
+                    avatarURL: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
+                    effectURL: d.discord_user.avatar_decoration_data?.asset 
+                        ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256` 
+                        : null,
+                    activity: activityInfo
+                };
             } catch (e) {
+                console.warn("Lanyard error:", userId, e);
                 return null;
             }
         }
 
 
         async function fetchAndUpdate() {
-            const allFounder = await Promise.all(founderIDs.map(id => getUserData(id)));
-            const allAboveAll = await Promise.all(aboveAllIDs.map(id => getUserData(id)));
-            const allStaff = await Promise.all(staffIDs.map(id => getUserData(id)));
-            const allScroll1 = await Promise.all(scrollingIDsRow1.map(id => getUserData(id)));
-            const allScroll2 = await Promise.all(scrollingIDsRow2.map(id => getUserData(id)));
+            const [allFounder, allAboveAll, allStaff, allScroll1, allScroll2] = await Promise.all([
+                Promise.all(founderIDs.map(getUserData)),
+                Promise.all(aboveAllIDs.map(getUserData)),
+                Promise.all(staffIDs.map(getUserData)),
+                Promise.all(scrollingIDsRow1.map(getUserData)),
+                Promise.all(scrollingIDsRow2.map(getUserData))
+            ]);
 
-            showGroup(allFounder.filter(Boolean), 'founder-container');
-            showGroup(allAboveAll.filter(Boolean), 'aboveall-container');
-            showGroup(allStaff.filter(Boolean), 'staff-container');
+            showGroup(allFounder.filter(Boolean),   'founder-container');
+            showGroup(allAboveAll.filter(Boolean),  'aboveall-container');
+            showGroup(allStaff.filter(Boolean),     'staff-container');
             showMarquee(allScroll1.filter(Boolean), "marquee-container-1");
             showMarquee(allScroll2.filter(Boolean), "marquee-container-2");
         }
 
 
-        function showGroup(members, container) {
-            const box = document.getElementById(container);
+        function showGroup(members, containerId) {
+            const box = document.getElementById(containerId);
             if (!box) return;
-            
-            box.innerHTML = ''; // No JOIN link anymore
+            box.innerHTML = '';
 
             members.forEach(mem => {
                 const wrapper = document.createElement('div'); 
                 wrapper.className = 'avatar-wrapper-node';
 
-                let decoHTML = '';
-                if (mem.effectURL) {
-                    decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy">`;
-                }
+                const decoHTML = mem.effectURL 
+                    ? `<img src="${mem.effectURL}" class="avatar-decoration" alt="deco" loading="lazy">` 
+                    : '';
 
-                let statusClass = 'status-offline'; 
-                if (mem.status) {
-                    const s = mem.status.toLowerCase().trim();
-                    if (s === 'online') statusClass = 'status-online';
-                    else if (s === 'idle') statusClass = 'status-idle';
-                    else if (s === 'dnd') statusClass = 'status-dnd';
-                }
+                const statusMap = { online:'status-online', idle:'status-idle', dnd:'status-dnd' };
+                const statusClass = statusMap[mem.status] || 'status-offline';
 
-                let statusText = '';
-                let statusType = '';
-
-                if (mem.spotify) {
-                    statusType = 'activity-listening';
-                    statusText = `Listening to ${mem.spotify.song}`;
-                } 
-                else if (mem.activities && mem.activities.length > 0) {
-                    const act = mem.activities.find(a => a.type !== 4) || mem.activities[0];
-                    if (act) {
-                        if (act.type === 0) { statusType = 'activity-playing'; statusText = `Playing ${act.name}`; }
-                        if (act.type === 1) { statusType = 'activity-streaming'; statusText = `Streaming ${act.name}`; }
-                        if (act.type === 2) { statusType = 'activity-listening'; statusText = `Listening to ${act.name}`; }
-                        if (act.type === 3) { statusType = 'activity-watching'; statusText = `Watching ${act.name}`; }
-                    }
-                }
+                const actHTML = mem.activity?.text 
+                    ? `<div class="tooltip-activity-wrapper ${mem.activity.class}" style="white-space:pre-line;">${mem.activity.text}</div>` 
+                    : '';
 
                 wrapper.innerHTML = `
                     <div class="circle-avatar-container">
                         ${decoHTML} 
-                        <img src="${mem.avatarURL}" class="avatar-img" alt="avatar">
+                        <img src="${mem.avatarURL}" class="avatar-img" alt="avatar" loading="lazy">
                         <span class="status-indicator ${statusClass}"></span>
                     </div>
                     <div class="name-label">${mem.displayName}</div>
-
                     <div class="avatar-tooltip">
                         <div class="tooltip-header">
                             <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
@@ -672,7 +769,7 @@
                                 <p>@${mem.username}</p>
                             </div>
                         </div>
-                        ${statusText ? `<div class="tooltip-activity-wrapper ${statusType}">${statusText}</div>` : ''}
+                        ${actHTML}
                     </div>
                 `;
                 box.appendChild(wrapper);
@@ -688,7 +785,7 @@
             list.forEach(mem => {
                 const block = document.createElement('div');
                 block.className = 'marquee-profile-block';
-                block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName}</span>`;
+                block.innerHTML = `<img src="${mem.avatarURL}" loading="lazy"> <span>${mem.displayName}</span>`;
                 box.appendChild(block);
             });
         }

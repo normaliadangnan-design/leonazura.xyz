@@ -41,21 +41,19 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
             color: #ffffff;
-            /* ✅ AYOS NA: SAKTO LANG ANG LAKI, HINDI LUMALAGPAS SA SCREEN */
             height: 100vh;
             max-height: 100vh;
-            overflow: hidden; /* ✅ TINANGGAL ANG SCROLLING */
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px 0; /* ✅ PINALIIT ANG PADDING PARA SAKTO */
+            padding: 10px 0;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
         body.loaded { opacity: 1; }
 
-        /* ✅ FIX: HIDE CONTENT PROPERLY — NO BUGS */
         .center-container, .navigation-bar, #azura-discord-btn {
             opacity: 0;
             visibility: hidden;
@@ -80,13 +78,13 @@
         }
 
         .main-clan-logo img {
-            height: 60px; /* ✅ PINALIIT NANG KONTI PARA SAKTO */
+            height: 60px;
             width: auto;
             object-fit: contain;
         }
 
         .symbol-break {
-            font-size: 28px; /* ✅ PINALIIT NANG KONTI */
+            font-size: 28px;
             font-weight: 900;
             margin: 3px 0 8px 0;
             overflow: visible;
@@ -110,7 +108,7 @@
 
         .typewriter-header {
             font-family: 'Inter', sans-serif;
-            font-size: 24px; /* ✅ PINALIIT PARA HINDI MALAKI */
+            font-size: 24px;
             font-weight: 900;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -126,6 +124,7 @@
             position: relative;
         }
 
+        /* ✅ DOUBLE LINES ABOVE & BELOW — SAME AS PUBLIC ENEMY */
         .typewriter-header::before,
         .typewriter-header::after {
             content: '';
@@ -142,6 +141,27 @@
         .typewriter-header::after {
             bottom: -12px;
         }
+        /* Extra line for exact match */
+        .typewriter-container {
+            position: relative;
+            margin: 20px 0;
+        }
+        .typewriter-container::before,
+        .typewriter-container::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220%;
+            height: 1px;
+            background: rgba(255,255,255,0.05);
+        }
+        .typewriter-container::before {
+            top: -8px;
+        }
+        .typewriter-container::after {
+            bottom: -8px;
+        }
 
         .navigation-bar {
             position: absolute;
@@ -156,10 +176,16 @@
             z-index: 100;
         }
 
+        /* ✅ FIXED VIEWS BOX — SAME STYLE */
         .views-box {
-            padding: 3px 8px;
+            padding: 3px 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+            border-radius: 15px;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        #views {
+            font-weight: 600;
         }
 
         .center-container {
@@ -172,7 +198,7 @@
             position: relative;
             z-index: 10;
             padding: 0 15px;
-            gap: 8px; /* ✅ PINALIIT ANG LAKI NG LUGAR SA GITNA */
+            gap: 8px;
             overflow: visible;
         }
 
@@ -201,7 +227,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            gap: 30px !important; /* ✅ PINALIIT ANG LAYO NG MGA LARAWAN */
+            gap: 30px !important;
             padding: 5px 0;
             min-height: 70px;
         }
@@ -220,8 +246,8 @@
 
         .circle-avatar-container {
           position: relative;
-            width: 80px; /* ✅ PINALIIT NANG KONTI */
-            height: 80px; /* ✅ PINALIIT NANG KONTI */
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             overflow: visible; 
             background: transparent; 
@@ -235,7 +261,7 @@
             top: 50% !important;
             left: 50% !important;
             transform: translate(-50%, -50%) !important;
-            width: 100px !important; /* ✅ AYOS NA LAKI NG DECORATION */
+            width: 100px !important;
             height: 100px !important; 
             pointer-events: none !important;
             z-index: 1 !important;  
@@ -262,7 +288,7 @@
             position: absolute;
             bottom: 4px;
             right: 4px;
-            width: 12px; /* ✅ AYOS NA LAKI NG STATUS DOT */
+            width: 12px;
             height: 12px;
             border-radius: 50%;
             border: 2px solid #000;
@@ -274,7 +300,6 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ TAMANG LAKI NG POPUP — EKSAKTO SA SCREENSHOT MO */
         .avatar-tooltip {
             position: absolute;
             bottom: 120%; 
@@ -357,7 +382,6 @@
             word-wrap: break-word;
         }
 
-        /* ✅ SPOTIFY STYLE — TAMA */
         .tooltip-activity-spotify {
             display: flex;
             align-items: center;
@@ -420,7 +444,7 @@
         .marquee-wrapper-group {
             display: flex;
             flex-direction: column;
-            gap: 6px; /* ✅ PINALIIT ANG LAYO NG SCROLLING ROWS */
+            gap: 6px;
             width: 100%;
             align-items: center;
             margin: 8px 0 0 0;
@@ -471,7 +495,7 @@
 
         #azura-discord-btn {
             position: fixed !important;
-            bottom: 20px !important; /* ✅ INILIPAT NANG KONTI PAHIGA */
+            bottom: 20px !important;
             right: 20px !important;
             z-index: 9999999 !important;
             display: block !important;
@@ -491,7 +515,6 @@
             border-radius: 2px !important;
         }
 
-        /* ✅ FIXED LOADING / CLICK SCREEN — NO MORE BUGS */
         #gateway-overlay {
             position: fixed;
             inset: 0;
@@ -546,7 +569,20 @@
             max-width: 1300px;
             height: 1px;
             background: rgba(255,255,255,0.08);
-            margin: 12px 0; /* ✅ PINALIIT ANG LAYO NG LINYA */
+            margin: 12px 0;
+        }
+
+        /* ✅ JOIN LINK STYLE — SAME AS PUBLIC ENEMY */
+        .join-link {
+            font-size: 12px;
+            color: #888;
+            text-decoration: none;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            transition: color 0.2s;
+        }
+        .join-link:hover {
+            color: #fff;
         }
     </style>
 </head>
@@ -554,7 +590,7 @@
 
     <div class="navigation-bar">
         HOME
-        <div class="views-box">VIEWS : <span id="views">5569</span></div>
+        <div class="views-box">VIEWS : <span id="views">6529</span></div> <!-- ✅ UPDATED VIEWS COUNT -->
     </div>
 
     <div class="center-container">
@@ -567,12 +603,21 @@
 
         <div id="founder-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
-        <div class="title-group-block">
-            <span class="tiny-top-text">ABOVE ALL</span>
-            <h2 class="typewriter-header">ABOVE ALL</h2>
+
+        <!-- ✅ DOUBLE LINES WRAPPER -->
+        <div class="typewriter-container">
+            <div class="title-group-block">
+                <span class="tiny-top-text">ABOVE ALL</span>
+                <h2 class="typewriter-header">ABOVE ALL</h2>
+            </div>
         </div>
+
         <div id="aboveall-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
+
+        <!-- ✅ JOIN LINK BEFORE STAFF -->
+        <a href="https://discord.gg/azuraorg" class="join-link" target="_blank">JOIN</a>
+
         <div class="title-group-block">
             <span class="tiny-top-text">STAFF</span>
             <h2 class="typewriter-header">STAFF</h2>
@@ -622,7 +667,7 @@
         const audio = document.getElementById("soundtrack");
         audio.volume = 0.4;
 
-        // ✅ FIXED CLICK / LOADING — NO MORE BUGS
+        // ✅ FIXED CLICK / LOADING
         document.getElementById("gateway-overlay").addEventListener("click", function() {
             audio.play().catch(() => {});
             this.classList.add("fade-gateway");
@@ -651,7 +696,6 @@
                 if (json.success) {
                     const d = json.data;
                     
-                    // ✅ KUMPLETONG KUHA NG DATA MULA API
                     let status = d.discord_status || 'offline';
                     let activities = d.activities || [];
                     let spotify = d.spotify || null;
@@ -707,7 +751,6 @@
                     decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy">`;
                 }
 
-                // ✅ TAMANG STATUS COLOR
                 let statusClass = 'status-offline'; 
                 if (mem.status) {
                     const s = mem.status.toLowerCase().trim();
@@ -716,16 +759,13 @@
                     else if (s === 'dnd') statusClass = 'status-dnd';
                 }
 
-                // ✅ CUSTOM STATUS
                 let customStatusText = '';
                 if (mem.customStatus?.state) {
                     customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
                 }
 
-                // ✅ KUMPLETONG ACTIVITY DISPLAY — LAHAT MULA API
                 let activityText = '';
 
-                // ✅ SPOTIFY
                 if (mem.spotify) {
                     const track = mem.spotify.song;
                     const artist = mem.spotify.artist;
@@ -739,10 +779,9 @@
                         </div>
                     </div>`;
                 }
-                // ✅ IBANG ACTIVITIES: Playing, Streaming, Listening, Watching, Competing, Working on
                 else if (mem.activities && mem.activities.length > 0) {
                     mem.activities.forEach(act => {
-                        if (act.type === 4) return; // skip custom status
+                        if (act.type === 4) return;
 
                         let typeText = '';
                         if (act.type === 0) typeText = 'Playing';

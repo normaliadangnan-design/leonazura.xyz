@@ -228,19 +228,18 @@ img.avatar-decoration {
 }
 
 /* ==================================================
-   ✅ MUSIC PLAYER - GANITO NA KAGAYA SA SAMPLE
+   ✅ MUSIC PLAYER - WITH PLAY BUTTON & CONTROLS
    ================================================== */
 .music-container {
     display: block;
     color: white;
     background: #000000 !important;
     border-radius: 12px;
-    padding: 18px;
+    padding: 15px;
     width: 100%;
     transition: .3s;
     border: none;
-    pointer-events: none;
-    cursor: default;
+    cursor: pointer;
     margin-bottom: 8px;
 }
 
@@ -248,12 +247,12 @@ img.avatar-decoration {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .music-album-art {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 6px;
     object-fit: cover;
     flex-shrink: 0;
@@ -285,14 +284,41 @@ img.avatar-decoration {
     text-overflow: ellipsis;
 }
 
+/* PLAY BUTTON */
+.music-play-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.music-play-button:hover {
+    transform: scale(1.1);
+}
+
+.music-play-button svg {
+    width: 16px;
+    height: 16px;
+    fill: #000000;
+    margin-left: 2px;
+}
+
 /* Progress Bar */
 .music-progress-container {
     width: 100%;
     height: 4px;
     background: rgba(255,255,255,0.1);
     border-radius: 2px;
-    margin-top: 10px;
+    margin-top: 8px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .music-progress-bar {
@@ -453,7 +479,7 @@ a {
 
 <div class="card">
     <div class="logo-img-container">
-        <img src="https://i.imgur.com/w1A2v2A.png" alt="Leon Logo" class="main-logo" onerror="this.style.display='none';">
+        <img src="public azura.png" alt="Leon Logo" class="main-logo" onerror="this.style.display='none';">
     </div>
 
     <div class="title-image-container">
@@ -504,27 +530,31 @@ a {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/></svg>
         </a>
         <a class="social" href="https://www.instagram.com/leonky.2/" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 0 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.014-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 6.162 0 0 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
         </a>
     </div>
 
-    <!-- ✅ MUSIC PLAYER WITH ALBUM ART & PROGRESS BAR -->
-    <div class="music-container">
+    <!-- ✅ MUSIC PLAYER WITH PLAY BUTTON & CONTROLS -->
+    <div class="music-container" id="musicLinkContainer">
         <div class="music-header">
             <img id="musicAlbumArt" class="music-album-art" src="https://i.scdn.co/image/ab67616d0000b2734121faee8df82ba027c0456" alt="Album Art">
             <div class="music-info">
                 <span class="music-title" id="musicTitle">ORIGIMAL</span>
-                <span class="music-artist" id="musicArtist">Uncle Dags Origimal</span>
+                <span class="music-artist" id="musicArtist">Uncle Dags ORIGIMAL</span>
             </div>
+            <button id="playPauseBtn" class="music-play-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pauseIcon" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
         </div>
-        <div class="music-progress-container">
+        <div class="music-progress-container" id="progressBarContainer">
             <div id="musicProgressBar" class="music-progress-bar"></div>
         </div>
         <div class="music-time">
             <span id="musicTimeCurrent">0:00</span>
-            <span id="musicTimeTotal">0:00</span>
+            <span id="musicTimeTotal">2:31</span>
         </div>
-        <span class="views-pill" id="viewsCount">Views: 5675</span>
+        <span class="views-pill" id="viewsCount">Views: 5682</span>
     </div>
 </div>
 
@@ -567,9 +597,67 @@ const YOUR_ID = "1250654354344775703";
 const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
 
 // Default music info
-const defaultTitle = "ORIGINAL";
-const defaultArtist = "Uncle Dags Original";
+const defaultTitle = "ORIGIMAL";
+const defaultArtist = "Uncle Dags ORIGIMAL";
 const defaultArt = "https://i.scdn.co/image/ab67616d0000b2734121faee8df82ba027c0456";
+const defaultLink = "https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w";
+const defaultDuration = 151000; // 2:31 in ms
+
+let currentTrackUrl = defaultLink;
+let isPlaying = true;
+let currentTime = 0;
+let totalTime = defaultDuration;
+let progressInterval;
+
+// ==============================================
+// ✅ PLAY / PAUSE FUNCTIONALITY
+// ==============================================
+const playPauseBtn = document.getElementById('playPauseBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+const progressBar = document.getElementById('musicProgressBar');
+const timeCurrentEl = document.getElementById('musicTimeCurrent');
+const timeTotalEl = document.getElementById('musicTimeTotal');
+const musicLinkContainer = document.getElementById('musicLinkContainer');
+const progressBarContainer = document.getElementById('progressBarContainer');
+
+// Open Spotify Link when clicking music area
+musicLinkContainer.addEventListener('click', (e) => {
+    // Don't open if clicking the play button
+    if (!e.target.closest('.music-play-button')) {
+        window.open(currentTrackUrl, '_blank');
+    }
+});
+
+playPauseBtn.addEventListener('click', () => {
+    if (isPlaying) {
+        audio.pause();
+        clearInterval(progressInterval);
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+    } else {
+        audio.play();
+        startProgressTimer();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+    }
+    isPlaying = !isPlaying;
+});
+
+// Click on progress bar to seek
+progressBarContainer.addEventListener('click', (e) => {
+    const rect = progressBarContainer.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    const newTime = percent * totalTime;
+    
+    currentTime = newTime;
+    updateProgressUI();
+    
+    // Update audio position if it's the default song
+    if (!document.getElementById('musicTitle').dataset.isSpotify) {
+        audio.currentTime = newTime / 1000;
+    }
+});
 
 function formatTime(ms) {
     if (!ms || ms < 0) return "0:00";
@@ -579,6 +667,27 @@ function formatTime(ms) {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
+function startProgressTimer() {
+    clearInterval(progressInterval);
+    progressInterval = setInterval(() => {
+        if (currentTime < totalTime) {
+            currentTime += 1000;
+            updateProgressUI();
+        } else {
+            currentTime = 0; // Loop
+        }
+    }, 1000);
+}
+
+function updateProgressUI() {
+    const percentage = totalTime > 0 ? (currentTime / totalTime) * 100 : 0;
+    progressBar.style.width = percentage + "%";
+    timeCurrentEl.innerText = formatTime(currentTime);
+}
+
+// ==============================================
+// ✅ FETCH DATA FROM API
+// ==============================================
 async function fetchData() {
     try {
         const res = await fetch(API_URL, {cache: "no-store"});
@@ -673,9 +782,6 @@ async function fetchData() {
         const titleEl = document.getElementById('musicTitle');
         const artistEl = document.getElementById('musicArtist');
         const artEl = document.getElementById('musicAlbumArt');
-        const progressEl = document.getElementById('musicProgressBar');
-        const timeCurrentEl = document.getElementById('musicTimeCurrent');
-        const timeTotalEl = document.getElementById('musicTimeTotal');
 
         if (d.spotify && d.spotify.track_id) {
             // NAKIKINIG SA SPOTIFY
@@ -686,25 +792,33 @@ async function fetchData() {
             // Timestamps
             const start = d.spotify.timestamps?.start || 0;
             const end = d.spotify.timestamps?.end || 0;
-            const now = Date.now();
             
             if (end > start) {
-                const total = end - start;
-                const current = Math.min(now - start, total);
-                const percentage = (current / total) * 100;
-                
-                progressEl.style.width = percentage + "%";
-                timeCurrentEl.innerText = formatTime(current);
-                timeTotalEl.innerText = formatTime(total);
+                totalTime = end - start;
+                currentTime = Math.min(Date.now() - start, totalTime);
+                timeTotalEl.innerText = formatTime(totalTime);
+                updateProgressUI();
             }
+            
+            // Link to track
+            currentTrackUrl = `https://open.spotify.com/track/${d.spotify.track_id}`;
+            titleEl.dataset.isSpotify = "true";
+
         } else {
             // DEFAULT MUSIC
             titleEl.innerText = defaultTitle;
             artistEl.innerText = defaultArtist;
             artEl.src = defaultArt;
-            progressEl.style.width = "0%";
-            timeCurrentEl.innerText = "0:00";
+            currentTrackUrl = defaultLink;
+            totalTime = defaultDuration;
             timeTotalEl.innerText = "2:31";
+            titleEl.dataset.isSpotify = "false";
+            
+            // Update time for default song
+            if(isPlaying) {
+                currentTime = audio.currentTime * 1000;
+                updateProgressUI();
+            }
         }
 
     } catch (err) {
@@ -715,6 +829,11 @@ async function fetchData() {
 
 fetchData();
 setInterval(fetchData, 5000); // Update every 5 seconds
+
+// Start timer on load
+startProgressTimer();
+playIcon.style.display = 'none';
+pauseIcon.style.display = 'block';
 
 history.replaceState(null, null, location.href);
 window.onpopstate = () => history.go(1);

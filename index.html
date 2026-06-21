@@ -18,6 +18,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
 
         * {
             margin: 0;
@@ -32,10 +33,9 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            /* ✅ DARKER BACKGROUND — SAME AS PUBLIC ENEMY */
             background-color: #000000;
             background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), 
                 url("pba.webp");
             background-size: cover;
             background-position: center center;
@@ -69,7 +69,7 @@
 
         .main-logo-container {
             text-align: center;
-            margin: 0 0 5px 0;
+            margin: 0 0 10px 0;
         }
 
         .main-clan-logo {
@@ -84,14 +84,13 @@
             object-fit: contain;
         }
 
+        /* ✅ $ SYMBOL FONT — SAME AS PUBLIC ENEMY */
         .symbol-break {
-            font-size: 28px;
-            font-weight: 900;
-            margin: 3px 0 8px 0;
-            overflow: visible;
-            white-space: normal;
-            animation: metallic-glow 3s infinite ease-in-out;
-            color: #808080;
+            font-family: 'Oswald', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 5px 0 15px 0;
+            color: #888;
             text-align: center;
             display: block;
         }
@@ -102,64 +101,47 @@
         }
 
         @keyframes metallic-glow {
-            0% { color: #808080; text-shadow: 0 0 5px #555555; }
-            50% { color: #ffffff; text-shadow: 0 0 10px #aaaaaa; }
-            100% { color: #808080; text-shadow: 0 0 5px #555555; }
+            0% { color: #808080; text-shadow: 0 0 5px #555; }
+            50% { color: #fff; text-shadow: 0 0 10px #aaa; }
+            100% { color: #808080; text-shadow: 0 0 5px #555; }
         }
 
+        /* ✅ ABOVE ALL FONT — SAME AS PUBLIC ENEMY */
         .typewriter-header {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: 2px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
             overflow: hidden;
             white-space: nowrap;
             width: fit-content;
             margin: 0 auto 8px auto;
-            animation: 
-                typing 3.5s steps(20, end) forwards,
-                metallic-glow 3s infinite ease-in-out;
-            animation-play-state: paused;
-            width: 0;
+            color: #ddd;
             position: relative;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 4px 0;
         }
 
-        .typewriter-header::before,
-        .typewriter-header::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 180%;
-            height: 1px;
-            background: rgba(255,255,255,0.08);
+        .tiny-top-text {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.25);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 2px;
         }
-        .typewriter-header::before {
-            top: -12px;
-        }
-        .typewriter-header::after {
-            bottom: -12px;
-        }
-        .typewriter-container {
+
+        /* ✅ STAFF FONT — SAME AS PUBLIC ENEMY */
+        .staff-header {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #ddd;
             position: relative;
-            margin: 20px 0;
-        }
-        .typewriter-container::before,
-        .typewriter-container::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 220%;
-            height: 1px;
-            background: rgba(255,255,255,0.05);
-        }
-        .typewriter-container::before {
-            top: -8px;
-        }
-        .typewriter-container::after {
-            bottom: -8px;
         }
 
         .navigation-bar {
@@ -169,21 +151,22 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 10px;
+            font-size: 11px;
             letter-spacing: 2px;
-            opacity: 0.5;
+            opacity: 0.6;
             z-index: 100;
         }
 
         .views-box {
-            padding: 3px 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+            padding: 3px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
             font-size: 11px;
             letter-spacing: 1px;
+            background: rgba(0,0,0,0.4);
         }
         #views {
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .center-container {
@@ -196,26 +179,16 @@
             position: relative;
             z-index: 10;
             padding: 0 15px;
-            gap: 8px;
+            gap: 15px;
             overflow: visible;
         }
 
         .title-group-block {
-            margin: 8px 0;
+            margin: 10px 0;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        .tiny-top-text {
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 5px;
-            color: rgba(255, 255, 255, 0.3);
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 3px;
         }
 
         .horizontal-avatar-row {
@@ -225,9 +198,27 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            gap: 30px !important;
-            padding: 5px 0;
-            min-height: 70px;
+            gap: 35px !important;
+            padding: 8px 0;
+            min-height: 80px;
+            position: relative;
+        }
+
+        /* ✅ JOIN LINK — LEFT SIDE OF STAFF AVATARS */
+        .join-link {
+            position: absolute;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #888;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: color 0.2s;
+        }
+        .join-link:hover {
+            color: #fff;
         }
 
         .avatar-wrapper-node {
@@ -243,7 +234,7 @@
         }
 
         .circle-avatar-container {
-          position: relative;
+            position: relative;
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -298,24 +289,24 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ POPUP BOX — EXACT SAME AS YOUR SCREENSHOT */
+        /* ✅ POPUP BOX — EXACT SIZE & STYLE LIKE YOUR SCREENSHOT */
         .avatar-tooltip {
             position: absolute;
             top: 110%;
             left: 50%;
             transform: translateX(-50%);
-            background: #121214;
+            background: #111113;
             border: 1px solid #222;
-            border-radius: 6px;
-            width: 220px;
-            padding: 10px;
+            border-radius: 8px;
+            width: 240px;
+            padding: 12px;
             color: #fff;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
             pointer-events: none;
             z-index: 9999;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.7);
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
@@ -326,20 +317,20 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .tooltip-avatar-sm {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
         }
         .tooltip-user-info h4 {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             margin: 0;
         }
         .tooltip-user-info p {
-            font-size: 11px;
+            font-size: 12px;
             color: #999;
             margin: 0;
         }
@@ -349,8 +340,8 @@
             background: #1a1a1c;
             border-radius: 4px;
             padding: 6px 8px;
-            margin-top: 4px;
-            font-size: 11px;
+            margin-top: 6px;
+            font-size: 12px;
             color: #ccc;
         }
         .activity-playing { color: #43b581; }
@@ -479,7 +470,7 @@
 
         ::-webkit-scrollbar { display: none !important; }
 
-       .name-label {
+        .name-label {
             text-align: center;
             font-size: 11px;
             margin-top: 4px;
@@ -495,18 +486,6 @@
             height: 1px;
             background: rgba(255,255,255,0.08);
             margin: 12px 0;
-        }
-
-        .join-link {
-            font-size: 12px;
-            color: #888;
-            text-decoration: none;
-            margin-bottom: 8px;
-            letter-spacing: 2px;
-            transition: color 0.2s;
-        }
-        .join-link:hover {
-            color: #fff;
         }
     </style>
 </head>
@@ -528,23 +507,21 @@
         <div id="founder-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
 
-        <div class="typewriter-container">
-            <div class="title-group-block">
-                <span class="tiny-top-text">ABOVE ALL</span>
-                <h2 class="typewriter-header">ABOVE ALL</h2>
-            </div>
+        <div class="title-group-block">
+            <span class="tiny-top-text">ABOVE ALL</span>
+            <h2 class="typewriter-header">ABOVE ALL</h2>
         </div>
 
         <div id="aboveall-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
 
-        <a href="https://discord.gg/azuraorg" class="join-link" target="_blank">JOIN</a>
-
         <div class="title-group-block">
             <span class="tiny-top-text">STAFF</span>
-            <h2 class="typewriter-header">STAFF</h2>
+            <h2 class="staff-header">STAFF</h2>
         </div>
-        <div id="staff-container" class="horizontal-avatar-row"></div>
+        <div id="staff-container" class="horizontal-avatar-row">
+            <a href="https://discord.gg/azuraorg" class="join-link" target="_blank">JOIN</a>
+        </div>
 
         <div class="marquee-wrapper-group">
             <div class="marquee-ticker">
@@ -593,11 +570,6 @@
             audio.play().catch(() => {});
             this.classList.add("fade-gateway");
             document.body.classList.add('loaded');
-            
-            document.querySelectorAll('.typewriter-header').forEach(el => {
-                el.style.animationPlayState = 'running';
-                el.style.width = '100%';
-            });
         });
 
         const UPDATE_INTERVAL = 5000; 
@@ -661,7 +633,11 @@
         function showGroup(members, container) {
             const box = document.getElementById(container);
             if (!box) return;
+            
+            // Preserve JOIN link in staff container
+            const joinLink = box.querySelector('.join-link');
             box.innerHTML = '';
+            if (joinLink) box.appendChild(joinLink);
 
             members.forEach(mem => {
                 const wrapper = document.createElement('div'); 
@@ -706,7 +682,7 @@
                     </div>
                     <div class="name-label">${mem.displayName}</div>
 
-                    <!-- ✅ POPUP EXACTLY LIKE YOUR SCREENSHOT -->
+                    <!-- ✅ POPUP EXACT SIZE & STYLE -->
                     <div class="avatar-tooltip">
                         <div class="tooltip-header">
                             <img src="${mem.avatarURL}" class="tooltip-avatar-sm">

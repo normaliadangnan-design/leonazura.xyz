@@ -113,22 +113,42 @@
             font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
-            overflow: hidden;
+            overflow: visible;
             white-space: nowrap;
             width: fit-content;
             margin: 0 auto 8px auto;
-            color: #ddd;
+            color: #888; /* ✅ GRAY COLOR */
             position: relative;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 4px 0;
+            /* ✅ REMOVED SMALL LINES, ONLY BIG GRAY LINES */
         }
+
+        /* ✅ BIG GRAY WRAPPER LINES — EXACT LIKE PUBLIC ENEMY */
+        .title-group-block {
+            position: relative;
+            margin: 10px 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .title-group-block::before,
+        .title-group-block::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200%;
+            height: 1px;
+            background: #444; /* ✅ GRAY LINE */
+        }
+        .title-group-block::before { top: -8px; }
+        .title-group-block::after { bottom: -8px; }
 
         .tiny-top-text {
             font-size: 9px;
             font-weight: 400;
             letter-spacing: 4px;
-            color: rgba(255, 255, 255, 0.25);
+            color: #444; /* ✅ GRAY COLOR */
             text-transform: uppercase;
             display: block;
             margin-bottom: 2px;
@@ -140,10 +160,11 @@
             font-size: 22px;
             font-weight: 700;
             letter-spacing: 2px;
-            color: #ddd;
+            color: #888; /* ✅ GRAY COLOR */
             position: relative;
         }
 
+        /* ✅ HOME & VIEWS — GRAY TEXT */
         .navigation-bar {
             position: absolute;
             top: 25px;
@@ -153,20 +174,23 @@
             gap: 15px;
             font-size: 11px;
             letter-spacing: 2px;
-            opacity: 0.6;
+            color: #888; /* ✅ GRAY COLOR */
+            opacity: 0.8;
             z-index: 100;
         }
 
         .views-box {
             padding: 3px 12px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid #444; /* ✅ GRAY BORDER */
             border-radius: 20px;
             font-size: 11px;
             letter-spacing: 1px;
-            background: rgba(0,0,0,0.4);
+            background: transparent;
+            color: #888;
         }
         #views {
             font-weight: 500;
+            color: #888;
         }
 
         .center-container {
@@ -183,14 +207,6 @@
             overflow: visible;
         }
 
-        .title-group-block {
-            margin: 10px 0;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
         .horizontal-avatar-row {
             display: flex !important;
             flex-direction: row !important;
@@ -204,10 +220,10 @@
             position: relative;
         }
 
-        /* ✅ JOIN LINK — LEFT SIDE OF STAFF AVATARS */
+        /* ✅ JOIN LINK — CORRECT POSITION (NOT FAR) */
         .join-link {
             position: absolute;
-            left: -60px;
+            left: -50px; /* ✅ FIXED DISTANCE */
             top: 50%;
             transform: translateY(-50%);
             font-family: 'Inter', sans-serif;
@@ -289,24 +305,24 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ POPUP BOX — EXACT SIZE & STYLE LIKE YOUR SCREENSHOT */
+        /* ✅ POPUP BOX — EXACT SAME AS PUBLIC ENEMY */
         .avatar-tooltip {
             position: absolute;
             top: 110%;
             left: 50%;
             transform: translateX(-50%);
-            background: #111113;
+            background: #0a0a0b; /* ✅ DARKER LIKE PUBLIC ENEMY */
             border: 1px solid #222;
-            border-radius: 8px;
-            width: 240px;
-            padding: 12px;
+            border-radius: 4px; /* ✅ SHARP CORNERS */
+            width: 200px; /* ✅ CORRECT WIDTH */
+            padding: 8px 10px;
             color: #fff;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
             pointer-events: none;
             z-index: 9999;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+            box-shadow: none; /* ✅ NO SHADOW */
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
@@ -316,33 +332,34 @@
         .tooltip-header {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 6px;
+            margin-bottom: 4px;
         }
         .tooltip-avatar-sm {
-            width: 36px;
-            height: 36px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
         }
         .tooltip-user-info h4 {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 500;
             margin: 0;
+            color: #fff;
         }
         .tooltip-user-info p {
-            font-size: 12px;
-            color: #999;
+            font-size: 10px;
+            color: #666;
             margin: 0;
         }
 
-        /* ✅ STATUS WRAPPER — PLAYING / LISTENING / STREAMING */
+        /* ✅ STATUS WRAPPER — SAME STYLE */
         .tooltip-activity-wrapper {
-            background: #1a1a1c;
-            border-radius: 4px;
-            padding: 6px 8px;
-            margin-top: 6px;
-            font-size: 12px;
-            color: #ccc;
+            background: #111;
+            border-radius: 2px;
+            padding: 4px 6px;
+            margin-top: 4px;
+            font-size: 10px;
+            color: #888;
         }
         .activity-playing { color: #43b581; }
         .activity-streaming { color: #9146ff; }
@@ -423,14 +440,15 @@
             gap: 8px !important;
             padding: 8px 14px !important;
             background-color: #000 !important;
-            border: 1px solid rgba(255,255,255,0.15) !important;
-            color: #fff !important;
+            border: 1px solid #444 !important;
+            color: #888 !important;
             font-size: 11px !important;
             font-weight: bold !important;
             text-decoration: none !important;
             border-radius: 2px !important;
         }
 
+        /* ✅ LOADING SCREEN — EXACT SAME AS PUBLIC ENEMY */
         #gateway-overlay {
             position: fixed;
             inset: 0;
@@ -444,22 +462,20 @@
         }
 
         .gateway-btn {
-            padding: 20px 50px;
-            font-size: 18px !important;
-            letter-spacing: 10px;
+            font-size: 14px !important;
+            letter-spacing: 4px;
             background: transparent;
-            border: 2px solid #ffffff !important;
-            color: #ffffff !important;
-            text-shadow: 0 0 15px #ffffff, 0 0 25px #ffffff !important;
+            border: none !important;
+            color: #444 !important; /* ✅ GRAY TEXT */
+            text-transform: uppercase;
             transition: all 0.2s ease;
-            font-weight: bold !important;
+            font-weight: 400 !important;
             font-family: 'Inter', sans-serif !important;
             opacity: 1 !important;
             visibility: visible !important;
         }
         .gateway-btn:hover {
-            background: rgba(255,255,255,0.1);
-            text-shadow: 0 0 20px #ffffff, 0 0 30px #ffffff;
+            color: #888;
         }
 
         .fade-gateway {
@@ -484,7 +500,7 @@
             width: 100%;
             max-width: 1300px;
             height: 1px;
-            background: rgba(255,255,255,0.08);
+            background: #222; /* ✅ GRAY DIVIDER */
             margin: 12px 0;
         }
     </style>
@@ -682,7 +698,7 @@
                     </div>
                     <div class="name-label">${mem.displayName}</div>
 
-                    <!-- ✅ POPUP EXACT SIZE & STYLE -->
+                    <!-- ✅ POPUP EXACT SAME AS PUBLIC ENEMY -->
                     <div class="avatar-tooltip">
                         <div class="tooltip-header">
                             <img src="${mem.avatarURL}" class="tooltip-avatar-sm">

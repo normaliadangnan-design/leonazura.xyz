@@ -1,424 +1,850 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Leon</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;600&display=swap');
 
-    <title>/ AZURA ORG</title>
-    <meta name="description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://leonazura.xyz/">
-    <meta property="og:site_name" content="AZURA ORG">
-    <meta property="og:title" content="/ AZURA ORG">
-    <meta property="og:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
-    <meta name="twitter:title" content="/ AZURA ORG">
-    <meta name="twitter:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net https://cdn-icons-png.flaticon.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Kanit:wght@800;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.55)),url("../members/founder/leon.gif");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    color:white;
+    overflow:hidden;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            cursor: url('https://cdn.cursors-4u.net/previews/gruppled-move-tool-fa2fca77-32.webp') 48 47, auto !important;
-        }
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:8px 8px;
+    z-index:1;
+}
 
-        html, body { width:100%; height:100%; }
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #090909;
+    z-index: 9999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background:#000;
-            background-image: linear-gradient(rgba(0,0,0,.9),rgba(0,0,0,.9)), url("pba.webp");
-            background-size:cover; background-position:center; background-attachment:fixed;
-            color:#fff; height:100vh; max-height:100vh; overflow:hidden;
-            display:flex; flex-direction:column; align-items:center; justify-content:center;
-            padding:10px 0; opacity:0; transition:opacity .6s ease;
-        }
-        body.loaded { opacity:1; }
+.click-text {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 8px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    animation: pulse 1.5s infinite alternate;
+    text-transform: uppercase;
+}
 
-        .center-container, .navigation-bar {
-            opacity:0; visibility:hidden; transition:all .6s ease;
-        }
-        body.loaded .center-container, body.loaded .navigation-bar { opacity:1; visibility:visible; }
+@keyframes pulse {
+    0% { opacity: 0.3; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1.05); }
+}
 
-        .main-logo-container { text-align:center; margin:0 0 10px; }
-        .main-clan-logo img { height:60px; width:auto; object-fit:contain; }
+.card{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px;
+    width:380px;
+    background: transparent !important;
+    border-radius:25px;
+    border: none;
+    box-shadow: none;
+}
 
-        .symbol-break {
-            font-family:'Oswald',sans-serif; font-size:36px; font-weight:700;
-            margin:5px 0 15px; text-align:center; display:block;
-            animation:metallicRGB 2s infinite alternate;
-        }
-        @keyframes metallicRGB {
-            0%   { color:#555; text-shadow:0 0 4px #333, 0 0 8px #444; }
-            25%  { color:#888; text-shadow:0 0 6px #666, 0 0 12px #777; }
-            50%  { color:#bbb; text-shadow:0 0 10px #999, 0 0 18px #aaa; }
-            75%  { color:#e6e6e6; text-shadow:0 0 8px #bbb, 0 0 14px #ccc; }
-            100% { color:#fff; text-shadow:0 0 6px #ddd, 0 0 10px #eee; }
-        }
+.logo-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:20px;
+    width: 100%;
+    background: transparent;
+    padding: 15px;
+    border-radius: 12px;
+}
 
-        .typewriter-header {
-            font-family:'Oswald',sans-serif; font-size:32px; font-weight:700;
-            letter-spacing:3px; text-transform:uppercase; width:fit-content;
-            margin:0 auto 8px; animation:metallicRGB 2s infinite alternate;
-        }
-        .staff-header {
-            font-family:'Oswald',sans-serif; font-size:26px; font-weight:700;
-            letter-spacing:2px; animation:metallicRGB 2s infinite alternate;
-        }
+.main-logo {
+    max-width: 240px;
+    height: auto;
+    object-fit: contain;
+}
 
-        .navigation-bar {
-            position:absolute; top:25px; right:35px;
-            display:flex; align-items:center; gap:15px;
-            font-size:11px; letter-spacing:2px; color:#888; opacity:.8; z-index:100;
-        }
-        #views { font-weight:700; color:#bbb; font-variant-numeric:tabular-nums; }
+.title-image-container {
+    margin-bottom: 10px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.title-image {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
 
-        .center-container {
-            max-width:1400px; width:100%; z-index:10;
-            padding:0 15px; gap:15px;
-            display:flex; flex-direction:column; align-items:center;
-        }
-        .horizontal-avatar-row {
-            display:flex; flex-wrap:wrap; justify-content:center;
-            gap:45px !important; padding:8px 0; min-height:120px;
-        }
-        .avatar-wrapper-node {
-            position:relative; transition:transform .2s ease;
-            display:flex; flex-direction:column; align-items:center;
-        }
-        .avatar-wrapper-node:hover { transform:scale(1.08); }
+.status-container {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 15px;
+    background: #111;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 999;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.1);
+}
 
-        .circle-avatar-container {
-            width:110px !important; height:110px !important; border-radius:50%;
-            position:relative; display:flex; align-items:center; justify-content:center;
-        }
-        img.avatar-decoration {
-            position:absolute !important; inset:50% auto auto 50%;
-            transform:translate(-50%,-50%) !important;
-            width:135px !important; height:135px !important; z-index:1; pointer-events:none;
-        }
-        .circle-avatar-container img.avatar-img {
-            width:110px !important; height:110px !important; border-radius:50% !important;
-            object-fit:cover; z-index:2; border:2px solid #000; background:#000;
-        }
-        .status-indicator {
-            position:absolute; bottom:6px; right:6px;
-            width:14px; height:14px; border-radius:50%; border:2px solid #000; z-index:3;
-        }
-        .status-online{background:#23a55a}.status-idle{background:#f0b232}.status-dnd{background:#f13f43}.status-offline{background:#80848e}
-        .name-label {
-            font-size:12px; margin-top:6px; color:#ccc;
-            max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-        }
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.status-online { background-color: #23a55a; }
+.status-idle { background-color: #f0b232; }
+.status-dnd { background-color: #f13f43; }
+.status-offline { background-color: #80848e; }
 
-        /* ✅ POPUP KALAKI SA PIC */
-        .avatar-tooltip {
-            position:absolute; top:calc(100% + 14px); left:50%;
-            transform:translateX(-50%);
-            width:300px !important; background:#0b0b0d;
-            border:1px solid #1a1a1d; border-radius:14px;
-            padding:18px !important;
-            box-shadow:0 10px 40px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.02);
-            color:#fff; opacity:0; visibility:hidden;
-            transition:all .22s ease; pointer-events:none; z-index:99999;
-        }
-        .avatar-wrapper-node:hover .avatar-tooltip {
-            opacity:1; visibility:visible; transform:translateX(-50%) translateY(-2px);
-        }
-        .tooltip-header {
-            display:flex; align-items:center; gap:12px;
-            padding-bottom:12px; border-bottom:1px solid #1c1c20; margin-bottom:12px;
-        }
-        .tooltip-avatar-sm { width:48px !important; height:48px !important; border-radius:50%; }
-        .tooltip-user-info {
-            display:flex; flex-direction:column; gap:2px; min-width:0;
-            position:relative; padding-right:22px;
-        }
-        .tooltip-user-info h4 { font-size:18px !important; font-weight:600; margin:0; color:#fff; }
-        .tooltip-user-info p  { font-size:13px !important; color:#949ba4; margin:0; }
-        .tooltip-user-info::after {
-            content:""; position:absolute; right:0; top:6px;
-            width:12px; height:12px; border-radius:999px; border:2px solid #0b0b0d;
-        }
-        .avatar-wrapper-node:has(.status-online)  .tooltip-user-info::after{background:#23a55a}
-        .avatar-wrapper-node:has(.status-idle)    .tooltip-user-info::after{background:#f0b232}
-        .avatar-wrapper-node:has(.status-dnd)     .tooltip-user-info::after{background:#f13f43}
-        .avatar-wrapper-node:has(.status-offline) .tooltip-user-info::after{background:#80848e}
+.avatar{
+    position: relative;
+    width:140px;
+    height:140px;
+    margin:auto;
+    margin-bottom:18px;
+    overflow: visible !important;
+    cursor: pointer;
+}
 
-        .tooltip-activity-wrapper {
-            background:#111214; border-radius:8px;
-            padding:10px 12px; font-size:15px !important; font-weight:500;
-            color:#b5bac1; line-height:1.4;
-        }
-        .activity-playing{color:#43b581}.activity-streaming{color:#9146ff}.activity-listening{color:#1db954}.activity-watching{color:#faa61a}.activity-custom{color:#b9bbbe}
+.avatar-img-holder {
+    width: 100%;
+    height: 100%;
+    border-radius:50%;
+    overflow: hidden;
+    border:3px solid rgba(255,255,255,.18);
+    background: transparent;
+    position: relative;
+    z-index: 2;
+}
 
-        .marquee-ticker { overflow:hidden; width:100%; max-width:900px; }
-        .marquee-wrapper-group { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
-        .marquee-inner-wrap { display:flex; gap:12px; width:max-content; }
-        .scroll-left  { animation:smoothScrollLeft 30s linear infinite; }
-        .scroll-right { animation:smoothScrollRight 30s linear infinite; }
-        @keyframes smoothScrollLeft  { 0%{transform:translateX(0)} 100%{transform:translateX(-33.333%)} }
-        @keyframes smoothScrollRight { 0%{transform:translateX(-33.333%)} 100%{transform:translateX(0)} }
-        .marquee-profile-block {
-            display:flex; align-items:center; gap:8px; font-size:12px;
-            color:rgba(255,255,255,.8); background:#0c0c0c;
-            border:1px solid rgba(255,255,255,.08);
-            padding:4px 12px; border-radius:999px;
-        }
-        .marquee-profile-block img { width:28px; height:28px; border-radius:50%; }
+.avatar-img-holder img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-        .azura-discord-link {
-            position:fixed; bottom:22px; right:28px; z-index:9999;
-            display:inline-flex; align-items:center; gap:10px;
-            text-decoration:none; animation:azuraPulse 1.6s infinite alternate;
-        }
-        .discord-icon-svg {
-            width:26px; height:22px;
-            animation:metallicRGB 2s infinite alternate, discordGlow 1.6s infinite alternate;
-        }
-        .azura-text-glow {
-            font-family:'Oswald',sans-serif; font-size:22px; font-weight:700; letter-spacing:5px;
-            animation:metallicRGB 2s infinite alternate;
-        }
-        @keyframes azuraPulse  { 0%{transform:scale(1);   filter:drop-shadow(0 0 2px #5865F2)} 100%{transform:scale(1.15); filter:drop-shadow(0 0 12px #5865F2)} }
-        @keyframes discordGlow { 0%{filter:drop-shadow(0 0 2px #5865F2)} 100%{filter:drop-shadow(0 0 10px #7289da)} }
+img.avatar-decoration {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 170px !important;
+    height: 170px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    display: none;
+    border-radius: 0 !important;
+    background: transparent !important;
+    image-rendering: -webkit-optimize-contrast;
+}
 
-        /* ✅ LOADING — AGAD LUMALABAS */
-        #gateway-overlay {
-            position:fixed; inset:0; width:100vw; height:100vh;
-            background:#000 !important; display:flex !important;
-            justify-content:center; align-items:center; z-index:9999999 !important;
-            cursor:pointer; opacity:1; visibility:visible;
-            transition:opacity .7s ease, visibility .7s ease;
-        }
-        #gateway-overlay.fade-gateway { opacity:0 !important; visibility:hidden !important; pointer-events:none !important; }
-        .gateway-btn {
-            font-family:'Inter',sans-serif !important; font-size:18px !important;
-            font-weight:400 !important; letter-spacing:14px !important;
-            text-transform:uppercase; color:#cfd2d6 !important;
-            text-shadow:0 0 10px rgba(255,255,255,.35), 0 0 28px rgba(255,255,255,.18), 0 0 60px rgba(255,255,255,.08);
-            animation:gatewayBlink 2.2s ease-in-out infinite;
-        }
-        @keyframes gatewayBlink { 0%,100%{opacity:.55} 50%{opacity:1} }
+.username{
+    display: none !important;
+}
 
-        ::-webkit-scrollbar{display:none !important}
-        .section-divider { width:100%; max-width:1300px; height:1px; background:#1a1a1a; margin:15px 0; }
-    </style>
+.bio{
+    opacity:.85;
+    font-size:15px;
+    margin-bottom:28px;
+    min-height: 20px;
+    transition: all 0.3s ease;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.social{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(255,255,255,.05);
+    text-decoration:none;
+    transition:.3s;
+}
+
+.social:hover{
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.15);
+}
+
+.social svg {
+    width:26px;
+    height:26px;
+    fill:white;
+}
+
+/* ==================================================
+   ✅ MUSIC PLAYER - WITH PLAY BUTTON & CONTROLS
+   ================================================== */
+.music-container {
+    display: block;
+    color: white;
+    background: #000000 !important;
+    border-radius: 12px;
+    padding: 15px;
+    width: 100%;
+    transition: .3s;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.music-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.music-album-art {
+    width: 55px;
+    height: 55px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.music-info {
+    text-align: left;
+    flex: 1;
+}
+
+.music-title {
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-artist {
+    font-size: 13px;
+    opacity: 0.7;
+    display: block;
+    color: #cccccc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* PLAY BUTTON */
+.music-play-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.music-play-button:hover {
+    transform: scale(1.1);
+}
+
+.music-play-button svg {
+    width: 16px;
+    height: 16px;
+    fill: #000000;
+    margin-left: 2px;
+}
+
+/* Progress Bar */
+.music-progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.music-progress-bar {
+    height: 100%;
+    background: #ffffff;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.5s linear;
+}
+
+.music-time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.views-pill {
+    display: inline-block;
+    padding: 5px 24px;
+    border-radius: 30px;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    background: transparent;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+a {
+    text-decoration: none !important;
+    color: inherit !important;
+    pointer-events: auto;
+}
+
+.profile-popup {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 12px;
+    width: 380px;
+    background: #000000 !important;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.9);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+}
+
+.avatar:hover .profile-popup {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    position: relative;
+}
+
+.popup-avatar-wrapper {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+}
+
+.popup-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
+    position: relative;
+    z-index: 2;
+}
+
+.popup-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.popup-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 58px;
+    height: 58px;
+    pointer-events: none;
+    z-index: 1;
+    display: none;
+}
+
+.popup-info {
+    text-align: left;
+    flex: 1;
+    overflow: hidden;
+}
+
+.popup-nickname {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    display: block;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup-name {
+    font-size: 13px;
+    font-weight: 400;
+    color: #8a8a8a;
+    display: block;
+    line-height: 1.2;
+    margin: 2px 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup-status {
+    font-size: 12px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1;
+}
+
+.popup-status .status-dot {
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.popup-note {
+    display: none;
+}
+
+</style>
 </head>
-<body oncontextmenu="return false;" onkeydown="return disableKeys(event);">
+<body oncontextmenu="return false;">
 
-    <div class="navigation-bar">
-        HOME
-        <div class="views-box">VIEWS : <span id="views">0</span></div>
+<div id="loading-overlay">
+    <div class="click-text">CLICK</div>
+</div>
+
+<div class="card">
+    <div class="logo-img-container">
+        <img src="public azura.png" alt="Leon Logo" class="main-logo" onerror="this.style.display='none';">
     </div>
 
-    <div class="center-container">
-        <div class="main-logo-container">
-            <div class="main-clan-logo"><img src="public azura.png" alt="AZURA ORG"></div>
-            <div class="symbol-break">$</div>
+    <div class="title-image-container">
+        <img src="https://cdn.discordapp.com/attachments/1512985085610037338/1517456425956151418/image.png?ex=6a3658ec&is=6a35076c&hm=61c5a01dd669e3cb8c3d23e5d2c1cd7e4d18eeb90ad01546dd876fd5285de72d" alt="@ Symbol" class="title-image" onerror="this.style.display='none';">
+        <img src="https://cdn.discordapp.com/attachments/1512985085610037338/1517078120996540526/ChatGPT_Image_Jun_18_2026_03_56_22_PM.png?ex=6a35a159&is=6a344fd9&hm=3277b612a05ffcbfd3d95e03f5214af65448ddf40d29633b1f5b774da62f8bb6&" alt="Leon Text" class="title-image" onerror="this.style.display='none';">
+    </div>
+
+    <div id="statusArea" class="status-container">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText">Loading...</span>
+    </div>
+
+    <div class="avatar">
+        <div class="profile-popup">
+            <div class="popup-header">
+                <div class="popup-avatar-wrapper">
+                    <img id="popupDeco" class="popup-decoration" src="" alt="">
+                    <div class="popup-avatar">
+                        <img id="popupAvatarImg" src="" alt="">
+                    </div>
+                </div>
+                <div class="popup-info">
+                    <div class="popup-nickname" id="popupNickname">Leon</div>
+                    <div class="popup-name" id="popupUsername">@wtf.leon</div>
+                    <div class="popup-status">
+                        <span id="popupStatusDot" class="status-dot"></span>
+                        <span id="popupStatusText">Loading...</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="founder-container"  class="horizontal-avatar-row"></div>
-        <div class="section-divider"></div>
-        <h2 class="typewriter-header">ABOVE ALL</h2>
-        <div id="aboveall-container" class="horizontal-avatar-row"></div>
-        <div class="section-divider"></div>
-        <h2 class="staff-header">STAFF</h2>
-        <div id="staff-container"    class="horizontal-avatar-row"></div>
-
-        <div class="marquee-wrapper-group">
-            <div class="marquee-ticker"><div id="marquee-container-1" class="marquee-inner-wrap scroll-left"></div></div>
-            <div class="marquee-ticker"><div id="marquee-container-2" class="marquee-inner-wrap scroll-right"></div></div>
+        <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
+        <div class="avatar-img-holder">
+            <img id="avatarImg" src="" alt="Leon Avatar">
         </div>
     </div>
 
-    <a href="https://discord.gg/azuraorg" class="azura-discord-link" target="_blank">
-        <svg class="discord-icon-svg" viewBox="0 0 71 55" fill="currentColor"><path d="M60.1 4.9C55.58 2.82 50.73 1.29 45.65.416a.43.43 0 0 0-.5.11c-.624 1.11-1.316 2.558-1.8 3.692-5.457-.818-10.886-.818-16.23.002-.485-1.134-1.202-2.557-1.828-3.668a.428.428 0 0 0-.504-.11C15.406 2.818 10.553 4.898 6.028 6.974-3.17 20.727-5.694 34.14-4.457 47.388a.47.47 0 0 0 .16.366c12.254 9.162 24.74 14.447 37.26 15.367a.446.446 0 0 0 .518-.366c1.363-1.23 2.628-2.597 3.77-4.06a.44.44 0 0 0-.084-.504c-2.883-1.135-5.57-2.545-8.007-4.206a.436.436 0 0 1-.025-.65c.574-.565 1.125-1.155 1.64-1.777a.434.434 0 0 1 .37-.16c10.676 1.632 21.49 1.632 32.081.002a.434.434 0 0 1 .37.16c.515.622 1.066 1.212 1.64 1.777a.436.436 0 0 1-.025.65c-2.437 1.66-5.124 3.07-8.007 4.206a.44.44 0 0 0-.084.504c1.142 1.463 2.407 2.83 3.77 4.06a.446.446 0 0 0 .518.366c12.52-.92 25.006-6.205 37.26-15.367a.47.47 0 0 0 .16-.366c1.766-18.318-5.283-35.626-21.934-40.41ZM23.726 38.325c-3.498 0-6.38-3.212-6.38-7.166 0-3.952 2.826-7.166 6.38-7.166s6.436 3.214 6.38 7.166c0 3.954-2.882 7.166-6.38 7.166Zm23.592 0c-3.498 0-6.38-3.212-6.38-7.166 0-3.952 2.826-7.166 6.38-7.166s6.436 3.214 6.38 7.166c0 3.954-2.882 7.166-6.38 7.166Z"/></svg>
-        <span class="azura-text-glow">AZURA</span>
-    </a>
+    <div id="usernameText" class="username"></div>
+    
+    <div id="noteText" class="bio">PA KISS NGA</div>
 
-    <div id="gateway-overlay"><div class="gateway-btn">CLICK</div></div>
-    <audio id="soundtrack" loop preload="auto"><source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
+    <div class="socials">
+        <a class="social" href="https://discord.gg/CwsGFu6D" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/></svg>
+        </a>
+        <a class="social" href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/></svg>
+        </a>
+        <a class="social" href="https://www.instagram.com/leonky.2/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771 4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.014-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 0 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+    </div>
 
-    <script>
-        // 🛡️ SECURITY
-        function disableKeys(e){
-            if([123,85,73,83,67].includes(e.keyCode) && (e.ctrlKey||e.shiftKey)){ e.preventDefault(); return false; }
+    <!-- ✅ MUSIC PLAYER WITH PLAY BUTTON & CONTROLS -->
+    <div class="music-container" id="musicLinkContainer">
+        <div class="music-header">
+            <img id="musicAlbumArt" class="music-album-art" src="https://i.scdn.co/image/ab67616d0000b2734121faee8df82ba027c0456" alt="Album Art">
+            <div class="music-info">
+                <span class="music-title" id="musicTitle">ORIGIMAL</span>
+                <span class="music-artist" id="musicArtist">Uncle Dags Origimal</span>
+            </div>
+            <button id="playPauseBtn" class="music-play-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pauseIcon" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+        </div>
+        <div class="music-progress-container" id="progressBarContainer">
+            <div id="musicProgressBar" class="music-progress-bar"></div>
+        </div>
+        <div class="music-time">
+            <span id="musicTimeCurrent">0:00</span>
+            <span id="musicTimeTotal">2:31</span>
+        </div>
+        <span class="views-pill" id="viewsCount">Views: 5682</span>
+    </div>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="../uncle-dags-origimal-feat.mp3" type="audio/mpeg">
+
+<script>
+const audio = document.getElementById("bgMusic");
+audio.volume = 0.5;
+
+const overlay = document.getElementById("loading-overlay");
+
+overlay.addEventListener('click', () => {
+    audio.play().catch(e => console.log(e));
+    overlay.style.opacity = "0";
+    setTimeout(() => { 
+        overlay.style.visibility = "hidden"; 
+    }, 800);
+});
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
+        e.preventDefault();
+        return false;
+    }
+});
+setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
+
+function updateViews() {
+    let count = localStorage.getItem('page_views');
+    if (!count) count = 5671; 
+    count = parseInt(count) + 1;
+    localStorage.setItem('page_views', count);
+    document.getElementById('viewsCount').innerText = `Views: ${count}`;
+}
+updateViews();
+
+const YOUR_ID = "1250654354344775703";
+const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
+
+// Default music info
+const defaultTitle = "ORIGINAL";
+const defaultArtist = "Uncle Dags Original";
+const defaultArt = "https://i.scdn.co/image/ab67616d0000b2734121faee8df82ba027c0456";
+const defaultLink = "https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w";
+const defaultDuration = 151000; // 2:31 in ms
+
+let currentTrackUrl = defaultLink;
+let isPlaying = true;
+let currentTime = 0;
+let totalTime = defaultDuration;
+let progressInterval;
+
+// ==============================================
+// ✅ PLAY / PAUSE FUNCTIONALITY
+// ==============================================
+const playPauseBtn = document.getElementById('playPauseBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+const progressBar = document.getElementById('musicProgressBar');
+const timeCurrentEl = document.getElementById('musicTimeCurrent');
+const timeTotalEl = document.getElementById('musicTimeTotal');
+const musicLinkContainer = document.getElementById('musicLinkContainer');
+const progressBarContainer = document.getElementById('progressBarContainer');
+
+// Open Spotify Link when clicking music area
+musicLinkContainer.addEventListener('click', (e) => {
+    // Don't open if clicking the play button
+    if (!e.target.closest('.music-play-button')) {
+        window.open(currentTrackUrl, '_blank');
+    }
+});
+
+playPauseBtn.addEventListener('click', () => {
+    if (isPlaying) {
+        audio.pause();
+        clearInterval(progressInterval);
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+    } else {
+        audio.play();
+        startProgressTimer();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+    }
+    isPlaying = !isPlaying;
+});
+
+// Click on progress bar to seek
+progressBarContainer.addEventListener('click', (e) => {
+    const rect = progressBarContainer.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    const newTime = percent * totalTime;
+    
+    currentTime = newTime;
+    updateProgressUI();
+    
+    // Update audio position if it's the default song
+    if (!document.getElementById('musicTitle').dataset.isSpotify) {
+        audio.currentTime = newTime / 1000;
+    }
+});
+
+function formatTime(ms) {
+    if (!ms || ms < 0) return "0:00";
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+function startProgressTimer() {
+    clearInterval(progressInterval);
+    progressInterval = setInterval(() => {
+        if (currentTime < totalTime) {
+            currentTime += 1000;
+            updateProgressUI();
+        } else {
+            currentTime = 0; // Loop
         }
-        document.onkeydown=disableKeys;
-        document.oncontextmenu=()=>false;
+    }, 1000);
+}
 
-        // 🔢 VISITOR COUNTER
-        const K_VIEW="azura_org_total_views", K_VIS="azura_org_visited_before", BASE=5569;
-        function initCounter(){
-            let v=+localStorage.getItem(K_VIEW)||BASE;
-            if(localStorage.getItem(K_VIS)!=="true"){ v++; localStorage.setItem(K_VIS,"true"); localStorage.setItem(K_VIEW,v); }
-            const el=document.getElementById("views"), dur=1800, sT=performance.now();
-            !function t(n){
-                const p=Math.min((n-sT)/dur,1), e=1-Math.pow(1-p,3), c=Math.floor(v*e);
-                el.textContent=c.toLocaleString();
-                p<1?requestAnimationFrame(t):el.textContent=v.toLocaleString();
-            }(performance.now());
+function updateProgressUI() {
+    const percentage = totalTime > 0 ? (currentTime / totalTime) * 100 : 0;
+    progressBar.style.width = percentage + "%";
+    timeCurrentEl.innerText = formatTime(currentTime);
+}
+
+// ==============================================
+// ✅ FETCH DATA FROM API
+// ==============================================
+async function fetchData() {
+    try {
+        const res = await fetch(API_URL, {cache: "no-store"});
+        const json = await res.json();
+
+        if (!json.success) {
+            console.error("API Error:", json);
+            return;
         }
-        initCounter();
+        const d = json.data;
 
-        const audio=document.getElementById("soundtrack"); audio.volume=.35;
-        const gw=document.getElementById("gateway-overlay");
-        gw.addEventListener("click",()=>{
-            audio.play().catch(()=>{});
-            gw.classList.add("fade-gateway");
-            document.body.classList.add("loaded");
-        });
+        // Avatar
+        const avatarEl = document.getElementById('avatarImg');
+        const popupAvatarEl = document.getElementById('popupAvatarImg');
+        let avatarUrl = "";
+        if (d.discord_user.avatar) {
+            avatarUrl = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
+        } else {
+            avatarUrl = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
+        }
+        avatarEl.src = avatarUrl;
+        popupAvatarEl.src = avatarUrl;
 
-        const UPDATE = 4000; // ⬅️ PINABILIS KO PA NG KONTI ANG REFRESH
-        const MY_ID = "1250654354344775703"; // ⬅️ ITO ID MO
+        // Decoration
+        const decoEl = document.getElementById('decoImg');
+        const popupDecoEl = document.getElementById('popupDeco');
+        if (d.discord_user.avatar_decoration_data) {
+            const asset = d.discord_user.avatar_decoration_data.asset;
+            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=240&passthrough=true`;
+            decoEl.src = decoUrl;
+            decoEl.style.display = 'block';
+            popupDecoEl.src = decoUrl;
+            popupDecoEl.style.display = 'block';
+        } else {
+            decoEl.style.display = 'none';
+            popupDecoEl.style.display = 'none';
+        }
 
-        const founderIDs   = [MY_ID,"1123145717461033041","1085580321623375938"];
-        const aboveAllIDs  = ["1081806153341743144","1414546504437207161","918633044276019232","1499093156321431622","1242051125776093256","1498999674969784426"];
-        const staffIDs     = ["1501438491207405588","1374740899422277703","995205070679453789","1366187912118665276","1459797319863242797","1495366872516923553","1314554124976656505","1398759472821702773"];
-        const s1=["1276210406880317522","1506434429613113405","1498999674969784426","1499093156321431622","1501438491207405588"];
-        const s2=["1374740899422277703","1081806153341743144","995205070679453789","1414546504437207161","1509479201114296353"];
+        // Names
+        const nickname = d.discord_user.global_name || "Leon";
+        const username = d.discord_user.username || "wtf.leon";
+        document.getElementById('popupNickname').innerText = nickname;
+        document.getElementById('popupUsername').innerText = `@${username}`;
 
-        // ============================================================
-        // ✅ ✅ BAGONG API FETCHER — UUNAHIN TALAGA ANG SPOTIFY ✅ ✅
-        // ============================================================
-        async function getUserData(userId){
-            try {
-                // ❌ TINANGGAL KO NA ANG CACHE — BAGONG DATOS LAGI
-                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`,{
-                    cache:"no-store",
-                    headers:{ "Cache-Control":"no-cache, no-transform", Pragma:"no-cache" }
-                });
-                if(!res.ok) throw new Error("HTTP "+res.status);
-                const json = await res.json();
-                if(!json || !json.success) return null;
+        // Bio / Custom Status
+        const noteEl = document.getElementById('noteText');
+        const customStatus = d.activities.find(a => a.type === 4);
+        let statusText = "PA KISS NGA";
+        if (customStatus && customStatus.state) {
+            statusText = customStatus.state;
+        }
+        noteEl.innerText = statusText;
 
-                const d = json.data;
+        // Status
+        const statusDot = document.getElementById('statusDot');
+        const statusTextEl = document.getElementById('statusText');
+        const popupStatusDot = document.getElementById('popupStatusDot');
+        const popupStatusTextEl = document.getElementById('popupStatusText');
+        
+        statusDot.className = "status-dot";
+        popupStatusDot.className = "status-dot";
 
-                // 🔍 PARA MAKITA MO — Buksan F12 > Console, makikita mo buong datos
-                if(userId === MY_ID){
-                    console.log("%c✅ LANAYARD RAW DATA — IKAW ITO","color:#1db954; font-weight:bold; font-size:14px;");
-                    console.log("Spotify:", d.spotify);
-                    console.log("Activities:", d.activities);
-                    console.log("Status:", d.discord_status);
-                    console.log("Full object:", d);
-                }
+        let statusString = "";
+        let statusClass = "";
 
-                const activities = Array.isArray(d.activities) ? d.activities : [];
-                const customStatus = activities.find(a => a && a.type === 4) || null;
-                const realActivities = activities.filter(a => a && a.type !== 4);
-                const mainAct = realActivities[0] || null;
+        switch(d.discord_status) {
+            case 'online':
+                statusClass = 'status-online';
+                statusString = 'Online';
+                break;
+            case 'idle':
+                statusClass = 'status-idle';
+                statusString = 'Idle';
+                break;
+            case 'dnd':
+                statusClass = 'status-dnd';
+                statusString = 'Do Not Disturb';
+                break;
+            default:
+                statusClass = 'status-offline';
+                statusString = 'Offline / Invisible';
+        }
 
-                // 🎧 🎧 🎧 SPOTIFY MUNA BAGO ANG LAHAT — ITO ANG PINAKA IMPORTANTE 🎧 🎧 🎧
-                let ac = { type:null, text:null, cl:"" };
+        statusDot.classList.add(statusClass);
+        statusTextEl.innerText = statusString;
+        popupStatusDot.classList.add(statusClass);
+        popupStatusTextEl.innerText = statusString;
 
-                if(d.spotify && typeof d.spotify === "object" && d.spotify.track_id){
-                    const song = d.spotify.song || "Unknown Song";
-                    const artist = d.spotify.artist || "Unknown Artist";
-                    const album = d.spotify.album || "";
-                    ac = {
-                        type:"spotify",
-                        text: `🎧 Listening to\n${song}\nby ${artist}${album?"\non "+album:""}`,
-                        cl: "activity-listening"
-                    };
-                }
-                // 🎮 GAMES
-                else if(mainAct && mainAct.type === 0){
-                    let txt = `🎮 Playing ${mainAct.name||""}`;
-                    if(mainAct.details) txt += `\n${mainAct.details}`;
-                    if(mainAct.state)   txt += `\n${mainAct.state}`;
-                    ac = { type:"game", text:txt, cl:"activity-playing" };
-                }
-                // 📡 STREAM
-                else if(mainAct && mainAct.type === 1) ac={type:"stream", text:`📡 Streaming ${mainAct.name||""}`, cl:"activity-streaming"};
-                // 🎧 IBA PANG NAKIKINIG
-                else if(mainAct && mainAct.type === 2) ac={type:"listen", text:`🎧 Listening to ${mainAct.name||""}`, cl:"activity-listening"};
-                // 📺 NANONOOD
-                else if(mainAct && mainAct.type === 3) ac={type:"watch",  text:`📺 Watching ${mainAct.name||""}`,  cl:"activity-watching"};
-                // 💬 CUSTOM STATUS HULI NA LANG
-                else if(customStatus){
-                    const em = (customStatus.emoji?.name || customStatus.emoji?.id || "");
-                    const tx = customStatus.state || "";
-                    const out = (em?em+" ":"") + (tx||em||"");
-                    ac = { type:"custom", text: out || "No activity", cl:"activity-custom" };
-                }
+        // ==============================================
+        // ✅ SPOTIFY / MUSIC PLAYER UPDATE - FIXED LINK & IMAGE
+        // ==============================================
+        const titleEl = document.getElementById('musicTitle');
+        const artistEl = document.getElementById('musicArtist');
+        const artEl = document.getElementById('musicAlbumArt');
 
-                return {
-                    id: userId,
-                    u: d.discord_user.username,
-                    dn: d.discord_user.global_name || d.discord_user.display_name || d.discord_user.username,
-                    st: d.discord_status || "offline",
-                    av: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
-                    fx: d.discord_user.avatar_decoration_data?.asset
-                        ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256`
-                        : null,
-                    ac
-                };
+        if (d.spotify && d.spotify.track_id) {
+            // --- KAPAG NAKIKINIG SA SPOTIFY ---
+            titleEl.innerText = d.spotify.song || "Unknown Track";
+            artistEl.innerText = d.spotify.artist || "Unknown Artist";
+            
+            // ✅ TAMANG LINK: Direct to Track
+            currentTrackUrl = `https://open.spotify.com/track/${d.spotify.track_id}`;
+            
+            // ✅ TAMANG PICTURE: Album Art galing sa API
+            if (d.spotify.album_art_url) {
+                artEl.src = d.spotify.album_art_url;
+            } else {
+                artEl.src = defaultArt; // Fallback
+            }
+            
+            // Timestamps
+            const start = d.spotify.timestamps?.start || 0;
+            const end = d.spotify.timestamps?.end || 0;
+            
+            if (end > start) {
+                totalTime = end - start;
+                currentTime = Math.min(Date.now() - start, totalTime);
+                timeTotalEl.innerText = formatTime(totalTime);
+                updateProgressUI();
+            }
+            
+            titleEl.dataset.isSpotify = "true";
 
-            } catch(err){
-                console.warn(`❌ Lanyard error ${userId}:`, err.message);
-                return null;
+        } else {
+            // --- DEFAULT MUSIC ---
+            titleEl.innerText = defaultTitle;
+            artistEl.innerText = defaultArtist;
+            artEl.src = defaultArt;
+            currentTrackUrl = defaultLink; // Link to Playlist
+            totalTime = defaultDuration;
+            timeTotalEl.innerText = "2:31";
+            titleEl.dataset.isSpotify = "false";
+            
+            // Update time for default song
+            if(isPlaying) {
+                currentTime = audio.currentTime * 1000;
+                updateProgressUI();
             }
         }
 
-        async function go(){
-            const [F,A,S,M1,M2] = await Promise.all([
-                Promise.all(founderIDs.map(getUserData)),
-                Promise.all(aboveAllIDs.map(getUserData)),
-                Promise.all(staffIDs.map(getUserData)),
-                Promise.all(s1.map(getUserData)),
-                Promise.all(s2.map(getUserData))
-            ]);
-            draw(F,"founder-container");
-            draw(A,"aboveall-container");
-            draw(S,"staff-container");
-            marquee(M1,"marquee-container-1");
-            marquee(M2,"marquee-container-2");
-        }
+    } catch (err) {
+        console.error("API Fetch Error:", err);
+        document.getElementById('statusText').innerText = 'Error';
+    }
+}
 
-        function draw(list, id){
-            const b = document.getElementById(id); if(!b) return;
-            b.innerHTML = "";
-            const smap = {online:"status-online",idle:"status-idle",dnd:"status-dnd"};
-            list.filter(Boolean).forEach(m=>{
-                const w = document.createElement("div");
-                w.className = "avatar-wrapper-node";
-                w.innerHTML = `
-                    <div class="circle-avatar-container">
-                        ${m.fx?`<img src="${m.fx}" class="avatar-decoration" loading="lazy">`:""}
-                        <img src="${m.av}" class="avatar-img" loading="lazy">
-                        <span class="status-indicator ${smap[m.st]||"status-offline"}"></span>
-                    </div>
-                    <div class="name-label">${m.dn}</div>
-                    <div class="avatar-tooltip">
-                        <div class="tooltip-header">
-                            <img src="${m.av}" class="tooltip-avatar-sm">
-                            <div class="tooltip-user-info">
-                                <h4>${m.dn}</h4><p>@${m.u}</p>
-                            </div>
-                        </div>
-                        ${m.ac.text?`<div class="tooltip-activity-wrapper ${m.ac.cl}" style="white-space:pre-line">${m.ac.text}</div>`:""}
-                    </div>`;
-                b.appendChild(w);
-            });
-        }
+fetchData();
+setInterval(fetchData, 5000); // Update every 5 seconds
 
-        function marquee(list,id){
-            const b=document.getElementById(id); if(!b||!list.length) return;
-            const x=[...list,...list,...list];
-            b.innerHTML=x.map(m=>`<div class="marquee-profile-block"><img src="${m.av}" loading="lazy"><span>${m.dn}</span></div>`).join("");
-        }
+// Start timer on load
+startProgressTimer();
+playIcon.style.display = 'none';
+pauseIcon.style.display = 'block';
 
-        go();
-        setInterval(go, UPDATE);
-    </script>
+history.replaceState(null, null, location.href);
+window.onpopstate = () => history.go(1);
+window.addEventListener('load', () => history.pushState(null, null, location.href));
+</script>
 </body>
 </html>

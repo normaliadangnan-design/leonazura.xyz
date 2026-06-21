@@ -32,9 +32,10 @@
 
         body {
             font-family: 'Inter', sans-serif;
+            /* ✅ DARKER BACKGROUND — SAME AS PUBLIC ENEMY */
             background-color: #000000;
             background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
                 url("pba.webp");
             background-size: cover;
             background-position: center center;
@@ -124,7 +125,6 @@
             position: relative;
         }
 
-        /* ✅ DOUBLE LINES ABOVE & BELOW — SAME AS PUBLIC ENEMY */
         .typewriter-header::before,
         .typewriter-header::after {
             content: '';
@@ -141,7 +141,6 @@
         .typewriter-header::after {
             bottom: -12px;
         }
-        /* Extra line for exact match */
         .typewriter-container {
             position: relative;
             margin: 20px 0;
@@ -176,7 +175,6 @@
             z-index: 100;
         }
 
-        /* ✅ FIXED VIEWS BOX — SAME STYLE */
         .views-box {
             padding: 3px 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -300,138 +298,65 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
+        /* ✅ POPUP BOX — EXACT SAME AS YOUR SCREENSHOT */
         .avatar-tooltip {
             position: absolute;
-            bottom: 120%; 
+            top: 110%;
             left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background: #111214 !important;
-            border: 1px solid #26282c !important;
-            border-radius: 8px;
-            padding: 12px 15px;
-            width: 320px !important;
-            min-height: 110px;
-            color: #ffffff;
+            transform: translateX(-50%);
+            background: #121214;
+            border: 1px solid #222;
+            border-radius: 6px;
+            width: 220px;
+            padding: 10px;
+            color: #fff;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
-            pointer-events: none; 
-            z-index: 99999;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-            line-height: 1.4;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(0);
         }
 
         .tooltip-header {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            gap: 8px;
             margin-bottom: 6px;
-            position: relative;
-        }
-
-        .tooltip-decoration {
-            position: absolute;
-            top: 50%;
-            left: 16px;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            pointer-events: none;
-            z-index: 1;
         }
         .tooltip-avatar-sm {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            position: relative;
-            z-index: 2;
         }
-        .tooltip-header-inner {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tooltip-status-dot-inline {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            flex-shrink: 0;
-        }
-        .tooltip-username {
-            font-size: 11px;
-            color: #949494;
+        .tooltip-user-info h4 {
+            font-size: 13px;
+            font-weight: 600;
             margin: 0;
         }
-        .tooltip-desc {
-            font-size: 15px;
-            font-weight: 600;
-            margin: 0 0 4px 0;
-        }
-        .tooltip-note {
+        .tooltip-user-info p {
             font-size: 11px;
-            color: #888888;
-            margin-top: 4px;
-            line-height: 1.3;
-            word-wrap: break-word;
+            color: #999;
+            margin: 0;
         }
 
-        .tooltip-activity-spotify {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            color: #b9bbbe;
-            line-height: 1.4;
-            padding: 4px 6px;
-            background: #1a1b1d;
+        /* ✅ STATUS WRAPPER — PLAYING / LISTENING / STREAMING */
+        .tooltip-activity-wrapper {
+            background: #1a1a1c;
             border-radius: 4px;
+            padding: 6px 8px;
             margin-top: 4px;
-        }
-        .spotify-icon {
-            width: 14px;
-            height: 14px;
-            background: #1DB954;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-weight: bold;
-            font-size: 9px;
-            flex-shrink: 0;
-        }
-        .spotify-text strong {
-            color: #ffffff;
-            font-weight: 500;
             font-size: 11px;
+            color: #ccc;
         }
-        .spotify-text .song {
-            color: #ffffff;
-            font-weight: 500;
-            font-size: 11px;
-        }
-        .spotify-text .artist {
-            color: #949494;
-            font-size: 10px;
-        }
-
-        .tooltip-activity {
-            font-size: 11px;
-            color: #b9bbbe;
-            margin-top: 4px;
-            line-height: 1.4;
-            padding: 4px 6px;
-            background: #1a1b1d;
-            border-radius: 4px;
-            word-break: break-word;
-        }
+        .activity-playing { color: #43b581; }
+        .activity-streaming { color: #9146ff; }
+        .activity-listening { color: #1db954; }
+        .activity-watching { color: #faa61a; }
 
         .marquee-ticker {
             overflow: hidden;
@@ -572,7 +497,6 @@
             margin: 12px 0;
         }
 
-        /* ✅ JOIN LINK STYLE — SAME AS PUBLIC ENEMY */
         .join-link {
             font-size: 12px;
             color: #888;
@@ -590,7 +514,7 @@
 
     <div class="navigation-bar">
         HOME
-        <div class="views-box">VIEWS : <span id="views">6529</span></div> <!-- ✅ UPDATED VIEWS COUNT -->
+        <div class="views-box">VIEWS : <span id="views">6529</span></div>
     </div>
 
     <div class="center-container">
@@ -604,7 +528,6 @@
         <div id="founder-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
 
-        <!-- ✅ DOUBLE LINES WRAPPER -->
         <div class="typewriter-container">
             <div class="title-group-block">
                 <span class="tiny-top-text">ABOVE ALL</span>
@@ -615,7 +538,6 @@
         <div id="aboveall-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
 
-        <!-- ✅ JOIN LINK BEFORE STAFF -->
         <a href="https://discord.gg/azuraorg" class="join-link" target="_blank">JOIN</a>
 
         <div class="title-group-block">
@@ -667,7 +589,6 @@
         const audio = document.getElementById("soundtrack");
         audio.volume = 0.4;
 
-        // ✅ FIXED CLICK / LOADING
         document.getElementById("gateway-overlay").addEventListener("click", function() {
             audio.play().catch(() => {});
             this.classList.add("fade-gateway");
@@ -759,49 +680,22 @@
                     else if (s === 'dnd') statusClass = 'status-dnd';
                 }
 
-                let customStatusText = '';
-                if (mem.customStatus?.state) {
-                    customStatusText = `<div class="tooltip-note">${mem.customStatus.emoji || ''} ${mem.customStatus.state}</div>`;
-                }
-
-                let activityText = '';
+                // ✅ STATUS TEXT — PLAYING / LISTENING / STREAMING / WATCHING
+                let statusText = '';
+                let statusType = '';
 
                 if (mem.spotify) {
-                    const track = mem.spotify.song;
-                    const artist = mem.spotify.artist;
-                    activityText = `
-                    <div class="tooltip-activity-spotify">
-                        <div class="spotify-icon">♫</div>
-                        <div class="spotify-text">
-                            <div><strong>Listening to Spotify</strong></div>
-                            <div class="song">${track}</div>
-                            <div class="artist">${artist}</div>
-                        </div>
-                    </div>`;
-                }
+                    statusType = 'activity-listening';
+                    statusText = `Listening to ${mem.spotify.song}`;
+                } 
                 else if (mem.activities && mem.activities.length > 0) {
-                    mem.activities.forEach(act => {
-                        if (act.type === 4) return;
-
-                        let typeText = '';
-                        if (act.type === 0) typeText = 'Playing';
-                        if (act.type === 1) typeText = '🔴 Streaming';
-                        if (act.type === 2) typeText = 'Listening';
-                        if (act.type === 3) typeText = 'Watching';
-                        if (act.type === 5) typeText = 'Competing in';
-                        if (act.type === 7) typeText = 'Working on';
-
-                        if (typeText && act.name) {
-                            let details = act.details ? `<div>${act.details}</div>` : '';
-                            let state = act.state ? `<div>• ${act.state}</div>` : '';
-                            activityText += `<div class="tooltip-activity"><strong>${typeText}</strong>: ${act.name}${details}${state}</div>`;
-                        }
-                    });
-                }
-
-                let tooltipDeco = '';
-                if (mem.effectURL) {
-                    tooltipDeco = `<img src="${mem.effectURL}" class="tooltip-decoration" alt="decoration">`;
+                    const act = mem.activities.find(a => a.type !== 4) || mem.activities[0];
+                    if (act) {
+                        if (act.type === 0) { statusType = 'activity-playing'; statusText = `Playing ${act.name}`; }
+                        if (act.type === 1) { statusType = 'activity-streaming'; statusText = `Streaming ${act.name}`; }
+                        if (act.type === 2) { statusType = 'activity-listening'; statusText = `Listening to ${act.name}`; }
+                        if (act.type === 3) { statusType = 'activity-watching'; statusText = `Watching ${act.name}`; }
+                    }
                 }
 
                 wrapper.innerHTML = `
@@ -812,18 +706,16 @@
                     </div>
                     <div class="name-label">${mem.displayName}</div>
 
+                    <!-- ✅ POPUP EXACTLY LIKE YOUR SCREENSHOT -->
                     <div class="avatar-tooltip">
                         <div class="tooltip-header">
-                            ${tooltipDeco}
-                            <div class="tooltip-header-inner">
-                                <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
-                                <span class="tooltip-status-dot-inline ${statusClass}"></span>
+                            <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
+                            <div class="tooltip-user-info">
+                                <h4>${mem.displayName}</h4>
+                                <p>@${mem.username}</p>
                             </div>
                         </div>
-                        <div class="tooltip-desc">${mem.displayName}</div>
-                        <div class="tooltip-username">@${mem.username}</div>
-                        ${activityText}
-                        ${customStatusText}
+                        ${statusText ? `<div class="tooltip-activity-wrapper ${statusType}">${statusText}</div>` : ''}
                     </div>
                 `;
                 box.appendChild(wrapper);

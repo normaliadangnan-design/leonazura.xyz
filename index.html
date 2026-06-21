@@ -30,393 +30,187 @@
             cursor: url('https://cdn.cursors-4u.net/previews/gruppled-move-tool-fa2fca77-32.webp') 48 47, auto !important;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
+        html, body { width:100%; height:100%; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), 
-                url("pba.webp");
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #ffffff;
-            height: 100vh;
-            max-height: 100vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 0;
-            opacity: 0;
-            transition: opacity 0.6s ease;
+            background:#000;
+            background-image: linear-gradient(rgba(0,0,0,.9),rgba(0,0,0,.9)), url("pba.webp");
+            background-size:cover; background-position:center; background-attachment:fixed;
+            color:#fff; height:100vh; max-height:100vh; overflow:hidden;
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            padding:10px 0; opacity:0; transition:opacity .6s ease;
         }
-        body.loaded { opacity: 1; }
+        body.loaded { opacity:1; }
 
         .center-container, .navigation-bar {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.6s ease;
+            opacity:0; visibility:hidden; transition:all .6s ease;
         }
-        body.loaded .center-container,
-        body.loaded .navigation-bar {
-            opacity: 1;
-            visibility: visible;
-        }
+        body.loaded .center-container, body.loaded .navigation-bar { opacity:1; visibility:visible; }
 
-        .main-logo-container {
-            text-align: center;
-            margin: 0 0 10px 0;
-        }
-        .main-clan-logo {
-            background: transparent !important; 
-            border: none !important;
-            display: block;
-        }
-        .main-clan-logo img {
-            height: 60px;
-            width: auto;
-            object-fit: contain;
-        }
+        .main-logo-container { text-align:center; margin:0 0 10px; }
+        .main-clan-logo img { height:60px; width:auto; object-fit:contain; }
 
         .symbol-break {
-            font-family: 'Oswald', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            margin: 5px 0 15px 0;
-            text-align: center;
-            display: block;
-            animation: metallicRGB 2s infinite alternate;
+            font-family:'Oswald',sans-serif; font-size:36px; font-weight:700;
+            margin:5px 0 15px; text-align:center; display:block;
+            animation:metallicRGB 2s infinite alternate;
         }
         @keyframes metallicRGB {
-            0%   { color: #555; text-shadow: 0 0 4px #333, 0 0 8px #444; }
-            25%  { color: #888; text-shadow: 0 0 6px #666, 0 0 12px #777; }
-            50%  { color: #bbb; text-shadow: 0 0 10px #999, 0 0 18px #aaa; }
-            75%  { color: #e6e6e6; text-shadow: 0 0 8px #bbb, 0 0 14px #ccc; }
-            100% { color: #ffffff; text-shadow: 0 0 6px #ddd, 0 0 10px #eee; }
+            0%   { color:#555; text-shadow:0 0 4px #333, 0 0 8px #444; }
+            25%  { color:#888; text-shadow:0 0 6px #666, 0 0 12px #777; }
+            50%  { color:#bbb; text-shadow:0 0 10px #999, 0 0 18px #aaa; }
+            75%  { color:#e6e6e6; text-shadow:0 0 8px #bbb, 0 0 14px #ccc; }
+            100% { color:#fff; text-shadow:0 0 6px #ddd, 0 0 10px #eee; }
         }
 
         .typewriter-header {
-            font-family: 'Oswald', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            width: fit-content;
-            margin: 0 auto 8px auto;
-            border: none !important;
-            animation: metallicRGB 2s infinite alternate;
+            font-family:'Oswald',sans-serif; font-size:32px; font-weight:700;
+            letter-spacing:3px; text-transform:uppercase; width:fit-content;
+            margin:0 auto 8px; animation:metallicRGB 2s infinite alternate;
         }
         .staff-header {
-            font-family: 'Oswald', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            animation: metallicRGB 2s infinite alternate;
-        }
-        .title-group-block {
-            margin: 10px 0;
-            text-align: center;
+            font-family:'Oswald',sans-serif; font-size:26px; font-weight:700;
+            letter-spacing:2px; animation:metallicRGB 2s infinite alternate;
         }
 
         .navigation-bar {
-            position: absolute;
-            top: 25px;
-            right: 35px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: #888;
-            opacity: 0.8;
-            z-index: 100;
+            position:absolute; top:25px; right:35px;
+            display:flex; align-items:center; gap:15px;
+            font-size:11px; letter-spacing:2px; color:#888; opacity:.8; z-index:100;
         }
-        .views-box {
-            font-size: 11px;
-            color: #888;
-        }
-        #views {
-            font-weight: 700;
-            color: #bbb;
-            font-variant-numeric: tabular-nums;
-        }
+        #views { font-weight:700; color:#bbb; font-variant-numeric:tabular-nums; }
 
         .center-container {
-            max-width: 1400px;
-            width: 100%;
-            z-index: 10;
-            padding: 0 15px;
-            gap: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            max-width:1400px; width:100%; z-index:10;
+            padding:0 15px; gap:15px;
+            display:flex; flex-direction:column; align-items:center;
         }
         .horizontal-avatar-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 45px !important;
-            padding: 8px 0;
-            min-height: 120px;
+            display:flex; flex-wrap:wrap; justify-content:center;
+            gap:45px !important; padding:8px 0; min-height:120px;
         }
         .avatar-wrapper-node {
-            position: relative;
-            transition: transform 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            position:relative; transition:transform .2s ease;
+            display:flex; flex-direction:column; align-items:center;
         }
-        .avatar-wrapper-node:hover { transform: scale(1.08); }
+        .avatar-wrapper-node:hover { transform:scale(1.08); }
 
         .circle-avatar-container {
-            width: 110px !important;
-            height: 110px !important;
-            border-radius: 50%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width:110px !important; height:110px !important; border-radius:50%;
+            position:relative; display:flex; align-items:center; justify-content:center;
         }
         img.avatar-decoration {
-            position: absolute !important;
-            inset: 50% auto auto 50%;
-            transform: translate(-50%, -50%) !important;
-            width: 135px !important;
-            height: 135px !important;
-            z-index: 1;
-            pointer-events: none;
+            position:absolute !important; inset:50% auto auto 50%;
+            transform:translate(-50%,-50%) !important;
+            width:135px !important; height:135px !important; z-index:1; pointer-events:none;
         }
         .circle-avatar-container img.avatar-img {
-            width: 110px !important;
-            height: 110px !important;
-            border-radius: 50% !important;
-            object-fit: cover;
-            z-index: 2;
-            border: 2px solid #000;
-            background: #000;
+            width:110px !important; height:110px !important; border-radius:50% !important;
+            object-fit:cover; z-index:2; border:2px solid #000; background:#000;
         }
         .status-indicator {
-            position: absolute;
-            bottom: 6px;
-            right: 6px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            border: 2px solid #000;
-            z-index: 3;
+            position:absolute; bottom:6px; right:6px;
+            width:14px; height:14px; border-radius:50%; border:2px solid #000; z-index:3;
         }
-        .status-online  { background:#23a55a; }
-        .status-idle    { background:#f0b232; }
-        .status-dnd     { background:#f13f43; }
-        .status-offline { background:#80848e; }
+        .status-online{background:#23a55a}.status-idle{background:#f0b232}.status-dnd{background:#f13f43}.status-offline{background:#80848e}
         .name-label {
-            font-size: 12px;
-            margin-top: 6px;
-            color: #ccc;
-            max-width: 110px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            font-size:12px; margin-top:6px; color:#ccc;
+            max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
         }
 
-        /* =========================================================
-           ✅ BAGONG POPUP — KALAKI AT KAMUKHA NA TALAGA SA PICTURE
-           ========================================================= */
+        /* ✅ POPUP KALAKI SA PIC */
         .avatar-tooltip {
-            position: absolute;
-            top: calc(100% + 14px);
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px !important;   /* ✅ KALAKI TULAD NI AARON */
-            background: #0b0b0d;
-            border: 1px solid #1a1a1d;
-            border-radius: 14px;
-            padding: 18px !important;  /* ✅ LAKING LAGAY */
-            box-shadow: 0 10px 40px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.02);
-            color: #fff;
-            opacity: 0;
-            visibility: hidden;
-            transition: all .22s ease;
-            pointer-events: none;
-            z-index: 99999;
+            position:absolute; top:calc(100% + 14px); left:50%;
+            transform:translateX(-50%);
+            width:300px !important; background:#0b0b0d;
+            border:1px solid #1a1a1d; border-radius:14px;
+            padding:18px !important;
+            box-shadow:0 10px 40px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.02);
+            color:#fff; opacity:0; visibility:hidden;
+            transition:all .22s ease; pointer-events:none; z-index:99999;
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(-2px);
+            opacity:1; visibility:visible; transform:translateX(-50%) translateY(-2px);
         }
         .tooltip-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #1c1c20; /* ✅ GUHIT SA GITNA */
-            margin-bottom: 12px;
+            display:flex; align-items:center; gap:12px;
+            padding-bottom:12px; border-bottom:1px solid #1c1c20; margin-bottom:12px;
         }
-        .tooltip-avatar-sm {
-            width: 48px !important;   /* ✅ MALAKING AVATAR */
-            height: 48px !important;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
+        .tooltip-avatar-sm { width:48px !important; height:48px !important; border-radius:50%; }
         .tooltip-user-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            min-width: 0;
-            position: relative;
-            padding-right: 22px;
+            display:flex; flex-direction:column; gap:2px; min-width:0;
+            position:relative; padding-right:22px;
         }
-        .tooltip-user-info h4 {
-            font-size: 18px !important;  /* ✅ MALAKING PANGALAN */
-            font-weight: 600;
-            margin: 0;
-            color: #fff;
-        }
-        .tooltip-user-info p {
-            font-size: 13px !important;
-            color: #949ba4;
-            margin: 0;
-        }
-        /* ✅ STATUS DOT KATABI NG PANGALAN GAYA SA PIC */
+        .tooltip-user-info h4 { font-size:18px !important; font-weight:600; margin:0; color:#fff; }
+        .tooltip-user-info p  { font-size:13px !important; color:#949ba4; margin:0; }
         .tooltip-user-info::after {
-            content:"";
-            position:absolute;
-            right:0; top:6px;
-            width:12px; height:12px;
-            border-radius:999px;
-            background:inherit;
-            border:2px solid #0b0b0d;
+            content:""; position:absolute; right:0; top:6px;
+            width:12px; height:12px; border-radius:999px; border:2px solid #0b0b0d;
         }
-        .avatar-wrapper-node:has(.status-online)  .tooltip-user-info::after { background:#23a55a; }
-        .avatar-wrapper-node:has(.status-idle)    .tooltip-user-info::after { background:#f0b232; }
-        .avatar-wrapper-node:has(.status-dnd)     .tooltip-user-info::after { background:#f13f43; }
-        .avatar-wrapper-node:has(.status-offline) .tooltip-user-info::after { background:#80848e; }
+        .avatar-wrapper-node:has(.status-online)  .tooltip-user-info::after{background:#23a55a}
+        .avatar-wrapper-node:has(.status-idle)    .tooltip-user-info::after{background:#f0b232}
+        .avatar-wrapper-node:has(.status-dnd)     .tooltip-user-info::after{background:#f13f43}
+        .avatar-wrapper-node:has(.status-offline) .tooltip-user-info::after{background:#80848e}
 
         .tooltip-activity-wrapper {
-            background: #111214;
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 15px !important; /* ✅ MALAKING ACTIVITY TEXT */
-            font-weight: 500;
-            color: #b5bac1;
-            line-height: 1.4;
+            background:#111214; border-radius:8px;
+            padding:10px 12px; font-size:15px !important; font-weight:500;
+            color:#b5bac1; line-height:1.4;
         }
-        .activity-playing    { color:#43b581; }
-        .activity-streaming  { color:#9146ff; }
-        .activity-listening  { color:#1db954; }
-        .activity-watching   { color:#faa61a; }
-        .activity-custom     { color:#b9bbbe; }
+        .activity-playing{color:#43b581}.activity-streaming{color:#9146ff}.activity-listening{color:#1db954}.activity-watching{color:#faa61a}.activity-custom{color:#b9bbbe}
 
-        .marquee-ticker {
-            overflow: hidden;
-            width: 100%;
-            max-width: 900px;
-        }
-        .marquee-wrapper-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-top: 8px;
-        }
-        .marquee-inner-wrap {
-            display: flex;
-            gap: 12px;
-            width: max-content;
-        }
-        .scroll-left  { animation: smoothScrollLeft 30s linear infinite; }
-        .scroll-right { animation: smoothScrollRight 30s linear infinite; }
+        .marquee-ticker { overflow:hidden; width:100%; max-width:900px; }
+        .marquee-wrapper-group { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+        .marquee-inner-wrap { display:flex; gap:12px; width:max-content; }
+        .scroll-left  { animation:smoothScrollLeft 30s linear infinite; }
+        .scroll-right { animation:smoothScrollRight 30s linear infinite; }
         @keyframes smoothScrollLeft  { 0%{transform:translateX(0)} 100%{transform:translateX(-33.333%)} }
         @keyframes smoothScrollRight { 0%{transform:translateX(-33.333%)} 100%{transform:translateX(0)} }
         .marquee-profile-block {
-            display:flex; align-items:center; gap:8px;
-            font-size:12px; color:rgba(255,255,255,.8);
-            background:#0c0c0c; border:1px solid rgba(255,255,255,.08);
+            display:flex; align-items:center; gap:8px; font-size:12px;
+            color:rgba(255,255,255,.8); background:#0c0c0c;
+            border:1px solid rgba(255,255,255,.08);
             padding:4px 12px; border-radius:999px;
         }
         .marquee-profile-block img { width:28px; height:28px; border-radius:50%; }
 
-        /* ✨ DISCORD + AZURA GLOW */
         .azura-discord-link {
-            position: fixed;
-            bottom: 22px; right: 28px;
-            z-index: 9999;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            animation: azuraPulse 1.6s infinite alternate;
+            position:fixed; bottom:22px; right:28px; z-index:9999;
+            display:inline-flex; align-items:center; gap:10px;
+            text-decoration:none; animation:azuraPulse 1.6s infinite alternate;
         }
         .discord-icon-svg {
             width:26px; height:22px;
-            animation: metallicRGB 2s infinite alternate, discordGlow 1.6s infinite alternate;
+            animation:metallicRGB 2s infinite alternate, discordGlow 1.6s infinite alternate;
         }
         .azura-text-glow {
-            font-family:'Oswald',sans-serif;
-            font-size:22px; font-weight:700; letter-spacing:5px;
-            animation: metallicRGB 2s infinite alternate;
+            font-family:'Oswald',sans-serif; font-size:22px; font-weight:700; letter-spacing:5px;
+            animation:metallicRGB 2s infinite alternate;
         }
-        @keyframes azuraPulse   { 0%{transform:scale(1); filter:drop-shadow(0 0 2px #5865F2)} 100%{transform:scale(1.15); filter:drop-shadow(0 0 12px #5865F2)} }
-        @keyframes discordGlow  { 0%{filter:drop-shadow(0 0 2px #5865F2)} 100%{filter:drop-shadow(0 0 10px #7289da)} }
+        @keyframes azuraPulse  { 0%{transform:scale(1);   filter:drop-shadow(0 0 2px #5865F2)} 100%{transform:scale(1.15); filter:drop-shadow(0 0 12px #5865F2)} }
+        @keyframes discordGlow { 0%{filter:drop-shadow(0 0 2px #5865F2)} 100%{filter:drop-shadow(0 0 10px #7289da)} }
 
-        /* =========================================================
-           ✅ ✅ LOADING SCREEN — 100% FIXED NA ITO, WALANG BUG NA ✅ ✅
-              AGAD KITANG-KITA AGAD ANG "C L I C K" PAGBUKAS PA LANG
-           ========================================================= */
+        /* ✅ LOADING — AGAD LUMALABAS */
         #gateway-overlay {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000 !important;
-            display: flex !important;   /* ✅ DITO NA AGAD, HINDI NA SA JS */
-            justify-content: center;
-            align-items: center;
-            z-index: 9999999 !important;
-            cursor: pointer;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity .7s ease, visibility .7s ease;
+            position:fixed; inset:0; width:100vw; height:100vh;
+            background:#000 !important; display:flex !important;
+            justify-content:center; align-items:center; z-index:9999999 !important;
+            cursor:pointer; opacity:1; visibility:visible;
+            transition:opacity .7s ease, visibility .7s ease;
         }
-        #gateway-overlay.fade-gateway {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
+        #gateway-overlay.fade-gateway { opacity:0 !important; visibility:hidden !important; pointer-events:none !important; }
         .gateway-btn {
-            font-family: 'Inter', sans-serif !important;
-            font-size: 18px !important;
-            font-weight: 400 !important;
-            letter-spacing: 14px !important;   /* ✅ C L I C K malayo agwat */
-            text-transform: uppercase;
-            color: #cfd2d6 !important;
-            background: transparent;
-            border: none !important;
-            padding-left: 14px;
-            /* ✅ GLOW SA LIKOD KATULAD SA PICTURE MO */
-            text-shadow: 
-                0 0 10px rgba(255,255,255,.35),
-                0 0 28px rgba(255,255,255,.18),
-                0 0 60px rgba(255,255,255,.08);
-            animation: gatewayBlink 2.2s ease-in-out infinite;
+            font-family:'Inter',sans-serif !important; font-size:18px !important;
+            font-weight:400 !important; letter-spacing:14px !important;
+            text-transform:uppercase; color:#cfd2d6 !important;
+            text-shadow:0 0 10px rgba(255,255,255,.35), 0 0 28px rgba(255,255,255,.18), 0 0 60px rgba(255,255,255,.08);
+            animation:gatewayBlink 2.2s ease-in-out infinite;
         }
-        @keyframes gatewayBlink {
-            0%,100% { opacity:.55; }
-            50%     { opacity:1;    }
-        }
+        @keyframes gatewayBlink { 0%,100%{opacity:.55} 50%{opacity:1} }
 
-        ::-webkit-scrollbar { display:none !important; }
-        .section-divider {
-            width:100%; max-width:1300px; height:1px;
-            background:#1a1a1a; margin:15px 0;
-        }
+        ::-webkit-scrollbar{display:none !important}
+        .section-divider { width:100%; max-width:1300px; height:1px; background:#1a1a1a; margin:15px 0; }
     </style>
 </head>
 <body oncontextmenu="return false;" onkeydown="return disableKeys(event);">
@@ -451,14 +245,11 @@
         <span class="azura-text-glow">AZURA</span>
     </a>
 
-    <!-- ✅ KINIS NA LOADING, AGAD LUMALABAS -->
     <div id="gateway-overlay"><div class="gateway-btn">CLICK</div></div>
-
-    <audio id="soundtrack" loop preload="auto">
-        <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
-    
+    <audio id="soundtrack" loop preload="auto"><source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
 
     <script>
+        // 🛡️ SECURITY
         function disableKeys(e){
             if([123,85,73,83,67].includes(e.keyCode) && (e.ctrlKey||e.shiftKey)){ e.preventDefault(); return false; }
         }
@@ -468,7 +259,7 @@
         // 🔢 VISITOR COUNTER
         const K_VIEW="azura_org_total_views", K_VIS="azura_org_visited_before", BASE=5569;
         function initCounter(){
-            let v = +localStorage.getItem(K_VIEW)||BASE;
+            let v=+localStorage.getItem(K_VIEW)||BASE;
             if(localStorage.getItem(K_VIS)!=="true"){ v++; localStorage.setItem(K_VIS,"true"); localStorage.setItem(K_VIEW,v); }
             const el=document.getElementById("views"), dur=1800, sT=performance.now();
             !function t(n){
@@ -487,61 +278,120 @@
             document.body.classList.add("loaded");
         });
 
-        const UPDATE=5000;
-        const founderIDs=["1250654354344775703","1123145717461033041","1085580321623375938"];
-        const aboveAllIDs=["1081806153341743144","1414546504437207161","918633044276019232","1499093156321431622","1242051125776093256","1498999674969784426"];
-        const staffIDs=["1501438491207405588","1374740899422277703","995205070679453789","1366187912118665276","1459797319863242797","1495366872516923553","1314554124976656505","1398759472821702773"];
+        const UPDATE = 4000; // ⬅️ PINABILIS KO PA NG KONTI ANG REFRESH
+        const MY_ID = "1250654354344775703"; // ⬅️ ITO ID MO
+
+        const founderIDs   = [MY_ID,"1123145717461033041","1085580321623375938"];
+        const aboveAllIDs  = ["1081806153341743144","1414546504437207161","918633044276019232","1499093156321431622","1242051125776093256","1498999674969784426"];
+        const staffIDs     = ["1501438491207405588","1374740899422277703","995205070679453789","1366187912118665276","1459797319863242797","1495366872516923553","1314554124976656505","1398759472821702773"];
         const s1=["1276210406880317522","1506434429613113405","1498999674969784426","1499093156321431622","1501438491207405588"];
         const s2=["1374740899422277703","1081806153341743144","995205070679453789","1414546504437207161","1509479201114296353"];
 
-        async function getUserData(id){
-            try{
-                const r=await fetch(`https://api.lanyard.rest/v1/users/${id}`,{cache:"no-store"});
-                const j=await r.json();
-                if(!j.success) return null;
-                const d=j.data, a=d.activities||[];
-                const cs=a.find(x=>x.type===4), ra=a.filter(x=>x.type!==4), m=ra[0];
-                let info={t:null,tx:null,cl:""};
-                if(d.spotify)          info={t:"listen", tx:`🎧 Listening to ${d.spotify.song}\nby ${d.spotify.artist}`, cl:"activity-listening"};
-                else if(m?.type===0)    info={t:"play",   tx:`🎮 Playing ${m.name}${m.details?"\n"+m.details:""}${m.state?"\n"+m.state:""}`, cl:"activity-playing"};
-                else if(m?.type===1)    info={t:"stream", tx:`📡 Streaming ${m.name}`, cl:"activity-streaming"};
-                else if(m?.type===2)    info={t:"listen", tx:`🎧 Listening to ${m.name}`, cl:"activity-listening"};
-                else if(m?.type===3)    info={t:"watch",  tx:`📺 Watching ${m.name}`, cl:"activity-watching"};
-                else if(cs){
-                    const em=cs.emoji?.name||"", tx=cs.state||"";
-                    info={t:"cust", tx:(em?em+" ":"")+(tx||em||"No activity"), cl:"activity-custom"};
+        // ============================================================
+        // ✅ ✅ BAGONG API FETCHER — UUNAHIN TALAGA ANG SPOTIFY ✅ ✅
+        // ============================================================
+        async function getUserData(userId){
+            try {
+                // ❌ TINANGGAL KO NA ANG CACHE — BAGONG DATOS LAGI
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`,{
+                    cache:"no-store",
+                    headers:{ "Cache-Control":"no-cache, no-transform", Pragma:"no-cache" }
+                });
+                if(!res.ok) throw new Error("HTTP "+res.status);
+                const json = await res.json();
+                if(!json || !json.success) return null;
+
+                const d = json.data;
+
+                // 🔍 PARA MAKITA MO — Buksan F12 > Console, makikita mo buong datos
+                if(userId === MY_ID){
+                    console.log("%c✅ LANAYARD RAW DATA — IKAW ITO","color:#1db954; font-weight:bold; font-size:14px;");
+                    console.log("Spotify:", d.spotify);
+                    console.log("Activities:", d.activities);
+                    console.log("Status:", d.discord_status);
+                    console.log("Full object:", d);
                 }
+
+                const activities = Array.isArray(d.activities) ? d.activities : [];
+                const customStatus = activities.find(a => a && a.type === 4) || null;
+                const realActivities = activities.filter(a => a && a.type !== 4);
+                const mainAct = realActivities[0] || null;
+
+                // 🎧 🎧 🎧 SPOTIFY MUNA BAGO ANG LAHAT — ITO ANG PINAKA IMPORTANTE 🎧 🎧 🎧
+                let ac = { type:null, text:null, cl:"" };
+
+                if(d.spotify && typeof d.spotify === "object" && d.spotify.track_id){
+                    const song = d.spotify.song || "Unknown Song";
+                    const artist = d.spotify.artist || "Unknown Artist";
+                    const album = d.spotify.album || "";
+                    ac = {
+                        type:"spotify",
+                        text: `🎧 Listening to\n${song}\nby ${artist}${album?"\non "+album:""}`,
+                        cl: "activity-listening"
+                    };
+                }
+                // 🎮 GAMES
+                else if(mainAct && mainAct.type === 0){
+                    let txt = `🎮 Playing ${mainAct.name||""}`;
+                    if(mainAct.details) txt += `\n${mainAct.details}`;
+                    if(mainAct.state)   txt += `\n${mainAct.state}`;
+                    ac = { type:"game", text:txt, cl:"activity-playing" };
+                }
+                // 📡 STREAM
+                else if(mainAct && mainAct.type === 1) ac={type:"stream", text:`📡 Streaming ${mainAct.name||""}`, cl:"activity-streaming"};
+                // 🎧 IBA PANG NAKIKINIG
+                else if(mainAct && mainAct.type === 2) ac={type:"listen", text:`🎧 Listening to ${mainAct.name||""}`, cl:"activity-listening"};
+                // 📺 NANONOOD
+                else if(mainAct && mainAct.type === 3) ac={type:"watch",  text:`📺 Watching ${mainAct.name||""}`,  cl:"activity-watching"};
+                // 💬 CUSTOM STATUS HULI NA LANG
+                else if(customStatus){
+                    const em = (customStatus.emoji?.name || customStatus.emoji?.id || "");
+                    const tx = customStatus.state || "";
+                    const out = (em?em+" ":"") + (tx||em||"");
+                    ac = { type:"custom", text: out || "No activity", cl:"activity-custom" };
+                }
+
                 return {
-                    id,
-                    u:d.discord_user.username,
-                    dn:d.discord_user.global_name||d.discord_user.username,
-                    st:d.discord_status||"offline",
-                    av:`https://cdn.discordapp.com/avatars/${id}/${d.discord_user.avatar}.png?size=1024`,
-                    fx:d.discord_user.avatar_decoration_data?.asset?`https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256`:null,
-                    ac:info
+                    id: userId,
+                    u: d.discord_user.username,
+                    dn: d.discord_user.global_name || d.discord_user.display_name || d.discord_user.username,
+                    st: d.discord_status || "offline",
+                    av: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
+                    fx: d.discord_user.avatar_decoration_data?.asset
+                        ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256`
+                        : null,
+                    ac
                 };
-            }catch(e){ return null }
+
+            } catch(err){
+                console.warn(`❌ Lanyard error ${userId}:`, err.message);
+                return null;
+            }
         }
 
         async function go(){
-            const [F,A,S,M1,M2]=await Promise.all([
+            const [F,A,S,M1,M2] = await Promise.all([
                 Promise.all(founderIDs.map(getUserData)),
                 Promise.all(aboveAllIDs.map(getUserData)),
                 Promise.all(staffIDs.map(getUserData)),
                 Promise.all(s1.map(getUserData)),
                 Promise.all(s2.map(getUserData))
             ]);
-            draw(F,"founder-container"); draw(A,"aboveall-container"); draw(S,"staff-container");
-            marquee(M1,"marquee-container-1"); marquee(M2,"marquee-container-2");
+            draw(F,"founder-container");
+            draw(A,"aboveall-container");
+            draw(S,"staff-container");
+            marquee(M1,"marquee-container-1");
+            marquee(M2,"marquee-container-2");
         }
 
-        function draw(list,id){
-            const b=document.getElementById(id); if(!b) return;
-            b.innerHTML="";
-            const smap={online:"status-online",idle:"status-idle",dnd:"status-dnd"};
+        function draw(list, id){
+            const b = document.getElementById(id); if(!b) return;
+            b.innerHTML = "";
+            const smap = {online:"status-online",idle:"status-idle",dnd:"status-dnd"};
             list.filter(Boolean).forEach(m=>{
-                const w=document.createElement("div"); w.className="avatar-wrapper-node";
-                w.innerHTML=`
+                const w = document.createElement("div");
+                w.className = "avatar-wrapper-node";
+                w.innerHTML = `
                     <div class="circle-avatar-container">
                         ${m.fx?`<img src="${m.fx}" class="avatar-decoration" loading="lazy">`:""}
                         <img src="${m.av}" class="avatar-img" loading="lazy">
@@ -555,18 +405,20 @@
                                 <h4>${m.dn}</h4><p>@${m.u}</p>
                             </div>
                         </div>
-                        ${m.ac.tx?`<div class="tooltip-activity-wrapper ${m.ac.cl}" style="white-space:pre-line">${m.ac.tx}</div>`:""}
+                        ${m.ac.text?`<div class="tooltip-activity-wrapper ${m.ac.cl}" style="white-space:pre-line">${m.ac.text}</div>`:""}
                     </div>`;
                 b.appendChild(w);
             });
         }
+
         function marquee(list,id){
             const b=document.getElementById(id); if(!b||!list.length) return;
             const x=[...list,...list,...list];
             b.innerHTML=x.map(m=>`<div class="marquee-profile-block"><img src="${m.av}" loading="lazy"><span>${m.dn}</span></div>`).join("");
         }
 
-        go(); setInterval(go,UPDATE);
+        go();
+        setInterval(go, UPDATE);
     </script>
 </body>
 </html>

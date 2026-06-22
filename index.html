@@ -14,9 +14,10 @@
     <meta name="twitter:title" content="/ AZURA ORG">
     <meta name="twitter:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net https://cdn-icons-png.flaticon.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
+    <!-- 🛡️ SECURITY: DISABLE INSPECT ELEMENT & RIGHT CLICK -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Kanit:wght@800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
 
         * {
@@ -30,395 +31,671 @@
             cursor: url('https://cdn.cursors-4u.net/previews/gruppled-move-tool-fa2fca77-32.webp') 48 47, auto !important;
         }
 
-        html, body { width:100%; height:100%; }
-
         body {
             font-family: 'Inter', sans-serif;
-            background:#000;
-            background-image: linear-gradient(rgba(0,0,0,.9),rgba(0,0,0,.9)), url("pba.webp");
-            background-size:cover; background-position:center; background-attachment:fixed;
-            color:#fff; height:100vh; max-height:100vh; overflow:hidden;
-            display:flex; flex-direction:column; align-items:center; justify-content:center;
-            padding:10px 0; opacity:0; transition:opacity .6s ease;
+            background-color: #000000;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), 
+                url("pba.webp");
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
-        body.loaded { opacity:1; }
+        body.loaded { opacity: 1; }
 
         .center-container, .navigation-bar {
-            opacity:0; visibility:hidden; transition:all .6s ease;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
         }
-        body.loaded .center-container, body.loaded .navigation-bar { opacity:1; visibility:visible; }
+        body.loaded .center-container,
+        body.loaded .navigation-bar {
+            opacity: 1;
+            visibility: visible;
+        }
 
-        .main-logo-container { text-align:center; margin:0 0 10px; }
-        .main-clan-logo img { height:60px; width:auto; object-fit:contain; }
+        .main-logo-container {
+            text-align: center;
+            margin: 0 0 10px 0;
+        }
 
+        .main-clan-logo {
+            background: transparent !important; 
+            border: none !important;
+            display: block;
+        }
+
+        .main-clan-logo img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* ✅ $ SYMBOL — METALLIC GRAY-WHITE RGB GLOW */
         .symbol-break {
-            font-family:'Oswald',sans-serif; font-size:36px; font-weight:700;
-            margin:5px 0 15px; text-align:center; display:block;
-            animation:metallicRGB 2s infinite alternate;
+            font-family: 'Oswald', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 5px 0 15px 0;
+            text-align: center;
+            display: block;
+            animation: metallicRGB 2s infinite alternate;
         }
+
         @keyframes metallicRGB {
-            0%   { color:#555; text-shadow:0 0 4px #333, 0 0 8px #444; }
-            25%  { color:#888; text-shadow:0 0 6px #666, 0 0 12px #777; }
-            50%  { color:#bbb; text-shadow:0 0 10px #999, 0 0 18px #aaa; }
-            75%  { color:#e6e6e6; text-shadow:0 0 8px #bbb, 0 0 14px #ccc; }
-            100% { color:#fff; text-shadow:0 0 6px #ddd, 0 0 10px #eee; }
+            0% { color: #666; text-shadow: 0 0 4px #444, 0 0 8px #555; }
+            25% { color: #888; text-shadow: 0 0 6px #666, 0 0 12px #777; }
+            50% { color: #ccc; text-shadow: 0 0 8px #999, 0 0 16px #aaa; }
+            75% { color: #eee; text-shadow: 0 0 6px #bbb, 0 0 12px #ccc; }
+            100% { color: #fff; text-shadow: 0 0 4px #ddd, 0 0 8px #eee; }
         }
 
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* ✅ ABOVE ALL — NO LINES, METALLIC GLOW */
         .typewriter-header {
-            font-family:'Oswald',sans-serif; font-size:32px; font-weight:700;
-            letter-spacing:3px; text-transform:uppercase; width:fit-content;
-            margin:0 auto 8px; animation:metallicRGB 2s infinite alternate;
-        }
-        .staff-header {
-            font-family:'Oswald',sans-serif; font-size:26px; font-weight:700;
-            letter-spacing:2px; animation:metallicRGB 2s infinite alternate;
+            font-family: 'Oswald', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            overflow: visible;
+            white-space: nowrap;
+            width: fit-content;
+            margin: 0 auto 8px auto;
+            position: relative;
+            border: none !important;
+            animation: metallicRGB 2s infinite alternate;
         }
 
-        .navigation-bar {
-            position:absolute; top:25px; right:35px;
-            display:flex; align-items:center; gap:15px;
-            font-size:11px; letter-spacing:2px; color:#888; opacity:.8; z-index:100;
+        .title-group-block {
+            position: relative;
+            margin: 10px 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* ❌ REMOVED ALL LINES */
         }
-        #views { font-weight:700; color:#bbb; font-variant-numeric:tabular-nums; }
+
+        .tiny-top-text {
+            font-size: 9px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            color: #444;
+            text-transform: uppercase;
+            display: none;
+            margin-bottom: 2px;
+        }
+
+        /* ✅ STAFF — NO LINES, METALLIC GLOW */
+        .staff-header {
+            font-family: 'Oswald', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            position: relative;
+            border: none !important;
+            animation: metallicRGB 2s infinite alternate;
+        }
+
+        /* ✅ HOME & VIEWS — GRAY TEXT, NO BOX BORDER */
+        .navigation-bar {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #888;
+            opacity: 0.8;
+            z-index: 100;
+        }
+
+        .views-box {
+            padding: 3px 0;
+            border: none !important; /* ❌ REMOVED BOX LINE */
+            border-radius: 0;
+            font-size: 11px;
+            letter-spacing: 1px;
+            background: transparent;
+            color: #888;
+        }
+        #views {
+            font-weight: 500;
+            color: #888;
+        }
 
         .center-container {
-            max-width:1400px; width:100%; z-index:10;
-            padding:0 15px; gap:15px;
-            display:flex; flex-direction:column; align-items:center;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            padding: 0 15px;
+            gap: 15px;
+            overflow: visible;
         }
+
         .horizontal-avatar-row {
-            display:flex; flex-wrap:wrap; justify-content:center;
-            gap:45px !important; padding:8px 0; min-height:120px;
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important; 
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            gap: 45px !important;
+            padding: 8px 0;
+            min-height: 120px;
+            position: relative;
         }
+
+        /* ❌ REMOVED JOIN LINK */
+
         .avatar-wrapper-node {
-            position:relative; transition:transform .2s ease;
-            display:flex; flex-direction:column; align-items:center;
+            position: relative;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .avatar-wrapper-node:hover { transform:scale(1.08); }
+        .avatar-wrapper-node:hover {
+            transform: scale(1.08);
+        }
 
+        /* ✅ AVATAR — LARGE (110px) */
         .circle-avatar-container {
-            width:110px !important; height:110px !important; border-radius:50%;
-            position:relative; display:flex; align-items:center; justify-content:center;
-        }
-        img.avatar-decoration {
-            position:absolute !important; inset:50% auto auto 50%;
-            transform:translate(-50%,-50%) !important;
-            width:135px !important; height:135px !important; z-index:1; pointer-events:none;
-        }
-        .circle-avatar-container img.avatar-img {
-            width:110px !important; height:110px !important; border-radius:50% !important;
-            object-fit:cover; z-index:2; border:2px solid #000; background:#000;
-        }
-        .status-indicator {
-            position:absolute; bottom:6px; right:6px;
-            width:14px; height:14px; border-radius:50%; border:2px solid #000; z-index:3;
-        }
-        .status-online{background:#23a55a}.status-idle{background:#f0b232}.status-dnd{background:#f13f43}.status-offline{background:#80848e}
-        .name-label {
-            font-size:12px; margin-top:6px; color:#ccc;
-            max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+            position: relative;
+            width: 110px !important;
+            height: 110px !important;
+            border-radius: 50%;
+            overflow: visible; 
+            background: transparent; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* ✅ POPUP KALAKI SA PIC */
+        img.avatar-decoration {
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 135px !important;
+            height: 135px !important; 
+            pointer-events: none !important;
+            z-index: 1 !important;  
+            border-radius: 0 !important; 
+            object-fit: contain !important;
+            background: transparent !important;
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        .circle-avatar-container img.avatar-img {
+            width: 110px !important;
+            height: 110px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            pointer-events: none !important;
+            position: relative !important;
+            z-index: 2 !important; 
+            border: 2px solid #000 !important; 
+            background: #000 !important; 
+        }
+
+        .status-indicator {
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid #000;
+            z-index: 3 !important;
+        }
+
+        .status-online { background-color: #23a55a; }
+        .status-idle { background-color: #f0b232; }
+        .status-dnd { background-color: #f13f43; }
+        .status-offline { background-color: #80848e; }
+
+        /* ✅ POPUP BOX — CLEAN, NO EXTRA LINES */
         .avatar-tooltip {
-            position:absolute; top:calc(100% + 14px); left:50%;
-            transform:translateX(-50%);
-            width:300px !important; background:#0b0b0d;
-            border:1px solid #1a1a1d; border-radius:14px;
-            padding:18px !important;
-            box-shadow:0 10px 40px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.02);
-            color:#fff; opacity:0; visibility:hidden;
-            transition:all .22s ease; pointer-events:none; z-index:99999;
+            position: absolute;
+            top: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0a0a0b;
+            border: 1px solid #222;
+            border-radius: 4px;
+            width: 220px;
+            padding: 10px 12px;
+            color: #fff;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: none;
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
-            opacity:1; visibility:visible; transform:translateX(-50%) translateY(-2px);
+            opacity: 1;
+            visibility: visible;
         }
+
         .tooltip-header {
-            display:flex; align-items:center; gap:12px;
-            padding-bottom:12px; border-bottom:1px solid #1c1c20; margin-bottom:12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
         }
-        .tooltip-avatar-sm { width:48px !important; height:48px !important; border-radius:50%; }
-        .tooltip-user-info {
-            display:flex; flex-direction:column; gap:2px; min-width:0;
-            position:relative; padding-right:22px;
+        .tooltip-avatar-sm {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
         }
-        .tooltip-user-info h4 { font-size:18px !important; font-weight:600; margin:0; color:#fff; }
-        .tooltip-user-info p  { font-size:13px !important; color:#949ba4; margin:0; }
-        .tooltip-user-info::after {
-            content:""; position:absolute; right:0; top:6px;
-            width:12px; height:12px; border-radius:999px; border:2px solid #0b0b0d;
+        .tooltip-user-info h4 {
+            font-size: 13px;
+            font-weight: 500;
+            margin: 0;
+            color: #fff;
         }
-        .avatar-wrapper-node:has(.status-online)  .tooltip-user-info::after{background:#23a55a}
-        .avatar-wrapper-node:has(.status-idle)    .tooltip-user-info::after{background:#f0b232}
-        .avatar-wrapper-node:has(.status-dnd)     .tooltip-user-info::after{background:#f13f43}
-        .avatar-wrapper-node:has(.status-offline) .tooltip-user-info::after{background:#80848e}
+        .tooltip-user-info p {
+            font-size: 10px;
+            color: #666;
+            margin: 0;
+        }
 
         .tooltip-activity-wrapper {
-            background:#111214; border-radius:8px;
-            padding:10px 12px; font-size:15px !important; font-weight:500;
-            color:#b5bac1; line-height:1.4;
+            background: #111;
+            border-radius: 2px;
+            padding: 4px 6px;
+            margin-top: 4px;
+            font-size: 10px;
+            color: #888;
         }
-        .activity-playing{color:#43b581}.activity-streaming{color:#9146ff}.activity-listening{color:#1db954}.activity-watching{color:#faa61a}.activity-custom{color:#b9bbbe}
+        .activity-playing { color: #43b581; }
+        .activity-streaming { color: #9146ff; }
+        .activity-listening { color: #1db954; }
+        .activity-watching { color: #faa61a; }
 
-        .marquee-ticker { overflow:hidden; width:100%; max-width:900px; }
-        .marquee-wrapper-group { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
-        .marquee-inner-wrap { display:flex; gap:12px; width:max-content; }
-        .scroll-left  { animation:smoothScrollLeft 30s linear infinite; }
-        .scroll-right { animation:smoothScrollRight 30s linear infinite; }
-        @keyframes smoothScrollLeft  { 0%{transform:translateX(0)} 100%{transform:translateX(-33.333%)} }
-        @keyframes smoothScrollRight { 0%{transform:translateX(-33.333%)} 100%{transform:translateX(0)} }
+        .marquee-ticker {
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            padding: 2px 0;
+            background: transparent;
+        }
+
+        .marquee-wrapper-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+            align-items: center;
+            margin: 8px 0 0 0;
+        }
+
+        .marquee-inner-wrap {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 12px;
+            width: max-content;
+        }
+
+        .scroll-left { animation: smoothScrollLeft 30s linear infinite; }
+        .scroll-right { animation: smoothScrollRight 30s linear infinite; }
+
         .marquee-profile-block {
-            display:flex; align-items:center; gap:8px; font-size:12px;
-            color:rgba(255,255,255,.8); background:#0c0c0c;
-            border:1px solid rgba(255,255,255,.08);
-            padding:4px 12px; border-radius:999px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            background: #0c0c0c; 
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 4px 12px;
+            border-radius: 30px; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
         }
-        .marquee-profile-block img { width:28px; height:28px; border-radius:50%; }
 
-        .azura-discord-link {
-            position:fixed; bottom:22px; right:28px; z-index:9999;
-            display:inline-flex; align-items:center; gap:10px;
-            text-decoration:none; animation:azuraPulse 1.6s infinite alternate;
+        .marquee-profile-block img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            pointer-events: none;
         }
-        .discord-icon-svg {
-            width:26px; height:22px;
-            animation:metallicRGB 2s infinite alternate, discordGlow 1.6s infinite alternate;
-        }
-        .azura-text-glow {
-            font-family:'Oswald',sans-serif; font-size:22px; font-weight:700; letter-spacing:5px;
-            animation:metallicRGB 2s infinite alternate;
-        }
-        @keyframes azuraPulse  { 0%{transform:scale(1);   filter:drop-shadow(0 0 2px #5865F2)} 100%{transform:scale(1.15); filter:drop-shadow(0 0 12px #5865F2)} }
-        @keyframes discordGlow { 0%{filter:drop-shadow(0 0 2px #5865F2)} 100%{filter:drop-shadow(0 0 10px #7289da)} }
 
-        /* ✅ LOADING — AGAD LUMALABAS */
+        @keyframes smoothScrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-33.333%); }
+        }
+        @keyframes smoothScrollRight {
+            0% { transform: translateX(-33.333%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* ❌ REMOVED AZURA ORG BUTTON */
+
+        /* ✅ ANIMATED DISCORD LOGO — PULSE EFFECT */
+        .discord-animated {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            animation: discordPulse 1.5s infinite alternate;
+        }
+        .discord-animated img {
+            width: 24px;
+            height: 24px;
+            opacity: 0.7;
+        }
+        @keyframes discordPulse {
+            0% { transform: scale(1); opacity: 0.6; filter: drop-shadow(0 0 2px #5865F2); }
+            100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 8px #5865F2); }
+        }
+
+        /* ✅ LOADING SCREEN — CLEAN */
         #gateway-overlay {
-            position:fixed; inset:0; width:100vw; height:100vh;
-            background:#000 !important; display:flex !important;
-            justify-content:center; align-items:center; z-index:9999999 !important;
-            cursor:pointer; opacity:1; visibility:visible;
-            transition:opacity .7s ease, visibility .7s ease;
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999999 !important;
+            cursor: pointer;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
         }
-        #gateway-overlay.fade-gateway { opacity:0 !important; visibility:hidden !important; pointer-events:none !important; }
-        .gateway-btn {
-            font-family:'Inter',sans-serif !important; font-size:18px !important;
-            font-weight:400 !important; letter-spacing:14px !important;
-            text-transform:uppercase; color:#cfd2d6 !important;
-            text-shadow:0 0 10px rgba(255,255,255,.35), 0 0 28px rgba(255,255,255,.18), 0 0 60px rgba(255,255,255,.08);
-            animation:gatewayBlink 2.2s ease-in-out infinite;
-        }
-        @keyframes gatewayBlink { 0%,100%{opacity:.55} 50%{opacity:1} }
 
-        ::-webkit-scrollbar{display:none !important}
-        .section-divider { width:100%; max-width:1300px; height:1px; background:#1a1a1a; margin:15px 0; }
+        .gateway-btn {
+            font-size: 14px !important;
+            letter-spacing: 4px;
+            background: transparent;
+            border: none !important;
+            color: #444 !important;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            font-weight: 400 !important;
+            font-family: 'Inter', sans-serif !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        .gateway-btn:hover {
+            color: #888;
+        }
+
+        .fade-gateway {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        ::-webkit-scrollbar { display: none !important; }
+
+        .name-label {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 6px;
+            color: #ccc;
+            max-width: 110px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .section-divider {
+            width: 100%;
+            max-width: 1300px;
+            height: 1px;
+            background: #222;
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body oncontextmenu="return false;" onkeydown="return disableKeys(event);">
 
     <div class="navigation-bar">
         HOME
-        <div class="views-box">VIEWS : <span id="views">0</span></div>
+        <div class="views-box">VIEWS : <span id="views">6529</span></div>
     </div>
 
     <div class="center-container">
         <div class="main-logo-container">
-            <div class="main-clan-logo"><img src="public azura.png" alt="AZURA ORG"></div>
+            <div class="main-clan-logo">
+                <img src="public azura.png" alt="AZURA ORG LOGO">
+            </div>
             <div class="symbol-break">$</div>
         </div>
 
-        <div id="founder-container"  class="horizontal-avatar-row"></div>
+        <div id="founder-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
-        <h2 class="typewriter-header">ABOVE ALL</h2>
+
+        <div class="title-group-block">
+            <h2 class="typewriter-header">ABOVE ALL</h2>
+        </div>
+
         <div id="aboveall-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
-        <h2 class="staff-header">STAFF</h2>
-        <div id="staff-container"    class="horizontal-avatar-row"></div>
+
+        <div class="title-group-block">
+            <h2 class="staff-header">STAFF</h2>
+        </div>
+        <div id="staff-container" class="horizontal-avatar-row">
+            <!-- ❌ REMOVED JOIN LINK -->
+        </div>
 
         <div class="marquee-wrapper-group">
-            <div class="marquee-ticker"><div id="marquee-container-1" class="marquee-inner-wrap scroll-left"></div></div>
-            <div class="marquee-ticker"><div id="marquee-container-2" class="marquee-inner-wrap scroll-right"></div></div>
+            <div class="marquee-ticker">
+                <div id="marquee-container-1" class="marquee-inner-wrap scroll-left"></div>
+            </div>
+            <div class="marquee-ticker">
+                <div id="marquee-container-2" class="marquee-inner-wrap scroll-right"></div>
+            </div>
         </div>
     </div>
 
-    <a href="https://discord.gg/azuraorg" class="azura-discord-link" target="_blank">
-        <svg class="discord-icon-svg" viewBox="0 0 71 55" fill="currentColor"><path d="M60.1 4.9C55.58 2.82 50.73 1.29 45.65.416a.43.43 0 0 0-.5.11c-.624 1.11-1.316 2.558-1.8 3.692-5.457-.818-10.886-.818-16.23.002-.485-1.134-1.202-2.557-1.828-3.668a.428.428 0 0 0-.504-.11C15.406 2.818 10.553 4.898 6.028 6.974-3.17 20.727-5.694 34.14-4.457 47.388a.47.47 0 0 0 .16.366c12.254 9.162 24.74 14.447 37.26 15.367a.446.446 0 0 0 .518-.366c1.363-1.23 2.628-2.597 3.77-4.06a.44.44 0 0 0-.084-.504c-2.883-1.135-5.57-2.545-8.007-4.206a.436.436 0 0 1-.025-.65c.574-.565 1.125-1.155 1.64-1.777a.434.434 0 0 1 .37-.16c10.676 1.632 21.49 1.632 32.081.002a.434.434 0 0 1 .37.16c.515.622 1.066 1.212 1.64 1.777a.436.436 0 0 1-.025.65c-2.437 1.66-5.124 3.07-8.007 4.206a.44.44 0 0 0-.084.504c1.142 1.463 2.407 2.83 3.77 4.06a.446.446 0 0 0 .518.366c12.52-.92 25.006-6.205 37.26-15.367a.47.47 0 0 0 .16-.366c1.766-18.318-5.283-35.626-21.934-40.41ZM23.726 38.325c-3.498 0-6.38-3.212-6.38-7.166 0-3.952 2.826-7.166 6.38-7.166s6.436 3.214 6.38 7.166c0 3.954-2.882 7.166-6.38 7.166Zm23.592 0c-3.498 0-6.38-3.212-6.38-7.166 0-3.952 2.826-7.166 6.38-7.166s6.436 3.214 6.38 7.166c0 3.954-2.882 7.166-6.38 7.166Z"/></svg>
-        <span class="azura-text-glow">AZURA</span>
+    <!-- ✅ ANIMATED DISCORD LOGO -->
+    <a href="https://discord.gg/azuraorg" class="discord-animated" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
     </a>
 
-    <div id="gateway-overlay"><div class="gateway-btn">CLICK</div></div>
-    <audio id="soundtrack" loop preload="auto"><source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
+    <div id="gateway-overlay">
+        <div class="gateway-btn">CLICK</div>
+    </div>
+
+    <audio id="soundtrack" loop>
+        <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
+    
 
     <script>
-        // 🛡️ SECURITY
-        function disableKeys(e){
-            if([123,85,73,83,67].includes(e.keyCode) && (e.ctrlKey||e.shiftKey)){ e.preventDefault(); return false; }
+        // 🛡️ SECURITY: BLOCK INSPECT ELEMENT, VIEW SOURCE, RIGHT CLICK
+        function disableKeys(e) {
+            if(e.keyCode == 123 || 
+               (e.ctrlKey && e.keyCode == 85) || 
+               (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
+               (e.ctrlKey && e.keyCode == 83)) {
+                return false;
+            }
         }
-        document.onkeydown=disableKeys;
-        document.oncontextmenu=()=>false;
+        document.onkeydown = disableKeys;
+        document.oncontextmenu = function() { return false; };
+        document.onmousedown = function(e) { if(e.button === 2) return false; };
 
-        // 🔢 VISITOR COUNTER
-        const K_VIEW="azura_org_total_views", K_VIS="azura_org_visited_before", BASE=5569;
-        function initCounter(){
-            let v=+localStorage.getItem(K_VIEW)||BASE;
-            if(localStorage.getItem(K_VIS)!=="true"){ v++; localStorage.setItem(K_VIS,"true"); localStorage.setItem(K_VIEW,v); }
-            const el=document.getElementById("views"), dur=1800, sT=performance.now();
-            !function t(n){
-                const p=Math.min((n-sT)/dur,1), e=1-Math.pow(1-p,3), c=Math.floor(v*e);
-                el.textContent=c.toLocaleString();
-                p<1?requestAnimationFrame(t):el.textContent=v.toLocaleString();
-            }(performance.now());
-        }
-        initCounter();
 
-        const audio=document.getElementById("soundtrack"); audio.volume=.35;
-        const gw=document.getElementById("gateway-overlay");
-        gw.addEventListener("click",()=>{
-            audio.play().catch(()=>{});
-            gw.classList.add("fade-gateway");
-            document.body.classList.add("loaded");
+        const audio = document.getElementById("soundtrack");
+        audio.volume = 0.4;
+
+        document.getElementById("gateway-overlay").addEventListener("click", function() {
+            audio.play().catch(() => {});
+            this.classList.add("fade-gateway");
+            document.body.classList.add('loaded');
         });
 
-        const UPDATE = 4000; // ⬅️ PINABILIS KO PA NG KONTI ANG REFRESH
-        const MY_ID = "1250654354344775703"; // ⬅️ ITO ID MO
+        const UPDATE_INTERVAL = 5000; 
 
-        const founderIDs   = [MY_ID,"1123145717461033041","1085580321623375938"];
-        const aboveAllIDs  = ["1081806153341743144","1414546504437207161","918633044276019232","1499093156321431622","1242051125776093256","1498999674969784426"];
-        const staffIDs     = ["1501438491207405588","1374740899422277703","995205070679453789","1366187912118665276","1459797319863242797","1495366872516923553","1314554124976656505","1398759472821702773"];
-        const s1=["1276210406880317522","1506434429613113405","1498999674969784426","1499093156321431622","1501438491207405588"];
-        const s2=["1374740899422277703","1081806153341743144","995205070679453789","1414546504437207161","1509479201114296353"];
+        const founderIDs = ["1250654354344775703", "1123145717461033041", "1085580321623375938"]; 
+        const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1242051125776093256", "1498999674969784426"]; 
+        const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
+        const scrollingIDsRow1 = ["1276210406880317522", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
+        const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
-        // ============================================================
-        // ✅ ✅ BAGONG API FETCHER — UUNAHIN TALAGA ANG SPOTIFY ✅ ✅
-        // ============================================================
-        async function getUserData(userId){
+
+        async function getUserData(userId) {
             try {
-                // ❌ TINANGGAL KO NA ANG CACHE — BAGONG DATOS LAGI
-                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`,{
-                    cache:"no-store",
-                    headers:{ "Cache-Control":"no-cache, no-transform", Pragma:"no-cache" }
-                });
-                if(!res.ok) throw new Error("HTTP "+res.status);
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
                 const json = await res.json();
-                if(!json || !json.success) return null;
 
-                const d = json.data;
+                if (json.success) {
+                    const d = json.data;
+                    
+                    let status = d.discord_status || 'offline';
+                    let activities = d.activities || [];
+                    let spotify = d.spotify || null;
+                    let customStatus = activities.find(a => a.type === 4) || null;
 
-                // 🔍 PARA MAKITA MO — Buksan F12 > Console, makikita mo buong datos
-                if(userId === MY_ID){
-                    console.log("%c✅ LANAYARD RAW DATA — IKAW ITO","color:#1db954; font-weight:bold; font-size:14px;");
-                    console.log("Spotify:", d.spotify);
-                    console.log("Activities:", d.activities);
-                    console.log("Status:", d.discord_status);
-                    console.log("Full object:", d);
-                }
-
-                const activities = Array.isArray(d.activities) ? d.activities : [];
-                const customStatus = activities.find(a => a && a.type === 4) || null;
-                const realActivities = activities.filter(a => a && a.type !== 4);
-                const mainAct = realActivities[0] || null;
-
-                // 🎧 🎧 🎧 SPOTIFY MUNA BAGO ANG LAHAT — ITO ANG PINAKA IMPORTANTE 🎧 🎧 🎧
-                let ac = { type:null, text:null, cl:"" };
-
-                if(d.spotify && typeof d.spotify === "object" && d.spotify.track_id){
-                    const song = d.spotify.song || "Unknown Song";
-                    const artist = d.spotify.artist || "Unknown Artist";
-                    const album = d.spotify.album || "";
-                    ac = {
-                        type:"spotify",
-                        text: `🎧 Listening to\n${song}\nby ${artist}${album?"\non "+album:""}`,
-                        cl: "activity-listening"
+                    return {
+                        id: userId,
+                        username: d.discord_user.username,
+                        displayName: d.discord_user.global_name || d.discord_user.username,
+                        status: status,
+                        avatarURL: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
+                        effectURL: d.discord_user.avatar_decoration_data?.asset 
+                            ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256` 
+                            : null,
+                        spotify: spotify,
+                        activities: activities,
+                        customStatus: customStatus
                     };
                 }
-                // 🎮 GAMES
-                else if(mainAct && mainAct.type === 0){
-                    let txt = `🎮 Playing ${mainAct.name||""}`;
-                    if(mainAct.details) txt += `\n${mainAct.details}`;
-                    if(mainAct.state)   txt += `\n${mainAct.state}`;
-                    ac = { type:"game", text:txt, cl:"activity-playing" };
-                }
-                // 📡 STREAM
-                else if(mainAct && mainAct.type === 1) ac={type:"stream", text:`📡 Streaming ${mainAct.name||""}`, cl:"activity-streaming"};
-                // 🎧 IBA PANG NAKIKINIG
-                else if(mainAct && mainAct.type === 2) ac={type:"listen", text:`🎧 Listening to ${mainAct.name||""}`, cl:"activity-listening"};
-                // 📺 NANONOOD
-                else if(mainAct && mainAct.type === 3) ac={type:"watch",  text:`📺 Watching ${mainAct.name||""}`,  cl:"activity-watching"};
-                // 💬 CUSTOM STATUS HULI NA LANG
-                else if(customStatus){
-                    const em = (customStatus.emoji?.name || customStatus.emoji?.id || "");
-                    const tx = customStatus.state || "";
-                    const out = (em?em+" ":"") + (tx||em||"");
-                    ac = { type:"custom", text: out || "No activity", cl:"activity-custom" };
-                }
-
-                return {
-                    id: userId,
-                    u: d.discord_user.username,
-                    dn: d.discord_user.global_name || d.discord_user.display_name || d.discord_user.username,
-                    st: d.discord_status || "offline",
-                    av: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
-                    fx: d.discord_user.avatar_decoration_data?.asset
-                        ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256`
-                        : null,
-                    ac
-                };
-
-            } catch(err){
-                console.warn(`❌ Lanyard error ${userId}:`, err.message);
+                return null;
+            } catch (e) {
                 return null;
             }
         }
 
-        async function go(){
-            const [F,A,S,M1,M2] = await Promise.all([
-                Promise.all(founderIDs.map(getUserData)),
-                Promise.all(aboveAllIDs.map(getUserData)),
-                Promise.all(staffIDs.map(getUserData)),
-                Promise.all(s1.map(getUserData)),
-                Promise.all(s2.map(getUserData))
-            ]);
-            draw(F,"founder-container");
-            draw(A,"aboveall-container");
-            draw(S,"staff-container");
-            marquee(M1,"marquee-container-1");
-            marquee(M2,"marquee-container-2");
+
+        async function fetchAndUpdate() {
+            const allFounder = await Promise.all(founderIDs.map(id => getUserData(id)));
+            const allAboveAll = await Promise.all(aboveAllIDs.map(id => getUserData(id)));
+            const allStaff = await Promise.all(staffIDs.map(id => getUserData(id)));
+            const allScroll1 = await Promise.all(scrollingIDsRow1.map(id => getUserData(id)));
+            const allScroll2 = await Promise.all(scrollingIDsRow2.map(id => getUserData(id)));
+
+            showGroup(allFounder.filter(Boolean), 'founder-container');
+            showGroup(allAboveAll.filter(Boolean), 'aboveall-container');
+            showGroup(allStaff.filter(Boolean), 'staff-container');
+            showMarquee(allScroll1.filter(Boolean), "marquee-container-1");
+            showMarquee(allScroll2.filter(Boolean), "marquee-container-2");
         }
 
-        function draw(list, id){
-            const b = document.getElementById(id); if(!b) return;
-            b.innerHTML = "";
-            const smap = {online:"status-online",idle:"status-idle",dnd:"status-dnd"};
-            list.filter(Boolean).forEach(m=>{
-                const w = document.createElement("div");
-                w.className = "avatar-wrapper-node";
-                w.innerHTML = `
+
+        function showGroup(members, container) {
+            const box = document.getElementById(container);
+            if (!box) return;
+            
+            box.innerHTML = ''; // No JOIN link anymore
+
+            members.forEach(mem => {
+                const wrapper = document.createElement('div'); 
+                wrapper.className = 'avatar-wrapper-node';
+
+                let decoHTML = '';
+                if (mem.effectURL) {
+                    decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy">`;
+                }
+
+                let statusClass = 'status-offline'; 
+                if (mem.status) {
+                    const s = mem.status.toLowerCase().trim();
+                    if (s === 'online') statusClass = 'status-online';
+                    else if (s === 'idle') statusClass = 'status-idle';
+                    else if (s === 'dnd') statusClass = 'status-dnd';
+                }
+
+                let statusText = '';
+                let statusType = '';
+
+                if (mem.spotify) {
+                    statusType = 'activity-listening';
+                    statusText = `Listening to ${mem.spotify.song}`;
+                } 
+                else if (mem.activities && mem.activities.length > 0) {
+                    const act = mem.activities.find(a => a.type !== 4) || mem.activities[0];
+                    if (act) {
+                        if (act.type === 0) { statusType = 'activity-playing'; statusText = `Playing ${act.name}`; }
+                        if (act.type === 1) { statusType = 'activity-streaming'; statusText = `Streaming ${act.name}`; }
+                        if (act.type === 2) { statusType = 'activity-listening'; statusText = `Listening to ${act.name}`; }
+                        if (act.type === 3) { statusType = 'activity-watching'; statusText = `Watching ${act.name}`; }
+                    }
+                }
+
+                wrapper.innerHTML = `
                     <div class="circle-avatar-container">
-                        ${m.fx?`<img src="${m.fx}" class="avatar-decoration" loading="lazy">`:""}
-                        <img src="${m.av}" class="avatar-img" loading="lazy">
-                        <span class="status-indicator ${smap[m.st]||"status-offline"}"></span>
+                        ${decoHTML} 
+                        <img src="${mem.avatarURL}" class="avatar-img" alt="avatar">
+                        <span class="status-indicator ${statusClass}"></span>
                     </div>
-                    <div class="name-label">${m.dn}</div>
+                    <div class="name-label">${mem.displayName}</div>
+
                     <div class="avatar-tooltip">
                         <div class="tooltip-header">
-                            <img src="${m.av}" class="tooltip-avatar-sm">
+                            <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
                             <div class="tooltip-user-info">
-                                <h4>${m.dn}</h4><p>@${m.u}</p>
+                                <h4>${mem.displayName}</h4>
+                                <p>@${mem.username}</p>
                             </div>
                         </div>
-                        ${m.ac.text?`<div class="tooltip-activity-wrapper ${m.ac.cl}" style="white-space:pre-line">${m.ac.text}</div>`:""}
-                    </div>`;
-                b.appendChild(w);
+                        ${statusText ? `<div class="tooltip-activity-wrapper ${statusType}">${statusText}</div>` : ''}
+                    </div>
+                `;
+                box.appendChild(wrapper);
             });
         }
 
-        function marquee(list,id){
-            const b=document.getElementById(id); if(!b||!list.length) return;
-            const x=[...list,...list,...list];
-            b.innerHTML=x.map(m=>`<div class="marquee-profile-block"><img src="${m.av}" loading="lazy"><span>${m.dn}</span></div>`).join("");
+
+        function showMarquee(members, containerId) {
+            const box = document.getElementById(containerId);
+            if (!box || members.length === 0) return;
+            const list = [...members, ...members, ...members];
+            box.innerHTML = '';
+            list.forEach(mem => {
+                const block = document.createElement('div');
+                block.className = 'marquee-profile-block';
+                block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName}</span>`;
+                box.appendChild(block);
+            });
         }
 
-        go();
-        setInterval(go, UPDATE);
+
+        fetchAndUpdate();
+        setInterval(fetchAndUpdate, UPDATE_INTERVAL);
     </script>
 </body>
 </html>

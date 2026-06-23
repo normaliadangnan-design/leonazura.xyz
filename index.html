@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Improved viewport for mobile/desktop -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>/ AZURA ORG</title>
@@ -15,7 +14,6 @@
     <meta name="twitter:title" content="/ AZURA ORG">
     <meta name="twitter:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
 
-    <!-- 🛡️ SECURITY: DISABLE INSPECT ELEMENT & RIGHT CLICK -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
@@ -38,13 +36,13 @@
             background-image: 
                 linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), 
                 url("pba.webp");
-            background-size: cover;
+            background-size: contain; /* ✅ Kita nang buo ang background */
             background-position: center center;
             background-attachment: fixed;
             background-repeat: no-repeat;
             color: #ffffff;
             min-height: 100vh;
-            /* Allow scrolling if content overflows */
+            width: 100%;
             overflow-x: hidden;
             overflow-y: auto;
             display: flex;
@@ -70,7 +68,7 @@
 
         .main-logo-container {
             text-align: center;
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
         }
 
         .main-clan-logo {
@@ -80,17 +78,16 @@
         }
 
         .main-clan-logo img {
-            height: 50px;
+            height: 60px;
             width: auto;
             object-fit: contain;
         }
 
-        /* ✅ $ SYMBOL — METALLIC GRAY-WHITE RGB GLOW */
         .symbol-break {
             font-family: 'Oswald', sans-serif;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
-            margin: 5px 0 12px 0;
+            margin: 5px 0 15px 0;
             text-align: center;
             display: block;
             animation: metallicRGB 2s infinite alternate;
@@ -104,22 +101,16 @@
             100% { color: #fff; text-shadow: 0 0 4px #ddd, 0 0 8px #eee; }
         }
 
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        /* ✅ ABOVE ALL — NO LINES, METALLIC GLOW */
         .typewriter-header {
             font-family: 'Oswald', sans-serif;
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             overflow: visible;
             white-space: nowrap;
             width: fit-content;
-            margin: 0 auto 8px auto;
+            margin: 0 auto 10px auto;
             position: relative;
             border: none !important;
             animation: metallicRGB 2s infinite alternate;
@@ -127,27 +118,16 @@
 
         .title-group-block {
             position: relative;
-            margin: 10px 0;
+            margin: 15px 0;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .tiny-top-text {
-            font-size: 9px;
-            font-weight: 400;
-            letter-spacing: 4px;
-            color: #444;
-            text-transform: uppercase;
-            display: none;
-            margin-bottom: 2px;
-        }
-
-        /* ✅ STAFF — NO LINES, METALLIC GLOW */
         .staff-header {
             font-family: 'Oswald', sans-serif;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             letter-spacing: 2px;
             position: relative;
@@ -155,15 +135,14 @@
             animation: metallicRGB 2s infinite alternate;
         }
 
-        /* ✅ HOME & VIEWS — GRAY TEXT, NO BOX BORDER */
         .navigation-bar {
             position: fixed;
-            top: 15px;
-            right: 20px;
+            top: 20px;
+            right: 30px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 11px;
+            gap: 15px;
+            font-size: 12px;
             letter-spacing: 1px;
             color: #888;
             opacity: 0.8;
@@ -174,7 +153,7 @@
             padding: 3px 0;
             border: none !important;
             border-radius: 0;
-            font-size: 11px;
+            font-size: 12px;
             letter-spacing: 1px;
             background: transparent;
             color: #888;
@@ -186,19 +165,18 @@
 
         .center-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             z-index: 10;
-            padding: 0 10px;
-            gap: 12px;
+            padding: 0 15px;
+            gap: 18px;
             overflow: visible;
         }
 
-        /* ✅ RESPONSIVE AVATAR ROW */
         .horizontal-avatar-row {
             display: flex !important;
             flex-direction: row !important;
@@ -206,9 +184,9 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            gap: 25px !important;
-            padding: 8px 0;
-            min-height: 100px;
+            gap: 35px !important;
+            padding: 10px 0;
+            min-height: 110px;
             position: relative;
         }
 
@@ -224,11 +202,11 @@
             transform: scale(1.08);
         }
 
-        /* ✅ SMALLER AVATAR SIZE */
+        /* ✅ AVATAR & DECORATION - Fixed position/size */
         .circle-avatar-container {
             position: relative;
-            width: 85px !important;
-            height: 85px !important;
+            width: 95px !important;
+            height: 95px !important;
             border-radius: 50%;
             overflow: visible; 
             background: transparent; 
@@ -242,8 +220,8 @@
             top: 50% !important;
             left: 50% !important;
             transform: translate(-50%, -50%) !important;
-            width: 105px !important;
-            height: 105px !important; 
+            width: 125px !important;
+            height: 125px !important; 
             pointer-events: none !important;
             z-index: 1 !important;  
             border-radius: 0 !important; 
@@ -254,8 +232,8 @@
         }
 
         .circle-avatar-container img.avatar-img {
-            width: 85px !important;
-            height: 85px !important;
+            width: 95px !important;
+            height: 95px !important;
             border-radius: 50% !important;
             object-fit: cover !important;
             pointer-events: none !important;
@@ -267,10 +245,10 @@
 
         .status-indicator {
             position: absolute;
-            bottom: 4px;
-            right: 4px;
-            width: 12px;
-            height: 12px;
+            bottom: 5px;
+            right: 5px;
+            width: 13px;
+            height: 13px;
             border-radius: 50%;
             border: 2px solid #000;
             z-index: 3 !important;
@@ -281,24 +259,24 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ POPUP BOX — CLEAN, NO EXTRA LINES */
+        /* ✅ POPUP BOX - Fixed position */
         .avatar-tooltip {
             position: absolute;
-            bottom: 110%;
+            bottom: 120%;
             left: 50%;
             transform: translateX(-50%);
             background: #0a0a0b;
             border: 1px solid #222;
             border-radius: 8px;
-            width: 250px;
-            padding: 12px;
+            width: 280px;
+            padding: 16px;
             color: #fff;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
             pointer-events: none;
             z-index: 9999;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.6);
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
@@ -308,33 +286,33 @@
         .tooltip-header {
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-bottom: 4px;
+            gap: 8px;
+            margin-bottom: 8px;
         }
         .tooltip-avatar-sm {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
         }
         .tooltip-user-info h4 {
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 600;
             margin: 0;
             color: #fff;
         }
         .tooltip-user-info p {
-            font-size: 9px;
-            color: #666;
-            margin: 0;
+            font-size: 11px;
+            color: #888;
+            margin: 2px 0 0 0;
         }
 
         .tooltip-activity-wrapper {
             background: #111;
-            border-radius: 2px;
-            padding: 4px 6px;
-            margin-top: 4px;
-            font-size: 9px;
-            color: #888;
+            border-radius: 4px;
+            padding: 6px 8px;
+            margin-top: 8px;
+            font-size: 11px;
+            color: #aaa;
         }
         .activity-playing { color: #43b581; }
         .activity-streaming { color: #9146ff; }
@@ -344,53 +322,30 @@
         .marquee-ticker {
             overflow: hidden;
             width: 100%;
-            max-width: 900px;
-            padding: 2px 0;
+            max-width: 950px;
+            padding: 4px 0;
             background: transparent;
         }
 
         .marquee-wrapper-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             width: 100%;
             align-items: center;
-            margin: 8px 0 20px 0;
+            margin: 15px 0 25px 0;
         }
 
         .marquee-inner-wrap {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
-            gap: 10px;
+            gap: 12px;
             width: max-content;
         }
 
-        .scroll-left { animation: smoothScrollLeft 30s linear infinite; }
-        .scroll-right { animation: smoothScrollRight 30s linear infinite; }
-
-        .marquee-profile-block {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            background: #0c0c0c; 
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 3px 10px;
-            border-radius: 30px; 
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            white-space: nowrap;
-        }
-
-        .marquee-profile-block img {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-            pointer-events: none;
-        }
+        .scroll-left { animation: smoothScrollLeft 35s linear infinite; }
+        .scroll-right { animation: smoothScrollRight 35s linear infinite; }
 
         @keyframes smoothScrollLeft {
             0% { transform: translateX(0); }
@@ -401,25 +356,46 @@
             100% { transform: translateX(0); }
         }
 
-        /* ✅ ANIMATED DISCORD LOGO — PULSE EFFECT */
+        .marquee-profile-block {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            background: #0c0c0c; 
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 5px 14px;
+            border-radius: 30px; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+            white-space: nowrap;
+        }
+
+        .marquee-profile-block img {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
         .discord-animated {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             z-index: 9999;
             animation: discordPulse 1.5s infinite alternate;
         }
         .discord-animated img {
-            width: 24px;
-            height: 24px;
-            opacity: 0.7;
+            width: 28px;
+            height: 28px;
+            opacity: 0.75;
         }
         @keyframes discordPulse {
-            0% { transform: scale(1); opacity: 0.6; filter: drop-shadow(0 0 2px #5865F2); }
-            100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 8px #5865F2); }
+            0% { transform: scale(1); opacity: 0.6; filter: drop-shadow(0 0 3px #5865F2); }
+            100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 10px #5865F2); }
         }
 
-        /* ✅ LOADING SCREEN — CLEAN */
         #gateway-overlay {
             position: fixed;
             inset: 0;
@@ -433,8 +409,8 @@
         }
 
         .gateway-btn {
-            font-size: 14px !important;
-            letter-spacing: 4px;
+            font-size: 16px !important;
+            letter-spacing: 5px;
             background: transparent;
             border: none !important;
             color: #444 !important;
@@ -459,10 +435,10 @@
 
         .name-label {
             text-align: center;
-            font-size: 11px;
-            margin-top: 5px;
+            font-size: 12px;
+            margin-top: 6px;
             color: #ccc;
-            max-width: 85px;
+            max-width: 95px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -470,34 +446,37 @@
         }
         .section-divider {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             height: 1px;
             background: #222;
-            margin: 12px 0;
+            margin: 15px 0;
         }
 
-        /* Extra adjustment for smaller screens */
+        /* Responsive for smaller screens */
         @media (max-width: 768px) {
             .circle-avatar-container {
-                width: 70px !important;
-                height: 70px !important;
+                width: 75px !important;
+                height: 75px !important;
             }
             img.avatar-decoration {
-                width: 90px !important;
-                height: 90px !important;
+                width: 100px !important;
+                height: 100px !important;
             }
             .circle-avatar-container img.avatar-img {
-                width: 70px !important;
-                height: 70px !important;
+                width: 75px !important;
+                height: 75px !important;
             }
             .horizontal-avatar-row {
-                gap: 18px !important;
+                gap: 22px !important;
             }
             .typewriter-header {
-                font-size: 22px;
+                font-size: 24px;
             }
             .staff-header {
-                font-size: 19px;
+                font-size: 20px;
+            }
+            .avatar-tooltip {
+                width: 240px;
             }
         }
     </style>
@@ -542,7 +521,6 @@
         </div>
     </div>
 
-    <!-- ✅ ANIMATED DISCORD LOGO -->
     <a href="https://discord.gg/azuraorg" class="discord-animated" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
     </a>
@@ -556,7 +534,6 @@
     
 
     <script>
-        // 🛡️ SECURITY: BLOCK INSPECT ELEMENT, VIEW SOURCE, RIGHT CLICK
         function disableKeys(e) {
             if(e.keyCode == 123 || 
                (e.ctrlKey && e.keyCode == 85) || 
@@ -607,8 +584,9 @@
                         displayName: d.discord_user.global_name || d.discord_user.username,
                         status: status,
                         avatarURL: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
+                        // ✅ Fixed decoration URL format
                         effectURL: d.discord_user.avatar_decoration_data?.asset 
-                            ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset}.png?size=256` 
+                            ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset.replace(/^a_/, '')}.png?size=256` 
                             : null,
                         spotify: spotify,
                         activities: activities,
@@ -617,6 +595,7 @@
                 }
                 return null;
             } catch (e) {
+                console.log("Error fetching user:", e);
                 return null;
             }
         }
@@ -649,7 +628,7 @@
 
                 let decoHTML = '';
                 if (mem.effectURL) {
-                    decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy">`;
+                    decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy" onerror="this.style.display='none'">`;
                 }
 
                 let statusClass = 'status-offline'; 
@@ -675,6 +654,12 @@
                         if (act.type === 2) { statusType = 'activity-listening'; statusText = `Listening to ${act.name}`; }
                         if (act.type === 3) { statusType = 'activity-watching'; statusText = `Watching ${act.name}`; }
                     }
+                }
+
+                // ✅ Added custom status support
+                if (mem.customStatus && mem.customStatus.state) {
+                    statusText = mem.customStatus.state;
+                    statusType = '';
                 }
 
                 wrapper.innerHTML = `

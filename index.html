@@ -282,24 +282,24 @@
         .status-offline { background-color: #80848e; }
 
         /* ✅ POPUP BOX — CLEAN, NO EXTRA LINES */
-        .avatar-tooltip {
-            position: absolute;
-            top: 110%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #0a0a0b;
-            border: 1px solid #222;
-            border-radius: 4px;
-            width: 220px;
-            padding: 10px 12px;
-            color: #fff;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s ease;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: none;
-        }
+       .avatar-tooltip {
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0a0a0b;
+    border: 1px solid #222;
+    border-radius: 8px; /* Gawin itong mas rounded para mas modern */
+    width: 280px;      /* DITO MO BAGUHIN: Mula 220px gawin mong 280px o mas malaki pa */
+    padding: 16px;     /* Palakihin din ang padding para hindi dikit-dikit */
+    color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Dagdagan ng shadow para lutang */
+}
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
             visibility: visible;

@@ -50,10 +50,7 @@
             align-items: center;
             justify-content: flex-start;
             padding: 20px 10px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
         }
-        body.loaded { opacity: 1; }
 
         .center-container, .navigation-bar {
             opacity: 0;
@@ -216,14 +213,13 @@
             justify-content: center;
         }
 
-        /* ✅ INAYOS NA: Sakto lang ang laki, hindi lumalabis */
         img.avatar-decoration {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(1.05); /* Pinaliit ang scale */
-            width: 115px; /* Mas maliit na lapad */
-            height: 115px; /* Mas maliit na taas */
+            transform: translate(-50%, -50%) scale(1.05);
+            width: 115px;
+            height: 115px;
             pointer-events: none;
             z-index: 1;
             border-radius: 0;
@@ -287,7 +283,6 @@
             visibility: visible;
         }
 
-        /* ✅ Sakto din sa tooltip */
         .tooltip-avatar-wrapper {
             position: relative;
             width: 40px;
@@ -438,12 +433,14 @@
             align-items: center;
             z-index: 9999999;
             cursor: pointer;
+            opacity: 1;
+            visibility: visible;
             transition: opacity 0.4s ease, visibility 0.4s ease;
         }
 
         .gateway-btn {
-            font-size: 20px;
-            letter-spacing: 6px;
+            font-size: 22px;
+            letter-spacing: 8px;
             background: transparent;
             border: none;
             color: #555;
@@ -513,7 +510,7 @@
             .avatar-tooltip {
                 width: 240px;
             }
-            .gateway-btn { font-size: 16px; }
+            .gateway-btn { font-size: 18px; }
         }
     </style>
 </head>
@@ -545,6 +542,7 @@
         <div class="title-group-block">
             <h2 class="staff-header">STAFF</h2>
         </div>
+
         <div id="staff-container" class="horizontal-avatar-row"></div>
 
         <div class="marquee-wrapper-group">
@@ -562,7 +560,7 @@
     </a>
 
     <div id="gateway-overlay">
-        <div class="gateway-btn">CLICK TO ENTER</div>
+        <div class="gateway-btn">CLICK</div>
     </div>
 
     <audio id="soundtrack" loop>
@@ -581,7 +579,6 @@
         document.onkeydown = disableKeys;
         document.oncontextmenu = function() { return false; };
         document.onmousedown = function(e) { if(e.button === 2) return false; };
-
 
         const audio = document.getElementById("soundtrack");
         audio.volume = 0.4;

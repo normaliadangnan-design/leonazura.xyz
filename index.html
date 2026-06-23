@@ -214,22 +214,23 @@
             justify-content: center;
         }
 
-        img.avatar-decoration {
-            position: absolute !important;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            width: 125px !important;
-            height: 125px !important; 
-            pointer-events: none !important;
-            z-index: 1 !important;  
-            border-radius: 0 !important; 
-            object-fit: contain !important;
-            background: transparent !important;
-            display: block !important;
-            opacity: 1 !important;
-            image-rendering: crisp-edges;
-        }
+     img.avatar-decoration {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(1.15) !important; /* dagdag scale para lumaki nang kaunti */
+    width: 135px !important;
+    height: 135px !important; 
+    pointer-events: none !important;
+    z-index: 1 !important;  
+    border-radius: 0 !important; 
+    object-fit: contain !important;
+    background: transparent !important;
+    display: block !important;
+    opacity: 1 !important;
+    image-rendering: crisp-edges;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.25)); /* magandang liwanag sa paligid */
+}
 
         .circle-avatar-container img.avatar-img {
             width: 95px !important;
@@ -244,15 +245,16 @@
         }
 
         .status-indicator {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            width: 13px;
-            height: 13px;
-            border-radius: 50%;
-            border: 2px solid #000;
-            z-index: 3 !important;
-        }
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    z-index: 3 !important;
+    box-shadow: 0 0 4px rgba(0,0,0,0.8);
+}
 
         .status-online { background-color: #23a55a; }
         .status-idle { background-color: #f0b232; }
@@ -260,23 +262,23 @@
         .status-offline { background-color: #80848e; }
 
         .avatar-tooltip {
-            position: absolute;
-            bottom: 120%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #0a0a0b;
-            border: 1px solid #222;
-            border-radius: 8px;
-            width: 280px;
-            padding: 16px;
-            color: #fff;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s ease;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.6);
-        }
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000000;
+    border: 1px solid #2a2a2e;
+    border-radius: 10px;
+    width: 290px;
+    padding: 18px;
+    color: #ffffff;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08);
+}
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
             visibility: visible;

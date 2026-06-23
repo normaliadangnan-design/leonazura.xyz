@@ -216,13 +216,14 @@
             justify-content: center;
         }
 
+        /* ✅ Bigger & better aligned decorations */
         img.avatar-decoration {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(1.15);
-            width: 135px;
-            height: 135px;
+            transform: translate(-50%, -50%) scale(1.25);
+            width: 150px;
+            height: 150px;
             pointer-events: none;
             z-index: 1;
             border-radius: 0;
@@ -231,7 +232,7 @@
             display: block;
             opacity: 1;
             image-rendering: crisp-edges;
-            filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
         }
 
         .circle-avatar-container img.avatar-img {
@@ -286,16 +287,41 @@
             visibility: visible;
         }
 
+        /* ✅ Decoration inside tooltip */
+        .tooltip-avatar-wrapper {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tooltip-avatar-decoration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.2);
+            width: 55px;
+            height: 55px;
+            pointer-events: none;
+            z-index: 1;
+            object-fit: contain;
+        }
+        .tooltip-avatar-sm {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            z-index: 2;
+            position: relative;
+        }
+
         .tooltip-header {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 8px;
-        }
-        .tooltip-avatar-sm {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
         }
         .tooltip-user-info h4 {
             font-size: 14px;
@@ -467,8 +493,9 @@
                 height: 75px;
             }
             img.avatar-decoration {
-                width: 100px;
-                height: 100px;
+                width: 115px;
+                height: 115px;
+                transform: translate(-50%, -50%) scale(1.2);
             }
             .circle-avatar-container img.avatar-img {
                 width: 75px;
@@ -673,6 +700,9 @@
                     statusType = '';
                 }
 
+                // ✅ Updated tooltip with decoration
+                const tooltipDeco = mem.effectURL ? `<img src="${mem.effectURL}" class="tooltip-avatar-decoration" alt="decoration">` : '';
+
                 wrapper.innerHTML = `
                     <div class="circle-avatar-container">
                         ${decoHTML} 
@@ -683,7 +713,10 @@
 
                     <div class="avatar-tooltip">
                         <div class="tooltip-header">
-                            <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="avatar" loading="lazy">
+                            <div class="tooltip-avatar-wrapper">
+                                ${tooltipDeco}
+                                <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="avatar" loading="lazy">
+                            </div>
                             <div class="tooltip-user-info">
                                 <h4>${mem.displayName}</h4>
                                 <p>@${mem.username}</p>

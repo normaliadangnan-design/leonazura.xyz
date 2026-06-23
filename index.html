@@ -216,14 +216,14 @@
             justify-content: center;
         }
 
-        /* ✅ Bigger & better aligned decorations */
+        /* ✅ INAYOS NA: Sakto lang ang laki, hindi lumalabis */
         img.avatar-decoration {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(1.25);
-            width: 150px;
-            height: 150px;
+            transform: translate(-50%, -50%) scale(1.05); /* Pinaliit ang scale */
+            width: 115px; /* Mas maliit na lapad */
+            height: 115px; /* Mas maliit na taas */
             pointer-events: none;
             z-index: 1;
             border-radius: 0;
@@ -232,7 +232,7 @@
             display: block;
             opacity: 1;
             image-rendering: crisp-edges;
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
         }
 
         .circle-avatar-container img.avatar-img {
@@ -287,7 +287,7 @@
             visibility: visible;
         }
 
-        /* ✅ Decoration inside tooltip */
+        /* ✅ Sakto din sa tooltip */
         .tooltip-avatar-wrapper {
             position: relative;
             width: 40px;
@@ -302,9 +302,9 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(1.2);
-            width: 55px;
-            height: 55px;
+            transform: translate(-50%, -50%) scale(1.08);
+            width: 48px;
+            height: 48px;
             pointer-events: none;
             z-index: 1;
             object-fit: contain;
@@ -493,9 +493,9 @@
                 height: 75px;
             }
             img.avatar-decoration {
-                width: 115px;
-                height: 115px;
-                transform: translate(-50%, -50%) scale(1.2);
+                width: 92px;
+                height: 92px;
+                transform: translate(-50%, -50%) scale(1.05);
             }
             .circle-avatar-container img.avatar-img {
                 width: 75px;
@@ -589,7 +589,7 @@
         document.getElementById("gateway-overlay").addEventListener("click", function() {
             audio.play().catch(() => {});
             this.classList.add("fade-gateway");
-            document.body.classList.add("loaded");
+            document.body.classList.add('loaded');
         });
 
         const UPDATE_INTERVAL = 5000; 
@@ -700,7 +700,6 @@
                     statusType = '';
                 }
 
-                // ✅ Updated tooltip with decoration
                 const tooltipDeco = mem.effectURL ? `<img src="${mem.effectURL}" class="tooltip-avatar-decoration" alt="decoration">` : '';
 
                 wrapper.innerHTML = `

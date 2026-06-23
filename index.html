@@ -14,7 +14,7 @@
     <meta name="twitter:title" content="/ AZURA ORG">
     <meta name="twitter:description" content="click. Logo. HOME. Views: —. above all. FOUNDER. STAFF. Discord Join.">
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://cdn.cursors-4u.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.cursors-4u.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
@@ -36,7 +36,7 @@
             background-image: 
                 linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), 
                 url("pba.webp");
-            background-size: contain; /* ✅ Kita nang buo ang background */
+            background-size: contain;
             background-position: center center;
             background-attachment: fixed;
             background-repeat: no-repeat;
@@ -202,7 +202,6 @@
             transform: scale(1.08);
         }
 
-        /* ✅ AVATAR & DECORATION - Fixed position/size */
         .circle-avatar-container {
             position: relative;
             width: 95px !important;
@@ -229,6 +228,7 @@
             background: transparent !important;
             display: block !important;
             opacity: 1 !important;
+            image-rendering: crisp-edges;
         }
 
         .circle-avatar-container img.avatar-img {
@@ -259,7 +259,6 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✅ POPUP BOX - Fixed position */
         .avatar-tooltip {
             position: absolute;
             bottom: 120%;
@@ -313,6 +312,8 @@
             margin-top: 8px;
             font-size: 11px;
             color: #aaa;
+            word-wrap: break-word;
+            max-width: 100%;
         }
         .activity-playing { color: #43b581; }
         .activity-streaming { color: #9146ff; }
@@ -452,7 +453,6 @@
             margin: 15px 0;
         }
 
-        /* Responsive for smaller screens */
         @media (max-width: 768px) {
             .circle-avatar-container {
                 width: 75px !important;
@@ -522,7 +522,7 @@
     </div>
 
     <a href="https://discord.gg/azuraorg" class="discord-animated" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord" loading="lazy">
     </a>
 
     <div id="gateway-overlay">
@@ -578,16 +578,20 @@
                     let spotify = d.spotify || null;
                     let customStatus = activities.find(a => a.type === 4) || null;
 
+                    // ✅ Fixed decoration URL format to avoid 403/denied
+                    let effectURL = null;
+                    if (d.discord_user.avatar_decoration_data?.asset) {
+                        const assetId = d.discord_user.avatar_decoration_data.asset.replace(/^a_/, '');
+                        effectURL = `https://cdn.discordapp.com/avatar-decoration-presets/a_${assetId}.png?size=256`;
+                    }
+
                     return {
                         id: userId,
                         username: d.discord_user.username,
                         displayName: d.discord_user.global_name || d.discord_user.username,
                         status: status,
                         avatarURL: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
-                        // ✅ Fixed decoration URL format
-                        effectURL: d.discord_user.avatar_decoration_data?.asset 
-                            ? `https://cdn.discordapp.com/avatar-decoration-presets/${d.discord_user.avatar_decoration_data.asset.replace(/^a_/, '')}.png?size=256` 
-                            : null,
+                        effectURL: effectURL,
                         spotify: spotify,
                         activities: activities,
                         customStatus: customStatus
@@ -628,7 +632,7 @@
 
                 let decoHTML = '';
                 if (mem.effectURL) {
-                    decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy" onerror="this.style.display='none'">`;
+                    decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy" onerror="this.remove()">`;
                 }
 
                 let statusClass = 'status-offline'; 
@@ -656,7 +660,6 @@
                     }
                 }
 
-                // ✅ Added custom status support
                 if (mem.customStatus && mem.customStatus.state) {
                     statusText = mem.customStatus.state;
                     statusType = '';
@@ -665,14 +668,14 @@
                 wrapper.innerHTML = `
                     <div class="circle-avatar-container">
                         ${decoHTML} 
-                        <img src="${mem.avatarURL}" class="avatar-img" alt="avatar">
+                        <img src="${mem.avatarURL}" class="avatar-img" alt="avatar" loading="lazy">
                         <span class="status-indicator ${statusClass}"></span>
                     </div>
                     <div class="name-label">${mem.displayName}</div>
 
                     <div class="avatar-tooltip">
                         <div class="tooltip-header">
-                            <img src="${mem.avatarURL}" class="tooltip-avatar-sm">
+                            <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="avatar" loading="lazy">
                             <div class="tooltip-user-info">
                                 <h4>${mem.displayName}</h4>
                                 <p>@${mem.username}</p>
@@ -694,7 +697,7 @@
             list.forEach(mem => {
                 const block = document.createElement('div');
                 block.className = 'marquee-profile-block';
-                block.innerHTML = `<img src="${mem.avatarURL}"> <span>${mem.displayName}</span>`;
+                block.innerHTML = `<img src="${mem.avatarURL}" loading="lazy"> <span>${mem.displayName}</span>`;
                 box.appendChild(block);
             });
         }

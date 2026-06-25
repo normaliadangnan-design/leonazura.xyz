@@ -1,1 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>crimben</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;600&display=swap');
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    background:
+    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+    url("../members/founder/leon.gif");
+    background-size:cover;
+    background-position:center;
+    color:white;
+    overflow-y:auto;
+    padding-top:100px;
+}
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:8px 8px;
+    z-index:1;
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #090909;
+    z-index: 9999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.click-text {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 8px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    animation: pulse 1.5s infinite alternate;
+    text-transform: uppercase;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1.05); }
+}
+
+.card{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+    padding:0;
+    background:transparent;
+    box-shadow:none;
+}
+.logo-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:20px;
+    width: 100%;
+    background: transparent;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.main-logo {
+    max-width: 240px;
+    height: auto;
+    object-fit: contain;
+}
+
+.title-image-container {
+    margin-bottom: 10px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.title-image {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.status-container {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 15px;
+    background: #111;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 999;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.status-online { background-color: #23a55a; }
+.status-idle { background-color: #f0b232; }
+.status-dnd { background-color: #f13f43; }
+.status-offline { background-color: #80848e; }
+
+.avatar{
+    position: relative;
+    width:140px;
+    height:140px;
+    margin:auto;
+    margin-bottom:18px;
+    overflow: visible !important;
+    cursor: pointer;
+    z-index: 100; /* ✅ PARA SA POPUP */
+}
+
+.avatar-img-holder {
+    width: 100%;
+    height: 100%;
+    border-radius:50%;
+    overflow: hidden;
+    border:3px solid rgba(255,255,255,.18);
+    background: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+.avatar-img-holder img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+img.avatar-decoration {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 170px !important;
+    height: 170px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    display: block !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.section-card{
+    background:rgba(15,15,15,.65);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:20px;
+}
+    
+.username{
+    display: none !important;
+}
+
+.bio{
+    opacity:.85;
+    font-size:15px;
+    margin-bottom:28px;
+    min-height: 20px;
+    transition: all 0.3s ease;
+    line-height: 1.4;
+    word-break: break-word;
+    text-align: center !important;
+}
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin-bottom:25px;
+    position: relative;
+    z-index: 10; /* ✅ PARA NAPIPINDOT */
+}
+
+.social{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(255,255,255,.05);
+    text-decoration:none !important;
+    transition:.3s;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 11; /* ✅ SIGURADONG NASA TAAS */
+}
+
+.social:hover{
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.15);
+}
+
+.social svg {
+    width:26px;
+    height:26px;
+    fill:white;
+}
+
+/* ==================================================
+   ✅ MUSIC PLAYER - BILOG ANG LITRATO AT UMIKOT
+   ================================================== */
+.music-container {
+    display: block;
+    color: white;
+    background: #000000 !important;
+    border-radius: 12px;
+    padding: 15px;
+    width: 100%;
+    transition: .3s;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.music-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.music-album-art {
+    width: 55px;
+    height: 55px;
+    border-radius: 50% !important; /* ✅ BILOG */
+    object-fit: cover;
+    flex-shrink: 0;
+    animation: rotateAlbum 8s linear infinite; /* ✅ PAIKOT */
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+@keyframes rotateAlbum {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.music-info {
+    text-align: left;
+    flex: 1;
+}
+
+.music-title {
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-artist {
+    font-size: 13px;
+    opacity: 0.7;
+    display: block;
+    color: #cccccc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* PLAY BUTTON */
+.music-play-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.music-play-button:hover {
+    transform: scale(1.1);
+}
+
+.music-play-button svg {
+    width: 16px;
+    height: 16px;
+    fill: #000000;
+    margin-left: 2px;
+}
+
+/* Progress Bar */
+.music-progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.music-progress-bar {
+    height: 100%;
+    background: #ffffff;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.5s linear;
+}
+
+.music-time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.views-pill {
+    display: inline-block;
+    padding: 5px 24px;
+    border-radius: 30px;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    background: transparent;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+a {
+    text-decoration: none !important;
+    color: inherit !important;
+    pointer-events: auto !important;
+}
+
+/* ✅ POPUP BOX — AYOS NA ANG PAG LALABAS */
+.profile-popup {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 12px;
+    width: 380px;
+    background: #000000 !important;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.9);
+    z-index: 9999; /* ✅ PINAKAMATAAS */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+}
+
+.avatar:hover .profile-popup {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    position: relative;
+}
+
+.popup-avatar-wrapper {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+}
+
+.popup-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
+    position: relative;
+    z-index: 2;
+}
+
+.popup-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.popup-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 58px;
+    height: 58px;
+    pointer-events: none;
+    z-index: 1;
+    display: block !important;
+}
+
+.popup-info {
+    text-align: left;
+    flex: 1;
+    overflow: hidden;
+}
+
+.popup-nickname {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    display: block;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup-name {
+    font-size: 13px;
+    font-weight: 400;
+    color: #8a8a8a;
+    display: block;
+    line-height: 1.2;
+    margin: 2px 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup-status {
+    font-size: 12px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.popup-status .status-dot {
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.popup-activity {
+    font-size: 11px;
+    color: #aaa;
+    background: #111;
+    padding: 4px 6px;
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
+</style>
+</head>
+<body oncontextmenu="return false;">
+
+<div id="loading-overlay">
+    <div class="click-text">CLICK</div>
+</div>
+
+<div class="card">
+    <div class="logo-img-container">
+        <img src="public azura.png" alt="crimben Logo" class="main-logo" onerror="this.style.display='none';">
+    </div>
+
+    <div class="title-image-container">
+        <img src="https://cdn.discordapp.com/attachments/1512985085610037338/1517456425956151418/image.png?ex=6a3658ec&is=6a35076c&hm=61c5a01dd669e3cb8c3d23e5d2c1cd7e4d18eeb90ad01546dd876fd5285de72d" alt="@ Symbol" class="title-image" onerror="this.style.display='none';">
+        <img src="https://cdn.discordapp.com/attachments/1512985085610037338/1517078120996540526/ChatGPT_Image_Jun_18_2026_03_56_22_PM.png?ex=6a35a159&is=6a344fd9&hm=3277b612a05ffcbfd3d95e03f5214af65448ddf40d29633b1f5b774da62f8bb6&" alt="Leon Text" class="title-image" onerror="this.style.display='none';">
+    </div>
+
+   <div id="statusArea" class="status-container">
+    <span id="statusDot" class="status-dot"></span>
+    <span id="statusText">Loading...</span>
+</div>
+
+<div class="section-card">
+
+<div class="avatar">
+        <div class="profile-popup">
+            <div class="popup-header">
+                <div class="popup-avatar-wrapper">
+                    <img id="popupDeco" class="popup-decoration" src="" alt="">
+                    <div class="popup-avatar">
+                        <img id="popupAvatarImg" src="" alt="">
+                    </div>
+                </div>
+                <div class="popup-info">
+                    <div class="popup-nickname" id="popupNickname">Leon</div>
+                    <div class="popup-name" id="popupUsername">@wtf.leon</div>
+                    <div class="popup-status">
+                        <span id="popupStatusDot" class="status-dot"></span>
+                        <span id="popupStatusText">Loading...</span>
+                    </div>
+                    <div class="popup-activity" id="popupActivity">No Activity</div>
+                </div>
+            </div>
+        </div>
+
+        <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
+        <div class="avatar-img-holder">
+            <img id="avatarImg" src="" alt="Leon Avatar">
+        </div>
+    </div>
+
+    <div id="usernameText" class="username"></div>
+    
+    <div id="noteText" class="bio">PA KISS NGA</div>
+
+    <div class="socials">
+        <a class="social" href="https://discord.gg/CwsGFu6D" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/></svg>
+        </a>
+        <a class="social" href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w&nd=1&dlsi=2944e36b3a9441b6" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/></svg>
+        </a>
+        <a class="social" href="https://www.instagram.com/leonky.2/" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.014-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 6.162 0 0 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+    </div>
+</div>
+<div class="section-card">
+
+    <!-- ✅ MUSIC PLAYER WITH PLAY BUTTON & CONTROLS -->
+    <div class="music-container" id="musicLinkContainer">
+        <div class="music-header">
+            <img id="musicAlbumArt" class="music-album-art" src="leonaise.webp" alt="Album Art">
+            <div class="music-info">
+                <span class="music-title" id="musicTitle">ORIGIMAL</span>
+                <span class="music-artist" id="musicArtist">Uncle Dags ORIGIMAL</span>
+            </div>
+            <button id="playPauseBtn" class="music-play-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="playIcon">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pauseIcon" style="display:none;">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="music-progress-container" id="progressBarContainer">
+            <div id="musicProgressBar" class="music-progress-bar"></div>
+        </div>
+
+        <div class="music-time">
+            <span id="musicTimeCurrent">0:00</span>
+            <span id="musicTimeTotal">2:31</span>
+        </div>
+
+        <span class="views-pill" id="viewsCount">Views: 5682</span>
+    </div>
+
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="../uncle-dags-origimal-feat.mp3" type="audio/mpeg">
+
+<script>
+const audio = document.getElementById("bgMusic");
+audio.volume = 0.5;
+
+const overlay = document.getElementById("loading-overlay");
+
+overlay.addEventListener('click', () => {
+    audio.play().catch(e => console.log(e));
+    overlay.style.opacity = "0";
+    setTimeout(() => { 
+        overlay.style.visibility = "hidden"; 
+    }, 800);
+});
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
+        e.preventDefault();
+        return false;
+    }
+});
+setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
+
+function updateViews() {
+    let count = localStorage.getItem('page_views');
+    if (!count) count = 5671; 
+    count = parseInt(count) + 1;
+    localStorage.setItem('page_views', count);
+    document.getElementById('viewsCount').innerText = `Views: ${count}`;
+}
+updateViews();
+
+const YOUR_ID = "1123145717461033041";
+const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
+
+// Default music info
+const defaultTitle = "ORIGIMAL";
+const defaultArtist = "Uncle Dags ORIGIMAL";
+const defaultArt = "leonaise.webp";
+const defaultLink = "https://open.spotify.com/track/0FRtjVrSshjgQzd7ex645B?si=c4fcafa93b6c4761";
+const defaultDuration = 151000; // 2:31 in ms
+
+let currentTrackUrl = defaultLink;
+let isPlaying = true;
+let currentTime = 0;
+let totalTime = defaultDuration;
+let progressInterval;
+
+// ==============================================
+// ✅ PLAY / PAUSE FUNCTIONALITY
+// ==============================================
+const playPauseBtn = document.getElementById('playPauseBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+const progressBar = document.getElementById('musicProgressBar');
+const timeCurrentEl = document.getElementById('musicTimeCurrent');
+const timeTotalEl = document.getElementById('musicTimeTotal');
+const musicLinkContainer = document.getElementById('musicLinkContainer');
+const progressBarContainer = document.getElementById('progressBarContainer');
+
+// Open Spotify Link when clicking music area
+musicLinkContainer.addEventListener('click', (e) => {
+    // Don't open if clicking the play button
+    if (!e.target.closest('.music-play-button')) {
+        window.open(currentTrackUrl, '_blank');
+    }
+});
+
+playPauseBtn.addEventListener('click', () => {
+    if (isPlaying) {
+        audio.pause();
+        clearInterval(progressInterval);
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+    } else {
+        audio.play().catch(e => console.log(e));
+        startProgressTimer();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+    }
+    isPlaying = !isPlaying;
+});
+
+// Click on progress bar to seek
+progressBarContainer.addEventListener('click', (e) => {
+    const rect = progressBarContainer.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    const newTime = percent * totalTime;
+    
+    currentTime = newTime;
+    updateProgressUI();
+    
+    // Update audio position if it's the default song
+    if (!document.getElementById('musicTitle').dataset.isSpotify) {
+        audio.currentTime = newTime / 1000;
+    }
+});
+
+function formatTime(ms) {
+    if (!ms || ms < 0) return "0:00";
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+function startProgressTimer() {
+    clearInterval(progressInterval);
+    progressInterval = setInterval(() => {
+        if (currentTime < totalTime) {
+            currentTime += 1000;
+            updateProgressUI();
+        } else {
+            currentTime = 0; // Loop
+            if(!document.getElementById('musicTitle').dataset.isSpotify) {
+                audio.currentTime = 0;
+            }
+        }
+    }, 1000);
+}
+
+function updateProgressUI() {
+    const percentage = totalTime > 0 ? (currentTime / totalTime) * 100 : 0;
+    progressBar.style.width = percentage + "%";
+    timeCurrentEl.innerText = formatTime(currentTime);
+}
+
+// ==============================================
+// ✅ FETCH DATA FROM API - AYOS NA ANG PAGKUHA
+// ==============================================
+async function fetchData() {
+    try {
+        const res = await fetch(API_URL, {cache: "no-store"});
+        const json = await res.json();
+
+        if (!json.success) {
+            console.error("API Error:", json);
+            document.getElementById('statusText').innerText = 'Error';
+            return;
+        }
+        const d = json.data;
+
+        // Avatar
+        const avatarEl = document.getElementById('avatarImg');
+        const popupAvatarEl = document.getElementById('popupAvatarImg');
+        let avatarUrl = "";
+        if (d.discord_user.avatar) {
+            avatarUrl = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
+        } else {
+            avatarUrl = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
+        }
+        avatarEl.src = avatarUrl;
+        popupAvatarEl.src = avatarUrl;
+
+        // ✅ AVATAR DECORATION - SIGURADONG LUMALABAS
+        const decoEl = document.getElementById('decoImg');
+        const popupDecoEl = document.getElementById('popupDeco');
+        if (d.discord_user.avatar_decoration_data) {
+            const asset = d.discord_user.avatar_decoration_data.asset;
+            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=240&passthrough=true`;
+            decoEl.src = decoUrl;
+            decoEl.style.display = 'block';
+            popupDecoEl.src = decoUrl;
+            popupDecoEl.style.display = 'block';
+        } else {
+            decoEl.style.display = 'none';
+            popupDecoEl.style.display = 'none';
+        }
+
+        // Names
+        const nickname = d.discord_user.global_name || "Leon";
+        const username = d.discord_user.username || "wtf.leon";
+        document.getElementById('popupNickname').innerText = nickname;
+        document.getElementById('popupUsername').innerText = `@${username}`;
+
+        // Bio / Custom Status
+        const noteEl = document.getElementById('noteText');
+        const customStatus = d.activities?.find(a => a.type === 4);
+        let statusText = "PA KISS NGA";
+        if (customStatus?.state) {
+            statusText = customStatus.state;
+        }
+        noteEl.innerText = statusText;
+
+        // Status
+        const statusDot = document.getElementById('statusDot');
+        const statusTextEl = document.getElementById('statusText');
+        const popupStatusDot = document.getElementById('popupStatusDot');
+        const popupStatusText = document.getElementById('popupStatusText');
+        
+        statusDot.className = "status-dot";
+        popupStatusDot.className = "status-dot";
+
+        let statusString = "";
+        let statusClass = "";
+
+        switch(d.discord_status) {
+            case 'online':
+                statusClass = 'status-online';
+                statusString = 'Online';
+                break;
+            case 'idle':
+                statusClass = 'status-idle';
+                statusString = 'Idle';
+                break;
+            case 'dnd':
+                statusClass = 'status-dnd';
+                statusString = 'Do Not Disturb';
+                break;
+            default:
+                statusClass = 'status-offline';
+                statusString = 'Offline / Invisible';
+        }
+
+        statusDot.classList.add(statusClass);
+        statusTextEl.innerText = statusString;
+        popupStatusDot.classList.add(statusClass);
+        popupStatusText.innerText = statusString;
+
+        // ✅ Activity sa Popup
+        const activityEl = document.getElementById('popupActivity');
+        const activity = d.activities?.find(a => a.type === 0 || a.type === 2 || a.type === 3);
+        if (activity) {
+            if (activity.type === 0) activityEl.innerText = `Playing: ${activity.name}`;
+            if (activity.type === 2) activityEl.innerText = `Listening: ${activity.name}`;
+            if (activity.type === 3) activityEl.innerText = `Watching: ${activity.name}`;
+        } else {
+            activityEl.innerText = "No Activity";
+        }
+
+        // ==============================================
+        // ✅ SPOTIFY / MUSIC PLAYER UPDATE
+        // ==============================================
+        const titleEl = document.getElementById('musicTitle');
+        const artistEl = document.getElementById('musicArtist');
+        const artEl = document.getElementById('musicAlbumArt');
+
+        if (d.spotify?.track_id) {
+            // NAKIKINIG SA SPOTIFY
+            titleEl.innerText = d.spotify.song || "Unknown Track";
+            artistEl.innerText = d.spotify.artist || "Unknown Artist";
+            artEl.src = d.spotify.album_art_url || defaultArt;
+            
+            // Timestamps
+            const start = d.spotify.timestamps?.start || 0;
+            const end = d.spotify.timestamps?.end || 0;
+            
+            if (end > start) {
+                totalTime = end - start;
+                currentTime = Math.min(Date.now() - start, totalTime);
+                timeTotalEl.innerText = formatTime(totalTime);
+                updateProgressUI();
+            }
+            
+            // Link to track
+            currentTrackUrl = `https://open.spotify.com/track/${d.spotify.track_id}`;
+            titleEl.dataset.isSpotify = "true";
+
+        } else {
+            // DEFAULT MUSIC
+            titleEl.innerText = defaultTitle;
+            artistEl.innerText = defaultArtist;
+            artEl.src = "leonaise.webp";
+            currentTrackUrl = defaultLink;
+            totalTime = defaultDuration;
+            timeTotalEl.innerText = "2:31";
+            titleEl.dataset.isSpotify = "false";
+            
+            // Update time for default song
+            if(isPlaying) {
+                currentTime = audio.currentTime * 1000;
+                updateProgressUI();
+            }
+        }
+
+    } catch (err) {
+        console.error("API Fetch Error:", err);
+        document.getElementById('statusText').innerText = 'Error';
+    }
+}
+
+fetchData();
+setInterval(fetchData, 5000); // Update every 5 seconds
+
+// Start timer on load
+startProgressTimer();
+playIcon.style.display = 'none';
+pauseIcon.style.display = 'block';
+
+history.replaceState(null, null, location.href);
+window.onpopstate = () => history.go(1);
+window.addEventListener('load', () => history.pushState(null, null, location.href));
+</script>
+</body>
+</html>

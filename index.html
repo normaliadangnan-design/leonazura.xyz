@@ -563,7 +563,7 @@
         <div class="gateway-btn">CLICK</div>
     </div>
 
-    <!-- ✅ FIXED: TAMA NA ANG PAGSARA NG AUDIO TAG -->
+    <!-- ✅ TAMA NA ANG PAGSARA NG AUDIO TAG — HINDI NA MAGIGING SANHI NG ERROR -->
     <audio id="soundtrack" loop>
         <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
     
@@ -584,13 +584,17 @@
         const audio = document.getElementById("soundtrack");
         audio.volume = 0.4;
 
-        // ✅ Pinatibay na click event
+        // ✅ PINATIBAY NA PINDOT — siguradong tutugon kahit may error sa tunog
         const gateway = document.getElementById("gateway-overlay");
         gateway.addEventListener("click", function() {
-            audio.play().catch(err => console.log("Audio error:", err));
+            // Kahit hindi tumugma ang audio, itutuloy pa rin ang pagpapakita ng site
+            try {
+                audio.play().catch(() => {});
+            } catch {}
+            // Agad na aalisin ang itim na screen
             this.classList.add("fade-gateway");
             document.body.classList.add('loaded');
-            fetchAndUpdate(); // Agad na kukunin ang data pag pindot
+            fetchAndUpdate();
         });
 
         const UPDATE_INTERVAL = 5000; 
@@ -605,6 +609,7 @@
         async function getUserData(userId) {
             try {
                 const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+                if (!res.ok) return null;
                 const json = await res.json();
 
                 if (json.success) {
@@ -616,7 +621,7 @@
                     let customStatus = activities.find(a => a.type === 4) || null;
 
                     let effectURL = null;
-                    if (d.discord_user.avatar_decoration_data?.asset) {
+                    if (d.discord_user?.avatar_decoration_data?.asset) {
                         const assetId = d.discord_user.avatar_decoration_data.asset.replace(/^a_/, '');
                         effectURL = `https://cdn.discordapp.com/avatar-decoration-presets/a_${assetId}.png?size=256`;
                     }
@@ -743,6 +748,9 @@
             });
         }
 
+        // Simulan agad ang pagkuha ng data pagkatapos mabasa ang script
+        fetchAndUpdate();
+        setInterval(fetchAndUpdate, UPDATE_INTERVAL);
     </script>
 </body>
 </html>

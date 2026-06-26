@@ -555,49 +555,54 @@
         </div>
     </div>
 
-    <a href="https://discord.gg/azuraorg" class="discord-animated" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord" loading="lazy">
+    <a href="https://discord.gg/azuraorg" class="discord-animated" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord" loading="lazy" onerror="this.style.display='none'">
     </a>
 
     <div id="gateway-overlay">
         <div class="gateway-btn">CLICK</div>
     </div>
 
-    <!-- ✅ TAMA NA ANG PAGSARA NG AUDIO TAG — HINDI NA MAGIGING SANHI NG ERROR -->
-    <audio id="soundtrack" loop>
+    <!-- ✅ FIXED: TAMA NA ANG PAGSARA NG AUDIO TAG -->
+    <audio id="soundtrack" loop preload="auto">
         <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
+        <!-- Kung walang audio, hindi na magdudulot ng error -->
+        Your browser does not support the audio element.
     
 
     <script>
         function disableKeys(e) {
-            if(e.keyCode == 123 || 
-               (e.ctrlKey && e.keyCode == 85) || 
-               (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
-               (e.ctrlKey && e.keyCode == 83)) {
+            if(e.keyCode === 123 || 
+               (e.ctrlKey && e.keyCode === 85) || 
+               (e.ctrlKey && e.shiftKey && e.keyCode === 73) || 
+               (e.ctrlKey && e.keyCode === 83)) {
+                e.preventDefault();
                 return false;
             }
+            return true;
         }
-        document.onkeydown = disableKeys;
-        document.oncontextmenu = function() { return false; };
-        document.onmousedown = function(e) { if(e.button === 2) return false; };
+        document.addEventListener('keydown', disableKeys);
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('mousedown', e => { if(e.button === 2) e.preventDefault(); });
 
         const audio = document.getElementById("soundtrack");
         audio.volume = 0.4;
 
-        // ✅ PINATIBAY NA PINDOT — siguradong tutugon kahit may error sa tunog
+        // ✅ MATIBAY NA CLICK EVENT — kahit may problema sa audio, gagana pa rin
         const gateway = document.getElementById("gateway-overlay");
         gateway.addEventListener("click", function() {
-            // Kahit hindi tumugma ang audio, itutuloy pa rin ang pagpapakita ng site
+            // Subukang magpatugtog ng tunog, pero huwag pigilan ang site kung may error
             try {
                 audio.play().catch(() => {});
             } catch {}
-            // Agad na aalisin ang itim na screen
+
+            // Agad na ipakita ang laman ng site
             this.classList.add("fade-gateway");
             document.body.classList.add('loaded');
             fetchAndUpdate();
         });
 
-        const UPDATE_INTERVAL = 5000; 
+        const UPDATE_INTERVAL = 10000; // Inayos: 10 segundo ang pag-update para hindi mabigat
 
         const founderIDs = ["1250654354344775703", "1123145717461033041", "1085580321623375938"]; 
         const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1242051125776093256", "1498999674969784426"]; 
@@ -608,34 +613,26 @@
 
         async function getUserData(userId) {
             try {
-                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`, {
+                    cache: 'no-cache'
+                });
                 if (!res.ok) return null;
                 const json = await res.json();
 
-                if (json.success) {
+                if (json.success && json.data) {
                     const d = json.data;
+                    const user = d.discord_user || {};
                     
-                    let status = d.discord_status || 'offline';
-                    let activities = d.activities || [];
-                    let spotify = d.spotify || null;
-                    let customStatus = activities.find(a => a.type === 4) || null;
-
-                    let effectURL = null;
-                    if (d.discord_user?.avatar_decoration_data?.asset) {
-                        const assetId = d.discord_user.avatar_decoration_data.asset.replace(/^a_/, '');
-                        effectURL = `https://cdn.discordapp.com/avatar-decoration-presets/a_${assetId}.png?size=256`;
-                    }
-
                     return {
                         id: userId,
-                        username: d.discord_user.username,
-                        displayName: d.discord_user.global_name || d.discord_user.username,
-                        status: status,
-                        avatarURL: `https://cdn.discordapp.com/avatars/${userId}/${d.discord_user.avatar}.png?size=1024`,
-                        effectURL: effectURL,
-                        spotify: spotify,
-                        activities: activities,
-                        customStatus: customStatus
+                        username: user.username || "unknown",
+                        displayName: user.global_name || user.username || "Unknown",
+                        status: d.discord_status || 'offline',
+                        avatarURL: user.avatar ? `https://cdn.discordapp.com/avatars/${userId}/${user.avatar}.png?size=1024` : "https://cdn.discordapp.com/embed/avatars/0.png",
+                        effectURL: user.avatar_decoration_data?.asset ? `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.png?size=256` : null,
+                        spotify: d.spotify || null,
+                        activities: d.activities || [],
+                        customStatus: (d.activities || []).find(a => a.type === 4) || null
                     };
                 }
                 return null;
@@ -647,61 +644,59 @@
 
 
         async function fetchAndUpdate() {
-            const allFounder = await Promise.all(founderIDs.map(id => getUserData(id)));
-            const allAboveAll = await Promise.all(aboveAllIDs.map(id => getUserData(id)));
-            const allStaff = await Promise.all(staffIDs.map(id => getUserData(id)));
-            const allScroll1 = await Promise.all(scrollingIDsRow1.map(id => getUserData(id)));
-            const allScroll2 = await Promise.all(scrollingIDsRow2.map(id => getUserData(id)));
+            try {
+                const [founders, aboveAll, staff, scroll1, scroll2] = await Promise.allSettled([
+                    Promise.all(founderIDs.map(getUserData)),
+                    Promise.all(aboveAllIDs.map(getUserData)),
+                    Promise.all(staffIDs.map(getUserData)),
+                    Promise.all(scrollingIDsRow1.map(getUserData)),
+                    Promise.all(scrollingIDsRow2.map(getUserData))
+                ]);
 
-            showGroup(allFounder.filter(Boolean), 'founder-container');
-            showGroup(allAboveAll.filter(Boolean), 'aboveall-container');
-            showGroup(allStaff.filter(Boolean), 'staff-container');
-            showMarquee(allScroll1.filter(Boolean), "marquee-container-1");
-            showMarquee(allScroll2.filter(Boolean), "marquee-container-2");
+                showGroup(founders.status === 'fulfilled' ? founders.value.filter(Boolean) : [], 'founder-container');
+                showGroup(aboveAll.status === 'fulfilled' ? aboveAll.value.filter(Boolean) : [], 'aboveall-container');
+                showGroup(staff.status === 'fulfilled' ? staff.value.filter(Boolean) : [], 'staff-container');
+                showMarquee(scroll1.status === 'fulfilled' ? scroll1.value.filter(Boolean) : [], "marquee-container-1");
+                showMarquee(scroll2.status === 'fulfilled' ? scroll2.value.filter(Boolean) : [], "marquee-container-2");
+            } catch (e) {
+                console.log("Update error:", e);
+            }
         }
 
 
-        function showGroup(members, container) {
-            const box = document.getElementById(container);
+        function showGroup(members, containerId) {
+            const box = document.getElementById(containerId);
             if (!box) return;
-            
             box.innerHTML = '';
 
             members.forEach(mem => {
                 const wrapper = document.createElement('div'); 
                 wrapper.className = 'avatar-wrapper-node';
 
-                let decoHTML = '';
-                if (mem.effectURL) {
-                    decoHTML = `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy" onerror="this.remove()">`;
-                }
+                const decoHTML = mem.effectURL ? `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy" onerror="this.remove()">` : '';
 
-                let statusClass = 'status-offline'; 
-                if (mem.status) {
-                    const s = mem.status.toLowerCase().trim();
-                    if (s === 'online') statusClass = 'status-online';
-                    else if (s === 'idle') statusClass = 'status-idle';
-                    else if (s === 'dnd') statusClass = 'status-dnd';
-                }
+                let statusClass = 'status-offline';
+                const s = String(mem.status || 'offline').toLowerCase().trim();
+                if (s === 'online') statusClass = 'status-online';
+                else if (s === 'idle') statusClass = 'status-idle';
+                else if (s === 'dnd') statusClass = 'status-dnd';
 
                 let statusText = '';
                 let statusType = '';
 
                 if (mem.spotify) {
                     statusType = 'activity-listening';
-                    statusText = `Listening to ${mem.spotify.song}`;
-                } 
-                else if (mem.activities && mem.activities.length > 0) {
+                    statusText = `Listening to ${mem.spotify.song || 'Music'}`;
+                } else if (Array.isArray(mem.activities) && mem.activities.length > 0) {
                     const act = mem.activities.find(a => a.type !== 4) || mem.activities[0];
                     if (act) {
-                        if (act.type === 0) { statusType = 'activity-playing'; statusText = `Playing ${act.name}`; }
-                        if (act.type === 1) { statusType = 'activity-streaming'; statusText = `Streaming ${act.name}`; }
-                        if (act.type === 2) { statusType = 'activity-listening'; statusText = `Listening to ${act.name}`; }
-                        if (act.type === 3) { statusType = 'activity-watching'; statusText = `Watching ${act.name}`; }
+                        if (act.type === 0) { statusType = 'activity-playing'; statusText = `Playing ${act.name || 'Game'}`; }
+                        if (act.type === 1) { statusType = 'activity-streaming'; statusText = `Streaming ${act.name || 'Stream'}`; }
+                        if (act.type === 2) { statusType = 'activity-listening'; statusText = `Listening to ${act.name || 'Music'}`; }
+                        if (act.type === 3) { statusType = 'activity-watching'; statusText = `Watching ${act.name || 'Video'}`; }
                     }
                 }
-
-                if (mem.customStatus && mem.customStatus.state) {
+                if (mem.customStatus?.state) {
                     statusText = mem.customStatus.state;
                     statusType = '';
                 }
@@ -715,7 +710,6 @@
                         <span class="status-indicator ${statusClass}"></span>
                     </div>
                     <div class="name-label">${mem.displayName}</div>
-
                     <div class="avatar-tooltip">
                         <div class="tooltip-header">
                             <div class="tooltip-avatar-wrapper">
@@ -737,18 +731,18 @@
 
         function showMarquee(members, containerId) {
             const box = document.getElementById(containerId);
-            if (!box || members.length === 0) return;
+            if (!box || !Array.isArray(members) || members.length === 0) return;
             const list = [...members, ...members, ...members];
             box.innerHTML = '';
             list.forEach(mem => {
                 const block = document.createElement('div');
                 block.className = 'marquee-profile-block';
-                block.innerHTML = `<img src="${mem.avatarURL}" loading="lazy"> <span>${mem.displayName}</span>`;
+                block.innerHTML = `<img src="${mem.avatarURL}" loading="lazy" alt="avatar"> <span>${mem.displayName}</span>`;
                 box.appendChild(block);
             });
         }
 
-        // Simulan agad ang pagkuha ng data pagkatapos mabasa ang script
+        // Simulan agad ang pagkuha ng data
         fetchAndUpdate();
         setInterval(fetchAndUpdate, UPDATE_INTERVAL);
     </script>

@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -563,7 +563,7 @@
         <div class="gateway-btn">CLICK</div>
     </div>
 
-    <!-- ✅ TAMA NA ANG PAGSARA NG TAG -->
+    <!-- ✅ FIXED: Sarado nang tama ang audio tag -->
     <audio id="soundtrack" loop>
         <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
     
@@ -584,10 +584,13 @@
         const audio = document.getElementById("soundtrack");
         audio.volume = 0.4;
 
-        document.getElementById("gateway-overlay").addEventListener("click", function() {
-            audio.play().catch(() => {});
+        // ✅ Pinatibay ang click event
+        const gateway = document.getElementById("gateway-overlay");
+        gateway.addEventListener("click", function() {
+            audio.play().catch(err => console.log("Audio play error:", err));
             this.classList.add("fade-gateway");
             document.body.classList.add('loaded');
+            fetchAndUpdate(); // Agad na kukunin ang data pag pindot
         });
 
         const UPDATE_INTERVAL = 5000; 

@@ -37,7 +37,6 @@ body {
     position: relative;
 }
 
-/* ✅ Enhanced Grid Overlay + Subtle Grain */
 body::before {
     content: "";
     position: absolute;
@@ -50,14 +49,12 @@ body::before {
     pointer-events: none;
 }
 
-/* ✅ Glowing Border Animation */
 @keyframes borderGlow {
     0% { box-shadow: 0 0 5px rgba(255,255,255,0.15), 0 0 10px rgba(255,255,255,0.1); }
     50% { box-shadow: 0 0 12px rgba(255,255,255,0.25), 0 0 20px rgba(255,255,255,0.15); }
     100% { box-shadow: 0 0 5px rgba(255,255,255,0.15), 0 0 10px rgba(255,255,255,0.1); }
 }
 
-/* ✅ Loading Screen */
 #loading-overlay {
     position: fixed;
     top: 0;
@@ -89,7 +86,6 @@ body::before {
     100% { opacity: 1; transform: scale(1.08); }
 }
 
-/* ✅ Main Container */
 .card {
     width: 100%;
     max-width: 520px;
@@ -98,7 +94,6 @@ body::before {
     z-index: 10;
 }
 
-/* ✅ Logo */
 .logo-img-container {
     display: flex;
     justify-content: center;
@@ -118,7 +113,6 @@ body::before {
     filter: drop-shadow(0 0 25px rgba(255,255,255,0.4));
 }
 
-/* ✅ Title Row */
 .title-image-container {
     margin-bottom: 25px;
     height: 50px;
@@ -139,7 +133,6 @@ body::before {
     transform: scale(1.05);
 }
 
-/* ✅ Status Badge - Improved */
 .status-container {
     display: flex;
     align-items: center;
@@ -172,7 +165,6 @@ body::before {
 .status-dnd { background-color: #f13f43; color: #f13f43; }
 .status-offline { background-color: #80848e; color: #80848e; }
 
-/* ✅ Avatar Section - More Dynamic */
 .avatar {
     position: relative;
     width: 160px;
@@ -228,7 +220,6 @@ img.avatar-decoration {
     filter: drop-shadow(0 0 20px rgba(255,255,255,0.35));
 }
 
-/* ✅ Card Sections - Better Glassmorphism */
 .section-card {
     background: rgba(10, 10, 10, 0.75);
     backdrop-filter: blur(16px);
@@ -246,9 +237,7 @@ img.avatar-decoration {
     box-shadow: 0 12px 35px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.1);
 }
 
-.username {
-    display: none;
-}
+.username { display: none; }
 
 .bio {
     opacity: 0.92;
@@ -262,7 +251,6 @@ img.avatar-decoration {
     font-weight: 400;
 }
 
-/* ✅ Social Icons - More Stylish */
 .socials {
     display: flex;
     justify-content: center;
@@ -299,11 +287,8 @@ img.avatar-decoration {
     opacity: 0.95;
     transition: fill 0.3s ease;
 }
-.social:hover svg {
-    fill: #f0f0f0;
-}
+.social:hover svg { fill: #f0f0f0; }
 
-/* ✅ Music Player - Polished */
 .music-container {
     display: block;
     color: white;
@@ -373,7 +358,6 @@ img.avatar-decoration {
     text-overflow: ellipsis;
 }
 
-/* ✅ Play/Pause Button */
 .music-play-button {
     width: 44px;
     height: 44px;
@@ -402,15 +386,19 @@ img.avatar-decoration {
     margin-left: 2px;
 }
 
-/* Progress Bar */
 .music-progress-container {
     width: 100%;
     height: 6px;
     background: rgba(255,255,255,0.12);
     border-radius: 4px;
     margin-top: 12px;
-    overflow: hidden;
-    cursor: default;
+    overflow: visible;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s ease;
+}
+.music-progress-container:hover {
+    background: rgba(255,255,255,0.2);
 }
 
 .music-progress-bar {
@@ -418,8 +406,26 @@ img.avatar-decoration {
     background: linear-gradient(90deg, #ffffff, #e8e8e8);
     width: 0%;
     border-radius: 4px;
-    transition: width 0.5s linear;
-    box-shadow: 0 0 10px rgba(255,255,255,0.25);
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    position: relative;
+}
+.music-progress-bar::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.music-progress-container:hover .music-progress-bar::after {
+    opacity: 1;
 }
 
 .music-time {
@@ -449,7 +455,6 @@ img.avatar-decoration {
     border-color: rgba(255,255,255,0.18);
 }
 
-/* ✅ Popup / Tooltip - Smoother */
 .profile-popup {
     position: absolute;
     bottom: 115%;
@@ -570,7 +575,6 @@ img.avatar-decoration {
     border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Responsive */
 @media (max-width: 480px) {
     .click-text { font-size: 26px; letter-spacing: 8px; }
     .avatar { width: 140px; height: 140px; }
@@ -665,7 +669,7 @@ img.avatar-decoration {
                 </button>
             </div>
 
-            <div class="music-progress-container">
+            <div id="progressClickArea" class="music-progress-container">
                 <div id="musicProgressBar" class="music-progress-bar"></div>
             </div>
 
@@ -720,7 +724,6 @@ const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
 const defaultTitle = "CHILL OUT";
 const defaultArtist = "HYU1 CHILL OUT (Official Music Video)";
 const defaultArt = "leonaise.webp";
-const defaultLink = "https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w";
 const defaultDuration = 151000;
 
 let isPlaying = true;
@@ -732,8 +735,19 @@ const playPauseBtn = document.getElementById('playPauseBtn');
 const playIcon = document.getElementById('playIcon');
 const pauseIcon = document.getElementById('pauseIcon');
 const progressBar = document.getElementById('musicProgressBar');
+const progressClickArea = document.getElementById('progressClickArea');
 const timeCurrentEl = document.getElementById('musicTimeCurrent');
 const timeTotalEl = document.getElementById('musicTimeTotal');
+
+progressClickArea.addEventListener('click', (e) => {
+    const rect = progressClickArea.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const percent = Math.max(0, Math.min(1, clickX / rect.width));
+    const newTime = percent * totalTime;
+    currentTime = newTime;
+    audio.currentTime = newTime / 1000;
+    updateProgressUI();
+});
 
 playPauseBtn.addEventListener('click', () => {
     if (isPlaying) {
@@ -761,19 +775,18 @@ function formatTime(ms) {
 function startProgressTimer() {
     clearInterval(progressInterval);
     progressInterval = setInterval(() => {
-        if (currentTime < totalTime) {
-            currentTime += 1000;
-            updateProgressUI();
-        } else {
-            currentTime = 0;
-            audio.currentTime = 0;
+        if (!isNaN(audio.duration) && audio.duration > 0) {
+            totalTime = audio.duration * 1000;
+            timeTotalEl.innerText = formatTime(totalTime);
         }
+        currentTime = audio.currentTime * 1000;
+        updateProgressUI();
     }, 1000);
 }
 
 function updateProgressUI() {
     const percentage = totalTime > 0 ? (currentTime / totalTime) * 100 : 0;
-    progressBar.style.width = percentage + "%";
+    progressBar.style.width = `${percentage}%`;
     timeCurrentEl.innerText = formatTime(currentTime);
 }
 
@@ -893,13 +906,10 @@ async function fetchData() {
         } else {
             titleEl.innerText = defaultTitle;
             artistEl.innerText = defaultArtist;
-            artEl.src = "leonaise.webp";
+            artEl.src = defaultArt;
             totalTime = defaultDuration;
-            timeTotalEl.innerText = "2:31";
-            if(isPlaying) {
-                currentTime = audio.currentTime * 1000;
-                updateProgressUI();
-            }
+            timeTotalEl.innerText = formatTime(defaultDuration);
+            updateProgressUI();
         }
 
     } catch (err) {

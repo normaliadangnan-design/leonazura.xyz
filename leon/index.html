@@ -443,7 +443,25 @@ img.avatar-decoration {
     border: 2px solid rgba(255,255,255,0.15);
     box-shadow: 0 0 15px rgba(0,0,0,0.9);
     transition: all 0.3s ease;
+    position: relative;
 }
+/* ✅ Spotify logo overlay */
+.music-album-art.spotify::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #1DB954;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.49 14.41c-.28.42-.85.55-1.27.27-3.49-2.14-7.89-2.62-11.66-1.43-.46.15-.95-.12-1.1-.58-.15-.46.12-.95.58-1.1 4.24-1.31 9.11-.75 12.57 1.47.42.28.55.85.27 1.27zm2.82-5.28c-.35.54-1.07.71-1.61.36-4.01-2.46-10.11-3.18-14.84-1.74-.62.19-1.29-.16-1.48-.78-.19-.62.16-1.29.78-1.48 5.39-1.64 12.09-.85 16.66 1.95.54.35.71 1.07.36 1.61zm.24-5.59c-.51.69-1.49.87-2.18.36-5.01-3.07-13.26-3.34-18.02-1.84-.75.24-1.55-.2-1.79-.95-.24-.75.2-1.55.95-1.79 5.44-1.7 14.53-1.38 20.15 2.07.69.51.87 1.49.36 2.18z" fill="white"/></svg>');
+    background-size: 14px;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
+
 .music-album-art:hover {
     border-color: rgba(255,255,255,0.25);
     box-shadow: 0 0 20px rgba(0,0,0,1);
@@ -526,11 +544,11 @@ img.avatar-decoration {
 
 .music-progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #ffffff, #e8e8e8);
+    background: linear-gradient(90deg, #1DB954, #1ed760);
     width: 0%;
     border-radius: 4px;
     transition: width 0.1s linear;
-    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    box-shadow: 0 0 10px rgba(29, 185, 84, 0.3);
     position: relative;
 }
 .music-progress-bar::after {
@@ -542,8 +560,8 @@ img.avatar-decoration {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #ffffff;
-    box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    background: #1DB954;
+    box-shadow: 0 0 15px rgba(29, 185, 84, 0.6);
     opacity: 0;
     transition: opacity 0.2s ease;
 }

@@ -55,6 +55,35 @@ body::before {
     100% { box-shadow: 0 0 5px rgba(255,255,255,0.15), 0 0 10px rgba(255,255,255,0.1); }
 }
 
+/* ✅ Typewriter Animation */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+#typewriter-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    margin-bottom: 16px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #ffffff;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    animation: 
+        typing 2.5s steps(9, end) forwards,
+        blink 0.8s infinite;
+}
+
 #loading-overlay {
     position: fixed;
     top: 0;
@@ -576,6 +605,7 @@ img.avatar-decoration {
 }
 
 @media (max-width: 480px) {
+    #typewriter-name { font-size: 22px; letter-spacing: 1px; }
     .click-text { font-size: 26px; letter-spacing: 8px; }
     .avatar { width: 140px; height: 140px; }
     img.avatar-decoration { width: 165px; height: 165px; }
@@ -601,6 +631,9 @@ img.avatar-decoration {
         <img src="https://cdn.discordapp.com/attachments/1512985085610037338/1517456425956151418/image.png?ex=6a3658ec&is=6a35076c&hm=61c5a01dd669e3cb8c3d23e5d2c1cd7e4d18eeb90ad01546dd876fd5285de72d" alt="@ Symbol" class="title-image" onerror="this.style.display='none';">
         <img src="https://cdn.discordapp.com/attachments/1512985085610037338/1517078120996540526/ChatGPT_Image_Jun_18_2026_03_56_22_PM.png?ex=6a35a159&is=6a344fd9&hm=3277b612a05ffcbfd3d95e03f5214af65448ddf40d29633b1f5b774da62f8bb6&" alt="Leon Text" class="title-image" onerror="this.style.display='none';">
     </div>
+
+    <!-- ✅ Typewriter Name here -->
+    <div id="typewriter-name">@ Ｌｅｏｎ</div>
 
     <div id="statusArea" class="status-container">
         <span id="statusDot" class="status-dot"></span>

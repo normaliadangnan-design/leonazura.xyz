@@ -24,19 +24,21 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    /* ✅ FIXED: Lower opacity so background shows clearly */
     background:
-        linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+        linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)),
         url("../members/founder/leon.gif");
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
     color: #ffffff;
     overflow-y: auto;
     padding: 100px 20px 40px;
     position: relative;
 }
 
-/* ✅ Subtle grid overlay for that "maangas" tech/dark vibe */
+/* ✅ Subtle grid overlay */
 body::before {
     content: "";
     position: absolute;
@@ -132,7 +134,7 @@ body::before {
     font-weight: 500;
     padding: 9px 20px;
     border-radius: 30px;
-    background: rgba(15, 15, 15, 0.8);
+    background: rgba(15, 15, 15, 0.85);
     border: 1px solid rgba(255,255,255,0.08);
     width: fit-content;
     margin-left: auto;
@@ -201,12 +203,12 @@ img.avatar-decoration {
     filter: drop-shadow(0 0 10px rgba(255,255,255,0.15));
 }
 
-/* ✅ Card Sections */
+/* ✅ Card Sections - More transparent so background shows through */
 .section-card {
-    background: rgba(10, 10, 10, 0.75);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(8, 8, 8, 0.70);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 22px;
     padding: 28px;
     margin-bottom: 22px;
@@ -248,7 +250,7 @@ img.avatar-decoration {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.08);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -257,8 +259,8 @@ img.avatar-decoration {
 
 .social:hover {
     transform: translateY(-5px) scale(1.08);
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.18);
     box-shadow: 0 0 15px rgba(255,255,255,0.15);
 }
 
@@ -269,18 +271,18 @@ img.avatar-decoration {
     opacity: 0.9;
 }
 
-/* ✅ Music Player — FIXED: Only button is clickable */
+/* ✅ Music Player — Only button is clickable */
 .music-container {
     display: block;
     color: white;
-    background: #000000;
+    background: rgba(0, 0, 0, 0.85);
     border-radius: 16px;
     padding: 18px;
     width: 100%;
     border: 1px solid rgba(255,255,255,0.08);
     margin-bottom: 10px;
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-    cursor: default; /* ❌ Hindi pwedeng i-click ang buong player */
+    cursor: default;
     transition: all 0.3s ease;
 }
 
@@ -371,7 +373,7 @@ img.avatar-decoration {
     border-radius: 3px;
     margin-top: 10px;
     overflow: hidden;
-    cursor: default; /* ❌ Hindi pwedeng i-click ang progress */
+    cursor: default;
 }
 
 .music-progress-bar {
@@ -413,7 +415,7 @@ img.avatar-decoration {
     transform: translateX(-50%);
     margin-bottom: 15px;
     width: 390px;
-    background: #000000;
+    background: rgba(0, 0, 0, 0.92);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 12px;
     padding: 18px;

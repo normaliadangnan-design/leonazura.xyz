@@ -55,13 +55,16 @@ body::before {
     100% { box-shadow: 0 0 5px rgba(255,255,255,0.15), 0 0 10px rgba(255,255,255,0.1); }
 }
 
-/* ✅ Typewriter Animation */
+/* ✅ Typewriter Animation - cursor disappears after done */
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
 }
 @keyframes blink {
     50% { border-color: transparent; }
+}
+@keyframes hideCursor {
+    to { border-right: none; }
 }
 
 #typewriter-name {
@@ -81,38 +84,89 @@ body::before {
     margin-right: auto;
     animation: 
         typing 2.5s steps(9, end) forwards,
-        blink 0.8s infinite;
+        blink 0.8s infinite 2.5s,
+        hideCursor 0.1s forwards 4s;
 }
 
+/* ✅ NEW ANIMATED LOADING SCREEN - Maangas Style */
 #loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #050505;
+    background: #000000;
     z-index: 999999;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: opacity 0.8s ease, visibility 0.8s ease;
+    overflow: hidden;
 }
 
+.loading-content {
+    position: relative;
+    text-align: center;
+    padding: 30px 50px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(10,10,10,0.7);
+    box-shadow: 0 0 40px rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+
+/* Scan line effect */
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ffffff;
+    box-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff80;
+    animation: scan 2.5s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(400%); }
+}
+
+/* Glitch text animation */
 .click-text {
     font-family: 'Oswald', sans-serif;
-    font-size: 36px;
+    font-size: 42px;
     font-weight: 700;
-    letter-spacing: 12px;
+    letter-spacing: 15px;
     color: #ffffff;
-    text-shadow: 0 0 20px rgba(255,255,255,0.5);
-    animation: pulse 2s infinite alternate;
     text-transform: uppercase;
+    position: relative;
+    animation: glitch 4s infinite;
+}
+
+@keyframes glitch {
+    0% { text-shadow: 0 0 20px rgba(255,255,255,0.6); }
+    2% { transform: translate(-2px, 0); }
+    4% { transform: translate(2px, 0); }
+    6% { transform: translate(0, 0); }
+    8% { text-shadow: 2px 0 15px #ff0040, -2px 0 15px #00ffff; }
+    10% { text-shadow: 0 0 20px rgba(255,255,255,0.6); }
+    100% { text-shadow: 0 0 20px rgba(255,255,255,0.6); }
+}
+
+.sub-text {
+    margin-top: 15px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: #cccccc;
+    opacity: 0.8;
+    animation: pulse 2s infinite alternate;
 }
 
 @keyframes pulse {
-    0% { opacity: 0.3; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1.08); }
+    0% { opacity: 0.4; }
+    100% { opacity: 1; }
 }
 
 .card {
@@ -613,13 +667,19 @@ img.avatar-decoration {
     .profile-popup { width: 330px; }
     .social { width: 60px; height: 60px; }
     .social svg { width: 26px; height: 26px; }
+    .loading-content { padding: 20px 30px; }
+    .click-text { font-size: 32px; letter-spacing: 10px; }
 }
 </style>
 </head>
 <body oncontextmenu="return false;">
 
 <div id="loading-overlay">
-    <div class="click-text">CLICK</div>
+    <div class="loading-content">
+        <div class="scan-line"></div>
+        <div class="click-text">ENTER</div>
+        <div class="sub-text">CLICK ANYWHERE TO PROCEED</div>
+    </div>
 </div>
 
 <div class="card">

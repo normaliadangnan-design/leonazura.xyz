@@ -95,13 +95,10 @@
             visibility: visible;
         }
 
-        /* ✅ TYPEWRITER ANIMATION */
+        /* ✅ TYPEWRITER ANIMATION — NO BLINKING CURSOR */
         @keyframes typewriter {
             from { width: 0; }
             to { width: 100%; }
-        }
-        @keyframes blink {
-            50% { border-color: transparent; }
         }
 
         .typewriter {
@@ -111,10 +108,9 @@
             overflow: hidden;
             white-space: nowrap;
             margin: 0 auto;
-            border-right: 2px solid #fff;
+            /* ❌ REMOVED border-right: 2px solid #fff; */
             animation: 
-                typewriter 1.5s steps(15, end) 0.5s 1 normal both,
-                blink 0.7s step-end infinite;
+                typewriter 1.5s steps(15, end) 0.5s 1 normal both;
         }
 
         .symbol-break {

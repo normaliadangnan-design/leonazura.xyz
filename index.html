@@ -41,7 +41,7 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
             color: #ffffff;
-            min-height: 100vh;
+            height: 100vh;
             width: 100%;
             overflow-x: hidden;
             overflow-y: auto;
@@ -49,7 +49,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 20px 10px;
+            padding: 15px 10px;
         }
 
         /* ✅ LOADING SCREEN */
@@ -113,14 +113,14 @@
             margin: 0 auto;
             border-right: 2px solid #fff;
             animation: 
-                typewriter 2s steps(20, end) 1s 1 normal both,
+                typewriter 1.5s steps(15, end) 0.5s 1 normal both,
                 blink 0.7s step-end infinite;
         }
 
         .symbol-break {
             font-size: 36px;
             letter-spacing: 2px;
-            margin: 10px 0 20px 0;
+            margin: 5px 0 8px 0;
             text-align: center;
             display: block;
             animation: metallicRGB 2s infinite alternate;
@@ -129,14 +129,14 @@
         .typewriter-header {
             font-size: 32px;
             letter-spacing: 3px;
-            margin-bottom: 25px;
+            margin: 8px 0 10px 0;
             animation: metallicRGB 2s infinite alternate;
         }
 
         .staff-header {
             font-size: 26px;
             letter-spacing: 2px;
-            margin: 15px 0 20px 0;
+            margin: 8px 0 10px 0;
             animation: metallicRGB 2s infinite alternate;
         }
 
@@ -150,7 +150,7 @@
 
         .main-logo-container {
             text-align: center;
-            margin: 0 0 25px 0;
+            margin: 0 0 10px 0;
         }
 
         .main-clan-logo {
@@ -169,7 +169,7 @@
 
         .title-group-block {
             position: relative;
-            margin: 20px 0;
+            margin: 8px 0;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -179,11 +179,11 @@
 
         .navigation-bar {
             position: fixed;
-            top: 25px;
-            right: 35px;
+            top: 20px;
+            right: 30px;
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 15px;
             font-size: 13px;
             letter-spacing: 1px;
             color: #888;
@@ -205,18 +205,20 @@
             color: #ccc;
         }
 
-        /* ✅ FULL WIDTH LAYOUT */
+        /* ✅ COMPACT & FULL WIDTH LAYOUT */
         .center-container {
             width: 100%;
-            max-width: 100%;
+            max-width: 1800px;
+            height: 100%;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: flex-start;
             position: relative;
             z-index: 10;
             padding: 0 20px;
-            gap: 25px;
+            gap: 12px;
             overflow: visible;
         }
 
@@ -228,9 +230,9 @@
             align-items: center;
             width: 100%;
             max-width: 1600px;
-            gap: 40px;
-            padding: 15px 0;
-            min-height: 120px;
+            gap: 30px;
+            padding: 5px 0;
+            min-height: 100px;
             position: relative;
         }
 
@@ -243,13 +245,13 @@
             align-items: center;
         }
         .avatar-wrapper-node:hover {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         .circle-avatar-container {
             position: relative;
-            width: 100px;
-            height: 100px;
+            width: 95px;
+            height: 95px;
             border-radius: 50%;
             overflow: visible;
             background: transparent;
@@ -263,8 +265,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.05);
-            width: 125px;
-            height: 125px;
+            width: 118px;
+            height: 118px;
             pointer-events: none;
             z-index: 1;
             border-radius: 0;
@@ -277,8 +279,8 @@
         }
 
         .circle-avatar-container img.avatar-img {
-            width: 100px;
-            height: 100px;
+            width: 95px;
+            height: 95px;
             border-radius: 50%;
             object-fit: cover;
             pointer-events: none;
@@ -292,8 +294,8 @@
             position: absolute;
             bottom: 6px;
             right: 6px;
-            width: 15px;
-            height: 15px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             border: 2px solid #000;
             z-index: 3;
@@ -313,8 +315,8 @@
             background: #000000;
             border: 1px solid #2a2a2e;
             border-radius: 12px;
-            width: 300px;
-            padding: 20px;
+            width: 280px;
+            padding: 15px;
             color: #ffffff;
             opacity: 0;
             visibility: hidden;
@@ -330,8 +332,8 @@
 
         .tooltip-avatar-wrapper {
             position: relative;
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             overflow: visible;
             display: flex;
@@ -343,15 +345,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.08);
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
             pointer-events: none;
             z-index: 1;
             object-fit: contain;
         }
         .tooltip-avatar-sm {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             z-index: 2;
             position: relative;
@@ -360,17 +362,17 @@
         .tooltip-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
+            gap: 10px;
+            margin-bottom: 8px;
         }
         .tooltip-user-info h4 {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             margin: 0;
             color: #fff;
         }
         .tooltip-user-info p {
-            font-size: 12px;
+            font-size: 11px;
             color: #888;
             margin: 2px 0 0 0;
         }
@@ -378,9 +380,9 @@
         .tooltip-activity-wrapper {
             background: #111;
             border-radius: 6px;
-            padding: 8px 10px;
-            margin-top: 10px;
-            font-size: 12px;
+            padding: 6px 8px;
+            margin-top: 8px;
+            font-size: 11px;
             color: #aaa;
             word-wrap: break-word;
             max-width: 100%;
@@ -394,32 +396,32 @@
         .marquee-wrapper-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
             width: 100%;
             max-width: 1300px;
             align-items: center;
-            margin: 20px 0 30px 0;
+            margin: 8px 0 15px 0;
             flex-shrink: 0;
         }
 
         .marquee-ticker {
             overflow: hidden;
             width: 100%;
-            padding: 6px 0;
+            padding: 4px 0;
             background: transparent;
-            min-height: 40px;
+            min-height: 32px;
         }
 
         .marquee-inner-wrap {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
-            gap: 15px;
+            gap: 12px;
             width: max-content;
         }
 
-        .scroll-left { animation: smoothScrollLeft 45s linear infinite; }
-        .scroll-right { animation: smoothScrollRight 45s linear infinite; }
+        .scroll-left { animation: smoothScrollLeft 40s linear infinite; }
+        .scroll-right { animation: smoothScrollRight 40s linear infinite; }
 
         @keyframes smoothScrollLeft {
             0% { transform: translateX(0); }
@@ -433,21 +435,21 @@
         .marquee-profile-block {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 13px;
+            gap: 8px;
+            font-size: 12px;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.9);
             background: #0c0c0c;
             border: 1px solid rgba(255,255,255,0.12);
-            padding: 6px 16px;
+            padding: 4px 12px;
             border-radius: 30px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
             white-space: nowrap;
         }
 
         .marquee-profile-block img {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             object-fit: cover;
             pointer-events: none;
@@ -455,29 +457,29 @@
 
         .discord-animated {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             z-index: 9999;
             animation: discordPulse 1.5s infinite alternate;
         }
         .discord-animated img {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             opacity: 0.75;
         }
         @keyframes discordPulse {
             0% { transform: scale(1); opacity: 0.6; filter: drop-shadow(0 0 4px #5865F2); }
-            100% { transform: scale(1.18); opacity: 1; filter: drop-shadow(0 0 12px #5865F2); }
+            100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 12px #5865F2); }
         }
 
         ::-webkit-scrollbar { display: none; }
 
         .name-label {
             text-align: center;
-            font-size: 13px;
-            margin-top: 8px;
+            font-size: 12px;
+            margin-top: 5px;
             color: #ccc;
-            max-width: 100px;
+            max-width: 95px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -488,33 +490,33 @@
             max-width: 1200px;
             height: 1px;
             background: #222;
-            margin: 15px 0;
+            margin: 8px 0;
         }
 
         /* ✅ Responsive */
         @media (max-width: 768px) {
-            .main-clan-logo img { height: 75px; }
+            .main-clan-logo img { height: 70px; }
             .circle-avatar-container {
-                width: 80px;
-                height: 80px;
+                width: 75px;
+                height: 75px;
             }
             img.avatar-decoration {
-                width: 100px;
-                height: 100px;
+                width: 92px;
+                height: 92px;
                 transform: translate(-50%, -50%) scale(1.05);
             }
             .circle-avatar-container img.avatar-img {
-                width: 80px;
-                height: 80px;
+                width: 75px;
+                height: 75px;
             }
             .horizontal-avatar-row {
-                gap: 25px;
+                gap: 20px;
             }
             .symbol-break { font-size: 28px; }
-            .typewriter-header { font-size: 26px; }
-            .staff-header { font-size: 22px; }
-            .avatar-tooltip { width: 260px; }
-            .navigation-bar { right: 20px; font-size: 12px; }
+            .typewriter-header { font-size: 24px; }
+            .staff-header { font-size: 20px; }
+            .avatar-tooltip { width: 240px; }
+            .navigation-bar { right: 15px; font-size: 11px; }
         }
     </style>
 </head>
@@ -527,7 +529,7 @@
 
     <div class="navigation-bar">
         HOME
-        <div class="views-box">VIEWS : <span id="views">8339</span></div>
+        <div class="views-box">VIEWS : <span id="views">5689</span></div>
     </div>
 
     <div class="center-container">
@@ -543,6 +545,7 @@
 
         <div class="title-group-block">
             <h2 class="typewriter-header typewriter">ABOVE ALL</h2>
+            <p style="font-size:14px; color:#888; margin:4px 0;">it's all about public azura</p>
         </div>
 
         <div id="aboveall-container" class="horizontal-avatar-row"></div>
@@ -737,7 +740,7 @@
         // ✅ Views counter
         function updateViews() {
             let count = localStorage.getItem('page_views');
-            if (!count) count = 8339;
+            if (!count) count = 5689;
             count = parseInt(count) + 1;
             localStorage.setItem('page_views', count);
             document.getElementById('views').innerText = count;

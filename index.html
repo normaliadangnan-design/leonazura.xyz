@@ -34,7 +34,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #000000;
             background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), 
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
                 url("pba.webp");
             background-size: cover;
             background-position: center center;
@@ -52,7 +52,7 @@
             padding: 20px 10px;
         }
 
-        /* ✅ LOADING SCREEN STYLE */
+        /* ✅ LOADING SCREEN */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -95,31 +95,48 @@
             visibility: visible;
         }
 
-        .main-logo-container {
-            text-align: center;
-            margin: 0 0 20px 0;
+        /* ✅ TYPEWRITER ANIMATION */
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
         }
 
-        .main-clan-logo {
-            background: transparent;
-            border: none;
-            display: block;
-        }
-
-        .main-clan-logo img {
-            height: 90px;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
+        .typewriter {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            border-right: 2px solid #fff;
+            animation: 
+                typewriter 2s steps(20, end) 1s 1 normal both,
+                blink 0.7s step-end infinite;
         }
 
         .symbol-break {
-            font-family: 'Oswald', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin: 5px 0 15px 0;
+            font-size: 36px;
+            letter-spacing: 2px;
+            margin: 10px 0 20px 0;
             text-align: center;
             display: block;
+            animation: metallicRGB 2s infinite alternate;
+        }
+
+        .typewriter-header {
+            font-size: 32px;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            animation: metallicRGB 2s infinite alternate;
+        }
+
+        .staff-header {
+            font-size: 26px;
+            letter-spacing: 2px;
+            margin: 15px 0 20px 0;
             animation: metallicRGB 2s infinite alternate;
         }
 
@@ -131,81 +148,76 @@
             100% { color: #fff; text-shadow: 0 0 4px #ddd, 0 0 8px #eee; }
         }
 
-        .typewriter-header {
-            font-family: 'Oswald', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            overflow: visible;
-            white-space: nowrap;
-            width: fit-content;
-            margin: 0 auto 10px auto;
-            position: relative;
+        .main-logo-container {
+            text-align: center;
+            margin: 0 0 25px 0;
+        }
+
+        .main-clan-logo {
+            background: transparent;
             border: none;
-            animation: metallicRGB 2s infinite alternate;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .main-clan-logo img {
+            height: 95px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.25));
         }
 
         .title-group-block {
             position: relative;
-            margin: 15px 0;
+            margin: 20px 0;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        .staff-header {
-            font-family: 'Oswald', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            position: relative;
-            border: none;
-            animation: metallicRGB 2s infinite alternate;
+            width: 100%;
         }
 
         .navigation-bar {
             position: fixed;
-            top: 20px;
-            right: 30px;
+            top: 25px;
+            right: 35px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 12px;
+            gap: 18px;
+            font-size: 13px;
             letter-spacing: 1px;
             color: #888;
             opacity: 0.8;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .views-box {
-            padding: 3px 0;
+            padding: 3px 8px;
             border: none;
             border-radius: 0;
-            font-size: 12px;
+            font-size: 13px;
             letter-spacing: 1px;
             background: transparent;
             color: #888;
         }
         #views {
             font-weight: 500;
-            color: #888;
+            color: #ccc;
         }
 
+        /* ✅ FULL WIDTH LAYOUT */
         .center-container {
             width: 100%;
-            max-width: 1300px;
+            max-width: 100%;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             z-index: 10;
-            padding: 0 15px;
-            gap: 18px;
+            padding: 0 20px;
+            gap: 25px;
             overflow: visible;
-            max-height: calc(100vh - 40px);
         }
 
         .horizontal-avatar-row {
@@ -215,9 +227,10 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            gap: 35px;
-            padding: 10px 0;
-            min-height: 110px;
+            max-width: 1600px;
+            gap: 40px;
+            padding: 15px 0;
+            min-height: 120px;
             position: relative;
         }
 
@@ -230,13 +243,13 @@
             align-items: center;
         }
         .avatar-wrapper-node:hover {
-            transform: scale(1.08);
+            transform: scale(1.1);
         }
 
         .circle-avatar-container {
             position: relative;
-            width: 95px;
-            height: 95px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             overflow: visible;
             background: transparent;
@@ -250,8 +263,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.05);
-            width: 115px;
-            height: 115px;
+            width: 125px;
+            height: 125px;
             pointer-events: none;
             z-index: 1;
             border-radius: 0;
@@ -260,12 +273,12 @@
             display: block;
             opacity: 1;
             image-rendering: crisp-edges;
-            filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
         }
 
         .circle-avatar-container img.avatar-img {
-            width: 95px;
-            height: 95px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
             pointer-events: none;
@@ -279,12 +292,12 @@
             position: absolute;
             bottom: 6px;
             right: 6px;
-            width: 14px;
-            height: 14px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
             border: 2px solid #000;
             z-index: 3;
-            box-shadow: 0 0 4px rgba(0,0,0,0.8);
+            box-shadow: 0 0 6px rgba(0,0,0,0.9);
         }
 
         .status-online { background-color: #23a55a; }
@@ -299,16 +312,16 @@
             transform: translateX(-50%);
             background: #000000;
             border: 1px solid #2a2a2e;
-            border-radius: 10px;
-            width: 290px;
-            padding: 18px;
+            border-radius: 12px;
+            width: 300px;
+            padding: 20px;
             color: #ffffff;
             opacity: 0;
             visibility: hidden;
             transition: all 0.2s ease;
             pointer-events: none;
             z-index: 9999;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1);
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
@@ -317,8 +330,8 @@
 
         .tooltip-avatar-wrapper {
             position: relative;
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             overflow: visible;
             display: flex;
@@ -330,15 +343,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.08);
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             pointer-events: none;
             z-index: 1;
             object-fit: contain;
         }
         .tooltip-avatar-sm {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             z-index: 2;
             position: relative;
@@ -347,30 +360,31 @@
         .tooltip-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
+            gap: 12px;
+            margin-bottom: 10px;
         }
         .tooltip-user-info h4 {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             margin: 0;
             color: #fff;
         }
         .tooltip-user-info p {
-            font-size: 11px;
+            font-size: 12px;
             color: #888;
             margin: 2px 0 0 0;
         }
 
         .tooltip-activity-wrapper {
             background: #111;
-            border-radius: 4px;
-            padding: 6px 8px;
-            margin-top: 8px;
-            font-size: 11px;
+            border-radius: 6px;
+            padding: 8px 10px;
+            margin-top: 10px;
+            font-size: 12px;
             color: #aaa;
             word-wrap: break-word;
             max-width: 100%;
+            border: 1px solid rgba(255,255,255,0.08);
         }
         .activity-playing { color: #43b581; }
         .activity-streaming { color: #9146ff; }
@@ -380,32 +394,32 @@
         .marquee-wrapper-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             width: 100%;
+            max-width: 1300px;
             align-items: center;
-            margin: 10px 0 0 0;
+            margin: 20px 0 30px 0;
             flex-shrink: 0;
         }
 
         .marquee-ticker {
             overflow: hidden;
             width: 100%;
-            max-width: 950px;
-            padding: 4px 0;
+            padding: 6px 0;
             background: transparent;
-            min-height: 36px;
+            min-height: 40px;
         }
 
         .marquee-inner-wrap {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
-            gap: 12px;
+            gap: 15px;
             width: max-content;
         }
 
-        .scroll-left { animation: smoothScrollLeft 35s linear infinite; }
-        .scroll-right { animation: smoothScrollRight 35s linear infinite; }
+        .scroll-left { animation: smoothScrollLeft 45s linear infinite; }
+        .scroll-right { animation: smoothScrollRight 45s linear infinite; }
 
         @keyframes smoothScrollLeft {
             0% { transform: translateX(0); }
@@ -419,21 +433,21 @@
         .marquee-profile-block {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
+            gap: 10px;
+            font-size: 13px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
             background: #0c0c0c;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 5px 14px;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 6px 16px;
             border-radius: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
             white-space: nowrap;
         }
 
         .marquee-profile-block img {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             object-fit: cover;
             pointer-events: none;
@@ -441,29 +455,29 @@
 
         .discord-animated {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 30px;
+            right: 30px;
             z-index: 9999;
             animation: discordPulse 1.5s infinite alternate;
         }
         .discord-animated img {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             opacity: 0.75;
         }
         @keyframes discordPulse {
-            0% { transform: scale(1); opacity: 0.6; filter: drop-shadow(0 0 3px #5865F2); }
-            100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 10px #5865F2); }
+            0% { transform: scale(1); opacity: 0.6; filter: drop-shadow(0 0 4px #5865F2); }
+            100% { transform: scale(1.18); opacity: 1; filter: drop-shadow(0 0 12px #5865F2); }
         }
 
         ::-webkit-scrollbar { display: none; }
 
         .name-label {
             text-align: center;
-            font-size: 12px;
-            margin-top: 6px;
+            font-size: 13px;
+            margin-top: 8px;
             color: #ccc;
-            max-width: 95px;
+            max-width: 100px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -471,39 +485,36 @@
         }
         .section-divider {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
             height: 1px;
             background: #222;
-            margin: 12px 0;
+            margin: 15px 0;
         }
 
+        /* ✅ Responsive */
         @media (max-width: 768px) {
-            .main-clan-logo img { height: 70px; }
+            .main-clan-logo img { height: 75px; }
             .circle-avatar-container {
-                width: 75px;
-                height: 75px;
+                width: 80px;
+                height: 80px;
             }
             img.avatar-decoration {
-                width: 92px;
-                height: 92px;
+                width: 100px;
+                height: 100px;
                 transform: translate(-50%, -50%) scale(1.05);
             }
             .circle-avatar-container img.avatar-img {
-                width: 75px;
-                height: 75px;
+                width: 80px;
+                height: 80px;
             }
             .horizontal-avatar-row {
-                gap: 22px;
+                gap: 25px;
             }
-            .typewriter-header {
-                font-size: 24px;
-            }
-            .staff-header {
-                font-size: 20px;
-            }
-            .avatar-tooltip {
-                width: 240px;
-            }
+            .symbol-break { font-size: 28px; }
+            .typewriter-header { font-size: 26px; }
+            .staff-header { font-size: 22px; }
+            .avatar-tooltip { width: 260px; }
+            .navigation-bar { right: 20px; font-size: 12px; }
         }
     </style>
 </head>
@@ -516,7 +527,7 @@
 
     <div class="navigation-bar">
         HOME
-        <div class="views-box">VIEWS : <span id="views">6529</span></div>
+        <div class="views-box">VIEWS : <span id="views">8339</span></div>
     </div>
 
     <div class="center-container">
@@ -524,21 +535,21 @@
             <div class="main-clan-logo">
                 <img src="public azura.png" alt="PUBLIC AZURA LOGO" onerror="this.style.display='none';">
             </div>
-            <div class="symbol-break">$</div>
+            <div class="symbol-break typewriter">$</div>
         </div>
 
         <div id="founder-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
 
         <div class="title-group-block">
-            <h2 class="typewriter-header">ABOVE ALL</h2>
+            <h2 class="typewriter-header typewriter">ABOVE ALL</h2>
         </div>
 
         <div id="aboveall-container" class="horizontal-avatar-row"></div>
         <div class="section-divider"></div>
 
         <div class="title-group-block">
-            <h2 class="staff-header">STAFF</h2>
+            <h2 class="staff-header typewriter">STAFF</h2>
         </div>
 
         <div id="staff-container" class="horizontal-avatar-row"></div>
@@ -557,7 +568,7 @@
         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord" loading="lazy" onerror="this.style.display='none';">
     </a>
 
-    <!-- ✅ FIXED AUDIO ELEMENT -->
+    <!-- ✅ AUDIO -->
     <audio id="soundtrack" loop preload="auto">
         <source src="5-mil_2RPY2b9n.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -581,23 +592,17 @@
         const audio = document.getElementById("soundtrack");
         audio.volume = 0.4;
 
-        // ✅ IMPROVED MUSIC PLAYBACK
         function playAudio() {
-            audio.play().catch(err => {
-                console.log("Auto-play blocked, will play on first interaction:", err);
-            });
+            audio.play().catch(err => console.log("Audio play:", err));
         }
 
-        // ✅ LOADING SCREEN CONTROL
         const loadingScreen = document.getElementById('loading-screen');
         function finishLoading() {
             loadingScreen.classList.add('fade-out');
             document.body.classList.add('page-ready');
             playAudio();
         }
-        // Click to enter
         loadingScreen.addEventListener('click', finishLoading);
-        // Auto enter after 2.5s if not clicked
         window.addEventListener('load', () => {
             setTimeout(finishLoading, 2500);
             fetchAndUpdate();
@@ -611,19 +616,14 @@
         const scrollingIDsRow1 = ["1276210406880317522", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
         const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
-
         async function getUserData(userId) {
             try {
-                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`, {
-                    cache: 'no-cache'
-                });
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`, { cache: 'no-cache' });
                 if (!res.ok) return null;
                 const json = await res.json();
-
                 if (json.success && json.data) {
                     const d = json.data;
                     const user = d.discord_user || {};
-                    
                     return {
                         id: userId,
                         username: user.username || "unknown",
@@ -643,7 +643,6 @@
             }
         }
 
-
         async function fetchAndUpdate() {
             try {
                 const [founders, aboveAll, staff, scroll1, scroll2] = await Promise.allSettled([
@@ -653,7 +652,6 @@
                     Promise.all(scrollingIDsRow1.map(getUserData)),
                     Promise.all(scrollingIDsRow2.map(getUserData))
                 ]);
-
                 showGroup(founders.status === 'fulfilled' ? founders.value.filter(Boolean) : [], 'founder-container');
                 showGroup(aboveAll.status === 'fulfilled' ? aboveAll.value.filter(Boolean) : [], 'aboveall-container');
                 showGroup(staff.status === 'fulfilled' ? staff.value.filter(Boolean) : [], 'staff-container');
@@ -664,27 +662,21 @@
             }
         }
 
-
         function showGroup(members, containerId) {
             const box = document.getElementById(containerId);
             if (!box) return;
             box.innerHTML = '';
-
             members.forEach(mem => {
                 const wrapper = document.createElement('div'); 
                 wrapper.className = 'avatar-wrapper-node';
-
                 const decoHTML = mem.effectURL ? `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy" onerror="this.remove()">` : '';
-
                 let statusClass = 'status-offline';
                 const s = String(mem.status || 'offline').toLowerCase().trim();
                 if (s === 'online') statusClass = 'status-online';
                 else if (s === 'idle') statusClass = 'status-idle';
                 else if (s === 'dnd') statusClass = 'status-dnd';
-
                 let statusText = '';
                 let statusType = '';
-
                 if (mem.spotify) {
                     statusType = 'activity-listening';
                     statusText = `Listening to ${mem.spotify.song || 'Music'}`;
@@ -701,9 +693,7 @@
                     statusText = mem.customStatus.state;
                     statusType = '';
                 }
-
                 const tooltipDeco = mem.effectURL ? `<img src="${mem.effectURL}" class="tooltip-avatar-decoration" alt="decoration">` : '';
-
                 wrapper.innerHTML = `
                     <div class="circle-avatar-container">
                         ${decoHTML} 
@@ -729,7 +719,6 @@
             });
         }
 
-
         function showMarquee(members, containerId) {
             const box = document.getElementById(containerId);
             if (!box || !Array.isArray(members) || members.length === 0) return;
@@ -744,6 +733,16 @@
         }
 
         setInterval(fetchAndUpdate, UPDATE_INTERVAL);
+
+        // ✅ Views counter
+        function updateViews() {
+            let count = localStorage.getItem('page_views');
+            if (!count) count = 8339;
+            count = parseInt(count) + 1;
+            localStorage.setItem('page_views', count);
+            document.getElementById('views').innerText = count;
+        }
+        updateViews();
     </script>
 </body>
 </html>

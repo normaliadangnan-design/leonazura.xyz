@@ -51,8 +51,8 @@ body::before {
 
 @keyframes borderGlow {
     0% { box-shadow: 0 0 5px rgba(255,255,255,0.15), 0 0 10px rgba(255,255,255,0.1); }
-    50% { box-shadow: 0 0 12px rgba(255,255,255,0.25), 0 0 20px rgba(255,255,255,0.15); }
-    100% { box-shadow: 0 0 5px rgba(255,255,255,0.15), 0 0 10px rgba(255,255,0.1); }
+    50% { box-shadow: 0 0 12px rgba(255,255,0.25), 0 0 20px rgba(255,255,255,0.15); }
+    100% { box-shadow: 0 0 5px rgba(255,255,0.15), 0 0 10px rgba(255,255,0.1); }
 }
 
 /* Typewriter Animation */
@@ -88,7 +88,7 @@ body::before {
         hideCursor 0.1s forwards 4s;
 }
 
-/* 🚀 SOBRANG ANGAS NA LOADING SCREEN — MAY ANIMATED LITRATO & EFFECTS */
+/* 🚀 LOADING SCREEN */
 #loading-overlay {
     position: fixed;
     top: 0;
@@ -105,7 +105,6 @@ body::before {
     overflow: hidden;
 }
 
-/* ✨ Moving glowing background particles */
 #loading-overlay::before {
     content: '';
     position: absolute;
@@ -122,7 +121,6 @@ body::before {
     100% { transform: translate(30px,30px); }
 }
 
-/* Scan line effect */
 #loading-overlay::after {
     content: '';
     position: absolute;
@@ -138,7 +136,6 @@ body::before {
     100% { transform: translateY(700%); }
 }
 
-/* CRT noise overlay */
 .crt-noise {
     position: absolute;
     inset: 0;
@@ -181,7 +178,6 @@ body::before {
     }
 }
 
-/* ✅ Animated Loading Image */
 .loading-avatar {
     width: 140px;
     height: 140px;
@@ -215,17 +211,12 @@ body::before {
     letter-spacing: 24px;
     color: #ffffff;
     text-transform: uppercase;
-    position: relative;
-    animation: 
-        textGlow 2s ease-in-out infinite alternate,
-        glitchEffect 5.2s infinite;
+    animation: textGlow 2s ease-in-out infinite alternate, glitchEffect 5.2s infinite;
 }
-
 @keyframes textGlow {
     from { text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff40, 0 0 45px #ff226620; }
     to { text-shadow: 0 0 25px #ffffff, 0 0 50px #ffffff80, 0 0 70px #00eeff50; }
 }
-
 @keyframes glitchEffect {
     0% { transform: translate(0); }
     2% { transform: translate(-4px, 2px); text-shadow: 2px 0 15px #ff2266, -2px 0 15px #00eeff; }
@@ -243,13 +234,11 @@ body::before {
     opacity: 0.8;
     animation: subPulse 2s infinite alternate;
 }
-
 @keyframes subPulse {
     0% { opacity: 0.4; letter-spacing: 4px; }
     100% { opacity: 1; letter-spacing: 6px; }
 }
 
-/* Iniangat nang maayos ang logo */
 .logo-img-container {
     display: flex;
     justify-content: center;
@@ -258,7 +247,6 @@ body::before {
     padding: 15px;
     margin-top: 5px;
 }
-
 .main-logo {
     max-width: 320px;
     height: auto;
@@ -266,18 +254,9 @@ body::before {
     filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
     transition: all 0.4s ease;
 }
-.main-logo:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 35px rgba(255,255,255,0.5));
-}
+.main-logo:hover { transform: scale(1.05); filter: drop-shadow(0 0 35px rgba(255,255,255,0.5)); }
 
-.card {
-    width: 100%;
-    max-width: 520px;
-    margin: auto;
-    position: relative;
-    z-index: 10;
-}
+.card { width: 100%; max-width: 520px; margin: auto; position: relative; z-index: 10; }
 
 .title-image-container {
     margin-bottom: 25px;
@@ -287,7 +266,6 @@ body::before {
     align-items: center;
     gap: 12px;
 }
-
 .title-image {
     height: 100%;
     width: auto;
@@ -295,9 +273,7 @@ body::before {
     filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
     transition: transform 0.3s ease;
 }
-.title-image:hover {
-    transform: scale(1.05);
-}
+.title-image:hover { transform: scale(1.05); }
 
 .status-container {
     display: flex;
@@ -315,544 +291,169 @@ body::before {
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 4px 15px rgba(0,0,0,0.7);
-    transition: all 0.3s ease;
     animation: borderGlow 4s infinite ease-in-out;
 }
-
-.status-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 10px currentColor;
-}
-.status-online { background-color: #23a55a; color: #23a55a; }
-.status-idle { background-color: #f0b232; color: #f0b232; }
-.status-dnd { background-color: #f13f43; color: #f13f43; }
-.status-offline { background-color: #80848e; color: #80848e; }
+.status-dot { width:12px; height:12px; border-radius:50%; display:inline-block; box-shadow:0 0 10px currentColor; }
+.status-online { background:#23a55a; color:#23a55a; }
+.status-idle { background:#f0b232; color:#f0b232; }
+.status-dnd { background:#f13f43; color:#f13f43; }
+.status-offline { background:#80848e; color:#80848e; }
 
 .avatar {
     position: relative;
-    width: 160px;
-    height: 160px;
-    margin: 0 auto 25px;
-    cursor: pointer;
-    z-index: 100;
-    transition: transform 0.4s ease;
+    width:160px; height:160px;
+    margin:0 auto 25px;
+    cursor:pointer; z-index:100;
+    transition:transform 0.4s ease;
 }
-.avatar:hover {
-    transform: scale(1.06);
-}
+.avatar:hover { transform:scale(1.06); }
 
 .avatar-img-holder {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid rgba(255,255,255,0.25);
-    background: #000;
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 0 25px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08);
-    transition: all 0.3s ease;
+    width:100%; height:100%; border-radius:50%; overflow:hidden;
+    border:3px solid rgba(255,255,255,0.25); background:#000;
+    position:relative; z-index:2;
+    box-shadow:0 0 25px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08);
+    transition:all 0.3s ease;
 }
 .avatar:hover .avatar-img-holder {
-    border-color: rgba(255,255,255,0.4);
-    box-shadow: 0 0 30px rgba(0,0,0,0.9), 0 0 15px rgba(255,255,255,0.15);
+    border-color:rgba(255,255,255,0.4);
+    box-shadow:0 0 30px rgba(0,0,0,0.9), 0 0 15px rgba(255,255,255,0.15);
 }
-
-.avatar-img-holder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+.avatar-img-holder img { width:100%; height:100%; object-fit:cover; }
 
 img.avatar-decoration {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.05);
-    width: 190px;
-    height: 190px;
-    pointer-events: none;
-    z-index: 1;
-    display: block;
-    border-radius: 0;
-    background: transparent;
-    filter: drop-shadow(0 0 12px rgba(255,255,255,0.2));
-    transition: filter 0.3s ease;
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(1.05);
+    width:190px; height:190px; pointer-events:none; z-index:1;
+    background:transparent; border-radius:0;
+    filter:drop-shadow(0 0 12px rgba(255,255,255,0.2));
+    transition:filter 0.3s ease;
 }
-.avatar:hover img.avatar-decoration {
-    filter: drop-shadow(0 0 20px rgba(255,255,255,0.35));
-}
+.avatar:hover img.avatar-decoration { filter:drop-shadow(0 0 20px rgba(255,255,255,0.35)); }
 
 .section-card {
-    background: rgba(10, 10, 10, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 24px;
-    padding: 30px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.75), inset 0 0 0 1px rgba(255,255,255,0.05);
-    transition: all 0.35s ease;
+    background:rgba(10,10,10,0.75);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,0.1); border-radius:24px;
+    padding:30px; margin-bottom:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.75), inset 0 0 0 1px rgba(255,255,255,0.05);
+    transition:all 0.35s ease;
 }
 .section-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255,255,255,0.18);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.1);
+    transform:translateY(-3px); border-color:rgba(255,255,255,0.18);
+    box-shadow:0 12px 35px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.1);
 }
 
-.username { display: none; }
-
+.username { display:none; }
 .bio {
-    opacity: 0.92;
-    font-size: 17px;
-    margin-bottom: 32px;
-    min-height: 26px;
-    line-height: 1.6;
-    text-align: center;
-    color: #e5e5e5;
-    letter-spacing: 0.6px;
-    font-weight: 400;
+    opacity:0.92; font-size:17px; margin-bottom:32px; min-height:26px;
+    line-height:1.6; text-align:center; color:#e5e5e5;
+    letter-spacing:0.6px; font-weight:400;
 }
 
-/* ✅ INAYOS NA ACTIVITY SECTION — TAMA NA HINDI NA NAKAASA SA SPOTIFY */
+/* ✅ ACTIVITY BOX — NGAYON KASAMA NA ANG SPOTIFY DITO */
 .activity-wrapper {
-    margin: 20px 0;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 20px;
+    margin:20px 0; border-top:1px solid rgba(255,255,255,0.08); padding-top:20px;
 }
 .activity-header {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #888;
-    margin-bottom: 12px;
-    font-weight: 600;
+    font-size:12px; text-transform:uppercase; letter-spacing:2px;
+    color:#888; margin-bottom:12px; font-weight:600;
 }
 .activity-card {
-    background: rgba(0,0,0,0.7);
-    border-radius: 14px;
-    padding: 16px;
-    border: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: all 0.3s ease;
+    background:rgba(0,0,0,0.7); border-radius:14px; padding:16px;
+    border:1px solid rgba(255,255,255,0.1);
+    display:flex; align-items:center; gap:14px;
+    transition:all 0.3s ease;
 }
-.activity-card:hover {
-    border-color: rgba(255,255,255,0.2);
-    background: rgba(15,15,15,0.8);
-}
+.activity-card:hover { border-color:rgba(255,255,255,0.2); background:rgba(15,15,15,0.8); }
 .activity-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    overflow: hidden;
-    font-size: 22px;
+    width:48px; height:48px; border-radius:10px; background:rgba(255,255,255,0.08);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; font-size:22px;
 }
-.activity-icon img { width: 100%; height:100%; object-fit:cover; }
+.activity-icon img { width:100%; height:100%; object-fit:cover; }
 .activity-info { flex:1; min-width:0; }
 .activity-name { font-size:15px; font-weight:600; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .activity-details { font-size:13px; color:#aaa; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.activity-progress { width:100%; height:5px; background:rgba(255,255,255,0.15); border-radius:3px; margin-top:10px; overflow:hidden; }
+.activity-progress-fill { height:100%; background:linear-gradient(90deg,#1DB954,#1ed760); border-radius:3px; transition:width 0.2s linear; }
 .activity-no { color:#777; font-style:italic; padding:12px; text-align:center; font-size:14px; }
 
-/* ✅ TERMINAL STYLE — GAYA SA LITRATO MO */
+/* TERMINAL */
 .terminal-block {
-    margin: 18px 0;
-    background: #0b0b0b;
-    border-radius: 10px;
-    padding: 14px 18px;
-    border: 1px solid rgba(0,255,120,0.15);
-    font-family: monospace;
-    font-size: 14px;
-    color: #b5f9b5;
-    box-shadow: inset 0 0 12px rgba(0,255,120,0.06);
+    margin:18px 0; background:#0b0b0b; border-radius:10px;
+    padding:14px 18px; border:1px solid rgba(0,255,120,0.15);
+    font-family:monospace; font-size:14px; color:#b5f9b5;
+    box-shadow:inset 0 0 12px rgba(0,255,120,0.06);
 }
 .terminal-prompt { color:#4ecdc4; font-weight:bold; }
 .terminal-text { color:#ddd; }
 
-.socials {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 12px;
-}
-
+.socials { display:flex; justify-content:center; gap:24px; margin-bottom:12px; }
 .social {
-    width: 66px;
-    height: 66px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.1);
-    text-decoration: none;
-    transition: all 0.35s ease;
-    cursor: pointer;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+    width:66px; height:66px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1);
+    text-decoration:none; transition:all 0.35s ease; cursor:pointer;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05);
 }
-
 .social:hover {
-    transform: translateY(-6px) scale(1.12);
-    background: rgba(255,255,255,0.16);
-    border-color: rgba(255,255,255,0.22);
-    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    transform:translateY(-6px) scale(1.12); background:rgba(255,255,255,0.16);
+    border-color:rgba(255,255,255,0.22); box-shadow:0 0 20px rgba(255,255,255,0.2);
 }
+.social svg { width:30px; height:30px; fill:#ffffff; opacity:0.95; transition:fill 0.3s ease; }
+.social:hover svg { fill:#f0f0f0; }
 
-.social svg {
-    width: 30px;
-    height: 30px;
-    fill: #ffffff;
-    opacity: 0.95;
-    transition: fill 0.3s ease;
-}
-.social:hover svg { fill: #f0f0f0; }
-
-.music-container {
-    display: block;
-    color: white;
-    background: rgba(0, 0, 0, 0.88);
-    border-radius: 18px;
-    padding: 20px;
-    width: 100%;
-    border: 1px solid rgba(255,255,255,0.1);
-    margin-bottom: 12px;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
-    cursor: default;
-    transition: all 0.3s ease;
-}
-
-.music-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 14px;
-}
-
-.music-album-art {
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    animation: rotateAlbum 12s linear infinite;
-    border: 2px solid rgba(255,255,255,0.15);
-    box-shadow: 0 0 15px rgba(0,0,0,0.9);
-    transition: all 0.3s ease;
-    position: relative;
-}
-/* ✅ Spotify logo overlay */
-.music-album-art.spotify::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    right: -4px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #1DB954;
-    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.49 14.41c-.28.42-.85.55-1.27.27-3.49-2.14-7.89-2.62-11.66-1.43-.46.15-.95-.12-1.1-.58-.15-.46.12-.95.58-1.1 4.24-1.31 9.11-.75 12.57 1.47.42.28.55.85.27 1.27zm2.82-5.28c-.35.54-1.07.71-1.61.36-4.01-2.46-10.11-3.18-14.84-1.74-.62.19-1.29-.16-1.48-.78-.19-.62.16-1.29.78-1.48 5.39-1.64 12.09-.85 16.66 1.95.54.35.71 1.07.36 1.61zm.24-5.59c-.51.69-1.49.87-2.18.36-5.01-3.07-13.26-3.34-18.02-1.84-.75.24-1.55-.2-1.79-.95-.24-.75.2-1.55.95-1.79 5.44-1.7 14.53-1.38 20.15 2.07.69.51.87 1.49.36 2.18z" fill="white"/></svg>');
-    background-size: 14px;
-    background-position: center;
-    background-repeat: no-repeat;
-    box-shadow: 0 0 8px rgba(0,0,0,0.6);
-}
-
-.music-album-art:hover {
-    border-color: rgba(255,255,255,0.25);
-    box-shadow: 0 0 20px rgba(0,0,0,1);
-}
-
-@keyframes rotateAlbum {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.music-info {
-    text-align: left;
-    flex: 1;
-    min-width: 0;
-}
-
-.music-title {
-    font-size: 18px;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 4px;
-    color: #ffffff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.music-artist {
-    font-size: 14px;
-    opacity: 0.8;
-    display: block;
-    color: #cccccc;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.music-play-button {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all 0.28s ease;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.6);
-}
-
-.music-play-button:hover {
-    transform: scale(1.15);
-    background: #f8f8f8;
-    box-shadow: 0 0 20px rgba(255,255,255,0.3);
-}
-
-.music-play-button svg {
-    width: 20px;
-    height: 20px;
-    fill: #000000;
-    margin-left: 2px;
-}
-
-.music-progress-container {
-    width: 100%;
-    height: 6px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 4px;
-    margin-top: 12px;
-    overflow: visible;
-    cursor: pointer;
-    position: relative;
-    transition: background 0.2s ease;
-}
-.music-progress-container:hover {
-    background: rgba(255,255,255,0.2);
-}
-
-.music-progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #1DB954, #1ed760);
-    width: 0%;
-    border-radius: 4px;
-    transition: width 0.1s linear;
-    box-shadow: 0 0 10px rgba(29, 185, 84, 0.3);
-    position: relative;
-}
-.music-progress-bar::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translate(50%, -50%);
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #1DB954;
-    box-shadow: 0 0 15px rgba(29, 185, 84, 0.6);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-.music-progress-container:hover .music-progress-bar::after {
-    opacity: 1;
-}
-
-.music-time {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: #999;
-    margin-top: 8px;
-    font-weight: 400;
-}
-
-.views-pill {
-    display: inline-block;
-    padding: 7px 28px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 500;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.1);
-    letter-spacing: 1px;
-    margin-top: 10px;
-    color: #dddddd;
-    transition: all 0.3s ease;
-}
-.views-pill:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.18);
-}
-
+/* POPUP TOOLTIP — NASAAN DIN LALABAS ANG SPOTIFY */
 .profile-popup {
-    position: absolute;
-    bottom: 115%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 20px;
-    width: 400px;
-    background: rgba(0, 0, 0, 0.94);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.08);
-    z-index: 9999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    pointer-events: none;
-    transform: translateX(-50%) translateY(10px);
+    position:absolute; bottom:115%; left:50%; transform:translateX(-50%);
+    margin-bottom:20px; width:400px; background:rgba(0,0,0,0.94);
+    border:1px solid rgba(255,255,255,0.15); border-radius:14px; padding:20px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.08);
+    z-index:9999; opacity:0; visibility:hidden;
+    transition:opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    pointer-events:none; transform:translateX(-50%) translateY(10px);
 }
+.avatar:hover .profile-popup { opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
 
-.avatar:hover .profile-popup {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-}
+.popup-header { display:flex; align-items:center; gap:16px; }
+.popup-avatar-wrapper { position:relative; width:52px; height:52px; flex-shrink:0; }
+.popup-avatar { width:100%; height:100%; border-radius:50%; overflow:hidden; border:1px solid rgba(255,255,255,0.12); position:relative; z-index:2; }
+.popup-avatar img { width:100%; height:100%; object-fit:cover; }
+.popup-decoration { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(1.08); width:66px; height:66px; pointer-events:none; z-index:1; display:block; }
+.popup-info { text-align:left; flex:1; overflow:hidden; }
+.popup-nickname { font-size:18px; font-weight:600; color:#ffffff; display:block; line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.popup-name { font-size:14px; font-weight:400; color:#aaaaaa; display:block; line-height:1.4; margin:3px 0 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.popup-status { font-size:13px; color:#999; display:flex; align-items:center; gap:7px; line-height:1; }
+.popup-status .status-dot { width:11px; height:11px; }
+.popup-activity { font-size:12px; color:#bbbbbb; background:#121212; padding:6px 10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.08); }
 
-.popup-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.popup-avatar-wrapper {
-    position: relative;
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
-}
-
-.popup-avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.12);
-    position: relative;
-    z-index: 2;
-}
-
-.popup-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.popup-decoration {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.08);
-    width: 66px;
-    height: 66px;
-    pointer-events: none;
-    z-index: 1;
-    display: block;
-}
-
-.popup-info {
-    text-align: left;
-    flex: 1;
-    overflow: hidden;
-}
-
-.popup-nickname {
-    font-size: 18px;
-    font-weight: 600;
-    color: #ffffff;
-    display: block;
-    line-height: 1.4;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.popup-name {
-    font-size: 14px;
-    font-weight: 400;
-    color: #aaaaaa;
-    display: block;
-    line-height: 1.4;
-    margin: 3px 0 6px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.popup-status {
-    font-size: 13px;
-    color: #999;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    line-height: 1;
-}
-
-.popup-status .status-dot {
-    width: 11px;
-    height: 11px;
-}
-
-.popup-activity {
-    font-size: 12px;
-    color: #bbbbbb;
-    background: #121212;
-    padding: 6px 10px;
-    border-radius: 8px;
-    margin-top: 8px;
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-@media (max-width: 480px) {
-    body { padding: 100px 15px 30px; }
-    #typewriter-name { font-size: 22px; letter-spacing: 1px; }
-    .loading-main-text { font-size: 36px; letter-spacing: 12px; }
-    .loading-sub-text { font-size: 13px; letter-spacing: 3px; }
-    .loading-content { padding: 30px 40px; }
-    .loading-avatar { width: 110px; height:110px; }
-    .avatar { width: 140px; height: 140px; }
-    img.avatar-decoration { width: 165px; height: 165px; }
-    .section-card { padding: 24px; }
-    .profile-popup { width: 330px; }
-    .social { width: 60px; height: 60px; }
-    .social svg { width: 26px; height: 26px; }
+/* RESPONSIVE */
+@media (max-width:480px) {
+    body { padding:100px 15px 30px; }
+    #typewriter-name { font-size:22px; letter-spacing:1px; }
+    .loading-main-text { font-size:36px; letter-spacing:12px; }
+    .loading-sub-text { font-size:13px; letter-spacing:3px; }
+    .loading-content { padding:30px 40px; }
+    .loading-avatar { width:110px; height:110px; }
+    .avatar { width:140px; height:140px; }
+    img.avatar-decoration { width:165px; height:165px; }
+    .section-card { padding:24px; }
+    .profile-popup { width:330px; }
+    .social { width:60px; height:60px; }
+    .social svg { width:26px; height:26px; }
 }
 </style>
 </head>
 <body oncontextmenu="return false;">
 
-<!-- ✅ BAGONG SOBRANG ANGAS NA LOADING SCREEN — MAY ANIMATED IMAGE & CRT EFFECTS -->
-<div id="loading-overlay">
+<div id="loading-overlay" onclick="this.style.opacity='0';setTimeout(()=>this.remove(),900)">
     <div class="crt-noise"></div>
     <div class="loading-content">
-        <!-- 🖼️ Animated Loading Avatar — palitan mo lang link kung gusto -->
-        <div class="loading-avatar">
-            <img src="leonaise.webp" alt="Loading">
-        </div>
+        <div class="loading-avatar"><img src="leonaise.webp" alt="Loading"></div>
         <div class="loading-main-text">CLICK</div>
         <div class="loading-sub-text">GODZ OF AZURA • LOADING SYSTEM</div>
     </div>
 </div>
 
 <div class="card">
-    <!-- ✅ Iniangat nang maayos ang logo -->
     <div class="logo-img-container">
         <img src="public azura.png" alt="PUBLIC AZURA" class="main-logo" onerror="this.style.display='none';">
     </div>
@@ -875,9 +476,7 @@ img.avatar-decoration {
                 <div class="popup-header">
                     <div class="popup-avatar-wrapper">
                         <img id="popupDeco" class="popup-decoration" src="" alt="">
-                        <div class="popup-avatar">
-                            <img id="popupAvatarImg" src="" alt="">
-                        </div>
+                        <div class="popup-avatar"><img id="popupAvatarImg" src="" alt=""></div>
                     </div>
                     <div class="popup-info">
                         <div class="popup-nickname" id="popupNickname">Leon</div>
@@ -892,21 +491,18 @@ img.avatar-decoration {
             </div>
 
             <img id="decoImg" src="" class="avatar-decoration" onerror="this.style.display='none'">
-            <div class="avatar-img-holder">
-                <img id="avatarImg" src="" alt="Leon Avatar">
-            </div>
+            <div class="avatar-img-holder"><img id="avatarImg" src="" alt="Leon Avatar"></div>
         </div>
 
         <div id="usernameText" class="username"></div>
         <div id="noteText" class="bio">PA KISS NGA</div>
 
-        <!-- ✅ TERMINAL BLOCK — GAYA SA LITRATO MO -->
         <div class="terminal-block">
             <span class="terminal-prompt">root@PBA:/GOD$</span> Leon /etc/publicazura<br>
             <span class="terminal-text">Make Money , Not Friends |</span>
         </div>
 
-        <!-- ✅ ✅ ✅ TAMA NA NGAYON: CURRRENT ACTIVITY DITO LALABAS — HINDI NA NAKAASA SA SPOTIFY -->
+        <!-- ✅ TANGING LANG ITONG ACTIVITY BOX — NASAAN LAHAT PAPASOK KASAMA SPOTIFY -->
         <div class="activity-wrapper">
             <div class="activity-header">CURRENT ACTIVITY</div>
             <div id="activityContainer" class="activity-card">
@@ -919,290 +515,114 @@ img.avatar-decoration {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/></svg>
             </a>
             <a class="social" href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w&nd=1&dlsi=2944e36b3a9441b6" target="_blank" rel="noopener noreferrer">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-
-            <a class="social" href="https://www.instagram.com/leonky.2/" target="_blank" rel="noopener noreferrer">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.014-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 6.162 0 0 0 0 12.324 6.162 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 1.44 0 1 0 0 2.881 1.44 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.271-.686-.164-.54.146-1.107.686-1.271 3.812-1.16 10.142-.943 14.057 1.466.52.32.686.98.366 1.5-.32.52-.98.686-1.5.366z"/></svg>
             </a>
         </div>
-    </div>
 
-    <div class="section-card">
-        <div class="music-container">
-            <div class="music-header">
-                <img id="musicAlbumArt" class="music-album-art" src="leonaise.webp" alt="Album Art">
-                <div class="music-info">
-                    <span class="music-title" id="musicTitle">CHILL OUT</span>
-                    <span class="music-artist" id="musicArtist">HYU1 CHILL OUT (Official Music Video)</span>
-                </div>
-                <button id="playPauseBtn" class="music-play-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="playIcon">
-                        <path d="M8 5v14l11-7z"/>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="pauseIcon" style="display:none;">
-                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div id="progressClickArea" class="music-progress-container">
-                <div id="musicProgressBar" class="music-progress-bar"></div>
-            </div>
-
-            <div class="music-time">
-                <span id="musicTimeCurrent">0:00</span>
-                <span id="musicTimeTotal">2:31</span>
-            </div>
-
-            <div class="views-pill" id="viewsCount">Views: 5682</div>
-        </div>
     </div>
 </div>
 
-<audio id="bgMusic" loop>
-    <source src="../HYU1 - CHILL OUT.mp3" type="audio/mpeg">
-
-
+<!-- ✅ INAYOS NA JS: SPOTIFY + LAHAT NG AKTIBIDAD → PUMAPUNTA SA TAMANG LUGAR -->
 <script>
-const audio = document.getElementById("bgMusic");
-audio.volume = 0.5;
+// ⚙️ PALITAN MO ITO NG TAMANG API ENDPOINT MO
+const API_URL = "https://api.lanyard.rest/v1/users/1250654354344775703";
 
-const overlay = document.getElementById("loading-overlay");
-
-overlay.addEventListener('click', () => {
-    audio.play().catch(e => console.log(e));
-    overlay.style.opacity = "0";
-    setTimeout(() => { 
-        overlay.style.visibility = "hidden"; 
-    }, 900);
-});
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
-        e.preventDefault();
-        return false;
+// STATUS CLASS MAPPING
+function getStatusClass(status) {
+    switch(status?.toLowerCase()){
+        case 'online': return 'status-online';
+        case 'idle': return 'status-idle';
+        case 'dnd': case 'do_not_disturb': return 'status-dnd';
+        default: return 'status-offline';
     }
-});
-
-function updateViews() {
-    let count = localStorage.getItem('page_views');
-    if (!count) count = 5671; 
-    count = parseInt(count) + 1;
-    localStorage.setItem('page_views', count);
-    document.getElementById('viewsCount').innerText = `Views: ${count}`;
-}
-updateViews();
-
-const YOUR_ID = "1250654354344775703";
-const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
-
-const defaultTitle = "CHILL OUT";
-const defaultArtist = "HYU1 CHILL OUT (Official Music Video)";
-const defaultArt = "leonaise.webp";
-const defaultDuration = 151000;
-
-let isPlaying = true;
-let currentTime = 0;
-let totalTime = defaultDuration;
-let progressInterval;
-
-const playPauseBtn = document.getElementById('playPauseBtn');
-const playIcon = document.getElementById('playIcon');
-const pauseIcon = document.getElementById('pauseIcon');
-const progressBar = document.getElementById('musicProgressBar');
-const progressClickArea = document.getElementById('progressClickArea');
-const timeCurrentEl = document.getElementById('musicTimeCurrent');
-const timeTotalEl = document.getElementById('musicTimeTotal');
-
-progressClickArea.addEventListener('click', (e) => {
-    const rect = progressClickArea.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const percent = Math.max(0, Math.min(1, clickX / rect.width));
-    const newTime = percent * totalTime;
-    currentTime = newTime;
-    audio.currentTime = newTime / 1000;
-    updateProgressUI();
-});
-
-playPauseBtn.addEventListener('click', () => {
-    if (isPlaying) {
-        audio.pause();
-        clearInterval(progressInterval);
-        playIcon.style.display = 'block';
-        pauseIcon.style.display = 'none';
-    } else {
-        audio.play().catch(e => console.log(e));
-        startProgressTimer();
-        playIcon.style.display = 'none';
-        pauseIcon.style.display = 'block';
-    }
-    isPlaying = !isPlaying;
-});
-
-function formatTime(ms) {
-    if (!ms || ms < 0) return "0:00";
-    const totalSeconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
-function startProgressTimer() {
-    clearInterval(progressInterval);
-    progressInterval = setInterval(() => {
-        if (!isNaN(audio.duration) && audio.duration > 0) {
-            totalTime = audio.duration * 1000;
-            timeTotalEl.innerText = formatTime(totalTime);
-        }
-        currentTime = audio.currentTime * 1000;
-        updateProgressUI();
-    }, 1000);
-}
-
-function updateProgressUI() {
-    const percentage = totalTime > 0 ? (currentTime / totalTime) * 100 : 0;
-    progressBar.style.width = `${percentage}%`;
-    timeCurrentEl.innerText = formatTime(currentTime);
-}
-
+// 🔄 MAIN FETCH FUNCTION — TAMANG PAGHIWALAY NG SPOTIFY VS IBA PANG AKTIBIDAD
 async function fetchData() {
     try {
-        const res = await fetch(API_URL, {cache: "no-store"});
-        const json = await res.json();
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        if(!data) return;
 
-        if (!json.success) {
-            console.error("API Error:", json);
-            document.getElementById('statusText').innerText = 'Error';
-            return;
+        // 🟢 UPDATE STATUS
+        const status = data.discord_status || 'offline';
+        const statusClass = getStatusClass(status);
+        document.getElementById('statusDot').className = `status-dot ${statusClass}`;
+        document.getElementById('statusText').textContent = status.charAt(0).toUpperCase() + status.slice(1);
+        document.getElementById('popupStatusDot').className = `status-dot ${statusClass}`;
+        document.getElementById('popupStatusText').textContent = status.charAt(0).toUpperCase() + status.slice(1);
+
+        // 🖼️ AVATAR & DECORATION
+        if(data.avatar) {
+            document.getElementById('avatarImg').src = `https://cdn.discordapp.com/avatars/${data.user_id}/${data.avatar}.png?size=256`;
+            document.getElementById('popupAvatarImg').src = `https://cdn.discordapp.com/avatars/${data.user_id}/${data.avatar}.png?size=128`;
         }
-        const d = json.data;
-
-        const avatarEl = document.getElementById('avatarImg');
-        const popupAvatarEl = document.getElementById('popupAvatarImg');
-        let avatarUrl = "";
-        if (d.discord_user.avatar) {
-            avatarUrl = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
-        } else {
-            avatarUrl = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
-        }
-        avatarEl.src = avatarUrl;
-        popupAvatarEl.src = avatarUrl;
-
-        const decoEl = document.getElementById('decoImg');
-        const popupDecoEl = document.getElementById('popupDeco');
-        if (d.discord_user.avatar_decoration_data) {
-            const asset = d.discord_user.avatar_decoration_data.asset;
-            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=240&passthrough=true`;
-            decoEl.src = decoUrl;
-            decoEl.style.display = 'block';
-            popupDecoEl.src = decoUrl;
-            popupDecoEl.style.display = 'block';
-        } else {
-            decoEl.style.display = 'none';
-            popupDecoEl.style.display = 'none';
+        if(data.decoration) {
+            document.getElementById('decoImg').src = data.decoration;
+            document.getElementById('popupDeco').src = data.decoration;
         }
 
-        const nickname = d.discord_user.global_name || "Leon";
-        const username = d.discord_user.username || "wtf.leon";
-        document.getElementById('popupNickname').innerText = nickname;
-        document.getElementById('popupUsername').innerText = `@${username}`;
+        // 🎵 SPOTIFY DATA — ITINUTURONG NGAYON SA ACTIVITY BOX DIRECTLY
+        const spotify = data.spotify;
+        const otherActivities = (data.activities || []).filter(act => act.type !== 2); // ✅ TANGGALIN DUPLICATE SPOTIFY
 
-        const noteEl = document.getElementById('noteText');
-        const customStatus = d.activities?.find(a => a.type === 4);
-        let statusText = "PA KISS NGA";
-        if (customStatus?.state) {
-            statusText = customStatus.state;
-        }
-        noteEl.innerText = statusText;
-
-        const statusDot = document.getElementById('statusDot');
-        const statusTextEl = document.getElementById('statusText');
-        const popupStatusDot = document.getElementById('popupStatusDot');
-        const popupStatusText = document.getElementById('popupStatusText');
-        
-        statusDot.className = "status-dot";
-        popupStatusDot.className = "status-dot";
-
-        let statusString = "";
-        let statusClass = "";
-
-        switch(d.discord_status) {
-            case 'online':
-                statusClass = 'status-online';
-                statusString = 'Online';
-                break;
-            case 'idle':
-                statusClass = 'status-idle';
-                statusString = 'Idle';
-                break;
-            case 'dnd':
-                statusClass = 'status-dnd';
-                statusString = 'Do Not Disturb';
-                break;
-            default:
-                statusClass = 'status-offline';
-                statusString = 'Offline / Invisible';
+        // 📌 PRIORITY RULE: SPOTIFY > IBANG AKTIBIDAD > WALANG GINAGAWA
+        let mainActivity = null;
+        if(spotify) {
+            mainActivity = {
+                isSpotify: true,
+                name: "Listening to Spotify",
+                details: spotify.song,
+                state: spotify.artist,
+                icon: spotify.album_art_url || "https://cdn-icons-png.flaticon.com/512/2111/2111624.png",
+                start: spotify.start_timestamp,
+                end: spotify.end_timestamp
+            };
+        } else if(otherActivities.length > 0) {
+            mainActivity = {...otherActivities[0], isSpotify: false};
         }
 
-        statusDot.classList.add(statusClass);
-        statusTextEl.innerText = statusString;
-        popupStatusDot.classList.add(statusClass);
-        popupStatusText.innerText = statusString;
+        // 📥 ILAGAY SA CURRENT ACTIVITY BOX
+        const actContainer = document.getElementById('activityContainer');
+        const popupAct = document.getElementById('popupActivity');
 
-        const activityEl = document.getElementById('popupActivity');
-        const activity = d.activities?.find(a => a.type === 0 || a.type === 2 || a.type === 3);
-        if (activity) {
-            if (activity.type === 0) activityEl.innerText = `Playing: ${activity.name}`;
-            if (activity.type === 2) activityEl.innerText = `Listening: ${activity.name}`;
-            if (activity.type === 3) activityEl.innerText = `Watching: ${activity.name}`;
-        } else {
-            activityEl.innerText = "No Activity";
-        }
-
-        const titleEl = document.getElementById('musicTitle');
-        const artistEl = document.getElementById('musicArtist');
-        const artEl = document.getElementById('musicAlbumArt');
-
-        if (d.spotify?.track_id) {
-            titleEl.innerText = d.spotify.song || "Unknown Track";
-            artistEl.innerText = d.spotify.artist || "Unknown Artist";
-            artEl.src = d.spotify.album_art_url || defaultArt;
-            
-            const start = d.spotify.timestamps?.start || 0;
-            const end = d.spotify.timestamps?.end || 0;
-            
-            if (end > start) {
-                totalTime = end - start;
-                currentTime = Math.min(Date.now() - start, totalTime);
-                timeTotalEl.innerText = formatTime(totalTime);
-                updateProgressUI();
+        if(mainActivity) {
+            // ✅ HTML CONTENT SA ACTIVITY BOX
+            let progressHTML = "";
+            if(mainActivity.isSpotify && mainActivity.start && mainActivity.end) {
+                const now = Date.now();
+                const total = mainActivity.end - mainActivity.start;
+                const elapsed = Math.max(0, now - mainActivity.start);
+                const pct = Math.min(100, Math.round((elapsed / total) * 100));
+                progressHTML = `<div class="activity-progress"><div class="activity-progress-fill" style="width:${pct}%"></div></div>`;
             }
 
+            actContainer.innerHTML = `
+                <div class="activity-icon"><img src="${mainActivity.icon}" alt="Activity Icon"></div>
+                <div class="activity-info">
+                    <div class="activity-name">${mainActivity.name || "Unknown Activity"}</div>
+                    <div class="activity-details">${mainActivity.details || ""}${mainActivity.state ? ` • ${mainActivity.state}` : ""}</div>
+                    ${progressHTML}
+                </div>
+            `;
+
+            // ✅ ILAGAY DIN SA POPUP BOX
+            popupAct.textContent = `${mainActivity.name || "Activity"}: ${mainActivity.details || ""} ${mainActivity.state ? `| ${mainActivity.state}` : ""}`;
         } else {
-            titleEl.innerText = defaultTitle;
-            artistEl.innerText = defaultArtist;
-            artEl.src = defaultArt;
-            totalTime = defaultDuration;
-            timeTotalEl.innerText = formatTime(defaultDuration);
-            updateProgressUI();
+            actContainer.innerHTML = `<div class="activity-no">Waiting for activity...</div>`;
+            popupAct.textContent = "No Activity";
         }
 
-    } catch (err) {
-        console.error("API Fetch Error:", err);
-        document.getElementById('statusText').innerText = 'Error';
+    } catch(err) {
+        console.error("Fetch Error:", err);
+        document.getElementById('activityContainer').innerHTML = `<div class="activity-no">Failed to load</div>`;
     }
 }
 
+// ⏱️ AUTO REFRESH EVERY 3 SECONDS
 fetchData();
-setInterval(fetchData, 5000);
-
-startProgressTimer();
-playIcon.style.display = 'none';
-pauseIcon.style.display = 'block';
-
-history.replaceState(null, null, location.href);
-window.onpopstate = () => history.go(1);
-window.addEventListener('load', () => history.pushState(null, null, location.href));
+setInterval(fetchData, 3000);
 </script>
+
 </body>
 </html>

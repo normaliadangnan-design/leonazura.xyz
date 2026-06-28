@@ -52,42 +52,126 @@
             padding: 15px 10px;
         }
 
-        /* ✅ LOADING SCREEN */
+        /* 🚀 SOBRANG ANGAS NA LOADING SCREEN — MAY BANNER, TEXT AT ANIMATION */
         #loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000000;
+            background: radial-gradient(circle at center, #0a0a0f 0%, #000000 100%);
             z-index: 99999;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1), visibility 0.8s ease;
+            overflow: hidden;
         }
         #loading-screen.fade-out {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
-        .loading-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            letter-spacing: 4px;
-            color: #ffffff;
-            opacity: 0.8;
-            animation: pulse 1.8s infinite alternate;
+
+        /* ✨ CRT & SCAN EFFECTS */
+        #loading-screen::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+            background-size: 25px 25px;
+            animation: bgFloat 7s linear infinite;
+            opacity: 0.5;
         }
-        @keyframes pulse {
-            0% { opacity: 0.4; }
-            100% { opacity: 1; }
+        @keyframes bgFloat {
+            0% { transform: translate(0,0); }
+            100% { transform: translate(25px,25px); }
+        }
+
+        .crt-overlay {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(transparent 0px, rgba(255,255,255,0.02) 1px, transparent 2px);
+            animation: crtScroll 3.5s linear infinite;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        @keyframes crtScroll {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+
+        .scan-beam {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffffff, #ff2266, #00eeff, transparent);
+            box-shadow: 0 0 20px #ffffff, 0 0 40px #ff226670, 0 0 60px #00eeff40;
+            animation: scanMove 2s linear infinite;
+            opacity: 0.9;
+        }
+        @keyframes scanMove {
+            0% { transform: translateY(-150%); }
+            100% { transform: translateY(600%); }
+        }
+
+        .loading-main-box {
+            position: relative;
+            text-align: center;
+            padding: 60px 100px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(4,4,4,0.7);
+            border-radius: 20px;
+            box-shadow: 
+                0 0 70px rgba(255,255,255,0.1),
+                inset 0 0 90px rgba(0,0,0,0.95);
+            animation: borderBreath 2.7s ease-in-out infinite;
+        }
+        @keyframes borderBreath {
+            0%,100% { border-color:rgba(255,255,255,0.1); box-shadow:0 0 40px rgba(255,255,255,0.08); }
+            50% { border-color:rgba(255,255,255,0.32); box-shadow:0 0 80px rgba(255,255,255,0.2); }
+        }
+
+        .loading-banner {
+            font-family: 'Oswald', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 26px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 20px;
+            animation: 
+                glowShift 2s infinite alternate,
+                glitchText 5s infinite;
+        }
+        @keyframes glowShift {
+            from { text-shadow:0 0 15px #fff,0 0 30px #ffffff50,0 0 50px #ff226620; }
+            to { text-shadow:0 0 25px #fff,0 0 50px #ffffff80,0 0 70px #00eeff40; }
+        }
+        @keyframes glitchText {
+            0% {transform:translate(0);}
+            2% {transform:translate(-3px,1px);text-shadow:2px 0 12px #ff2266,-2px 0 12px #00eeff;}
+            4% {transform:translate(3px,-1px);text-shadow:-2px 0 12px #ff2266,2px 0 12px #00eeff;}
+            6% {transform:translate(0);}
+        }
+
+        .loading-subtext {
+            font-size: 17px;
+            letter-spacing: 7px;
+            color: #aaa;
+            opacity:0.75;
+            animation: textPulse 1.8s infinite alternate;
+        }
+        @keyframes textPulse {
+            0% {opacity:0.4; letter-spacing:5px;}
+            100% {opacity:1; letter-spacing:7px;}
         }
 
         .center-container, .navigation-bar {
             opacity: 0;
             visibility: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.6s ease;
         }
         .page-ready .center-container,
         .page-ready .navigation-bar {
@@ -108,7 +192,6 @@
             overflow: hidden;
             white-space: nowrap;
             margin: 0 auto;
-            /* ❌ REMOVED border-right: 2px solid #fff; */
             animation: 
                 typewriter 1.5s steps(15, end) 0.5s 1 normal both;
         }
@@ -161,7 +244,9 @@
             width: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.25));
+            transition: transform 0.3s ease;
         }
+        .main-clan-logo img:hover { transform:scale(1.05); }
 
         .title-group-block {
             position: relative;
@@ -284,6 +369,10 @@
             z-index: 2;
             border: 2px solid #000;
             background: #000;
+            transition: box-shadow 0.3s ease;
+        }
+        .avatar-wrapper-node:hover .avatar-img {
+            box-shadow: 0 0 18px rgba(255,255,255,0.25);
         }
 
         .status-indicator {
@@ -303,33 +392,36 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
+        /* ✨ INAYOS NA POPUP — MAS MALUWAG PARA SA NOTE AT ACTIVITY */
         .avatar-tooltip {
             position: absolute;
-            bottom: 125%;
+            bottom: 130%;
             left: 50%;
             transform: translateX(-50%);
             background: #000000;
             border: 1px solid #2a2a2e;
-            border-radius: 12px;
-            width: 280px;
-            padding: 15px;
+            border-radius: 14px;
+            width: 320px; /* ✅ PINALUWAG */
+            max-width: 92vw;
+            padding: 18px;
             color: #ffffff;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             pointer-events: none;
             z-index: 9999;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.12);
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
             visibility: visible;
+            transform: translateX(-50%) translateY(-6px);
         }
 
         .tooltip-avatar-wrapper {
             position: relative;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             overflow: visible;
             display: flex;
@@ -341,15 +433,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.08);
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             pointer-events: none;
             z-index: 1;
             object-fit: contain;
         }
         .tooltip-avatar-sm {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             z-index: 2;
             position: relative;
@@ -358,36 +450,54 @@
         .tooltip-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
+            gap: 12px;
+            margin-bottom: 10px;
         }
         .tooltip-user-info h4 {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             margin: 0;
             color: #fff;
+            word-break: break-word;
         }
         .tooltip-user-info p {
-            font-size: 11px;
+            font-size: 12px;
             color: #888;
-            margin: 2px 0 0 0;
+            margin: 3px 0 0 0;
+        }
+
+        /* ✅ ESPESYAL NA BAHAGI: NOTE AT ACTIVITY — KUSANG BUMABALOT */
+        .tooltip-custom-note {
+            background: #0e0e0e;
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #e0e0e0;
+            line-height: 1.5;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .tooltip-activity-wrapper {
             background: #111;
-            border-radius: 6px;
-            padding: 6px 8px;
-            margin-top: 8px;
-            font-size: 11px;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-top: 10px;
+            font-size: 12.5px;
             color: #aaa;
+            line-height: 1.5;
             word-wrap: break-word;
+            white-space: normal;
             max-width: 100%;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .activity-playing { color: #43b581; }
-        .activity-streaming { color: #9146ff; }
-        .activity-listening { color: #1db954; }
-        .activity-watching { color: #faa61a; }
+        .activity-playing { color: #43b581; font-weight:500; }
+        .activity-streaming { color: #9146ff; font-weight:500; }
+        .activity-listening { color: #1db954; font-weight:500; }
+        .activity-watching { color: #faa61a; font-weight:500; }
+        .activity-custom { color: #7289da; font-weight:500; }
 
         .marquee-wrapper-group {
             display: flex;
@@ -441,7 +551,9 @@
             border-radius: 30px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
             white-space: nowrap;
+            transition: transform 0.2s ease;
         }
+        .marquee-profile-block:hover { transform:scale(1.03); }
 
         .marquee-profile-block img {
             width: 24px;
@@ -491,6 +603,7 @@
 
         /* ✅ Responsive */
         @media (max-width: 768px) {
+            .loading-banner { font-size: 42px; letter-spacing:12px; }
             .main-clan-logo img { height: 70px; }
             .circle-avatar-container {
                 width: 75px;
@@ -511,16 +624,21 @@
             .symbol-break { font-size: 28px; }
             .typewriter-header { font-size: 24px; }
             .staff-header { font-size: 20px; }
-            .avatar-tooltip { width: 240px; }
+            .avatar-tooltip { width: 280px; }
             .navigation-bar { right: 15px; font-size: 11px; }
         }
     </style>
 </head>
 <body oncontextmenu="return false;" onkeydown="return disableKeys(event);">
 
-    <!-- ✅ LOADING SCREEN -->
+    <!-- ✅ SOBRANG ANGAS NA LOADING SCREEN -->
     <div id="loading-screen">
-        <div class="loading-text">CLICK</div>
+        <div class="crt-overlay"></div>
+        <div class="scan-beam"></div>
+        <div class="loading-main-box">
+            <div class="loading-banner">PUBLIC AZURA</div>
+            <div class="loading-subtext">CLICK ANYWHERE • LOADING SYSTEM • CONNECTING LANYARD API</div>
+        </div>
     </div>
 
     <div class="navigation-bar">
@@ -603,7 +721,7 @@
         }
         loadingScreen.addEventListener('click', finishLoading);
         window.addEventListener('load', () => {
-            setTimeout(finishLoading, 2500);
+            setTimeout(finishLoading, 2800);
             fetchAndUpdate();
         });
 
@@ -674,24 +792,38 @@
                 if (s === 'online') statusClass = 'status-online';
                 else if (s === 'idle') statusClass = 'status-idle';
                 else if (s === 'dnd') statusClass = 'status-dnd';
-                let statusText = '';
-                let statusType = '';
+
+                // ✨ INAYOS NA PAGBASA NG AKTIBIDAD — TAMANG PAGKAKASUNOD
+                let noteText = "";
+                let activityText = "";
+                let activityClass = "";
+
+                // ✅ PRIORITY: CUSTOM STATUS / NOTE
+                if (mem.customStatus?.state?.trim()) {
+                    noteText = mem.customStatus.state.trim();
+                }
+
+                // ✅ THEN: SPOTIFY > GAME > STREAM > WATCH
                 if (mem.spotify) {
-                    statusType = 'activity-listening';
-                    statusText = `Listening to ${mem.spotify.song || 'Music'}`;
-                } else if (Array.isArray(mem.activities) && mem.activities.length > 0) {
-                    const act = mem.activities.find(a => a.type !== 4) || mem.activities[0];
-                    if (act) {
-                        if (act.type === 0) { statusType = 'activity-playing'; statusText = `Playing ${act.name || 'Game'}`; }
-                        if (act.type === 1) { statusType = 'activity-streaming'; statusText = `Streaming ${act.name || 'Stream'}`; }
-                        if (act.type === 2) { statusType = 'activity-listening'; statusText = `Listening to ${act.name || 'Music'}`; }
-                        if (act.type === 3) { statusType = 'activity-watching'; statusText = `Watching ${act.name || 'Video'}`; }
+                    activityText = `🎵 Listening: ${mem.spotify.song || 'Music'} — ${mem.spotify.artist || ''}`;
+                    activityClass = 'activity-listening';
+                } 
+                else if (Array.isArray(mem.activities) && mem.activities.length > 0) {
+                    // Huwag isama ang Type 4 (Custom Status) — hiwalay na 'yan
+                    const mainAct = mem.activities.find(a => a.type !== 4) || null;
+                    if (mainAct) {
+                        switch(mainAct.type) {
+                            case 0: activityText = `🎮 Playing: ${mainAct.name || 'Game'}`; activityClass = 'activity-playing'; break;
+                            case 1: activityText = `📹 Streaming: ${mainAct.name || 'Stream'}`; activityClass = 'activity-streaming'; break;
+                            case 2: activityText = `🎧 Listening: ${mainAct.name || 'Audio'}`; activityClass = 'activity-listening'; break;
+                            case 3: activityText = `📺 Watching: ${mainAct.name || 'Video'}`; activityClass = 'activity-watching'; break;
+                            default: activityText = `🔹 Active: ${mainAct.name || ''}`; activityClass = 'activity-custom';
+                        }
+                        // Idagdag ang detalye kung meron
+                        if (mainAct.state) activityText += ` • ${mainAct.state}`;
                     }
                 }
-                if (mem.customStatus?.state) {
-                    statusText = mem.customStatus.state;
-                    statusType = '';
-                }
+
                 const tooltipDeco = mem.effectURL ? `<img src="${mem.effectURL}" class="tooltip-avatar-decoration" alt="decoration">` : '';
                 wrapper.innerHTML = `
                     <div class="circle-avatar-container">
@@ -711,7 +843,8 @@
                                 <p>@${mem.username}</p>
                             </div>
                         </div>
-                        ${statusText ? `<div class="tooltip-activity-wrapper ${statusType}">${statusText}</div>` : ''}
+                        ${noteText ? `<div class="tooltip-custom-note">📝 ${noteText}</div>` : ''}
+                        ${activityText ? `<div class="tooltip-activity-wrapper ${activityClass}">${activityText}</div>` : ''}
                     </div>
                 `;
                 box.appendChild(wrapper);

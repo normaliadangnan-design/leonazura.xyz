@@ -52,7 +52,7 @@
             padding: 15px 10px;
         }
 
-        /* 🚀 SOBRANG ANGAS NA LOADING SCREEN — MAY BANNER, TEXT AT ANIMATION */
+        /* 🚀 SOBRANG ANGAS NA LOADING SCREEN — MAY BANNER IMAGE NA */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -119,7 +119,7 @@
         .loading-main-box {
             position: relative;
             text-align: center;
-            padding: 60px 100px;
+            padding: 50px 90px;
             border: 1px solid rgba(255,255,255,0.12);
             background: rgba(4,4,4,0.7);
             border-radius: 20px;
@@ -133,39 +133,39 @@
             50% { border-color:rgba(255,255,255,0.32); box-shadow:0 0 80px rgba(255,255,255,0.2); }
         }
 
-        .loading-banner {
-            font-family: 'Oswald', sans-serif;
-            font-size: 64px;
-            font-weight: 900;
-            letter-spacing: 26px;
-            text-transform: uppercase;
-            color: #fff;
-            margin-bottom: 20px;
+        /* ✅ BANNER IMAGE KUNDI TEXT NA LANG */
+        .loading-banner-img {
+            max-width: 420px;
+            width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto 25px auto;
+            filter: drop-shadow(0 0 18px rgba(255,255,255,0.25));
             animation: 
                 glowShift 2s infinite alternate,
-                glitchText 5s infinite;
+                subtleGlowPulse 3s ease-in-out infinite alternate;
         }
         @keyframes glowShift {
-            from { text-shadow:0 0 15px #fff,0 0 30px #ffffff50,0 0 50px #ff226620; }
-            to { text-shadow:0 0 25px #fff,0 0 50px #ffffff80,0 0 70px #00eeff40; }
+            from { filter: drop-shadow(0 0 12px #ffffff40); }
+            to { filter: drop-shadow(0 0 22px #ffffff80) drop-shadow(0 0 35px #ff226625); }
         }
-        @keyframes glitchText {
-            0% {transform:translate(0);}
-            2% {transform:translate(-3px,1px);text-shadow:2px 0 12px #ff2266,-2px 0 12px #00eeff;}
-            4% {transform:translate(3px,-1px);text-shadow:-2px 0 12px #ff2266,2px 0 12px #00eeff;}
-            6% {transform:translate(0);}
+        @keyframes subtleGlowPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.02); }
         }
 
         .loading-subtext {
             font-size: 17px;
-            letter-spacing: 7px;
-            color: #aaa;
-            opacity:0.75;
+            letter-spacing: 6px;
+            color: #cccccc;
+            opacity:0.8;
             animation: textPulse 1.8s infinite alternate;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
         }
         @keyframes textPulse {
-            0% {opacity:0.4; letter-spacing:5px;}
-            100% {opacity:1; letter-spacing:7px;}
+            0% {opacity:0.4; letter-spacing:4px;}
+            100% {opacity:1; letter-spacing:6px;}
         }
 
         .center-container, .navigation-bar {
@@ -603,7 +603,8 @@
 
         /* ✅ Responsive */
         @media (max-width: 768px) {
-            .loading-banner { font-size: 42px; letter-spacing:12px; }
+            .loading-main-box { padding: 35px 25px; }
+            .loading-banner-img { max-width: 280px; }
             .main-clan-logo img { height: 70px; }
             .circle-avatar-container {
                 width: 75px;
@@ -631,13 +632,15 @@
 </head>
 <body oncontextmenu="return false;" onkeydown="return disableKeys(event);">
 
-    <!-- ✅ SOBRANG ANGAS NA LOADING SCREEN -->
+    <!-- ✅ SOBRANG ANGAS NA LOADING SCREEN — MAY BANNER IMAGE NA -->
     <div id="loading-screen">
         <div class="crt-overlay"></div>
         <div class="scan-beam"></div>
         <div class="loading-main-box">
-            <div class="loading-banner">public azura.png</div>
-            <div class="loading-subtext">CLICK ANYWHERE • LOADING SYSTEM • </div>
+            <!-- 🖼️ BANNER IMAGE KUNDI TEXT -->
+            <img src="public azura.png" alt="PUBLIC AZURA" class="loading-banner-img" onerror="this.style.display='none';">
+            <!-- ✅ BAGONG TEKSTO AYON SA UTOS MO -->
+            <div class="loading-subtext">• PUBLIC AZURA LOADING SYSTEM •</div>
         </div>
     </div>
 

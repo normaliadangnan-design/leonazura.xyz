@@ -52,7 +52,7 @@ body::before {
 @keyframes borderGlow {
     0% { box-shadow: 0 0 5px rgba(255,255,255,0.15), 0 0 10px rgba(255,255,255,0.1); }
     50% { box-shadow: 0 0 12px rgba(255,255,255,0.25), 0 0 20px rgba(255,255,255,0.15); }
-    100% { box-shadow: 0 0 5px rgba(255,255,255,0.15), 0 0 10px rgba(255,255,255,0.1); }
+    100% { box-shadow: 0 0 5px rgba(255,255,255,0.15), 0 0 10px rgba(255,255,0.1); }
 }
 
 /* Typewriter Animation */
@@ -88,54 +88,69 @@ body::before {
         hideCursor 0.1s forwards 4s;
 }
 
-/* 🚀 SOBRANG ANGAS NA LOADING SCREEN - PUNO NG ANIMATION */
+/* 🚀 SOBRANG ANGAS NA LOADING SCREEN — MAY ANIMATED LITRATO & EFFECTS */
 #loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, #050505 0%, #000000 100%);
+    background: radial-gradient(circle at center, #0a0a0f 0%, #000000 100%);
     z-index: 999999;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: all 0.8s ease;
+    transition: all 0.9s cubic-bezier(0.19, 1, 0.22, 1);
     overflow: hidden;
 }
 
-/* Scan line effect */
+/* ✨ Moving glowing background particles */
 #loading-overlay::before {
     content: '';
     position: absolute;
     width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #ffffff, transparent);
-    box-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff70;
-    animation: scanLine 2.5s linear infinite;
-    opacity: 0.9;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: bgFloat 8s linear infinite;
+    opacity: 0.6;
+}
+@keyframes bgFloat {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(30px,30px); }
 }
 
-@keyframes scanLine {
-    0% { transform: translateY(-150%); }
-    100% { transform: translateY(550%); }
-}
-
-/* Glitch overlay effect */
+/* Scan line effect */
 #loading-overlay::after {
     content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #ffffff, #ff2266, #00eeff, transparent);
+    box-shadow: 0 0 25px #ffffff, 0 0 50px #ff226660, 0 0 70px #00eeff40;
+    animation: scanLine 2.2s linear infinite;
+    opacity: 0.95;
+}
+@keyframes scanLine {
+    0% { transform: translateY(-200%); }
+    100% { transform: translateY(700%); }
+}
+
+/* CRT noise overlay */
+.crt-noise {
     position: absolute;
     inset: 0;
     background: repeating-linear-gradient(
         transparent 0px,
-        rgba(255,255,255,0.02) 1px,
+        rgba(255,255,255,0.025) 1px,
         transparent 2px
     );
-    animation: scanLines 6s linear infinite;
-    opacity: 0.4;
+    animation: scanLines 4s linear infinite;
+    opacity: 0.35;
+    pointer-events: none;
 }
-
 @keyframes scanLines {
     from { transform: translateY(0); }
     to { transform: translateY(100vh); }
@@ -144,14 +159,15 @@ body::before {
 .loading-content {
     position: relative;
     text-align: center;
-    padding: 50px 70px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(5,5,5,0.5);
-    border-radius: 16px;
+    padding: 60px 90px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(5,5,5,0.65);
+    border-radius: 20px;
     box-shadow: 
-        0 0 50px rgba(255,255,255,0.1),
-        inset 0 0 60px rgba(0,0,0,0.9);
-    animation: borderPulse 3s ease-in-out infinite;
+        0 0 60px rgba(255,255,255,0.12),
+        inset 0 0 80px rgba(0,0,0,0.95);
+    animation: borderPulse 2.8s ease-in-out infinite;
+    overflow: hidden;
 }
 
 @keyframes borderPulse {
@@ -160,27 +176,54 @@ body::before {
         box-shadow: 0 0 30px rgba(255,255,255,0.08); 
     }
     50% { 
-        border-color: rgba(255,255,255,0.3); 
-        box-shadow: 0 0 60px rgba(255,255,255,0.2); 
+        border-color: rgba(255,255,255,0.35); 
+        box-shadow: 0 0 70px rgba(255,255,255,0.22); 
     }
+}
+
+/* ✅ Animated Loading Image */
+.loading-avatar {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.2);
+    position: relative;
+    animation: floatRock 3s ease-in-out infinite alternate;
+    box-shadow: 0 0 30px rgba(255,255,255,0.15);
+}
+.loading-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: slowSpin 12s linear infinite;
+}
+@keyframes floatRock {
+    from { transform: translateY(-8px) rotate(-1deg); }
+    to { transform: translateY(8px) rotate(1deg); }
+}
+@keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .loading-main-text {
     font-family: 'Oswald', sans-serif;
-    font-size: 56px;
+    font-size: 62px;
     font-weight: 800;
-    letter-spacing: 22px;
+    letter-spacing: 24px;
     color: #ffffff;
     text-transform: uppercase;
     position: relative;
     animation: 
         textGlow 2s ease-in-out infinite alternate,
-        glitchEffect 5s infinite;
+        glitchEffect 5.2s infinite;
 }
 
 @keyframes textGlow {
-    from { text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff40, 0 0 45px #ffffff20; }
-    to { text-shadow: 0 0 25px #ffffff, 0 0 50px #ffffff80, 0 0 70px #ffffff50; }
+    from { text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff40, 0 0 45px #ff226620; }
+    to { text-shadow: 0 0 25px #ffffff, 0 0 50px #ffffff80, 0 0 70px #00eeff50; }
 }
 
 @keyframes glitchEffect {
@@ -193,9 +236,9 @@ body::before {
 }
 
 .loading-sub-text {
-    margin-top: 25px;
-    font-size: 16px;
-    letter-spacing: 5px;
+    margin-top: 28px;
+    font-size: 17px;
+    letter-spacing: 6px;
     color: #cccccc;
     opacity: 0.8;
     animation: subPulse 2s infinite alternate;
@@ -203,7 +246,7 @@ body::before {
 
 @keyframes subPulse {
     0% { opacity: 0.4; letter-spacing: 4px; }
-    100% { opacity: 1; letter-spacing: 5px; }
+    100% { opacity: 1; letter-spacing: 6px; }
 }
 
 /* Iniangat nang maayos ang logo */
@@ -373,6 +416,66 @@ img.avatar-decoration {
     letter-spacing: 0.6px;
     font-weight: 400;
 }
+
+/* ✅ BAGONG STYLE: ACTIVITY SECTION — GAYA SA DISCORD PROFILE */
+.activity-wrapper {
+    margin: 20px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 20px;
+}
+.activity-header {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+.activity-card {
+    background: rgba(0,0,0,0.7);
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: all 0.3s ease;
+}
+.activity-card:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(15,15,15,0.8);
+}
+.activity-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.activity-icon img { width: 100%; height:100%; object-fit:cover; }
+.activity-info { flex:1; min-width:0; }
+.activity-name { font-size:15px; font-weight:600; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.activity-details { font-size:13px; color:#aaa; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.activity-no { color:#777; font-style:italic; padding:12px; text-align:center; font-size:14px; }
+
+/* ✅ TERMINAL STYLE — GAYA SA LITRATO MO */
+.terminal-block {
+    margin: 18px 0;
+    background: #0b0b0b;
+    border-radius: 10px;
+    padding: 14px 18px;
+    border: 1px solid rgba(0,255,120,0.15);
+    font-family: monospace;
+    font-size: 14px;
+    color: #b5f9b5;
+    box-shadow: inset 0 0 12px rgba(0,255,120,0.06);
+}
+.terminal-prompt { color:#4ecdc4; font-weight:bold; }
+.terminal-text { color:#ddd; }
 
 .socials {
     display: flex;
@@ -722,6 +825,7 @@ img.avatar-decoration {
     .loading-main-text { font-size: 36px; letter-spacing: 12px; }
     .loading-sub-text { font-size: 13px; letter-spacing: 3px; }
     .loading-content { padding: 30px 40px; }
+    .loading-avatar { width: 110px; height:110px; }
     .avatar { width: 140px; height: 140px; }
     img.avatar-decoration { width: 165px; height: 165px; }
     .section-card { padding: 24px; }
@@ -733,11 +837,16 @@ img.avatar-decoration {
 </head>
 <body oncontextmenu="return false;">
 
-<!-- ✅ BAGONG LOADING SCREEN - SOBRANG ANGAS -->
+<!-- ✅ BAGONG SOBRANG ANGAS NA LOADING SCREEN — MAY ANIMATED IMAGE & CRT EFFECTS -->
 <div id="loading-overlay">
+    <div class="crt-noise"></div>
     <div class="loading-content">
+        <!-- 🖼️ Animated Loading Avatar — palitan mo lang link kung gusto -->
+        <div class="loading-avatar">
+            <img src="https://cdn.discordapp.com/avatars/1250654354344775703/6c76149406915809a7f5411022571b3c.png?size=256" alt="Loading">
+        </div>
         <div class="loading-main-text">CLICK</div>
-        <div class="loading-sub-text">GODZ OF AZURA</div>
+        <div class="loading-sub-text">GODZ OF AZURA • LOADING SYSTEM</div>
     </div>
 </div>
 
@@ -790,12 +899,26 @@ img.avatar-decoration {
         <div id="usernameText" class="username"></div>
         <div id="noteText" class="bio">PA KISS NGA</div>
 
+        <!-- ✅ TERMINAL BLOCK — GAYA SA LITRATO MO -->
+        <div class="terminal-block">
+            <span class="terminal-prompt">root@wehaimi:/home$</span> aimi /etc/wehwrlwdwe<br>
+            <span class="terminal-text">Too real , too imitate |</span>
+        </div>
+
+        <!-- ✅ ✨ BAGONG ACTIVITY SECTION — GAYA SA DISCORD PROFILE -->
+        <div class="activity-wrapper">
+            <div class="activity-header">Activity</div>
+            <div id="activityContainer" class="activity-card">
+                <div class="activity-no">Loading activity...</div>
+            </div>
+        </div>
+
         <div class="socials">
             <a class="social" href="https://discord.gg/CwsGFu6D" target="_blank" rel="noopener noreferrer">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/></svg>
             </a>
             <a class="social" href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=DoTqgxLBSzSXV8Tbdbrg5w&nd=1&dlsi=2944e36b3a9441b6" target="_blank" rel="noopener noreferrer">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.35
             </a>
             <a class="social" href="https://www.instagram.com/leonky.2/" target="_blank" rel="noopener noreferrer">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.014-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 6.162 0 0 0 0 12.324 6.162 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 1.44 0 1 0 0 2.881 1.44 1.44 1.44 0 0 0 0-2.881z"/></svg>

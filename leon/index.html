@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Leon | PUBLIC AZURA</title>
 <style>
+/* ✅ Fixed JetBrains Mono Font */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
@@ -55,7 +56,7 @@ body::before {
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 0.8; }
+    0%, 100% { opacity: 0.7; }
     50% { opacity: 1; }
 }
 
@@ -64,19 +65,26 @@ body::before {
     100% { transform: translateY(100vh); }
 }
 
-/* 🚀 Loading Screen */
+@keyframes textGlow {
+    from { text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff40; }
+    to { text-shadow: 0 0 25px #ffffff, 0 0 50px #ffffff80; }
+}
+
+/* 🚀 IMPROVED LOADING SCREEN */
 #loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;
-    z-index: 9999;
+    background: #000000;
+    z-index: 99999;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
+    gap: 40px;
+    transition: opacity 1s ease, visibility 1s ease;
 }
 
 #loading-overlay.hidden {
@@ -84,35 +92,50 @@ body::before {
     visibility: hidden;
 }
 
+/* Scan line effect */
 #loading-overlay::after {
     content: '';
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 2px;
     background: linear-gradient(90deg, transparent, #ffffff, transparent);
-    animation: scanline 2s linear infinite;
-    opacity: 0.7;
+    box-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff70;
+    animation: scanline 2.5s linear infinite;
+    opacity: 0.8;
 }
 
-.loading-text {
-    font-size: 28px;
-    color: #fff;
-    letter-spacing: 8px;
-    animation: pulse 1.5s infinite alternate;
+/* Loading Banner/Text */
+.loading-main {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    color: #ffffff;
+    text-transform: uppercase;
+    animation: pulse 2s infinite alternate, textGlow 3s infinite alternate;
 }
 
-/* 🎯 Main Profile Card - Terminal Style */
+.loading-sub {
+    font-size: 20px;
+    letter-spacing: 6px;
+    color: #cccccc;
+    animation: pulse 2s infinite alternate-reverse;
+}
+
+/* 🎯 Main Profile Card */
 .profile-card {
     width: 100%;
-    max-width: 520px;
-    background: rgba(10, 10, 10, 0.9);
-    border: 1px solid rgba(80, 80, 80, 0.4);
-    border-radius: 6px;
+    max-width: 460px;
+    background: rgba(12, 12, 12, 0.92);
+    border: 1px solid rgba(70, 70, 70, 0.4);
+    border-radius: 8px;
     padding: 24px;
-    box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05);
+    box-shadow: 0 0 40px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.06);
     z-index: 10;
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.8s ease-out forwards;
     opacity: 0;
+    position: relative;
 }
 
 /* Header / Avatar Section */
@@ -124,14 +147,20 @@ body::before {
 }
 
 .avatar {
-    width: 84px;
-    height: 84px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.2);
     overflow: hidden;
     position: relative;
     background: #000;
     flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
 }
 
 .avatar img {
@@ -179,7 +208,7 @@ body::before {
 .status-offline { background-color: #80848e; color: #80848e; }
 
 .username {
-    font-size: 15px;
+    font-size: 14px;
     color: #a0a0a0;
 }
 
@@ -189,31 +218,34 @@ body::before {
 }
 
 .section-title {
-    font-size: 12px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: #777;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: 500;
 }
 
-/* Activity */
+/* Activity Box */
 .activity-box {
-    background: rgba(5, 5, 5, 0.6);
-    border: 1px solid rgba(60, 60, 60, 0.4);
+    background: rgba(8, 8, 8, 0.7);
+    border: 1px solid rgba(50, 50, 50, 0.5);
     border-radius: 4px;
-    padding: 12px;
-    font-size: 14px;
+    padding: 10px 12px;
+    font-size: 13px;
     color: #cccccc;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
 }
 
 /* Terminal / Status */
 .terminal-box {
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(50, 50, 50, 0.5);
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(40, 40, 40, 0.6);
     border-radius: 4px;
-    padding: 12px;
-    font-size: 14px;
+    padding: 10px 12px;
+    font-size: 13px;
     color: #b0e090;
     line-height: 1.6;
 }
@@ -224,28 +256,31 @@ body::before {
 
 /* Quote / Bio */
 .quote-box {
-    background: rgba(5, 5, 5, 0.6);
-    border: 1px solid rgba(60, 60, 60, 0.4);
+    background: rgba(8, 8, 8, 0.7);
+    border: 1px solid rgba(50, 50, 50, 0.5);
     border-radius: 4px;
-    padding: 12px;
-    font-size: 14px;
+    padding: 10px 12px;
+    font-size: 13px;
     color: #cccccc;
     font-style: italic;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
 }
 
 /* Links / Socials */
 .links-container {
     display: flex;
     gap: 16px;
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 .social-link {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 4px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -253,44 +288,173 @@ body::before {
 }
 
 .social-link:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.25);
     transform: translateY(-2px);
 }
 
 .social-link svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     fill: #e0e0e0;
 }
 
+/* ✅ AVATAR POPUP BOX */
+.profile-popup {
+    position: absolute;
+    top: 0;
+    left: 110%;
+    width: 320px;
+    background: #0a0a0a;
+    border: 1px solid rgba(80, 80, 80, 0.5);
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.95);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    transform: translateX(15px);
+    pointer-events: none;
+}
+
+.avatar:hover ~ .profile-popup,
+.profile-popup:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.popup-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    overflow: hidden;
+    position: relative;
+    background: #000;
+}
+
+.popup-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.popup-info .popup-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.popup-info .popup-user {
+    font-size: 12px;
+    color: #a0a0a0;
+    margin-bottom: 6px;
+}
+
+.popup-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #cccccc;
+}
+
+.popup-section {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.popup-section span {
+    color: #888;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.popup-activity {
+    background: rgba(5,5,5,0.7);
+    border: 1px solid rgba(50,50,50,0.4);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: #dddddd;
+}
+
 /* Responsive */
-@media (max-width: 480px) {
-    .profile-header {
-        flex-direction: column;
-        text-align: center;
+@media (max-width: 768px) {
+    .profile-popup {
+        left: 50%;
+        top: 110%;
+        transform: translateX(-50%) translateY(15px);
     }
+    .avatar:hover ~ .profile-popup {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
     .profile-card {
         padding: 18px;
+    }
+    .loading-main {
+        font-size: 30px;
+        letter-spacing: 6px;
+    }
+    .loading-sub {
+        font-size: 16px;
     }
 }
 </style>
 </head>
 <body oncontextmenu="return false;">
 
-<!-- Loading Screen -->
+<!-- ✅ LOADING SCREEN -->
 <div id="loading-overlay">
-    <div class="loading-text">LOADING</div>
+    <div class="loading-main">GOD$ OF AZURA</div>
+    <div class="loading-sub">LOADING SYSTEM</div>
 </div>
 
-<!-- Main Profile -->
+<!-- ✅ MAIN PROFILE CARD -->
 <div class="profile-card" id="profileCard">
-    <!-- Header -->
     <div class="profile-header">
         <div class="avatar">
             <img id="avatarImg" src="" alt="Avatar">
             <img id="avatarDeco" class="avatar-decoration" src="" alt="">
         </div>
+
+        <!-- ✅ POPUP BOX (lumalabas kapag tinutok ang avatar) -->
+        <div class="profile-popup">
+            <div class="popup-header">
+                <div class="popup-avatar">
+                    <img id="popupAvatarImg" src="" alt="">
+                </div>
+                <div class="popup-info">
+                    <div class="popup-name" id="popupName">Leon</div>
+                    <div class="popup-user" id="popupUser">@wtf.leon</div>
+                    <div class="popup-status">
+                        <span id="popupStatusDot" class="status-dot status-offline"></span>
+                        <span id="popupStatusText">Offline</span>
+                    </div>
+                </div>
+            </div>
+            <div class="popup-section">
+                <span>Activity</span>
+                <div class="popup-activity" id="popupActivity">No activity</div>
+            </div>
+        </div>
+
         <div class="user-info">
             <div class="display-name">
                 <span id="displayName">Leon</span>
@@ -310,8 +474,7 @@ body::before {
     <div class="section">
         <div class="section-title">TERMINAL</div>
         <div class="terminal-box">
-            <span class="terminal-prompt">root@wehaimi:~$</span>
-            <br>
+            <span class="terminal-prompt">root@publicazura:~$</span><br>
             <span id="customStatus">PA KISS NGA</span>
         </div>
     </div>
@@ -319,7 +482,7 @@ body::before {
     <!-- Quote / Bio -->
     <div class="section">
         <div class="section-title">QUOTE</div>
-        <div class="quote-box" id="quoteText">Too real , too</div>
+        <div class="quote-box" id="quoteText">Make Money ,Not Friends</div>
     </div>
 
     <!-- Links -->
@@ -348,7 +511,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         document.getElementById('loading-overlay').classList.add('hidden');
         document.getElementById('profileCard').style.opacity = "1";
-    }, 2500);
+    }, 3000);
 });
 
 async function fetchData() {
@@ -359,6 +522,7 @@ async function fetchData() {
         if (!json.success) {
             console.error("API Error:", json);
             document.getElementById('activityText').innerText = "API Error";
+            document.getElementById('popupActivity').innerText = "API Error";
             return;
         }
 
@@ -366,11 +530,17 @@ async function fetchData() {
 
         // Avatar & Decoration
         const avatarEl = document.getElementById('avatarImg');
+        const popupAvatarEl = document.getElementById('popupAvatarImg');
         const decoEl = document.getElementById('avatarDeco');
+
         if (d.discord_user.avatar) {
-            avatarEl.src = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
+            const avatarUrl = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
+            avatarEl.src = avatarUrl;
+            popupAvatarEl.src = avatarUrl;
         } else {
-            avatarEl.src = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
+            const defaultAvatar = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
+            avatarEl.src = defaultAvatar;
+            popupAvatarEl.src = defaultAvatar;
         }
 
         if (d.discord_user.avatar_decoration_data) {
@@ -382,40 +552,66 @@ async function fetchData() {
         }
 
         // Names
-        document.getElementById('displayName').innerText = d.discord_user.global_name || "Leon";
-        document.getElementById('username').innerText = `@${d.discord_user.username || "wtf.leon"}`;
+        const displayName = d.discord_user.global_name || "Leon";
+        const username = d.discord_user.username || "wtf.leon";
+        document.getElementById('displayName').innerText = displayName;
+        document.getElementById('username').innerText = `@${username}`;
+        document.getElementById('popupName').innerText = displayName;
+        document.getElementById('popupUser').innerText = `@${username}`;
 
         // Status
         const statusDot = document.getElementById('statusDot');
+        const popupStatusDot = document.getElementById('popupStatusDot');
+        const popupStatusText = document.getElementById('popupStatusText');
         statusDot.className = "status-dot";
+        popupStatusDot.className = "status-dot";
+
+        let statusText = "Offline / Invisible";
+        let statusClass = "status-offline";
+
         switch(d.discord_status) {
-            case 'online': statusDot.classList.add('status-online'); break;
-            case 'idle': statusDot.classList.add('status-idle'); break;
-            case 'dnd': statusDot.classList.add('status-dnd'); break;
-            default: statusDot.classList.add('status-offline'); break;
+            case 'online':
+                statusClass = 'status-online';
+                statusText = 'Online';
+                break;
+            case 'idle':
+                statusClass = 'status-idle';
+                statusText = 'Idle';
+                break;
+            case 'dnd':
+                statusClass = 'status-dnd';
+                statusText = 'Do Not Disturb';
+                break;
         }
+
+        statusDot.classList.add(statusClass);
+        popupStatusDot.classList.add(statusClass);
+        popupStatusText.innerText = statusText;
 
         // Custom Status / Terminal
         const customStatus = d.activities?.find(a => a.type === 4);
         document.getElementById('customStatus').innerText = customStatus?.state || "PA KISS NGA";
+        document.getElementById('quoteText').innerText = customStatus?.details || "Too real , too";
 
-        // Activity
+        // ✅ ACTIVITY - SAME ON MAIN CARD AND POPUP
         const activityEl = document.getElementById('activityText');
+        const popupActivityEl = document.getElementById('popupActivity');
         const activity = d.activities?.find(a => a.type === 0 || a.type === 2 || a.type === 3);
+
+        let activityText = "No activity";
         if (activity) {
-            if (activity.type === 0) activityEl.innerText = `Playing: ${activity.name}`;
-            if (activity.type === 2) activityEl.innerText = `Listening: ${activity.name}`;
-            if (activity.type === 3) activityEl.innerText = `Watching: ${activity.name}`;
-        } else {
-            activityEl.innerText = "No activity";
+            if (activity.type === 0) activityText = `Playing: ${activity.name}`;
+            if (activity.type === 2) activityText = `Listening: ${activity.name}`;
+            if (activity.type === 3) activityText = `Watching: ${activity.name}`;
         }
 
-        // Quote/Bio
-        document.getElementById('quoteText').innerText = customStatus?.details || "Too real , too";
+        activityEl.innerText = activityText;
+        popupActivityEl.innerText = activityText;
 
     } catch (err) {
         console.error("Fetch Error:", err);
         document.getElementById('activityText').innerText = "Connection Error";
+        document.getElementById('popupActivity').innerText = "Connection Error";
     }
 }
 

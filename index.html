@@ -14,10 +14,11 @@
     <meta name="twitter:title" content="PUBLIC AZURA ORG">
     <meta name="twitter:description" content="Official site of PUBLIC AZURA ORG">
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.lanyard.rest https://cdn.discordapp.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdn-icons-png.flaticon.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:;">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+        /* ✅ Fixed Fonts - working properly now */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Kanit:wght@800;900&family=Oswald:wght@700&display=swap');
 
         * {
             margin: 0;
@@ -34,14 +35,14 @@
             font-family: 'Inter', sans-serif;
             background-color: #000000;
             background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)), 
                 url("pba.webp");
             background-size: cover;
             background-position: center center;
             background-attachment: fixed;
             background-repeat: no-repeat;
             color: #ffffff;
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             overflow-x: hidden;
             overflow-y: auto;
@@ -49,17 +50,17 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 15px 10px;
+            padding: 20px 15px;
         }
 
-        /* 🚀 SOBRANG ANGAS NA LOADING SCREEN — MAY BANNER IMAGE NA */
+        /* 🚀 IMPROVED LOADING SCREEN — SOBRA ANGAS */
         #loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #0a0a0f 0%, #000000 100%);
+            background: radial-gradient(circle at center, #050508 0%, #000000 100%);
             z-index: 99999;
             display: flex;
             align-items: center;
@@ -79,9 +80,9 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+            background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
             background-size: 25px 25px;
-            animation: bgFloat 7s linear infinite;
+            animation: bgFloat 8s linear infinite;
             opacity: 0.5;
         }
         @keyframes bgFloat {
@@ -93,7 +94,7 @@
             position: absolute;
             inset: 0;
             background: repeating-linear-gradient(transparent 0px, rgba(255,255,255,0.02) 1px, transparent 2px);
-            animation: crtScroll 3.5s linear infinite;
+            animation: crtScroll 4s linear infinite;
             opacity: 0.3;
             pointer-events: none;
         }
@@ -105,10 +106,10 @@
         .scan-beam {
             position: absolute;
             width: 100%;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, #ffffff, #ff2266, #00eeff, transparent);
-            box-shadow: 0 0 20px #ffffff, 0 0 40px #ff226670, 0 0 60px #00eeff40;
-            animation: scanMove 2s linear infinite;
+            box-shadow: 0 0 25px #ffffff, 0 0 50px #ff226670, 0 0 75px #00eeff40;
+            animation: scanMove 2.2s linear infinite;
             opacity: 0.9;
         }
         @keyframes scanMove {
@@ -119,59 +120,53 @@
         .loading-main-box {
             position: relative;
             text-align: center;
-            padding: 50px 90px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(4,4,4,0.7);
-            border-radius: 20px;
+            padding: 60px 100px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(3,3,5,0.75);
+            border-radius: 24px;
             box-shadow: 
-                0 0 70px rgba(255,255,255,0.1),
-                inset 0 0 90px rgba(0,0,0,0.95);
-            animation: borderBreath 2.7s ease-in-out infinite;
+                0 0 80px rgba(255,255,255,0.12),
+                inset 0 0 100px rgba(0,0,0,0.9);
+            animation: borderBreath 3s ease-in-out infinite;
         }
         @keyframes borderBreath {
-            0%,100% { border-color:rgba(255,255,255,0.1); box-shadow:0 0 40px rgba(255,255,255,0.08); }
-            50% { border-color:rgba(255,255,255,0.32); box-shadow:0 0 80px rgba(255,255,255,0.2); }
+            0%,100% { border-color:rgba(255,255,255,0.1); box-shadow:0 0 50px rgba(255,255,255,0.08); }
+            50% { border-color:rgba(255,255,255,0.35); box-shadow:0 0 90px rgba(255,255,255,0.22); }
         }
 
-        /* ✅ BANNER IMAGE KUNDI TEXT NA LANG */
+        /* ✅ BANNER WITH FALLBACK TEXT */
         .loading-banner-img {
-            max-width: 420px;
+            max-width: 450px;
             width: 90%;
             height: auto;
             display: block;
-            margin: 0 auto 25px auto;
-            filter: drop-shadow(0 0 18px rgba(255,255,255,0.25));
-            animation: 
-                glowShift 2s infinite alternate,
-                subtleGlowPulse 3s ease-in-out infinite alternate;
+            margin: 0 auto 30px auto;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+            animation: glowShift 2.5s infinite alternate;
         }
         @keyframes glowShift {
-            from { filter: drop-shadow(0 0 12px #ffffff40); }
-            to { filter: drop-shadow(0 0 22px #ffffff80) drop-shadow(0 0 35px #ff226625); }
-        }
-        @keyframes subtleGlowPulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.02); }
+            from { filter: drop-shadow(0 0 15px #ffffff40); }
+            to { filter: drop-shadow(0 0 25px #ffffff90) drop-shadow(0 0 40px #ff226630); }
         }
 
         .loading-subtext {
-            font-size: 17px;
-            letter-spacing: 6px;
-            color: #cccccc;
-            opacity:0.8;
-            animation: textPulse 1.8s infinite alternate;
+            font-size: 18px;
+            letter-spacing: 7px;
+            color: #e0e0e0;
+            opacity: 0.85;
+            animation: textPulse 2s infinite alternate;
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
         }
         @keyframes textPulse {
-            0% {opacity:0.4; letter-spacing:4px;}
-            100% {opacity:1; letter-spacing:6px;}
+            0% { opacity: 0.5; letter-spacing: 5px; }
+            100% { opacity: 1; letter-spacing: 7px; }
         }
 
         .center-container, .navigation-bar {
             opacity: 0;
             visibility: hidden;
-            transition: all 0.6s ease;
+            transition: all 0.7s ease;
         }
         .page-ready .center-container,
         .page-ready .navigation-bar {
@@ -179,7 +174,7 @@
             visibility: visible;
         }
 
-        /* ✅ TYPEWRITER ANIMATION — NO BLINKING CURSOR */
+        /* ✅ TYPEWRITER ANIMATION */
         @keyframes typewriter {
             from { width: 0; }
             to { width: 100%; }
@@ -192,44 +187,43 @@
             overflow: hidden;
             white-space: nowrap;
             margin: 0 auto;
-            animation: 
-                typewriter 1.5s steps(15, end) 0.5s 1 normal both;
+            animation: typewriter 1.8s steps(20, end) 0.3s 1 normal both;
         }
 
         .symbol-break {
-            font-size: 36px;
-            letter-spacing: 2px;
-            margin: 5px 0 8px 0;
+            font-size: 40px;
+            letter-spacing: 3px;
+            margin: 8px 0 10px 0;
             text-align: center;
             display: block;
-            animation: metallicRGB 2s infinite alternate;
+            animation: metallicRGB 2.5s infinite alternate;
         }
 
         .typewriter-header {
-            font-size: 32px;
-            letter-spacing: 3px;
-            margin: 8px 0 10px 0;
-            animation: metallicRGB 2s infinite alternate;
+            font-size: 34px;
+            letter-spacing: 4px;
+            margin: 10px 0 12px 0;
+            animation: metallicRGB 2.5s infinite alternate;
         }
 
         .staff-header {
-            font-size: 26px;
-            letter-spacing: 2px;
-            margin: 8px 0 10px 0;
-            animation: metallicRGB 2s infinite alternate;
+            font-size: 28px;
+            letter-spacing: 3px;
+            margin: 10px 0 12px 0;
+            animation: metallicRGB 2.5s infinite alternate;
         }
 
         @keyframes metallicRGB {
-            0% { color: #666; text-shadow: 0 0 4px #444, 0 0 8px #555; }
-            25% { color: #888; text-shadow: 0 0 6px #666, 0 0 12px #777; }
-            50% { color: #ccc; text-shadow: 0 0 8px #999, 0 0 16px #aaa; }
-            75% { color: #eee; text-shadow: 0 0 6px #bbb, 0 0 12px #ccc; }
-            100% { color: #fff; text-shadow: 0 0 4px #ddd, 0 0 8px #eee; }
+            0% { color: #666; text-shadow: 0 0 5px #444, 0 0 10px #555; }
+            25% { color: #999; text-shadow: 0 0 7px #666, 0 0 14px #777; }
+            50% { color: #ddd; text-shadow: 0 0 9px #999, 0 0 18px #aaa; }
+            75% { color: #eee; text-shadow: 0 0 7px #bbb, 0 0 14px #ccc; }
+            100% { color: #fff; text-shadow: 0 0 5px #ddd, 0 0 10px #eee; }
         }
 
         .main-logo-container {
             text-align: center;
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
         }
 
         .main-clan-logo {
@@ -240,17 +234,17 @@
         }
 
         .main-clan-logo img {
-            height: 95px;
+            height: 100px;
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.25));
+            filter: drop-shadow(0 0 12px rgba(255,255,255,0.3));
             transition: transform 0.3s ease;
         }
-        .main-clan-logo img:hover { transform:scale(1.05); }
+        .main-clan-logo img:hover { transform: scale(1.06); }
 
         .title-group-block {
             position: relative;
-            margin: 8px 0;
+            margin: 12px 0;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -260,33 +254,33 @@
 
         .navigation-bar {
             position: fixed;
-            top: 20px;
-            right: 30px;
+            top: 25px;
+            right: 35px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 13px;
+            gap: 18px;
+            font-size: 14px;
             letter-spacing: 1px;
-            color: #888;
-            opacity: 0.8;
+            color: #999;
+            opacity: 0.9;
             z-index: 1000;
         }
 
         .views-box {
-            padding: 3px 8px;
+            padding: 4px 10px;
             border: none;
-            border-radius: 0;
-            font-size: 13px;
+            border-radius: 6px;
+            font-size: 14px;
             letter-spacing: 1px;
-            background: transparent;
-            color: #888;
+            background: rgba(255,255,255,0.05);
+            color: #aaa;
         }
         #views {
-            font-weight: 500;
-            color: #ccc;
+            font-weight: 600;
+            color: #fff;
         }
 
-        /* ✅ COMPACT & FULL WIDTH LAYOUT */
+        /* ✅ MAIN LAYOUT */
         .center-container {
             width: 100%;
             max-width: 1800px;
@@ -298,8 +292,8 @@
             justify-content: flex-start;
             position: relative;
             z-index: 10;
-            padding: 0 20px;
-            gap: 12px;
+            padding: 0 25px;
+            gap: 15px;
             overflow: visible;
         }
 
@@ -311,28 +305,28 @@
             align-items: center;
             width: 100%;
             max-width: 1600px;
-            gap: 30px;
-            padding: 5px 0;
-            min-height: 100px;
+            gap: 35px;
+            padding: 8px 0;
+            min-height: 110px;
             position: relative;
         }
 
         .avatar-wrapper-node {
             position: relative;
-            transition: transform 0.2s ease;
+            transition: transform 0.25s ease;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         .avatar-wrapper-node:hover {
-            transform: scale(1.08);
+            transform: scale(1.09);
         }
 
         .circle-avatar-container {
             position: relative;
-            width: 95px;
-            height: 95px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             overflow: visible;
             background: transparent;
@@ -346,8 +340,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.05);
-            width: 118px;
-            height: 118px;
+            width: 125px;
+            height: 125px;
             pointer-events: none;
             z-index: 1;
             border-radius: 0;
@@ -356,12 +350,12 @@
             display: block;
             opacity: 1;
             image-rendering: crisp-edges;
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.35));
         }
 
         .circle-avatar-container img.avatar-img {
-            width: 95px;
-            height: 95px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
             pointer-events: none;
@@ -372,19 +366,19 @@
             transition: box-shadow 0.3s ease;
         }
         .avatar-wrapper-node:hover .avatar-img {
-            box-shadow: 0 0 18px rgba(255,255,255,0.25);
+            box-shadow: 0 0 22px rgba(255,255,255,0.3);
         }
 
         .status-indicator {
             position: absolute;
             bottom: 6px;
             right: 6px;
-            width: 14px;
-            height: 14px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
             border: 2px solid #000;
             z-index: 3;
-            box-shadow: 0 0 6px rgba(0,0,0,0.9);
+            box-shadow: 0 0 8px rgba(0,0,0,0.95);
         }
 
         .status-online { background-color: #23a55a; }
@@ -392,36 +386,36 @@
         .status-dnd { background-color: #f13f43; }
         .status-offline { background-color: #80848e; }
 
-        /* ✨ INAYOS NA POPUP — MAS MALUWAG PARA SA NOTE AT ACTIVITY */
+        /* ✨ IMPROVED POPUP / TOOLTIP */
         .avatar-tooltip {
             position: absolute;
-            bottom: 130%;
+            bottom: 135%;
             left: 50%;
             transform: translateX(-50%);
-            background: #000000;
-            border: 1px solid #2a2a2e;
-            border-radius: 14px;
-            width: 320px; /* ✅ PINALUWAG */
+            background: #0a0a0f;
+            border: 1px solid #33333a;
+            border-radius: 16px;
+            width: 340px;
             max-width: 92vw;
-            padding: 18px;
+            padding: 20px;
             color: #ffffff;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             pointer-events: none;
             z-index: 9999;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.12);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.15);
         }
         .avatar-wrapper-node:hover .avatar-tooltip {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(-6px);
+            transform: translateX(-50%) translateY(-8px);
         }
 
         .tooltip-avatar-wrapper {
             position: relative;
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             overflow: visible;
             display: flex;
@@ -433,15 +427,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.08);
-            width: 52px;
-            height: 52px;
+            width: 55px;
+            height: 55px;
             pointer-events: none;
             z-index: 1;
             object-fit: contain;
         }
         .tooltip-avatar-sm {
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             z-index: 2;
             position: relative;
@@ -450,84 +444,86 @@
         .tooltip-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
+            gap: 14px;
+            margin-bottom: 12px;
         }
         .tooltip-user-info h4 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             margin: 0;
             color: #fff;
             word-break: break-word;
         }
         .tooltip-user-info p {
-            font-size: 12px;
-            color: #888;
-            margin: 3px 0 0 0;
+            font-size: 13px;
+            color: #999;
+            margin: 4px 0 0 0;
         }
 
-        /* ✅ ESPESYAL NA BAHAGI: NOTE AT ACTIVITY — KUSANG BUMABALOT */
+        /* ✅ NOTE & ACTIVITY STYLES */
         .tooltip-custom-note {
-            background: #0e0e0e;
-            border-radius: 8px;
-            padding: 8px 10px;
-            margin-top: 10px;
-            font-size: 13px;
-            color: #e0e0e0;
-            line-height: 1.5;
+            background: #101014;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-top: 12px;
+            font-size: 13.5px;
+            color: #e5e5e5;
+            line-height: 1.55;
             word-wrap: break-word;
             white-space: pre-wrap;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.12);
         }
 
         .tooltip-activity-wrapper {
-            background: #111;
-            border-radius: 8px;
-            padding: 10px 12px;
-            margin-top: 10px;
-            font-size: 12.5px;
-            color: #aaa;
-            line-height: 1.5;
+            background: #121218;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #bbb;
+            line-height: 1.55;
             word-wrap: break-word;
             white-space: normal;
             max-width: 100%;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.12);
         }
-        .activity-playing { color: #43b581; font-weight:500; }
-        .activity-streaming { color: #9146ff; font-weight:500; }
-        .activity-listening { color: #1db954; font-weight:500; }
-        .activity-watching { color: #faa61a; font-weight:500; }
-        .activity-custom { color: #7289da; font-weight:500; }
+        .activity-playing { color: #43b581; font-weight: 500; }
+        .activity-streaming { color: #9146ff; font-weight: 500; }
+        .activity-listening { color: #1db954; font-weight: 500; }
+        .activity-watching { color: #faa61a; font-weight: 500; }
+        .activity-custom { color: #7289da; font-weight: 500; }
 
+        /* ✅ MARQUEE / SCROLLING LIST */
         .marquee-wrapper-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
-            max-width: 1300px;
+            max-width: 1400px;
             align-items: center;
-            margin: 8px 0 15px 0;
+            margin: 15px 0 20px 0;
             flex-shrink: 0;
         }
 
         .marquee-ticker {
             overflow: hidden;
             width: 100%;
-            padding: 4px 0;
-            background: transparent;
-            min-height: 32px;
+            padding: 5px 0;
+            background: rgba(255,255,255,0.02);
+            border-radius: 30px;
+            min-height: 36px;
         }
 
         .marquee-inner-wrap {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
-            gap: 12px;
+            gap: 15px;
             width: max-content;
         }
 
-        .scroll-left { animation: smoothScrollLeft 40s linear infinite; }
-        .scroll-right { animation: smoothScrollRight 40s linear infinite; }
+        .scroll-left { animation: smoothScrollLeft 45s linear infinite; }
+        .scroll-right { animation: smoothScrollRight 45s linear infinite; }
 
         @keyframes smoothScrollLeft {
             0% { transform: translateX(0); }
@@ -541,53 +537,56 @@
         .marquee-profile-block {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
+            gap: 9px;
+            font-size: 12.5px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.9);
-            background: #0c0c0c;
-            border: 1px solid rgba(255,255,255,0.12);
-            padding: 4px 12px;
+            color: rgba(255, 255, 255, 0.95);
+            background: #0f0f13;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 5px 14px;
             border-radius: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.75);
             white-space: nowrap;
             transition: transform 0.2s ease;
         }
-        .marquee-profile-block:hover { transform:scale(1.03); }
+        .marquee-profile-block:hover { transform: scale(1.04); }
 
         .marquee-profile-block img {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             object-fit: cover;
             pointer-events: none;
         }
 
+        /* ✅ DISCORD BUTTON */
         .discord-animated {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             z-index: 9999;
-            animation: discordPulse 1.5s infinite alternate;
+            animation: discordPulse 1.6s infinite alternate;
+            transition: transform 0.2s ease;
         }
+        .discord-animated:hover { transform: scale(1.1); }
         .discord-animated img {
-            width: 28px;
-            height: 28px;
-            opacity: 0.75;
+            width: 32px;
+            height: 32px;
+            opacity: 0.8;
         }
         @keyframes discordPulse {
-            0% { transform: scale(1); opacity: 0.6; filter: drop-shadow(0 0 4px #5865F2); }
-            100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 12px #5865F2); }
+            0% { transform: scale(1); opacity: 0.7; filter: drop-shadow(0 0 5px #5865F2); }
+            100% { transform: scale(1.12); opacity: 1; filter: drop-shadow(0 0 15px #5865F2); }
         }
 
         ::-webkit-scrollbar { display: none; }
 
         .name-label {
             text-align: center;
-            font-size: 12px;
-            margin-top: 5px;
+            font-size: 12.5px;
+            margin-top: 6px;
             color: #ccc;
-            max-width: 95px;
+            max-width: 100px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -595,51 +594,38 @@
         }
         .section-divider {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
             height: 1px;
-            background: #222;
-            margin: 8px 0;
+            background: #2a2a30;
+            margin: 12px 0;
         }
 
-        /* ✅ Responsive */
+        /* ✅ RESPONSIVE DESIGN */
         @media (max-width: 768px) {
-            .loading-main-box { padding: 35px 25px; }
-            .loading-banner-img { max-width: 280px; }
-            .main-clan-logo img { height: 70px; }
-            .circle-avatar-container {
-                width: 75px;
-                height: 75px;
-            }
-            img.avatar-decoration {
-                width: 92px;
-                height: 92px;
-                transform: translate(-50%, -50%) scale(1.05);
-            }
-            .circle-avatar-container img.avatar-img {
-                width: 75px;
-                height: 75px;
-            }
-            .horizontal-avatar-row {
-                gap: 20px;
-            }
-            .symbol-break { font-size: 28px; }
-            .typewriter-header { font-size: 24px; }
-            .staff-header { font-size: 20px; }
-            .avatar-tooltip { width: 280px; }
-            .navigation-bar { right: 15px; font-size: 11px; }
+            .loading-main-box { padding: 40px 30px; }
+            .loading-banner-img { max-width: 300px; }
+            .main-clan-logo img { height: 75px; }
+            .circle-avatar-container { width: 80px; height: 80px; }
+            img.avatar-decoration { width: 98px; height: 98px; }
+            .circle-avatar-container img.avatar-img { width: 80px; height: 80px; }
+            .horizontal-avatar-row { gap: 22px; }
+            .symbol-break { font-size: 30px; }
+            .typewriter-header { font-size: 26px; }
+            .staff-header { font-size: 22px; }
+            .avatar-tooltip { width: 290px; }
+            .navigation-bar { right: 18px; font-size: 12px; }
+            .loading-subtext { font-size: 15px; letter-spacing: 5px; }
         }
     </style>
 </head>
 <body oncontextmenu="return false;" onkeydown="return disableKeys(event);">
 
-    <!-- ✅ SOBRANG ANGAS NA LOADING SCREEN — MAY BANNER IMAGE NA -->
+    <!-- ✅ LOADING SCREEN -->
     <div id="loading-screen">
         <div class="crt-overlay"></div>
         <div class="scan-beam"></div>
         <div class="loading-main-box">
-            <!-- 🖼️ BANNER IMAGE KUNDI TEXT -->
-            <img src="public azura.png" alt="PUBLIC AZURA" class="loading-banner-img" onerror="this.style.display='none';">
-            <!-- ✅ BAGONG TEKSTO AYON SA UTOS MO -->
+            <img src="public azura.png" alt="PUBLIC AZURA" class="loading-banner-img" onerror="this.style.display='none'; this.outerHTML = `<h2 style='font-family:Oswald; font-size:28px; color:#fff;'>PUBLIC AZURA</h2>`;">
             <div class="loading-subtext">• PUBLIC AZURA LOADING SYSTEM •</div>
         </div>
     </div>
@@ -662,7 +648,7 @@
 
         <div class="title-group-block">
             <h2 class="typewriter-header typewriter">ABOVE ALL</h2>
-            <p style="font-size:14px; color:#888; margin:4px 0;">it's all about public azura</p>
+            <p style="font-size:15px; color:#999; margin:6px 0;">it's all about public azura</p>
         </div>
 
         <div id="aboveall-container" class="horizontal-avatar-row"></div>
@@ -695,6 +681,7 @@
     
 
     <script>
+        // ✅ Disable right click and dev tools
         function disableKeys(e) {
             if(e.keyCode === 123 || 
                (e.ctrlKey && e.keyCode === 85) || 
@@ -707,15 +694,15 @@
         }
         document.addEventListener('keydown', disableKeys);
         document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('mousedown', e => { if(e.button === 2) e.preventDefault(); });
 
+        // ✅ Audio setup
         const audio = document.getElementById("soundtrack");
-        audio.volume = 0.4;
-
+        audio.volume = 0.35;
         function playAudio() {
-            audio.play().catch(err => console.log("Audio play:", err));
+            audio.play().catch(err => console.log("Audio autoplay blocked:", err));
         }
 
+        // ✅ Loading screen control
         const loadingScreen = document.getElementById('loading-screen');
         function finishLoading() {
             loadingScreen.classList.add('fade-out');
@@ -724,22 +711,28 @@
         }
         loadingScreen.addEventListener('click', finishLoading);
         window.addEventListener('load', () => {
-            setTimeout(finishLoading, 2800);
+            setTimeout(finishLoading, 3000);
             fetchAndUpdate();
         });
 
+        // ✅ Refresh data every 10 seconds
         const UPDATE_INTERVAL = 10000;
 
+        // ✅ USER IDs
         const founderIDs = ["1250654354344775703", "1123145717461033041", "1085580321623375938"]; 
         const aboveAllIDs = ["1081806153341743144", "1414546504437207161", "918633044276019232", "1499093156321431622", "1242051125776093256", "1498999674969784426"]; 
         const staffIDs = ["1501438491207405588", "1374740899422277703", "995205070679453789", "1366187912118665276", "1459797319863242797", "1495366872516923553", "1314554124976656505", "1398759472821702773"]; 
         const scrollingIDsRow1 = ["1276210406880317522", "1506434429613113405", "1498999674969784426", "1499093156321431622", "1501438491207405588"]; 
         const scrollingIDsRow2 = ["1374740899422277703", "1081806153341743144", "995205070679453789", "1414546504437207161", "1509479201114296353"];
 
+        // ✅ Fixed API Fetch - more reliable
         async function getUserData(userId) {
             try {
-                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`, { cache: 'no-cache' });
-                if (!res.ok) return null;
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`, { 
+                    cache: 'no-store',
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
                 const json = await res.json();
                 if (json.success && json.data) {
                     const d = json.data;
@@ -758,7 +751,7 @@
                 }
                 return null;
             } catch (e) {
-                console.log("Error fetching user:", e);
+                console.log("Fetch error for", userId, ":", e);
                 return null;
             }
         }
@@ -782,6 +775,7 @@
             }
         }
 
+        // ✅ Improved Activity Detection Logic
         function showGroup(members, containerId) {
             const box = document.getElementById(containerId);
             if (!box) return;
@@ -790,29 +784,28 @@
                 const wrapper = document.createElement('div'); 
                 wrapper.className = 'avatar-wrapper-node';
                 const decoHTML = mem.effectURL ? `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy" onerror="this.remove()">` : '';
+                
                 let statusClass = 'status-offline';
                 const s = String(mem.status || 'offline').toLowerCase().trim();
                 if (s === 'online') statusClass = 'status-online';
                 else if (s === 'idle') statusClass = 'status-idle';
                 else if (s === 'dnd') statusClass = 'status-dnd';
 
-                // ✨ INAYOS NA PAGBASA NG AKTIBIDAD — TAMANG PAGKAKASUNOD
                 let noteText = "";
                 let activityText = "";
                 let activityClass = "";
 
-                // ✅ PRIORITY: CUSTOM STATUS / NOTE
+                // ✅ Custom Status / Note
                 if (mem.customStatus?.state?.trim()) {
                     noteText = mem.customStatus.state.trim();
                 }
 
-                // ✅ THEN: SPOTIFY > GAME > STREAM > WATCH
+                // ✅ Activity Priority: Spotify > Game > Stream > Watch > Others
                 if (mem.spotify) {
-                    activityText = `🎵 Listening: ${mem.spotify.song || 'Music'} — ${mem.spotify.artist || ''}`;
+                    activityText = `🎵 Listening: ${mem.spotify.song || 'Unknown Song'} — ${mem.spotify.artist || 'Unknown Artist'}`;
                     activityClass = 'activity-listening';
                 } 
                 else if (Array.isArray(mem.activities) && mem.activities.length > 0) {
-                    // Huwag isama ang Type 4 (Custom Status) — hiwalay na 'yan
                     const mainAct = mem.activities.find(a => a.type !== 4) || null;
                     if (mainAct) {
                         switch(mainAct.type) {
@@ -822,7 +815,6 @@
                             case 3: activityText = `📺 Watching: ${mainAct.name || 'Video'}`; activityClass = 'activity-watching'; break;
                             default: activityText = `🔹 Active: ${mainAct.name || ''}`; activityClass = 'activity-custom';
                         }
-                        // Idagdag ang detalye kung meron
                         if (mainAct.state) activityText += ` • ${mainAct.state}`;
                     }
                 }

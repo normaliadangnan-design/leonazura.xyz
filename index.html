@@ -775,76 +775,149 @@
             }
         }
 
-        // ✅ Improved Activity Detection Logic
-        function showGroup(members, containerId) {
-            const box = document.getElementById(containerId);
-            if (!box) return;
-            box.innerHTML = '';
-            members.forEach(mem => {
-                const wrapper = document.createElement('div'); 
-                wrapper.className = 'avatar-wrapper-node';
-                const decoHTML = mem.effectURL ? `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy" onerror="this.remove()">` : '';
-                
-                let statusClass = 'status-offline';
-                const s = String(mem.status || 'offline').toLowerCase().trim();
-                if (s === 'online') statusClass = 'status-online';
-                else if (s === 'idle') statusClass = 'status-idle';
-                else if (s === 'dnd') statusClass = 'status-dnd';
+       // ✅ Improved Activity Detection with REAL Discord Activity Icons
+function showGroup(members, containerId) {
+    const box = document.getElementById(containerId);
+    if (!box) return;
+    box.innerHTML = '';
+    members.forEach(mem => {
+        const wrapper = document.createElement('div'); 
+        wrapper.className = 'avatar-wrapper-node';
+        const decoHTML = mem.effectURL ? `<img src="${mem.effectURL}" class="avatar-decoration" alt="decoration" loading="lazy" onerror="this.remove()">` : '';
+        
+        let statusClass = 'status-offline';
+        const s = String(mem.status || 'offline').toLowerCase().trim();
+        if (s === 'online') statusClass = 'status-online';
+        else if (s === 'idle') statusClass = 'status-idle';
+        else if (s === 'dnd') statusClass = 'status-dnd';
 
-                let noteText = "";
-                let activityText = "";
-                let activityClass = "";
+        let noteText = "";
+        let activityHTML = ""; // ✅ Papalitan na ito ng HTML na may image
+        let activityClass = "";
 
-                // ✅ Custom Status / Note
-                if (mem.customStatus?.state?.trim()) {
-                    noteText = mem.customStatus.state.trim();
-                }
-
-                // ✅ Activity Priority: Spotify > Game > Stream > Watch > Others
-                if (mem.spotify) {
-                    activityText = `🎵 Listening: ${mem.spotify.song || 'Unknown Song'} — ${mem.spotify.artist || 'Unknown Artist'}`;
-                    activityClass = 'activity-listening';
-                } 
-                else if (Array.isArray(mem.activities) && mem.activities.length > 0) {
-                    const mainAct = mem.activities.find(a => a.type !== 4) || null;
-                    if (mainAct) {
-                        switch(mainAct.type) {
-                            case 0: activityText = `🎮 Playing: ${mainAct.name || 'Game'}`; activityClass = 'activity-playing'; break;
-                            case 1: activityText = `📹 Streaming: ${mainAct.name || 'Stream'}`; activityClass = 'activity-streaming'; break;
-                            case 2: activityText = `🎧 Listening: ${mainAct.name || 'Audio'}`; activityClass = 'activity-listening'; break;
-                            case 3: activityText = `📺 Watching: ${mainAct.name || 'Video'}`; activityClass = 'activity-watching'; break;
-                            default: activityText = `🔹 Active: ${mainAct.name || ''}`; activityClass = 'activity-custom';
-                        }
-                        if (mainAct.state) activityText += ` • ${mainAct.state}`;
-                    }
-                }
-
-                const tooltipDeco = mem.effectURL ? `<img src="${mem.effectURL}" class="tooltip-avatar-decoration" alt="decoration">` : '';
-                wrapper.innerHTML = `
-                    <div class="circle-avatar-container">
-                        ${decoHTML} 
-                        <img src="${mem.avatarURL}" class="avatar-img" alt="avatar" loading="lazy">
-                        <span class="status-indicator ${statusClass}"></span>
-                    </div>
-                    <div class="name-label">${mem.displayName}</div>
-                    <div class="avatar-tooltip">
-                        <div class="tooltip-header">
-                            <div class="tooltip-avatar-wrapper">
-                                ${tooltipDeco}
-                                <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="avatar" loading="lazy">
-                            </div>
-                            <div class="tooltip-user-info">
-                                <h4>${mem.displayName}</h4>
-                                <p>@${mem.username}</p>
-                            </div>
-                        </div>
-                        ${noteText ? `<div class="tooltip-custom-note">📝 ${noteText}</div>` : ''}
-                        ${activityText ? `<div class="tooltip-activity-wrapper ${activityClass}">${activityText}</div>` : ''}
-                    </div>
-                `;
-                box.appendChild(wrapper);
-            });
+        // ✅ Custom Status / Note
+        if (mem.customStatus?.state?.trim()) {
+            noteText = mem.customStatus.state.trim();
         }
+
+        // ✅ Activity Priority: Spotify > Game > Stream > Watch > Others
+        if (mem.spotify) {
+            // 🎵 Spotify - May sariling icon
+            const spotifyIcon = "https://cdn.discordapp.com/emojis/562086965956554762.png";
+            activityHTML = `
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <img src="${spotifyIcon}" alt="Spotify" style="width:32px;height:32px;border-radius:4px;">
+                    <div>
+                        <div style="font-weight:500;">Listening to Spotify</div>
+                        <div style="font-size:12px;opacity:0.8;">${mem.spotify.song || 'Unknown Song'}</div>
+                        <div style="font-size:11px;opacity:0.6;">${mem.spotify.artist || 'Unknown Artist'}</div>
+                    </div>
+                </div>`;
+            activityClass = 'activity-listening';
+        } 
+        else if (Array.isArray(mem.activities) && mem.activities.length > 0) {
+            const mainAct = mem.activities.find(a => a.type !== 4) || null;
+            if (mainAct) {
+                // ✅ Kunin ang icon mula sa Discord assets
+                let actIcon = "";
+                if (mainAct.assets?.large_image) {
+                    // Kung may malaking imahe ang activity
+                    if (mainAct.assets.large_image.startsWith('mp:')) {
+                        actIcon = `https://media.discordapp.net/${mainAct.assets.large_image.replace('mp:', '')}?size=64`;
+                    } else {
+                        actIcon = `https://cdn.discordapp.com/app-assets/${mainAct.application_id}/${mainAct.assets.large_image}.png?size=64`;
+                    }
+                } else if (mainAct.application_id) {
+                    // Kung walang large image, gamitin ang icon ng app mismo
+                    actIcon = `https://cdn.discordapp.com/app-icons/${mainAct.application_id}/${mainAct.application_id}.png?size=64`;
+                }
+
+                // ✅ Ayusin ayon sa uri ng activity
+                switch(mainAct.type) {
+                    case 0: // Playing
+                        activityHTML = `
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                ${actIcon ? `<img src="${actIcon}" alt="Game" style="width:32px;height:32px;border-radius:4px;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/330/330585.png';">` : `<div style="width:32px;height:32px;border-radius:4px;background:#222;display:flex;align-items:center;justify-content:center;">🎮</div>`}
+                                <div>
+                                    <div style="font-weight:500;">Playing ${mainAct.name || 'Game'}</div>
+                                    ${mainAct.state ? `<div style="font-size:12px;opacity:0.8;">${mainAct.state}</div>` : ''}
+                                </div>
+                            </div>`;
+                        activityClass = 'activity-playing';
+                        break;
+                    case 1: // Streaming
+                        activityHTML = `
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div style="width:32px;height:32px;border-radius:4px;background:#9146ff;display:flex;align-items:center;justify-content:center;">📹</div>
+                                <div>
+                                    <div style="font-weight:500;">Streaming on ${mainAct.name || 'Stream'}</div>
+                                    ${mainAct.state ? `<div style="font-size:12px;opacity:0.8;">${mainAct.state}</div>` : ''}
+                                </div>
+                            </div>`;
+                        activityClass = 'activity-streaming';
+                        break;
+                    case 2: // Listening
+                        activityHTML = `
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div style="width:32px;height:32px;border-radius:4px;background:#1db954;display:flex;align-items:center;justify-content:center;">🎧</div>
+                                <div>
+                                    <div style="font-weight:500;">Listening to ${mainAct.name || 'Audio'}</div>
+                                    ${mainAct.state ? `<div style="font-size:12px;opacity:0.8;">${mainAct.state}</div>` : ''}
+                                </div>
+                            </div>`;
+                        activityClass = 'activity-listening';
+                        break;
+                    case 3: // Watching
+                        activityHTML = `
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div style="width:32px;height:32px;border-radius:4px;background:#faa61a;display:flex;align-items:center;justify-content:center;">📺</div>
+                                <div>
+                                    <div style="font-weight:500;">Watching ${mainAct.name || 'Video'}</div>
+                                    ${mainAct.state ? `<div style="font-size:12px;opacity:0.8;">${mainAct.state}</div>` : ''}
+                                </div>
+                            </div>`;
+                        activityClass = 'activity-watching';
+                        break;
+                    default: // Iba pang activity
+                        activityHTML = `
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                ${actIcon ? `<img src="${actIcon}" alt="Activity" style="width:32px;height:32px;border-radius:4px;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1006/1006572.png';">` : `<div style="width:32px;height:32px;border-radius:4px;background:#222;display:flex;align-items:center;justify-content:center;">🔹</div>`}
+                                <div>
+                                    <div style="font-weight:500;">${mainAct.name || 'Active'}</div>
+                                    ${mainAct.state ? `<div style="font-size:12px;opacity:0.8;">${mainAct.state}</div>` : ''}
+                                </div>
+                            </div>`;
+                        activityClass = 'activity-custom';
+                }
+            }
+        }
+
+        const tooltipDeco = mem.effectURL ? `<img src="${mem.effectURL}" class="tooltip-avatar-decoration" alt="decoration">` : '';
+        wrapper.innerHTML = `
+            <div class="circle-avatar-container">
+                ${decoHTML} 
+                <img src="${mem.avatarURL}" class="avatar-img" alt="avatar" loading="lazy">
+                <span class="status-indicator ${statusClass}"></span>
+            </div>
+            <div class="name-label">${mem.displayName}</div>
+            <div class="avatar-tooltip">
+                <div class="tooltip-header">
+                    <div class="tooltip-avatar-wrapper">
+                        ${tooltipDeco}
+                        <img src="${mem.avatarURL}" class="tooltip-avatar-sm" alt="avatar" loading="lazy">
+                    </div>
+                    <div class="tooltip-user-info">
+                        <h4>${mem.displayName}</h4>
+                        <p>@${mem.username}</p>
+                    </div>
+                </div>
+                ${noteText ? `<div class="tooltip-custom-note">📝 ${noteText}</div>` : ''}
+                ${activityHTML ? `<div class="tooltip-activity-wrapper ${activityClass}">${activityHTML}</div>` : ''}
+            </div>
+        `;
+        box.appendChild(wrapper);
+    });
+}
 
         function showMarquee(members, containerId) {
             const box = document.getElementById(containerId);

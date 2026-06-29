@@ -802,25 +802,21 @@ function showGroup(members, containerId) {
 
         // ✅ Activity Priority: Spotify > Game > Stream > Watch > Others
         if (mem.spotify) {
-            if (mem.spotify) {
-    // 🎵 EKSAKTONG SPOTIFY LOGO - BUO AT MALINAW
-    activityHTML = `
-        <div style="display:flex;align-items:center;gap:10px;">
-            <!-- ✅ Tamang hugis at kulay ng Spotify logo -->
-            <svg width="32" height="32" viewBox="0 0 100 100" style="flex-shrink:0;">
-                <circle cx="50" cy="50" r="50" fill="#1ed760"/>
-                <path d="M35,30 Q50,25 65,30 T90,30" stroke="#000" stroke-width="6" fill="none" stroke-linecap="round"/>
-                <path d="M35,50 Q50,45 65,50 T90,50" stroke="#000" stroke-width="6" fill="none" stroke-linecap="round"/>
-                <path d="M35,70 Q50,65 65,70 T90,70" stroke="#000" stroke-width="6" fill="none" stroke-linecap="round"/>
-            </svg>
-            <div>
-                <div style="font-weight:500; color:#1ed760;">Listening to Spotify</div>
-                <div style="font-size:12px;opacity:0.9; color:#ffffff;">${mem.spotify.song || 'Unknown Song'}</div>
-                <div style="font-size:11px;opacity:0.7; color:#cccccc;">${mem.spotify.artist || 'Unknown Artist'}</div>
-            </div>
-        </div>`;
-    activityClass = 'activity-listening';
-}
+            // 🎵 EKSAKTONG SPOTIFY LOGO - Katulad ng iyong halimbawa
+            activityHTML = `
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" style="flex-shrink:0;">
+                        <circle cx="12" cy="12" r="12" fill="#1ed760"/>
+                        <path d="M17.9 10.9C14.6 9 9.5 8.8 6.7 9.8c-.9.3-1.8-.3-2.1-1.2-.3-.9.3-1.8 1.2-2.1 3.2-1.1 8.5-.9 11.8 1.2.8.5 1.1 1.5.6 2.3-.5.7-1.5 1-2.3.6zm-.1 3.2c-.3.5-.8.8-1.3.9-2.9.9-7.4.8-10.1-.3-.6-.2-1.3 0-1.7.6-.4.6-.2 1.3.4 1.7 3.1 1.3 8.2 1.4 11.5.2.6-.2 1.1-.7 1.3-1.3.2-.6-.1-1.2-.6-1.5zm-1.2 3.1c-.2.4-.6.7-1.1.8-2.5.8-6.4.7-8.8-.2-.5-.2-1.1 0-1.4.5-.3.5-.1 1.1.4 1.4 2.7 1.1 7.2 1.2 10 .2.5-.2.9-.5 1.1-1 .2-.5 0-1-.4-1.2z" fill="#000000"/>
+                    </svg>
+                    <div>
+                        <div style="font-weight:500; color:#1ed760;">Listening to Spotify</div>
+                        <div style="font-size:12px;opacity:0.9; color:#ffffff;">${mem.spotify.song || 'Unknown Song'}</div>
+                        <div style="font-size:11px;opacity:0.7; color:#cccccc;">${mem.spotify.artist || 'Unknown Artist'}</div>
+                    </div>
+                </div>`;
+            activityClass = 'activity-listening';
+        } 
         else if (Array.isArray(mem.activities) && mem.activities.length > 0) {
             const mainAct = mem.activities.find(a => a.type !== 4) || null;
             if (mainAct) {

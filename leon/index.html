@@ -77,7 +77,7 @@ body::before {
     to { border-right: none; }
 }
 
-/* 🚀 LOADING SCREEN */
+/* 🚀 AUTOMATIC ANIMATED LOADING / INTRO SCREEN */
 #loading-overlay {
     position: fixed;
     top: 0;
@@ -89,8 +89,7 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
     overflow: hidden;
 }
 
@@ -184,13 +183,18 @@ body::before {
     font-size: 17px;
     letter-spacing: 6px;
     color: #cccccc;
-    opacity: 0.85;
-    animation: subPulse 2s infinite alternate;
+    opacity: 0;
+    animation: subPulse 2s infinite alternate, fadeIn 1s ease forwards 1s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.85; }
 }
 
 @keyframes subPulse {
-    0% { opacity: 0.45; letter-spacing: 5px; }
-    100% { opacity: 1; letter-spacing: 6px; }
+    0% { letter-spacing: 5px; }
+    100% { letter-spacing: 6px; }
 }
 
 /* Main Card */
@@ -201,6 +205,8 @@ body::before {
     position: relative;
     z-index: 10;
     animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    animation-delay: 1.2s;
 }
 
 .logo-img-container {
@@ -607,25 +613,24 @@ img.avatar-decoration {
     text-align: center;
 }
 
-/* Popup */
+/* ✅ FULL BLACK POPUP BOX */
 .profile-popup {
     position: absolute;
-    bottom: 115%;
+    bottom: 120%;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 20px;
-    width: 400px;
-    background: rgba(0, 0, 0, 0.94);
+    width: 420px;
+    background: #000000;
     border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.08);
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transition: all 0.35s ease;
     pointer-events: none;
-    transform: translateX(-50%) translateY(10px);
+    transform: translateX(-50%) translateY(12px);
 }
 
 .avatar:hover .profile-popup {
@@ -637,13 +642,14 @@ img.avatar-decoration {
 .popup-header {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 18px;
+    margin-bottom: 16px;
 }
 
 .popup-avatar-wrapper {
     position: relative;
-    width: 52px;
-    height: 52px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
 }
 
@@ -652,9 +658,10 @@ img.avatar-decoration {
     height: 100%;
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.2);
     position: relative;
     z-index: 2;
+    background: #000;
 }
 
 .popup-avatar img {
@@ -667,9 +674,9 @@ img.avatar-decoration {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1.08);
-    width: 66px;
-    height: 66px;
+    transform: translate(-50%, -50%) scale(1.1);
+    width: 76px;
+    height: 76px;
     pointer-events: none;
     z-index: 1;
     display: block;
@@ -682,8 +689,8 @@ img.avatar-decoration {
 }
 
 .popup-nickname {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     color: #ffffff;
     display: block;
     line-height: 1.4;
@@ -693,39 +700,40 @@ img.avatar-decoration {
 }
 
 .popup-name {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
-    color: #aaaaaa;
+    color: #bbbbbb;
     display: block;
     line-height: 1.4;
-    margin: 3px 0 6px;
+    margin: 4px 0 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .popup-status {
-    font-size: 13px;
-    color: #999;
+    font-size: 14px;
+    color: #cccccc;
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
     line-height: 1;
 }
 
 .popup-status .status-dot {
-    width: 11px;
-    height: 11px;
+    width: 12px;
+    height: 12px;
 }
 
 .popup-activity {
-    font-size: 12px;
-    color: #bbbbbb;
-    background: #121212;
-    padding: 6px 10px;
-    border-radius: 8px;
-    margin-top: 8px;
-    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 13px;
+    color: #ffffff;
+    background: #111111;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    text-align: left;
 }
 
 /* Responsive */
@@ -740,7 +748,7 @@ img.avatar-decoration {
     .profile-banner { height: 110px; }
     .music-container { margin: 0 15px 20px; padding: 18px; }
     .bio { padding: 0 15px; font-size: 15px; }
-    .profile-popup { width: 320px; }
+    .profile-popup { width: 320px; padding: 18px; }
     .social { width: 60px; height: 60px; }
     .social svg { width: 26px; height: 26px; }
 }
@@ -748,11 +756,11 @@ img.avatar-decoration {
 </head>
 <body oncontextmenu="return false;">
 
-<!-- ✅ ANIMATED LOADING SCREEN -->
+<!-- ✅ AUTOMATIC ANIMATED LOADING / INTRO -->
 <div id="loading-overlay">
     <div class="loading-content">
-        <div class="loading-main-text">CLICK</div>
-        <div class="loading-sub-text">GODZ OF AZURA</div>
+        <div class="loading-main-text">AZURA</div>
+        <div class="loading-sub-text">WELCOME</div>
     </div>
 </div>
 
@@ -861,12 +869,15 @@ audio.volume = 0.5;
 
 const overlay = document.getElementById("loading-overlay");
 
-overlay.addEventListener('click', () => {
-    audio.play().catch(e => console.log(e));
-    overlay.style.opacity = "0";
-    setTimeout(() => { 
-        overlay.style.visibility = "hidden"; 
-    }, 900);
+// ✅ AUTOMATIC LOADING FINISH (no click needed)
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        audio.play().catch(e => console.log(e));
+        overlay.style.opacity = "0";
+        setTimeout(() => { 
+            overlay.style.visibility = "hidden"; 
+        }, 1200);
+    }, 2800); // duration ng intro animation
 });
 
 document.addEventListener('contextmenu', e => e.preventDefault());

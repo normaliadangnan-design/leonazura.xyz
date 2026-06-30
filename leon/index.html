@@ -193,7 +193,7 @@
         transition: transform 0.3s ease;
     }
     
- .modal-overlay.active.modal-content {
+ .modal-overlay.active .modal-content {
         transform: scale(1);
     }
 
@@ -203,11 +203,123 @@
         left: 50%;
         transform: translateX(-50%);
         z-index: 9997;
+        background: rgba(15, 15, 20, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        padding: 10px 20px 10px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
         transition: all 0.3s ease;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     }
 
  .music-player:hover {
-        transform: translateX(-50%) scale(1.05);
+        transform: translateX(-50%) scale(1.02);
+        box-shadow: 0 12px 48px rgba(88, 101, 242, 0.3);
+    }
+
+ .play-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #5865F2;
+        border: 2px solid #7983F5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+ .play-btn:hover {
+        background: #4752C4;
+        transform: scale(1.08);
+    }
+
+ .play-btn:active {
+        transform: scale(0.95);
+    }
+
+ .play-btn i {
+        font-size: 13px;
+        margin-left: 2px;
+    }
+
+ .play-btn.playing i {
+        margin-left: 0;
+    }
+
+ .music-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 140px;
+    }
+
+ .music-info .title {
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+    }
+
+ .music-info .subtitle {
+        color: #8B92A8;
+        font-size: 11px;
+        line-height: 1;
+    }
+
+ .volume-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+ .views-counter {
+        background: rgba(88, 101, 242, 0.15);
+        border: 1px solid rgba(88, 101, 242, 0.3);
+        border-radius: 20px;
+        padding: 4px 12px;
+        font-size: 11px;
+        color: #A5ADFF;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+ .volume-control {
+        width: 90px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        outline: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+    }
+
+ .volume-control::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #5865F2;
+        cursor: pointer;
+        border: 2px solid white;
+        box-shadow: 0 2px 8px rgba(88, 101, 242, 0.5);
+    }
+
+ .volume-control::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #5865F2;
+        cursor: pointer;
+        border: 2px solid white;
+        box-shadow: 0 2px 8px rgba(88, 101, 242, 0.5);
     }
     
     @media (max-width: 450px) {
@@ -234,6 +346,28 @@
         }
      .music-player {
             bottom: 15px;
+            padding: 8px 16px 8px 8px;
+            gap: 10px;
+        }
+     .play-btn {
+            width: 36px;
+            height: 36px;
+        }
+     .volume-control {
+            width: 60px;
+        }
+     .music-info {
+            min-width: 100px;
+        }
+     .music-info .title {
+            font-size: 12px;
+        }
+     .music-info .subtitle {
+            font-size: 10px;
+        }
+     .views-counter {
+            font-size: 10px;
+            padding: 3px 10px;
         }
     }
 </style>
@@ -245,15 +379,20 @@
     Your browser does not support audio playback.
 </audio>
 
-<div class="music-player glass rounded-full p-3 flex items-center gap-3 shadow-2xl">
-    <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center text-white transition-all">
-        <i class="fas fa-play text-sm"></i>
+<div class="music-player">
+    <button id="playPauseBtn" class="play-btn">
+        <i class="fas fa-play"></i>
     </button>
-    <div class="hidden md:block">
-        <p class="text-white text-xs font-semibold">Now Playing</p>
-        <p class="text-gray-400 text-[10px]">Click to control</p>
+    <div class="music-info">
+        <span class="title">Luhod</span>
+        <span class="subtitle">Dreycruz</span>
     </div>
-    <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.3" class="w-20 accent-[#5865F2] hidden md:block">
+    <div class="volume-wrapper">
+        <div class="views-counter">
+            Views: <span id="viewCount">0</span>
+        </div>
+        <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1" class="volume-control">
+    </div>
 </div>
 
 <!-- Loading Screen -->

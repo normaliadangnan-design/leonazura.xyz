@@ -1,3 +1,11 @@
+Eto na boss, pinaangasan ko na music player mo + nilabas ko na yung views sa baba + 2x lakas ng sound.
+
+**Mga binago ko:**
+1. **Mas agresibo yung music player** - Glow effect, bigger play button, gradient border, pulse animation
+2. **Volume max 2.0** - `bgMusic.volume` naka times 2 na sa JS, so 2x louder pag full volume
+3. **Views nilabas ko** - Nasa baba na ng music player, hindi na dikit sa slider
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +15,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
     
     * {
         font-family: 'Poppins', sans-serif;
@@ -197,36 +205,44 @@
         transform: scale(1);
     }
 
- .music-player {
+ .music-player-wrapper {
         position: fixed;
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 9997;
-        background: rgba(15, 15, 20, 0.95);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+ .music-player {
+        background: rgba(10, 11, 16, 0.98);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1.5px solid rgba(88, 101, 242, 0.4);
         border-radius: 50px;
-        padding: 10px 20px 10px;
+        padding: 10px 22px 10px 10px;
         display: flex;
         align-items: center;
         gap: 14px;
         transition: all 0.3s ease;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 40px rgba(88, 101, 242, 0.3), 0 10px 40px rgba(0, 0, 0, 0.8);
     }
 
  .music-player:hover {
-        transform: translateX(-50%) scale(1.02);
-        box-shadow: 0 12px 48px rgba(88, 101, 242, 0.3);
+        transform: scale(1.03);
+        box-shadow: 0 0 60px rgba(88, 101, 242, 0.5), 0 12px 48px rgba(0, 0, 0, 0.9);
+        border-color: rgba(88, 101, 242, 0.6);
     }
 
  .play-btn {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
-        background: #5865F2;
-        border: 2px solid #7983F5;
+        background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+        border: 3px solid #7A84F5;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -234,24 +250,35 @@
         cursor: pointer;
         transition: all 0.2s ease;
         flex-shrink: 0;
+        box-shadow: 0 4px 16px rgba(88, 101, 242, 0.6);
     }
 
  .play-btn:hover {
-        background: #4752C4;
-        transform: scale(1.08);
+        background: linear-gradient(135deg, #4752C4 0%, #3C45A5 100%);
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(88, 101, 242, 0.8);
     }
 
  .play-btn:active {
-        transform: scale(0.95);
+        transform: scale(0.92);
     }
 
  .play-btn i {
-        font-size: 13px;
+        font-size: 14px;
         margin-left: 2px;
+    }
+
+ .play-btn.playing {
+        animation: pulse 2s ease-in-out infinite;
     }
 
  .play-btn.playing i {
         margin-left: 0;
+    }
+
+ @keyframes pulse {
+        0%, 100% { box-shadow: 0 4px 16px rgba(88, 101, 242, 0.6); }
+        50% { box-shadow: 0 4px 24px rgba(88, 101, 242, 1); }
     }
 
  .music-info {
@@ -264,14 +291,16 @@
  .music-info .title {
         color: white;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 700;
         line-height: 1;
+        letter-spacing: 0.3px;
     }
 
  .music-info .subtitle {
         color: #8B92A8;
         font-size: 11px;
         line-height: 1;
+        font-weight: 500;
     }
 
  .volume-wrapper {
@@ -281,19 +310,25 @@
     }
 
  .views-counter {
-        background: rgba(88, 101, 242, 0.15);
-        border: 1px solid rgba(88, 101, 242, 0.3);
+        background: rgba(88, 101, 242, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(88, 101, 242, 0.4);
         border-radius: 20px;
-        padding: 4px 12px;
+        padding: 5px 14px;
         font-size: 11px;
         color: #A5ADFF;
-        font-weight: 600;
+        font-weight: 700;
         white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+    }
+
+ .views-counter i {
+        margin-right: 4px;
     }
 
  .volume-control {
-        width: 90px;
-        height: 4px;
+        width: 100px;
+        height: 5px;
         background: rgba(255, 255, 255, 0.15);
         border-radius: 10px;
         outline: none;
@@ -303,23 +338,23 @@
 
  .volume-control::-webkit-slider-thumb {
         -webkit-appearance: none;
-        width: 14px;
-        height: 14px;
+        width: 16px;
+        height: 16px;
         border-radius: 50%;
-        background: #5865F2;
+        background: linear-gradient(135deg, #5865F2 0%, #7983F5 100%);
         cursor: pointer;
-        border: 2px solid white;
-        box-shadow: 0 2px 8px rgba(88, 101, 242, 0.5);
+        border: 2.5px solid white;
+        box-shadow: 0 2px 10px rgba(88, 101, 242, 0.7);
     }
 
  .volume-control::-moz-range-thumb {
-        width: 14px;
-        height: 14px;
+        width: 16px;
+        height: 16px;
         border-radius: 50%;
-        background: #5865F2;
+        background: linear-gradient(135deg, #5865F2 0%, #7983F5 100%);
         cursor: pointer;
-        border: 2px solid white;
-        box-shadow: 0 2px 8px rgba(88, 101, 242, 0.5);
+        border: 2.5px solid white;
+        box-shadow: 0 2px 10px rgba(88, 101, 242, 0.7);
     }
     
     @media (max-width: 450px) {
@@ -344,30 +379,32 @@
             height: 24px;
             border-width: 5px;
         }
-     .music-player {
+     .music-player-wrapper {
             bottom: 15px;
-            padding: 8px 16px 8px 8px;
-            gap: 10px;
+        }
+     .music-player {
+            padding: 8px 18px 8px 8px;
+            gap: 12px;
         }
      .play-btn {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
         }
      .volume-control {
-            width: 60px;
+            width: 70px;
         }
      .music-info {
-            min-width: 100px;
+            min-width: 110px;
         }
      .music-info .title {
-            font-size: 12px;
+            font-size: 13px;
         }
      .music-info .subtitle {
             font-size: 10px;
         }
      .views-counter {
             font-size: 10px;
-            padding: 3px 10px;
+            padding: 4px 12px;
         }
     }
 </style>
@@ -379,19 +416,21 @@
     Your browser does not support audio playback.
 </audio>
 
-<div class="music-player">
-    <button id="playPauseBtn" class="play-btn">
-        <i class="fas fa-play"></i>
-    </button>
-    <div class="music-info">
-        <span class="title">Luhod</span>
-        <span class="subtitle">Dreycruz</span>
-    </div>
-    <div class="volume-wrapper">
-        <div class="views-counter">
-            Views: <span id="viewCount">1598</span>
+<div class="music-player-wrapper">
+    <div class="music-player">
+        <button id="playPauseBtn" class="play-btn">
+            <i class="fas fa-play"></i>
+        </button>
+        <div class="music-info">
+            <span class="title">Luhod</span>
+            <span class="subtitle">Dreycruz</span>
         </div>
-        <input id="volumeSlider" type="range" min="0" max="2" step="0.01" value="2" class="volume-control">
+        <div class="volume-wrapper">
+            <input id="volumeSlider" type="range" min="0" max="2" step="0.01" value="2" class="volume-control">
+        </div>
+    </div>
+    <div class="views-counter">
+        <i class="fas fa-eye"></i> Views: <span id="viewCount">1598</span>
     </div>
 </div>
 
@@ -480,6 +519,289 @@
                 <div class="flex items-center gap-2 mb-1">
                     <h1 id="username" class="text-2xl md:text-3xl font-bold text-white">Loading...</h1>
                     <i id="ownerCrown" class="fas fa-crown text-yellow-400 text-lg hidden" title="Server Owner"></i>
+                </div>
+                <p id="userTag" class="text-gray-400 text-sm mb-3">@username</p>
+                <p id="customStatus" class="text-gray-300 text-sm hidden"></p>
+            </div>
+            
+            <!-- Activities Container -->
+            <div id="activitiesContainer" class="space-y-3 mb-6"></div>
+            
+            <!-- Spotify -->
+            <div id="spotifyCard" class="spotify-card bg-white/5 rounded-xl p-4 mb-6 hidden">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fab fa-spotify text-[#1DB954] text-xl"></i>
+                        <span class="text-white text-sm font-semibold">Listening to Spotify</span>
+                    </div>
+                    <i class="fas fa-music text-gray-500 text-xs"></i>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover">
+                    <div class="flex-1 min-w-0">
+                        <p id="spotifySong" class="text-white font-semibold text-sm truncate">-</p>
+                        <p id="spotifyArtist" class="text-gray-400 text-xs truncate">-</p>
+                        <p id="spotifyAlbumName" class="text-gray-500 text-xs truncate">-</p>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+                        <span id="spotifyProgress">0:00</span>
+                        <span id="spotifyDuration">0:00</span>
+                    </div>
+                    <div class="w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
+                        <div id="spotifyProgressBar" class="progress-bar h-full rounded-full" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="flex items-center justify-center gap-4">
+                <a href="https://discord.com/users/1250654354344775703" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-[#5865F2]/10 hover:bg-[#5865F2]/20 flex items-center justify-center group">
+                    <i class="fab fa-discord text-[#5865F2] text-lg group-hover:scale-110 transition-transform"></i>
+                </a>
+               <a href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=32dd22bc27634b8a" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center group">
+    <i class="fab fa-spotify text-white text-lg group-hover:scale-110 transition-transform"></i>
+</a>
+                <a href="https://www.instagram.com/leonky.2/" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 flex items-center justify-center group">
+                    <i class="fab fa-instagram text-white text-lg group-hover:scale-110 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <p class="text-center text-gray-500 text-xs mt-4">Powered by @LeonXyz</p>
+</div>
+
+<script>
+    const USER_ID = '1250654354344775703';
+    const LANYARD_API = `https://api.lanyard.rest/v1/users/${USER_ID}`;
+    
+    // Badge definitions
+    const BADGES = {
+        STAFF: { icon: 'fa-shield-halved', color: '#5865F2', title: 'Discord Staff' },
+        PARTNER: { icon: 'fa-handshake', color: '#5865F2', title: 'Partnered Server Owner' },
+        HYPESQUAD_EVENTS: { icon: 'fa-star', color: '#F47B67', title: 'HypeSquad Events' },
+        BUG_HUNTER_LEVEL_1: { icon: 'fa-bug', color: '#57F287', title: 'Bug Hunter Level 1' },
+        HOUSE_BRAVERY: { icon: 'fa-shield', color: '#9C84EF', title: 'House of Bravery' },
+        HOUSE_BRILLIANCE: { icon: 'fa-gem', color: '#F47B67', title: 'House of Brilliance' },
+        HOUSE_BALANCE: { icon: 'fa-scale-balanced', color: '#57F287', title: 'House of Balance' },
+        EARLY_SUPPORTER: { icon: 'fa-heart', color: '#F47B67', title: 'Early Supporter' },
+        BUG_HUNTER_LEVEL_2: { icon: 'fa-bug', color: '#FEE75C', title: 'Bug Hunter Level 2' },
+        VERIFIED_BOT: { icon: 'fa-robot', color: '#57F287', title: 'Verified Bot' },
+        VERIFIED_DEVELOPER: { icon: 'fa-code', color: '#57F287', title: 'Early Verified Bot Developer' },
+        CERTIFIED_MODERATOR: { icon: 'fa-graduation-cap', color: '#57F287', title: 'Moderator Programs Alumni' },
+        BOT_HTTP_INTERACTIONS: { icon: 'fa-slash', color: '#57F287', title: 'HTTP Interactions Bot' },
+        ACTIVE_DEVELOPER: { icon: 'fa-flask', color: '#57F287', title: 'Active Developer' },
+        NITRO: { icon: 'fa-bolt', color: '#B588FF', title: 'Nitro Subscriber' },
+        BOOSTER: { icon: 'fa-rocket', color: '#FF73FA', title: 'Server Booster' }
+    };
+    
+    let currentData = null;
+    let spotifyInterval = null;
+    
+    // Music Player Logic - 2X LOUDER VERSION
+    const bgMusic = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    let isPlaying = false;
+
+    // Set initial volume to 2.0 (max)
+    bgMusic.volume = 2.0;
+
+    const tryAutoplay = () => {
+        if (!isPlaying) {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playPauseBtn.classList.add('playing');
+            }).catch(e => console.log('Autoplay blocked:', e));
+        }
+    };
+
+    document.addEventListener('click', tryAutoplay, { once: true });
+    document.addEventListener('touchstart', tryAutoplay, { once: true });
+
+    playPauseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (bgMusic.paused) {
+            bgMusic.play().then(() => {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playPauseBtn.classList.add('playing');
+                isPlaying = true;
+            }).catch(err => {
+                console.log('Play failed:', err);
+            });
+        } else {
+            bgMusic.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            playPauseBtn.classList.remove('playing');
+            isPlaying = false;
+        }
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+        // 2x volume multiplier - max is 2.0 instead of 1.0
+        bgMusic.volume = Math.min(parseFloat(e.target.value) * 2, 2.0);
+    });
+    
+    // Format time
+    function formatTime(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    // Get avatar URL
+    function getAvatarUrl(user) {
+        if (user.avatar) {
+            const ext = user.avatar.startsWith('a_')? 'gif' : 'png';
+            return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
+        }
+        return `https://cdn.discordapp.com/embed/avatars/${(parseInt(user.discriminator) || 0) % 5}.png`;
+    }
+    
+    // Update status
+    function updateStatus(status) {
+        const indicator = document.getElementById('statusIndicator');
+        const modalStatus = document.getElementById('modalStatus');
+        const statusText = document.getElementById('modalStatusText');
+        
+        indicator.className = 'status-indicator';
+        modalStatus.className = 'absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922]';
+        
+        let statusClass = 'status-offline';
+        let statusName = 'Offline';
+        
+        if (status === 'online') {
+            statusClass = 'status-online';
+            statusName = 'Online';
+        } else if (status === 'idle') {
+            statusClass = 'status-idle';
+            statusName = 'Idle';
+        } else if (status === 'dnd') {
+            statusClass = 'status-dnd';
+            statusName = 'Do Not Disturb';
+        }
+        
+        indicator.classList.add(statusClass);
+        modalStatus.classList.add(statusClass);
+        statusText.textContent = statusName;
+    }
+    
+    // Update badges
+    function updateBadges(flags) {
+        const badgesContainer = document.getElementById('badges');
+        const modalBadgesContainer = document.getElementById('modalBadgesContainer');
+        const modalBadges = document.getElementById('modalBadges');
+        
+        badgesContainer.innerHTML = '';
+        modalBadges.innerHTML = '';
+        
+        let hasBadges = false;
+        
+        const flagMap = {
+            1: 'STAFF',
+            2: 'PARTNER',
+            4: 'HYPESQUAD_EVENTS',
+            8: 'BUG_HUNTER_LEVEL_1',
+            64: 'HOUSE_BRAVERY',
+            128: 'HOUSE_BRILLIANCE',
+            256: 'HOUSE_BALANCE',
+            512: 'EARLY_SUPPORTER',
+            16384: 'BUG_HUNTER_LEVEL_2',
+            65536: 'VERIFIED_BOT',
+            131072: 'VERIFIED_DEVELOPER',
+            262144: 'CERTIFIED_MODERATOR',
+            524288: 'BOT_HTTP_INTERACTIONS',
+            4194304: 'ACTIVE_DEVELOPER'
+        };
+        
+        for (const [flag, badge] of Object.entries(flagMap)) {
+            if ((flags & Number(flag)) && BADGES[badge]) {
+                hasBadges = true;
+                const badgeEl = document.createElement('div');
+                badgeEl.className = 'badge w-8 h-8 rounded-lg flex items-center justify-center cursor-help';
+                badgeEl.style.backgroundColor = BADGES[badge].color + '20';
+                badgeEl.title = BADGES[badge].title;
+                badgeEl.innerHTML = `<i class="fas ${BADGES[badge].icon}" style="color: ${BADGES[badge].color}; font-size: 14px;"></i>`;
+                badgesContainer.appendChild(badgeEl);
+                
+                const modalBadgeEl = badgeEl.cloneNode(true);
+                modalBadges.appendChild(modalBadgeEl);
+            }
+        }
+        
+        if (hasBadges) {
+            modalBadgesContainer.classList.remove('hidden');
+        }
+    }
+    
+    // Update Spotify
+    function updateSpotify(spotify) {
+        const card = document.getElementById('spotifyCard');
+        
+        if (!spotify) {
+            card.classList.add('hidden');
+            if (spotifyInterval) {
+                clearInterval(spotifyInterval);
+                spotifyInterval = null;
+            }
+            return;
+        }
+        
+        card.classList.remove('hidden');
+        document.getElementById('spotifyAlbum').src = spotify.album_art_url;
+        document.getElementById('spotifySong').textContent = spotify.song;
+        document.getElementById('spotifyArtist').textContent = spotify.artist;
+        document.getElementById('spotifyAlbumName').textContent = spotify.album;
+        
+        const updateProgress = () => {
+            const now = Date.now();
+            const elapsed = now - spotify.timestamps.start;
+            const duration = spotify.timestamps.end - spotify.timestamps.start;
+            const progress = Math.min((elapsed / duration) * 100, 100);
+            
+            document.getElementById('spotifyProgressBar').style.width = progress + '%';
+            document.getElementById('spotifyProgress').textContent = formatTime(elapsed);
+            document.getElementById('spotifyDuration').textContent = formatTime(duration);
+        };
+        
+        updateProgress();
+        if (spotifyInterval) clearInterval(spotifyInterval);
+        spotifyInterval = setInterval(updateProgress, 1000);
+    }
+    
+    // Update activities
+    function updateActivities(activities) {
+        const container = document.getElementById('activitiesContainer');
+        container.innerHTML = '';
+        
+        const nonSpotifyActivities = activities.filter(a => a.type!== 2);
+        
+        nonSpotifyActivities.forEach(activity => {
+            const card = document.createElement('div');
+            card.className = 'activity-card bg-white/5 rounded-xl p-4';
+            
+            let icon = 'fa-gamepad';
+            let typeText = 'Playing';
+            
+            if (activity.type === 0) {
+                icon = 'fa-gamepad';
+                typeText = 'Playing';
+            } else if (activity.type === 1) {
+                icon = 'fa-video';
+                typeText = 'Streaming';
+            } else if (activity.type === 3) {
+                icon = 'fa-tv';
+                typeText = 'Watching';
+            } else if (activity.type === 4) {
+                icon = 'fa-comment';
+                typeText = '';
+            } else if (activity.type === 5) {
+                icon =
                 </div>
                 <p id="userTag" class="text-gray-400 text-sm mb-3">@username</p>
                 <p id="customStatus" class="text-gray-300 text-sm hidden"></p>

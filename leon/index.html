@@ -1,3 +1,12 @@
+Ayun nakita ko na boss. **Na-duplicate yung code mo sa gitna** tapos **may putol na line** kaya nag crash yung JavaScript. Stock talaga sa "Loading profile" kasi di na-run yung `fetchLanyard()`.
+
+**2 Sira:**
+1. Sa `updateActivities` function may `icon =` na putol - dapat `icon = 'fa-trophy'`
+2. Na-duplicate yung buong HTML/JS after nun kaya nag error
+
+Eto na yung full fixed code. Copy-paste mo lahat:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -511,6 +520,280 @@
                 <div class="flex items-center gap-2 mb-1">
                     <h1 id="username" class="text-2xl md:text-3xl font-bold text-white">Loading...</h1>
                     <i id="ownerCrown" class="fas fa-crown text-yellow-400 text-lg hidden" title="Server Owner"></i>
+                </div>
+                <p id="userTag" class="text-gray-400 text-sm mb-3">@username</p>
+                <p id="customStatus" class="text-gray-300 text-sm hidden"></p>
+            </div>
+            
+            <!-- Activities Container -->
+            <div id="activitiesContainer" class="space-y-3 mb-6"></div>
+            
+            <!-- Spotify -->
+            <div id="spotifyCard" class="spotify-card bg-white/5 rounded-xl p-4 mb-6 hidden">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fab fa-spotify text-[#1DB954] text-xl"></i>
+                        <span class="text-white text-sm font-semibold">Listening to Spotify</span>
+                    </div>
+                    <i class="fas fa-music text-gray-500 text-xs"></i>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover">
+                    <div class="flex-1 min-w-0">
+                        <p id="spotifySong" class="text-white font-semibold text-sm truncate">-</p>
+                        <p id="spotifyArtist" class="text-gray-400 text-xs truncate">-</p>
+                        <p id="spotifyAlbumName" class="text-gray-500 text-xs truncate">-</p>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+                        <span id="spotifyProgress">0:00</span>
+                        <span id="spotifyDuration">0:00</span>
+                    </div>
+                    <div class="w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
+                        <div id="spotifyProgressBar" class="progress-bar h-full rounded-full" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="flex items-center justify-center gap-4">
+                <a href="https://discord.com/users/1250654354344775703" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-[#5865F2]/10 hover:bg-[#5865F2]/20 flex items-center justify-center group">
+                    <i class="fab fa-discord text-[#5865F2] text-lg group-hover:scale-110 transition-transform"></i>
+                </a>
+               <a href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=32dd22bc27634b8a" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center group">
+    <i class="fab fa-spotify text-white text-lg group-hover:scale-110 transition-transform"></i>
+</a>
+                <a href="https://www.instagram.com/leonky.2/" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 flex items-center justify-center group">
+                    <i class="fab fa-instagram text-white text-lg group-hover:scale-110 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <p class="text-center text-gray-500 text-xs mt-4">Powered by @LeonXyz</p>
+</div>
+
+<script>
+    const USER_ID = '1250654354344775703';
+    const LANYARD_API = `https://api.lanyard.rest/v1/users/${USER_ID}`;
+    
+    // Badge definitions
+    const BADGES = {
+        STAFF: { icon: 'fa-shield-halved', color: '#5865F2', title: 'Discord Staff' },
+        PARTNER: { icon: 'fa-handshake', color: '#5865F2', title: 'Partnered Server Owner' },
+        HYPESQUAD_EVENTS: { icon: 'fa-star', color: '#F47B67', title: 'HypeSquad Events' },
+        BUG_HUNTER_LEVEL_1: { icon: 'fa-bug', color: '#57F287', title: 'Bug Hunter Level 1' },
+        HOUSE_BRAVERY: { icon: 'fa-shield', color: '#9C84EF', title: 'House of Bravery' },
+        HOUSE_BRILLIANCE: { icon: 'fa-gem', color: '#F47B67', title: 'House of Brilliance' },
+        HOUSE_BALANCE: { icon: 'fa-scale-balanced', color: '#57F287', title: 'House of Balance' },
+        EARLY_SUPPORTER: { icon: 'fa-heart', color: '#F47B67', title: 'Early Supporter' },
+        BUG_HUNTER_LEVEL_2: { icon: 'fa-bug', color: '#FEE75C', title: 'Bug Hunter Level 2' },
+        VERIFIED_BOT: { icon: 'fa-robot', color: '#57F287', title: 'Verified Bot' },
+        VERIFIED_DEVELOPER: { icon: 'fa-code', color: '#57F287', title: 'Early Verified Bot Developer' },
+        CERTIFIED_MODERATOR: { icon: 'fa-graduation-cap', color: '#57F287', title: 'Moderator Programs Alumni' },
+        BOT_HTTP_INTERACTIONS: { icon: 'fa-slash', color: '#57F287', title: 'HTTP Interactions Bot' },
+        ACTIVE_DEVELOPER: { icon: 'fa-flask', color: '#57F287', title: 'Active Developer' },
+        NITRO: { icon: 'fa-bolt', color: '#B588FF', title: 'Nitro Subscriber' },
+        BOOSTER: { icon: 'fa-rocket', color: '#FF73FA', title: 'Server Booster' }
+    };
+    
+    let currentData = null;
+    let spotifyInterval = null;
+    
+    // Music Player Logic - 2X LOUDER VERSION
+    const bgMusic = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    let isPlaying = false;
+
+    // Set initial volume to 2.0 (max)
+    bgMusic.volume = 2.0;
+
+    const tryAutoplay = () => {
+        if (!isPlaying) {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playPauseBtn.classList.add('playing');
+            }).catch(e => console.log('Autoplay blocked:', e));
+        }
+    };
+
+    document.addEventListener('click', tryAutoplay, { once: true });
+    document.addEventListener('touchstart', tryAutoplay, { once: true });
+
+    playPauseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (bgMusic.paused) {
+            bgMusic.play().then(() => {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playPauseBtn.classList.add('playing');
+                isPlaying = true;
+            }).catch(err => {
+                console.log('Play failed:', err);
+            });
+        } else {
+            bgMusic.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            playPauseBtn.classList.remove('playing');
+            isPlaying = false;
+        }
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+        // 2x volume multiplier - max is 2.0 instead of 1.0
+        bgMusic.volume = Math.min(parseFloat(e.target.value) * 2, 2.0);
+    });
+    
+    // Format time
+    function formatTime(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    // Get avatar URL
+    function getAvatarUrl(user) {
+        if (user.avatar) {
+            const ext = user.avatar.startsWith('a_')? 'gif' : 'png';
+            return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
+        }
+        return `https://cdn.discordapp.com/embed/avatars/${(parseInt(user.discriminator) || 0) % 5}.png`;
+    }
+    
+    // Update status
+    function updateStatus(status) {
+        const indicator = document.getElementById('statusIndicator');
+        const modalStatus = document.getElementById('modalStatus');
+        const statusText = document.getElementById('modalStatusText');
+        
+        indicator.className = 'status-indicator';
+        modalStatus.className = 'absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922]';
+        
+        let statusClass = 'status-offline';
+        let statusName = 'Offline';
+        
+        if (status === 'online') {
+            statusClass = 'status-online';
+            statusName = 'Online';
+        } else if (status === 'idle') {
+            statusClass = 'status-idle';
+            statusName = 'Idle';
+        } else if (status === 'dnd') {
+            statusClass = 'status-dnd';
+            statusName = 'Do Not Disturb';
+        }
+        
+        indicator.classList.add(statusClass);
+        modalStatus.classList.add(statusClass);
+        statusText.textContent = statusName;
+    }
+    
+    // Update badges
+    function updateBadges(flags) {
+        const badgesContainer = document.getElementById('badges');
+        const modalBadgesContainer = document.getElementById('modalBadgesContainer');
+        const modalBadges = document.getElementById('modalBadges');
+        
+        badgesContainer.innerHTML = '';
+        modalBadges.innerHTML = '';
+        
+        let hasBadges = false;
+        
+        const flagMap = {
+            1: 'STAFF',
+            2: 'PARTNER',
+            4: 'HYPESQUAD_EVENTS',
+            8: 'BUG_HUNTER_LEVEL_1',
+            64: 'HOUSE_BRAVERY',
+            128: 'HOUSE_BRILLIANCE',
+            256: 'HOUSE_BALANCE',
+            512: 'EARLY_SUPPORTER',
+            16384: 'BUG_HUNTER_LEVEL_2',
+            65536: 'VERIFIED_BOT',
+            131072: 'VERIFIED_DEVELOPER',
+            262144: 'CERTIFIED_MODERATOR',
+            524288: 'BOT_HTTP_INTERACTIONS',
+            4194304: 'ACTIVE_DEVELOPER'
+        };
+        
+        for (const [flag, badge] of Object.entries(flagMap)) {
+            if ((flags & Number(flag)) && BADGES[badge]) {
+                hasBadges = true;
+                const badgeEl = document.createElement('div');
+                badgeEl.className = 'badge w-8 h-8 rounded-lg flex items-center justify-center cursor-help';
+                badgeEl.style.backgroundColor = BADGES[badge].color + '20';
+                badgeEl.title = BADGES[badge].title;
+                badgeEl.innerHTML = `<i class="fas ${BADGES[badge].icon}" style="color: ${BADGES[badge].color}; font-size: 14px;"></i>`;
+                badgesContainer.appendChild(badgeEl);
+                
+                const modalBadgeEl = badgeEl.cloneNode(true);
+                modalBadges.appendChild(modalBadgeEl);
+            }
+        }
+        
+        if (hasBadges) {
+            modalBadgesContainer.classList.remove('hidden');
+        }
+    }
+    
+    // Update Spotify
+    function updateSpotify(spotify) {
+        const card = document.getElementById('spotifyCard');
+        
+        if (!spotify) {
+            card.classList.add('hidden');
+            if (spotifyInterval) {
+                clearInterval(spotifyInterval);
+                spotifyInterval = null;
+            }
+            return;
+        }
+        
+        card.classList.remove('hidden');
+        document.getElementById('spotifyAlbum').src = spotify.album_art_url;
+        document.getElementById('spotifySong').textContent = spotify.song;
+        document.getElementById('spotifyArtist').textContent = spotify.artist;
+        document.getElementById('spotifyAlbumName').textContent = spotify.album;
+        
+        const updateProgress = () => {
+            const now = Date.now();
+            const elapsed = now - spotify.timestamps.start;
+            const duration = spotify.timestamps.end - spotify.timestamps.start;
+            const progress = Math.min((elapsed / duration) * 100, 100);
+            
+            document.getElementById('spotifyProgressBar').style.width = progress + '%';
+            document.getElementById('spotifyProgress').textContent = formatTime(elapsed);
+            document.getElementById('spotifyDuration').textContent = formatTime(duration);
+        };
+        
+        updateProgress();
+        if (spotifyInterval) clearInterval(spotifyInterval);
+        spotifyInterval = setInterval(updateProgress, 1000);
+    }
+    
+    // Update activities - FIXED
+    function updateActivities(activities) {
+        const container = document.getElementById('activitiesContainer');
+        container.innerHTML = '';
+        
+        const nonSpotifyActivities = activities.filter(a => a.type!== 2);
+        
+        nonSpotifyActivities.forEach(activity => {
+            const card = document.createElement('div');
+            card.className = 'activity-card bg-white/5 rounded-xl p-4';
+            
+            let icon = 'fa-gamepad';
+            let typeText = 'Playing';
+            
+            if (activity.type === 0) {
+                icon = 'fa-gamepad';
+                typeText = 'Playing';
+            } else if (activity.type === 1) {
+                icon =
                 </div>
                 <p id="userTag" class="text-gray-400 text-sm mb-3">@username</p>
                 <p id="customStatus" class="text-gray-300 text-sm hidden"></p>

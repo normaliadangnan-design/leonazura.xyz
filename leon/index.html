@@ -52,8 +52,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 170px;
-        height: 170px;
+        width: 142px;
+        height: 142px;
         pointer-events: none;
         z-index: 10;
     }
@@ -88,8 +88,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 110px;
-        height: 110px;
+        width: 135px;
+        height: 135px;
         pointer-events: none;
         z-index: 10;
     }
@@ -200,13 +200,14 @@
    .music-player {
         position: fixed;
         bottom: 20px;
-        right: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         z-index: 9997;
         transition: all 0.3s ease;
     }
 
    .music-player:hover {
-        transform: scale(1.05);
+        transform: translateX(-50%) scale(1.05);
     }
     
     @media (max-width: 450px) {
@@ -219,12 +220,12 @@
             height: 112px;
         }
        .avatar-deco {
-            width: 150px;
-            height: 150px;
+            width: 125px;
+            height: 125px;
         }
        .modal-avatar-deco {
-            width: 95px;
-            height: 95px;
+            width: 118px;
+            height: 118px;
         }
        .status-indicator {
             width: 24px;
@@ -233,16 +234,16 @@
         }
        .music-player {
             bottom: 15px;
-            right: 15px;
         }
     }
 </style>
 </head>
 <body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
 <!-- Music Player -->
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop preload="auto">
     <source src="PALITAN_MO_NG_MUSIC_LINK.mp3" type="audio/mpeg">
-</audio>
+    Your browser does not support audio playback.
+
 
 <div class="music-player glass rounded-full p-3 flex items-center gap-3 shadow-2xl">
     <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center text-white transition-all">
@@ -428,17 +429,20 @@
     const volumeSlider = document.getElementById('volumeSlider');
     let isPlaying = false;
 
-    // Try autoplay - browsers block yan pero gagana after first user interaction
+    // Autoplay fix
+    bgMusic.volume = 0.3;
+
     document.addEventListener('click', () => {
-        if (!isPlaying && bgMusic.src &&!bgMusic.src.includes('HYU1 - CHILL OUT.mp3')) {
+        if (!isPlaying && bgMusic.src && bgMusic.src !== window.location.href) {
             bgMusic.play().then(() => {
                 isPlaying = true;
                 playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
-            }).catch(e => console.log('Autoplay blocked:', e));
+            }).catch(e => console.log('Autoplay blocked by browser:', e));
         }
     }, { once: true });
 
-    playPauseBtn.addEventListener('click', () => {
+    playPauseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (bgMusic.paused) {
             bgMusic.play();
             playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
@@ -451,10 +455,8 @@
     });
 
     volumeSlider.addEventListener('input', (e) => {
-        bgMusic.volume = e.target.value;
+        bgMusic.volume = parseFloat(e.target.value);
     });
-
-    bgMusic.volume = 0.3; // Default 30% volume para di masyado malakas
     
     // Format time
     function formatTime(ms) {
@@ -531,7 +533,7 @@
         };
         
         for (const [flag, badge] of Object.entries(flagMap)) {
-            if (flags & flag && BADGES[badge]) {
+            if ((flags & Number(flag)) && BADGES[badge]) {
                 hasBadges = true;
                 const badgeEl = document.createElement('div');
                 badgeEl.className = 'badge w-8 h-8 rounded-lg flex items-center justify-center cursor-help';
@@ -663,9 +665,14 @@
         
         // Avatar decoration
         if (user.avatar_decoration_data) {
-            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.png?size=160`;
+            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.png?size=240`;
             document.getElementById('avatarDecoration').src = decoUrl;
             document.getElementById('avatarDecoration').classList.remove('hidden');
+            document.getElementById('modalAvatarDecoration').src = decoUrl;
+            document.getElementById('modalAvatarDecoration').classList.remove('hidden');
+        } else {
+            document.getElementById('avatarDecoration').classList.add('hidden');
+            document.getElementById('modalAvatarDecoration').classList.add('hidden');
         }
         
         // Username

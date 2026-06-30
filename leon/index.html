@@ -2,649 +2,685 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leon | PUBLIC AZURA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-/* ✅ Fixed JetBrains Mono Font */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'JetBrains Mono', monospace;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background:
-        linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
-        url("../members/founder/leon.gif");
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    color: #e0e0e0;
-    padding: 20px;
-    position: relative;
-}
-
-body::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: 
-        radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-        repeating-linear-gradient(transparent 0px, rgba(255,255,255,0.015) 1px, transparent 2px);
-    background-size: 6px 6px, 100% 4px;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-}
-
-@keyframes scanline {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100vh); }
-}
-
-@keyframes textGlow {
-    from { text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff40; }
-    to { text-shadow: 0 0 25px #ffffff, 0 0 50px #ffffff80; }
-}
-
-/* 🚀 IMPROVED LOADING SCREEN */
-#loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000000;
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    transition: opacity 1s ease, visibility 1s ease;
-}
-
-#loading-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-/* Scan line effect */
-#loading-overlay::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #ffffff, transparent);
-    box-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff70;
-    animation: scanline 2.5s linear infinite;
-    opacity: 0.8;
-}
-
-/* Loading Banner/Text */
-.loading-main {
-    font-size: 42px;
-    font-weight: 700;
-    letter-spacing: 10px;
-    color: #ffffff;
-    text-transform: uppercase;
-    animation: pulse 2s infinite alternate, textGlow 3s infinite alternate;
-}
-
-.loading-sub {
-    font-size: 20px;
-    letter-spacing: 6px;
-    color: #cccccc;
-    animation: pulse 2s infinite alternate-reverse;
-}
-
-/* 🎯 Main Profile Card */
-.profile-card {
-    width: 100%;
-    max-width: 460px;
-    background: rgba(12, 12, 12, 0.92);
-    border: 1px solid rgba(70, 70, 70, 0.4);
-    border-radius: 8px;
-    padding: 24px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.06);
-    z-index: 10;
-    animation: fadeIn 0.8s ease-out forwards;
-    opacity: 0;
-    position: relative;
-}
-
-/* Header / Avatar Section */
-.profile-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
-}
-
-.avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.2);
-    overflow: hidden;
-    position: relative;
-    background: #000;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.avatar:hover {
-    transform: scale(1.05);
-}
-
-.avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.avatar-decoration {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.1);
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    display: none;
-}
-
-.user-info {
-    flex: 1;
-    overflow: hidden;
-}
-
-.display-name {
-    font-size: 22px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.status-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 8px currentColor;
-}
-.status-online { background-color: #23a55a; color: #23a55a; }
-.status-idle { background-color: #f0b232; color: #f0b232; }
-.status-dnd { background-color: #f13f43; color: #f13f43; }
-.status-offline { background-color: #80848e; color: #80848e; }
-
-.username {
-    font-size: 14px;
-    color: #a0a0a0;
-}
-
-/* Section Styles */
-.section {
-    margin-bottom: 20px;
-}
-
-.section-title {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #777;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-/* ✅ Updated Activity Box with Spotify Logo */
-.activity-box {
-    background: rgba(8, 8, 8, 0.7);
-    border: 1px solid rgba(50, 50, 50, 0.5);
-    border-radius: 4px;
-    padding: 10px 12px;
-    font-size: 13px;
-    color: #cccccc;
-    min-height: 38px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.spotify-icon {
-    width: 16px;
-    height: 16px;
-    fill: #1DB954;
-    flex-shrink: 0;
-}
-
-/* Terminal / Status */
-.terminal-box {
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(40, 40, 40, 0.6);
-    border-radius: 4px;
-    padding: 10px 12px;
-    font-size: 13px;
-    color: #b0e090;
-    line-height: 1.6;
-}
-
-.terminal-prompt {
-    color: #639cd9;
-}
-
-/* Quote / Bio */
-.quote-box {
-    background: rgba(8, 8, 8, 0.7);
-    border: 1px solid rgba(50, 50, 50, 0.5);
-    border-radius: 4px;
-    padding: 10px 12px;
-    font-size: 13px;
-    color: #cccccc;
-    font-style: italic;
-    min-height: 38px;
-    display: flex;
-    align-items: center;
-}
-
-/* Links / Socials */
-.links-container {
-    display: flex;
-    gap: 16px;
-    margin-top: 6px;
-}
-
-.social-link {
-    width: 38px;
-    height: 38px;
-    border-radius: 4px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.25s ease;
-}
-
-.social-link:hover {
-    background: rgba(255,255,255,0.15);
-    border-color: rgba(255,255,255,0.25);
-    transform: translateY(-2px);
-}
-
-.social-link svg {
-    width: 18px;
-    height: 18px;
-    fill: #e0e0e0;
-}
-
-/* ✅ AVATAR POPUP BOX */
-.profile-popup {
-    position: absolute;
-    top: 0;
-    left: 110%;
-    width: 320px;
-    background: #0a0a0a;
-    border: 1px solid rgba(80, 80, 80, 0.5);
-    border-radius: 8px;
-    padding: 18px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.95);
-    z-index: 9999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    transform: translateX(15px);
-    pointer-events: none;
-}
-
-.avatar:hover ~ .profile-popup,
-.profile-popup:hover {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-    pointer-events: auto;
-}
-
-.popup-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.popup-avatar {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.2);
-    overflow: hidden;
-    position: relative;
-    background: #000;
-}
-
-.popup-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.popup-info .popup-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 2px;
-}
-
-.popup-info .popup-user {
-    font-size: 12px;
-    color: #a0a0a0;
-    margin-bottom: 6px;
-}
-
-.popup-status {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: #cccccc;
-}
-
-.popup-section {
-    margin-top: 10px;
-    font-size: 12px;
-}
-
-.popup-section span {
-    color: #888;
-    text-transform: uppercase;
-    font-size: 10px;
-    letter-spacing: 1px;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.popup-activity {
-    background: rgba(5,5,5,0.7);
-    border: 1px solid rgba(50,50,50,0.4);
-    border-radius: 4px;
-    padding: 6px 8px;
-    color: #dddddd;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .profile-popup {
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+        background: #0f0f14;
+        overflow-x: hidden;
+    }
+    
+    .bg-grid {
+        background-image: 
+            linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+    
+    .glass {
+        background: rgba(24, 25, 34, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .banner-gradient {
+        background: linear-gradient(180deg, transparent 0%, rgba(24, 25, 34, 1) 100%);
+    }
+    
+    .status-online { background: #23a55a; }
+    .status-idle { background: #f0b232; }
+    .status-dnd { background: #f23f43; }
+    .status-offline { background: #80848e; }
+    
+    .avatar-wrapper {
+        position: relative;
+        width: 128px;
+        height: 128px;
+    }
+    
+    .avatar-deco {
+        position: absolute;
+        top: 50%;
         left: 50%;
-        top: 110%;
-        transform: translateX(-50%) translateY(15px);
+        transform: translate(-50%, -50%);
+        width: 150px;
+        height: 150px;
+        pointer-events: none;
+        z-index: 10;
     }
-    .avatar:hover ~ .profile-popup {
-        transform: translateX(-50%) translateY(0);
+    
+    .avatar-img {
+        width: 128px;
+        height: 128px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 6px solid #181922;
+        cursor: pointer;
+        transition: transform 0.3s ease;
     }
-}
-
-@media (max-width: 480px) {
-    .profile-card {
-        padding: 18px;
+    
+    .avatar-img:hover {
+        transform: scale(1.05);
     }
-    .loading-main {
-        font-size: 30px;
-        letter-spacing: 6px;
+    
+    .status-indicator {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 6px solid #181922;
+        z-index: 11;
     }
-    .loading-sub {
-        font-size: 16px;
+    
+    .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0f0f14;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
     }
-}
+    
+    .loading-screen.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    .loader {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(88, 101, 242, 0.2);
+        border-top-color: #5865F2;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    .fade-in {
+        animation: fadeIn 0.6s ease-out;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .progress-bar {
+        background: linear-gradient(90deg, #1DB954 0%, #1ed760 100%);
+        transition: width 0.3s ease;
+    }
+    
+    .activity-card, .spotify-card {
+        transition: all 0.3s ease;
+    }
+    
+    .activity-card:hover, .spotify-card:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .social-icon {
+        transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        transform: translateY(-3px) scale(1.1);
+    }
+    
+    .badge {
+        transition: transform 0.2s ease;
+    }
+    
+    .badge:hover {
+        transform: scale(1.15);
+    }
+    
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        z-index: 9998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        padding: 1rem;
+    }
+    
+    .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .modal-content {
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+    
+    .modal-overlay.active .modal-content {
+        transform: scale(1);
+    }
+    
+    @media (max-width: 450px) {
+        .avatar-wrapper {
+            width: 112px;
+            height: 112px;
+        }
+        .avatar-img {
+            width: 112px;
+            height: 112px;
+        }
+        .avatar-deco {
+            width: 132px;
+            height: 132px;
+        }
+        .status-indicator {
+            width: 24px;
+            height: 24px;
+            border-width: 5px;
+        }
+    }
 </style>
 </head>
-<body oncontextmenu="return false;">
-
-<!-- ✅ LOADING SCREEN -->
-<div id="loading-overlay">
-    <div class="loading-main">GOD$ OF AZURA</div>
-    <div class="loading-sub">LOADING SYSTEM</div>
+<body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="text-center">
+        <div class="loader mx-auto mb-4"></div>
+        <p class="text-gray-400 text-sm">Loading profile...</p>
+    </div>
 </div>
 
-<!-- ✅ MAIN PROFILE CARD -->
-<div class="profile-card" id="profileCard">
-    <div class="profile-header">
-        <div class="avatar">
-            <img id="avatarImg" src="" alt="Avatar">
-            <img id="avatarDeco" class="avatar-decoration" src="" alt="">
+<!-- Avatar Profile Modal -->
+<div id="profileModal" class="modal-overlay">
+    <div class="modal-content glass rounded-2xl max-w-md w-full overflow-hidden shadow-2xl">
+        <div class="relative">
+           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover">
+            <button id="closeModal" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-all">
+                <i class="fas fa-times text-sm"></i>
+            </button>
         </div>
-
-        <!-- ✅ POPUP BOX (lumalabas kapag tinutok ang avatar) -->
-        <div class="profile-popup">
-            <div class="popup-header">
-                <div class="popup-avatar">
-                    <img id="popupAvatarImg" src="" alt="">
+        <div class="p-6 pt-0">
+            <div class="flex items-end -mt-12 mb-4">
+                <div class="relative">
+                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]">
+                    <div id="modalStatus" class="absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922] status-offline"></div>
                 </div>
-                <div class="popup-info">
-                    <div class="popup-name" id="popupName">Leon</div>
-                    <div class="popup-user" id="popupUser">@wtf.leon</div>
-                    <div class="popup-status">
-                        <span id="popupStatusDot" class="status-dot status-offline"></span>
-                        <span id="popupStatusText">Offline</span>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <h3 id="modalUsername" class="text-2xl font-bold text-white mb-1">Loading...</h3>
+                    <p id="modalUserTag" class="text-gray-400 text-sm">@username</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white/5 rounded-lg p-3">
+                        <p class="text-gray-400 text-xs mb-1">User ID</p>
+                        <p id="modalUserId" class="text-white text-sm font-mono break-all">-</p>
+                    </div>
+                    <div class="bg-white/5 rounded-lg p-3">
+                        <p class="text-gray-400 text-xs mb-1">Status</p>
+                        <p id="modalStatusText" class="text-white text-sm font-medium">Offline</p>
+                    </div>
+                </div>
+                
+                <div id="modalBadgesContainer" class="bg-white/5 rounded-lg p-3 hidden">
+                    <p class="text-gray-400 text-xs mb-2">Badges</p>
+                    <div id="modalBadges" class="flex flex-wrap gap-2"></div>
+                </div>
+                
+                <div id="modalCustomStatus" class="bg-white/5 rounded-lg p-3 hidden">
+                    <p class="text-gray-400 text-xs mb-1">Custom Status</p>
+                    <p id="modalCustomStatusText" class="text-white text-sm">-</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Profile Card -->
+<div id="profileCard" class="w-full max-w-xl opacity-0">
+    <div class="glass rounded-2xl overflow-hidden shadow-2xl">
+        <!-- Banner -->
+        <div class="relative h-48 md:h-56">
+            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover">
+            <div class="absolute inset-0 banner-gradient"></div>
+        </div>
+        
+        <!-- Profile Section -->
+        <div class="px-6 md:px-8 pb-6 md:pb-8">
+            <!-- Avatar -->
+            <div class="flex items-end justify-between -mt-16 mb-4">
+                <div class="avatar-wrapper">
+                    <img id="avatar" src="" alt="Avatar" class="avatar-img">
+                    <img id="avatarDecoration" src="" alt="Avatar Decoration" class="avatar-deco hidden">
+                    <div id="statusIndicator" class="status-indicator status-offline"></div>
+                </div>
+                
+                <!-- Badges -->
+                <div id="badges" class="flex gap-1.5 pb-2"></div>
+            </div>
+            
+            <!-- User Info -->
+            <div class="mb-6">
+                <div class="flex items-center gap-2 mb-1">
+                    <h1 id="username" class="text-2xl md:text-3xl font-bold text-white">Loading...</h1>
+                    <i id="ownerCrown" class="fas fa-crown text-yellow-400 text-lg hidden" title="Server Owner"></i>
+                </div>
+                <p id="userTag" class="text-gray-400 text-sm mb-3">@username</p>
+                <p id="customStatus" class="text-gray-300 text-sm hidden"></p>
+            </div>
+            
+            <!-- Activities Container -->
+            <div id="activitiesContainer" class="space-y-3 mb-6"></div>
+            
+            <!-- Spotify -->
+            <div id="spotifyCard" class="spotify-card bg-white/5 rounded-xl p-4 mb-6 hidden">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fab fa-spotify text-[#1DB954] text-xl"></i>
+                        <span class="text-white text-sm font-semibold">Listening to Spotify</span>
+                    </div>
+                    <i class="fas fa-music text-gray-500 text-xs"></i>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover">
+                    <div class="flex-1 min-w-0">
+                        <p id="spotifySong" class="text-white font-semibold text-sm truncate">-</p>
+                        <p id="spotifyArtist" class="text-gray-400 text-xs truncate">-</p>
+                        <p id="spotifyAlbumName" class="text-gray-500 text-xs truncate">-</p>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+                        <span id="spotifyProgress">0:00</span>
+                        <span id="spotifyDuration">0:00</span>
+                    </div>
+                    <div class="w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
+                        <div id="spotifyProgressBar" class="progress-bar h-full rounded-full" style="width: 0%"></div>
                     </div>
                 </div>
             </div>
-            <div class="popup-section">
-                <span>Activity</span>
-                <div class="popup-activity" id="popupActivity">No activity</div>
+            
+            <!-- Social Links -->
+            <div class="flex items-center justify-center gap-4">
+                <a href="https://discord.com/users/1250654354344775703" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-[#5865F2]/10 hover:bg-[#5865F2]/20 flex items-center justify-center group">
+                    <i class="fab fa-discord text-[#5865F2] text-lg group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a href="#" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center group">
+                    <i class="fab fa-twitter text-white text-lg group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a href="#" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center group">
+                    <i class="fab fa-github text-white text-lg group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a href="#" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 flex items-center justify-center group">
+                    <i class="fab fa-instagram text-white text-lg group-hover:scale-110 transition-transform"></i>
+                </a>
             </div>
         </div>
-
-        <div class="user-info">
-            <div class="display-name">
-                <span id="displayName">Leon</span>
-                <span id="statusDot" class="status-dot status-offline"></span>
-            </div>
-            <div class="username" id="username">@wtf.leon</div>
-        </div>
     </div>
-
-    <!-- Activity -->
-    <div class="section">
-        <div class="section-title">ACTIVITY</div>
-        <div class="activity-box" id="activityText">
-            <svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-            No activity
-        </div>
-    </div>
-
-    <!-- Terminal / Custom Status -->
-    <div class="section">
-        <div class="section-title">TERMINAL</div>
-        <div class="terminal-box">
-            <span class="terminal-prompt">root@publicazura:~$</span><br>
-            <span id="customStatus">PA KISS NGA</span>
-        </div>
-    </div>
-
-    <!-- Quote / Bio -->
-    <div class="section">
-        <div class="section-title">QUOTE</div>
-        <div class="quote-box" id="quoteText">Make Money ,Not Friends</div>
-    </div>
-
-    <!-- Links -->
-    <div class="section">
-        <div class="section-title">LINKS</div>
-        <div class="links-container">
-            <a href="https://discord.gg/CwsGFu6D" target="_blank" class="social-link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.92c-1.167-.977-2.387-1.785-3.653-2.42a.44.44 0 0 0-.234-.075 10.3 10.3 0 0 0-1.336.557 14.3 14.3 0 0 0-3.864 1.125 14.5 14.5 0 0 0-3.944-1.125 10.4 10.4 0 0 0-1.34-.557.43.43 0 0 0-.233.075c-1.266.635-2.486 1.443-3.653 2.42a.41.41 0 0 0-.067.417c.397 1.23 1.043 2.387 1.917 3.443a.41.41 0 0 0 .443.137c1.03-.38 2.07-.667 3.13-.857a.41.41 0 0 0 .267-.303 9.5 9.5 0 0 1-.107-1.143.41.41 0 0 1 .41-.41h.07a8.3 8.3 0 0 1 2.77.997.41.41 0 0 0 .443 0 8.3 8.3 0 0 1 2.77-.997h.07a.41.41 0 0 1 .41.41c0 .38-.037.76-.107 1.143a.41.41 0 0 0 .267.303c1.06.19 2.1.477 3.13.857a.41.41 0 0 0 .443-.137c.874-1.056 1.52-2.213 1.917-3.443a.41.41 0 0 0-.067-.417zM8.02 14.763c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387zm7.96 0c-1.19 0-2.16-1.07-2.16-2.387 0-1.317.953-2.387 2.16-2.387 1.206 0 2.173 1.07 2.16 2.387.013 1.317-.954 2.387-2.16 2.387z"/></svg>
-            </a>
-            <a href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI" target="_blank" class="social-link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.075-.336.135-.668.47-.743 3.856-.88 7.15-.51 9.822 1.13.296.178.387.563.206.858zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.107-.847.52-.972 3.676-1.114 8.25-.57 11.35 1.34.366.226.486.706.26 1.073zm.105-2.833C14.383 8.8 8.44 8.6 4.975 9.65c-.54.164-1.107-.146-1.27-.687-.165-.54.146-1.107.687-1.27 3.985-1.208 10.56-.982 14.63 1.434.486.29.643.918.353 1.405-.29.488-.918.644-1.405.353z"/></svg>
-            </a>
-            <a href="https://www.instagram.com/leonky.2/" target="_blank" class="social-link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.014-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 6.162 0 0 0 0 12.324 6.162 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 1.44 0 1 0 0 2.881 1.44 1.44 1.44 0 0 0 0-2.881z"/></svg>
-            </a>
-        </div>
-    </div>
+    
+    <!-- Footer -->
+    <p class="text-center text-gray-500 text-xs mt-4">Powered by @LeonXyz</p>
 </div>
 
 <script>
-const YOUR_ID = "1250654354344775703";
-const API_URL = `https://api.lanyard.rest/v1/users/${YOUR_ID}`;
-
-// Loading Screen
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.getElementById('loading-overlay').classList.add('hidden');
-        document.getElementById('profileCard').style.opacity = "1";
-    }, 3000);
-});
-
-async function fetchData() {
-    try {
-        const res = await fetch(API_URL, { cache: "no-store" });
-        const json = await res.json();
-
-        if (!json.success) {
-            console.error("API Error:", json);
-            document.getElementById('activityText').innerHTML = `<svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> API Error`;
-            document.getElementById('popupActivity').innerHTML = `<svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> API Error`;
+    const USER_ID = '1250654354344775703';
+    const LANYARD_API = `https://api.lanyard.rest/v1/users/${USER_ID}`;
+    
+    // Badge definitions
+    const BADGES = {
+        STAFF: { icon: 'fa-shield-halved', color: '#5865F2', title: 'Discord Staff' },
+        PARTNER: { icon: 'fa-handshake', color: '#5865F2', title: 'Partnered Server Owner' },
+        HYPESQUAD_EVENTS: { icon: 'fa-star', color: '#F47B67', title: 'HypeSquad Events' },
+        BUG_HUNTER_LEVEL_1: { icon: 'fa-bug', color: '#57F287', title: 'Bug Hunter Level 1' },
+        HOUSE_BRAVERY: { icon: 'fa-shield', color: '#9C84EF', title: 'House of Bravery' },
+        HOUSE_BRILLIANCE: { icon: 'fa-gem', color: '#F47B67', title: 'House of Brilliance' },
+        HOUSE_BALANCE: { icon: 'fa-scale-balanced', color: '#57F287', title: 'House of Balance' },
+        EARLY_SUPPORTER: { icon: 'fa-heart', color: '#F47B67', title: 'Early Supporter' },
+        BUG_HUNTER_LEVEL_2: { icon: 'fa-bug', color: '#FEE75C', title: 'Bug Hunter Level 2' },
+        VERIFIED_BOT: { icon: 'fa-robot', color: '#57F287', title: 'Verified Bot' },
+        VERIFIED_DEVELOPER: { icon: 'fa-code', color: '#57F287', title: 'Early Verified Bot Developer' },
+        CERTIFIED_MODERATOR: { icon: 'fa-graduation-cap', color: '#57F287', title: 'Moderator Programs Alumni' },
+        BOT_HTTP_INTERACTIONS: { icon: 'fa-slash', color: '#57F287', title: 'HTTP Interactions Bot' },
+        ACTIVE_DEVELOPER: { icon: 'fa-flask', color: '#57F287', title: 'Active Developer' },
+        NITRO: { icon: 'fa-bolt', color: '#B588FF', title: 'Nitro Subscriber' },
+        BOOSTER: { icon: 'fa-rocket', color: '#FF73FA', title: 'Server Booster' }
+    };
+    
+    let currentData = null;
+    let spotifyInterval = null;
+    
+    // Format time
+    function formatTime(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    // Get avatar URL
+    function getAvatarUrl(user) {
+        if (user.avatar) {
+            const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
+            return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
+        }
+        return `https://cdn.discordapp.com/embed/avatars/${(parseInt(user.discriminator) || 0) % 5}.png`;
+    }
+    
+    // Update status
+    function updateStatus(status) {
+        const indicator = document.getElementById('statusIndicator');
+        const modalStatus = document.getElementById('modalStatus');
+        const statusText = document.getElementById('modalStatusText');
+        
+        indicator.className = 'status-indicator';
+        modalStatus.className = 'absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922]';
+        
+        let statusClass = 'status-offline';
+        let statusName = 'Offline';
+        
+        if (status === 'online') {
+            statusClass = 'status-online';
+            statusName = 'Online';
+        } else if (status === 'idle') {
+            statusClass = 'status-idle';
+            statusName = 'Idle';
+        } else if (status === 'dnd') {
+            statusClass = 'status-dnd';
+            statusName = 'Do Not Disturb';
+        }
+        
+        indicator.classList.add(statusClass);
+        modalStatus.classList.add(statusClass);
+        statusText.textContent = statusName;
+    }
+    
+    // Update badges
+    function updateBadges(flags) {
+        const badgesContainer = document.getElementById('badges');
+        const modalBadgesContainer = document.getElementById('modalBadgesContainer');
+        const modalBadges = document.getElementById('modalBadges');
+        
+        badgesContainer.innerHTML = '';
+        modalBadges.innerHTML = '';
+        
+        let hasBadges = false;
+        
+        // Public flags mapping
+        const flagMap = {
+            1: 'STAFF',
+            2: 'PARTNER',
+            4: 'HYPESQUAD_EVENTS',
+            8: 'BUG_HUNTER_LEVEL_1',
+            64: 'HOUSE_BRAVERY',
+            128: 'HOUSE_BRILLIANCE',
+            256: 'HOUSE_BALANCE',
+            512: 'EARLY_SUPPORTER',
+            16384: 'BUG_HUNTER_LEVEL_2',
+            65536: 'VERIFIED_BOT',
+            131072: 'VERIFIED_DEVELOPER',
+            262144: 'CERTIFIED_MODERATOR',
+            524288: 'BOT_HTTP_INTERACTIONS',
+            4194304: 'ACTIVE_DEVELOPER'
+        };
+        
+        for (const [flag, badge] of Object.entries(flagMap)) {
+            if (flags & flag && BADGES[badge]) {
+                hasBadges = true;
+                const badgeEl = document.createElement('div');
+                badgeEl.className = 'badge w-8 h-8 rounded-lg flex items-center justify-center cursor-help';
+                badgeEl.style.backgroundColor = BADGES[badge].color + '20';
+                badgeEl.title = BADGES[badge].title;
+                badgeEl.innerHTML = `<i class="fas ${BADGES[badge].icon}" style="color: ${BADGES[badge].color}; font-size: 14px;"></i>`;
+                badgesContainer.appendChild(badgeEl);
+                
+                const modalBadgeEl = badgeEl.cloneNode(true);
+                modalBadges.appendChild(modalBadgeEl);
+            }
+        }
+        
+        if (hasBadges) {
+            modalBadgesContainer.classList.remove('hidden');
+        }
+    }
+    
+    // Update Spotify
+    function updateSpotify(spotify) {
+        const card = document.getElementById('spotifyCard');
+        
+        if (!spotify) {
+            card.classList.add('hidden');
+            if (spotifyInterval) {
+                clearInterval(spotifyInterval);
+                spotifyInterval = null;
+            }
             return;
         }
-
-        const d = json.data;
-
-        // Avatar & Decoration
-        const avatarEl = document.getElementById('avatarImg');
-        const popupAvatarEl = document.getElementById('popupAvatarImg');
-        const decoEl = document.getElementById('avatarDeco');
-
-        if (d.discord_user.avatar) {
-            const avatarUrl = `https://cdn.discordapp.com/avatars/${YOUR_ID}/${d.discord_user.avatar}.png?size=256`;
-            avatarEl.src = avatarUrl;
-            popupAvatarEl.src = avatarUrl;
-        } else {
-            const defaultAvatar = 'https://discord.com/assets/f99e19bae51a14c679b3c4361546955a.png';
-            avatarEl.src = defaultAvatar;
-            popupAvatarEl.src = defaultAvatar;
-        }
-
-        if (d.discord_user.avatar_decoration_data) {
-            const asset = d.discord_user.avatar_decoration_data.asset;
-            decoEl.src = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=240&passthrough=true`;
-            decoEl.style.display = "block";
-        } else {
-            decoEl.style.display = "none";
-        }
-
-        // Names
-        const displayName = d.discord_user.global_name || "Leon";
-        const username = d.discord_user.username || "wtf.leon";
-        document.getElementById('displayName').innerText = displayName;
-        document.getElementById('username').innerText = `@${username}`;
-        document.getElementById('popupName').innerText = displayName;
-        document.getElementById('popupUser').innerText = `@${username}`;
-
-        // Status
-        const statusDot = document.getElementById('statusDot');
-        const popupStatusDot = document.getElementById('popupStatusDot');
-        const popupStatusText = document.getElementById('popupStatusText');
-        statusDot.className = "status-dot";
-        popupStatusDot.className = "status-dot";
-
-        let statusText = "Offline / Invisible";
-        let statusClass = "status-offline";
-
-        switch(d.discord_status) {
-            case 'online':
-                statusClass = 'status-online';
-                statusText = 'Online';
-                break;
-            case 'idle':
-                statusClass = 'status-idle';
-                statusText = 'Idle';
-                break;
-            case 'dnd':
-                statusClass = 'status-dnd';
-                statusText = 'Do Not Disturb';
-                break;
-        }
-
-        statusDot.classList.add(statusClass);
-        popupStatusDot.classList.add(statusClass);
-        popupStatusText.innerText = statusText;
-
-        // Custom Status / Terminal
-        const customStatus = d.activities?.find(a => a.type === 4);
-        document.getElementById('customStatus').innerText = customStatus?.state || "PA KISS NGA";
-        document.getElementById('quoteText').innerText = customStatus?.details || "Too real , too";
-
-        // ✅ ACTIVITY - WITH SPOTIFY LOGO & FORMAT
-        const activityEl = document.getElementById('activityText');
-        const popupActivityEl = document.getElementById('popupActivity');
-
-        if (d.spotify?.track_id) {
-            // If listening to Spotify
-            const song = d.spotify.song || "Unknown Track";
-            const artist = d.spotify.artist || "Unknown Artist";
-            activityEl.innerHTML = `<svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> Listening: ${song} — ${artist}`;
-            popupActivityEl.innerHTML = `<svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> Listening: ${song} — ${artist}`;
-        } else {
-            // Other activities
-            const activity = d.activities?.find(a => a.type === 0 || a.type === 3);
-            let activityText = "No activity";
-            if (activity) {
-                if (activity.type === 0) activityText = `Playing: ${activity.name}`;
-                if (activity.type === 3) activityText = `Watching: ${activity.name}`;
+        
+        card.classList.remove('hidden');
+        document.getElementById('spotifyAlbum').src = spotify.album_art_url;
+        document.getElementById('spotifySong').textContent = spotify.song;
+        document.getElementById('spotifyArtist').textContent = spotify.artist;
+        document.getElementById('spotifyAlbumName').textContent = spotify.album;
+        
+        const updateProgress = () => {
+            const now = Date.now();
+            const elapsed = now - spotify.timestamps.start;
+            const duration = spotify.timestamps.end - spotify.timestamps.start;
+            const progress = Math.min((elapsed / duration) * 100, 100);
+            
+            document.getElementById('spotifyProgressBar').style.width = progress + '%';
+            document.getElementById('spotifyProgress').textContent = formatTime(elapsed);
+            document.getElementById('spotifyDuration').textContent = formatTime(duration);
+        };
+        
+        updateProgress();
+        if (spotifyInterval) clearInterval(spotifyInterval);
+        spotifyInterval = setInterval(updateProgress, 1000);
+    }
+    
+    // Update activities
+    function updateActivities(activities) {
+        const container = document.getElementById('activitiesContainer');
+        container.innerHTML = '';
+        
+        const nonSpotifyActivities = activities.filter(a => a.type !== 2);
+        
+        nonSpotifyActivities.forEach(activity => {
+            const card = document.createElement('div');
+            card.className = 'activity-card bg-white/5 rounded-xl p-4';
+            
+            let icon = 'fa-gamepad';
+            let typeText = 'Playing';
+            
+            if (activity.type === 0) {
+                icon = 'fa-gamepad';
+                typeText = 'Playing';
+            } else if (activity.type === 1) {
+                icon = 'fa-video';
+                typeText = 'Streaming';
+            } else if (activity.type === 3) {
+                icon = 'fa-tv';
+                typeText = 'Watching';
+            } else if (activity.type === 4) {
+                icon = 'fa-comment';
+                typeText = '';
+            } else if (activity.type === 5) {
+                icon = 'fa-trophy';
+                typeText = 'Competing in';
             }
-            activityEl.innerHTML = `<svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> ${activityText}`;
-            popupActivityEl.innerHTML = `<svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> ${activityText}`;
+            
+            let details = '';
+            if (activity.type === 4 && activity.state) {
+                document.getElementById('customStatus').textContent = activity.state;
+                document.getElementById('customStatus').classList.remove('hidden');
+                document.getElementById('modalCustomStatus').classList.remove('hidden');
+                document.getElementById('modalCustomStatusText').textContent = activity.state;
+                return;
+            } else {
+                document.getElementById('customStatus').classList.add('hidden');
+                document.getElementById('modalCustomStatus').classList.add('hidden');
+            }
+            
+            card.innerHTML = `
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fas ${icon} text-gray-400 text-sm"></i>
+                    <span class="text-gray-400 text-xs font-medium uppercase">${typeText}</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    ${activity.assets?.large_image ? `
+                        <img src="https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png" 
+                             alt="${activity.name}" 
+                             class="w-14 h-14 rounded-lg object-cover">
+                    ` : ''}
+                    <div class="flex-1 min-w-0">
+                        <p class="text-white font-semibold text-sm truncate">${activity.name}</p>
+                        ${activity.details ? `<p class="text-gray-400 text-xs truncate">${activity.details}</p>` : ''}
+                        ${activity.state ? `<p class="text-gray-500 text-xs truncate">${activity.state}</p>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(card);
+        });
+    }
+    
+    // Update profile
+    function updateProfile(data) {
+        currentData = data;
+        const user = data.discord_user;
+        
+        // Avatar
+        const avatarUrl = getAvatarUrl(user);
+        document.getElementById('avatar').src = avatarUrl;
+        document.getElementById('modalAvatar').src = avatarUrl;
+        
+        // Avatar decoration
+        if (user.avatar_decoration_data) {
+            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.png?size=160`;
+            document.getElementById('avatarDecoration').src = decoUrl;
+            document.getElementById('avatarDecoration').classList.remove('hidden');
         }
-
-    } catch (err) {
-        console.error("Fetch Error:", err);
-        document.getElementById('activityText').innerHTML = `<svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> Connection Error`;
-        document.getElementById('popupActivity').innerHTML = `<svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> Connection Error`;
+        
+        // Username
+        const displayName = user.global_name || user.username;
+        document.getElementById('username').textContent = displayName;
+        document.getElementById('modalUsername').textContent = displayName;
+        document.getElementById('userTag').textContent = `@${user.username}`;
+        document.getElementById('modalUserTag').textContent = `@${user.username}`;
+        document.getElementById('modalUserId').textContent = user.id;
+        
+        // Status
+        updateStatus(data.discord_status);
+        
+        // Badges
+        updateBadges(user.public_flags || 0);
+        
+        // Activities
+        updateActivities(data.activities || []);
+        
+        // Spotify
+        updateSpotify(data.spotify);
+        
+        // Hide loading screen
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('profileCard').classList.add('fade-in');
+            document.getElementById('profileCard').style.opacity = '1';
+        }, 500);
     }
-}
-
-fetchData();
-setInterval(fetchData, 5000);
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-    if ((e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || e.key === 'F12') {
-        e.preventDefault();
+    
+    // Fetch data from Lanyard
+    async function fetchLanyard() {
+        try {
+            const response = await fetch(LANYARD_API);
+            const { data } = await response.json();
+            updateProfile(data);
+        } catch (error) {
+            console.error('Failed to fetch Lanyard data:', error);
+            document.getElementById('username').textContent = 'Failed to load';
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('profileCard').style.opacity = '1';
+        }
     }
-});
+    
+    // Modal handlers
+    document.getElementById('avatar').addEventListener('click', () => {
+        document.getElementById('profileModal').classList.add('active');
+    });
+    
+    document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('profileModal').classList.remove('active');
+    });
+    
+    document.getElementById('profileModal').addEventListener('click', (e) => {
+        if (e.target.id === 'profileModal') {
+            document.getElementById('profileModal').classList.remove('active');
+        }
+    });
+    
+    // WebSocket for real-time updates
+    function connectWebSocket() {
+        const ws = new WebSocket('wss://api.lanyard.rest/socket');
+        
+        ws.onopen = () => {
+            ws.send(JSON.stringify({
+                op: 2,
+                d: { subscribe_to_id: USER_ID }
+            }));
+        };
+        
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE') {
+                updateProfile(data.d);
+            }
+        };
+        
+        ws.onerror = () => {
+            console.error('WebSocket error, falling back to HTTP');
+            fetchLanyard();
+        };
+        
+        ws.onclose = () => {
+            setTimeout(connectWebSocket, 5000);
+        };
+    }
+    
+    // Initialize
+    fetchLanyard();
+    connectWebSocket();
+    
+    // Refresh every 30s as fallback
+    setInterval(fetchLanyard, 30000);
 </script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
 </body>
 </html>

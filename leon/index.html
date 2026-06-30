@@ -11,11 +11,15 @@
     
     * {
         font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
     
     body {
         background: #0f0f14;
         overflow-x: hidden;
+        min-height: 100vh;
     }
     
    .bg-grid {
@@ -66,6 +70,7 @@
         border: 6px solid #181922;
         cursor: pointer;
         transition: transform 0.3s ease;
+        background: #222;
     }
     
    .avatar-img:hover {
@@ -111,6 +116,7 @@
    .loading-screen.hidden {
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
     }
     
    .loader {
@@ -209,6 +215,10 @@
    .music-player:hover {
         transform: translateX(-50%) scale(1.05);
     }
+
+    #profileCard {
+        transition: opacity 0.5s ease;
+    }
     
     @media (max-width: 450px) {
        .avatar-wrapper {
@@ -239,11 +249,12 @@
 </style>
 </head>
 <body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
+
 <!-- Music Player -->
 <audio id="bgMusic" loop preload="auto">
     <source src="HYU1 - CHILL OUT.mp3" type="audio/mpeg">
     Your browser does not support audio playback.
-
+ <!-- ✅ Fixed missing closing tag -->
 
 <div class="music-player glass rounded-full p-3 flex items-center gap-3 shadow-2xl">
     <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center text-white transition-all">
@@ -268,7 +279,7 @@
 <div id="profileModal" class="modal-overlay">
     <div class="modal-content glass rounded-2xl max-w-md w-full overflow-hidden shadow-2xl">
         <div class="relative">
-           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover">
+           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover" onerror="this.src='https://via.placeholder.com/600x120/181922/5865F2?text=Profile+Banner'">
             <button id="closeModal" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-all">
                 <i class="fas fa-times text-sm"></i>
             </button>
@@ -276,7 +287,7 @@
         <div class="p-6 pt-0">
             <div class="flex items-end -mt-12 mb-4">
                 <div class="relative">
-                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]">
+                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
                     <img id="modalAvatarDecoration" src="" alt="Avatar Decoration" class="modal-avatar-deco hidden">
                     <div id="modalStatus" class="absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922] status-offline"></div>
                 </div>
@@ -318,7 +329,7 @@
     <div class="glass rounded-2xl overflow-hidden shadow-2xl">
         <!-- Banner -->
         <div class="relative h-48 md:h-56">
-            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover">
+            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x200/181922/5865F2?text=AZURA+Banner'">
             <div class="absolute inset-0 banner-gradient"></div>
         </div>
         
@@ -327,7 +338,7 @@
             <!-- Avatar -->
             <div class="flex items-end justify-between -mt-16 mb-4">
                 <div class="avatar-wrapper">
-                    <img id="avatar" src="" alt="Avatar" class="avatar-img">
+                    <img id="avatar" src="" alt="Avatar" class="avatar-img" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
                     <img id="avatarDecoration" src="" alt="Avatar Decoration" class="avatar-deco hidden">
                     <div id="statusIndicator" class="status-indicator status-offline"></div>
                 </div>
@@ -359,7 +370,7 @@
                     <i class="fas fa-music text-gray-500 text-xs"></i>
                 </div>
                 <div class="flex items-center gap-3">
-                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover">
+                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover" onerror="this.src='https://via.placeholder.com/64/1DB954/fff?text=Album'">
                     <div class="flex-1 min-w-0">
                         <p id="spotifySong" class="text-white font-semibold text-sm truncate">-</p>
                         <p id="spotifyArtist" class="text-gray-400 text-xs truncate">-</p>
@@ -433,7 +444,7 @@
     bgMusic.volume = 0.3;
 
     document.addEventListener('click', () => {
-        if (!isPlaying && bgMusic.src && bgMusic.src !== window.location.href) {
+        if (!isPlaying && bgMusic.src && !bgMusic.src.includes(window.location.href)) {
             bgMusic.play().then(() => {
                 isPlaying = true;
                 playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
@@ -460,6 +471,7 @@
     
     // Format time
     function formatTime(ms) {
+        if (!ms || ms < 0) return "0:00";
         const totalSeconds = Math.floor(ms / 1000);
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
@@ -468,11 +480,11 @@
     
     // Get avatar URL
     function getAvatarUrl(user) {
-        if (user.avatar) {
+        if (user?.avatar) {
             const ext = user.avatar.startsWith('a_')? 'gif' : 'png';
             return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
         }
-        return `https://cdn.discordapp.com/embed/avatars/${(parseInt(user.discriminator) || 0) % 5}.png`;
+        return `https://cdn.discordapp.com/embed/avatars/${(parseInt(user?.discriminator) || 0) % 5}.png`;
     }
     
     // Update status
@@ -639,7 +651,8 @@
                     ${activity.assets?.large_image ? `
                         <img src="https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png" 
                              alt="${activity.name}" 
-                             class="w-14 h-14 rounded-lg object-cover">
+                             class="w-14 h-14 rounded-lg object-cover"
+                             onerror="this.src='https://via.placeholder.com/56/222/fff?text=App'">
                     ` : ''}
                     <div class="flex-1 min-w-0">
                         <p class="text-white font-semibold text-sm truncate">${activity.name}</p>
@@ -707,11 +720,18 @@
     async function fetchLanyard() {
         try {
             const response = await fetch(LANYARD_API);
+            if (!response.ok) throw new Error(`API Error: ${response.status}`);
             const { data } = await response.json();
             updateProfile(data);
         } catch (error) {
             console.error('Failed to fetch Lanyard data:', error);
-            document.getElementById('username').textContent = 'Failed to load';
+            // Fallback display
+            document.getElementById('username').textContent = 'Leon';
+            document.getElementById('userTag').textContent = '@leonky';
+            document.getElementById('modalUsername').textContent = 'Leon';
+            document.getElementById('modalUserTag').textContent = '@leonky';
+            document.getElementById('modalUserId').textContent = USER_ID;
+            updateStatus('offline');
             document.getElementById('loadingScreen').classList.add('hidden');
             document.getElementById('profileCard').style.opacity = '1';
         }

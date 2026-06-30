@@ -18,47 +18,47 @@
         overflow-x: hidden;
     }
     
-    .bg-grid {
+   .bg-grid {
         background-image: 
             linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
         background-size: 50px 50px;
     }
     
-    .glass {
+   .glass {
         background: rgba(24, 25, 34, 0.7);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.06);
     }
     
-    .banner-gradient {
+   .banner-gradient {
         background: linear-gradient(180deg, transparent 0%, rgba(24, 25, 34, 1) 100%);
     }
     
-    .status-online { background: #23a55a; }
-    .status-idle { background: #f0b232; }
-    .status-dnd { background: #f23f43; }
-    .status-offline { background: #80848e; }
+   .status-online { background: #23a55a; }
+   .status-idle { background: #f0b232; }
+   .status-dnd { background: #f23f43; }
+   .status-offline { background: #80848e; }
     
-    .avatar-wrapper {
+   .avatar-wrapper {
         position: relative;
         width: 128px;
         height: 128px;
     }
     
-    .avatar-deco {
+   .avatar-deco {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 150px;
-        height: 150px;
+        width: 170px;
+        height: 170px;
         pointer-events: none;
         z-index: 10;
     }
     
-    .avatar-img {
+   .avatar-img {
         width: 128px;
         height: 128px;
         border-radius: 50%;
@@ -68,11 +68,11 @@
         transition: transform 0.3s ease;
     }
     
-    .avatar-img:hover {
+   .avatar-img:hover {
         transform: scale(1.05);
     }
     
-    .status-indicator {
+   .status-indicator {
         position: absolute;
         bottom: 8px;
         right: 8px;
@@ -83,7 +83,18 @@
         z-index: 11;
     }
     
-    .loading-screen {
+   .modal-avatar-deco {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 110px;
+        height: 110px;
+        pointer-events: none;
+        z-index: 10;
+    }
+    
+   .loading-screen {
         position: fixed;
         top: 0;
         left: 0;
@@ -97,12 +108,12 @@
         transition: opacity 0.5s ease, visibility 0.5s ease;
     }
     
-    .loading-screen.hidden {
+   .loading-screen.hidden {
         opacity: 0;
         visibility: hidden;
     }
     
-    .loader {
+   .loader {
         width: 50px;
         height: 50px;
         border: 3px solid rgba(88, 101, 242, 0.2);
@@ -115,7 +126,7 @@
         to { transform: rotate(360deg); }
     }
     
-    .fade-in {
+   .fade-in {
         animation: fadeIn 0.6s ease-out;
     }
     
@@ -124,37 +135,37 @@
         to { opacity: 1; transform: translateY(0); }
     }
     
-    .progress-bar {
+   .progress-bar {
         background: linear-gradient(90deg, #1DB954 0%, #1ed760 100%);
         transition: width 0.3s ease;
     }
     
-    .activity-card, .spotify-card {
+   .activity-card,.spotify-card {
         transition: all 0.3s ease;
     }
     
-    .activity-card:hover, .spotify-card:hover {
+   .activity-card:hover,.spotify-card:hover {
         transform: translateY(-2px);
         background: rgba(255, 255, 255, 0.05);
     }
     
-    .social-icon {
+   .social-icon {
         transition: all 0.3s ease;
     }
     
-    .social-icon:hover {
+   .social-icon:hover {
         transform: translateY(-3px) scale(1.1);
     }
     
-    .badge {
+   .badge {
         transition: transform 0.2s ease;
     }
     
-    .badge:hover {
+   .badge:hover {
         transform: scale(1.15);
     }
     
-    .modal-overlay {
+   .modal-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -172,42 +183,78 @@
         padding: 1rem;
     }
     
-    .modal-overlay.active {
+   .modal-overlay.active {
         opacity: 1;
         visibility: visible;
     }
     
-    .modal-content {
+   .modal-content {
         transform: scale(0.9);
         transition: transform 0.3s ease;
     }
     
-    .modal-overlay.active .modal-content {
+   .modal-overlay.active.modal-content {
         transform: scale(1);
+    }
+
+   .music-player {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9997;
+        transition: all 0.3s ease;
+    }
+
+   .music-player:hover {
+        transform: scale(1.05);
     }
     
     @media (max-width: 450px) {
-        .avatar-wrapper {
+       .avatar-wrapper {
             width: 112px;
             height: 112px;
         }
-        .avatar-img {
+       .avatar-img {
             width: 112px;
             height: 112px;
         }
-        .avatar-deco {
-            width: 132px;
-            height: 132px;
+       .avatar-deco {
+            width: 150px;
+            height: 150px;
         }
-        .status-indicator {
+       .modal-avatar-deco {
+            width: 95px;
+            height: 95px;
+        }
+       .status-indicator {
             width: 24px;
             height: 24px;
             border-width: 5px;
+        }
+       .music-player {
+            bottom: 15px;
+            right: 15px;
         }
     }
 </style>
 </head>
 <body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
+<!-- Music Player -->
+<audio id="bgMusic" loop>
+    <source src="PALITAN_MO_NG_MUSIC_LINK.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-player glass rounded-full p-3 flex items-center gap-3 shadow-2xl">
+    <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center text-white transition-all">
+        <i class="fas fa-play text-sm"></i>
+    </button>
+    <div class="hidden md:block">
+        <p class="text-white text-xs font-semibold">Now Playing</p>
+        <p class="text-gray-400 text-[10px]">Click to control</p>
+    </div>
+    <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.3" class="w-20 accent-[#5865F2] hidden md:block">
+</div>
+
 <!-- Loading Screen -->
 <div id="loadingScreen" class="loading-screen">
     <div class="text-center">
@@ -229,6 +276,7 @@
             <div class="flex items-end -mt-12 mb-4">
                 <div class="relative">
                     <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]">
+                    <img id="modalAvatarDecoration" src="" alt="Avatar Decoration" class="modal-avatar-deco hidden">
                     <div id="modalStatus" class="absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922] status-offline"></div>
                 </div>
             </div>
@@ -377,6 +425,40 @@
     let currentData = null;
     let spotifyInterval = null;
     
+    // Music Player Logic
+    const bgMusic = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    let isPlaying = false;
+
+    // Try autoplay - browsers block yan pero gagana after first user interaction
+    document.addEventListener('click', () => {
+        if (!isPlaying && bgMusic.src &&!bgMusic.src.includes('PALITAN_MO_NG_MUSIC_LINK')) {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
+            }).catch(e => console.log('Autoplay blocked:', e));
+        }
+    }, { once: true });
+
+    playPauseBtn.addEventListener('click', () => {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
+            isPlaying = true;
+        } else {
+            bgMusic.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play text-sm"></i>';
+            isPlaying = false;
+        }
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+        bgMusic.volume = e.target.value;
+    });
+
+    bgMusic.volume = 0.3; // Default 30% volume para di masyado malakas
+    
     // Format time
     function formatTime(ms) {
         const totalSeconds = Math.floor(ms / 1000);
@@ -388,7 +470,7 @@
     // Get avatar URL
     function getAvatarUrl(user) {
         if (user.avatar) {
-            const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
+            const ext = user.avatar.startsWith('a_')? 'gif' : 'png';
             return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
         }
         return `https://cdn.discordapp.com/embed/avatars/${(parseInt(user.discriminator) || 0) % 5}.png`;

@@ -70,6 +70,7 @@
         border: 6px solid #181922;
         cursor: pointer;
         transition: all 0.3s ease;
+        background: #2a2b38;
     }
     
     .avatar-img:hover {
@@ -111,12 +112,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
     }
     
     .loading-screen.hidden {
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
     }
     
     .loader {
@@ -248,10 +250,9 @@
 <body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
 
 <!-- Music Player -->
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop preload="none">
     <source src="./luhod.mp3" type="audio/mpeg">
-    Your browser does not support audio playback.
- <!-- ✅ Fixed missing closing tag -->
+
 
 <div class="music-player glass rounded-full p-3 flex items-center gap-3 shadow-2xl">
     <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center text-white transition-all">
@@ -276,7 +277,7 @@
 <div id="profileModal" class="modal-overlay">
     <div class="modal-content glass rounded-2xl max-w-md w-full overflow-hidden shadow-2xl">
         <div class="relative">
-           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover" onerror="this.src='https://via.placeholder.com/600x160/181922/5865F2?text=Profile+Banner'">
+           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover" onerror="this.style.background='#2a2b38'; this.src=''; this.alt='Banner'">
             <button id="closeModal" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center text-white transition-all">
                 <i class="fas fa-times text-sm"></i>
             </button>
@@ -284,7 +285,7 @@
         <div class="p-6 pt-0">
             <div class="flex items-end -mt-12 mb-4">
                 <div class="relative">
-                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                    <img id="modalAvatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]" onerror="this.src=''; this.style.background='#2a2b38'; this.alt='Avatar'">
                     <img id="modalAvatarDecoration" src="" alt="Avatar Decoration" class="modal-avatar-deco hidden">
                     <div id="modalStatus" class="absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922] status-offline"></div>
                 </div>
@@ -326,7 +327,7 @@
     <div class="glass rounded-2xl overflow-hidden shadow-2xl">
         <!-- Banner -->
         <div class="relative h-48 md:h-56">
-            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x220/181922/5865F2?text=Azura+Banner'">
+            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover" onerror="this.style.background='#2a2b38'; this.src=''; this.alt='Banner'">
             <div class="absolute inset-0 banner-gradient"></div>
         </div>
         
@@ -335,7 +336,7 @@
             <!-- Avatar -->
             <div class="flex items-end justify-between -mt-16 mb-4">
                 <div class="avatar-wrapper">
-                    <img id="avatar" src="" alt="Avatar" class="avatar-img" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                    <img id="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" class="avatar-img" onerror="this.src=''; this.style.background='#2a2b38'; this.alt='Avatar'">
                     <img id="avatarDecoration" src="" alt="Avatar Decoration" class="avatar-deco hidden">
                     <div id="statusIndicator" class="status-indicator status-offline"></div>
                 </div>
@@ -367,7 +368,7 @@
                     <i class="fas fa-music text-gray-500 text-xs"></i>
                 </div>
                 <div class="flex items-center gap-3">
-                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover" onerror="this.src='https://via.placeholder.com/64/1DB954/ffffff?text=🎵'">
+                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover" onerror="this.src=''; this.style.background='#2a2b38'; this.alt='🎵'">
                     <div class="flex-1 min-w-0">
                         <p id="spotifySong" class="text-white font-semibold text-sm truncate">-</p>
                         <p id="spotifyArtist" class="text-gray-400 text-xs truncate">-</p>
@@ -436,24 +437,18 @@
     const playPauseBtn = document.getElementById('playPauseBtn');
     const volumeSlider = document.getElementById('volumeSlider');
     let isPlaying = false;
-
     bgMusic.volume = 0.3;
-
-    document.addEventListener('click', () => {
-        if (!isPlaying && bgMusic.src && !bgMusic.src.includes(window.location.href)) {
-            bgMusic.play().then(() => {
-                isPlaying = true;
-                playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
-            }).catch(e => console.log('Autoplay blocked by browser:', e));
-        }
-    }, { once: true });
 
     playPauseBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (bgMusic.paused) {
-            bgMusic.play();
-            playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
-            isPlaying = true;
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
+            }).catch(err => {
+                console.log('Audio unavailable:', err);
+                playPauseBtn.innerHTML = '<i class="fas fa-volume-mute text-sm"></i>';
+            });
         } else {
             bgMusic.pause();
             playPauseBtn.innerHTML = '<i class="fas fa-play text-sm"></i>';
@@ -474,14 +469,13 @@
         return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
     
-    // Get avatar URL
+    // Get avatar URL with fallback
     function getAvatarUrl(user) {
         if (user?.avatar) {
             const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
             return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
         }
-        const num = user?.discriminator ? parseInt(user.discriminator) % 5 : 0;
-        return `https://cdn.discordapp.com/embed/avatars/${num}.png`;
+        return `https://cdn.discordapp.com/embed/avatars/0.png`;
     }
     
     // Update status
@@ -641,7 +635,7 @@
                         <img src="https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png" 
                              alt="${activity.name}" 
                              class="w-14 h-14 rounded-lg object-cover"
-                             onerror="this.src='https://via.placeholder.com/56/181922/5865F2?text=🎮'">
+                             onerror="this.src=''; this.style.background='#2a2b38'; this.alt='🎮'">
                     ` : ''}
                     <div class="flex-1 min-w-0">
                         <p class="text-white font-semibold text-sm truncate">${activity.name || 'Unknown Activity'}</p>
@@ -691,24 +685,31 @@
         updateBadges(user.public_flags || 0);
         updateActivities(data.activities || []);
         updateSpotify(data.spotify);
-        
-        setTimeout(() => {
-            document.getElementById('loadingScreen').classList.add('hidden');
-            document.getElementById('profileCard').classList.add('fade-in');
-            document.getElementById('profileCard').style.opacity = '1';
-        }, 500);
     }
     
-    // Fetch data from Lanyard
+    // Fetch data from Lanyard with fallback
     async function fetchLanyard() {
         try {
-            const response = await fetch(LANYARD_API);
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            const response = await fetch(LANYARD_API, { cache: 'no-cache' });
+            if (!response.ok) throw new Error(`API down`);
             const { data } = await response.json();
             updateProfile(data);
         } catch (error) {
-            console.error('Failed to fetch Lanyard data:', error);
-            // ✅ Show content even if API fails
+            console.warn('Lanyard API unavailable, using default data:', error);
+            // Default data if API fails
+            updateProfile({
+                discord_user: {
+                    id: USER_ID,
+                    username: 'leonky.2',
+                    global_name: 'Leon',
+                    public_flags: 0
+                },
+                discord_status: 'offline',
+                activities: [],
+                spotify: null
+            });
+        } finally {
+            // Always hide loading screen
             document.getElementById('loadingScreen').classList.add('hidden');
             document.getElementById('profileCard').style.opacity = '1';
             document.getElementById('profileCard').classList.add('fade-in');
@@ -750,19 +751,17 @@
         
         ws.onerror = () => {
             console.error('WebSocket error, falling back to HTTP');
-            fetchLanyard();
         };
         
         ws.onclose = () => {
-            setTimeout(connectWebSocket, 5000);
+            setTimeout(connectWebSocket, 10000);
         };
     }
     
     // Initialize
     fetchLanyard();
     connectWebSocket();
-    
-    setInterval(fetchLanyard, 30000);
+    setInterval(fetchLanyard, 60000);
 </script>
 </body>
 </html>

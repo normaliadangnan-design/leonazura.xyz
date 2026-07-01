@@ -3,10 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.discordapp.com https://*.lanyard.rest https://cdnjs.cloudflare.com https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data: https://*.discordapp.com https://*.lanyard.rest; media-src 'self'; connect-src 'self' wss://api.lanyard.rest https://api.lanyard.rest;">
 <title>Leon | PUBLIC AZURA</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -15,10 +11,6 @@
     
     * {
         font-family: 'Poppins', sans-serif;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
     }
     
     body {
@@ -74,7 +66,6 @@
         border: 6px solid #181922;
         cursor: pointer;
         transition: transform 0.3s ease;
-        background: #2a2b38;
     }
     
  .avatar-img:hover {
@@ -252,7 +243,7 @@
 <audio id="bgMusic" loop preload="auto">
     <source src="../luhod.mp3" type="audio/mpeg">
     Your browser does not support audio playback.
-
+</audio>
 
 <div class="music-player glass rounded-full p-3 flex items-center gap-3 shadow-2xl">
     <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center text-white transition-all">
@@ -277,7 +268,7 @@
 <div id="profileModal" class="modal-overlay">
     <div class="modal-content glass rounded-2xl max-w-md w-full overflow-hidden shadow-2xl">
         <div class="relative">
-           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover" onerror="this.style.background='#2a2b38'; this.src=''">
+           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover">
             <button id="closeModal" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-all">
                 <i class="fas fa-times text-sm"></i>
             </button>
@@ -285,7 +276,7 @@
         <div class="p-6 pt-0">
             <div class="flex items-end -mt-12 mb-4">
                 <div class="relative">
-                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]" onerror="this.style.background='#2a2b38'; this.src=''">
+                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]">
                     <img id="modalAvatarDecoration" src="" alt="Avatar Decoration" class="modal-avatar-deco hidden">
                     <div id="modalStatus" class="absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922] status-offline"></div>
                 </div>
@@ -293,14 +284,14 @@
             
             <div class="space-y-4">
                 <div>
-                    <h3 id="modalUsername" class="text-2xl font-bold text-white mb-1">Leon</h3>
-                    <p id="modalUserTag" class="text-gray-400 text-sm">@leonky.2</p>
+                    <h3 id="modalUsername" class="text-2xl font-bold text-white mb-1">Loading...</h3>
+                    <p id="modalUserTag" class="text-gray-400 text-sm">@username</p>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-white/5 rounded-lg p-3">
                         <p class="text-gray-400 text-xs mb-1">User ID</p>
-                        <p id="modalUserId" class="text-white text-sm font-mono break-all">••••••••••••••••••••</p>
+                        <p id="modalUserId" class="text-white text-sm font-mono break-all">-</p>
                     </div>
                     <div class="bg-white/5 rounded-lg p-3">
                         <p class="text-gray-400 text-xs mb-1">Status</p>
@@ -327,7 +318,7 @@
     <div class="glass rounded-2xl overflow-hidden shadow-2xl">
         <!-- Banner -->
         <div class="relative h-48 md:h-56">
-            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover" onerror="this.style.background='#2a2b38'; this.src=''">
+            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover">
             <div class="absolute inset-0 banner-gradient"></div>
         </div>
         
@@ -336,7 +327,7 @@
             <!-- Avatar -->
             <div class="flex items-end justify-between -mt-16 mb-4">
                 <div class="avatar-wrapper">
-                    <img id="avatar" src="" alt="Avatar" class="avatar-img" onerror="this.style.background='#2a2b38'; this.src=''">
+                    <img id="avatar" src="" alt="Avatar" class="avatar-img">
                     <img id="avatarDecoration" src="" alt="Avatar Decoration" class="avatar-deco hidden">
                     <div id="statusIndicator" class="status-indicator status-offline"></div>
                 </div>
@@ -348,10 +339,10 @@
             <!-- User Info -->
             <div class="mb-6">
                 <div class="flex items-center gap-2 mb-1">
-                    <h1 id="username" class="text-2xl md:text-3xl font-bold text-white">Leon</h1>
+                    <h1 id="username" class="text-2xl md:text-3xl font-bold text-white">Loading...</h1>
                     <i id="ownerCrown" class="fas fa-crown text-yellow-400 text-lg hidden" title="Server Owner"></i>
                 </div>
-                <p id="userTag" class="text-gray-400 text-sm mb-3">@leonky.2</p>
+                <p id="userTag" class="text-gray-400 text-sm mb-3">@username</p>
                 <p id="customStatus" class="text-gray-300 text-sm hidden"></p>
             </div>
             
@@ -368,7 +359,7 @@
                     <i class="fas fa-music text-gray-500 text-xs"></i>
                 </div>
                 <div class="flex items-center gap-3">
-                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover" onerror="this.style.background='#2a2b38'; this.src=''">
+                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover">
                     <div class="flex-1 min-w-0">
                         <p id="spotifySong" class="text-white font-semibold text-sm truncate">-</p>
                         <p id="spotifyArtist" class="text-gray-400 text-xs truncate">-</p>
@@ -388,13 +379,13 @@
             
             <!-- Social Links -->
             <div class="flex items-center justify-center gap-4">
-                <a href="https://discord.com/users/1250654354344775703" target="_blank" rel="noopener noreferrer nofollow" class="social-icon w-11 h-11 rounded-xl bg-[#5865F2]/10 hover:bg-[#5865F2]/20 flex items-center justify-center group">
+                <a href="https://discord.com/users/1250654354344775703" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-[#5865F2]/10 hover:bg-[#5865F2]/20 flex items-center justify-center group">
                     <i class="fab fa-discord text-[#5865F2] text-lg group-hover:scale-110 transition-transform"></i>
                 </a>
-               <a href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=32dd22bc27634b8a" target="_blank" rel="noopener noreferrer nofollow" class="social-icon w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center group">
+               <a href="https://open.spotify.com/playlist/0EpzfpMwBENOUUHAWMIgUI?si=32dd22bc27634b8a" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center group">
     <i class="fab fa-spotify text-white text-lg group-hover:scale-110 transition-transform"></i>
 </a>
-                <a href="https://www.instagram.com/leonky.2/" target="_blank" rel="noopener noreferrer nofollow" class="social-icon w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 flex items-center justify-center group">
+                <a href="https://www.instagram.com/leonky.2/" target="_blank" class="social-icon w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 flex items-center justify-center group">
                     <i class="fab fa-instagram text-white text-lg group-hover:scale-110 transition-transform"></i>
                 </a>
             </div>
@@ -406,376 +397,361 @@
 </div>
 
 <script>
-// --------------------------
-// SECURITY LAYER
-// --------------------------
-// Block right-click
-document.addEventListener('contextmenu', e => e.preventDefault());
-// Block F12 / DevTools shortcuts
-document.addEventListener('keydown', e => {
-    if(e.key === 'F12' || 
-       (e.ctrlKey && e.shiftKey && ['I','J','C','U'].includes(e.key.toUpperCase())) ||
-       (e.ctrlKey && e.key.toUpperCase() === 'U')) {
-        e.preventDefault();
-        return false;
-    }
-});
-// Obscure User ID
-const USER_ID = btoa('MTI1MDY1NDM1NDM0NDc3NTcwMw==');
-const getRealId = () => atob(USER_ID);
-const LANYARD_API = () => `https://api.lanyard.rest/v1/users/${getRealId()}`;
+    const USER_ID = '1250654354344775703';
+    const LANYARD_API = `https://api.lanyard.rest/v1/users/${USER_ID}`;
+    
+    // Badge definitions
+    const BADGES = {
+        STAFF: { icon: 'fa-shield-halved', color: '#5865F2', title: 'Discord Staff' },
+        PARTNER: { icon: 'fa-handshake', color: '#5865F2', title: 'Partnered Server Owner' },
+        HYPESQUAD_EVENTS: { icon: 'fa-star', color: '#F47B67', title: 'HypeSquad Events' },
+        BUG_HUNTER_LEVEL_1: { icon: 'fa-bug', color: '#57F287', title: 'Bug Hunter Level 1' },
+        HOUSE_BRAVERY: { icon: 'fa-shield', color: '#9C84EF', title: 'House of Bravery' },
+        HOUSE_BRILLIANCE: { icon: 'fa-gem', color: '#F47B67', title: 'House of Brilliance' },
+        HOUSE_BALANCE: { icon: 'fa-scale-balanced', color: '#57F287', title: 'House of Balance' },
+        EARLY_SUPPORTER: { icon: 'fa-heart', color: '#F47B67', title: 'Early Supporter' },
+        BUG_HUNTER_LEVEL_2: { icon: 'fa-bug', color: '#FEE75C', title: 'Bug Hunter Level 2' },
+        VERIFIED_BOT: { icon: 'fa-robot', color: '#57F287', title: 'Verified Bot' },
+        VERIFIED_DEVELOPER: { icon: 'fa-code', color: '#57F287', title: 'Early Verified Bot Developer' },
+        CERTIFIED_MODERATOR: { icon: 'fa-graduation-cap', color: '#57F287', title: 'Moderator Programs Alumni' },
+        BOT_HTTP_INTERACTIONS: { icon: 'fa-slash', color: '#57F287', title: 'HTTP Interactions Bot' },
+        ACTIVE_DEVELOPER: { icon: 'fa-flask', color: '#57F287', title: 'Active Developer' },
+        NITRO: { icon: 'fa-bolt', color: '#B588FF', title: 'Nitro Subscriber' },
+        BOOSTER: { icon: 'fa-rocket', color: '#FF73FA', title: 'Server Booster' }
+    };
+    
+    let currentData = null;
+    let spotifyInterval = null;
+    
+    // Music Player Logic
+    const bgMusic = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    let isPlaying = false;
 
-// Badge definitions
-const BADGES = {
-    STAFF: { icon: 'fa-shield-halved', color: '#5865F2', title: 'Discord Staff' },
-    PARTNER: { icon: 'fa-handshake', color: '#5865F2', title: 'Partnered Server Owner' },
-    HYPESQUAD_EVENTS: { icon: 'fa-star', color: '#F47B67', title: 'HypeSquad Events' },
-    BUG_HUNTER_LEVEL_1: { icon: 'fa-bug', color: '#57F287', title: 'Bug Hunter Level 1' },
-    HOUSE_BRAVERY: { icon: 'fa-shield', color: '#9C84EF', title: 'House of Bravery' },
-    HOUSE_BRILLIANCE: { icon: 'fa-gem', color: '#F47B67', title: 'House of Brilliance' },
-    HOUSE_BALANCE: { icon: 'fa-scale-balanced', color: '#57F287', title: 'House of Balance' },
-    EARLY_SUPPORTER: { icon: 'fa-heart', color: '#F47B67', title: 'Early Supporter' },
-    BUG_HUNTER_LEVEL_2: { icon: 'fa-bug', color: '#FEE75C', title: 'Bug Hunter Level 2' },
-    VERIFIED_BOT: { icon: 'fa-robot', color: '#57F287', title: 'Verified Bot' },
-    VERIFIED_DEVELOPER: { icon: 'fa-code', color: '#57F287', title: 'Early Verified Bot Developer' },
-    CERTIFIED_MODERATOR: { icon: 'fa-graduation-cap', color: '#57F287', title: 'Moderator Programs Alumni' },
-    BOT_HTTP_INTERACTIONS: { icon: 'fa-slash', color: '#57F287', title: 'HTTP Interactions Bot' },
-    ACTIVE_DEVELOPER: { icon: 'fa-flask', color: '#57F287', title: 'Active Developer' },
-    NITRO: { icon: 'fa-bolt', color: '#B588FF', title: 'Nitro Subscriber' },
-    BOOSTER: { icon: 'fa-rocket', color: '#FF73FA', title: 'Server Booster' }
-};
+    // Autoplay fix - need user interaction first
+    bgMusic.volume = 0.3;
 
-let currentData = null;
-let spotifyInterval = null;
+    document.addEventListener('click', () => {
+        if (!isPlaying && bgMusic.src && bgMusic.src!== window.location.href) {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
+            }).catch(e => console.log('Autoplay blocked by browser:', e));
+        }
+    }, { once: true });
 
-// Music Player Logic
-const bgMusic = document.getElementById('bgMusic');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const volumeSlider = document.getElementById('volumeSlider');
-let isPlaying = false;
-
-bgMusic.volume = 0.3;
-
-document.addEventListener('click', () => {
-    if (!isPlaying && bgMusic.src && bgMusic.src!== window.location.href) {
-        bgMusic.play().then(() => {
-            isPlaying = true;
+    playPauseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (bgMusic.paused) {
+            bgMusic.play();
             playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
-        }).catch(e => console.log('Audio unavailable:', e));
-    }
-}, { once: true });
-
-playPauseBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (bgMusic.paused) {
-        bgMusic.play();
-        playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
-        isPlaying = true;
-    } else {
-        bgMusic.pause();
-        playPauseBtn.innerHTML = '<i class="fas fa-play text-sm"></i>';
-        isPlaying = false;
-    }
-});
-
-volumeSlider.addEventListener('input', (e) => {
-    bgMusic.volume = parseFloat(e.target.value);
-});
-
-// Format time
-function formatTime(ms) {
-    if (!ms || ms < 0) return "0:00";
-    const totalSeconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-}
-
-// Get avatar URL with fallback
-function getAvatarUrl(user) {
-    if (user?.avatar) {
-        const ext = user.avatar.startsWith('a_')? 'gif' : 'png';
-        return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
-    }
-    return `https://cdn.discordapp.com/embed/avatars/0.png`;
-}
-
-// Update status
-function updateStatus(status) {
-    const indicator = document.getElementById('statusIndicator');
-    const modalStatus = document.getElementById('modalStatus');
-    const statusText = document.getElementById('modalStatusText');
-    
-    indicator.className = 'status-indicator';
-    modalStatus.className = 'absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922]';
-    
-    let statusClass = 'status-offline';
-    let statusName = 'Offline';
-    
-    if (status === 'online') {
-        statusClass = 'status-online';
-        statusName = 'Online';
-    } else if (status === 'idle') {
-        statusClass = 'status-idle';
-        statusName = 'Idle';
-    } else if (status === 'dnd') {
-        statusClass = 'status-dnd';
-        statusName = 'Do Not Disturb';
-    }
-    
-    indicator.classList.add(statusClass);
-    modalStatus.classList.add(statusClass);
-    statusText.textContent = statusName;
-}
-
-// Update badges
-function updateBadges(flags) {
-    const badgesContainer = document.getElementById('badges');
-    const modalBadgesContainer = document.getElementById('modalBadgesContainer');
-    const modalBadges = document.getElementById('modalBadges');
-    
-    badgesContainer.innerHTML = '';
-    modalBadges.innerHTML = '';
-    
-    let hasBadges = false;
-    
-    const flagMap = {
-        1: 'STAFF',
-        2: 'PARTNER',
-        4: 'HYPESQUAD_EVENTS',
-        8: 'BUG_HUNTER_LEVEL_1',
-        64: 'HOUSE_BRAVERY',
-        128: 'HOUSE_BRILLIANCE',
-        256: 'HOUSE_BALANCE',
-        512: 'EARLY_SUPPORTER',
-        16384: 'BUG_HUNTER_LEVEL_2',
-        65536: 'VERIFIED_BOT',
-        131072: 'VERIFIED_DEVELOPER',
-        262144: 'CERTIFIED_MODERATOR',
-        524288: 'BOT_HTTP_INTERACTIONS',
-        4194304: 'ACTIVE_DEVELOPER'
-    };
-    
-    for (const [flag, badge] of Object.entries(flagMap)) {
-        if ((flags & Number(flag)) && BADGES[badge]) {
-            hasBadges = true;
-            const badgeEl = document.createElement('div');
-            badgeEl.className = 'badge w-8 h-8 rounded-lg flex items-center justify-center cursor-help';
-            badgeEl.style.backgroundColor = BADGES[badge].color + '20';
-            badgeEl.title = BADGES[badge].title;
-            badgeEl.innerHTML = `<i class="fas ${BADGES[badge].icon}" style="color: ${BADGES[badge].color}; font-size: 14px;"></i>`;
-            badgesContainer.appendChild(badgeEl);
-            
-            const modalBadgeEl = badgeEl.cloneNode(true);
-            modalBadges.appendChild(modalBadgeEl);
+            isPlaying = true;
+        } else {
+            bgMusic.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play text-sm"></i>';
+            isPlaying = false;
         }
-    }
-    
-    modalBadgesContainer.classList.toggle('hidden', !hasBadges);
-}
+    });
 
-// Update Spotify
-function updateSpotify(spotify) {
-    const card = document.getElementById('spotifyCard');
+    volumeSlider.addEventListener('input', (e) => {
+        bgMusic.volume = parseFloat(e.target.value);
+    });
     
-    if (!spotify) {
-        card.classList.add('hidden');
-        if (spotifyInterval) {
-            clearInterval(spotifyInterval);
-            spotifyInterval = null;
-        }
-        return;
+    // Format time
+    function formatTime(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
     
-    card.classList.remove('hidden');
-    document.getElementById('spotifyAlbum').src = spotify.album_art_url;
-    document.getElementById('spotifySong').textContent = spotify.song || '-';
-    document.getElementById('spotifyArtist').textContent = spotify.artist || '-';
-    document.getElementById('spotifyAlbumName').textContent = spotify.album || '-';
+    // Get avatar URL
+    function getAvatarUrl(user) {
+        if (user.avatar) {
+            const ext = user.avatar.startsWith('a_')? 'gif' : 'png';
+            return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
+        }
+        return `https://cdn.discordapp.com/embed/avatars/${(parseInt(user.discriminator) || 0) % 5}.png`;
+    }
     
-    const updateProgress = () => {
-        const now = Date.now();
-        const elapsed = now - spotify.timestamps.start;
-        const duration = spotify.timestamps.end - spotify.timestamps.start;
-        const progress = Math.min((elapsed / duration) * 100, 100);
+    // Update status
+    function updateStatus(status) {
+        const indicator = document.getElementById('statusIndicator');
+        const modalStatus = document.getElementById('modalStatus');
+        const statusText = document.getElementById('modalStatusText');
         
-        document.getElementById('spotifyProgressBar').style.width = progress + '%';
-        document.getElementById('spotifyProgress').textContent = formatTime(elapsed);
-        document.getElementById('spotifyDuration').textContent = formatTime(duration);
-    };
+        indicator.className = 'status-indicator';
+        modalStatus.className = 'absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922]';
+        
+        let statusClass = 'status-offline';
+        let statusName = 'Offline';
+        
+        if (status === 'online') {
+            statusClass = 'status-online';
+            statusName = 'Online';
+        } else if (status === 'idle') {
+            statusClass = 'status-idle';
+            statusName = 'Idle';
+        } else if (status === 'dnd') {
+            statusClass = 'status-dnd';
+            statusName = 'Do Not Disturb';
+        }
+        
+        indicator.classList.add(statusClass);
+        modalStatus.classList.add(statusClass);
+        statusText.textContent = statusName;
+    }
     
-    updateProgress();
-    if (spotifyInterval) clearInterval(spotifyInterval);
-    spotifyInterval = setInterval(updateProgress, 1000);
-}
-
-// Update activities
-function updateActivities(activities = []) {
-    const container = document.getElementById('activitiesContainer');
-    container.innerHTML = '';
+    // Update badges
+    function updateBadges(flags) {
+        const badgesContainer = document.getElementById('badges');
+        const modalBadgesContainer = document.getElementById('modalBadgesContainer');
+        const modalBadges = document.getElementById('modalBadges');
+        
+        badgesContainer.innerHTML = '';
+        modalBadges.innerHTML = '';
+        
+        let hasBadges = false;
+        
+        const flagMap = {
+            1: 'STAFF',
+            2: 'PARTNER',
+            4: 'HYPESQUAD_EVENTS',
+            8: 'BUG_HUNTER_LEVEL_1',
+            64: 'HOUSE_BRAVERY',
+            128: 'HOUSE_BRILLIANCE',
+            256: 'HOUSE_BALANCE',
+            512: 'EARLY_SUPPORTER',
+            16384: 'BUG_HUNTER_LEVEL_2',
+            65536: 'VERIFIED_BOT',
+            131072: 'VERIFIED_DEVELOPER',
+            262144: 'CERTIFIED_MODERATOR',
+            524288: 'BOT_HTTP_INTERACTIONS',
+            4194304: 'ACTIVE_DEVELOPER'
+        };
+        
+        for (const [flag, badge] of Object.entries(flagMap)) {
+            if ((flags & Number(flag)) && BADGES[badge]) {
+                hasBadges = true;
+                const badgeEl = document.createElement('div');
+                badgeEl.className = 'badge w-8 h-8 rounded-lg flex items-center justify-center cursor-help';
+                badgeEl.style.backgroundColor = BADGES[badge].color + '20';
+                badgeEl.title = BADGES[badge].title;
+                badgeEl.innerHTML = `<i class="fas ${BADGES[badge].icon}" style="color: ${BADGES[badge].color}; font-size: 14px;"></i>`;
+                badgesContainer.appendChild(badgeEl);
+                
+                const modalBadgeEl = badgeEl.cloneNode(true);
+                modalBadges.appendChild(modalBadgeEl);
+            }
+        }
+        
+        if (hasBadges) {
+            modalBadgesContainer.classList.remove('hidden');
+        }
+    }
     
-    const nonSpotifyActivities = activities.filter(a => a.type !== 2);
-    let hasCustomStatus = false;
-    
-    nonSpotifyActivities.forEach(activity => {
-        if (activity.type === 4 && activity.state) {
-            document.getElementById('customStatus').textContent = activity.state;
-            document.getElementById('customStatus').classList.remove('hidden');
-            document.getElementById('modalCustomStatusText').textContent = activity.state;
-            document.getElementById('modalCustomStatus').classList.remove('hidden');
-            hasCustomStatus = true;
+    // Update Spotify
+    function updateSpotify(spotify) {
+        const card = document.getElementById('spotifyCard');
+        
+        if (!spotify) {
+            card.classList.add('hidden');
+            if (spotifyInterval) {
+                clearInterval(spotifyInterval);
+                spotifyInterval = null;
+            }
             return;
         }
         
-        const card = document.createElement('div');
-        card.className = 'activity-card bg-white/5 rounded-xl p-4';
+        card.classList.remove('hidden');
+        document.getElementById('spotifyAlbum').src = spotify.album_art_url;
+        document.getElementById('spotifySong').textContent = spotify.song;
+        document.getElementById('spotifyArtist').textContent = spotify.artist;
+        document.getElementById('spotifyAlbumName').textContent = spotify.album;
         
-        let icon = 'fa-gamepad';
-        let typeText = 'Playing';
+        const updateProgress = () => {
+            const now = Date.now();
+            const elapsed = now - spotify.timestamps.start;
+            const duration = spotify.timestamps.end - spotify.timestamps.start;
+            const progress = Math.min((elapsed / duration) * 100, 100);
+            
+            document.getElementById('spotifyProgressBar').style.width = progress + '%';
+            document.getElementById('spotifyProgress').textContent = formatTime(elapsed);
+            document.getElementById('spotifyDuration').textContent = formatTime(duration);
+        };
         
-        if (activity.type === 0) {
-            icon = 'fa-gamepad';
-            typeText = 'Playing';
-        } else if (activity.type === 1) {
-            icon = 'fa-video';
-            typeText = 'Streaming';
-        } else if (activity.type === 3) {
-            icon = 'fa-tv';
-            typeText = 'Watching';
-        } else if (activity.type === 5) {
-            icon = 'fa-trophy';
-            typeText = 'Competing in';
-        }
+        updateProgress();
+        if (spotifyInterval) clearInterval(spotifyInterval);
+        spotifyInterval = setInterval(updateProgress, 1000);
+    }
+    
+    // Update activities
+    function updateActivities(activities) {
+        const container = document.getElementById('activitiesContainer');
+        container.innerHTML = '';
         
-        card.innerHTML = `
-            <div class="flex items-center gap-2 mb-2">
-                <i class="fas ${icon} text-gray-400 text-sm"></i>
-                <span class="text-gray-400 text-xs font-medium uppercase">${typeText}</span>
-            </div>
-            <div class="flex items-center gap-3">
-                ${activity.assets?.large_image? `
-                    <img src="https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png" 
-                         alt="${activity.name}" 
-                         class="w-14 h-14 rounded-lg object-cover"
-                         onerror="this.src=''; this.style.background='#2a2b38'">
-                ` : ''}
-                <div class="flex-1 min-w-0">
-                    <p class="text-white font-semibold text-sm truncate">${activity.name || 'Unknown Activity'}</p>
-                    ${activity.details? `<p class="text-gray-400 text-xs truncate">${activity.details}</p>` : ''}
-                    ${activity.state? `<p class="text-gray-500 text-xs truncate">${activity.state}</p>` : ''}
+        const nonSpotifyActivities = activities.filter(a => a.type!== 2);
+        
+        nonSpotifyActivities.forEach(activity => {
+            const card = document.createElement('div');
+            card.className = 'activity-card bg-white/5 rounded-xl p-4';
+            
+            let icon = 'fa-gamepad';
+            let typeText = 'Playing';
+            
+            if (activity.type === 0) {
+                icon = 'fa-gamepad';
+                typeText = 'Playing';
+            } else if (activity.type === 1) {
+                icon = 'fa-video';
+                typeText = 'Streaming';
+            } else if (activity.type === 3) {
+                icon = 'fa-tv';
+                typeText = 'Watching';
+            } else if (activity.type === 4) {
+                icon = 'fa-comment';
+                typeText = '';
+            } else if (activity.type === 5) {
+                icon = 'fa-trophy';
+                typeText = 'Competing in';
+            }
+            
+            if (activity.type === 4 && activity.state) {
+                document.getElementById('customStatus').textContent = activity.state;
+                document.getElementById('customStatus').classList.remove('hidden');
+                document.getElementById('modalCustomStatus').classList.remove('hidden');
+                document.getElementById('modalCustomStatusText').textContent = activity.state;
+                return;
+            } else {
+                document.getElementById('customStatus').classList.add('hidden');
+                document.getElementById('modalCustomStatus').classList.add('hidden');
+            }
+            
+            card.innerHTML = `
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fas ${icon} text-gray-400 text-sm"></i>
+                    <span class="text-gray-400 text-xs font-medium uppercase">${typeText}</span>
                 </div>
-            </div>
-        `;
-        
-        container.appendChild(card);
-    });
-
-    if (!hasCustomStatus) {
-        document.getElementById('customStatus').classList.add('hidden');
-        document.getElementById('modalCustomStatus').classList.add('hidden');
-    }
-}
-
-// Update profile
-function updateProfile(data) {
-    currentData = data;
-    const user = data.discord_user;
-    
-    const avatarUrl = getAvatarUrl(user);
-    document.getElementById('avatar').src = avatarUrl;
-    document.getElementById('modalAvatar').src = avatarUrl;
-    
-    if (user.avatar_decoration_data) {
-        const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.png?size=240`;
-        document.getElementById('avatarDecoration').src = decoUrl;
-        document.getElementById('avatarDecoration').classList.remove('hidden');
-        document.getElementById('modalAvatarDecoration').src = decoUrl;
-        document.getElementById('modalAvatarDecoration').classList.remove('hidden');
-    } else {
-        document.getElementById('avatarDecoration').classList.add('hidden');
-        document.getElementById('modalAvatarDecoration').classList.add('hidden');
-    }
-    
-    const displayName = user.global_name || user.username;
-    document.getElementById('username').textContent = displayName;
-    document.getElementById('modalUsername').textContent = displayName;
-    document.getElementById('userTag').textContent = `@${user.username}`;
-    document.getElementById('modalUserTag').textContent = `@${user.username}`;
-    
-    updateStatus(data.discord_status);
-    updateBadges(user.public_flags || 0);
-    updateActivities(data.activities || []);
-    updateSpotify(data.spotify);
-}
-
-// Fetch data with fallback
-async function fetchLanyard() {
-    try {
-        const response = await fetch(LANYARD_API(), { cache: 'no-cache' });
-        if (!response.ok) throw new Error('API unavailable');
-        const { data } = await response.json();
-        updateProfile(data);
-    } catch (error) {
-        console.warn('Using default data:', error);
-        updateProfile({
-            discord_user: {
-                id: getRealId(),
-                username: 'leonky.2',
-                global_name: 'Leon',
-                public_flags: 0
-            },
-            discord_status: 'offline',
-            activities: [],
-            spotify: null
+                <div class="flex items-center gap-3">
+                    ${activity.assets?.large_image? `
+                        <img src="https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png" 
+                             alt="${activity.name}" 
+                             class="w-14 h-14 rounded-lg object-cover">
+                    ` : ''}
+                    <div class="flex-1 min-w-0">
+                        <p class="text-white font-semibold text-sm truncate">${activity.name}</p>
+                        ${activity.details? `<p class="text-gray-400 text-xs truncate">${activity.details}</p>` : ''}
+                        ${activity.state? `<p class="text-gray-500 text-xs truncate">${activity.state}</p>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(card);
         });
-    } finally {
-        document.getElementById('loadingScreen').classList.add('hidden');
-        document.getElementById('profileCard').style.opacity = '1';
-        document.getElementById('profileCard').classList.add('fade-in');
     }
-}
-
-// Modal handlers
-document.getElementById('avatar').addEventListener('click', () => {
-    document.getElementById('profileModal').classList.add('active');
-});
-
-document.getElementById('closeModal').addEventListener('click', () => {
-    document.getElementById('profileModal').classList.remove('active');
-});
-
-document.getElementById('profileModal').addEventListener('click', (e) => {
-    if (e.target.id === 'profileModal') {
-        document.getElementById('profileModal').classList.remove('active');
-    }
-});
-
-// WebSocket for real-time updates
-function connectWebSocket() {
-    const ws = new WebSocket('wss://api.lanyard.rest/socket');
     
-    ws.onopen = () => {
-        ws.send(JSON.stringify({
-            op: 2,
-            d: { subscribe_to_id: getRealId() }
-        }));
-    };
-    
-    ws.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        if (data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE') {
-            updateProfile(data.d);
+    // Update profile
+    function updateProfile(data) {
+        currentData = data;
+        const user = data.discord_user;
+        
+        const avatarUrl = getAvatarUrl(user);
+        document.getElementById('avatar').src = avatarUrl;
+        document.getElementById('modalAvatar').src = avatarUrl;
+        
+        if (user.avatar_decoration_data) {
+            const decoUrl = `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.png?size=240`;
+            document.getElementById('avatarDecoration').src = decoUrl;
+            document.getElementById('avatarDecoration').classList.remove('hidden');
+            document.getElementById('modalAvatarDecoration').src = decoUrl;
+            document.getElementById('modalAvatarDecoration').classList.remove('hidden');
+        } else {
+            document.getElementById('avatarDecoration').classList.add('hidden');
+            document.getElementById('modalAvatarDecoration').classList.add('hidden');
         }
-    };
+        
+        const displayName = user.global_name || user.username;
+        document.getElementById('username').textContent = displayName;
+        document.getElementById('modalUsername').textContent = displayName;
+        document.getElementById('userTag').textContent = `@${user.username}`;
+        document.getElementById('modalUserTag').textContent = `@${user.username}`;
+        document.getElementById('modalUserId').textContent = user.id;
+        
+        updateStatus(data.discord_status);
+        updateBadges(user.public_flags || 0);
+        updateActivities(data.activities || []);
+        updateSpotify(data.spotify);
+        
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('profileCard').classList.add('fade-in');
+            document.getElementById('profileCard').style.opacity = '1';
+        }, 500);
+    }
     
-    ws.onerror = () => console.warn('WebSocket error');
-    ws.onclose = () => setTimeout(connectWebSocket, 10000);
-}
-
-// Initialize
-fetchLanyard();
-connectWebSocket();
-setInterval(fetchLanyard, 60000);
+    // Fetch data from Lanyard
+    async function fetchLanyard() {
+        try {
+            const response = await fetch(LANYARD_API);
+            const { data } = await response.json();
+            updateProfile(data);
+        } catch (error) {
+            console.error('Failed to fetch Lanyard data:', error);
+            document.getElementById('username').textContent = 'Failed to load';
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('profileCard').style.opacity = '1';
+        }
+    }
+    
+    // Modal handlers
+    document.getElementById('avatar').addEventListener('click', () => {
+        document.getElementById('profileModal').classList.add('active');
+    });
+    
+    document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('profileModal').classList.remove('active');
+    });
+    
+    document.getElementById('profileModal').addEventListener('click', (e) => {
+        if (e.target.id === 'profileModal') {
+            document.getElementById('profileModal').classList.remove('active');
+        }
+    });
+    
+    // WebSocket for real-time updates
+    function connectWebSocket() {
+        const ws = new WebSocket('wss://api.lanyard.rest/socket');
+        
+        ws.onopen = () => {
+            ws.send(JSON.stringify({
+                op: 2,
+                d: { subscribe_to_id: USER_ID }
+            }));
+        };
+        
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE') {
+                updateProfile(data.d);
+            }
+        };
+        
+        ws.onerror = () => {
+            console.error('WebSocket error, falling back to HTTP');
+            fetchLanyard();
+        };
+        
+        ws.onclose = () => {
+            setTimeout(connectWebSocket, 5000);
+        };
+    }
+    
+    // Initialize
+    fetchLanyard();
+    connectWebSocket();
+    
+    setInterval(fetchLanyard, 30000);
 </script>
 </body>
 </html>

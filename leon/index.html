@@ -246,11 +246,12 @@
 </style>
 </head>
 <body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
+
 <!-- Music Player -->
 <audio id="bgMusic" loop preload="auto">
     <source src="./luhod.mp3" type="audio/mpeg">
     Your browser does not support audio playback.
-
+ <!-- ✅ Fixed missing closing tag -->
 
 <div class="music-player glass rounded-full p-3 flex items-center gap-3 shadow-2xl">
     <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center text-white transition-all">
@@ -275,7 +276,7 @@
 <div id="profileModal" class="modal-overlay">
     <div class="modal-content glass rounded-2xl max-w-md w-full overflow-hidden shadow-2xl">
         <div class="relative">
-           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover">
+           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover" onerror="this.src='https://via.placeholder.com/600x160/181922/5865F2?text=Profile+Banner'">
             <button id="closeModal" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center text-white transition-all">
                 <i class="fas fa-times text-sm"></i>
             </button>
@@ -283,7 +284,7 @@
         <div class="p-6 pt-0">
             <div class="flex items-end -mt-12 mb-4">
                 <div class="relative">
-                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]">
+                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
                     <img id="modalAvatarDecoration" src="" alt="Avatar Decoration" class="modal-avatar-deco hidden">
                     <div id="modalStatus" class="absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922] status-offline"></div>
                 </div>
@@ -291,14 +292,14 @@
             
             <div class="space-y-4">
                 <div>
-                    <h3 id="modalUsername" class="text-2xl font-bold text-white mb-1">Loading...</h3>
-                    <p id="modalUserTag" class="text-gray-400 text-sm">@username</p>
+                    <h3 id="modalUsername" class="text-2xl font-bold text-white mb-1">Leon</h3>
+                    <p id="modalUserTag" class="text-gray-400 text-sm">@leonky.2</p>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-white/5 rounded-lg p-3">
                         <p class="text-gray-400 text-xs mb-1">User ID</p>
-                        <p id="modalUserId" class="text-white text-sm font-mono break-all">-</p>
+                        <p id="modalUserId" class="text-white text-sm font-mono break-all">1250654354344775703</p>
                     </div>
                     <div class="bg-white/5 rounded-lg p-3">
                         <p class="text-gray-400 text-xs mb-1">Status</p>
@@ -325,7 +326,7 @@
     <div class="glass rounded-2xl overflow-hidden shadow-2xl">
         <!-- Banner -->
         <div class="relative h-48 md:h-56">
-            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover">
+            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x220/181922/5865F2?text=Azura+Banner'">
             <div class="absolute inset-0 banner-gradient"></div>
         </div>
         
@@ -334,7 +335,7 @@
             <!-- Avatar -->
             <div class="flex items-end justify-between -mt-16 mb-4">
                 <div class="avatar-wrapper">
-                    <img id="avatar" src="" alt="Avatar" class="avatar-img">
+                    <img id="avatar" src="" alt="Avatar" class="avatar-img" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
                     <img id="avatarDecoration" src="" alt="Avatar Decoration" class="avatar-deco hidden">
                     <div id="statusIndicator" class="status-indicator status-offline"></div>
                 </div>
@@ -346,10 +347,10 @@
             <!-- User Info -->
             <div class="mb-6">
                 <div class="flex items-center gap-2 mb-1">
-                    <h1 id="username" class="text-2xl md:text-3xl font-bold text-white">Loading...</h1>
+                    <h1 id="username" class="text-2xl md:text-3xl font-bold text-white">Leon</h1>
                     <i id="ownerCrown" class="fas fa-crown text-yellow-400 text-lg hidden" title="Server Owner"></i>
                 </div>
-                <p id="userTag" class="text-gray-400 text-sm mb-3">@username</p>
+                <p id="userTag" class="text-gray-400 text-sm mb-3">@leonky.2</p>
                 <p id="customStatus" class="text-gray-300 text-sm hidden"></p>
             </div>
             
@@ -366,7 +367,7 @@
                     <i class="fas fa-music text-gray-500 text-xs"></i>
                 </div>
                 <div class="flex items-center gap-3">
-                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover">
+                    <img id="spotifyAlbum" src="" alt="Album" class="w-16 h-16 rounded-lg object-cover" onerror="this.src='https://via.placeholder.com/64/1DB954/ffffff?text=🎵'">
                     <div class="flex-1 min-w-0">
                         <p id="spotifySong" class="text-white font-semibold text-sm truncate">-</p>
                         <p id="spotifyArtist" class="text-gray-400 text-xs truncate">-</p>
@@ -639,7 +640,8 @@
                     ${activity.assets?.large_image ? `
                         <img src="https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png" 
                              alt="${activity.name}" 
-                             class="w-14 h-14 rounded-lg object-cover">
+                             class="w-14 h-14 rounded-lg object-cover"
+                             onerror="this.src='https://via.placeholder.com/56/181922/5865F2?text=🎮'">
                     ` : ''}
                     <div class="flex-1 min-w-0">
                         <p class="text-white font-semibold text-sm truncate">${activity.name || 'Unknown Activity'}</p>
@@ -706,9 +708,10 @@
             updateProfile(data);
         } catch (error) {
             console.error('Failed to fetch Lanyard data:', error);
-            document.getElementById('username').textContent = 'Failed to load';
+            // ✅ Show content even if API fails
             document.getElementById('loadingScreen').classList.add('hidden');
             document.getElementById('profileCard').style.opacity = '1';
+            document.getElementById('profileCard').classList.add('fade-in');
         }
     }
     

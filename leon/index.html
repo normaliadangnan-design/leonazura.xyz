@@ -10,6 +10,9 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     
     * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
     }
     
@@ -18,36 +21,37 @@
         overflow-x: hidden;
     }
     
- .bg-grid {
+    .bg-grid {
         background-image: 
             linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
         background-size: 50px 50px;
     }
     
- .glass {
-        background: rgba(24, 25, 34, 0.7);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+    .glass {
+        background: rgba(24, 25, 34, 0.75);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     }
     
- .banner-gradient {
-        background: linear-gradient(180deg, transparent 0%, rgba(24, 25, 34, 1) 100%);
+    .banner-gradient {
+        background: linear-gradient(180deg, transparent 0%, rgba(24, 25, 34, 0.95) 100%);
     }
     
- .status-online { background: #23a55a; }
- .status-idle { background: #f0b232; }
- .status-dnd { background: #f23f43; }
- .status-offline { background: #80848e; }
+    .status-online { background: #23a55a; }
+    .status-idle { background: #f0b232; }
+    .status-dnd { background: #f23f43; }
+    .status-offline { background: #80848e; }
     
- .avatar-wrapper {
+    .avatar-wrapper {
         position: relative;
         width: 128px;
         height: 128px;
     }
     
- .avatar-deco {
+    .avatar-deco {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -58,21 +62,22 @@
         z-index: 10;
     }
     
- .avatar-img {
+    .avatar-img {
         width: 128px;
         height: 128px;
         border-radius: 50%;
         object-fit: cover;
         border: 6px solid #181922;
         cursor: pointer;
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease;
     }
     
- .avatar-img:hover {
-        transform: scale(1.05);
+    .avatar-img:hover {
+        transform: scale(1.06);
+        border-color: #5865F2;
     }
     
- .status-indicator {
+    .status-indicator {
         position: absolute;
         bottom: 8px;
         right: 8px;
@@ -81,9 +86,10 @@
         border-radius: 50%;
         border: 6px solid #181922;
         z-index: 11;
+        box-shadow: 0 0 8px rgba(0,0,0,0.4);
     }
     
- .modal-avatar-deco {
+    .modal-avatar-deco {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -94,7 +100,7 @@
         z-index: 10;
     }
     
- .loading-screen {
+    .loading-screen {
         position: fixed;
         top: 0;
         left: 0;
@@ -108,12 +114,12 @@
         transition: opacity 0.5s ease, visibility 0.5s ease;
     }
     
- .loading-screen.hidden {
+    .loading-screen.hidden {
         opacity: 0;
         visibility: hidden;
     }
     
- .loader {
+    .loader {
         width: 50px;
         height: 50px;
         border: 3px solid rgba(88, 101, 242, 0.2);
@@ -126,8 +132,8 @@
         to { transform: rotate(360deg); }
     }
     
- .fade-in {
-        animation: fadeIn 0.6s ease-out;
+    .fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
     }
     
     @keyframes fadeIn {
@@ -135,44 +141,45 @@
         to { opacity: 1; transform: translateY(0); }
     }
     
- .progress-bar {
+    .progress-bar {
         background: linear-gradient(90deg, #1DB954 0%, #1ed760 100%);
         transition: width 0.3s ease;
     }
     
- .activity-card,.spotify-card {
+    .activity-card, .spotify-card {
         transition: all 0.3s ease;
     }
     
- .activity-card:hover,.spotify-card:hover {
+    .activity-card:hover, .spotify-card:hover {
         transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.07);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     
- .social-icon {
+    .social-icon {
         transition: all 0.3s ease;
     }
     
- .social-icon:hover {
-        transform: translateY(-3px) scale(1.1);
+    .social-icon:hover {
+        transform: translateY(-3px) scale(1.12);
     }
     
- .badge {
+    .badge {
         transition: transform 0.2s ease;
     }
     
- .badge:hover {
+    .badge:hover {
         transform: scale(1.15);
     }
     
- .modal-overlay {
+    .modal-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(8px);
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
         z-index: 9998;
         display: flex;
         align-items: center;
@@ -183,21 +190,21 @@
         padding: 1rem;
     }
     
- .modal-overlay.active {
+    .modal-overlay.active {
         opacity: 1;
         visibility: visible;
     }
     
- .modal-content {
+    .modal-content {
         transform: scale(0.9);
         transition: transform 0.3s ease;
     }
     
- .modal-overlay.active.modal-content {
+    .modal-overlay.active .modal-content {
         transform: scale(1);
     }
 
- .music-player {
+    .music-player {
         position: fixed;
         bottom: 20px;
         left: 50%;
@@ -206,33 +213,33 @@
         transition: all 0.3s ease;
     }
 
- .music-player:hover {
+    .music-player:hover {
         transform: translateX(-50%) scale(1.05);
     }
     
     @media (max-width: 450px) {
-     .avatar-wrapper {
+        .avatar-wrapper {
             width: 112px;
             height: 112px;
         }
-     .avatar-img {
+        .avatar-img {
             width: 112px;
             height: 112px;
         }
-     .avatar-deco {
+        .avatar-deco {
             width: 125px;
             height: 125px;
         }
-     .modal-avatar-deco {
+        .modal-avatar-deco {
             width: 118px;
             height: 118px;
         }
-     .status-indicator {
+        .status-indicator {
             width: 24px;
             height: 24px;
             border-width: 5px;
         }
-     .music-player {
+        .music-player {
             bottom: 15px;
         }
     }
@@ -241,9 +248,9 @@
 <body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
 <!-- Music Player -->
 <audio id="bgMusic" loop preload="auto">
-    <source src="../luhod.mp3" type="audio/mpeg">
+    <source src="./luhod.mp3" type="audio/mpeg">
     Your browser does not support audio playback.
-</audio>
+
 
 <div class="music-player glass rounded-full p-3 flex items-center gap-3 shadow-2xl">
     <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center text-white transition-all">
@@ -269,7 +276,7 @@
     <div class="modal-content glass rounded-2xl max-w-md w-full overflow-hidden shadow-2xl">
         <div class="relative">
            <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover">
-            <button id="closeModal" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-all">
+            <button id="closeModal" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center text-white transition-all">
                 <i class="fas fa-times text-sm"></i>
             </button>
         </div>
@@ -429,11 +436,10 @@
     const volumeSlider = document.getElementById('volumeSlider');
     let isPlaying = false;
 
-    // Autoplay fix - need user interaction first
     bgMusic.volume = 0.3;
 
     document.addEventListener('click', () => {
-        if (!isPlaying && bgMusic.src && bgMusic.src!== window.location.href) {
+        if (!isPlaying && bgMusic.src && !bgMusic.src.includes(window.location.href)) {
             bgMusic.play().then(() => {
                 isPlaying = true;
                 playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
@@ -460,6 +466,7 @@
     
     // Format time
     function formatTime(ms) {
+        if (!ms || ms < 0) return "0:00";
         const totalSeconds = Math.floor(ms / 1000);
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
@@ -468,11 +475,12 @@
     
     // Get avatar URL
     function getAvatarUrl(user) {
-        if (user.avatar) {
-            const ext = user.avatar.startsWith('a_')? 'gif' : 'png';
+        if (user?.avatar) {
+            const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
             return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
         }
-        return `https://cdn.discordapp.com/embed/avatars/${(parseInt(user.discriminator) || 0) % 5}.png`;
+        const num = user?.discriminator ? parseInt(user.discriminator) % 5 : 0;
+        return `https://cdn.discordapp.com/embed/avatars/${num}.png`;
     }
     
     // Update status
@@ -546,9 +554,7 @@
             }
         }
         
-        if (hasBadges) {
-            modalBadgesContainer.classList.remove('hidden');
-        }
+        modalBadgesContainer.classList.toggle('hidden', !hasBadges);
     }
     
     // Update Spotify
@@ -566,9 +572,9 @@
         
         card.classList.remove('hidden');
         document.getElementById('spotifyAlbum').src = spotify.album_art_url;
-        document.getElementById('spotifySong').textContent = spotify.song;
-        document.getElementById('spotifyArtist').textContent = spotify.artist;
-        document.getElementById('spotifyAlbumName').textContent = spotify.album;
+        document.getElementById('spotifySong').textContent = spotify.song || '-';
+        document.getElementById('spotifyArtist').textContent = spotify.artist || '-';
+        document.getElementById('spotifyAlbumName').textContent = spotify.album || '-';
         
         const updateProgress = () => {
             const now = Date.now();
@@ -587,13 +593,23 @@
     }
     
     // Update activities
-    function updateActivities(activities) {
+    function updateActivities(activities = []) {
         const container = document.getElementById('activitiesContainer');
         container.innerHTML = '';
         
-        const nonSpotifyActivities = activities.filter(a => a.type!== 2);
+        const nonSpotifyActivities = activities.filter(a => a.type !== 2);
+        let hasCustomStatus = false;
         
         nonSpotifyActivities.forEach(activity => {
+            if (activity.type === 4 && activity.state) {
+                document.getElementById('customStatus').textContent = activity.state;
+                document.getElementById('customStatus').classList.remove('hidden');
+                document.getElementById('modalCustomStatusText').textContent = activity.state;
+                document.getElementById('modalCustomStatus').classList.remove('hidden');
+                hasCustomStatus = true;
+                return;
+            }
+            
             const card = document.createElement('div');
             card.className = 'activity-card bg-white/5 rounded-xl p-4';
             
@@ -609,23 +625,9 @@
             } else if (activity.type === 3) {
                 icon = 'fa-tv';
                 typeText = 'Watching';
-            } else if (activity.type === 4) {
-                icon = 'fa-comment';
-                typeText = '';
             } else if (activity.type === 5) {
                 icon = 'fa-trophy';
                 typeText = 'Competing in';
-            }
-            
-            if (activity.type === 4 && activity.state) {
-                document.getElementById('customStatus').textContent = activity.state;
-                document.getElementById('customStatus').classList.remove('hidden');
-                document.getElementById('modalCustomStatus').classList.remove('hidden');
-                document.getElementById('modalCustomStatusText').textContent = activity.state;
-                return;
-            } else {
-                document.getElementById('customStatus').classList.add('hidden');
-                document.getElementById('modalCustomStatus').classList.add('hidden');
             }
             
             card.innerHTML = `
@@ -634,21 +636,26 @@
                     <span class="text-gray-400 text-xs font-medium uppercase">${typeText}</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    ${activity.assets?.large_image? `
+                    ${activity.assets?.large_image ? `
                         <img src="https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png" 
                              alt="${activity.name}" 
                              class="w-14 h-14 rounded-lg object-cover">
                     ` : ''}
                     <div class="flex-1 min-w-0">
-                        <p class="text-white font-semibold text-sm truncate">${activity.name}</p>
-                        ${activity.details? `<p class="text-gray-400 text-xs truncate">${activity.details}</p>` : ''}
-                        ${activity.state? `<p class="text-gray-500 text-xs truncate">${activity.state}</p>` : ''}
+                        <p class="text-white font-semibold text-sm truncate">${activity.name || 'Unknown Activity'}</p>
+                        ${activity.details ? `<p class="text-gray-400 text-xs truncate">${activity.details}</p>` : ''}
+                        ${activity.state ? `<p class="text-gray-500 text-xs truncate">${activity.state}</p>` : ''}
                     </div>
                 </div>
             `;
             
             container.appendChild(card);
         });
+
+        if (!hasCustomStatus) {
+            document.getElementById('customStatus').classList.add('hidden');
+            document.getElementById('modalCustomStatus').classList.add('hidden');
+        }
     }
     
     // Update profile
@@ -694,6 +701,7 @@
     async function fetchLanyard() {
         try {
             const response = await fetch(LANYARD_API);
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
             const { data } = await response.json();
             updateProfile(data);
         } catch (error) {

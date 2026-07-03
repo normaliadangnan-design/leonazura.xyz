@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.discordapp.com https://*.lanyard.rest https://cdnjs.cloudflare.com https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data: https://*.discordapp.com https://*.lanyard.rest https://cdn.discordapp.com; media-src 'self'; connect-src 'self' wss://api.lanyard.rest https://api.lanyard.rest;">
 <title>Leon | PUBLIC AZURA</title>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -26,36 +25,36 @@
         overflow-x: hidden;
     }
 
- .bg-grid {
+   .bg-grid {
         background-image:
             linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
         background-size: 50px 50px;
     }
 
- .glass {
+   .glass {
         background: rgba(24, 25, 34, 0.7);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
- .banner-gradient {
+   .banner-gradient {
         background: linear-gradient(180deg, transparent 0%, rgba(24, 25, 34, 1) 100%);
     }
 
- .status-online { background: #23a55a; }
- .status-idle { background: #f0b232; }
- .status-dnd { background: #f23f43; }
- .status-offline { background: #80848e; }
+   .status-online { background: #23a55a; }
+   .status-idle { background: #f0b232; }
+   .status-dnd { background: #f23f43; }
+   .status-offline { background: #80848e; }
 
- .avatar-wrapper {
+   .avatar-wrapper {
         position: relative;
         width: 128px;
         height: 128px;
     }
 
- .avatar-deco {
+   .avatar-deco {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -66,7 +65,7 @@
         z-index: 10;
     }
 
- .avatar-img {
+   .avatar-img {
         width: 128px;
         height: 128px;
         border-radius: 50%;
@@ -77,11 +76,11 @@
         background: #2a2b38;
     }
 
- .avatar-img:hover {
+   .avatar-img:hover {
         transform: scale(1.05);
     }
 
- .status-indicator {
+   .status-indicator {
         position: absolute;
         bottom: 8px;
         right: 8px;
@@ -92,7 +91,7 @@
         z-index: 11;
     }
 
- .modal-avatar-deco {
+   .modal-avatar-deco {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -103,7 +102,7 @@
         z-index: 10;
     }
 
- .loading-screen {
+   .loading-screen {
         position: fixed;
         top: 0;
         left: 0;
@@ -117,24 +116,24 @@
         transition: opacity 0.6s ease, visibility 0.6s ease;
     }
 
- .loading-screen.hidden {
+   .loading-screen.hidden {
         opacity: 0;
         visibility: hidden;
     }
 
- .loading-content {
+   .loading-content {
         text-align: center;
         width: 320px;
     }
 
- .loading-logo-wrapper {
+   .loading-logo-wrapper {
         position: relative;
         width: 120px;
         height: 120px;
         margin: 0 auto 2rem auto;
     }
 
- .loading-logo {
+   .loading-logo {
         width: 120px;
         height: 120px;
         object-fit: contain;
@@ -143,7 +142,7 @@
         z-index: 2;
     }
 
- .logo-glow {
+   .logo-glow {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -165,7 +164,7 @@
         50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
     }
 
- .loading-text {
+   .loading-text {
         color: #e2e8f0;
         font-size: 1.1rem;
         margin-bottom: 1.5rem;
@@ -173,14 +172,14 @@
         font-weight: 500;
     }
 
- .progress-wrapper {
+   .progress-wrapper {
         background: rgba(255, 255, 255, 0.05);
         border-radius: 12px;
         padding: 4px;
         box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
- .progress-bar-bg {
+   .progress-bar-bg {
         width: 100%;
         height: 8px;
         background: rgba(0, 0, 0, 0.3);
@@ -189,7 +188,7 @@
         position: relative;
     }
 
- .progress-bar-fill {
+   .progress-bar-fill {
         height: 100%;
         background: linear-gradient(90deg, #5865F2 0%, #7289da 50%, #5865F2 100%);
         background-size: 200% 100%;
@@ -204,23 +203,23 @@
         100% { background-position: -200% 0; }
     }
 
- .progress-info {
+   .progress-info {
         display: flex;
         justify-content: space-between;
         margin-top: 0.75rem;
         font-size: 0.85rem;
     }
 
- .progress-status {
+   .progress-status {
         color: #94a3b8;
     }
 
- .progress-percent {
+   .progress-percent {
         color: #5865F2;
         font-weight: 600;
     }
 
- .fade-in {
+   .fade-in {
         animation: fadeIn 0.6s ease-out;
     }
 
@@ -229,37 +228,37 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
- .progress-bar {
+   .progress-bar {
         background: linear-gradient(90deg, #1DB954 0%, #1ed760 100%);
         transition: width 0.3s ease;
     }
 
- .activity-card,.spotify-card {
+   .activity-card,.spotify-card {
         transition: all 0.3s ease;
     }
 
- .activity-card:hover,.spotify-card:hover {
+   .activity-card:hover,.spotify-card:hover {
         transform: translateY(-2px);
         background: rgba(255, 255, 255, 0.05);
     }
 
- .social-icon {
+   .social-icon {
         transition: all 0.3s ease;
     }
 
- .social-icon:hover {
+   .social-icon:hover {
         transform: translateY(-3px) scale(1.1);
     }
 
- .badge {
+   .badge {
         transition: transform 0.2s ease;
     }
 
- .badge:hover {
+   .badge:hover {
         transform: scale(1.15);
     }
 
- .modal-overlay {
+   .modal-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -277,21 +276,21 @@
         padding: 1rem;
     }
 
- .modal-overlay.active {
+   .modal-overlay.active {
         opacity: 1;
         visibility: visible;
     }
 
- .modal-content {
+   .modal-content {
         transform: scale(0.9);
         transition: transform 0.3s ease;
     }
 
- .modal-overlay.active.modal-content {
+   .modal-overlay.active.modal-content {
         transform: scale(1);
     }
 
- .music-player {
+   .music-player {
         position: fixed;
         bottom: 20px;
         left: 50%;
@@ -300,40 +299,40 @@
         transition: all 0.3s ease;
     }
 
- .music-player:hover {
+   .music-player:hover {
         transform: translateX(-50%) scale(1.05);
     }
 
     @media (max-width: 450px) {
-     .avatar-wrapper {
+       .avatar-wrapper {
             width: 112px;
             height: 112px;
         }
-     .avatar-img {
+       .avatar-img {
             width: 112px;
             height: 112px;
         }
-     .avatar-deco {
+       .avatar-deco {
             width: 125px;
             height: 125px;
         }
-     .modal-avatar-deco {
+       .modal-avatar-deco {
             width: 118px;
             height: 118px;
         }
-     .status-indicator {
+       .status-indicator {
             width: 24px;
             height: 24px;
             border-width: 5px;
         }
-     .music-player {
+       .music-player {
             bottom: 15px;
         }
-     .loading-logo-wrapper {
+       .loading-logo-wrapper {
             width: 100px;
             height: 100px;
         }
-     .loading-logo {
+       .loading-logo {
             width: 100px;
             height: 100px;
         }

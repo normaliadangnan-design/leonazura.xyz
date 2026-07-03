@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    
+
     * {
         font-family: 'Poppins', sans-serif;
         -webkit-user-select: none;
@@ -20,42 +20,42 @@
         -ms-user-select: none;
         user-select: none;
     }
-    
+
     body {
         background: #0f0f14;
         overflow-x: hidden;
     }
-    
- .bg-grid {
-        background-image: 
+
+   .bg-grid {
+        background-image:
             linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
         background-size: 50px 50px;
     }
-    
- .glass {
+
+   .glass {
         background: rgba(24, 25, 34, 0.7);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.06);
     }
-    
- .banner-gradient {
+
+   .banner-gradient {
         background: linear-gradient(180deg, transparent 0%, rgba(24, 25, 34, 1) 100%);
     }
-    
- .status-online { background: #23a55a; }
- .status-idle { background: #f0b232; }
- .status-dnd { background: #f23f43; }
- .status-offline { background: #80848e; }
-    
- .avatar-wrapper {
+
+   .status-online { background: #23a55a; }
+   .status-idle { background: #f0b232; }
+   .status-dnd { background: #f23f43; }
+   .status-offline { background: #80848e; }
+
+   .avatar-wrapper {
         position: relative;
         width: 128px;
         height: 128px;
     }
-    
- .avatar-deco {
+
+   .avatar-deco {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -65,8 +65,8 @@
         pointer-events: none;
         z-index: 10;
     }
-    
- .avatar-img {
+
+   .avatar-img {
         width: 128px;
         height: 128px;
         border-radius: 50%;
@@ -76,12 +76,12 @@
         transition: transform 0.3s ease;
         background: #2a2b38;
     }
-    
- .avatar-img:hover {
+
+   .avatar-img:hover {
         transform: scale(1.05);
     }
-    
- .status-indicator {
+
+   .status-indicator {
         position: absolute;
         bottom: 8px;
         right: 8px;
@@ -91,8 +91,8 @@
         border: 6px solid #181922;
         z-index: 11;
     }
-    
- .modal-avatar-deco {
+
+   .modal-avatar-deco {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -102,110 +102,166 @@
         pointer-events: none;
         z-index: 10;
     }
-    
- .loading-screen {
+
+    /* --- IMPROVED LOADING SCREEN --- */
+   .loading-screen {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: #0f0f14;
+        background: radial-gradient(circle at center, #1a1b24 0%, #0f0f14 100%);
         z-index: 9999;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
     }
-    
- .loading-screen.hidden {
+
+   .loading-screen.hidden {
         opacity: 0;
         visibility: hidden;
     }
 
-    /* --- ANIMATED LOGO STYLES --- */
- .loading-logo {
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 1.5rem auto;
-        object-fit: contain;
-        animation: pulse 2.5s ease-in-out infinite;
+   .loading-content {
+        text-align: center;
+        width: 320px;
     }
 
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); opacity: 0.9; }
-        50% { transform: scale(1.08); opacity: 1; }
+   .loading-logo-wrapper {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 2rem auto;
     }
-    
- /* --- NEW ANIMATED LOADING BAR --- */
- .loading-content {
-        text-align: center;
-        width: 280px;
+
+   .loading-logo {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        animation: float 3s ease-in-out infinite;
+        position: relative;
+        z-index: 2;
     }
- .loading-text {
+
+   .logo-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 140px;
+        height: 140px;
+        background: radial-gradient(circle, rgba(88, 101, 242, 0.4) 0%, transparent 70%);
+        animation: glow 2s ease-in-out infinite;
+        border-radius: 50%;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes glow {
+        0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+        50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+   .loading-text {
         color: #e2e8f0;
         font-size: 1.1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         letter-spacing: 0.5px;
-    }
- .progress-bar-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.8rem;
-    }
- .progress-blocks {
-        font-size: 1.3rem;
-        letter-spacing: 1px;
-        color: #60a5fa;
-        font-family: monospace;
-    }
- .progress-percent {
-        color: #94a3b8;
         font-weight: 500;
-        min-width: 38px;
-        text-align: right;
     }
-    
- .fade-in {
+
+    /* NEW PROGRESS BAR WITH SHIMMER */
+   .progress-wrapper {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 4px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+   .progress-bar-bg {
+        width: 100%;
+        height: 8px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+    }
+
+   .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #5865F2 0%, #7289da 50%, #5865F2 100%);
+        background-size: 200% 100%;
+        border-radius: 8px;
+        transition: width 0.3s ease;
+        animation: shimmer 1.5s linear infinite;
+        box-shadow: 0 0 10px rgba(88, 101, 242, 0.5);
+    }
+
+    @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+   .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+   .progress-status {
+        color: #94a3b8;
+    }
+
+   .progress-percent {
+        color: #5865F2;
+        font-weight: 600;
+    }
+
+   .fade-in {
         animation: fadeIn 0.6s ease-out;
     }
-    
+
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
-    
- .progress-bar {
+
+   .progress-bar {
         background: linear-gradient(90deg, #1DB954 0%, #1ed760 100%);
         transition: width 0.3s ease;
     }
-    
- .activity-card,.spotify-card {
+
+   .activity-card,.spotify-card {
         transition: all 0.3s ease;
     }
-    
- .activity-card:hover,.spotify-card:hover {
+
+   .activity-card:hover,.spotify-card:hover {
         transform: translateY(-2px);
         background: rgba(255, 255, 255, 0.05);
     }
-    
- .social-icon {
+
+   .social-icon {
         transition: all 0.3s ease;
     }
-    
- .social-icon:hover {
+
+   .social-icon:hover {
         transform: translateY(-3px) scale(1.1);
     }
-    
- .badge {
+
+   .badge {
         transition: transform 0.2s ease;
     }
-    
- .badge:hover {
+
+   .badge:hover {
         transform: scale(1.15);
     }
-    
- .modal-overlay {
+
+   .modal-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -222,22 +278,23 @@
         transition: all 0.3s ease;
         padding: 1rem;
     }
-    
- .modal-overlay.active {
+
+   .modal-overlay.active {
         opacity: 1;
         visibility: visible;
     }
-    
- .modal-content {
+
+   .modal-content {
         transform: scale(0.9);
         transition: transform 0.3s ease;
     }
-    
- .modal-overlay.active.modal-content {
+
+    /* FIXED: Added space between classes */
+   .modal-overlay.active.modal-content {
         transform: scale(1);
     }
 
- .music-player {
+   .music-player {
         position: fixed;
         bottom: 20px;
         left: 50%;
@@ -246,36 +303,40 @@
         transition: all 0.3s ease;
     }
 
- .music-player:hover {
+   .music-player:hover {
         transform: translateX(-50%) scale(1.05);
     }
-    
+
     @media (max-width: 450px) {
-     .avatar-wrapper {
+       .avatar-wrapper {
             width: 112px;
             height: 112px;
         }
-     .avatar-img {
+       .avatar-img {
             width: 112px;
             height: 112px;
         }
-     .avatar-deco {
+       .avatar-deco {
             width: 125px;
             height: 125px;
         }
-     .modal-avatar-deco {
+       .modal-avatar-deco {
             width: 118px;
             height: 118px;
         }
-     .status-indicator {
+       .status-indicator {
             width: 24px;
             height: 24px;
             border-width: 5px;
         }
-     .music-player {
+       .music-player {
             bottom: 15px;
         }
-     .loading-logo {
+       .loading-logo-wrapper {
+            width: 100px;
+            height: 100px;
+        }
+       .loading-logo {
             width: 100px;
             height: 100px;
         }
@@ -283,11 +344,11 @@
 </style>
 </head>
 <body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
-<!-- Music Player -->
+<!-- FIXED: Added closing audio tag -->
 <audio id="bgMusic" loop preload="auto">
     <source src="../luhod.mp3" type="audio/mpeg">
     Your browser does not support audio playback.
-
+</audio>
 
 <div class="music-player glass rounded-full p-3 flex items-center gap-3 shadow-2xl">
     <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center text-white transition-all">
@@ -300,15 +361,24 @@
     <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.3" class="w-20 accent-[#5865F2] hidden md:block">
 </div>
 
-<!-- Loading Screen -->
+<!-- Loading Screen - IMPROVED -->
 <div id="loadingScreen" class="loading-screen">
     <div class="loading-content">
-        <!-- ANIMATED LOGO AREA -->
-        <img id="loadingLogo" src="./public azura.png" alt="Loading Logo" class="loading-logo" onerror="this.src=''; this.style.display='none';">
-        
+        <div class="loading-logo-wrapper">
+            <div class="logo-glow"></div>
+            <img id="loadingLogo" src="./public azura.png" alt="Loading Logo" class="loading-logo" onerror="this.src=''; this.style.display='none';">
+        </div>
+
         <p class="loading-text">Loading Profile...</p>
-        <div class="progress-bar-container">
-            <span id="progressBlocks" class="progress-blocks">░░░░░░░░░░░░░░░░░░░</span>
+
+        <div class="progress-wrapper">
+            <div class="progress-bar-bg">
+                <div id="progressBarFill" class="progress-bar-fill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="progress-info">
+            <span id="progressStatus" class="progress-status">Initializing</span>
             <span id="progressPercent" class="progress-percent">0%</span>
         </div>
     </div>
@@ -331,13 +401,13 @@
                     <div id="modalStatus" class="absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922] status-offline"></div>
                 </div>
             </div>
-            
+
             <div class="space-y-4">
                 <div>
                     <h3 id="modalUsername" class="text-2xl font-bold text-white mb-1">Leon</h3>
                     <p id="modalUserTag" class="text-gray-400 text-sm">@leonky.2</p>
                 </div>
-                
+
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-white/5 rounded-lg p-3">
                         <p class="text-gray-400 text-xs mb-1">User ID</p>
@@ -348,12 +418,12 @@
                         <p id="modalStatusText" class="text-white text-sm font-medium">Offline</p>
                     </div>
                 </div>
-                
+
                 <div id="modalBadgesContainer" class="bg-white/5 rounded-lg p-3 hidden">
                     <p class="text-gray-400 text-xs mb-2">Badges</p>
                     <div id="modalBadges" class="flex flex-wrap gap-2"></div>
                 </div>
-                
+
                 <div id="modalCustomStatus" class="bg-white/5 rounded-lg p-3 hidden">
                     <p class="text-gray-400 text-xs mb-1">Custom Status</p>
                     <p id="modalCustomStatusText" class="text-white text-sm">-</p>
@@ -371,7 +441,7 @@
             <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover" onerror="this.style.background='#2a2b38'; this.src=''">
             <div class="absolute inset-0 banner-gradient"></div>
         </div>
-        
+
         <!-- Profile Section -->
         <div class="px-6 md:px-8 pb-6 md:pb-8">
             <!-- Avatar -->
@@ -381,11 +451,11 @@
                     <img id="avatarDecoration" src="" alt="Avatar Decoration" class="avatar-deco hidden">
                     <div id="statusIndicator" class="status-indicator status-offline"></div>
                 </div>
-                
+
                 <!-- Badges -->
                 <div id="badges" class="flex gap-1.5 pb-2"></div>
             </div>
-            
+
             <!-- User Info -->
             <div class="mb-6">
                 <div class="flex items-center gap-2 mb-1">
@@ -395,10 +465,10 @@
                 <p id="userTag" class="text-gray-400 text-sm mb-3">@leonky.2</p>
                 <p id="customStatus" class="text-gray-300 text-sm hidden"></p>
             </div>
-            
+
             <!-- Activities Container -->
             <div id="activitiesContainer" class="space-y-3 mb-6"></div>
-            
+
             <!-- Spotify -->
             <div id="spotifyCard" class="spotify-card bg-white/5 rounded-xl p-4 mb-6 hidden">
                 <div class="flex items-center justify-between mb-3">
@@ -426,7 +496,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Social Links -->
             <div class="flex items-center justify-center gap-4">
                 <a href="https://discord.com/users/1250654354344775703" target="_blank" rel="noopener noreferrer nofollow" class="social-icon w-11 h-11 rounded-xl bg-[#5865F2]/10 hover:bg-[#5865F2]/20 flex items-center justify-center group">

@@ -341,7 +341,7 @@
 </head>
 <body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
 <audio id="bgMusic" loop preload="metadata">
-    <source src="../luhod.mp3" type="audio/mpeg">
+    <source src="" type="audio/mpeg"> <!-- Removed broken default path -->
     Your browser does not support audio playback.
 
 
@@ -360,7 +360,7 @@
     <div class="loading-content">
         <div class="loading-logo-wrapper">
             <div class="logo-glow"></div>
-            <img id="loadingLogo" src="./public azura.png" alt="Loading Logo" class="loading-logo" onerror="this.style.display='none';">
+            <img id="loadingLogo" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Loading Logo" class="loading-logo">
         </div>
 
         <p class="loading-text">Loading Profile...</p>
@@ -381,7 +381,7 @@
 <div id="profileModal" class="modal-overlay">
     <div class="modal-content glass rounded-2xl max-w-md w-full overflow-hidden shadow-2xl">
         <div class="relative">
-           <img id="modalBanner" src="./azura.webp" alt="Banner" class="w-full h-32 object-cover" onerror="this.style.background='#2a2b38'; this.src=''">
+           <img id="modalBanner" src="https://via.placeholder.com/800x200/2a2b38/5865F2?text=AZURA" alt="Banner" class="w-full h-32 object-cover">
             <button id="closeModal" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-all">
                 <i class="fas fa-times text-sm"></i>
             </button>
@@ -389,7 +389,7 @@
         <div class="p-6 pt-0">
             <div class="flex items-end -mt-12 mb-4">
                 <div class="relative">
-                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]" onerror="this.style.background='#2a2b38'; this.src=''">
+                    <img id="modalAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-full border-4 border-[#181922]">
                     <img id="modalAvatarDecoration" src="" alt="Avatar Decoration" class="modal-avatar-deco hidden">
                     <div id="modalStatus" class="absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922] status-offline"></div>
                 </div>
@@ -429,14 +429,14 @@
 <div id="profileCard" class="w-full max-w-xl opacity-0">
     <div class="glass rounded-2xl overflow-hidden shadow-2xl">
         <div class="relative h-48 md:h-56">
-            <img id="banner" src="./azura.webp" alt="Banner" class="w-full h-full object-cover" onerror="this.style.background='#2a2b38'; this.src=''">
+            <img id="banner" src="https://via.placeholder.com/800x220/2a2b38/5865F2?text=AZURA" alt="Banner" class="w-full h-full object-cover">
             <div class="absolute inset-0 banner-gradient"></div>
         </div>
 
         <div class="px-6 md:px-8 pb-6 md:pb-8">
             <div class="flex items-end justify-between -mt-16 mb-4">
                 <div class="avatar-wrapper">
-                    <img id="avatar" src="" alt="Avatar" class="avatar-img" onerror="this.style.background='#2a2b38'; this.src=''">
+                    <img id="avatar" src="" alt="Avatar" class="avatar-img">
                     <img id="avatarDecoration" src="" alt="Avatar Decoration" class="avatar-deco hidden">
                     <div id="statusIndicator" class="status-indicator status-offline"></div>
                 </div>
@@ -503,7 +503,7 @@
 // Disable right-click & dev tools
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
-    if(e.key === 'F12' ||
+    if(e.key === 'F12 ||
        (e.ctrlKey && e.shiftKey && ['I','J','C','U'].includes(e.key.toUpperCase())) ||
        (e.ctrlKey && e.key.toUpperCase() === 'U')) {
         e.preventDefault();
@@ -582,6 +582,7 @@ const profileCard = document.getElementById('profileCard');
 
 let loadingProgress = 0;
 let loadingInterval = null;
+let loadingTimeout = null;
 
 function updateLoadingProgress(percent, status) {
     loadingProgress = Math.min(percent, 100);
@@ -604,10 +605,17 @@ function startFakeLoading() {
             if (loadingProgress > 80 && statusIndex === 2) statusIndex = 3;
         }
     }, 200);
+
+    // TIMEOUT: finish loading after 8 seconds no matter what
+    loadingTimeout = setTimeout(() => {
+        console.warn('Loading timed out, showing profile anyway');
+        finishLoading();
+    }, 8000);
 }
 
 function finishLoading() {
     if (loadingInterval) clearInterval(loadingInterval);
+    if (loadingTimeout) clearTimeout(loadingTimeout);
     updateLoadingProgress(100, 'Complete');
     setTimeout(() => {
         loadingScreen.classList.add('hidden');

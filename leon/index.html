@@ -6,335 +6,66 @@
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.discordapp.com https://*.lanyard.rest https://cdnjs.cloudflare.com https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://via.placeholder.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data: https://*.discordapp.com https://*.lanyard.rest https://cdn.discordapp.com https://via.placeholder.com; media-src 'self'; connect-src 'self' wss://api.lanyard.rest https://api.lanyard.rest;">
+<title>Leon | PUBLIC AZURA</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-    * {
-        font-family: 'Poppins', sans-serif;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    body {
-        background: #0f0f14;
-        overflow-x: hidden;
-    }
-
-  .bg-grid {
-        background-image:
-            linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
-        background-size: 50px 50px;
-    }
-
-  .glass {
-        background: rgba(24, 25, 34, 0.7);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-  .banner-gradient {
-        background: linear-gradient(180deg, transparent 0%, rgba(24, 25, 34, 1) 100%);
-    }
-
-  .status-online { background: #23a55a; }
-  .status-idle { background: #f0b232; }
-  .status-dnd { background: #f23f43; }
-  .status-offline { background: #80848e; }
-
-  .avatar-wrapper {
-        position: relative;
-        width: 128px;
-        height: 128px;
-    }
-
-  .avatar-deco {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 142px;
-        height: 142px;
-        pointer-events: none;
-        z-index: 10;
-    }
-
-  .avatar-img {
-        width: 128px;
-        height: 128px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 6px solid #181922;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-        background: #2a2b38;
-    }
-
-  .avatar-img:hover {
-        transform: scale(1.05);
-    }
-
-  .status-indicator {
-        position: absolute;
-        bottom: 8px;
-        right: 8px;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        border: 6px solid #181922;
-        z-index: 11;
-    }
-
-  .modal-avatar-deco {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 135px;
-        height: 135px;
-        pointer-events: none;
-        z-index: 10;
-    }
-
-  .loading-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle at center, #1a1b24 0%, #0f0f14 100%);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-
-  .loading-screen.hidden {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-  .loading-content {
-        text-align: center;
-        width: 320px;
-    }
-
-  .loading-logo-wrapper {
-        position: relative;
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 2rem auto;
-    }
-
-  .loading-logo {
-        width: 120px;
-        height: 120px;
-        object-fit: contain;
-        animation: float 3s ease-in-out infinite;
-        position: relative;
-        z-index: 2;
-    }
-
-  .logo-glow {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 140px;
-        height: 140px;
-        background: radial-gradient(circle, rgba(88, 101, 242, 0.4) 0%, transparent 70%);
-        animation: glow 2s ease-in-out infinite;
-        border-radius: 50%;
-    }
-
-    @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-    }
-
-    @keyframes glow {
-        0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-        50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
-    }
-
-  .loading-text {
-        color: #e2e8f0;
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
-        letter-spacing: 0.5px;
-        font-weight: 500;
-    }
-
-  .progress-wrapper {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        padding: 4px;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-  .progress-bar-bg {
-        width: 100%;
-        height: 8px;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 8px;
-        overflow: hidden;
-        position: relative;
-    }
-
-  .progress-bar-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #5865F2 0%, #7289da 50%, #5865F2 100%);
-        background-size: 200% 100%;
-        border-radius: 8px;
-        transition: width 0.3s ease;
-        animation: shimmer 1.5s linear infinite;
-        box-shadow: 0 0 10px rgba(88, 101, 242, 0.5);
-    }
-
-    @keyframes shimmer {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-    }
-
-  .progress-info {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 0.75rem;
-        font-size: 0.85rem;
-    }
-
-  .progress-status {
-        color: #94a3b8;
-    }
-
-  .progress-percent {
-        color: #5865F2;
-        font-weight: 600;
-    }
-
-  .fade-in {
-        animation: fadeIn 0.6s ease-out;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-  .progress-bar {
-        background: linear-gradient(90deg, #1DB954 0%, #1ed760 100%);
-        transition: width 0.3s ease;
-    }
-
-  .activity-card,.spotify-card {
-        transition: all 0.3s ease;
-    }
-
-  .activity-card:hover,.spotify-card:hover {
-        transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.05);
-    }
-
-  .social-icon {
-        transition: all 0.3s ease;
-    }
-
-  .social-icon:hover {
-        transform: translateY(-3px) scale(1.1);
-    }
-
-  .badge {
-        transition: transform 0.2s ease;
-    }
-
-  .badge:hover {
-        transform: scale(1.15);
-    }
-
-  .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(8px);
-        z-index: 9998;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        padding: 1rem;
-    }
-
-  .modal-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-  .modal-content {
-        transform: scale(0.9);
-        transition: transform 0.3s ease;
-    }
-
-  .modal-overlay.active.modal-content {
-        transform: scale(1);
-    }
-
-  .music-player {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 9997;
-        transition: all 0.3s ease;
-    }
-
-  .music-player:hover {
-        transform: translateX(-50%) scale(1.05);
-    }
-
+    * { font-family: 'Poppins', sans-serif; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+    body { background: #0f0f14; overflow-x: hidden; }
+ .bg-grid { background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 50px 50px; }
+ .glass { background: rgba(24, 25, 34, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.06); }
+ .banner-gradient { background: linear-gradient(180deg, transparent 0%, rgba(24, 25, 34, 1) 100%); }
+ .status-online { background: #23a55a; }
+ .status-idle { background: #f0b232; }
+ .status-dnd { background: #f23f43; }
+ .status-offline { background: #80848e; }
+ .avatar-wrapper { position: relative; width: 128px; height: 128px; }
+ .avatar-deco { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 142px; height: 142px; pointer-events: none; z-index: 10; }
+ .avatar-img { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; border: 6px solid #181922; cursor: pointer; transition: transform 0.3s ease; background: #2a2b38; }
+ .avatar-img:hover { transform: scale(1.05); }
+ .status-indicator { position: absolute; bottom: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; border: 6px solid #181922; z-index: 11; }
+ .modal-avatar-deco { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 135px; height: 135px; pointer-events: none; z-index: 10; }
+ .loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a1b24 0%, #0f0f14 100%); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+ .loading-screen.hidden { opacity: 0; visibility: hidden; }
+ .loading-content { text-align: center; width: 320px; }
+ .loading-logo-wrapper { position: relative; width: 120px; height: 120px; margin: 0 auto 2rem auto; }
+ .loading-logo { width: 120px; height: 120px; object-fit: contain; animation: float 3s ease-in-out infinite; position: relative; z-index: 2; }
+ .logo-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140px; height: 140px; background: radial-gradient(circle, rgba(88, 101, 242, 0.4) 0%, transparent 70%); animation: glow 2s ease-in-out infinite; border-radius: 50%; }
+    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+    @keyframes glow { 0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); } }
+ .loading-text { color: #e2e8f0; font-size: 1.1rem; margin-bottom: 1.5rem; letter-spacing: 0.5px; font-weight: 500; }
+ .progress-wrapper { background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 4px; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); }
+ .progress-bar-bg { width: 100%; height: 8px; background: rgba(0, 0, 0, 0.3); border-radius: 8px; overflow: hidden; position: relative; }
+ .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #5865F2 0%, #7289da 50%, #5865F2 100%); background-size: 200% 100%; border-radius: 8px; transition: width 0.3s ease; animation: shimmer 1.5s linear infinite; box-shadow: 0 0 10px rgba(88, 101, 242, 0.5); }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+ .progress-info { display: flex; justify-content: space-between; margin-top: 0.75rem; font-size: 0.85rem; }
+ .progress-status { color: #94a3b8; }
+ .progress-percent { color: #5865F2; font-weight: 600; }
+ .fade-in { animation: fadeIn 0.6s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+ .progress-bar { background: linear-gradient(90deg, #1DB954 0%, #1ed760 100%); transition: width 0.3s ease; }
+ .activity-card,.spotify-card { transition: all 0.3s ease; }
+ .activity-card:hover,.spotify-card:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.05); }
+ .social-icon { transition: all 0.3s ease; }
+ .social-icon:hover { transform: translateY(-3px) scale(1.1); }
+ .badge { transition: transform 0.2s ease; }
+ .badge:hover { transform: scale(1.15); }
+ .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 9998; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem; }
+ .modal-overlay.active { opacity: 1; visibility: visible; }
+ .modal-content { transform: scale(0.9); transition: transform 0.3s ease; }
+ .modal-overlay.active.modal-content { transform: scale(1); }
+ .music-player { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9997; transition: all 0.3s ease; }
+ .music-player:hover { transform: translateX(-50%) scale(1.05); }
     @media (max-width: 450px) {
-      .avatar-wrapper {
-            width: 112px;
-            height: 112px;
-        }
-      .avatar-img {
-            width: 112px;
-            height: 112px;
-        }
-      .avatar-deco {
-            width: 125px;
-            height: 125px;
-        }
-      .modal-avatar-deco {
-            width: 118px;
-            height: 118px;
-        }
-      .status-indicator {
-            width: 24px;
-            height: 24px;
-            border-width: 5px;
-        }
-      .music-player {
-            bottom: 15px;
-        }
-      .loading-logo-wrapper {
-            width: 100px;
-            height: 100px;
-        }
-      .loading-logo {
-            width: 100px;
-            height: 100px;
-        }
+     .avatar-wrapper { width: 112px; height: 112px; }
+     .avatar-img { width: 112px; height: 112px; }
+     .avatar-deco { width: 125px; height: 125px; }
+     .modal-avatar-deco { width: 118px; height: 118px; }
+     .status-indicator { width: 24px; height: 24px; border-width: 5px; }
+     .music-player { bottom: 15px; }
+     .loading-logo-wrapper { width: 100px; height: 100px; }
+     .loading-logo { width: 100px; height: 100px; }
     }
 </style>
 </head>
@@ -359,17 +90,14 @@
     <div class="loading-content">
         <div class="loading-logo-wrapper">
             <div class="logo-glow"></div>
-            <img id="loadingLogo" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Loading Logo" class="loading-logo">
+            <img id="loadingLogo" src="leonaise.webp" alt="Loading Logo" class="loading-logo">
         </div>
-
         <p class="loading-text">Loading Profile...</p>
-
         <div class="progress-wrapper">
             <div class="progress-bar-bg">
                 <div id="progressBarFill" class="progress-bar-fill" style="width: 0%"></div>
             </div>
         </div>
-
         <div class="progress-info">
             <span id="progressStatus" class="progress-status">Initializing</span>
             <span id="progressPercent" class="progress-percent">0%</span>
@@ -393,13 +121,11 @@
                     <div id="modalStatus" class="absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922] status-offline"></div>
                 </div>
             </div>
-
             <div class="space-y-4">
                 <div>
                     <h3 id="modalUsername" class="text-2xl font-bold text-white mb-1">Leon</h3>
                     <p id="modalUserTag" class="text-gray-400 text-sm">@leonky.2</p>
                 </div>
-
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-white/5 rounded-lg p-3">
                         <p class="text-gray-400 text-xs mb-1">User ID</p>
@@ -410,12 +136,10 @@
                         <p id="modalStatusText" class="text-white text-sm font-medium">Offline</p>
                     </div>
                 </div>
-
                 <div id="modalBadgesContainer" class="bg-white/5 rounded-lg p-3 hidden">
                     <p class="text-gray-400 text-xs mb-2">Badges</p>
                     <div id="modalBadges" class="flex flex-wrap gap-2"></div>
                 </div>
-
                 <div id="modalCustomStatus" class="bg-white/5 rounded-lg p-3 hidden">
                     <p class="text-gray-400 text-xs mb-1">Custom Status</p>
                     <p id="modalCustomStatusText" class="text-white text-sm">-</p>
@@ -428,10 +152,9 @@
 <div id="profileCard" class="w-full max-w-xl opacity-0">
     <div class="glass rounded-2xl overflow-hidden shadow-2xl">
         <div class="relative h-48 md:h-56">
-            <img id="banner" src="https://via.placeholder.com/800x220/2a2b38/5865F2?text=AZURA" alt="Banner" class="w-full h-full object-cover">
+            <img id="banner" src="public azura.png" alt="Banner" class="w-full h-full object-cover">
             <div class="absolute inset-0 banner-gradient"></div>
         </div>
-
         <div class="px-6 md:px-8 pb-6 md:pb-8">
             <div class="flex items-end justify-between -mt-16 mb-4">
                 <div class="avatar-wrapper">
@@ -439,10 +162,8 @@
                     <img id="avatarDecoration" src="" alt="Avatar Decoration" class="avatar-deco hidden">
                     <div id="statusIndicator" class="status-indicator status-offline"></div>
                 </div>
-
                 <div id="badges" class="flex gap-1.5 pb-2"></div>
             </div>
-
             <div class="mb-6">
                 <div class="flex items-center gap-2 mb-1">
                     <h1 id="username" class="text-2xl md:text-3xl font-bold text-white">Leon</h1>
@@ -451,9 +172,7 @@
                 <p id="userTag" class="text-gray-400 text-sm mb-3">@leonky.2</p>
                 <p id="customStatus" class="text-gray-300 text-sm hidden"></p>
             </div>
-
             <div id="activitiesContainer" class="space-y-3 mb-6"></div>
-
             <div id="spotifyCard" class="spotify-card bg-white/5 rounded-xl p-4 mb-6 hidden">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
@@ -480,7 +199,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="flex items-center justify-center gap-4">
                 <a href="https://discord.com/users/1250654354344775703" target="_blank" rel="noopener noreferrer nofollow" class="social-icon w-11 h-11 rounded-xl bg-[#5865F2]/10 hover:bg-[#5865F2]/20 flex items-center justify-center group">
                     <i class="fab fa-discord text-[#5865F2] text-lg group-hover:scale-110 transition-transform"></i>
@@ -494,7 +212,6 @@
             </div>
         </div>
     </div>
-
     <p class="text-center text-gray-500 text-xs mt-4">Powered by @LeonXyz</p>
 </div>
 
@@ -511,7 +228,7 @@ document.addEventListener('keydown', e => {
 });
 
 // Obscured User ID
-const USER_ID = btoa('MTI1MDY1NDM1NDM0NDc3NTcwMw==');
+const USER_ID = btoa('1250654354344775703');
 const getRealId = () => atob(USER_ID);
 const LANYARD_API = () => `https://api.lanyard.rest/v1/users/${getRealId()}`;
 
@@ -609,7 +326,6 @@ function startFakeLoading() {
         }
     }, 200);
 
-    // TIMEOUT: finish loading after 8 seconds no matter what
     loadingTimeout = setTimeout(() => {
         console.warn('Loading timed out, showing profile anyway');
         finishLoading();
@@ -682,20 +398,10 @@ function updateBadges(flags) {
     let hasBadges = false;
 
     const flagMap = {
-        1: 'STAFF',
-        2: 'PARTNER',
-        4: 'HYPESQUAD_EVENTS',
-        8: 'BUG_HUNTER_LEVEL_1',
-        64: 'HOUSE_BRAVERY',
-        128: 'HOUSE_BRILLIANCE',
-        256: 'HOUSE_BALANCE',
-        512: 'EARLY_SUPPORTER',
-        16384: 'BUG_HUNTER_LEVEL_2',
-        65536: 'VERIFIED_BOT',
-        131072: 'VERIFIED_DEVELOPER',
-        262144: 'CERTIFIED_MODERATOR',
-        524288: 'BOT_HTTP_INTERACTIONS',
-        4194304: 'ACTIVE_DEVELOPER'
+        1: 'STAFF', 2: 'PARTNER', 4: 'HYPESQUAD_EVENTS', 8: 'BUG_HUNTER_LEVEL_1',
+        64: 'HOUSE_BRAVERY', 128: 'HOUSE_BRILLIANCE', 256: 'HOUSE_BALANCE', 512: 'EARLY_SUPPORTER',
+        16384: 'BUG_HUNTER_LEVEL_2', 65536: 'VERIFIED_BOT', 131072: 'VERIFIED_DEVELOPER',
+        262144: 'CERTIFIED_MODERATOR', 524288: 'BOT_HTTP_INTERACTIONS', 4194304: 'ACTIVE_DEVELOPER'
     };
 
     for (const [flag, badge] of Object.entries(flagMap)) {
@@ -788,284 +494,7 @@ function updateActivities(activities = []) {
         }
 
         card.innerHTML = `
-            <div class="flex items-center gap-2 mb-2">
-                <i class="fas ${icon}
-
-// Obscured User ID
-const USER_ID = btoa('1250654354344775703');
-const getRealId = () => atob(USER_ID);
-const LANYARD_API = () => `https://api.lanyard.rest/v1/users/${getRealId()}`;
-
-// Badge definitions
-const BADGES = {
-    STAFF: { icon: 'fa-shield-halved', color: '#5865F2', title: 'Discord Staff' },
-    PARTNER: { icon: 'fa-handshake', color: '#5865F2', title: 'Partnered Server Owner' },
-    HYPESQUAD_EVENTS: { icon: 'fa-star', color: '#F47B67', title: 'HypeSquad Events' },
-    BUG_HUNTER_LEVEL_1: { icon: 'fa-bug', color: '#57F287', title: 'Bug Hunter Level 1' },
-    HOUSE_BRAVERY: { icon: 'fa-shield', color: '#9C84EF', title: 'House of Bravery' },
-    HOUSE_BRILLIANCE: { icon: 'fa-gem', color: '#F47B67', title: 'House of Brilliance' },
-    HOUSE_BALANCE: { icon: 'fa-scale-balanced', color: '#57F287', title: 'House of Balance' },
-    EARLY_SUPPORTER: { icon: 'fa-heart', color: '#F47B67', title: 'Early Supporter' },
-    BUG_HUNTER_LEVEL_2: { icon: 'fa-bug', color: '#FEE75C', title: 'Bug Hunter Level 2' },
-    VERIFIED_BOT: { icon: 'fa-robot', color: '#57F287', title: 'Verified Bot' },
-    VERIFIED_DEVELOPER: { icon: 'fa-code', color: '#57F287', title: 'Early Verified Bot Developer' },
-    CERTIFIED_MODERATOR: { icon: 'fa-graduation-cap', color: '#57F287', title: 'Moderator Programs Alumni' },
-    BOT_HTTP_INTERACTIONS: { icon: 'fa-slash', color: '#57F287', title: 'HTTP Interactions Bot' },
-    ACTIVE_DEVELOPER: { icon: 'fa-flask', color: '#57F287', title: 'Active Developer' },
-    NITRO: { icon: 'fa-bolt', color: '#B588FF', title: 'Nitro Subscriber' },
-    BOOSTER: { icon: 'fa-rocket', color: '#FF73FA', title: 'Server Booster' }
-};
-
-let currentData = null;
-let spotifyInterval = null;
-
-// Music Player Logic
-const bgMusic = document.getElementById('bgMusic');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const volumeSlider = document.getElementById('volumeSlider');
-let isPlaying = false;
-
-bgMusic.volume = 0.3;
-
-document.addEventListener('click', () => {
-    if (!isPlaying && bgMusic.src && bgMusic.src!== window.location.href) {
-        bgMusic.play().then(() => {
-            isPlaying = true;
-            playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
-        }).catch(e => console.log('Audio unavailable:', e));
-    }
-}, { once: true });
-
-playPauseBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (bgMusic.paused) {
-        bgMusic.play();
-        playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
-        isPlaying = true;
-    } else {
-        bgMusic.pause();
-        playPauseBtn.innerHTML = '<i class="fas fa-play text-sm"></i>';
-        isPlaying = false;
-    }
-});
-
-volumeSlider.addEventListener('input', (e) => {
-    bgMusic.volume = parseFloat(e.target.value);
-});
-
-// Loading Progress Logic
-const progressBarFill = document.getElementById('progressBarFill');
-const progressPercentEl = document.getElementById('progressPercent');
-const progressStatusEl = document.getElementById('progressStatus');
-const loadingScreen = document.getElementById('loadingScreen');
-const profileCard = document.getElementById('profileCard');
-
-let loadingProgress = 0;
-let loadingInterval = null;
-let loadingTimeout = null;
-
-function updateLoadingProgress(percent, status) {
-    loadingProgress = Math.min(percent, 100);
-    progressBarFill.style.width = loadingProgress + '%';
-    progressPercentEl.textContent = Math.round(loadingProgress) + '%';
-    if (status) progressStatusEl.textContent = status;
-}
-
-function startFakeLoading() {
-    const statuses = ['Connecting', 'Fetching data', 'Loading assets', 'Almost done'];
-    let statusIndex = 0;
-
-    loadingInterval = setInterval(() => {
-        if (loadingProgress < 90) {
-            loadingProgress += Math.random() * 15;
-            if (loadingProgress > 90) loadingProgress = 90;
-            updateLoadingProgress(loadingProgress, statuses[Math.min(statusIndex, statuses.length - 1)]);
-            if (loadingProgress > 30 && statusIndex === 0) statusIndex = 1;
-            if (loadingProgress > 60 && statusIndex === 1) statusIndex = 2;
-            if (loadingProgress > 80 && statusIndex === 2) statusIndex = 3;
-        }
-    }, 200);
-
-    // TIMEOUT: finish loading after 8 seconds no matter what
-    loadingTimeout = setTimeout(() => {
-        console.warn('Loading timed out, showing profile anyway');
-        finishLoading();
-    }, 8000);
-}
-
-function finishLoading() {
-    if (loadingInterval) clearInterval(loadingInterval);
-    if (loadingTimeout) clearTimeout(loadingTimeout);
-    updateLoadingProgress(100, 'Complete');
-    setTimeout(() => {
-        loadingScreen.classList.add('hidden');
-        profileCard.style.opacity = '1';
-        profileCard.classList.add('fade-in');
-    }, 400);
-}
-
-// Helper Functions
-function formatTime(ms) {
-    if (!ms || ms < 0) return "0:00";
-    const totalSeconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-}
-
-function getAvatarUrl(user) {
-    if (user?.avatar) {
-        const ext = user.avatar.startsWith('a_')? 'gif' : 'png';
-        return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
-    }
-    return `https://cdn.discordapp.com/embed/avatars/0.png`;
-}
-
-function updateStatus(status) {
-    const indicator = document.getElementById('statusIndicator');
-    const modalStatus = document.getElementById('modalStatus');
-    const statusText = document.getElementById('modalStatusText');
-
-    indicator.className = 'status-indicator';
-    modalStatus.className = 'absolute bottom-1 right-1 w-7 h-7 rounded-full border-4 border-[#181922]';
-
-    let statusClass = 'status-offline';
-    let statusName = 'Offline';
-
-    if (status === 'online') {
-        statusClass = 'status-online';
-        statusName = 'Online';
-    } else if (status === 'idle') {
-        statusClass = 'status-idle';
-        statusName = 'Idle';
-    } else if (status === 'dnd') {
-        statusClass = 'status-dnd';
-        statusName = 'Do Not Disturb';
-    }
-
-    indicator.classList.add(statusClass);
-    modalStatus.classList.add(statusClass);
-    statusText.textContent = statusName;
-}
-
-function updateBadges(flags) {
-    const badgesContainer = document.getElementById('badges');
-    const modalBadgesContainer = document.getElementById('modalBadgesContainer');
-    const modalBadges = document.getElementById('modalBadges');
-
-    badgesContainer.innerHTML = '';
-    modalBadges.innerHTML = '';
-
-    let hasBadges = false;
-
-    const flagMap = {
-        1: 'STAFF',
-        2: 'PARTNER',
-        4: 'HYPESQUAD_EVENTS',
-        8: 'BUG_HUNTER_LEVEL_1',
-        64: 'HOUSE_BRAVERY',
-        128: 'HOUSE_BRILLIANCE',
-        256: 'HOUSE_BALANCE',
-        512: 'EARLY_SUPPORTER',
-        16384: 'BUG_HUNTER_LEVEL_2',
-        65536: 'VERIFIED_BOT',
-        131072: 'VERIFIED_DEVELOPER',
-        262144: 'CERTIFIED_MODERATOR',
-        524288: 'BOT_HTTP_INTERACTIONS',
-        4194304: 'ACTIVE_DEVELOPER'
-    };
-
-    for (const [flag, badge] of Object.entries(flagMap)) {
-        if ((flags & Number(flag)) && BADGES[badge]) {
-            hasBadges = true;
-            const badgeEl = document.createElement('div');
-            badgeEl.className = 'badge w-8 h-8 rounded-lg flex items-center justify-center cursor-help';
-            badgeEl.style.backgroundColor = BADGES[badge].color + '20';
-            badgeEl.title = BADGES[badge].title;
-            badgeEl.innerHTML = `<i class="fas ${BADGES[badge].icon}" style="color: ${BADGES[badge].color}; font-size: 14px;"></i>`;
-            badgesContainer.appendChild(badgeEl);
-
-            const modalBadgeEl = badgeEl.cloneNode(true);
-            modalBadges.appendChild(modalBadgeEl);
-        }
-    }
-
-    modalBadgesContainer.classList.toggle('hidden',!hasBadges);
-}
-
-function updateSpotify(spotify) {
-    const card = document.getElementById('spotifyCard');
-
-    if (!spotify) {
-        card.classList.add('hidden');
-        if (spotifyInterval) {
-            clearInterval(spotifyInterval);
-            spotifyInterval = null;
-        }
-        return;
-    }
-
-    card.classList.remove('hidden');
-    document.getElementById('spotifyAlbum').src = spotify.album_art_url;
-    document.getElementById('spotifySong').textContent = spotify.song || '-';
-    document.getElementById('spotifyArtist').textContent = spotify.artist || '-';
-    document.getElementById('spotifyAlbumName').textContent = spotify.album || '-';
-
-    const updateProgress = () => {
-        const now = Date.now();
-        const elapsed = now - spotify.timestamps.start;
-        const duration = spotify.timestamps.end - spotify.timestamps.start;
-        const progress = Math.min((elapsed / duration) * 100, 100);
-
-        document.getElementById('spotifyProgressBar').style.width = progress + '%';
-        document.getElementById('spotifyProgress').textContent = formatTime(elapsed);
-        document.getElementById('spotifyDuration').textContent = formatTime(duration);
-    };
-
-    updateProgress();
-    if (spotifyInterval) clearInterval(spotifyInterval);
-    spotifyInterval = setInterval(updateProgress, 1000);
-}
-
-function updateActivities(activities = []) {
-    const container = document.getElementById('activitiesContainer');
-    container.innerHTML = '';
-
-    const nonSpotifyActivities = activities.filter(a => a.type!== 2);
-    let hasCustomStatus = false;
-
-    nonSpotifyActivities.forEach(activity => {
-        if (activity.type === 4 && activity.state) {
-            document.getElementById('customStatus').textContent = activity.state;
-            document.getElementById('customStatus').classList.remove('hidden');
-            document.getElementById('modalCustomStatusText').textContent = activity.state;
-            document.getElementById('modalCustomStatus').classList.remove('hidden');
-            hasCustomStatus = true;
-            return;
-        }
-
-        const card = document.createElement('div');
-        card.className = 'activity-card bg-white/5 rounded-xl p-4';
-
-        let icon = 'fa-gamepad';
-        let typeText = 'Playing';
-
-        if (activity.type === 0) {
-            icon = 'fa-gamepad';
-            typeText = 'Playing';
-        } else if (activity.type === 1) {
-            icon = 'fa-video';
-            typeText = 'Streaming';
-        } else if (activity.type === 3) {
-            icon = 'fa-tv';
-            typeText = 'Watching';
-        } else if (activity.type === 5) {
-            icon = 'fa-trophy';
-            typeText = 'Competing in';
-        }
-
-        card.innerHTML = `
-            <div class="flex items-center gap-2 mb-2">
+            <div class="flex items-center gap-2 mb
                 <i class="fas ${icon} text-gray-400 text-sm"></i>
                 <span class="text-gray-400 text-xs font-medium uppercase">${typeText}</span>
             </div>

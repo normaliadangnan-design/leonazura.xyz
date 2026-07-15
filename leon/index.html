@@ -12,9 +12,71 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     * { font-family: 'Poppins', sans-serif; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-    body { background: #0f0f14; overflow-x: hidden; }
+ body{
+    overflow-x:hidden;
+    background:#09090f;
+    position:relative;
+    min-height:100vh;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:-30%;
+    background:
+    radial-gradient(circle at 20% 20%,rgba(88,101,242,.18),transparent 30%),
+    radial-gradient(circle at 80% 30%,rgba(162,89,255,.15),transparent 35%),
+    radial-gradient(circle at 40% 90%,rgba(0,255,255,.12),transparent 35%);
+    filter:blur(90px);
+    animation:aurora 18s linear infinite alternate;
+    pointer-events:none;
+    z-index:-2;
+}
+
+@keyframes aurora{
+
+0%{
+transform:translate(-5%,-5%) rotate(0deg);
+}
+
+50%{
+transform:translate(6%,3%) rotate(10deg);
+}
+
+100%{
+transform:translate(-2%,7%) rotate(-8deg);
+}
+
+}
 .bg-grid { background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 50px 50px; }
-.glass { background: rgba(24, 25, 34, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 0.06); }
+    .glass{
+    background: rgba(18, 20, 28, 0.58);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.45),
+        0 0 30px rgba(88,101,242,.08),
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.glass:hover{
+    transform: translateY(-4px);
+
+    border-color: rgba(88,101,242,.25);
+
+    box-shadow:
+        0 18px 55px rgba(0,0,0,.55),
+        0 0 40px rgba(88,101,242,.18),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
 .banner-gradient { background: linear-gradient(180deg, transparent 0%, rgba(24, 25, 34, 1) 100%); }
 .status-online { background: #23a55a; }
 .status-idle { background: #f0b232; }
@@ -22,8 +84,33 @@
 .status-offline { background: #80848e; }
 .avatar-wrapper { position: relative; width: 128px; height: 128px; }
 .avatar-deco { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 142px; height: 142px; pointer-events: none; z-index: 10; }
-.avatar-img { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; border: 6px solid #181922; cursor: pointer; transition: transform 0.3s ease; background: #2a2b38; }
-.avatar-img:hover { transform: scale(1.05); }
+.avatar-img{
+    width:128px;
+    height:128px;
+    border-radius:50%;
+    object-fit:cover;
+    border:6px solid #181922;
+    cursor:pointer;
+    background:#2a2b38;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.avatar-img:hover{
+
+    transform:
+        scale(1.08);
+
+    border-color:
+        rgba(88,101,242,.45);
+
+    box-shadow:
+        0 0 25px rgba(88,101,242,.45),
+        0 0 60px rgba(88,101,242,.25);
+}
 .status-indicator { position: absolute; bottom: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; border: 6px solid #181922; z-index: 11; }
 .modal-avatar-deco { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 135px; height: 135px; pointer-events: none; z-index: 10; }
 .loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a1b24 0%, #0f0f14 100%); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
@@ -54,7 +141,9 @@
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 9998; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem; }
 .modal-overlay.active { opacity: 1; visibility: visible; }
 .modal-content { transform: scale(0.9); transition: transform 0.3s ease; }
-.modal-overlay.active.modal-content { transform: scale(1); }
+.modal-overlay.active .modal-content{
+    transform:scale(1);
+}
 .music-player { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9997; transition: all 0.3s ease; }
 .music-player:hover { transform: translateX(-50%) scale(1.05); }
     @media (max-width: 450px) {
@@ -71,7 +160,7 @@
 </head>
 <body class="bg-grid min-h-screen flex items-center justify-center p-4 md:p-6">
 <audio id="bgMusic" loop preload="metadata">
-   <source src=".../luhod.mp3" type="audio/mpeg">
+   <source src="luhod.mp3" type="audio/mpeg">
     Your browser does not support audio playback.
 </audio>
 
@@ -228,9 +317,12 @@ document.addEventListener('keydown', e => {
 });
 
 // Obscured User ID
-const USER_ID = btoa('1250654354344775703');
-const getRealId = () => atob(USER_ID);
-const LANYARD_API = () => `https://api.lanyard.rest/v1/users/${getRealId()}`;
+const CONFIG = {
+    USER_ID: "1250654354344775703"
+};
+
+const LANYARD_API = () =>
+`https://api.lanyard.rest/v1/users/${CONFIG.USER_ID}`;
 
 // Badge definitions
 const BADGES = {
@@ -565,7 +657,7 @@ async function fetchLanyard() {
         console.warn('Using default data:', error);
         updateProfile({
             discord_user: {
-                id: getRealId(),
+                id: CONFIG.USER_ID,
                 username: 'leonky.2',
                 global_name: 'Leon',
                 public_flags: 0
@@ -580,7 +672,12 @@ async function fetchLanyard() {
 // Initialize App
 async function initApp() {
     startFakeLoading();
-    await fetchLanyard();
+
+    await Promise.all([
+        fetchLanyard(),
+        new Promise(resolve => setTimeout(resolve, 1800))
+    ]);
+
     finishLoading();
 }
 
@@ -606,7 +703,7 @@ function connectWebSocket() {
     ws.onopen = () => {
         ws.send(JSON.stringify({
             op: 2,
-            d: { subscribe_to_id: getRealId() }
+            d: { subscribe_to_id: CONFIG.USER_ID }
         }));
     };
     
@@ -624,7 +721,6 @@ function connectWebSocket() {
 // Start everything
 initApp();
 connectWebSocket();
-setInterval(fetchLanyard, 60000);
 </script>
 </body>
 </html>

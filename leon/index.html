@@ -5,8 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.discordapp.com https://*.lanyard.rest https://cdnjs.cloudflare.com https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://via.placeholder.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data: https://*.discordapp.com https://*.lanyard.rest https://cdn.discordapp.com https://via.placeholder.com; media-src 'self'; connect-src 'self' wss://api.lanyard.rest https://api.lanyard.rest;">
-<title>Leon | PUBLIC AZURA</title>
+<meta http-equiv="Content-Security-Policy"
+content="
+default-src 'self';
+script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;
+style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com;
+font-src https://fonts.gstatic.com;
+img-src 'self' data: https://cdn.discordapp.com https://via.placeholder.com;
+connect-src https://api.lanyard.rest wss://api.lanyard.rest;
+media-src 'self';
+">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -355,31 +363,25 @@ let isPlaying = false;
 
 bgMusic.volume = 0.3;
 
-document.addEventListener('click', () => {
-    if (!isPlaying && bgMusic.querySelector('source') && bgMusic.querySelector('source').src) {
-        bgMusic.play().then(() => {
-            isPlaying = true;
-            playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
-        }).catch(e => console.log('Audio unavailable:', e));
-    }
-}, { once: true });
 
-playPauseBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (!bgMusic.querySelector('source') ||!bgMusic.querySelector('source').src) {
-        console.log('No audio source set');
-        return;
-    }
-    if (bgMusic.paused) {
-        bgMusic.play();
-        playPauseBtn.innerHTML = '<i class="fas fa-pause text-sm"></i>';
-        isPlaying = true;
-    } else {
-        bgMusic.pause();
-        playPauseBtn.innerHTML = '<i class="fas fa-play text-sm"></i>';
-        isPlaying = false;
+playPauseBtn.addEventListener("click", async () => {
+    try {
+        if (bgMusic.paused) {
+            await bgMusic.play();
+            playPauseBtn.innerHTML =
+                '<i class="fas fa-pause text-sm"></i>';
+            isPlaying = true;
+        } else {
+            bgMusic.pause();
+            playPauseBtn.innerHTML =
+                '<i class="fas fa-play text-sm"></i>';
+            isPlaying = false;
+        }
+    } catch (err) {
+        console.error(err);
     }
 });
+
 
 volumeSlider.addEventListener('input', (e) => {
     bgMusic.volume = parseFloat(e.target.value);

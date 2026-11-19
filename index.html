@@ -9,87 +9,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#050505;--card:#0c0c0d;--line:rgba(255,255,255,.08);--text:#f4f4f5;--muted:#a1a1a8;--online:#3ba55d;--idle:#faa81a;--dnd:#ed4245;--off:#747f8d;--rx:0deg;--ry:0deg}
-*{box-sizing:border-box}html,body{margin:0;height:100%}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
 body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:var(--text);font-family:"Inter",system-ui,sans-serif;overflow-x:hidden}
 
 /* ========== LOADING SCREEN ========== */
-#loading-screen{
-  position: fixed;
-  inset: 0;
-  background: #050505;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  transition: opacity .6s ease, visibility .6s ease;
-  overflow: hidden;
-}
-
-#loading-screen.hidden{
-  opacity: 0;
-  visibility: hidden;
-}
-
-.loading-gif{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: .85;
-}
-
-.loading-text{
-  position: relative;
-  z-index: 1;
-  font-family: "Fredoka", sans-serif;
-  font-size: clamp(1rem, 3vw, 1.8rem);
-  color: var(--text);
-  letter-spacing: .1em;
-  text-align: center;
-  padding: 0 20px;
-  text-shadow: 0 0 10px #000, 0 0 20px #000;
-}
-
-.loading-dots{
-  display: inline-flex;
-  gap: 2px;
-}
-
-.loading-dots span{
-  animation: bounce 1.4s infinite ease-in-out both;
-}
-
-.loading-dots span:nth-child(2){
-  animation-delay: .2s;
-}
-
-.loading-dots span:nth-child(3){
-  animation-delay: .4s;
-}
-
-@keyframes bounce{
-  0%, 80%, 100%{
-    transform: scale(.6);
-    opacity: .5;
-  }
-  40%{
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
+#loading-screen{position:fixed;inset:0;background:#050505;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .6s ease,visibility .6s ease;overflow:hidden}
+#loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loading-gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}
+.loading-text{position:relative;z-index:1;font-family:"Fredoka",sans-serif;font-size:clamp(1rem,3vw,1.8rem);color:var(--text);letter-spacing:.1em;text-align:center;padding:0 20px;text-shadow:0 0 10px #000,0 0 20px #000}
+.loading-dots{display:inline-flex;gap:2px}
+.loading-dots span{animation:bounce 1.4s infinite ease-in-out both}
+.loading-dots span:nth-child(2){animation-delay:.2s}
+.loading-dots span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
 
 #stars{position:fixed;inset:0;z-index:0}
 .stage{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;gap:34px;padding:40px 20px;perspective:1400px}
 .card{background:linear-gradient(180deg,#121213,var(--card));border:1px solid var(--line);border-radius:26px;box-shadow:0 30px 60px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.04);transition:transform .25s ease-out,opacity .5s ease,visibility .5s ease;transform-style:preserve-3d;opacity:0;visibility:hidden}
 .card.visible{opacity:1;visibility:visible;animation:in .9s ease both}
+.mid.visible{animation-delay:.1s}
+.right.visible{animation-delay:.2s}
 @keyframes in{from{opacity:0;transform:translateY(24px) scale(.97)}}
 .left{width:340px;padding:20px;transform:rotateY(calc(11deg + var(--ry))) rotateX(var(--rx)) rotateZ(-1.5deg)}
-.mid{width:384px;overflow:hidden;animation-delay:.1s;transform:rotateX(var(--rx)) rotateY(var(--ry))}
-.right{width:352px;padding:24px 26px;animation-delay:.2s;transform:rotateY(calc(-11deg + var(--ry))) rotateX(var(--rx)) rotateZ(1.5deg)}
+.mid{width:384px;overflow:hidden;transform:rotateX(var(--rx)) rotateY(var(--ry))}
+.right{width:352px;padding:24px 26px;transform:rotateY(calc(-11deg + var(--ry))) rotateX(var(--rx)) rotateZ(1.5deg)}
 /* left */
 .frame{border-radius:18px;overflow:hidden;aspect-ratio:3/4.1;background:#000;border:1px solid var(--line)}
 .frame img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05)}
@@ -99,6 +43,7 @@ body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:va
 .av{position:relative;width:172px;height:172px}
 .av .a{position:absolute;inset:12%;width:76%;height:76%;border-radius:50%;object-fit:cover;background:#222}
 .av .d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.av .d[hidden]{display:none}
 .dot{position:absolute;right:20px;bottom:20px;width:24px;height:24px;border-radius:50%;border:4px solid var(--card);background:var(--off)}
 .dot.online{background:var(--online);--r:rgba(59,165,93,.7);animation:ring 2s infinite}
 .dot.idle{background:var(--idle);--r:rgba(250,168,26,.7);animation:ring 2.4s infinite}
@@ -113,29 +58,39 @@ body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:va
 .chip{font-size:.76rem;padding:3px 10px;border-radius:999px;background:#1a1a1c;border:1px solid var(--line);color:var(--text)}
 .row{width:100%;background:#141416;border:1px solid var(--line);border-radius:14px;padding:10px 14px;display:flex;gap:10px;align-items:center;text-align:left}
 .row[hidden]{display:none}
-.row .ic{font-size:22px;flex:none}.row .ic img{width:24px;height:24px;object-fit:contain;display:block}
-.row .t{font-size:.72rem;color:var(--muted)}.row .x{overflow-wrap:anywhere;white-space:pre-wrap;font-size:.95rem}
-.row.upd{animation:flash .9s ease}@keyframes flash{from{background:#2c2c32}to{background:#141416}}
+.row .ic{font-size:22px;flex:none}
+.row .ic img{width:24px;height:24px;object-fit:contain;display:block}
+.row .t{font-size:.72rem;color:var(--muted)}
+.row .x{overflow-wrap:anywhere;white-space:pre-wrap;font-size:.95rem}
+.row.upd{animation:flash .9s ease}
+@keyframes flash{from{background:#2c2c32}to{background:#141416}}
 .soc{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap;justify-content:center}
 .soc a{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:#d4d4d8;background:radial-gradient(circle at 35% 30%,#2a2a2d,#121214);border:1px solid var(--line);box-shadow:0 6px 14px rgba(0,0,0,.5);transition:transform .2s,color .2s,box-shadow .2s}
 .soc a:hover{transform:translateY(-4px);color:#fff;box-shadow:0 10px 22px rgba(255,255,255,.12)}
 .soc svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.msg{font-size:.85rem;color:var(--muted)}.err{color:#ffb3b5}
+.msg{font-size:.85rem;color:var(--muted)}
+.err{color:#ffb3b5}
 /* right */
 .np{display:flex;justify-content:space-between;align-items:center;font-size:.68rem;letter-spacing:.18em;font-weight:600;color:#d4d4d8}
 .eqi{display:inline-flex;gap:2px;align-items:flex-end;height:14px}
-.eqi i{width:3px;background:#fff;height:4px}.playing .eqi i{animation:eq 1s ease-in-out infinite}.eqi i:nth-child(2){animation-delay:-.4s}.eqi i:nth-child(3){animation-delay:-.7s}
+.eqi i{width:3px;background:#fff;height:4px}
+.playing .eqi i{animation:eq 1s ease-in-out infinite}
+.eqi i:nth-child(2){animation-delay:-.4s}
+.eqi i:nth-child(3){animation-delay:-.7s}
 @keyframes eq{0%,100%{height:3px}50%{height:14px}}
 .cover{width:100%;aspect-ratio:2.2/1;object-fit:cover;border-radius:12px;margin:14px 0;background:#18181a;filter:grayscale(1) contrast(1.1);display:block}
 .title{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.2rem;line-height:1.2;overflow-wrap:anywhere}
 .artist{color:var(--muted);font-size:.88rem;margin-top:4px}
-.prog{margin-top:16px}.tr{height:3px;background:rgba(255,255,255,.14);border-radius:3px;cursor:pointer;position:relative}
+.prog{margin-top:16px}
+.tr{height:3px;background:rgba(255,255,255,.14);border-radius:3px;cursor:pointer;position:relative}
 .tr i{position:absolute;left:0;top:0;bottom:0;width:0;background:#fff;border-radius:3px}
 .tm{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:6px}
 .ctl{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:16px}
 .ctl button{border:1px solid var(--line);background:radial-gradient(circle at 35% 30%,#2a2a2d,#141416);color:#fff;border-radius:50%;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;transition:transform .15s}
-.ctl button.big{width:54px;height:54px}.ctl button:hover{transform:scale(1.08)}
-.ctl svg{width:16px;height:16px;fill:currentColor}.ctl .big svg{width:20px;height:20px}
+.ctl button.big{width:54px;height:54px}
+.ctl button:hover{transform:scale(1.08)}
+.ctl svg{width:16px;height:16px;fill:currentColor}
+.ctl .big svg{width:20px;height:20px}
 .wave{display:flex;gap:3px;align-items:center;justify-content:center;height:22px;margin-top:14px}
 .wave i{width:2px;height:4px;background:#8a8a90;border-radius:2px;transition:height .15s}
 .vol{display:flex;align-items:center;gap:10px;margin-top:12px;color:#d4d4d8}
@@ -153,13 +108,12 @@ a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 <!-- ========== LOADING SCREEN ========== -->
 <div id="loading-screen">
-  <img src="leon.gif" alt="Loading…" class="loading-gif">
+  <img id="loadingGif" src="leon.gif" alt="" class="loading-gif">
   <div class="loading-text">
-    Kung ang english ng matigas na bato ay hard rock, pwede ba kitang ma-hardfuck?<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+    <span id="loadingText">Loading</span><span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
   </div>
 </div>
-<!-- ===================================== -->
-  
+
 <canvas id="stars"></canvas>
 <main class="stage" id="stage">
 
@@ -203,12 +157,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 <script>
 /* ================= EDIT DITO ================= */
 const DISCORD_ID = "1250654354344775703";
-const NOTE_KEY   = "OTEN OTEN";
+/* Lanyard KV key: letters, numbers at underscore lang (bawal ang space) */
+const NOTE_KEY   = "note";
 const IMAGE_URL  = "leon2.jpg";
 const SOCIALS = [
   { icon: "discord",   url: "https://discord.com/users/1250654354344775703", label: "Discord" },
   { icon: "tiktok",    url: "https://www.tiktok.com/@leonexclsv_",           label: "TikTok" },
-  { icon: "instagram", url: "https://www.instagram.com/dfw_leoky",         label: "Instagram" }
+  { icon: "instagram", url: "https://www.instagram.com/dfw_leoky",           label: "Instagram" }
 ];
 const TRACKS = [
   { title: "White Lady", artist: "Uncle Dags feat. Buensa & Niño Armani", src: "White Lady - Uncle Dags (feat. Buensa & Niño Armani).mp3", cover: "blinsk.jpg" },
@@ -217,30 +172,28 @@ const TRACKS = [
 ];
 
 /* ========== LOADING SCREEN SETTINGS ========== */
-const LOADING_GIF  = "leon.gif";   // Palitan ang GIF filename
-const LOADING_TEXT = "Kung ang english ng matigas na bato ay hard rock, pwede ba kitang ma-hardfuck?";  // Palitan ang text na gusto mo
-const LOADING_DELAY = 1000;            // Ilang milisec bago maglaho (1500 = 1.5 seconds)
+const LOADING_GIF   = "leon.gif";
+const LOADING_TEXT  = "Kung ang english ng matigas na bato ay hard rock, pwede ba kitang ma-hardfuck?";
+const LOADING_DELAY = 1000; // minimum na tagal (ms) bago maglaho
 /* ============================================= */
 
 const $ = (id) => document.getElementById(id);
 const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
 const fmt = (s) => { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
 
-/* ---------- Loading Screen Hide ---------- */
+/* ---------- Loading Screen ---------- */
+$("loadingGif").src = LOADING_GIF;
+$("loadingText").textContent = LOADING_TEXT;
+let pageLoaded = document.readyState === "complete", delayDone = false, finished = false;
 function finishLoading() {
+  if (finished) return; finished = true;
   $("loading-screen").classList.add("hidden");
-  document.querySelectorAll(".card").forEach(card => card.classList.add("visible"));
+  document.querySelectorAll(".card").forEach((c) => c.classList.add("visible"));
 }
-function startLoadingSequence() {
-  setTimeout(finishLoading, LOADING_DELAY);
-}
-
-// Agad na magsisimula pag handa na ang DOM
-if (document.readyState === "complete" || document.readyState === "interactive") {
-  startLoadingSequence();
-} else {
-  document.addEventListener("DOMContentLoaded", startLoadingSequence);
-}
+function tryFinish() { if (pageLoaded && delayDone) finishLoading(); }
+setTimeout(() => { delayDone = true; tryFinish(); }, LOADING_DELAY);
+if (!pageLoaded) addEventListener("load", () => { pageLoaded = true; tryFinish(); });
+setTimeout(finishLoading, 6000); // safety: huwag mag-stuck kahit may file na ayaw mag-load
 
 /* ---------- stars ---------- */
 (function stars() {
@@ -259,24 +212,23 @@ if (matchMedia("(pointer:fine)").matches) addEventListener("pointermove", (e) =>
 
 /* ---------- socials ---------- */
 const ICONS = {
-  discord: '<path d="M5 6c2-1.2 4-1.8 7-1.8S17 4.8 19 6c1.5 3 2.300 6 2 10-1.500 1.200-3 1.800-4.500 2.200l-1-1.700M5 6C3.500 9 2.700 12 3 16c1.500 1.200 3 1.800 4.500 2.200l1-1.700M7.500 17.500c3 1 6 1 9 0"/><circle cx="9" cy="11.500" r="1.200" fill="currentColor"/><circle cx="15" cy="11.500" r="1.200" fill="currentColor"/>',
-  github: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S1
-8.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>',
+  discord: '<path d="M8.5 7.5c1.1-.3 2.2-.5 3.5-.5s2.4.2 3.5.5c1.6 2.3 2.6 5 2.9 8-1.2.9-2.5 1.4-3.9 1.7l-.8-1.4M8.5 7.5C6.9 9.8 5.9 12.5 5.6 15.5c1.2.9 2.5 1.4 3.9 1.7l.8-1.4M8.5 15.8c2.3.7 4.7.7 7 0"/><circle cx="9.5" cy="12" r="1.1" fill="currentColor"/><circle cx="14.5" cy="12" r="1.1" fill="currentColor"/>',
+  github: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>',
   youtube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5l5 2.5-5 2.5z" fill="currentColor"/>',
   tiktok: '<path d="M14 3v11a4 4 0 1 1-4-4"/><path d="M14 3c.4 2.6 2.2 4.2 5 4.5"/>',
   instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/>',
   roblox: '<rect x="5" y="5" width="14" height="14" rx="2" transform="rotate(15 12 12)"/><rect x="10" y="10" width="4" height="4" transform="rotate(15 12 12)"/>',
-  link: '<path d="M10 14a4 4 0 0 0 5.700 0l3-3a4 4 0 0 0-5.700-5.700l-1 1M14 10a4 4 0 0 0-5.700 0l-3 3a4 4 0 0 0 5.700 5.700l1-1"/>'
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
 };
 SOCIALS.forEach((s) => {
-  const a = el("a"); a.href = s.url; a.target = "_blank"; a.rel = "noopener"; a.title = s.label; a.setAttribute("aria-label", s.label);
-  a.innerHTML = `<svg viewBox="0 0 24 24">${ICONS[s.icon] || ICONS.link}</svg>`; $("soc").appendChild(a);
+  const a = el("a"); a.href = s.url; a.target = "_blank"; a.rel = "noopener noreferrer"; a.title = s.label; a.setAttribute("aria-label", s.label);
+  a.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[s.icon] || ICONS.link}</svg>`; $("soc").appendChild(a);
 });
 
 /* ---------- waveform ---------- */
 const bars = []; for (let i = 0; i < 38; i++) { const b = el("i"); $("wave").appendChild(b); bars.push(b); }
 let waveOn = false;
-setInterval(() => bars.forEach((b) => { b.style.height = (waveOn ? 3 + Math.random() * 18 : 3 + (Math.sin(performance.now() / 900 + b.offsetLeft) + 1) * 1.5) + "px"; }), 160);
+setInterval(() => bars.forEach((b, i) => { b.style.height = (waveOn ? 3 + Math.random() * 18 : 3 + (Math.sin(performance.now() / 900 + i) + 1) * 1.5) + "px"; }), 160);
 const setPlaying = (on) => { waveOn = on; $("player").classList.toggle("playing", on); };
 
 /* ---------- player ---------- */
@@ -286,18 +238,20 @@ const PLAY = "M7 4l13 8-13 8z", PAUSE = "M6 4h4v16H6zM14 4h4v16h-4z";
 
 function loadTrack(i, autoplay) {
   idx = (i + TRACKS.length) % TRACKS.length; const t = TRACKS[idx];
-  audio.src = t.src; $("pTitle").textContent = t.title; $("pArtist").textContent = t.artist || "";
-  $("cover").src = t.cover || $("av").src; $("tNow").textContent = "0:00"; $("fill").style.width = "0";
+  audio.src = encodeURI(t.src); $("pTitle").textContent = t.title; $("pArtist").textContent = t.artist || "";
+  if (t.cover) $("cover").src = encodeURI(t.cover); else if ($("av").getAttribute("src")) $("cover").src = $("av").src;
+  $("tNow").textContent = "0:00"; $("tEnd").textContent = "0:00"; $("fill").style.width = "0";
   if (autoplay) audio.play().catch(() => {});
 }
 if (!spotifyMode) {
   loadTrack(0, false);
-  $("play").onclick = () => (audio.paused ? audio.play() : audio.pause());
+  $("play").onclick = () => (audio.paused ? audio.play().catch(() => {}) : audio.pause());
   $("prev").onclick = () => loadTrack(idx - 1, true);
   $("next").onclick = () => loadTrack(idx + 1, true);
   audio.onplay = () => { $("playIc").innerHTML = `<path d="${PAUSE}"/>`; setPlaying(true); };
   audio.onpause = () => { $("playIc").innerHTML = `<path d="${PLAY}"/>`; setPlaying(false); };
   audio.onended = () => loadTrack(idx + 1, true);
+  audio.onerror = () => { $("pArtist").textContent = "Hindi ma-load ang audio file"; setPlaying(false); };
   audio.onloadedmetadata = () => ($("tEnd").textContent = fmt(audio.duration));
   audio.ontimeupdate = () => { if (audio.duration) { $("fill").style.width = audio.currentTime / audio.duration * 100 + "%"; $("tNow").textContent = fmt(audio.currentTime); } };
   $("tr").onclick = (e) => { const r = e.currentTarget.getBoundingClientRect(); if (audio.duration) audio.currentTime = (e.clientX - r.left) / r.width * audio.duration; };
@@ -308,7 +262,7 @@ let spTimer;
 function renderSpotify() {
   clearInterval(spTimer);
   if (!spotifyMode) return;
-  if (!sp) { $("pTitle").textContent = "Nothing playing"; $("pArtist").textContent = "Walang pinapakinggan sa Spotify"; $("cover").removeAttribute("src"); $("fill").style.width = "0"; $("tNow").textContent = "0:00"; $("tEnd").textContent = "0:00"; setPlaying(false); return; }
+  if (!sp) { $("npLabel").textContent = "NOW PLAYING"; $("pTitle").textContent = "Nothing playing"; $("pArtist").textContent = "Walang pinapakinggan sa Spotify"; $("cover").removeAttribute("src"); $("fill").style.width = "0"; $("tNow").textContent = "0:00"; $("tEnd").textContent = "0:00"; setPlaying(false); return; }
   $("npLabel").textContent = "NOW PLAYING · SPOTIFY";
   $("cover").src = sp.album_art_url || ""; $("pTitle").textContent = sp.song || ""; $("pArtist").textContent = (sp.artist || "").replace(/;/g, ",");
   setPlaying(true);
@@ -358,11 +312,25 @@ function render() {
   sp = data.listening_to_spotify ? data.spotify : null; renderSpotify();
 }
 const fail = (t) => { $("dn").textContent = "Can't load Discord"; $("msg").className = "msg err"; $("msg").textContent = t; };
-(async () => { try { const j = await (await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)).json(); if (!j.success) return fail("User not found. Sumali sa discord.gg/lanyard."); data = j.data; render(); } catch { fail("Network error. Subukan ulit mamaya."); } })();
+(async () => {
+  try {
+    const j = await (await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)).json();
+    if (!j.success) return fail("User not found. Sumali sa discord.gg/lanyard.");
+    data = j.data; render();
+  } catch { fail("Network error. Subukan ulit mamaya."); }
+})();
 (function ws() {
-  const s = new WebSocket("wss://api.lanyard.rest/socket"); let hb;
-  s.onmessage = (e) => { const m = JSON.parse(e.data); if (m.op === 1) { s.send(JSON.stringify({ op: 2, d: { subscribe_to_id: DISCORD_ID } })); hb = setInterval(() => s.send(JSON.stringify({ op: 3 })), m.d.heartbeat_interval); } else if (m.op === 0) { data = m.d; render(); } };
-  s.onclose = () => { clearInterval(hb); setTimeout(ws, 5000); }; s.onerror = () => s.close();
+  let hb, s;
+  try { s = new WebSocket("wss://api.lanyard.rest/socket"); } catch { return; }
+  s.onmessage = (e) => {
+    let m; try { m = JSON.parse(e.data); } catch { return; }
+    if (m.op === 1) {
+      s.send(JSON.stringify({ op: 2, d: { subscribe_to_id: DISCORD_ID } }));
+      hb = setInterval(() => { if (s.readyState === 1) s.send(JSON.stringify({ op: 3 })); }, m.d.heartbeat_interval);
+    } else if (m.op === 0) { data = m.d; render(); }
+  };
+  s.onclose = () => { clearInterval(hb); setTimeout(ws, 5000); };
+  s.onerror = () => s.close();
 })();
 </script>
 </body>

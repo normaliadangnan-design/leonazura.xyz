@@ -13,7 +13,6 @@
 body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:var(--text);font-family:"Inter",system-ui,sans-serif;overflow-x:hidden}
 
 /* ========== LOADING SCREEN ========== */
-/* ========== LOADING SCREEN ========== */
 #loading-screen{
   position:fixed;
   inset:0;
@@ -23,14 +22,15 @@ body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:va
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:32px;
+  gap:24px;
   transition:opacity .6s ease,visibility .6s ease
 }
 #loading-screen.hidden{opacity:0;visibility:hidden}
 .loading-gif{
-  width:min(80%, 500px);
-  height:auto;
-  object-fit:contain
+  width: min(95%, 900px);
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain
 }
 .loading-text{
   font-family:"Fredoka",sans-serif;
@@ -45,6 +45,7 @@ body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:va
 .loading-dots span:nth-child(2){animation-delay:.2s}
 .loading-dots span:nth-child(3){animation-delay:.4s}
 @keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
+
 
 #stars{position:fixed;inset:0;z-index:0}
 .stage{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;gap:34px;padding:40px 20px;perspective:1400px}
@@ -183,7 +184,7 @@ const TRACKS = [
 /* ========== LOADING SCREEN SETTINGS ========== */
 const LOADING_GIF  = "leon.gif";   // Palitan ang GIF filename
 const LOADING_TEXT = "Welcome, Leon";  // Palitan ang text na gusto mo
-const LOADING_DELAY = 1500;            // Ilang milisec bago maglaho (1500 = 1.5 seconds)
+const LOADING_DELAY = 1200;            // Ilang milisec bago maglaho (1500 = 1.5 seconds)
 /* ============================================= */
 
 const $ = (id) => document.getElementById(id);

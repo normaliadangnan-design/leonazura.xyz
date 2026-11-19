@@ -231,10 +231,16 @@ function finishLoading() {
   $("loading-screen").classList.add("hidden");
   document.querySelectorAll(".card").forEach(card => card.classList.add("visible"));
 }
-window.addEventListener("load", () => {
+function startLoadingSequence() {
   setTimeout(finishLoading, LOADING_DELAY);
-  
-});
+}
+
+// Agad na magsisimula pag handa na ang DOM
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  startLoadingSequence();
+} else {
+  document.addEventListener("DOMContentLoaded", startLoadingSequence);
+}
 
 /* ---------- stars ---------- */
 (function stars() {

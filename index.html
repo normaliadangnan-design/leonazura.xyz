@@ -12,39 +12,61 @@
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
 body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:var(--text);font-family:"Inter",system-ui,sans-serif;overflow-x:hidden}
+img:not([src]){visibility:hidden}
 
 /* ========== LOADING SCREEN ========== */
-#loading-screen{position:fixed;inset:0;background:#050505;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .6s ease,visibility .6s ease;overflow:hidden}
+#loading-screen{position:fixed;inset:0;background:#050505;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:opacity .7s ease,visibility .7s ease;overflow:hidden}
 #loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.loading-gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}
-.loading-text{position:relative;z-index:1;font-family:"Fredoka",sans-serif;font-size:clamp(1rem,3vw,1.8rem);color:var(--text);letter-spacing:.1em;text-align:center;padding:0 20px;text-shadow:0 0 10px #000,0 0 20px #000}
-.loading-dots{display:inline-flex;gap:2px}
+.loading-gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;transition:transform .9s ease,filter .9s ease}
+#loading-screen.hidden .loading-gif{transform:scale(1.1);filter:blur(8px)}
+.loading-text{position:relative;z-index:1;font-family:"Fredoka",sans-serif;font-size:clamp(1rem,3vw,1.8rem);color:var(--text);letter-spacing:.1em;text-align:center;padding:0 20px;text-shadow:0 0 10px #000,0 0 20px #000;min-height:1.4em}
+.caret{display:inline-block;width:2px;height:1em;background:#fff;margin-left:3px;vertical-align:-.12em;animation:blink .8s steps(1) infinite}
+#loading-screen.typed .caret{display:none}
+.loading-dots{display:inline-flex;gap:2px;opacity:0;transition:opacity .3s}
+#loading-screen.typed .loading-dots{opacity:1}
 .loading-dots span{animation:bounce 1.4s infinite ease-in-out both}
 .loading-dots span:nth-child(2){animation-delay:.2s}
 .loading-dots span:nth-child(3){animation-delay:.4s}
+.loading-bar{position:relative;z-index:1;width:min(280px,60vw);height:3px;background:rgba(255,255,255,.18);border-radius:3px;overflow:hidden;box-shadow:0 0 12px #000}
+.loading-bar i{display:block;height:100%;width:0;background:#fff;border-radius:3px}
+@keyframes blink{50%{opacity:0}}
 @keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
 
 #stars{position:fixed;inset:0;z-index:0}
 .stage{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;gap:34px;padding:40px 20px;perspective:1400px}
-.card{background:linear-gradient(180deg,#121213,var(--card));border:1px solid var(--line);border-radius:26px;box-shadow:0 30px 60px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.04);transition:transform .25s ease-out,opacity .5s ease,visibility .5s ease;transform-style:preserve-3d;opacity:0;visibility:hidden}
+.card{position:relative;background:linear-gradient(180deg,#121213,var(--card));border:1px solid var(--line);border-radius:26px;box-shadow:0 30px 60px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.04);transition:transform .25s ease-out,opacity .5s ease,visibility .5s ease;transform-style:preserve-3d;opacity:0;visibility:hidden}
+/* glare na sumusunod sa cursor */
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.10),transparent 45%);opacity:0;transition:opacity .3s}
+.card:hover::after{opacity:1}
 .card.visible{opacity:1;visibility:visible;animation:in .9s ease both}
 .mid.visible{animation-delay:.1s}
 .right.visible{animation-delay:.2s}
+/* idle float (gumagamit ng "translate" kaya hindi sumasalungat sa tilt) */
+.card.visible.float{animation:float var(--fd,7s) ease-in-out var(--fdel,0s) infinite}
+.left{--fd:8s;--fdel:-2s}
+.mid{--fd:6.5s;--fdel:-4s}
+.right{--fd:7.5s;--fdel:-1s}
 @keyframes in{from{opacity:0;transform:translateY(24px) scale(.97)}}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@keyframes fade{from{opacity:0}}
 .left{width:340px;padding:20px;transform:rotateY(calc(11deg + var(--ry))) rotateX(var(--rx)) rotateZ(-1.5deg)}
 .mid{width:384px;overflow:hidden;transform:rotateX(var(--rx)) rotateY(var(--ry))}
-.right{width:352px;padding:24px 26px;transform:rotateY(calc(-11deg + var(--ry))) rotateX(var(--rx)) rotateZ(1.5deg)}
+.right{width:352px;padding:24px 26px;transform:rotateY(calc(-11deg + var(--ry))) rotateX(var(--rx)) rotateZ(1.5deg);box-shadow:0 30px 60px rgba(0,0,0,.65),0 0 calc(var(--lvl,0)*70px) rgba(255,255,255,calc(var(--lvl,0)*.16)),inset 0 1px 0 rgba(255,255,255,.04)}
+/* pintig ng ambient glow sa loob ng player */
+.right::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at 50% 28%,rgba(255,255,255,calc(var(--lvl,0)*.14)),transparent 62%)}
 /* left */
 .frame{border-radius:18px;overflow:hidden;aspect-ratio:3/4.1;background:#000;border:1px solid var(--line)}
 .frame img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05)}
 /* middle */
 .top{height:150px;background:linear-gradient(180deg,#bdbdbd,#3a3a3a 70%,#0c0c0d)}
 .body{display:grid;justify-items:center;gap:10px;padding:0 24px 26px;margin-top:-84px;text-align:center}
-.av{position:relative;width:172px;height:172px}
+.av{position:relative;width:172px;height:172px;transition:transform .35s cubic-bezier(.2,1.4,.3,1);cursor:pointer}
+.av:hover{transform:scale(1.06) rotate(-2deg)}
+.av:active{transform:scale(.96)}
 .av .a{position:absolute;inset:12%;width:76%;height:76%;border-radius:50%;object-fit:cover;background:#222}
 .av .d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .av .d[hidden]{display:none}
-.dot{position:absolute;right:20px;bottom:20px;width:24px;height:24px;border-radius:50%;border:4px solid var(--card);background:var(--off)}
+.dot{position:absolute;right:20px;bottom:20px;width:24px;height:24px;border-radius:50%;border:4px solid var(--card);background:var(--off);transition:background .4s}
 .dot.online{background:var(--online);--r:rgba(59,165,93,.7);animation:ring 2s infinite}
 .dot.idle{background:var(--idle);--r:rgba(250,168,26,.7);animation:ring 2.4s infinite}
 .dot.dnd{background:var(--dnd);--r:rgba(237,66,69,.7);animation:ring 1.6s infinite}
@@ -55,7 +77,8 @@ body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:va
 .name{font-family:"Fredoka",sans-serif;font-weight:700;font-size:2.2rem;line-height:1;margin-top:6px;letter-spacing:.01em;text-shadow:0 2px 14px rgba(255,255,255,.15)}
 .handle{color:var(--muted);font-weight:500;letter-spacing:.06em;overflow-wrap:anywhere}
 .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-.chip{font-size:.76rem;padding:3px 10px;border-radius:999px;background:#1a1a1c;border:1px solid var(--line);color:var(--text)}
+.chip{font-size:.76rem;padding:3px 10px;border-radius:999px;background:#1a1a1c;border:1px solid var(--line);color:var(--text);transition:transform .2s,background .2s}
+.chip:hover{transform:translateY(-2px);background:#232326}
 .row{width:100%;background:#141416;border:1px solid var(--line);border-radius:14px;padding:10px 14px;display:flex;gap:10px;align-items:center;text-align:left}
 .row[hidden]{display:none}
 .row .ic{font-size:22px;flex:none}
@@ -64,9 +87,12 @@ body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:va
 .row .x{overflow-wrap:anywhere;white-space:pre-wrap;font-size:.95rem}
 .row.upd{animation:flash .9s ease}
 @keyframes flash{from{background:#2c2c32}to{background:#141416}}
+.fadein{animation:fadein .45s ease both}
+@keyframes fadein{from{opacity:0;transform:translateY(5px)}}
 .soc{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap;justify-content:center}
 .soc a{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:#d4d4d8;background:radial-gradient(circle at 35% 30%,#2a2a2d,#121214);border:1px solid var(--line);box-shadow:0 6px 14px rgba(0,0,0,.5);transition:transform .2s,color .2s,box-shadow .2s}
 .soc a:hover{transform:translateY(-4px);color:#fff;box-shadow:0 10px 22px rgba(255,255,255,.12)}
+.soc a:active{transform:scale(.9)}
 .soc svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .msg{font-size:.85rem;color:var(--muted)}
 .err{color:#ffb3b5}
@@ -78,9 +104,15 @@ body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:va
 .eqi i:nth-child(2){animation-delay:-.4s}
 .eqi i:nth-child(3){animation-delay:-.7s}
 @keyframes eq{0%,100%{height:3px}50%{height:14px}}
-.cover{width:100%;aspect-ratio:2.2/1;object-fit:cover;border-radius:12px;margin:14px 0;background:#18181a;filter:grayscale(1) contrast(1.1);display:block}
+.cw{margin:14px 0;border-radius:12px;transform:scale(calc(1 + var(--lvl,0)*.025));box-shadow:0 0 calc(var(--lvl,0)*34px) rgba(255,255,255,calc(var(--lvl,0)*.28))}
+.cover{width:100%;aspect-ratio:2.2/1;object-fit:cover;border-radius:12px;background:#18181a;filter:grayscale(1) contrast(1.1);display:block}
 .title{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.2rem;line-height:1.2;overflow-wrap:anywhere}
 .artist{color:var(--muted);font-size:.88rem;margin-top:4px}
+.trk{animation:trk .45s ease both}
+.artist.trk{animation-delay:.07s}
+.cover.trk{animation:trkc .55s ease both}
+@keyframes trk{from{opacity:0;transform:translateY(8px)}}
+@keyframes trkc{from{opacity:0;transform:scale(.94)}}
 .prog{margin-top:16px}
 .tr{height:3px;background:rgba(255,255,255,.14);border-radius:3px;cursor:pointer;position:relative}
 .tr i{position:absolute;left:0;top:0;bottom:0;width:0;background:#fff;border-radius:3px}
@@ -89,29 +121,50 @@ body{background:radial-gradient(ellipse at 50% 45%,#161616,#050505 70%);color:va
 .ctl button{border:1px solid var(--line);background:radial-gradient(circle at 35% 30%,#2a2a2d,#141416);color:#fff;border-radius:50%;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;transition:transform .15s}
 .ctl button.big{width:54px;height:54px}
 .ctl button:hover{transform:scale(1.08)}
+.ctl button:active{transform:scale(.88)}
 .ctl svg{width:16px;height:16px;fill:currentColor}
 .ctl .big svg{width:20px;height:20px}
+#playIc.swap{animation:iconpop .35s cubic-bezier(.2,1.6,.4,1)}
+@keyframes iconpop{from{transform:scale(.5) rotate(-40deg);opacity:.4}}
 .wave{display:flex;gap:3px;align-items:center;justify-content:center;height:22px;margin-top:14px}
-.wave i{width:2px;height:4px;background:#8a8a90;border-radius:2px;transition:height .15s}
+.wave i{width:2px;height:4px;background:#8a8a90;border-radius:2px;transition:height .08s linear}
+.playing .wave i{background:#d4d4d8}
 .vol{display:flex;align-items:center;gap:10px;margin-top:12px;color:#d4d4d8}
 .vol svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:3px;border-radius:3px;background:linear-gradient(90deg,#fff var(--p,70%),rgba(255,255,255,.14) var(--p,70%));outline:none}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#fff}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
 input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radius:50%;background:#fff}
 .ro .ctl,.ro .vol{display:none}
 a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
-@media(max-width:1020px){.stage{flex-direction:column;gap:24px}.left,.mid,.right{width:min(384px,100%);transform:none!important}.left{order:3}.right{order:2}.mid{order:1}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* mobile: may tilt pa rin (gyro), walang !important kaya buhay ang entrance animation */
+@media(max-width:1020px){
+  .stage{flex-direction:column;gap:24px}
+  .left,.mid,.right{width:min(384px,100%);transform:rotateX(var(--rx)) rotateY(var(--ry))}
+  .left{order:3}.right{order:2}.mid{order:1}
+}
+
+/* reduce motion: tinatanggal lang ang malalaking galaw, hindi lahat ng animation */
+@media(prefers-reduced-motion:reduce){
+  .card.visible{animation:fade .4s both}
+  .card.visible.float{animation:none}
+  .card::after{display:none}
+  .loading-dots span,.bub,.eqi i,.dot,.trk,.fadein,#playIc.swap,.caret{animation:none!important}
+  .av:hover,.ctl button:hover,.chip:hover,.soc a:hover{transform:none}
+  .loading-gif,#loading-screen.hidden .loading-gif{transition:none;transform:none;filter:none}
+}
 </style>
 </head>
 <body>
 
 <!-- ========== LOADING SCREEN ========== -->
 <div id="loading-screen">
-  <img id="loadingGif" src="leon.gif" alt="" class="loading-gif">
+  <img id="loadingGif" src="leon.gif" alt="" class="loading-gif" onerror="this.style.display='none'">
   <div class="loading-text">
-    <span id="loadingText">Loading</span><span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+    <span id="loadingText"></span><span class="caret"></span><span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
   </div>
+  <div class="loading-bar"><i id="loadingFill"></i></div>
 </div>
 
 <canvas id="stars"></canvas>
@@ -140,7 +193,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
   <section class="card right" id="player" aria-label="Now playing">
     <div class="np"><span id="npLabel">NOW PLAYING</span><span class="eqi"><i></i><i></i><i></i></span></div>
-    <img class="cover" id="cover" alt="Cover">
+    <div class="cw"><img class="cover" id="cover" alt="Cover"></div>
     <div class="title" id="pTitle">Nothing playing</div>
     <div class="artist" id="pArtist"></div>
     <div class="prog"><div class="tr" id="tr"><i id="fill"></i></div><div class="tm"><span id="tNow">0:00</span><span id="tEnd">0:00</span></div></div>
@@ -174,41 +227,95 @@ const TRACKS = [
 /* ========== LOADING SCREEN SETTINGS ========== */
 const LOADING_GIF   = "leon.gif";
 const LOADING_TEXT  = "Kung ang english ng matigas na bato ay hard rock, pwede ba kitang ma-hardfuck?";
-const LOADING_DELAY = 1200; // minimum na tagal (ms) bago maglaho
+const LOADING_DELAY = 3000; // minimum na tagal (ms) bago maglaho
 /* ============================================= */
 
 const $ = (id) => document.getElementById(id);
 const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
 const fmt = (s) => { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const replay = (e, cls) => { e.classList.remove(cls); void e.offsetWidth; e.classList.add(cls); };
+const setText = (id, v) => { const e = $(id); if (e.textContent === v) return; e.textContent = v; replay(e, "fadein"); };
+const REDUCE = matchMedia("(prefers-reduced-motion:reduce)").matches;
+let level = 0; // 0..1 lakas ng tugtog (ginagamit ng glow, cover at stars)
 
 /* ---------- Loading Screen ---------- */
 $("loadingGif").src = LOADING_GIF;
-$("loadingText").textContent = LOADING_TEXT;
+{
+  const chars = Array.from(LOADING_TEXT), lt = $("loadingText"), ls = $("loading-screen");
+  if (REDUCE) { lt.textContent = LOADING_TEXT; ls.classList.add("typed"); }
+  else {
+    let n = 0;
+    const tm = setInterval(() => { n++; lt.textContent = chars.slice(0, n).join(""); if (n >= chars.length) { clearInterval(tm); ls.classList.add("typed"); } }, Math.max(15, LOADING_DELAY * .8 / chars.length));
+  }
+  const lf = $("loadingFill");
+  lf.style.transition = "width " + LOADING_DELAY + "ms cubic-bezier(.2,.7,.2,1)";
+  requestAnimationFrame(() => requestAnimationFrame(() => { lf.style.width = "92%"; }));
+}
 let pageLoaded = document.readyState === "complete", delayDone = false, finished = false;
 function finishLoading() {
   if (finished) return; finished = true;
-  $("loading-screen").classList.add("hidden");
-  document.querySelectorAll(".card").forEach((c) => c.classList.add("visible"));
+  const lf = $("loadingFill"); lf.style.transition = "width .25s ease"; lf.style.width = "100%";
+  setTimeout(() => {
+    $("loading-screen").classList.add("hidden");
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((c) => c.classList.add("visible"));
+    if (!REDUCE) setTimeout(() => cards.forEach((c) => c.classList.add("float")), 1400); // simulan ang idle float pagkatapos ng entrance
+  }, 280);
 }
 function tryFinish() { if (pageLoaded && delayDone) finishLoading(); }
 setTimeout(() => { delayDone = true; tryFinish(); }, LOADING_DELAY);
 if (!pageLoaded) addEventListener("load", () => { pageLoaded = true; tryFinish(); });
-setTimeout(finishLoading, 6000); // safety: huwag mag-stuck kahit may file na ayaw mag-load
+setTimeout(finishLoading, LOADING_DELAY + 4000); // safety: huwag mag-stuck kahit may file na ayaw mag-load
+
+/* ---------- left picture (hindi na naghihintay sa Discord) ---------- */
+if (IMAGE_URL) $("hero").src = encodeURI(IMAGE_URL);
 
 /* ---------- stars ---------- */
 (function stars() {
   const c = $("stars"), x = c.getContext("2d"); let w, h, S = [];
   const size = () => { w = c.width = innerWidth; h = c.height = innerHeight; S = Array.from({ length: Math.round(w * h / 9000) }, () => ({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.4 + .3, a: Math.random(), v: Math.random() * .08 + .02, t: Math.random() * 6 })); };
   size(); addEventListener("resize", size);
-  (function loop() { x.clearRect(0, 0, w, h); for (const s of S) { s.y -= s.v; s.t += .02; if (s.y < -2) { s.y = h + 2; s.x = Math.random() * w; } x.globalAlpha = .25 + .55 * Math.abs(Math.sin(s.t + s.a * 6)); x.fillStyle = "#fff"; x.beginPath(); x.arc(s.x, s.y, s.r, 0, 7); x.fill(); } requestAnimationFrame(loop); })();
+  (function loop() {
+    x.clearRect(0, 0, w, h);
+    for (const s of S) {
+      if (!REDUCE) { s.y -= s.v * (1 + level * 6); s.t += .02; }
+      if (s.y < -2) { s.y = h + 2; s.x = Math.random() * w; }
+      x.globalAlpha = clamp((REDUCE ? .5 : .25 + .55 * Math.abs(Math.sin(s.t + s.a * 6))) + level * .3, 0, 1);
+      x.fillStyle = "#fff"; x.beginPath(); x.arc(s.x, s.y, s.r, 0, 7); x.fill();
+    }
+    requestAnimationFrame(loop);
+  })();
 })();
 
-/* ---------- mouse tilt ---------- */
-if (matchMedia("(pointer:fine)").matches) addEventListener("pointermove", (e) => {
-  const s = $("stage").style;
-  s.setProperty("--ry", ((e.clientX / innerWidth - .5) * 8) + "deg");
-  s.setProperty("--rx", ((.5 - e.clientY / innerHeight) * 6) + "deg");
-});
+/* ---------- tilt: mouse (desktop) at gyroscope (mobile) ---------- */
+const tiltReset = () => { const s = $("stage").style; s.setProperty("--ry", "0deg"); s.setProperty("--rx", "0deg"); };
+if (!REDUCE) {
+  if (matchMedia("(pointer:fine)").matches) {
+    addEventListener("pointermove", (e) => {
+      const s = $("stage").style;
+      s.setProperty("--ry", ((e.clientX / innerWidth - .5) * 8) + "deg");
+      s.setProperty("--rx", ((.5 - e.clientY / innerHeight) * 6) + "deg");
+    });
+    document.addEventListener("mouseout", (e) => { if (!e.relatedTarget) tiltReset(); }); // bumabalik sa neutral
+    addEventListener("blur", tiltReset);
+    document.querySelectorAll(".card").forEach((c) => c.addEventListener("pointermove", (e) => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
+      c.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
+    }));
+  } else if ("DeviceOrientationEvent" in window) {
+    const on = () => addEventListener("deviceorientation", (e) => {
+      if (e.gamma == null || e.beta == null) return;
+      const s = $("stage").style;
+      s.setProperty("--ry", clamp(e.gamma * .2, -8, 8) + "deg");
+      s.setProperty("--rx", clamp(-(e.beta - 50) * .15, -6, 6) + "deg");
+    });
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      addEventListener("click", () => { DeviceOrientationEvent.requestPermission().then((r) => { if (r === "granted") on(); }).catch(() => {}); }, { once: true }); // iOS: kailangan ng tap
+    } else on();
+  }
+}
 
 /* ---------- socials ---------- */
 const ICONS = {
@@ -225,31 +332,63 @@ SOCIALS.forEach((s) => {
   a.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[s.icon] || ICONS.link}</svg>`; $("soc").appendChild(a);
 });
 
-/* ---------- waveform ---------- */
+/* ---------- waveform (totoong audio analyser, may fallback) ---------- */
 const bars = []; for (let i = 0; i < 38; i++) { const b = el("i"); $("wave").appendChild(b); bars.push(b); }
-let waveOn = false;
-setInterval(() => bars.forEach((b, i) => { b.style.height = (waveOn ? 3 + Math.random() * 18 : 3 + (Math.sin(performance.now() / 900 + i) + 1) * 1.5) + "px"; }), 160);
+let waveOn = false, actx = null, analyser = null, freq = null;
 const setPlaying = (on) => { waveOn = on; $("player").classList.toggle("playing", on); };
+
+(function tick() {
+  const t = performance.now() / 1000;
+  let sum = 0;
+  if (analyser && waveOn) {
+    analyser.getByteFrequencyData(freq);
+    const usable = Math.floor(freq.length * .75);
+    bars.forEach((b, i) => { const v = freq[Math.floor(i / bars.length * usable)] / 255; sum += v; b.style.height = (3 + v * 19) + "px"; });
+  } else {
+    bars.forEach((b, i) => {
+      const v = waveOn ? .22 + .5 * Math.abs(Math.sin(t * 4 + i * .6) * Math.cos(t * 2.3 + i * .35)) : (Math.sin(t * 1.1 + i * .4) + 1) * .08;
+      if (waveOn) sum += v; b.style.height = (3 + v * 19) + "px";
+    });
+  }
+  const target = waveOn ? clamp(sum / bars.length * 1.6, 0, 1) : 0;
+  level += (target - level) * .15;
+  $("player").style.setProperty("--lvl", level.toFixed(3));
+  requestAnimationFrame(tick);
+})();
 
 /* ---------- player ---------- */
 const audio = new Audio(); audio.volume = .7; audio.preload = "metadata";
-let idx = 0, spotifyMode = !TRACKS.length, sp = null;
+let idx = 0, spotifyMode = !TRACKS.length, sp = null, lastSpKey = "";
 const PLAY = "M7 4l13 8-13 8z", PAUSE = "M6 4h4v16H6zM14 4h4v16h-4z";
+/* analyser: gumagana lang kung naka-host (http/https) at same-origin ang mga mp3 */
+const CAN_ANALYSE = /^https?:$/.test(location.protocol) && TRACKS.every((t) => !/^(https?:)?\/\//i.test(t.src));
+function initAnalyser() {
+  if (actx || !CAN_ANALYSE) return;
+  try {
+    actx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = actx.createMediaElementSource(audio);
+    const an = actx.createAnalyser(); an.fftSize = 128; an.smoothingTimeConstant = .8;
+    src.connect(an); an.connect(actx.destination);
+    freq = new Uint8Array(an.frequencyBinCount); analyser = an;
+  } catch { actx = null; analyser = null; }
+}
+const trackAnim = () => { replay($("cover"), "trk"); replay($("pTitle"), "trk"); replay($("pArtist"), "trk"); };
 
 function loadTrack(i, autoplay) {
   idx = (i + TRACKS.length) % TRACKS.length; const t = TRACKS[idx];
   audio.src = encodeURI(t.src); $("pTitle").textContent = t.title; $("pArtist").textContent = t.artist || "";
   if (t.cover) $("cover").src = encodeURI(t.cover); else if ($("av").getAttribute("src")) $("cover").src = $("av").src;
   $("tNow").textContent = "0:00"; $("tEnd").textContent = "0:00"; $("fill").style.width = "0";
+  if (!REDUCE) trackAnim();
   if (autoplay) audio.play().catch(() => {});
 }
 if (!spotifyMode) {
   loadTrack(0, false);
-  $("play").onclick = () => (audio.paused ? audio.play().catch(() => {}) : audio.pause());
+  $("play").onclick = () => { if (audio.paused) { initAnalyser(); audio.play().catch(() => {}); } else audio.pause(); };
   $("prev").onclick = () => loadTrack(idx - 1, true);
   $("next").onclick = () => loadTrack(idx + 1, true);
-  audio.onplay = () => { $("playIc").innerHTML = `<path d="${PAUSE}"/>`; setPlaying(true); };
-  audio.onpause = () => { $("playIc").innerHTML = `<path d="${PLAY}"/>`; setPlaying(false); };
+  audio.onplay = () => { initAnalyser(); if (actx && actx.state === "suspended") actx.resume().catch(() => {}); $("playIc").innerHTML = `<path d="${PAUSE}"/>`; replay($("playIc"), "swap"); setPlaying(true); };
+  audio.onpause = () => { $("playIc").innerHTML = `<path d="${PLAY}"/>`; replay($("playIc"), "swap"); setPlaying(false); };
   audio.onended = () => loadTrack(idx + 1, true);
   audio.onerror = () => { $("pArtist").textContent = "Hindi ma-load ang audio file"; setPlaying(false); };
   audio.onloadedmetadata = () => ($("tEnd").textContent = fmt(audio.duration));
@@ -262,9 +401,10 @@ let spTimer;
 function renderSpotify() {
   clearInterval(spTimer);
   if (!spotifyMode) return;
-  if (!sp) { $("npLabel").textContent = "NOW PLAYING"; $("pTitle").textContent = "Nothing playing"; $("pArtist").textContent = "Walang pinapakinggan sa Spotify"; $("cover").removeAttribute("src"); $("fill").style.width = "0"; $("tNow").textContent = "0:00"; $("tEnd").textContent = "0:00"; setPlaying(false); return; }
+  if (!sp) { lastSpKey = ""; $("npLabel").textContent = "NOW PLAYING"; $("pTitle").textContent = "Nothing playing"; $("pArtist").textContent = "Walang pinapakinggan sa Spotify"; $("cover").removeAttribute("src"); $("fill").style.width = "0"; $("tNow").textContent = "0:00"; $("tEnd").textContent = "0:00"; setPlaying(false); return; }
   $("npLabel").textContent = "NOW PLAYING · SPOTIFY";
   $("cover").src = sp.album_art_url || ""; $("pTitle").textContent = sp.song || ""; $("pArtist").textContent = (sp.artist || "").replace(/;/g, ",");
+  const key = (sp.song || "") + "|" + (sp.artist || ""); if (key !== lastSpKey) { lastSpKey = key; if (!REDUCE) trackAnim(); }
   setPlaying(true);
   const t = () => { const { start, end } = sp.timestamps, n = Math.min(Date.now(), end); $("fill").style.width = Math.max(0, Math.min(100, (n - start) / (end - start) * 100)) + "%"; $("tNow").textContent = fmt((n - start) / 1000); $("tEnd").textContent = fmt((end - start) / 1000); };
   t(); spTimer = setInterval(t, 1000);
@@ -272,26 +412,29 @@ function renderSpotify() {
 
 /* ---------- Discord via Lanyard ---------- */
 const STATUS = { online: "Online", idle: "Idle", dnd: "Do Not Disturb", offline: "Offline" };
-let data = null;
+let data = null, lastChipKey = "";
 const flash = (id, v) => { const r = $(id); if (r.dataset.v !== undefined && r.dataset.v !== v) { r.classList.remove("upd"); void r.offsetWidth; r.classList.add("upd"); } r.dataset.v = v; };
 const avatarUrl = (u, size) => !u.avatar ? `https://cdn.discordapp.com/embed/avatars/${Number((BigInt(u.id) >> 22n) % 6n)}.png` : `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=${size}`;
 
 function render() {
   if (!data) return;
   const u = data.discord_user || {};
-  $("dn").textContent = u.global_name || u.display_name || u.username || "Unknown";
+  setText("dn", u.global_name || u.display_name || u.username || "Unknown");
   document.title = $("dn").textContent;
-  $("un").textContent = u.username ? "@" + u.username : "";
+  setText("un", u.username ? "@" + u.username : "");
   $("av").src = avatarUrl(u, 256);
-  $("hero").src = IMAGE_URL || avatarUrl(u, 512);
+  if (!IMAGE_URL) $("hero").src = avatarUrl(u, 512);
 
   const asset = u.avatar_decoration_data && u.avatar_decoration_data.asset, d = $("deco");
   d.hidden = !asset;
   if (asset) { const url = `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=240&passthrough=true`; if (d.dataset.s !== url) { d.dataset.s = url; d.onerror = () => { d.onerror = null; d.src = url.replace("&passthrough=true", ""); }; d.src = url; } }
 
   const st = data.discord_status || "offline"; $("dot").className = "dot " + st;
-  const chips = $("chips"); chips.textContent = ""; chips.appendChild(el("span", "chip", STATUS[st] || st));
-  [["active_on_discord_desktop", "Desktop"], ["active_on_discord_web", "Web"], ["active_on_discord_mobile", "Mobile"]].forEach(([k, n]) => data[k] && chips.appendChild(el("span", "chip", n)));
+  const devs = [["active_on_discord_desktop", "Desktop"], ["active_on_discord_web", "Web"], ["active_on_discord_mobile", "Mobile"]].filter(([k]) => data[k]);
+  const chips = $("chips"), ckey = st + "|" + devs.map((x) => x[1]).join(",");
+  chips.textContent = ""; chips.appendChild(el("span", "chip", STATUS[st] || st));
+  devs.forEach(([, n]) => chips.appendChild(el("span", "chip", n)));
+  if (ckey !== lastChipKey) { lastChipKey = ckey; if (!REDUCE) replay(chips, "fadein"); }
 
   const acts = data.activities || [];
   const c = acts.find((a) => a.type === 4), has = c && (c.state || c.emoji);
@@ -307,7 +450,8 @@ function render() {
   const note = data.kv && data.kv[NOTE_KEY]; $("rNote").hidden = !note; if (note) { $("nTx").textContent = note; flash("rNote", note); }
 
   const g = acts.find((a) => a.type !== 4 && a.name !== "Spotify");
-  $("msg").className = "msg"; $("msg").textContent = g ? ({ 1: "Streaming ", 2: "Listening to ", 3: "Watching ", 5: "Competing in " }[g.type] || "Playing ") + g.name + (g.details ? " · " + g.details : "") : "";
+  $("msg").className = "msg";
+  setText("msg", g ? ({ 1: "Streaming ", 2: "Listening to ", 3: "Watching ", 5: "Competing in " }[g.type] || "Playing ") + g.name + (g.details ? " · " + g.details : "") : "");
 
   sp = data.listening_to_spotify ? data.spotify : null; renderSpotify();
 }

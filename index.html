@@ -1295,7 +1295,7 @@ let actTimes = null;
 {
   const f = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila", hour: "numeric", minute: "2-digit", second: "2-digit" });
   const tickClock = () => {
-    $("clock").textContent = "🕒 PH time · " + f.format(new Date());
+    $("clock").textContent = "🕒 PH Time · " + f.format(new Date());
     const tm = $("aTm");
     if (actTimes) {
       const now = Date.now(); let txt = "";

@@ -1,0 +1,14 @@
+{
+  "name": "Leon",
+  "short_name": "Leon",
+  "description": "Leon — Discord profile, music and socials",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    { "src": "leon2.jpg", "sizes": "any", "type": "image/jpeg", "purpose": "any" }
+  ]
+}

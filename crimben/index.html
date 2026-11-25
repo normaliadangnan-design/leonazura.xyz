@@ -171,8 +171,8 @@ body.entered .card{opacity:1;transform:none}
     transition:.2s ease;
     z-index:20;
 }
-.avatar.open .profile-popup,
-.avatar:focus-within .profile-popup{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.avatar.open .profile-popup{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.avatar:has(:focus-visible) .profile-popup{opacity:1;visibility:visible;transform:translate(-50%,0)}
 @media (hover:hover){
     .avatar:hover .profile-popup{opacity:1;visibility:visible;transform:translate(-50%,0)}
 }
@@ -274,7 +274,7 @@ body.entered .card{opacity:1;transform:none}
 </style>
 <script>
 function titleFallback(){
-    document.getElementById('title').innerHTML = '<span class="title-fallback">@LEON</span>';
+    document.getElementById('title').innerHTML = '<span class="title-fallback">@crimben</span>';
 }
 </script>
 </head>
@@ -308,8 +308,8 @@ function titleFallback(){
                     <img id="popupDeco" class="popup-decoration" alt="" hidden>
                 </div>
                 <div class="popup-info">
-                    <div class="popup-nickname" id="popupNickname">𝙏𝙍 | 𝘾𝙧𝙞𝙢𝙗𝙚𝙣👑 </div>
-                    <div class="popup-name" id="popupUsername">@crimben </div>
+                    <div class="popup-nickname" id="popupNickname">𝙏𝙍 | 𝘾𝙧𝙞𝙢𝙗𝙚𝙣👑</div>
+                    <div class="popup-name" id="popupUsername">@crimben</div>
                     <div class="popup-status">
                         <span id="popupStatusDot" class="status-dot"></span>
                         <span id="popupStatusText">Loading...</span>
@@ -318,7 +318,7 @@ function titleFallback(){
                 </div>
             </div>
             <button type="button" class="avatar-button" id="avatarButton" aria-label="Ipakita ang profile">
-                <img id="avatarImg" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Leon Avatar">
+                <img id="avatarImg" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar ni Crimben">
             </button>
             <img id="decoImg" class="avatar-decoration" alt="" hidden>
         </div>
@@ -341,7 +341,7 @@ function titleFallback(){
             <a id="trackLink" href="#" target="_blank" rel="noopener noreferrer">Buksan sa Spotify ↗</a>
         </div>
         <div class="music-header">
-            <img id="musicAlbumArt" class="music-album-art" src="leonaise.webp" alt="Album Art">
+            <img id="musicAlbumArt" class="music-album-art" src="leonaise.webp" alt="Album Art" onerror="this.style.visibility='hidden'" onload="this.style.visibility='visible'">
             <div class="music-info">
                 <span class="music-title" id="musicTitle">ORIGIMAL</span>
                 <span class="music-artist" id="musicArtist">Uncle Dags ORIGIMAL</span>
@@ -394,7 +394,6 @@ $('avatarButton').addEventListener('click', () => $('avatar').classList.toggle('
 document.addEventListener('click', e => {
     if (!$('avatar').contains(e.target)) {
         $('avatar').classList.remove('open');
-        $('avatarButton').blur();
     }
 });
 
@@ -458,7 +457,7 @@ function showTrack(data) {
     $('trackLink').href = valid && data.track_id
         ? `https://open.spotify.com/track/${data.track_id}`
         : DEFAULT_TRACK.link;
-    $('musicSource').textContent = valid ? "Pinapakinggan ngayon ni Leon" : "Background music";
+    $('musicSource').textContent = valid ? "Pinapakinggan ngayon ni Crimben" : "Background music";
     $('progressBarContainer').classList.toggle('locked', valid);
 
     updatePlayState();
@@ -506,8 +505,8 @@ async function fetchData() {
             if (asset) setImage($(id), `https://cdn.discordapp.com/avatar-decoration-presets/${asset}.png?size=240&passthrough=true`);
         });
 
-        $('popupNickname').textContent = user.global_name || 'Leon';
-        $('popupUsername').textContent = `@${user.username || 'wtf.leon'}`;
+        $('popupNickname').textContent = user.global_name || user.username || 'Crimben';
+        $('popupUsername').textContent = `@${user.username || 'crimben'}`;
 
         const custom = d.activities?.find(a => a.type === 4);
         $('noteText').textContent = custom?.state || 'PA KISS NGA';

@@ -1521,7 +1521,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && (!
 
 (function () {
   /* ============ EDIT DITO ============ */
-  const BIO = ["dfw • Leon", "music • night drives", "Leon", "dm me on Discord!"];
+  const BIO = ["dfw • Leon", "Music • Young God", "Leon", "Dm me on Discord!"];
   const WX = { lat: 14.65, lon: 121.05, name: "Manila" };
   /* ================================= */
   const q = (id) => document.getElementById(id);
@@ -1638,6 +1638,145 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && (!
   fetch("https://api.open-meteo.com/v1/forecast?latitude=" + WX.lat + "&longitude=" + WX.lon + "&current_weather=true")
     .then((r) => r.json()).then((j) => { if (j.current_weather) { pw.hidden = false; tw.textContent = WX.name + " · " + Math.round(j.current_weather.temperature) + "°C"; } }).catch(() => {});
 })();
+
+
+  /* LEON POPUP v1: ilagay pagkatapos ng huling </script>, bago ang </body> */
+(function () {
+  /* ============ EDIT DITO ============ */
+  const ABOUT = {
+    text: "Ang init ng katawan ko, parang may hinahanap na yakap mo. 🔥Hindi ako nilalamig, pero bakit ikaw lang ang gusto kong katabi? 😏Warning: naka-in-heat mode ako ngayon, baka ikaw ang maging dahilan ng pag-init ko lalo. 🥵",
+    facts: [["Location", "Manila, PH"], ["Hilig", "Music • Young God"], ["Online", "Gabi, PH time"]]
+  };
+  const CONTACT = "Message me on Discord";
+  /* ================================= */
+  const q = (id) => document.getElementById(id);
+  const mk = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+
+  /* cleanup: itago ang mga hindi nakakatulong (title flicker, shooting stars, cursor glow/trail) */
+  try { Object.defineProperty(document, "title", { configurable: true, get() { return "Leon"; }, set() {} }); } catch (_) {}
+
+  const css = document.createElement("style");
+  css.textContent = `
+.shoot,.glow,#cTrail,#cRing{display:none!important}
+.toast{z-index:30}
+.morebtn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid rgba(var(--acc-rgb),.45);background:var(--chip);color:var(--text);font:600 .8rem "Fredoka",sans-serif;letter-spacing:.06em;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
+.morebtn:hover{transform:translateY(-2px);background:var(--chip2);box-shadow:0 8px 20px rgba(var(--acc-rgb),.18)}
+.morebtn:active{transform:scale(.95)}
+.morebtn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.pm{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:16px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.pm.open{opacity:1;visibility:visible}
+.pm-box{width:min(440px,100%);max-height:min(86vh,640px);display:flex;flex-direction:column;border-radius:24px;background:linear-gradient(180deg,var(--card1),var(--card2));border:1px solid var(--line);box-shadow:0 30px 70px var(--shadow),0 0 40px rgba(var(--acc-rgb),.12);transform:translateY(16px) scale(.96);transition:transform .35s cubic-bezier(.2,1.3,.3,1);overflow:hidden}
+.pm.open .pm-box{transform:none}
+.pm-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 0}
+.pm-title{font:700 1.15rem "Fredoka",sans-serif;color:var(--fg)}
+.pm-x{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--chip);color:var(--soc);display:grid;place-items:center;cursor:pointer;transition:transform .2s,color .2s}
+.pm-x:hover{transform:rotate(90deg);color:var(--fg)}
+.pm-x svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.pm-tabs{display:flex;gap:4px;margin:14px 18px 0;padding:3px;border-radius:999px;background:var(--row);border:1px solid var(--line)}
+.pm-tabs button{flex:1;border:0;border-radius:999px;padding:7px 8px;background:none;color:var(--muted);font:600 .78rem "Fredoka",sans-serif;cursor:pointer;transition:background .2s,color .2s}
+.pm-tabs button[aria-selected="true"]{background:var(--fg);color:var(--fg-inv)}
+.pm-body{padding:16px 18px 20px;overflow:auto;display:grid;gap:10px;align-content:start}
+.pm-body[hidden]{display:none}
+.pm-p{margin:0 0 4px;line-height:1.55;font-size:.92rem;color:var(--text)}
+.pm-fact{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:12px;background:var(--row);border:1px solid var(--line);font-size:.85rem}
+.pm-fact span:first-child{color:var(--muted)}
+.pm-link{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:var(--row);border:1px solid var(--line)}
+.pm-link .ico{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--chip);color:var(--soc);flex:none}
+.pm-link .ico svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pm-link .h{flex:1;min-width:0;display:grid}
+.pm-link .h b{font:600 .9rem "Fredoka",sans-serif}
+.pm-link .h small{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pm-link .b{border:1px solid var(--line);background:var(--chip);color:var(--text);border-radius:999px;padding:5px 11px;font:600 .72rem "Fredoka",sans-serif;cursor:pointer;text-decoration:none;transition:background .2s}
+.pm-link .b:hover{background:var(--chip2)}
+.pm-cta{display:flex;justify-content:center;padding:12px;border-radius:14px;background:var(--fg);color:var(--fg-inv);font:600 .9rem "Fredoka",sans-serif;text-decoration:none;transition:transform .2s}
+.pm-cta:hover{transform:translateY(-2px)}
+html.paused .pm,html.paused .pm-box{transition:none}
+@media(prefers-reduced-motion:reduce){.pm,.pm-box,.morebtn{transition:none}}
+`;
+  document.head.appendChild(css);
+
+  /* DOM */
+  const pm = mk("div", "pm"), box = mk("div", "pm-box");
+  pm.setAttribute("role", "dialog"); pm.setAttribute("aria-modal", "true"); pm.setAttribute("aria-label", "More about me");
+  const head = mk("div", "pm-head"), title = mk("div", "pm-title", "More about me");
+  const x = mk("button", "pm-x"); x.type = "button"; x.setAttribute("aria-label", "Close");
+  x.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  head.append(title, x);
+  const tabs = mk("div", "pm-tabs"); tabs.setAttribute("role", "tablist");
+  const names = [["about", "About"], ["links", "Links"], ["music", "Music"]], tbs = {}, panels = {};
+  names.forEach(([k, l]) => {
+    const b = mk("button", null, l); b.type = "button"; b.setAttribute("role", "tab"); b.dataset.k = k;
+    b.onclick = () => show(k); tabs.appendChild(b); tbs[k] = b;
+    const p = mk("div", "pm-body"); p.setAttribute("role", "tabpanel"); p.hidden = true; panels[k] = p;
+  });
+  box.append(head, tabs, panels.about, panels.links, panels.music); pm.appendChild(box); document.body.appendChild(pm);
+
+  function show(k) {
+    names.forEach(([n]) => { tbs[n].setAttribute("aria-selected", String(n === k)); tbs[n].tabIndex = n === k ? 0 : -1; panels[n].hidden = n !== k; });
+  }
+
+  /* About */
+  panels.about.appendChild(mk("p", "pm-p", ABOUT.text));
+  ABOUT.facts.forEach(([a, b]) => { const r = mk("div", "pm-fact"); r.append(mk("span", null, a), mk("span", null, b)); panels.about.appendChild(r); });
+
+  /* Links (galing sa SOCIALS mo) */
+  const handleOf = (s) => {
+    if (s.icon === "discord") return (q("un").textContent || "").replace(/^@/, "") || "Discord";
+    try { const p = new URL(s.url).pathname.split("/").filter(Boolean).pop() || ""; return p ? (p[0] === "@" ? p : "@" + p) : s.url; } catch (_) { return s.url; }
+  };
+  function renderLinks() {
+    const L = panels.links; L.textContent = "";
+    SOCIALS.forEach((s) => {
+      const r = mk("div", "pm-link"), ico = mk("span", "ico"), h = mk("div", "h");
+      ico.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[s.icon] || ICONS.link) + "</svg>";
+      h.append(mk("b", null, s.label), mk("small", null, handleOf(s)));
+      const c = mk("button", "b", "Copy"); c.type = "button";
+      c.onclick = async () => {
+        const v = s.icon === "discord" ? handleOf(s) : s.url;
+        try { await navigator.clipboard.writeText(v); toast("Copied!"); } catch (_) { toast("Hindi ma-copy"); }
+      };
+      const o = mk("a", "b", "Open"); o.href = s.url; o.target = "_blank"; o.rel = "noopener noreferrer";
+      r.append(ico, h, c, o); L.appendChild(r);
+    });
+    const d = SOCIALS.find((s) => s.icon === "discord");
+    if (d) { const a = mk("a", "pm-cta", CONTACT); a.href = d.url; a.target = "_blank"; a.rel = "noopener noreferrer"; L.appendChild(a); }
+  }
+
+  /* Music (galing sa TRACKS mo) */
+  const M = panels.music;
+  if (typeof spotifyMode !== "undefined" && spotifyMode) M.appendChild(mk("p", "pm-p", "Spotify ang pinapakinggan ngayon."));
+  else TRACKS.forEach((t, i) => {
+    const b = mk("button", "pli"); b.type = "button";
+    b.append(mk("b", null, String(i + 1)), mk("span", null, t.title + " — " + t.artist));
+    b.onclick = () => { loadTrack(i, true); markMusic(); toast("Playing: " + t.title); };
+    M.appendChild(b);
+  });
+  function markMusic() { Array.from(M.querySelectorAll(".pli")).forEach((b, i) => b.classList.toggle("act", i === idx)); }
+  try { audio.addEventListener("play", markMusic); } catch (_) {}
+
+  /* open / close */
+  let last = null;
+  const open = () => { last = document.activeElement; renderLinks(); markMusic(); show("about"); pm.classList.add("open"); document.body.style.overflow = "hidden"; x.focus(); };
+  const close = () => { pm.classList.remove("open"); document.body.style.overflow = ""; if (last && last.focus) last.focus(); };
+  x.onclick = close;
+  pm.addEventListener("click", (e) => { if (e.target === pm) close(); });
+  pm.addEventListener("pointerdown", (e) => e.stopPropagation());
+  pm.addEventListener("keydown", (e) => {
+    e.stopPropagation();   /* huwag gumana ang shortcut ng player habang bukas ang popup */
+    if (e.key === "Escape") { close(); return; }
+    if (e.target.getAttribute && e.target.getAttribute("role") === "tab" && (e.key === "ArrowRight" || e.key === "ArrowLeft")) {
+      const k = names.map((n) => n[0]), i = k.indexOf(e.target.dataset.k), n = k[(i + (e.key === "ArrowRight" ? 1 : k.length - 1)) % k.length];
+      show(n); tbs[n].focus(); e.preventDefault();
+    }
+  });
+
+  /* More button sa ilalim ng bio/pangalan */
+  const mb = mk("button", "morebtn"); mb.type = "button";
+  mb.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>More</span>';
+  mb.onclick = open;
+  (document.querySelector(".bio") || q("dn")).after(mb);
+})();
+
 
 </script>
 </body>

@@ -490,33 +490,7 @@ html.paused .ld-title span{opacity:1}
 
 <div class="marq" aria-hidden="true"><div class="mt" id="mt"></div></div>
 
-<!-- PROTECTION: panghadlang lang, hindi 100% harang -->
-<script>
-(function () {
-  const lock = () => {
-    document.body.innerHTML = '<div style="position:fixed;inset:0;z-index:2147483647;background:#050505;color:#fff;display:grid;place-items:center;font:600 1.2rem Inter,sans-serif;text-align:center;padding:20px">Access denied.<br>Isara ang DevTools at i-refresh ang page.</div>';
-  };
-  const stop = (e) => { e.preventDefault(); e.stopPropagation(); return false; };
-  ["contextmenu", "selectstart", "dragstart", "copy", "cut"].forEach((ev) => document.addEventListener(ev, stop, true));
-  document.addEventListener("keydown", (e) => {
-    const k = (e.key || "").toLowerCase();
-    if (e.key === "F12" ||
-        (e.ctrlKey && e.shiftKey && (k === "i" || k === "j" || k === "c" || k === "k")) ||
-        (e.ctrlKey && (k === "u" || k === "s" || k === "p")) ||
-        (e.metaKey && e.altKey && (k === "i" || k === "j" || k === "u" || k === "c")) ||
-        (e.metaKey && (k === "u" || k === "s"))) return stop(e);
-  }, true);
-  if (matchMedia("(pointer:fine)").matches) {
-    setInterval(() => { if (outerWidth - innerWidth > 160 || outerHeight - innerHeight > 200) lock(); }, 800);
-  }
-  setInterval(() => {
-    const t = performance.now();
-    (function () { debugger; })();
-    if (performance.now() - t > 120) lock();
-  }, 1500);
-  try { console.log("%cStop!", "font-size:40px;color:red"); } catch (_) {}
-})();
-</script>
+
 
 <script>
 /* ================= EDIT DITO ================= */
@@ -1541,6 +1515,130 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && (!
     if (done.size === 4 && LD.shown >= 99.5 && !done.has("r")) { done.add("r"); add("ready ✓"); }
   }, 260);
 })();
+
+  /* LEON UPGRADE v3 (CSS + JS sa isang file) */
+(function(){var s=document.createElement("style");s.textContent="\n/* lite mode (mahinang device) */\nhtml.lite body::after,html.lite .glow,html.lite .shoot{display:none!important}\nhtml.lite *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}\nhtml.lite .blob{animation:none!important}\nhtml.lite .card.visible.float{animation:none!important}\n/* bio typewriter */\n.bio{min-height:1.3em;font-family:\"Fredoka\",sans-serif;font-size:.9rem;letter-spacing:.05em;color:var(--muted)}\n.bio::after{content:\"\";display:inline-block;width:2px;height:1em;background:var(--fg);margin-left:3px;vertical-align:-.12em;animation:blink .8s steps(1) infinite}\n/* cursor */\n#cTrail{position:fixed;inset:0;width:100%;height:100%;z-index:7;pointer-events:none}\n#cRing{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid rgba(var(--acc-rgb),.7);z-index:7;pointer-events:none;transition:width .2s,height .2s,margin .2s,background .2s;will-change:transform}\n#cRing.hov{width:56px;height:56px;margin:-28px 0 0 -28px;background:rgba(var(--acc-rgb),.12)}\n/* circular visualizer */\n.cw{position:relative}\n#ringViz{position:absolute;left:-22px;top:-22px;pointer-events:none}\n/* staggered socials + tooltip + ripple */\nbody.entered .soc a{animation:sIn .6s cubic-bezier(.2,1.4,.3,1) backwards;animation-delay:calc(1s + var(--k,0) * .12s)}\n@keyframes sIn{from{opacity:0;transform:translateY(18px) scale(.5)}}\n.soc a{position:relative;overflow:visible}\n.soc a::after{content:attr(data-l);position:absolute;bottom:calc(100% + 8px);left:50%;translate:-50% 4px;padding:3px 9px;border-radius:999px;background:var(--fg);color:var(--fg-inv);font:600 .7rem \"Fredoka\",sans-serif;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,translate .2s}\n.soc a:hover::after{opacity:1;translate:-50% 0}\n.rip{position:absolute;inset:0;border-radius:50%;background:rgba(var(--acc-rgb),.35);animation:rip .6s ease-out forwards;pointer-events:none}\n@keyframes rip{from{transform:scale(.2);opacity:1}to{transform:scale(2.2);opacity:0}}\n/* name shimmer */\n.name:not(.sk):not(:hover){background:linear-gradient(90deg,var(--fg) 20%,rgb(var(--acc-rgb)) 50%,var(--fg) 80%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;animation:nm 7s linear infinite}\n@keyframes nm{to{background-position:-220% 0}}\n/* info pills (views, oras, panahon) */\n#clock{display:none}\n.meta{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:6px}\n.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;background:var(--chip);border:1px solid var(--line);color:var(--text);font:500 .76rem/1 \"Inter\",sans-serif;letter-spacing:.03em;font-variant-numeric:tabular-nums;transition:transform .2s,background .2s}\n.pill:hover{transform:translateY(-2px);background:var(--chip2)}\n.pill[hidden],.vpill:empty{display:none}\n.pill svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.85;flex:none}\n.vpill{padding:6px 14px 6px 12px;border-color:rgba(var(--acc-rgb),.45);box-shadow:0 0 18px rgba(var(--acc-rgb),.14)}\n.vpill svg{color:rgb(var(--acc-rgb));opacity:1;animation:eye 4s ease-in-out infinite}\n@keyframes eye{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}\n.vpill b{font:700 .95rem \"Fredoka\",sans-serif;color:var(--fg)}\n.vpill .vl{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}\n";document.head.appendChild(s);})();
+
+(function () {
+  /* ============ EDIT DITO ============ */
+  const BIO = ["DFW • Manila", "music • night drives", "Leon", "dm me on Discord"];
+  const WX = { lat: 14.65, lon: 121.05, name: "Manila" };
+  /* ================================= */
+  const q = (id) => document.getElementById(id);
+  const lite = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
+  if (lite) document.documentElement.classList.add("lite");
+  const still = () => typeof noMotion !== "undefined" && noMotion;
+  const accent = () => getComputedStyle(document.documentElement).getPropertyValue("--acc-rgb").trim() || "255,255,255";
+
+  /* typewriter bio */
+  const bio = document.createElement("div"); bio.className = "bio"; q("dn").after(bio);
+  (function () {
+    let i = 0, n = 0, dir = 1;
+    (function step() {
+      const s = BIO[i];
+      if (still()) { bio.textContent = s; return setTimeout(() => { i = (i + 1) % BIO.length; step(); }, 3000); }
+      n += dir; bio.textContent = s.slice(0, n);
+      if (dir > 0 && n >= s.length) { dir = -1; return setTimeout(step, 1800); }
+      if (dir < 0 && n <= 0) { dir = 1; i = (i + 1) % BIO.length; }
+      setTimeout(step, dir > 0 ? 80 : 35);
+    })();
+  })();
+
+  /* cursor ring + trail (desktop lang, hindi sa lite) */
+  if (matchMedia("(pointer:fine)").matches && !lite && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
+    const cv = document.createElement("canvas"); cv.id = "cTrail"; document.body.appendChild(cv);
+    const ring = document.createElement("div"); ring.id = "cRing"; document.body.appendChild(ring);
+    const x = cv.getContext("2d"); let pts = [], mx = -99, my = -99, rx = -99, ry = -99, col = "255,255,255", f = 0;
+    const size = () => { cv.width = innerWidth; cv.height = innerHeight; }; size(); addEventListener("resize", size);
+    addEventListener("pointermove", (e) => { mx = e.clientX; my = e.clientY; pts.push({ x: mx, y: my, a: 1 }); if (pts.length > 28) pts.shift(); ring.classList.toggle("hov", !!e.target.closest("a,button,.tr,.av,input")); });
+    (function loop() {
+      if (!(f++ % 30)) col = accent();
+      rx += (mx - rx) * .2; ry += (my - ry) * .2; ring.style.transform = "translate(" + rx + "px," + ry + "px)";
+      x.clearRect(0, 0, cv.width, cv.height);
+      if (!still()) pts.forEach((p, i) => { p.a *= .9; x.fillStyle = "rgba(" + col + "," + p.a * .7 + ")"; x.beginPath(); x.arc(p.x, p.y, 1 + 4 * (i / pts.length) * p.a, 0, 7); x.fill(); });
+      pts = pts.filter((p) => p.a > .03);
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  /* circular visualizer sa paligid ng cover */
+  if (!lite) {
+    const cw = document.querySelector(".cw"), cv = document.createElement("canvas"); cv.id = "ringViz"; cw.appendChild(cv);
+    const x = cv.getContext("2d"); let W = 0, H = 0, col = "255,255,255", f = 0;
+    const size = () => { W = cv.width = cw.offsetWidth + 44; H = cv.height = cw.offsetHeight + 44; }; size(); addEventListener("resize", size);
+    (function loop() {
+      requestAnimationFrame(loop);
+      if (!(f++ % 30)) col = accent();
+      if (!W || still()) return;
+      x.clearRect(0, 0, W, H);
+      const N = 72, t = performance.now() / 1000, rx = W / 2 - 14, ry = H / 2 - 14;
+      x.strokeStyle = "rgba(" + col + ",.85)"; x.lineWidth = 2.4; x.lineCap = "round"; x.beginPath();
+      for (let i = 0; i < N; i++) {
+        const a = i / N * 6.2832;
+        let v = (typeof analyser !== "undefined" && analyser && waveOn && freq) ? freq[Math.floor(i / N * freq.length * .7)] / 255 : (waveOn ? .2 + .3 * Math.abs(Math.sin(t * 3 + i * .5)) : .05);
+        const l = 2 + v * 14, c = Math.cos(a), s = Math.sin(a);
+        x.moveTo(W / 2 + c * rx, H / 2 + s * ry); x.lineTo(W / 2 + c * (rx + l), H / 2 + s * (ry + l));
+      }
+      x.stroke();
+    })();
+  }
+
+  /* socials: stagger, tooltip, ripple */
+  document.querySelectorAll(".soc a").forEach((a, i) => {
+    a.style.setProperty("--k", i); a.dataset.l = a.getAttribute("aria-label") || "";
+    a.addEventListener("click", () => { const r = document.createElement("span"); r.className = "rip"; a.appendChild(r); setTimeout(() => r.remove(), 650); });
+  });
+
+  /* ===== info pills: views, PH time, weather, last online ===== */
+  const I = {
+    eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'
+  };
+  const ic = (k) => '<svg viewBox="0 0 24 24" aria-hidden="true">' + I[k] + "</svg>";
+  const pill = (k) => { const d = document.createElement("div"); d.className = "pill"; d.innerHTML = ic(k); const t = document.createElement("span"); d.appendChild(t); d.hidden = true; return [d, t]; };
+  const meta = document.createElement("div"); meta.className = "meta"; q("clock").before(meta);
+  const vis = q("vis"); vis.className = "pill vpill"; meta.appendChild(vis);
+  const [pc, tc] = pill("clock"), [pw, tw] = pill("sun"), [pl, tl] = pill("moon");
+  meta.append(pc, pw, pl);
+
+  /* PH time */
+  const tf = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila", hour: "numeric", minute: "2-digit", second: "2-digit" });
+  const tick = () => { pc.hidden = false; tc.textContent = "PH " + tf.format(new Date()); }; tick(); setInterval(tick, 1000);
+
+  /* views: ganda ng counter + count-up animation */
+  let vn = null;
+  const build = (n, local) => {
+    vis.dataset.busy = 1;
+    vis.innerHTML = ic("eye") + '<b></b><span class="vl"></span>';
+    vis.querySelector(".vl").textContent = local ? "views · local" : "views";
+    setTimeout(() => { delete vis.dataset.busy; });
+    const b = vis.querySelector("b"), from = vn || 0; vn = n;
+    if (still() || from === n) { b.textContent = n.toLocaleString(); return; }
+    const t0 = performance.now();
+    (function s(t) { const p = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - p, 3); b.textContent = Math.round(from + (n - from) * e).toLocaleString(); if (p < 1) requestAnimationFrame(s); })(t0);
+  };
+  const readVis = () => { if (vis.dataset.busy) return; const m = vis.textContent.match(/\d[\d,]*/); if (m) build(Number(m[0].replace(/,/g, "")), /local/.test(vis.textContent)); };
+  new MutationObserver(readVis).observe(vis, { childList: true }); readVis();
+
+  /* last online (per-browser) */
+  const ago = (ms) => { const m = Math.floor(ms / 60000); return m < 1 ? "just now" : m < 60 ? m + "m ago" : m < 1440 ? Math.floor(m / 60) + "h ago" : Math.floor(m / 1440) + "d ago"; };
+  const seen = () => {
+    const off = /offline/.test(q("dot").className);
+    try {
+      if (!off && /online|idle|dnd/.test(q("dot").className)) localStorage.setItem("leon-seen", String(Date.now()));
+      const t = Number(localStorage.getItem("leon-seen"));
+      pl.hidden = !(off && t); if (off && t) tl.textContent = "Last online · " + ago(Date.now() - t);
+    } catch (_) {}
+  };
+  new MutationObserver(seen).observe(q("dot"), { attributes: true }); setInterval(seen, 30000);
+
+  /* weather */
+  fetch("https://api.open-meteo.com/v1/forecast?latitude=" + WX.lat + "&longitude=" + WX.lon + "&current_weather=true")
+    .then((r) => r.json()).then((j) => { if (j.current_weather) { pw.hidden = false; tw.textContent = WX.name + " · " + Math.round(j.current_weather.temperature) + "°C"; } }).catch(() => {});
+})();
+
 </script>
 </body>
 </html>

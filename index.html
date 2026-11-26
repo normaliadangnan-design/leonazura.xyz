@@ -78,7 +78,8 @@ button{font-family:inherit}
 .loading-gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;scale:1.1;translate:calc(var(--px,0) * -18px) calc(var(--py,0) * -12px);transition:translate .35s ease-out,transform .9s ease,filter .9s ease}
 #loading-screen.hidden .loading-gif,#loading-screen.opening .loading-gif{transform:scale(1.1);filter:blur(8px)}
 .ld-fx{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.ld-vig{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.78))}
+.ld-vig{background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.45))}
+#bootLog,.ld-fx,.ld-scan,.ld-status,#loading-screen::after{display:none!important}
 .ld-scan{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px)}
 .ld-scan::after{content:"";position:absolute;left:0;right:0;height:22%;top:-25%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.06),transparent);animation:ldscan 6s linear infinite}
 @keyframes ldscan{to{top:110%}}
@@ -86,8 +87,7 @@ button{font-family:inherit}
 @keyframes ldgrain{0%,100%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-5%,-2%)}80%{transform:translate(4%,4%)}}
 
 .ld-center{position:relative;z-index:1;display:grid;justify-items:center;gap:14px;translate:calc(var(--px,0) * 8px) calc(var(--py,0) * 6px);transition:translate .35s ease-out}
-.ld-ring{--rs:168px;position:relative;width:var(--rs);height:var(--rs);display:grid;place-items:center;animation:ldfloat 4.5s ease-in-out infinite}
-@keyframes ldfloat{50%{transform:translateY(-6px)}}
+.ld-ring{display:none}
 .ld-svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
 .ld-trk{fill:none;stroke:rgba(255,255,255,.12);stroke-width:2}
 .ld-prg{fill:none;stroke:url(#ldg);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:282.743;stroke-dashoffset:282.743;filter:drop-shadow(0 0 3px rgba(255,255,255,.8))}
@@ -373,8 +373,11 @@ html.paused .card.visible{opacity:1}
 html.paused .glow{display:none}
   html.paused .ld-title span{opacity:1}
 
-/* Activity fix */
-.pair{grid-template-columns:1fr}
+/* Note + Activity magkatabi */
+.pair{grid-template-columns:1fr 1fr}
+.pair.one{grid-template-columns:1fr}
+.pair .row{flex-direction:column;align-items:flex-start;gap:8px;min-width:0}
+.pair .row>div:last-child{width:100%}
 .pair .row .s,.row.act .x{overflow-wrap:break-word}
 </style>
   

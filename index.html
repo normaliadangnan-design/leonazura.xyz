@@ -510,7 +510,9 @@ const COUNTER_NS = "leon-profile-page"; /* pangalan ng visitor counter, palitan 
 const SOCIALS = [
   { icon: "discord",   url: "https://discord.com/users/1250654354344775703", label: "Discord" },
   { icon: "tiktok",    url: "https://www.tiktok.com/@leonexclsv_",           label: "TikTok" },
-  { icon: "instagram", url: "https://www.instagram.com/dfw_leoky",           label: "Instagram" }
+  { icon: "instagram", url: "https://www.instagram.com/dfw_leoky",           label: "Instagram" },
+  { icon: "facebook",  url: "https://www.facebook.com/naifdangnan",          label: "Facebook" },
+  { icon: "roblox",    url: "https://www.roblox.com/users/3923534435/profile",  label: "Roblox" }
 ];
 /* lyrics (sarili mong captions lang): dalawang paraan
    1) lyrics: [[segundo, "linya"], [12.5, "isa pang linya"]]
@@ -921,12 +923,11 @@ if (!REDUCE && FINE) {
 /* ---------- socials ---------- */
 const ICONS = {
   discord: '<path d="M8.5 7.5c1.1-.3 2.2-.5 3.5-.5s2.4.2 3.5.5c1.6 2.3 2.6 5 2.9 8-1.2.9-2.5 1.4-3.9 1.7l-.8-1.4M8.5 7.5C6.9 9.8 5.9 12.5 5.6 15.5c1.2.9 2.5 1.4 3.9 1.7l.8-1.4M8.5 15.8c2.3.7 4.7.7 7 0"/><circle cx="9.5" cy="12" r="1.1" fill="currentColor"/><circle cx="14.5" cy="12" r="1.1" fill="currentColor"/>',
-  github: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>',
-  youtube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5l5 2.5-5 2.5z" fill="currentColor"/>',
   tiktok: '<path d="M14 3v11a4 4 0 1 1-4-4"/><path d="M14 3c.4 2.6 2.2 4.2 5 4.5"/>',
   instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/>',
   roblox: '<rect x="5" y="5" width="14" height="14" rx="2" transform="rotate(15 12 12)"/><rect x="10" y="10" width="4" height="4" transform="rotate(15 12 12)"/>',
-  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  facebook: '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>'
 };
 SOCIALS.forEach((s) => {
   const a = el("a"); a.href = s.url; a.target = "_blank"; a.rel = "noopener noreferrer"; a.title = s.label; a.setAttribute("aria-label", s.label);

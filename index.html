@@ -371,8 +371,13 @@ body.entered .dock{opacity:1;pointer-events:auto}
 html.paused *,html.paused *::before,html.paused *::after{animation:none!important}
 html.paused .card.visible{opacity:1}
 html.paused .glow{display:none}
-html.paused .ld-title span{opacity:1}
+  html.paused .ld-title span{opacity:1}
+
+/* Activity fix */
+.pair{grid-template-columns:1fr}
+.pair .row .s,.row.act .x{overflow-wrap:break-word}
 </style>
+  
 </head>
 <body>
 
@@ -1337,7 +1342,7 @@ function assetUrl(a, img) {
 }
 const line = (id, v) => { const e = $(id); e.hidden = !v; if (e.textContent !== v) { e.textContent = v; e.title = v; } };
 function renderActivity(acts) {
-  const list = acts.filter((a) => a.type !== 4 && a.name !== "Spotify");
+    const list = acts.filter((a) => a.type !== 4 && a.type !== 6).sort((x, y) => (x.name === "Spotify") - (y.name === "Spotify"));
   const a = list[0], ic = $("aIc");
   if (!a) {
     actTimes = null;

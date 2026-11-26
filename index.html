@@ -1282,21 +1282,36 @@ let actTimes = null;
   tickClock(); setInterval(tickClock, 1000);
 }
 
-/* ---------- visitor counter ---------- */
+/* ---------- visitor counter (Abacus) ---------- */
 (async () => {
-  const v = $("vis"); let n = null;
-  try {
-    const first = !sessionStorage.getItem("v");
-    const r = await fetch("https://api.counterapi.dev/v1/" + COUNTER_NS + "/visits" + (first ? "/up" : ""));
+  const NS = "leonazura.xyz", KEY = "visits";
+  const BASE = 0; /* dating bilang na gusto mong idagdag, hal. 150 */
+  const v = $("vis");
+  const read = (store, k) => { try { return store.getItem(k); } catch (_) { return null; } };
+  const write = (store, k, val) => { try { store.setItem(k, val); } catch (_) {} };
+  const show = (n) => { v.textContent = "👁 " + n.toLocaleString("en-US") + " visits"; };
+
+  /* ipakita muna ang huling nakuhang bilang */
+  const saved = read(localStorage, "leon-views");
+  if (saved !== null) show(Number(saved));
+
+  const call = async (action) => {
+    const r = await fetch("https://abacus.jasoncameron.dev/" + action + "/" + NS + "/" + KEY, { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
     const j = await r.json();
-    if (j && typeof j.count === "number") { n = j.count; sessionStorage.setItem("v", "1"); }
-  } catch (_) {}
-  if (n != null) { v.textContent = "👁 " + n.toLocaleString() + " visits"; return; }
+    if (typeof j.value !== "number") throw new Error("walang value");
+    return j.value;
+  };
+
   try {
-    n = (Number(localStorage.getItem("vc")) || 0) + (sessionStorage.getItem("vl") ? 0 : 1);
-    localStorage.setItem("vc", String(n)); sessionStorage.setItem("vl", "1");
-    v.textContent = "👁 " + n + " (local)";
-  } catch (_) {}
+    const counted = read(sessionStorage, "leon-counted");
+    const n = (await call(counted ? "get" : "hit")) + BASE;
+    write(sessionStorage, "leon-counted", "1");
+    write(localStorage, "leon-views", String(n));
+    show(n);
+  } catch (e) {
+    console.warn("Visitor counter:", e.message);
+  }
 })();
 
 /* ---------- Discord via Lanyard ---------- */
